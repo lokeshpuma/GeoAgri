@@ -1,0 +1,2486 @@
+[
+  {
+    "crop_id": "rice",
+    "crop_name": "Rice",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 1200.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1000.0,
+    "ideal_rainfall_max": 2500.0,
+    "baseline_yield_t_ha": {
+      "p10": 8.65,
+      "p50": 13.02,
+      "p90": 17.32
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Rice with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "greengram",
+        "companion_crop_name": "Greengram",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Rice with Greengram optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.18,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Rice with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "wheat",
+    "crop_name": "Wheat",
+    "category": "cereals",
+    "season": "rabi",
+    "water_need_mm": 450.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 650.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.5,
+      "p50": 3.8,
+      "p90": 5.2
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "maize",
+    "crop_name": "Maize",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 600.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 8.95,
+      "p50": 13.04,
+      "p90": 17.41
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Maize with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Maize with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "groundnut",
+        "companion_crop_name": "Groundnut (Peanut)",
+        "yield_boost_pct": 0.18,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Maize with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "sorghum",
+    "crop_name": "Sorghum (Jowar)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 450.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 8.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 800.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.16,
+      "p50": 1.34,
+      "p90": 1.56
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "pearl_millet",
+    "crop_name": "Pearl Millet (Bajra)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 40.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 650.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.8,
+      "p50": 1.3,
+      "p90": 2.2
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "finger_millet",
+    "crop_name": "Finger Millet (Ragi)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.0,
+      "p50": 1.6,
+      "p90": 2.5
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "barley",
+    "crop_name": "Barley",
+    "category": "cereals",
+    "season": "rabi",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 24.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.39,
+      "p50": 1.64,
+      "p90": 1.86
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "small_millets",
+    "crop_name": "Small Millets",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 300.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.5,
+      "p50": 0.9,
+      "p90": 1.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "chickpea",
+    "crop_name": "Chickpea (Gram)",
+    "category": "pulses",
+    "season": "rabi",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 8.8,
+      "p50": 12.83,
+      "p90": 17.34
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "rapeseed_mustard",
+        "companion_crop_name": "Rapeseed & Mustard",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Chickpea (Gram) with Rapeseed & Mustard optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "linseed",
+        "companion_crop_name": "Linseed",
+        "yield_boost_pct": 0.13,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Chickpea (Gram) with Linseed optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "barley",
+        "companion_crop_name": "Barley",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Chickpea (Gram) with Barley optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "pigeon_pea",
+    "crop_name": "Pigeon Pea (Arhar)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 500.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 800.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.67,
+      "p50": 0.89,
+      "p90": 1.35
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "sorghum",
+        "companion_crop_name": "Sorghum (Jowar)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Sorghum (Jowar) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "millet",
+        "companion_crop_name": "Millet",
+        "yield_boost_pct": 0.13,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Millet optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "groundnut",
+        "companion_crop_name": "Groundnut (Peanut)",
+        "yield_boost_pct": 0.16,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "green_gram",
+    "crop_name": "Green Gram (Moong)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.2,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.45,
+      "p50": 0.57,
+      "p90": 0.9
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "maize",
+        "companion_crop_name": "Maize",
+        "yield_boost_pct": 0.09,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Green Gram (Moong) with Maize optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "sorghum",
+        "companion_crop_name": "Sorghum (Jowar)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Green Gram (Moong) with Sorghum (Jowar) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "sesame",
+        "companion_crop_name": "Sesame (Til)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Green Gram (Moong) with Sesame (Til) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "black_gram",
+    "crop_name": "Black Gram (Urad)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.43,
+      "p50": 0.64,
+      "p90": 0.78
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "maize",
+        "companion_crop_name": "Maize",
+        "yield_boost_pct": 0.09,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Black Gram (Urad) with Maize optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "sorghum",
+        "companion_crop_name": "Sorghum (Jowar)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Black Gram (Urad) with Sorghum (Jowar) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "sesame",
+        "companion_crop_name": "Sesame (Til)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Black Gram (Urad) with Sesame (Til) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "lentil",
+    "crop_name": "Lentil (Masoor)",
+    "category": "pulses",
+    "season": "rabi",
+    "water_need_mm": 300.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 450.0,
+    "baseline_yield_t_ha": {
+      "p10": 8.95,
+      "p50": 13.19,
+      "p90": 17.1
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "rapeseed_mustard",
+        "companion_crop_name": "Rapeseed & Mustard",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Lentil (Masoor) with Rapeseed & Mustard optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "barley",
+        "companion_crop_name": "Barley",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Lentil (Masoor) with Barley optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "field_pea",
+    "crop_name": "Field Pea",
+    "category": "pulses",
+    "season": "rabi",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 22.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.9,
+      "p50": 1.4,
+      "p90": 2.1
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cowpea",
+    "crop_name": "Cowpea (Lobia)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.58,
+      "p50": 0.8,
+      "p90": 1.11
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "moth_bean",
+    "crop_name": "Moth Bean",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 250.0,
+    "ideal_temp_min": 24.0,
+    "ideal_temp_max": 40.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 200.0,
+    "ideal_rainfall_max": 450.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.3,
+      "p50": 0.5,
+      "p90": 0.9
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "horse_gram",
+    "crop_name": "Horse Gram (Kulthi)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 250.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 34.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 200.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.4,
+      "p50": 0.7,
+      "p90": 1.1
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "groundnut",
+    "crop_name": "Groundnut (Peanut)",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 500.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.8,
+    "ideal_ph_max": 7.2,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 800.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.99,
+      "p50": 1.35,
+      "p90": 1.71
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "soybean",
+    "crop_name": "Soybean",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 850.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.0,
+      "p50": 1.4,
+      "p90": 2.1
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "rapeseed_mustard",
+    "crop_name": "Rapeseed & Mustard",
+    "category": "oilseeds",
+    "season": "rabi",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.61,
+      "p50": 0.71,
+      "p90": 0.82
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "sunflower",
+    "crop_name": "Sunflower",
+    "category": "oilseeds",
+    "season": "rabi",
+    "water_need_mm": 500.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.8,
+      "p50": 1.2,
+      "p90": 1.8
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "sesame",
+    "crop_name": "Sesame (Til)",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 24.0,
+    "ideal_temp_max": 36.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.38,
+      "p50": 0.43,
+      "p90": 0.51
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "safflower",
+    "crop_name": "Safflower (Kusum)",
+    "category": "oilseeds",
+    "season": "rabi",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.5,
+      "p50": 0.9,
+      "p90": 1.4
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "castor",
+    "crop_name": "Castor Seed",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 500.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.0,
+      "p50": 1.6,
+      "p90": 2.3
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "niger_seed",
+    "crop_name": "Niger Seed",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.2,
+      "p50": 0.4,
+      "p90": 0.7
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cotton",
+    "crop_name": "Cotton",
+    "category": "cash_crops",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1100.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.03,
+      "p50": 13.19,
+      "p90": 17.14
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Cotton with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "green_gram",
+        "companion_crop_name": "Green Gram (Moong)",
+        "yield_boost_pct": 0.13,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Cotton with Green Gram (Moong) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "groundnut",
+        "companion_crop_name": "Groundnut (Peanut)",
+        "yield_boost_pct": 0.16,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Cotton with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "sugarcane",
+    "crop_name": "Sugarcane",
+    "category": "cash_crops",
+    "season": "annual",
+    "water_need_mm": 1800.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2500.0,
+    "baseline_yield_t_ha": {
+      "p10": 55.0,
+      "p50": 70.0,
+      "p90": 95.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "jute",
+    "crop_name": "Jute",
+    "category": "cash_crops",
+    "season": "kharif",
+    "water_need_mm": 1000.0,
+    "ideal_temp_min": 24.0,
+    "ideal_temp_max": 37.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2000.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.22,
+      "p50": 13.4,
+      "p90": 17.09
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.09,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Jute with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "green_gram",
+        "companion_crop_name": "Green Gram (Moong)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Jute with Green Gram (Moong) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "tobacco",
+    "crop_name": "Tobacco",
+    "category": "cash_crops",
+    "season": "rabi",
+    "water_need_mm": 500.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.2,
+      "p50": 1.8,
+      "p90": 2.5
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "tea",
+    "crop_name": "Tea",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 1600.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 4.5,
+    "ideal_ph_max": 5.5,
+    "ideal_rainfall_min": 1500.0,
+    "ideal_rainfall_max": 2500.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.5,
+      "p50": 2.2,
+      "p90": 3.0
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "coffee",
+    "crop_name": "Coffee",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 1400.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2000.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.05,
+      "p50": 13.18,
+      "p90": 16.78
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.09,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Coffee with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.13,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Coffee with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "green_manure",
+        "companion_crop_name": "Green Manure",
+        "yield_boost_pct": 0.17,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Coffee with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "rubber",
+    "crop_name": "Rubber",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 2000.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 34.0,
+    "ideal_ph_min": 4.5,
+    "ideal_ph_max": 6.0,
+    "ideal_rainfall_min": 1800.0,
+    "ideal_rainfall_max": 3000.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.2,
+      "p50": 1.7,
+      "p90": 2.3
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "arecanut",
+    "crop_name": "Arecanut",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 1500.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2200.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.0,
+      "p50": 1.5,
+      "p90": 2.2
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "potato",
+    "crop_name": "Potato",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 500.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 24.0,
+    "ideal_ph_min": 5.2,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 16.0,
+      "p50": 22.0,
+      "p90": 30.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "onion",
+    "crop_name": "Onion",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 450.0,
+    "ideal_temp_min": 13.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 12.0,
+      "p50": 18.0,
+      "p90": 25.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "tomato",
+    "crop_name": "Tomato",
+    "category": "vegetables",
+    "season": "zaid",
+    "water_need_mm": 600.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.0,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 800.0,
+    "baseline_yield_t_ha": {
+      "p10": 18.0,
+      "p50": 25.0,
+      "p90": 36.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "eggplant",
+    "crop_name": "Eggplant (Brinjal)",
+    "category": "vegetables",
+    "season": "zaid",
+    "water_need_mm": 500.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 15.0,
+      "p50": 22.0,
+      "p90": 30.0
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cabbage",
+    "crop_name": "Cabbage",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 22.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 18.0,
+      "p50": 25.0,
+      "p90": 34.0
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cauliflower",
+    "crop_name": "Cauliflower",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 22.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 28.0
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "okra",
+    "crop_name": "Okra (Bhindi)",
+    "category": "vegetables",
+    "season": "zaid",
+    "water_need_mm": 450.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 8.0,
+      "p50": 12.0,
+      "p90": 16.0
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "chilli",
+    "crop_name": "Chilli",
+    "category": "vegetables",
+    "season": "kharif",
+    "water_need_mm": 500.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.5,
+      "p50": 2.5,
+      "p90": 3.8
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "garlic",
+    "crop_name": "Garlic",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.0,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 4.5,
+      "p50": 7.0,
+      "p90": 10.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "ginger",
+    "crop_name": "Ginger",
+    "category": "vegetables",
+    "season": "kharif",
+    "water_need_mm": 1300.0,
+    "ideal_temp_min": 19.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 1800.0,
+    "baseline_yield_t_ha": {
+      "p10": 12.0,
+      "p50": 18.0,
+      "p90": 25.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "mango",
+    "crop_name": "Mango",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 24.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 750.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.4,
+      "p50": 12.89,
+      "p90": 17.09
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Mango with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.13,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Mango with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "green_manure",
+        "companion_crop_name": "Green Manure",
+        "yield_boost_pct": 0.17,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Mango with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "banana",
+    "crop_name": "Banana",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 1500.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2200.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.08,
+      "p50": 13.18,
+      "p90": 17.17
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Banana with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.13,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Banana with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "groundnut",
+        "companion_crop_name": "Groundnut (Peanut)",
+        "yield_boost_pct": 0.16,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Banana with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "citrus",
+    "crop_name": "Citrus (Orange/Lemon)",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 1000.0,
+    "ideal_temp_min": 13.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 800.0,
+    "ideal_rainfall_max": 1300.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.22,
+      "p50": 13.0,
+      "p90": 16.73
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Citrus (Orange/Lemon) with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "green_manure",
+        "companion_crop_name": "Green Manure",
+        "yield_boost_pct": 0.17,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Citrus (Orange/Lemon) with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "apple",
+    "crop_name": "Apple",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 1000.0,
+    "ideal_temp_min": 6.0,
+    "ideal_temp_max": 22.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 800.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.04,
+      "p50": 13.11,
+      "p90": 17.34
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "clover",
+        "companion_crop_name": "Clover",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Apple with Clover optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "pea",
+        "companion_crop_name": "Pea",
+        "yield_boost_pct": 0.14,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Apple with Pea optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "green_manure",
+        "companion_crop_name": "Green Manure",
+        "yield_boost_pct": 0.18,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Apple with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "grapes",
+    "crop_name": "Grapes",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 800.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 8.63,
+      "p50": 12.86,
+      "p90": 17.22
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.09,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Grapes with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "green_manure",
+        "companion_crop_name": "Green Manure",
+        "yield_boost_pct": 0.13,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Grapes with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "pomegranate",
+    "crop_name": "Pomegranate",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 600.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.5,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 5.56,
+      "p50": 7.12,
+      "p90": 11.01
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Pomegranate with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "green_manure",
+        "companion_crop_name": "Green Manure",
+        "yield_boost_pct": 0.16,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Pomegranate with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "guava",
+    "crop_name": "Guava",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 800.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 700.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.0,
+      "p50": 16.0,
+      "p90": 22.0
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "papaya",
+    "crop_name": "Papaya",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 1300.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.0,
+    "ideal_rainfall_min": 1000.0,
+    "ideal_rainfall_max": 1800.0,
+    "baseline_yield_t_ha": {
+      "p10": 13.98,
+      "p50": 16.97,
+      "p90": 28.21
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Papaya with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.13,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Papaya with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "watermelon",
+    "crop_name": "Watermelon",
+    "category": "fruits",
+    "season": "zaid",
+    "water_need_mm": 450.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.63,
+      "p50": 13.43,
+      "p90": 17.56
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.09,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Watermelon with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Watermelon with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "muskmelon",
+    "crop_name": "Muskmelon",
+    "category": "fruits",
+    "season": "zaid",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.0,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.32,
+      "p50": 13.07,
+      "p90": 17.1
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.09,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Muskmelon with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Muskmelon with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "coconut",
+    "crop_name": "Coconut",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 1800.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.2,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1300.0,
+    "ideal_rainfall_max": 2500.0,
+    "baseline_yield_t_ha": {
+      "p10": 9.22,
+      "p50": 13.04,
+      "p90": 17.24
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "black_gram",
+        "companion_crop_name": "Black Gram (Urad)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Coconut with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.14,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Coconut with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "groundnut",
+        "companion_crop_name": "Groundnut (Peanut)",
+        "yield_boost_pct": 0.17,
+        "companion_share_factor": 0.3,
+        "rationale": "Combining Coconut with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "turmeric",
+    "crop_name": "Turmeric",
+    "category": "spices",
+    "season": "kharif",
+    "water_need_mm": 1300.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1000.0,
+    "ideal_rainfall_max": 1800.0,
+    "baseline_yield_t_ha": {
+      "p10": 15.0,
+      "p50": 22.0,
+      "p90": 30.0
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "coriander",
+    "crop_name": "Coriander",
+    "category": "spices",
+    "season": "rabi",
+    "water_need_mm": 350.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 450.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.6,
+      "p50": 1.0,
+      "p90": 1.5
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cumin",
+    "crop_name": "Cumin (Jeera)",
+    "category": "spices",
+    "season": "rabi",
+    "water_need_mm": 300.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 6.5,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 200.0,
+    "ideal_rainfall_max": 400.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.4,
+      "p50": 0.6,
+      "p90": 0.9
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cardamom",
+    "crop_name": "Cardamom",
+    "category": "spices",
+    "season": "perennial",
+    "water_need_mm": 1800.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 6.5,
+    "ideal_rainfall_min": 1500.0,
+    "ideal_rainfall_max": 2500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.2,
+      "p50": 0.3,
+      "p90": 0.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "black_pepper",
+    "crop_name": "Black Pepper",
+    "category": "spices",
+    "season": "perennial",
+    "water_need_mm": 1600.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.5,
+    "ideal_rainfall_min": 1400.0,
+    "ideal_rainfall_max": 2400.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.8,
+      "p50": 1.2,
+      "p90": 1.8
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "rice_var_1",
+    "crop_name": "Rice (Hybrid Var. 1)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 1140.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1000.0,
+    "ideal_rainfall_max": 2500.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.31,
+      "p50": 3.78,
+      "p90": 5.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "wheat_var_2",
+    "crop_name": "Wheat (Hybrid Var. 2)",
+    "category": "cereals",
+    "season": "rabi",
+    "water_need_mm": 427.5,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 650.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.62,
+      "p50": 4.1,
+      "p90": 5.72
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "maize_var_3",
+    "crop_name": "Maize (Hybrid Var. 3)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 570.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.52,
+      "p50": 3.89,
+      "p90": 6.05
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "sorghum_var_4",
+    "crop_name": "Sorghum (Jowar) (Hybrid Var. 4)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 427.5,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 8.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 800.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.05,
+      "p50": 1.62,
+      "p90": 2.75
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "pearl_millet_var_5",
+    "crop_name": "Pearl Millet (Bajra) (Hybrid Var. 5)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 40.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 650.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.84,
+      "p50": 1.4,
+      "p90": 2.42
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "finger_millet_var_6",
+    "crop_name": "Finger Millet (Ragi) (Hybrid Var. 6)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 380.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.05,
+      "p50": 1.73,
+      "p90": 2.75
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "barley_var_7",
+    "crop_name": "Barley (Hybrid Var. 7)",
+    "category": "cereals",
+    "season": "rabi",
+    "water_need_mm": 380.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 24.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.89,
+      "p50": 3.02,
+      "p90": 4.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "small_millets_var_8",
+    "crop_name": "Small Millets (Hybrid Var. 8)",
+    "category": "cereals",
+    "season": "kharif",
+    "water_need_mm": 285.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.53,
+      "p50": 0.97,
+      "p90": 1.65
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "chickpea_var_9",
+    "crop_name": "Chickpea (Gram) (Hybrid Var. 9)",
+    "category": "pulses",
+    "season": "rabi",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.84,
+      "p50": 1.3,
+      "p90": 1.98
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "pigeon_pea_var_10",
+    "crop_name": "Pigeon Pea (Arhar) (Hybrid Var. 10)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 475.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 800.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.63,
+      "p50": 0.97,
+      "p90": 1.65
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "green_gram_var_11",
+    "crop_name": "Green Gram (Moong) (Hybrid Var. 11)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.2,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.53,
+      "p50": 0.76,
+      "p90": 1.32
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "black_gram_var_12",
+    "crop_name": "Black Gram (Urad) (Hybrid Var. 12)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.53,
+      "p50": 0.86,
+      "p90": 1.43
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "lentil_var_13",
+    "crop_name": "Lentil (Masoor) (Hybrid Var. 13)",
+    "category": "pulses",
+    "season": "rabi",
+    "water_need_mm": 285.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 450.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.63,
+      "p50": 1.08,
+      "p90": 1.76
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "field_pea_var_14",
+    "crop_name": "Field Pea (Hybrid Var. 14)",
+    "category": "pulses",
+    "season": "rabi",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 22.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.95,
+      "p50": 1.51,
+      "p90": 2.31
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cowpea_var_15",
+    "crop_name": "Cowpea (Lobia) (Hybrid Var. 15)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.63,
+      "p50": 1.19,
+      "p90": 1.87
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "moth_bean_var_16",
+    "crop_name": "Moth Bean (Hybrid Var. 16)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 237.5,
+    "ideal_temp_min": 24.0,
+    "ideal_temp_max": 40.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 200.0,
+    "ideal_rainfall_max": 450.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.32,
+      "p50": 0.54,
+      "p90": 0.99
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "horse_gram_var_17",
+    "crop_name": "Horse Gram (Kulthi) (Hybrid Var. 17)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 237.5,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 34.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 200.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.42,
+      "p50": 0.76,
+      "p90": 1.21
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "groundnut_var_18",
+    "crop_name": "Groundnut (Peanut) (Hybrid Var. 18)",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 475.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.8,
+    "ideal_ph_max": 7.2,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 800.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.26,
+      "p50": 1.94,
+      "p90": 2.86
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "soybean_var_19",
+    "crop_name": "Soybean (Hybrid Var. 19)",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 522.5,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 850.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.05,
+      "p50": 1.51,
+      "p90": 2.31
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "rapeseed_mustard_var_20",
+    "crop_name": "Rapeseed & Mustard (Hybrid Var. 20)",
+    "category": "oilseeds",
+    "season": "rabi",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.95,
+      "p50": 1.51,
+      "p90": 2.2
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "sunflower_var_21",
+    "crop_name": "Sunflower (Hybrid Var. 21)",
+    "category": "oilseeds",
+    "season": "rabi",
+    "water_need_mm": 475.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.84,
+      "p50": 1.3,
+      "p90": 1.98
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "sesame_var_22",
+    "crop_name": "Sesame (Til) (Hybrid Var. 22)",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 24.0,
+    "ideal_temp_max": 36.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.32,
+      "p50": 0.54,
+      "p90": 0.88
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "safflower_var_23",
+    "crop_name": "Safflower (Kusum) (Hybrid Var. 23)",
+    "category": "oilseeds",
+    "season": "rabi",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.53,
+      "p50": 0.97,
+      "p90": 1.54
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "castor_var_24",
+    "crop_name": "Castor Seed (Hybrid Var. 24)",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 475.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.05,
+      "p50": 1.73,
+      "p90": 2.53
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "niger_seed_var_25",
+    "crop_name": "Niger Seed (Hybrid Var. 25)",
+    "category": "oilseeds",
+    "season": "kharif",
+    "water_need_mm": 332.5,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.21,
+      "p50": 0.43,
+      "p90": 0.77
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cotton_var_26",
+    "crop_name": "Cotton (Hybrid Var. 26)",
+    "category": "cash_crops",
+    "season": "kharif",
+    "water_need_mm": 665.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1100.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.47,
+      "p50": 2.27,
+      "p90": 3.52
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "sugarcane_var_27",
+    "crop_name": "Sugarcane (Hybrid Var. 27)",
+    "category": "cash_crops",
+    "season": "annual",
+    "water_need_mm": 1710.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2500.0,
+    "baseline_yield_t_ha": {
+      "p10": 57.75,
+      "p50": 75.6,
+      "p90": 104.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "jute_var_28",
+    "crop_name": "Jute (Hybrid Var. 28)",
+    "category": "cash_crops",
+    "season": "kharif",
+    "water_need_mm": 950.0,
+    "ideal_temp_min": 24.0,
+    "ideal_temp_max": 37.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2000.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.89,
+      "p50": 2.7,
+      "p90": 3.74
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "tobacco_var_29",
+    "crop_name": "Tobacco (Hybrid Var. 29)",
+    "category": "cash_crops",
+    "season": "rabi",
+    "water_need_mm": 475.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.26,
+      "p50": 1.94,
+      "p90": 2.75
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "tea_var_30",
+    "crop_name": "Tea (Hybrid Var. 30)",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 1520.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 4.5,
+    "ideal_ph_max": 5.5,
+    "ideal_rainfall_min": 1500.0,
+    "ideal_rainfall_max": 2500.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.58,
+      "p50": 2.38,
+      "p90": 3.3
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "coffee_var_31",
+    "crop_name": "Coffee (Hybrid Var. 31)",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 1330.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2000.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.63,
+      "p50": 1.08,
+      "p90": 1.65
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "rubber_var_32",
+    "crop_name": "Rubber (Hybrid Var. 32)",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 1900.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 34.0,
+    "ideal_ph_min": 4.5,
+    "ideal_ph_max": 6.0,
+    "ideal_rainfall_min": 1800.0,
+    "ideal_rainfall_max": 3000.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.26,
+      "p50": 1.84,
+      "p90": 2.53
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "arecanut_var_33",
+    "crop_name": "Arecanut (Hybrid Var. 33)",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 1425.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2200.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.05,
+      "p50": 1.62,
+      "p90": 2.42
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "potato_var_34",
+    "crop_name": "Potato (Hybrid Var. 34)",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 475.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 24.0,
+    "ideal_ph_min": 5.2,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 16.8,
+      "p50": 23.76,
+      "p90": 33.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "onion_var_35",
+    "crop_name": "Onion (Hybrid Var. 35)",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 427.5,
+    "ideal_temp_min": 13.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 12.6,
+      "p50": 19.44,
+      "p90": 27.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "tomato_var_36",
+    "crop_name": "Tomato (Hybrid Var. 36)",
+    "category": "vegetables",
+    "season": "zaid",
+    "water_need_mm": 570.0,
+    "ideal_temp_min": 18.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.0,
+    "ideal_rainfall_min": 450.0,
+    "ideal_rainfall_max": 800.0,
+    "baseline_yield_t_ha": {
+      "p10": 18.9,
+      "p50": 27.0,
+      "p90": 39.6
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "eggplant_var_37",
+    "crop_name": "Eggplant (Brinjal) (Hybrid Var. 37)",
+    "category": "vegetables",
+    "season": "zaid",
+    "water_need_mm": 475.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 15.75,
+      "p50": 23.76,
+      "p90": 33.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cabbage_var_38",
+    "crop_name": "Cabbage (Hybrid Var. 38)",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 380.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 22.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 18.9,
+      "p50": 27.0,
+      "p90": 37.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cauliflower_var_39",
+    "crop_name": "Cauliflower (Hybrid Var. 39)",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 380.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 22.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.7,
+      "p50": 21.6,
+      "p90": 30.8
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "okra_var_40",
+    "crop_name": "Okra (Bhindi) (Hybrid Var. 40)",
+    "category": "vegetables",
+    "season": "zaid",
+    "water_need_mm": 427.5,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 6.8,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 8.4,
+      "p50": 12.96,
+      "p90": 17.6
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "chilli_var_41",
+    "crop_name": "Chilli (Hybrid Var. 41)",
+    "category": "vegetables",
+    "season": "kharif",
+    "water_need_mm": 475.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.58,
+      "p50": 2.7,
+      "p90": 4.18
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "garlic_var_42",
+    "crop_name": "Garlic (Hybrid Var. 42)",
+    "category": "vegetables",
+    "season": "rabi",
+    "water_need_mm": 380.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.0,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 500.0,
+    "baseline_yield_t_ha": {
+      "p10": 4.73,
+      "p50": 7.56,
+      "p90": 11.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "ginger_var_43",
+    "crop_name": "Ginger (Hybrid Var. 43)",
+    "category": "vegetables",
+    "season": "kharif",
+    "water_need_mm": 1235.0,
+    "ideal_temp_min": 19.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 1800.0,
+    "baseline_yield_t_ha": {
+      "p10": 12.6,
+      "p50": 19.44,
+      "p90": 27.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "mango_var_44",
+    "crop_name": "Mango (Hybrid Var. 44)",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 855.0,
+    "ideal_temp_min": 24.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 750.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 5.25,
+      "p50": 9.18,
+      "p90": 15.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "banana_var_45",
+    "crop_name": "Banana (Hybrid Var. 45)",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 1425.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 1200.0,
+    "ideal_rainfall_max": 2200.0,
+    "baseline_yield_t_ha": {
+      "p10": 31.5,
+      "p50": 48.6,
+      "p90": 66.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "citrus_var_46",
+    "crop_name": "Citrus (Orange/Lemon) (Hybrid Var. 46)",
+    "category": "fruits",
+    "season": "perennial",
+    "water_need_mm": 950.0,
+    "ideal_temp_min": 13.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 800.0,
+    "ideal_rainfall_max": 1300.0,
+    "baseline_yield_t_ha": {
+      "p10": 8.4,
+      "p50": 15.12,
+      "p90": 22.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": []
+  }
+]

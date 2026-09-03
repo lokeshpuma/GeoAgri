@@ -1,0 +1,438 @@
+{
+  "rice": [
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Rice with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "greengram",
+      "companion_crop_name": "Greengram",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Rice with Greengram optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Rice with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "maize": [
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Maize with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Maize with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "groundnut",
+      "companion_crop_name": "Groundnut (Peanut)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Maize with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "chickpea": [
+    {
+      "companion_crop_id": "rapeseed_mustard",
+      "companion_crop_name": "Rapeseed & Mustard",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Chickpea (Gram) with Rapeseed & Mustard optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "linseed",
+      "companion_crop_name": "Linseed",
+      "yield_boost_pct": 0.13,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Chickpea (Gram) with Linseed optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "barley",
+      "companion_crop_name": "Barley",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Chickpea (Gram) with Barley optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "kidneybeans": [
+    {
+      "companion_crop_id": "maize",
+      "companion_crop_name": "Maize",
+      "yield_boost_pct": 0.08,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Kidneybeans with Maize optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Kidneybeans with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "pigeon_pea": [
+    {
+      "companion_crop_id": "sorghum",
+      "companion_crop_name": "Sorghum (Jowar)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Sorghum (Jowar) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "millet",
+      "companion_crop_name": "Millet",
+      "yield_boost_pct": 0.13,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Millet optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "groundnut",
+      "companion_crop_name": "Groundnut (Peanut)",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "mothbeans": [
+    {
+      "companion_crop_id": "millet",
+      "companion_crop_name": "Millet",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Mothbeans with Millet optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "sesame",
+      "companion_crop_name": "Sesame (Til)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Mothbeans with Sesame (Til) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "green_gram": [
+    {
+      "companion_crop_id": "maize",
+      "companion_crop_name": "Maize",
+      "yield_boost_pct": 0.09,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Green Gram (Moong) with Maize optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "sorghum",
+      "companion_crop_name": "Sorghum (Jowar)",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Green Gram (Moong) with Sorghum (Jowar) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "sesame",
+      "companion_crop_name": "Sesame (Til)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Green Gram (Moong) with Sesame (Til) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "black_gram": [
+    {
+      "companion_crop_id": "maize",
+      "companion_crop_name": "Maize",
+      "yield_boost_pct": 0.09,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Black Gram (Urad) with Maize optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "sorghum",
+      "companion_crop_name": "Sorghum (Jowar)",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Black Gram (Urad) with Sorghum (Jowar) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "sesame",
+      "companion_crop_name": "Sesame (Til)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Black Gram (Urad) with Sesame (Til) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "lentil": [
+    {
+      "companion_crop_id": "rapeseed_mustard",
+      "companion_crop_name": "Rapeseed & Mustard",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Lentil (Masoor) with Rapeseed & Mustard optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "barley",
+      "companion_crop_name": "Barley",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Lentil (Masoor) with Barley optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "pomegranate": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Pomegranate with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "green_manure",
+      "companion_crop_name": "Green Manure",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Pomegranate with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "banana": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Banana with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.13,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Banana with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "groundnut",
+      "companion_crop_name": "Groundnut (Peanut)",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Banana with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "mango": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Mango with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.13,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Mango with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "green_manure",
+      "companion_crop_name": "Green Manure",
+      "yield_boost_pct": 0.17,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Mango with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "grapes": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.09,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Grapes with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "green_manure",
+      "companion_crop_name": "Green Manure",
+      "yield_boost_pct": 0.13,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Grapes with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "watermelon": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.09,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Watermelon with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Watermelon with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "muskmelon": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.09,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Muskmelon with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Muskmelon with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "apple": [
+    {
+      "companion_crop_id": "clover",
+      "companion_crop_name": "Clover",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Apple with Clover optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "pea",
+      "companion_crop_name": "Pea",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Apple with Pea optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "green_manure",
+      "companion_crop_name": "Green Manure",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Apple with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "citrus": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Citrus (Orange/Lemon) with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "green_manure",
+      "companion_crop_name": "Green Manure",
+      "yield_boost_pct": 0.17,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Citrus (Orange/Lemon) with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "papaya": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Papaya with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.13,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Papaya with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "coconut": [
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Coconut with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Coconut with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "groundnut",
+      "companion_crop_name": "Groundnut (Peanut)",
+      "yield_boost_pct": 0.17,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Coconut with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "cotton": [
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.1,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Cotton with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "green_gram",
+      "companion_crop_name": "Green Gram (Moong)",
+      "yield_boost_pct": 0.13,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Cotton with Green Gram (Moong) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "groundnut",
+      "companion_crop_name": "Groundnut (Peanut)",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Cotton with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "jute": [
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.09,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Jute with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "green_gram",
+      "companion_crop_name": "Green Gram (Moong)",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Jute with Green Gram (Moong) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ],
+  "coffee": [
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.09,
+      "companion_share_factor": 0.2,
+      "rationale": "Combining Coffee with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.13,
+      "companion_share_factor": 0.25,
+      "rationale": "Combining Coffee with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    },
+    {
+      "companion_crop_id": "green_manure",
+      "companion_crop_name": "Green Manure",
+      "yield_boost_pct": 0.17,
+      "companion_share_factor": 0.3,
+      "rationale": "Combining Coffee with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+    }
+  ]
+}

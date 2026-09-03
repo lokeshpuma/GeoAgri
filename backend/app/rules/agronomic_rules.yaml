@@ -1,0 +1,44 @@
+# Agronomic Filter Rule Table for Model B (Stage 2)
+# Configures min/max limits for crop growth conditions
+
+defaults:
+  temp_range_buffer_c: 5.0
+  rainfall_tolerance_pct: 0.30
+  ph_tolerance: 1.0
+
+categories:
+  cereals:
+    temp_min: 10.0
+    temp_max: 40.0
+    ph_min: 5.0
+    ph_max: 8.5
+  pulses:
+    temp_min: 10.0
+    temp_max: 38.0
+    ph_min: 5.5
+    ph_max: 8.2
+  oilseeds:
+    temp_min: 12.0
+    temp_max: 40.0
+    ph_min: 5.5
+    ph_max: 8.0
+  cash_crops:
+    temp_min: 15.0
+    temp_max: 40.0
+    ph_min: 5.0
+    ph_max: 8.0
+  vegetables:
+    temp_min: 10.0
+    temp_max: 36.0
+    ph_min: 5.5
+    ph_max: 7.5
+  fruits:
+    temp_min: 10.0
+    temp_max: 42.0
+    ph_min: 5.0
+    ph_max: 8.0
+  spices:
+    temp_min: 15.0
+    temp_max: 35.0
+    ph_min: 5.0
+    ph_max: 7.5
