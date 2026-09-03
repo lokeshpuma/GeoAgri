@@ -185,9 +185,9 @@ export const Dashboard: React.FC = () => {
               satellite={report.satellite_features}
             />
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '24px' }}>
+            <div className="middle-grid">
               <YieldChart crops={report.recommended_crops} />
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', minWidth: 0 }}>
                 <IrrigationPanel summary={report.irrigation_summary} />
                 <ClimateRiskReport summary={report.climate_risk_summary} />
                 <IntercropPanel summary={report.intercrop_summary} />

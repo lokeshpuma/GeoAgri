@@ -23,7 +23,7 @@ export const YieldChart: React.FC<YieldChartProps> = ({ crops }) => {
       </div>
       <p style={{ fontSize: '0.8rem', color: '#9ca3af' }}>Visualizing yield uncertainty bounds across top candidates: P10 (Pessimistic), P50 (Expected), P90 (Optimistic).</p>
 
-      <div style={{ height: '300px', width: '100%' }}>
+      <div style={{ height: '300px', width: '100%', minWidth: 0 }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 25 }}>
             <XAxis dataKey="name" stroke="#9ca3af" tick={{ fontSize: 11 }} angle={-15} textAnchor="end" />
