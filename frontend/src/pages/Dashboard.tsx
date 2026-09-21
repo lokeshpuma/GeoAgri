@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Sliders, Play, RefreshCw, Layers, Sparkles } from 'lucide-react';
+import { MapPin, Sliders, Play, RefreshCw, Layers, Sparkles, Sprout, Table as TableIcon } from 'lucide-react';
 import { fetchFullReport, FullReportResponse, PredictRequestPayload } from '../api/client';
 import { MapSelector } from '../components/MapSelector/MapSelector';
 import { FieldSummaryCard } from '../components/FieldSummaryCard/FieldSummaryCard';
@@ -10,6 +10,9 @@ import { YieldChart } from '../components/YieldChart/YieldChart';
 import { IrrigationPanel } from '../components/IrrigationPanel/IrrigationPanel';
 import { ClimateRiskReport } from '../components/ClimateRiskReport/ClimateRiskReport';
 import { IntercropPanel } from '../components/IntercropPanel/IntercropPanel';
+import { CropSuitabilityRanking } from '../components/CropSuitabilityRanking/CropSuitabilityRanking';
+import { YieldComparisonChart } from '../components/YieldComparisonChart/YieldComparisonChart';
+import { MultiCroppingTable } from '../components/MultiCroppingTable/MultiCroppingTable';
 
 export const Dashboard: React.FC = () => {
   const [polygonPts, setPolygonPts] = useState<[number, number][]>([
@@ -28,6 +31,7 @@ export const Dashboard: React.FC = () => {
   const [phInput, setPhInput] = useState<string>("");
   const [socInput, setSocInput] = useState<string>("");
 
+  const [activeView, setActiveView] = useState<'intercrop' | 'plan'>('intercrop');
   const [report, setReport] = useState<FullReportResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -194,7 +198,63 @@ export const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            <CropTable crops={report.recommended_crops} />
+            {/* View Mode Switcher */}
+            <div style={{ display: 'flex', gap: '12px', marginTop: '20px', marginBottom: '8px', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => setActiveView('intercrop')}
+                style={{
+                  padding: '10px 18px',
+                  borderRadius: '10px',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                  border: activeView === 'intercrop' ? '1px solid #10b981' : '1px solid var(--bg-card-border)',
+                  background: activeView === 'intercrop' ? 'rgba(16, 185, 129, 0.2)' : 'var(--bg-card)',
+                  color: activeView === 'intercrop' ? '#34d399' : '#9ca3af',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <Sprout size={18} />
+                <span>Companion Intercropping Matrix</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveView('plan')}
+                style={{
+                  padding: '10px 18px',
+                  borderRadius: '10px',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                  border: activeView === 'plan' ? '1px solid #3b82f6' : '1px solid var(--bg-card-border)',
+                  background: activeView === 'plan' ? 'rgba(59, 130, 246, 0.2)' : 'var(--bg-card)',
+                  color: activeView === 'plan' ? '#60a5fa' : '#9ca3af',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <TableIcon size={18} />
+                <span>100+ Master Crop Plan</span>
+              </button>
+            </div>
+
+            {/* Conditional Views */}
+            {activeView === 'intercrop' ? (
+              <>
+                <CropSuitabilityRanking crops={report.recommended_crops} farmArea={report.field_summary.area_ha} />
+                <YieldComparisonChart crops={report.recommended_crops} farmArea={report.field_summary.area_ha} />
+                <MultiCroppingTable crops={report.recommended_crops} farmArea={report.field_summary.area_ha} />
+              </>
+            ) : (
+              <CropTable crops={report.recommended_crops} />
+            )}
           </>
         )}
       </main>

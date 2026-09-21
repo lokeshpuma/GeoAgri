@@ -196,6 +196,37 @@ class CropRegistry:
             )
             self._crops[var_id] = var_profile
 
+        # Attach companion intercrop options from intercrop_matrix.json
+        matrix_candidates = [
+            "backend/ml/data/processed/intercrop_matrix.json",
+            "ml/data/processed/intercrop_matrix.json"
+        ]
+        matrix_data = {}
+        for m_path in matrix_candidates:
+            if os.path.exists(m_path):
+                try:
+                    with open(m_path, "r") as f:
+                        matrix_data = json.load(f)
+                    break
+                except Exception:
+                    pass
+
+        for crop_id, profile in self._crops.items():
+            base_key = crop_id.split("_var_")[0]
+            opts = matrix_data.get(base_key, [])
+            if opts:
+                profile.intercrop_options = [IntercropOption(**opt) for opt in opts]
+            elif not profile.intercrop_options:
+                profile.intercrop_options = [
+                    IntercropOption(
+                        companion_crop_id="cowpea",
+                        companion_crop_name="Cowpea (Lobia)",
+                        yield_boost_pct=0.15,
+                        companion_share_factor=0.25,
+                        rationale="Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+                    )
+                ]
+
 # Default global registry instance
 _registry_instance: CropRegistry | None = None
 
