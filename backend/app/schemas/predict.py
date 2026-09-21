@@ -3,6 +3,7 @@ Pydantic Schemas for API Requests & Responses.
 Matches data contracts in Section 4 of GeoAgri AI specification.
 """
 
+from __future__ import annotations
 from typing import Literal
 from pydantic import BaseModel, Field
 

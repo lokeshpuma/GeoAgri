@@ -3,6 +3,7 @@ Crop Registry & Profile Service.
 Provides Pydantic schemas and registry lookup for 100+ Indian crops with confidence levels.
 """
 
+from __future__ import annotations
 import os
 import json
 from typing import Literal

@@ -4,6 +4,7 @@ Field Router Endpoint.
 Calculates instant geodesic polygon area for interactive frontend feedback.
 """
 
+from __future__ import annotations
 from fastapi import APIRouter
 from pydantic import BaseModel
 from app.services.geo.area import compute_polygon_area_ha
