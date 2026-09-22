@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshCw, Sun, Moon } from 'lucide-react';
+import { RefreshCw, Sun, Moon, Bot } from 'lucide-react';
 import { useWorkflow } from '../../context/WorkflowContext';
 import { GeoAgriLogo } from '../GeoAgriLogo/GeoAgriLogo';
 
@@ -11,11 +11,16 @@ const STEP_TITLES: Record<number, string> = {
 };
 
 export const PageHeader: React.FC = () => {
-  const { currentStep, loading, runAnalysis, report, theme, toggleTheme } = useWorkflow();
+  const { currentStep, loading, runAnalysis, report, theme, toggleTheme, goToStep, isChatOpen, setIsChatOpen } = useWorkflow();
 
   return (
     <header className="app-header">
-      <div className="brand">
+      <div
+        className="brand"
+        onClick={() => goToStep(1)}
+        style={{ cursor: 'pointer', userSelect: 'none' }}
+        title="Click to navigate to Workspace Overview"
+      >
         <div className="brand-icon" style={{ background: 'transparent', padding: 0, overflow: 'hidden' }}>
           <GeoAgriLogo size={32} />
         </div>
@@ -55,6 +60,7 @@ export const PageHeader: React.FC = () => {
           )}
         </button>
 
+        {/* Re-run AI / Run Jobs Button */}
         {report && (
           <button
             type="button"
@@ -67,6 +73,20 @@ export const PageHeader: React.FC = () => {
             <span>{loading ? "Recomputing..." : "Re-run AI"}</span>
           </button>
         )}
+
+        {/* Explainable AI Agronomic Advisor Chatbot Button (placed next to Run Jobs) */}
+        <button
+          type="button"
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className={`btn-chat-toggle ${isChatOpen ? 'active' : ''}`}
+          title="Open Explainable AI Advisor (Learn what NDVI, SOC, P50, t/ha & Workflow mean)"
+          aria-label="Toggle Explainable AI Advisor"
+          id="ai-advisor-toggle-btn"
+        >
+          <Bot size={17} style={{ color: '#10b981' }} />
+          <span>AI Advisor</span>
+          <span className="copilot-pulse-dot" />
+        </button>
       </div>
     </header>
   );

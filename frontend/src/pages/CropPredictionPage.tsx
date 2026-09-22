@@ -47,11 +47,18 @@ export const CropPredictionPage: React.FC = () => {
   const centroidLon = report?.field_summary?.centroid_lon || 78.4867;
 
   const suit = report?.land_suitability || { grade: "High", score: 0.83, confidence: 0.90 };
-  const irri = report?.irrigation_summary || { recommended_mode: "Supplemental" };
-  const risk = report?.climate_risk_summary || { overall_risk_level: "Low" };
+  const irri = report?.irrigation_summary || { recommended_mode: "Rainfed", total_water_demand_m3: 11400, effective_rainfall_mm: 789.8 };
+  const risk = report?.climate_risk_summary || { overall_risk_level: "Low", drought_risk_score: 6, heat_risk_score: 5, note: "Low climatic risk profile during active growing window." };
+  const env = report?.environment || { ph: 5.92, organic_carbon_g_kg: 6.1, rainfall_mm: 1053, temp_mean_c: 23.1 };
+  const sat = report?.satellite_features || { ndvi: 0.59, ndmi: 0.23 };
 
   const top5Crops = crops.slice(0, 5);
   const top10Crops = crops.slice(0, 10);
+  const topCrop = top5Crops[0];
+  const companionOpt = topCrop?.intercrop_options?.[0];
+  const companionName = companionOpt?.companion_crop_name || "Cowpea (Lobia)";
+  const boostPct = companionOpt ? (companionOpt.yield_boost_pct * 100).toFixed(1) : "15.0";
+  const topNames = top5Crops.map(c => c.crop_name).join(", ");
 
   // Chart data for Top 10 crops
   const chartData = top10Crops.map((c) => ({
@@ -417,53 +424,180 @@ export const CropPredictionPage: React.FC = () => {
             </div>
           </section>
 
-          {/* SECTION 7 — AI AGRICULTURAL INSIGHT NARRATIVE */}
+          {/* SECTION 7 — AI AGRICULTURAL INSIGHT */}
           <section className="crop-section">
-            <div className="glass-card" style={{ borderLeft: '4px solid #10b981' }}>
-              <div className="section-header" style={{ marginBottom: '14px' }}>
+            <div className="glass-card ai-insight-box" style={{ borderLeft: '4px solid #10b981', padding: '24px' }}>
+              <div className="section-header" style={{ marginBottom: '16px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Sparkles size={20} style={{ color: '#10b981' }} />
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
                     AI Agricultural Insight
                   </h3>
                 </div>
                 <span className="badge badge-high">Ensemble Decision Synthesis</span>
               </div>
 
-              <div className="recommendation-narrative-box">
-                <div style={{ lineHeight: '1.75', fontSize: '0.92rem', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  {aiInsightNarrative.split('\n\n').map((paragraph, pIdx) => {
-                    if (paragraph.startsWith('###')) {
-                      return (
-                        <h4 key={pIdx} style={{ fontSize: '1.02rem', fontWeight: 700, color: '#10b981', margin: '4px 0 2px 0' }}>
-                          {paragraph.replace(/^###\s*/, '')}
-                        </h4>
-                      );
-                    }
-                    const lines = paragraph.split('\n');
-                    return (
-                      <div key={pIdx} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                        {lines.map((line, lIdx) => {
-                          const isBullet = line.trim().startsWith('-');
-                          const content = isBullet ? line.trim().substring(1).trim() : line;
-                          const parts = content.split(/(\*\*[^*]+\*\*)/g);
-                          const formatted = parts.map((part, idx) => {
-                            if (part.startsWith('**') && part.endsWith('**')) {
-                              return <strong key={idx} style={{ color: 'var(--text-main)' }}>{part.slice(2, -2)}</strong>;
-                            }
-                            return part;
-                          });
+              {/* 1. Executive Synthesis Paragraph */}
+              <p style={{ fontSize: '0.94rem', lineHeight: 1.7, color: 'var(--text-main)', marginBottom: '18px' }}>
+                Based on the selected location's satellite vegetation condition (<strong>NDVI: {sat.ndvi?.toFixed(2) || '0.59'}</strong>, <strong>NDMI: {sat.ndmi?.toFixed(2) || '0.23'}</strong>), soil characteristics (<strong>pH: {env.ph?.toFixed(2) || '5.92'}</strong>, <strong>SOC: {env.organic_carbon_g_kg?.toFixed(1) || '6.1'} g/kg</strong>), seasonal rainfall (<strong>{Math.round(env.rainfall_mm || 1053)} mm</strong>), and ambient temperature (<strong>{env.temp_mean_c?.toFixed(1) || '23.1'}°C</strong>), the following crops were ranked: <strong>{topNames || 'Finger Millet (Ragi), Maize, Groundnut'}</strong>.
+              </p>
 
-                          return (
-                            <div key={lIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: isBullet ? '8px' : '0' }}>
-                              {isBullet && <span style={{ color: '#10b981', fontWeight: 700 }}>•</span>}
-                              <span>{formatted}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
-                  })}
+              {/* 2. High Suitability & Diagnostic Confidence Banner */}
+              <div className="ai-suitability-highlight" style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '12px',
+                background: isLight ? 'rgba(16, 185, 129, 0.08)' : 'rgba(16, 185, 129, 0.12)',
+                border: '1px solid rgba(16, 185, 129, 0.3)',
+                borderRadius: '12px',
+                padding: '14px 18px',
+                marginBottom: '20px'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Award size={22} style={{ color: '#10b981', flexShrink: 0 }} />
+                  <div>
+                    <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', fontWeight: 600 }}>
+                      Parcel Suitability Grade
+                    </span>
+                    <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#10b981' }}>
+                      {suit.grade || 'High'} Suitability ({Math.round((suit.score || 0.83) * 100)}%)
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  background: isLight ? '#ffffff' : 'rgba(0, 0, 0, 0.25)',
+                  border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(255, 255, 255, 0.12)',
+                  borderRadius: '8px',
+                  padding: '6px 14px'
+                }}>
+                  <CheckCircle size={15} style={{ color: '#10b981' }} />
+                  <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                    Diagnostic Confidence: {Math.round((suit.confidence || 0.90) * 100)}%
+                  </span>
+                </div>
+              </div>
+
+              {/* 3. Key Agronomic Action Plan — 4 Clean Cards */}
+              <div>
+                <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Leaf size={16} style={{ color: '#10b981' }} />
+                  Key Agronomic Action Plan
+                </h4>
+
+                <div className="action-plan-grid" style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '14px'
+                }}>
+                  {/* Card 1: Cultivar */}
+                  <div className="action-plan-card" style={{
+                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
+                    border: isLight ? '1px solid #e2e8f0' : '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '12px',
+                    padding: '14px 16px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '6px'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#10b981' }}>
+                        Primary Cultivar Allocation
+                      </span>
+                      <span className="badge badge-high" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                        Rank #1
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                      {topCrop?.crop_name || "Finger Millet (Ragi)"}
+                    </div>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                      Suitability match of <strong>{Math.round(((topCrop?.recommendation_score || 0.83) * 100))}%</strong> with expected median yield of <strong>{topCrop?.expected_yield_t_ha?.p50 || 1.56} t/ha</strong> (P10–P90: {topCrop?.expected_yield_t_ha?.p10 || 0.93}–{topCrop?.expected_yield_t_ha?.p90 || 2.56} t/ha).
+                    </p>
+                  </div>
+
+                  {/* Card 2: Intercrop */}
+                  <div className="action-plan-card" style={{
+                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
+                    border: isLight ? '1px solid #e2e8f0' : '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '12px',
+                    padding: '14px 16px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '6px'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#38bdf8' }}>
+                        Symbiotic Companion Pairing
+                      </span>
+                      <span className="badge badge-high" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                        +{boostPct}% Synergy
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                      Intercrop with {companionName}
+                    </div>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                      Recommended <strong>75:25 spatial arrangement</strong> boosts total parcel harvest via atmospheric nitrogen fixation and canopy layering.
+                    </p>
+                  </div>
+
+                  {/* Card 3: Irrigation */}
+                  <div className="action-plan-card" style={{
+                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
+                    border: isLight ? '1px solid #e2e8f0' : '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '12px',
+                    padding: '14px 16px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '6px'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#06b6d4' }}>
+                        Irrigation Strategy
+                      </span>
+                      <span className="badge badge-moderate" style={{ fontSize: '0.7rem', padding: '2px 8px', textTransform: 'capitalize' }}>
+                        {irri.recommended_mode || 'Rainfed'}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                      Water Management Mode: {String(irri.recommended_mode || 'Rainfed').toUpperCase()}
+                    </div>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                      Seasonal water demand of <strong>{irri.total_water_demand_m3?.toLocaleString() || '11,400'} m³</strong> against <strong>{irri.effective_rainfall_mm || '789.8'} mm</strong> effective precipitation.
+                    </p>
+                  </div>
+
+                  {/* Card 4: Climate Resilience */}
+                  <div className="action-plan-card" style={{
+                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
+                    border: isLight ? '1px solid #e2e8f0' : '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '12px',
+                    padding: '14px 16px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '6px'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#f59e0b' }}>
+                        Climate Resilience
+                      </span>
+                      <span className="badge badge-high" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                        {risk.overall_risk_level || 'Low'} Risk
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                      Drought: {risk.drought_risk_score?.toFixed(0) || '6'}% • Heat: {risk.heat_risk_score?.toFixed(0) || '5'}%
+                    </div>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                      {risk.note || 'Low climatic risk profile during active vegetative and grain filling window.'}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -479,7 +613,7 @@ export const CropPredictionPage: React.FC = () => {
               onClick={() => goToStep(2)}
             >
               <ArrowLeft size={16} />
-              <span>← Previous (Field Analysis)</span>
+              <span>Previous (Field Analysis)</span>
             </button>
 
             <button
@@ -488,7 +622,7 @@ export const CropPredictionPage: React.FC = () => {
               onClick={() => goToStep(4)}
               style={{ padding: '12px 28px', fontSize: '1rem' }}
             >
-              <span>Detailed Summary →</span>
+              <span>Detailed Summary</span>
               <ArrowRight size={18} />
             </button>
           </div>

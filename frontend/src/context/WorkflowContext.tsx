@@ -144,6 +144,8 @@ interface WorkflowContextType {
   selectPreset: (preset: PresetRegion) => void;
   isStepAccessible: (step: StepNumber) => boolean;
   toggleTheme: () => void;
+  isChatOpen: boolean;
+  setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const WorkflowContext = createContext<WorkflowContextType | undefined>(undefined);
@@ -197,6 +199,7 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const [pipelineStageIndex, setPipelineStageIndex] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<WorkflowFormData>({
     polygonPts: PRESET_REGIONS[0].polygon,
@@ -387,7 +390,9 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         updateFormData,
         selectPreset,
         isStepAccessible,
-        toggleTheme
+        toggleTheme,
+        isChatOpen,
+        setIsChatOpen
       }}
     >
       {children}

@@ -2,6 +2,7 @@ import React from 'react';
 import { WorkflowProvider, useWorkflow } from './context/WorkflowContext';
 import { PageHeader } from './components/PageHeader/PageHeader';
 import { BottomWorkflowNav } from './components/BottomWorkflowNav/BottomWorkflowNav';
+import { AgriChatBot } from './components/AgriChatBot/AgriChatBot';
 import { WorkspacePage } from './pages/WorkspacePage';
 import { FieldAnalysisPage } from './pages/FieldAnalysisPage';
 import { CropPredictionPage } from './pages/CropPredictionPage';
@@ -40,6 +41,9 @@ const WorkflowContainer: React.FC = () => {
         {renderActiveStepPage()}
       </main>
       <BottomWorkflowNav />
+
+      {/* Explainable AI Agronomic Advisor Chatbot Tab / Drawer */}
+      <AgriChatBot />
     </div>
   );
 };

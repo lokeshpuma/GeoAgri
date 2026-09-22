@@ -18,7 +18,7 @@ export const ReportDownloadButton: React.FC<ReportDownloadButtonProps> = ({ onPr
     <div className="report-actions-panel">
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <CheckCircle size={18} style={{ color: '#10b981' }} />
-        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#ffffff' }}>
+        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-main)' }}>
           Intelligence Dossier Ready
         </span>
       </div>

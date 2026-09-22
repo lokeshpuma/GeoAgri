@@ -590,7 +590,7 @@ export const SummaryReportPage: React.FC = () => {
           onClick={() => goToStep(3)}
         >
           <ArrowLeft size={16} />
-          <span>← Previous (Crop Prediction)</span>
+          <span>Previous (Crop Prediction)</span>
         </button>
 
         <button

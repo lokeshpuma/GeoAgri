@@ -74,10 +74,7 @@ export const BottomWorkflowNav: React.FC = () => {
                 </div>
 
                 <div className="step-text-content">
-                  <div className="step-title-row">
-                    <span className="step-number-label">Step {item.step}</span>
-                    <span className="step-name">{item.title}</span>
-                  </div>
+                  <span className="step-name">{item.title}</span>
                   <span className="step-subtitle-desc">{item.subtitle}</span>
                 </div>
 

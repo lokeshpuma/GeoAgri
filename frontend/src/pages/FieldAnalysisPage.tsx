@@ -614,7 +614,7 @@ export const FieldAnalysisPage: React.FC = () => {
               onClick={() => goToStep(1)}
             >
               <ArrowLeft size={16} />
-              <span>← Back to Workspace</span>
+              <span>Back to Workspace</span>
             </button>
 
             <button
@@ -623,7 +623,7 @@ export const FieldAnalysisPage: React.FC = () => {
               onClick={() => startCropAnalysis()}
               style={{ padding: '12px 28px', fontSize: '1rem' }}
             >
-              <span>Analyse All Crops →</span>
+              <span>Analyse All Crops</span>
               <ArrowRight size={18} />
             </button>
           </div>
