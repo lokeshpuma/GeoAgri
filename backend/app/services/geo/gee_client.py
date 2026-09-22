@@ -22,13 +22,28 @@ def fetch_satellite_features(polygon_pts: list[tuple[float, float]] | None, cent
             import ee
             # Initialize if needed
             if not ee.data._credentials:
+                import json
                 account = os.getenv("GEE_SERVICE_ACCOUNT", "")
                 key_path = os.getenv("GEE_PRIVATE_KEY_PATH", "")
+                project_id = os.getenv("GEE_PROJECT_ID", "")
+                if not project_id and key_path and os.path.exists(key_path):
+                    try:
+                        with open(key_path) as f:
+                            project_id = json.load(f).get("project_id", "")
+                    except Exception:
+                        pass
+
                 if account and key_path and os.path.exists(key_path):
                     credentials = ee.ServiceAccountCredentials(account, key_path)
-                    ee.Initialize(credentials)
+                    if project_id:
+                        ee.Initialize(credentials, project=project_id)
+                    else:
+                        ee.Initialize(credentials)
                 else:
-                    ee.Initialize()
+                    if project_id:
+                        ee.Initialize(project=project_id)
+                    else:
+                        ee.Initialize()
 
             # Define GEE geometry
             gee_poly = ee.Geometry.Polygon(polygon_pts) if polygon_pts else ee.Geometry.Point([lon, lat]).buffer(100)

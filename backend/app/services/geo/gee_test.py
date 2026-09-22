@@ -28,8 +28,20 @@ def test_gee_connection() -> dict:
 
     try:
         import ee
+        import json
+        project_id = os.getenv("GEE_PROJECT_ID", "")
+        if not project_id and os.path.exists(key_path):
+            try:
+                with open(key_path) as f:
+                    project_id = json.load(f).get("project_id", "")
+            except Exception:
+                pass
+
         credentials = ee.ServiceAccountCredentials(service_account, key_path)
-        ee.Initialize(credentials)
+        if project_id:
+            ee.Initialize(credentials, project=project_id)
+        else:
+            ee.Initialize(credentials)
         return {
             "status": "connected",
             "message": "Successfully authenticated and initialized Google Earth Engine."
