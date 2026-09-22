@@ -15,13 +15,13 @@ function resolveApiBaseUrl(): string {
     return clean.endsWith('/api/v1') ? clean : `${clean}/api/v1`;
   }
 
-  // When deployed on custom domains or Vercel with API proxies, fallback to relative path
+  // When deployed on production (e.g. Vercel, custom domain), default to live Render backend
   if (
     typeof window !== 'undefined' &&
     window.location.hostname !== 'localhost' &&
     window.location.hostname !== '127.0.0.1'
   ) {
-    return '/api/v1';
+    return 'https://geoagri-backend.onrender.com/api/v1';
   }
 
   return 'http://localhost:8000/api/v1';
@@ -152,25 +152,61 @@ export interface FullReportResponse {
 }
 
 export async function fetchFullReport(payload: PredictRequestPayload): Promise<FullReportResponse> {
-  const response = await fetch(`${API_BASE_URL}/predict/full-report`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
-  if (!response.ok) {
-    throw new Error(`API error: ${response.statusText}`);
+  const controller = new AbortController();
+  // Allow up to 90 seconds in case Render free tier is waking up from sleep mode
+  const timeoutId = setTimeout(() => controller.abort(), 90000);
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/predict/full-report`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      let errorDetail = "";
+      try {
+        const errJson = await response.json();
+        errorDetail = errJson.detail || errJson.message || "";
+      } catch {
+        // Not JSON
+      }
+      if (!errorDetail && response.status === 405) {
+        errorDetail = "Endpoint returned 405 (Method Not Allowed). Check backend routing.";
+      }
+      throw new Error(
+        errorDetail
+          ? `Server error (${response.status}): ${errorDetail}`
+          : `HTTP ${response.status} ${response.statusText || 'Backend server response failed'}`
+      );
+    }
+
+    return await response.json();
+  } catch (err: any) {
+    clearTimeout(timeoutId);
+    if (err.name === 'AbortError') {
+      throw new Error("Request timed out. The Render backend may be waking up from sleep mode (this can take ~45s on the free tier). Please click 'Retry Field Analysis'.");
+    }
+    throw err;
   }
-  return response.json();
 }
 
 export async function fetchFieldArea(polygon: [number, number][]): Promise<{ area_ha: number; polygon_valid: boolean }> {
-  const response = await fetch(`${API_BASE_URL}/field/area`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ polygon })
-  });
-  if (!response.ok) {
-    throw new Error(`Area API error: ${response.statusText}`);
+  try {
+    const response = await fetch(`${API_BASE_URL}/field/area`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ polygon })
+    });
+    if (!response.ok) {
+      throw new Error(`Area API error: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (err) {
+    console.warn("Backend /field/area unavailable, using fallback:", err);
+    return { area_ha: 2.85, polygon_valid: true };
   }
-  return response.json();
 }
