@@ -50,6 +50,14 @@ class FeaturePipeline:
         for key, val in soil.items():
             raw_map[key] = float(val) if val is not None else 0.0
 
+        # Fill centroid coordinates
+        centroid = profile.get("centroid")
+        if centroid:
+            raw_map["centroid_lon"] = float(centroid[0])
+            raw_map["centroid_lat"] = float(centroid[1])
+            raw_map["longitude"] = float(centroid[0])
+            raw_map["latitude"] = float(centroid[1])
+
         # Default fallbacks for common keys
         defaults = {
             "ph": 6.5,
@@ -71,6 +79,12 @@ class FeaturePipeline:
             if val is None or np.isnan(val):
                 val = defaults.get(f_name, 0.5)
             vector[f_name] = round(float(val), 4)
+
+        # Ensure spatial coordinates are preserved for bioclimatic routing
+        if "latitude" in raw_map:
+            vector["latitude"] = raw_map["latitude"]
+        if "longitude" in raw_map:
+            vector["longitude"] = raw_map["longitude"]
 
         return vector
 

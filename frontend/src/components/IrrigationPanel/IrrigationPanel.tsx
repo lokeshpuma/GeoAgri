@@ -14,7 +14,7 @@ export const IrrigationPanel: React.FC<IrrigationPanelProps> = ({ summary }) => 
         <h3 style={{ fontSize: '1.1rem', fontWeight: 600 }}>Irrigation Feasibility & Water Balance (Model C)</h3>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '12px' }}>
         <div className="metric-box">
           <span className="metric-label">Recommended Mode</span>
           <span className="metric-value" style={{ color: '#38bdf8', textTransform: 'capitalize' }}>
@@ -28,6 +28,12 @@ export const IrrigationPanel: React.FC<IrrigationPanelProps> = ({ summary }) => 
         <div className="metric-box">
           <span className="metric-label">Effective Rainfall</span>
           <span className="metric-value">{summary.effective_rainfall_mm} mm</span>
+        </div>
+        <div className="metric-box">
+          <span className="metric-label">Water Balance</span>
+          <span className="metric-value" style={{ color: summary.recommended_mode === 'rainfed' ? '#34d399' : '#fbbf24' }}>
+            {summary.recommended_mode === 'rainfed' ? '+ Surplus' : 'Supplemental'}
+          </span>
         </div>
       </div>
     </div>

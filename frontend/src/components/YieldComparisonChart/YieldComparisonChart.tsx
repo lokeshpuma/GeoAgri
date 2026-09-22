@@ -12,7 +12,7 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
     return null;
   }
 
-  const top3 = crops.slice(0, 3);
+  const top5 = crops.slice(0, 5);
 
   return (
     <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: 18, marginBottom: 24 }}>
@@ -29,11 +29,11 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <BarChart3 size={20} style={{ color: "#10b981" }} />
           <div>
-            <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0, color: "var(--text-main)" }}>
-              Standalone vs. Companion Intercropped Production
+            <h3 style={{ fontSize: "1.15rem", fontWeight: 700, margin: 0, color: "var(--text-main)" }}>
+              Multi-Crop & Intercrop Compatibility
             </h3>
-            <p style={{ fontSize: "0.75rem", color: "#9ca3af", margin: 0 }}>
-              Visualizing baseline yield compared with additional harvest gained from symbiotic intercropping
+            <p style={{ fontSize: "0.78rem", color: "#9ca3af", margin: 0 }}>
+              Standalone vs. Companion Intercropped Production — Visualizing main crop baseline harvest with companion yield synergies
             </p>
           </div>
         </div>
@@ -53,7 +53,7 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
 
       {/* Comparison Rows */}
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {top3.map((crop, idx) => {
+        {top5.map((crop, idx) => {
           const mainYieldPerHa = crop.expected_yield_t_ha?.p50 || 2.5;
           const mainArea = farmArea * 0.75;
           const intercropArea = farmArea * 0.25;
@@ -68,7 +68,7 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
           const intercropYieldPerHa = mainYieldPerHa * 0.58;
           const intercropTotalYield = Number((intercropYieldPerHa * intercropArea).toFixed(2));
           const combinedYield = Number((mainTotalYield + intercropTotalYield).toFixed(2));
-          const maxVal = Math.max(...top3.map(c => ((c.expected_yield_t_ha?.p50 || 2.5) * farmArea * 0.75 * 1.5)), combinedYield * 1.2, 1);
+          const maxVal = Math.max(...top5.map((c: any) => ((c.expected_yield_t_ha?.p50 || 2.5) * farmArea * 0.75 * 1.5)), combinedYield * 1.2, 1);
 
           const mainPct = Math.min(100, Math.round((mainTotalYield / maxVal) * 100));
           const intercropPct = Math.min(100, Math.round((intercropTotalYield / maxVal) * 100));
@@ -76,11 +76,10 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
           return (
             <div
               key={crop.crop_id || idx}
+              className="yield-comparison-row"
               style={{
-                background: "rgba(0, 0, 0, 0.2)",
                 padding: 14,
                 borderRadius: 10,
-                border: "1px solid rgba(255, 255, 255, 0.05)",
               }}
             >
               <div
@@ -92,18 +91,18 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ fontSize: "0.95rem", fontWeight: 700, color: "#ffffff" }}>
+                  <span style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--text-main)" }}>
                     {crop.crop_name}
                   </span>
-                  <span style={{ fontSize: "0.8rem", color: "#34d399", fontWeight: 600 }}>
+                  <span style={{ fontSize: "0.8rem", color: "#10b981", fontWeight: 600 }}>
                     + {intercropName}
                   </span>
                 </div>
                 <div style={{ textAlign: "right" }}>
-                  <span style={{ fontSize: "0.95rem", fontWeight: 800, color: "#fbbf24" }}>
+                  <span style={{ fontSize: "0.95rem", fontWeight: 800, color: "var(--accent-amber)" }}>
                     {combinedYield} t
                   </span>
-                  <span style={{ fontSize: "0.75rem", color: "#9ca3af", marginLeft: 4 }}>
+                  <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginLeft: 4 }}>
                     combined output
                   </span>
                 </div>
@@ -146,20 +145,20 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
                   display: "flex",
                   justifyContent: "space-between",
                   fontSize: "0.75rem",
-                  color: "#9ca3af",
+                  color: "var(--text-muted)",
                 }}
               >
                 <div style={{ display: "flex", gap: 16 }}>
                   <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
                     <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#3b82f6" }} />
-                    Main ({crop.crop_name}): <strong style={{ color: "#ffffff", marginLeft: 2 }}>{mainTotalYield} t</strong>
+                    Main ({crop.crop_name}): <strong style={{ color: "var(--text-main)", marginLeft: 2 }}>{mainTotalYield} t</strong>
                   </span>
                   <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
                     <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#10b981" }} />
-                    Companion ({intercropName}): <strong style={{ color: "#34d399", marginLeft: 2 }}>+{intercropTotalYield} t</strong>
+                    Companion ({intercropName}): <strong style={{ color: "#10b981", marginLeft: 2 }}>+{intercropTotalYield} t</strong>
                   </span>
                 </div>
-                <span style={{ color: "#34d399", fontWeight: 600 }}>
+                <span style={{ color: "#10b981", fontWeight: 600 }}>
                   +{(crop.intercrop_options?.[0]?.yield_boost_pct ? (crop.intercrop_options[0].yield_boost_pct * 100).toFixed(1) : 14.5)}% Advantage
                 </span>
               </div>

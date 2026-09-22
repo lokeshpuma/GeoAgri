@@ -8,8 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1 import predict, field, health
 
 app = FastAPI(
-    title="GeoAgri AI – India Edition API",
-    description="Location-driven agricultural decision-support API for crop selection, yield prediction, water balance, and climate risk.",
+    title="GeoAgri AI – Global Agricultural Intelligence API",
+    description="Location-driven global agricultural decision-support API for land analysis, crop selection, yield prediction, water balance, and climate risk.",
     version="1.0.0"
 )
 
@@ -30,11 +30,14 @@ app.include_router(health.router, prefix="/api/v1", tags=["Health & Crops"])
 @app.get("/")
 async def root():
     return {
-        "title": "GeoAgri AI – India Edition API",
+        "title": "GeoAgri AI – Global Agricultural Intelligence API",
         "status": "online",
         "docs": "/docs"
     }
 
 if __name__ == "__main__":
+    import os
     import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    reload = os.environ.get("ENV", "development").lower() == "development"
+    uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=reload)

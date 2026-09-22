@@ -64,17 +64,11 @@ class ModelDYield:
 
                 combo_mult = soc_mult * ndvi_mult * rf_mult
 
-                # Use ML trained per-crop empirical stats if available, else baseline
-                if crop.crop_id in per_crop_stats:
-                    stats = per_crop_stats[crop.crop_id]
-                    raw_p10 = stats["p10"]
-                    raw_p50 = stats["p50"]
-                    raw_p90 = stats["p90"]
-                else:
-                    base_q = crop.baseline_yield_t_ha
-                    raw_p10 = base_q.p10
-                    raw_p50 = base_q.p50
-                    raw_p90 = base_q.p90
+                # Use validated agronomic baseline yields scaled by environmental factors (SOC, NDVI, rainfall)
+                base_q = crop.baseline_yield_t_ha
+                raw_p10 = base_q.p10
+                raw_p50 = base_q.p50
+                raw_p90 = base_q.p90
 
                 p10 = round(max(0.1, raw_p10 * combo_mult * 0.95), 2)
                 p50 = round(max(p10 * 1.05, raw_p50 * combo_mult), 2)

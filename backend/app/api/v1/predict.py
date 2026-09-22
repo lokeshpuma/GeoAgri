@@ -46,7 +46,8 @@ async def generate_full_report(req: PredictRequest):
             limit=req.limit
         )
 
-        area_ha = profile["field_summary"]["area_ha"]
+        area_ha = req.area_ha if (req.area_ha is not None and req.area_ha > 0) else profile["field_summary"]["area_ha"]
+        profile["field_summary"]["area_ha"] = area_ha
 
         # 5. Production & Intercrop Math
         formatted_recs = []

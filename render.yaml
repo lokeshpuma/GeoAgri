@@ -1,0 +1,43 @@
+services:
+  # ===================================================
+  # GeoAgri AI - FastAPI Backend Service (Render)
+  # ===================================================
+  - type: web
+    name: geoagri-backend
+    env: python
+    runtime: python-3.11
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GEE_MOCK_FALLBACK
+        value: "true"
+      - key: ENV
+        value: "production"
+
+  # ===================================================
+  # GeoAgri AI - React / Vite Frontend (Render Static)
+  # ===================================================
+  - type: web
+    name: geoagri-frontend
+    env: static
+    plan: free
+    region: oregon
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: geoagri-backend
+          property: host

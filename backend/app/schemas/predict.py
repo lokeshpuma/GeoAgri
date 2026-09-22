@@ -24,6 +24,7 @@ class PredictRequest(BaseModel):
     limit: int = 100
     irrigation_preference: Literal["rainfed", "supplemental", "full"] | None = None
     manual_soil: ManualSoil | None = None
+    area_ha: float | None = None
 
 class QuantileValue(BaseModel):
     p10: float

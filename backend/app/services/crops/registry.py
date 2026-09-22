@@ -76,6 +76,7 @@ class CropRegistry:
                 ("finger_millet", "Finger Millet (Ragi)", "kharif", 400.0, 18.0, 32.0, 5.0, 7.5, 350.0, 750.0, QuantileValue(p10=1.0, p50=1.6, p90=2.5), "medium"),
                 ("barley", "Barley", "rabi", 400.0, 12.0, 24.0, 6.0, 7.8, 300.0, 500.0, QuantileValue(p10=1.8, p50=2.8, p90=4.0), "medium"),
                 ("small_millets", "Small Millets", "kharif", 300.0, 20.0, 35.0, 5.0, 7.5, 250.0, 600.0, QuantileValue(p10=0.5, p50=0.9, p90=1.5), "low"),
+                ("durum_wheat", "Durum Wheat", "rabi", 400.0, 14.0, 30.0, 6.5, 8.2, 300.0, 550.0, QuantileValue(p10=2.2, p50=3.4, p90=4.8), "high"),
             ],
             "pulses": [
                 ("chickpea", "Chickpea (Gram)", "rabi", 350.0, 15.0, 28.0, 6.0, 8.0, 300.0, 550.0, QuantileValue(p10=0.8, p50=1.2, p90=1.8), "high"),
@@ -86,6 +87,8 @@ class CropRegistry:
                 ("field_pea", "Field Pea", "rabi", 350.0, 10.0, 22.0, 6.0, 7.5, 300.0, 500.0, QuantileValue(p10=0.9, p50=1.4, p90=2.1), "medium"),
                 ("cowpea", "Cowpea (Lobia)", "kharif", 350.0, 20.0, 35.0, 5.5, 7.5, 300.0, 600.0, QuantileValue(p10=0.6, p50=1.1, p90=1.7), "medium"),
                 ("moth_bean", "Moth Bean", "kharif", 250.0, 24.0, 40.0, 6.0, 8.0, 200.0, 450.0, QuantileValue(p10=0.3, p50=0.5, p90=0.9), "high"),
+                ("cluster_bean", "Cluster Bean (Guar)", "kharif", 250.0, 22.0, 42.0, 7.0, 8.5, 200.0, 450.0, QuantileValue(p10=0.6, p50=1.1, p90=1.8), "high"),
+                ("fava_bean", "Fava Bean (Broad Bean)", "rabi", 400.0, 12.0, 25.0, 6.0, 7.8, 300.0, 550.0, QuantileValue(p10=1.5, p50=2.6, p90=3.8), "high"),
                 ("horse_gram", "Horse Gram (Kulthi)", "kharif", 250.0, 20.0, 34.0, 5.0, 7.5, 200.0, 500.0, QuantileValue(p10=0.4, p50=0.7, p90=1.1), "low"),
             ],
             "oilseeds": [
@@ -100,6 +103,10 @@ class CropRegistry:
             ],
             "cash_crops": [
                 ("cotton", "Cotton", "kharif", 700.0, 20.0, 35.0, 6.0, 8.0, 600.0, 1100.0, QuantileValue(p10=1.4, p50=2.1, p90=3.2), "high"),
+                ("almond", "Almond", "perennial", 800.0, 15.0, 36.0, 6.0, 8.0, 350.0, 750.0, QuantileValue(p10=1.5, p50=2.4, p90=3.5), "high"),
+                ("olive", "Olive", "perennial", 550.0, 12.0, 38.0, 6.5, 8.5, 300.0, 700.0, QuantileValue(p10=4.0, p50=7.5, p90=11.0), "high"),
+                ("pistachio", "Pistachio", "perennial", 650.0, 16.0, 40.0, 7.0, 8.5, 250.0, 600.0, QuantileValue(p10=1.2, p50=2.0, p90=3.2), "high"),
+                ("walnut", "Walnut", "perennial", 850.0, 10.0, 32.0, 6.0, 7.5, 500.0, 1000.0, QuantileValue(p10=1.8, p50=3.0, p90=4.5), "medium"),
                 ("sugarcane", "Sugarcane", "annual", 1800.0, 20.0, 38.0, 6.0, 7.8, 1200.0, 2500.0, QuantileValue(p10=55.0, p50=70.0, p90=95.0), "high"),
                 ("jute", "Jute", "kharif", 1000.0, 24.0, 37.0, 6.0, 7.5, 1200.0, 2000.0, QuantileValue(p10=1.8, p50=2.5, p90=3.4), "high"),
                 ("tobacco", "Tobacco", "rabi", 500.0, 20.0, 32.0, 5.5, 7.5, 450.0, 750.0, QuantileValue(p10=1.2, p50=1.8, p90=2.5), "medium"),
@@ -107,6 +114,8 @@ class CropRegistry:
                 ("coffee", "Coffee", "perennial", 1400.0, 15.0, 28.0, 5.5, 6.5, 1200.0, 2000.0, QuantileValue(p10=0.6, p50=1.0, p90=1.5), "high"),
                 ("rubber", "Rubber", "perennial", 2000.0, 20.0, 34.0, 4.5, 6.0, 1800.0, 3000.0, QuantileValue(p10=1.2, p50=1.7, p90=2.3), "low"),
                 ("arecanut", "Arecanut", "perennial", 1500.0, 18.0, 35.0, 5.5, 7.5, 1200.0, 2200.0, QuantileValue(p10=1.0, p50=1.5, p90=2.2), "low"),
+                ("berseem_clover", "Berseem (Egyptian Clover)", "rabi", 550.0, 12.0, 28.0, 6.5, 8.2, 350.0, 700.0, QuantileValue(p10=28.0, p50=42.0, p90=60.0), "high"),
+                ("cassava", "Cassava", "annual", 900.0, 20.0, 36.0, 5.0, 7.5, 800.0, 1800.0, QuantileValue(p10=12.0, p50=20.0, p90=32.0), "high"),
             ],
             "vegetables": [
                 ("potato", "Potato", "rabi", 500.0, 12.0, 24.0, 5.2, 6.8, 400.0, 600.0, QuantileValue(p10=16.0, p50=22.0, p90=30.0), "high"),

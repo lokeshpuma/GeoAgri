@@ -3,13 +3,38 @@
  * Connects React frontend to FastAPI backend service.
  */
 
-const API_BASE_URL = "http://localhost:8000/api/v1";
+function resolveApiBaseUrl(): string {
+  const metaEnv = (import.meta as any)?.env;
+  const envUrl =
+    (metaEnv?.VITE_API_BASE_URL as string) ||
+    (metaEnv?.VITE_API_URL as string) ||
+    (metaEnv?.NEXT_PUBLIC_API_URL as string);
+
+  if (envUrl && typeof envUrl === 'string' && envUrl.trim().length > 0) {
+    const clean = envUrl.trim().replace(/\/+$/, '');
+    return clean.endsWith('/api/v1') ? clean : `${clean}/api/v1`;
+  }
+
+  // When deployed on custom domains or Vercel with API proxies, fallback to relative path
+  if (
+    typeof window !== 'undefined' &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1'
+  ) {
+    return '/api/v1';
+  }
+
+  return 'http://localhost:8000/api/v1';
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
 
 export interface PredictRequestPayload {
   polygon?: [number, number][];
   point?: [number, number];
   season: "kharif" | "rabi" | "zaid" | "annual" | "perennial";
   limit?: number;
+  area_ha?: number;
   irrigation_preference?: "rainfed" | "supplemental" | "full" | null;
   manual_soil?: {
     ph?: number | null;

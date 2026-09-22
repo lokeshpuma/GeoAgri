@@ -7,11 +7,11 @@ Optimizes for balanced crop planning, enforcing exact weighting rules and human-
 from app.services.crops.registry import get_crop_registry
 
 DEFAULT_WEIGHTS = {
-    "land_suitability": 0.20,
-    "crop_recommendation": 0.25,
-    "irrigation_cost": 0.15,
+    "land_suitability": 0.15,
+    "crop_recommendation": 0.40,
+    "irrigation_cost": 0.10,
     "yield": 0.25,
-    "climate_risk": 0.15
+    "climate_risk": 0.10
 }
 
 def fusion_score(
@@ -26,15 +26,15 @@ def fusion_score(
     Computes exact weighted multi-attribute score.
     fusion_score = w1*land_suit + w2*crop_rec - w3*irrigation_cost_norm + w4*yield_norm - w5*climate_risk_norm
     """
-    w1 = weights.get("land_suitability", 0.20)
-    w2 = weights.get("crop_recommendation", 0.25)
-    w3 = weights.get("irrigation_cost", 0.15)
+    w1 = weights.get("land_suitability", 0.15)
+    w2 = weights.get("crop_recommendation", 0.40)
+    w3 = weights.get("irrigation_cost", 0.10)
     w4 = weights.get("yield", 0.25)
-    w5 = weights.get("climate_risk", 0.15)
+    w5 = weights.get("climate_risk", 0.10)
 
     raw_score = (w1 * land_suit) + (w2 * crop_rec) - (w3 * irrigation_cost_norm) + (w4 * yield_norm) - (w5 * climate_risk_norm)
-    # Rescale from range [-0.3, 0.75] to [0.0, 1.0]
-    scaled = max(0.0, min(1.0, (raw_score + 0.30) / 1.05))
+    # Rescale from range [-0.25, 0.85] to [0.0, 1.0]
+    scaled = max(0.0, min(1.0, (raw_score + 0.25) / 1.05))
     return round(scaled, 3)
 
 def run_decision_fusion(
@@ -58,18 +58,13 @@ def run_decision_fusion(
     # Adjust weights based on irrigation preference
     weights = DEFAULT_WEIGHTS.copy()
     if irrigation_preference == "rainfed":
-        weights["irrigation_cost"] = 0.30
+        weights["irrigation_cost"] = 0.20
         weights["yield"] = 0.20
-        weights["crop_recommendation"] = 0.20
+        weights["crop_recommendation"] = 0.35
     elif irrigation_preference == "full":
         weights["irrigation_cost"] = 0.05
-        weights["yield"] = 0.35
-
-    # Determine max yield for normalization across candidate crops
-    max_yield_p50 = max(
-        [data.get("p50", 1.0) for data in mod_d.values()] if mod_d else [1.0]
-    )
-    max_yield_p50 = max(1.0, max_yield_p50)
+        weights["yield"] = 0.30
+        weights["crop_recommendation"] = 0.40
 
     recommendations = []
 
@@ -91,12 +86,14 @@ def run_decision_fusion(
         water_need = c_data.get("water_need_mm", crop_profile.water_need_mm)
         irrig_cost_norm = 0.1 if mode == "rainfed" else (0.5 if mode == "supplemental" else 0.9)
 
-        # Model D Yield normalization
+        # Model D Yield normalization: evaluate against crop's own potential (p90)
+        # for fair cross-species comparison across diverse global crops
         d_data = mod_d.get(crop_id, {})
         p10 = d_data.get("p10", crop_profile.baseline_yield_t_ha.p10)
         p50 = d_data.get("p50", crop_profile.baseline_yield_t_ha.p50)
         p90 = d_data.get("p90", crop_profile.baseline_yield_t_ha.p90)
-        yield_norm = min(1.0, p50 / max_yield_p50)
+        crop_target_p90 = max(0.2, crop_profile.baseline_yield_t_ha.p90)
+        yield_norm = min(1.0, p50 / crop_target_p90)
 
         # Model E Climate Risk normalization
         e_data = mod_e.get(crop_id, {})
@@ -147,4 +144,15 @@ def run_decision_fusion(
     # Sort descending by recommendation_score
     recommendations.sort(key=lambda x: x["recommendation_score"], reverse=True)
 
-    return recommendations[:limit]
+    # Ensure distinct crop species diversity across top recommendations
+    distinct_recs = []
+    seen_base_crops = set()
+    for rec in recommendations:
+        base_crop_id = rec["crop_id"].split("_var_")[0]
+        if base_crop_id not in seen_base_crops:
+            seen_base_crops.add(base_crop_id)
+            distinct_recs.append(rec)
+        if len(distinct_recs) >= limit:
+            break
+
+    return distinct_recs

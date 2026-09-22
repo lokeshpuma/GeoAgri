@@ -2482,5 +2482,209 @@
     },
     "data_confidence": "low",
     "intercrop_options": []
+  },
+  {
+    "crop_id": "almond",
+    "crop_name": "Almond",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 850.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 36.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.6,
+      "p50": 2.5,
+      "p90": 3.6
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "berseem_clover",
+        "companion_crop_name": "Berseem (Clover)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.2,
+        "rationale": "Leguminous cover cropping fixes nitrogen and boosts orchard soil moisture retention."
+      }
+    ]
+  },
+  {
+    "crop_id": "olive",
+    "crop_name": "Olive",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.5,
+    "ideal_ph_max": 8.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 4.5,
+      "p50": 7.5,
+      "p90": 11.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "fava_bean",
+        "companion_crop_name": "Fava Bean",
+        "yield_boost_pct": 0.14,
+        "companion_share_factor": 0.22,
+        "rationale": "Winter legume intercropping supplies biological nitrogen to olive groves."
+      }
+    ]
+  },
+  {
+    "crop_id": "pistachio",
+    "crop_name": "Pistachio",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 16.0,
+    "ideal_temp_max": 40.0,
+    "ideal_ph_min": 7.0,
+    "ideal_ph_max": 8.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.2,
+      "p50": 2.0,
+      "p90": 3.2
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "walnut",
+    "crop_name": "Walnut",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 850.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.8,
+      "p50": 3.0,
+      "p90": 4.5
+    },
+    "data_confidence": "medium",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cluster_bean",
+    "crop_name": "Cluster Bean (Guar)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 250.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 42.0,
+    "ideal_ph_min": 7.0,
+    "ideal_ph_max": 8.5,
+    "ideal_rainfall_min": 200.0,
+    "ideal_rainfall_max": 450.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.6,
+      "p50": 1.1,
+      "p90": 1.8
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "pearl_millet",
+        "companion_crop_name": "Pearl Millet (Bajra)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Guar-Bajra intercropping is a resilient arid cropping system fixing nitrogen in sandy soils."
+      }
+    ]
+  },
+  {
+    "crop_id": "fava_bean",
+    "crop_name": "Fava Bean (Broad Bean)",
+    "category": "pulses",
+    "season": "rabi",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.5,
+      "p50": 2.6,
+      "p90": 3.8
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "berseem_clover",
+    "crop_name": "Berseem (Egyptian Clover)",
+    "category": "cash_crops",
+    "season": "rabi",
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 6.5,
+    "ideal_ph_max": 8.2,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 28.0,
+      "p50": 42.0,
+      "p90": 60.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "durum_wheat",
+    "crop_name": "Durum Wheat",
+    "category": "cereals",
+    "season": "rabi",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 14.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 6.5,
+    "ideal_ph_max": 8.2,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.2,
+      "p50": 3.4,
+      "p90": 4.8
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
+  },
+  {
+    "crop_id": "cassava",
+    "crop_name": "Cassava",
+    "category": "cash_crops",
+    "season": "annual",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 36.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 800.0,
+    "ideal_rainfall_max": 1800.0,
+    "baseline_yield_t_ha": {
+      "p10": 12.0,
+      "p50": 20.0,
+      "p90": 32.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": []
   }
 ]
