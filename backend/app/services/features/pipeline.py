@@ -81,10 +81,24 @@ class FeaturePipeline:
             vector[f_name] = round(float(val), 4)
 
         # Ensure spatial coordinates are preserved for bioclimatic routing
-        if "latitude" in raw_map:
-            vector["latitude"] = raw_map["latitude"]
-        if "longitude" in raw_map:
-            vector["longitude"] = raw_map["longitude"]
+        lat = raw_map.get("latitude", 13.32)
+        lon = raw_map.get("longitude", 75.75)
+        vector["latitude"] = lat
+        vector["longitude"] = lon
+
+        # Bioclimatic and Land/Water Biome Classification
+        from app.services.geo.land_mask import classify_global_biome
+        elev = float(raw_map.get("elevation", 320.0))
+        temp = float(raw_map.get("temp_mean_c", 25.0))
+        rain = float(raw_map.get("rainfall_mm", 800.0))
+
+        biome_info = classify_global_biome(lat, lon, elev, temp, rain)
+        vector["biome_type"] = biome_info["biome_type"]
+        vector["is_arable"] = 1.0 if biome_info["is_arable"] else 0.0
+        vector["is_water"] = 1.0 if biome_info["is_water"] else 0.0
+        vector["biome_name"] = biome_info["biome_name"]
+        vector["non_arable_reason"] = biome_info["non_arable_reason"]
+        vector["suitability_ceiling"] = biome_info["suitability_ceiling"]
 
         return vector
 

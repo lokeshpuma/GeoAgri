@@ -17,7 +17,8 @@ import {
   ChevronUp,
   CheckCircle,
   Leaf,
-  Compass
+  Compass,
+  AlertTriangle
 } from 'lucide-react';
 import {
   BarChart,
@@ -124,13 +125,27 @@ export const CropPredictionPage: React.FC = () => {
 
             {detectedLocation && (
               <div className="summary-pill-item">
-                <Compass size={16} style={{ color: '#ec4899' }} />
-                <div>
-                  <span className="summary-pill-label">Regional Benchmark (Kaggle/ICAR)</span>
-                  <strong className="summary-pill-val" style={{ color: '#f472b6' }}>
-                    {detectedLocation.district}, {detectedLocation.state}
-                  </strong>
-                </div>
+                {detectedLocation.isWater || detectedLocation.isArable === false ? (
+                  <>
+                    <AlertTriangle size={16} style={{ color: '#ef4444' }} />
+                    <div>
+                      <span className="summary-pill-label">Detected Biome</span>
+                      <strong className="summary-pill-val" style={{ color: '#ef4444' }}>
+                        {detectedLocation.district}
+                      </strong>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Compass size={16} style={{ color: '#059669' }} />
+                    <div>
+                      <span className="summary-pill-label">Regional Benchmark</span>
+                      <strong className="summary-pill-val" style={{ color: '#059669' }}>
+                        {detectedLocation.district}, {detectedLocation.state}
+                      </strong>
+                    </div>
+                  </>
+                )}
               </div>
             )}
 
@@ -151,10 +166,12 @@ export const CropPredictionPage: React.FC = () => {
             </div>
 
             <div className="summary-pill-item">
-              <Award size={16} style={{ color: '#34d399' }} />
+              <Award size={16} style={{ color: suit.score === 0 ? '#ef4444' : '#10b981' }} />
               <div>
                 <span className="summary-pill-label">Land Suitability</span>
-                <strong className="summary-pill-val">{Math.round(suit.score * 100)}% ({suit.grade})</strong>
+                <strong className="summary-pill-val" style={{ color: suit.score === 0 ? '#ef4444' : undefined }}>
+                  {Math.round(suit.score * 100)}% ({suit.grade})
+                </strong>
               </div>
             </div>
 
@@ -175,29 +192,74 @@ export const CropPredictionPage: React.FC = () => {
             </div>
           </section>
 
-          {/* SECTION 2 — TOP 5 MULTI-CROP RECOMMENDATIONS */}
-          <section className="crop-section">
-            <div className="section-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Sparkles size={20} style={{ color: '#10b981' }} />
-                <h2 className="section-title">Top 5 Multi-Crop Recommendations</h2>
+          {/* SECTION 2 — TOP 5 MULTI-CROP RECOMMENDATIONS OR NON-ARABLE NOTICE */}
+          {top5Crops.length === 0 ? (
+            <section className="crop-section">
+              <div className="glass-card" style={{
+                textAlign: 'center',
+                padding: '48px 24px',
+                border: '1px solid rgba(239, 68, 68, 0.35)',
+                background: 'rgba(239, 68, 68, 0.05)',
+                borderRadius: '16px'
+              }}>
+                <AlertTriangle size={52} style={{ color: '#ef4444', margin: '0 auto 16px auto' }} />
+                <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '8px' }}>
+                  Cultivation Not Feasible: Non-Arable Zone Selected
+                </h2>
+                <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '680px', margin: '0 auto 16px auto', lineHeight: 1.6 }}>
+                  The selected coordinate (<strong>{centroidLat.toFixed(4)}°N, {centroidLon.toFixed(4)}°E</strong>) lies within an open water body or polar permafrost zone (<strong>{detectedLocation?.displayName || 'Non-Arable Terrestrial Zone'}</strong>).
+                  Because open water and ice shields lack soil lithology and experience sub-zero or aquatic environments, Land Suitability is <strong>0% (Not Suitable)</strong> and <strong>no crops can be planted here</strong>.
+                </p>
+                <div style={{
+                  display: 'inline-block',
+                  background: 'rgba(239, 68, 68, 0.12)',
+                  border: '1px solid rgba(239, 68, 68, 0.25)',
+                  borderRadius: '8px',
+                  padding: '10px 20px',
+                  fontSize: '0.88rem',
+                  color: '#ef4444',
+                  fontWeight: 600,
+                  marginBottom: '28px'
+                }}>
+                  ⚠️ Limiting Factors: {(suit as any).limiting_factors && (suit as any).limiting_factors.length > 0 ? (suit as any).limiting_factors.join('. ') : (detectedLocation?.warningMessage || 'Terrestrial crop cultivation impossible in open water / polar ice.')}
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => goToStep(2)}
+                    style={{ padding: '12px 28px', fontSize: '0.95rem' }}
+                  >
+                    <MapPin size={18} />
+                    <span>Reposition Field onto Arable Land →</span>
+                  </button>
+                </div>
               </div>
-              <span className="badge badge-high">
-                Spatial Land Allocation: 75% Main + 25% Companion
-              </span>
-            </div>
+            </section>
+          ) : (
+            <>
+              <section className="crop-section">
+                <div className="section-header">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Sparkles size={20} style={{ color: '#10b981' }} />
+                    <h2 className="section-title">Top 5 Multi-Crop Recommendations</h2>
+                  </div>
+                  <span className="badge badge-high">
+                    Spatial Land Allocation: 75% Main + 25% Companion
+                  </span>
+                </div>
 
-            <div className="top5-cards-grid">
-              {top5Crops.map((crop, index) => (
-                <CropRecommendationCard
-                  key={crop.crop_id || index}
-                  crop={crop}
-                  rank={index + 1}
-                  farmArea={farmArea}
-                />
-              ))}
-            </div>
-          </section>
+                <div className="top5-cards-grid">
+                  {top5Crops.map((crop, index) => (
+                    <CropRecommendationCard
+                      key={crop.crop_id || index}
+                      crop={crop}
+                      rank={index + 1}
+                      farmArea={farmArea}
+                    />
+                  ))}
+                </div>
+              </section>
 
           {/* SECTION 3 — TOP 10 YIELD PREDICTIONS */}
           <section className="crop-section">
@@ -406,6 +468,8 @@ export const CropPredictionPage: React.FC = () => {
               </div>
             </div>
           </section>
+          </>
+          )}
 
           {/* BOTTOM ACTIONS */}
           <div className="page-bottom-actions">

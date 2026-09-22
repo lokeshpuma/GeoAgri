@@ -57,7 +57,7 @@ export interface FullReportResponse {
     used_fallback_buffer: boolean;
   };
   land_suitability: {
-    grade: "High" | "Moderate" | "Low" | "Not Suitable";
+    grade: "High" | "Moderate" | "Low" | "Not Suitable" | string;
     score: number;
     confidence: number;
     limiting_factors: string[];

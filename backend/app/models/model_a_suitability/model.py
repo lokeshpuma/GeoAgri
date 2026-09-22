@@ -12,6 +12,51 @@ class ModelASuitability:
         Predicts Land Suitability grade and score.
         Returns: {grade, score, confidence, limiting_factors, is_fallback}
         """
+        biome_type = feature_vector.get("biome_type")
+        is_arable = feature_vector.get("is_arable", 1.0)
+
+        # 1. HARD GUARDRAIL: OPEN WATER BODY (Oceans, Seas, Deep Lakes)
+        if biome_type == "OPEN_WATER" or is_arable == 0.0 and feature_vector.get("is_water") == 1.0:
+            return {
+                "grade": "Not Suitable (Water Body)",
+                "score": 0.0,
+                "confidence": 0.99,
+                "limiting_factors": [
+                    "Coordinates lie in an open water body (Ocean/Sea/Marine waters)",
+                    "Zero terrestrial soil substrate present",
+                    "Open-field agricultural cultivation is physically impossible"
+                ],
+                "is_fallback": False
+            }
+
+        # 2. HARD GUARDRAIL: POLAR ICE SHEETS (Greenland, Antarctica, High Arctic)
+        if biome_type == "POLAR_ICE_SHEET":
+            return {
+                "grade": "Not Suitable (Polar Glacial)",
+                "score": 0.0,
+                "confidence": 0.99,
+                "limiting_factors": [
+                    "Perennial sub-zero polar thermal regime",
+                    "Continental ice sheet and continuous permafrost",
+                    "Growing season length is 0 frost-free days"
+                ],
+                "is_fallback": False
+            }
+
+        # 3. HARD GUARDRAIL: HIGH ALPINE GLACIAL ROCK (Himalayan / High Alpine Peaks)
+        if biome_type == "HIGH_ALPINE_GLACIER":
+            return {
+                "grade": "Not Suitable (High Alpine Peak)",
+                "score": 0.0,
+                "confidence": 0.99,
+                "limiting_factors": [
+                    "Extreme mountain altitude (>4,000m AMSL)",
+                    "Perennial snow, ice, and bare exposed rock lithosols",
+                    "Continuous sub-zero freezing hazards prevent crop emergence"
+                ],
+                "is_fallback": False
+            }
+
         if force_fallback:
             return self._fallback_predict(feature_vector)
 

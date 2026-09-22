@@ -242,13 +242,29 @@ class ModelBRecommendation:
         ML probability blending, and geographic bioclimatic zone affinity.
         Returns dict: {crop_id: {"score": float, "suitability_score": float, "confidence": float, "is_fallback": bool}}
         """
+        biome_type = feature_vector.get("biome_type")
+        is_arable = feature_vector.get("is_arable", 1.0)
+        is_water = feature_vector.get("is_water", 0.0)
+
+        registry = get_crop_registry()
+        crops = registry.list_crops()
+
+        # HARD GUARDRAIL: ZERO CROPS FOR WATER BODIES OR POLAR ICE OR ALPINE ROCK
+        if biome_type in ["OPEN_WATER", "POLAR_ICE_SHEET", "HIGH_ALPINE_GLACIER"] or is_arable == 0.0 or is_water == 1.0:
+            return {
+                crop.crop_id: {
+                    "score": 0.0,
+                    "suitability_score": 0.0,
+                    "confidence": 0.99,
+                    "is_fallback": False
+                }
+                for crop in crops
+            }
+
         if force_fallback:
             return self._fallback_predict(feature_vector, season)
 
         try:
-            registry = get_crop_registry()
-            crops = registry.list_crops()
-            
             lat = feature_vector.get("latitude", feature_vector.get("centroid_lat", 13.32))
             lon = feature_vector.get("longitude", feature_vector.get("centroid_lon", 75.75))
             rainfall = feature_vector.get("rainfall_mm", 800.0)
@@ -286,17 +302,19 @@ class ModelBRecommendation:
                 # Stage 2 Agronomic filter penalty
                 agronomic_penalty = 1.0
 
+                # Strict Thermal Lethal Limit: crop cannot survive extreme cold/heat
+                if temp < (crop.ideal_temp_min - 8.0) or temp > (crop.ideal_temp_max + 12.0):
+                    agronomic_penalty = 0.0
+                elif temp < crop.ideal_temp_min or temp > crop.ideal_temp_max:
+                    agronomic_penalty *= 0.60
+
                 # Season match check
                 if crop.season not in ["annual", "perennial", season]:
                     agronomic_penalty *= 0.55
 
-                # Temp match
-                if temp < crop.ideal_temp_min or temp > crop.ideal_temp_max:
-                    agronomic_penalty *= 0.70
-
                 # Rainfall match
-                if rainfall < crop.ideal_rainfall_min * 0.5:
-                    agronomic_penalty *= 0.65
+                if rainfall < crop.ideal_rainfall_min * 0.4:
+                    agronomic_penalty *= 0.50
 
                 # pH match
                 if ph < crop.ideal_ph_min or ph > crop.ideal_ph_max:

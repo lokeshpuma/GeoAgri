@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Sliders, Play, RefreshCw, Layers, Sparkles, Sprout, Table as TableIcon } from 'lucide-react';
+import { GeoAgriLogo } from '../components/GeoAgriLogo/GeoAgriLogo';
 import { fetchFullReport, FullReportResponse, PredictRequestPayload } from '../api/client';
 import { MapSelector } from '../components/MapSelector/MapSelector';
 import { FieldSummaryCard } from '../components/FieldSummaryCard/FieldSummaryCard';
@@ -71,12 +72,12 @@ export const Dashboard: React.FC = () => {
     <div style={{ minHeight: '100vh', background: 'var(--bg-primary)' }}>
       <header className="app-header">
         <div className="brand">
-          <div className="brand-icon">
-            <Sparkles style={{ color: '#ffffff' }} size={22} />
+          <div className="brand-icon" style={{ background: 'transparent' }}>
+            <GeoAgriLogo size={28} />
           </div>
           <div>
             <h1 className="brand-title">GeoAgri AI</h1>
-            <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>Location-Driven Decision Support System (India Edition)</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Location-Driven Agricultural Intelligence (Global Edition)</span>
           </div>
         </div>
 

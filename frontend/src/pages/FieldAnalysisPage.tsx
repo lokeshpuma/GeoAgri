@@ -18,7 +18,8 @@ import {
   RotateCcw,
   Check,
   RefreshCw,
-  Sliders
+  Sliders,
+  AlertTriangle
 } from 'lucide-react';
 import { useWorkflow, PIPELINE_STAGES } from '../context/WorkflowContext';
 import { MapSelector } from '../components/MapSelector/MapSelector';
@@ -235,32 +236,61 @@ export const FieldAnalysisPage: React.FC = () => {
               </div>
             </div>
 
-            {/* DETECTED LOCATION FROM EXTERNAL DATASETS (KAGGLE / ICAR) */}
+            {/* DETECTED LOCATION / WATER BODY / NON-ARABLE ALERT */}
             {detectedLocation && (
-              <div className="detected-location-card">
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Compass size={15} style={{ color: '#ec4899' }} />
-                    <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em', color: '#ec4899', textTransform: 'uppercase' }}>
-                      Detected Regional Agri Benchmark
+              detectedLocation.isWater || detectedLocation.isArable === false ? (
+                <div className="detected-location-card non-arable-alert" style={{
+                  background: 'rgba(239, 68, 68, 0.08)',
+                  borderColor: 'rgba(239, 68, 68, 0.35)',
+                  borderLeft: '4px solid #ef4444'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <AlertTriangle size={16} style={{ color: '#ef4444' }} />
+                      <span style={{ fontSize: '0.74rem', fontWeight: 800, letterSpacing: '0.04em', color: '#ef4444', textTransform: 'uppercase' }}>
+                        {detectedLocation.isWater ? 'Open Water Body (Non-Arable)' : 'Polar Glacial Zone (Non-Arable)'}
+                      </span>
+                    </div>
+                    <span className="badge badge-low" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>
+                      Suitability: 0%
                     </span>
                   </div>
-                  <span className="badge badge-high" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>
-                    {detectedLocation.source === 'reverse_geocoded' ? 'Detected District' : 'Global Benchmark'}
-                  </span>
-                </div>
-                <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
-                  {detectedLocation.displayName}
-                </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                  Agro-Climatic Zone: <strong style={{ color: '#38bdf8' }}>{detectedLocation.agroZone}</strong>
-                </div>
-                {detectedLocation.dominantCrops && detectedLocation.dominantCrops.length > 0 && (
-                  <div style={{ fontSize: '0.73rem', color: 'var(--text-dim)', marginTop: '4px' }}>
-                    Regional benchmarks: {detectedLocation.dominantCrops.slice(0, 4).join(', ')}
+                  <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                    {detectedLocation.displayName}
                   </div>
-                )}
-              </div>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                    Biome: <strong style={{ color: '#f59e0b' }}>{detectedLocation.agroZone}</strong>
+                  </div>
+                  <div style={{ fontSize: '0.74rem', color: '#ef4444', marginTop: '6px', lineHeight: 1.4 }}>
+                    ⚠️ {detectedLocation.warningMessage || 'Agricultural cultivation cannot take place in open water or polar ice. Please choose an inland agricultural parcel.'}
+                  </div>
+                </div>
+              ) : (
+                <div className="detected-location-card">
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <Compass size={15} style={{ color: '#059669' }} />
+                      <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em', color: '#059669', textTransform: 'uppercase' }}>
+                        Detected Regional Agri Benchmark
+                      </span>
+                    </div>
+                    <span className="badge badge-high" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>
+                      {detectedLocation.source === 'reverse_geocoded' ? 'Detected District' : 'Global Benchmark'}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                    {detectedLocation.displayName}
+                  </div>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                    Agro-Climatic Zone: <strong style={{ color: '#0284c7' }}>{detectedLocation.agroZone}</strong>
+                  </div>
+                  {detectedLocation.dominantCrops && detectedLocation.dominantCrops.length > 0 && (
+                    <div style={{ fontSize: '0.73rem', color: 'var(--text-dim)', marginTop: '4px' }}>
+                      Regional benchmarks: {detectedLocation.dominantCrops.slice(0, 4).join(', ')}
+                    </div>
+                  )}
+                </div>
+              )
             )}
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -316,10 +346,10 @@ export const FieldAnalysisPage: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <RefreshCw size={22} className="animate-spin" style={{ color: '#10b981' }} />
               <div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
                   GeoAgri AI is Analysing Your Location...
                 </h3>
-                <span style={{ fontSize: '0.8rem', color: '#9ca3af' }}>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                   Executing cloud Earth Observation models across selected parcel
                 </span>
               </div>
@@ -357,21 +387,21 @@ export const FieldAnalysisPage: React.FC = () => {
                 >
                   <div className="stage-status-icon">
                     {isDone ? (
-                      <Check size={14} style={{ color: '#34d399' }} />
+                      <Check size={14} style={{ color: '#10b981' }} />
                     ) : isCurrent ? (
-                      <RefreshCw size={14} className="animate-spin" style={{ color: '#fbbf24' }} />
+                      <RefreshCw size={14} className="animate-spin" style={{ color: '#f59e0b' }} />
                     ) : (
                       <span className="stage-num-dot">{st.id}</span>
                     )}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <strong style={{ fontSize: '0.85rem', color: isDone || isCurrent ? '#ffffff' : '#64748b' }}>
+                      <strong className="stage-title" style={{ fontSize: '0.85rem' }}>
                         {st.title}
                       </strong>
-                      <span style={{ fontSize: '0.72rem', color: '#9ca3af' }}>{st.source}</span>
+                      <span className="stage-source" style={{ fontSize: '0.72rem' }}>{st.source}</span>
                     </div>
-                    <span style={{ fontSize: '0.72rem', color: isDone ? '#34d399' : isCurrent ? '#fbbf24' : '#64748b' }}>
+                    <span className={`stage-status ${isDone ? 'done' : isCurrent ? 'current' : 'pending'}`} style={{ fontSize: '0.72rem' }}>
                       {isDone ? "Completed ✓" : isCurrent ? `${st.description}...` : "Waiting"}
                     </span>
                   </div>
@@ -390,10 +420,10 @@ export const FieldAnalysisPage: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <CheckCircle size={22} style={{ color: '#10b981' }} />
               <div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
                   Location Analysis Complete
                 </h3>
-                <span style={{ fontSize: '0.8rem', color: '#9ca3af' }}>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                   All 34 satellite, soil, and meteorological layers successfully processed for {centroidLat.toFixed(4)}°N, {centroidLon.toFixed(4)}°E.
                 </span>
               </div>
@@ -416,11 +446,11 @@ export const FieldAnalysisPage: React.FC = () => {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Activity size={20} style={{ color: '#10b981' }} />
-                  <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+                  <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
                     Environmental & Satellite Analysis
                   </h2>
                 </div>
-                <p style={{ fontSize: '0.8rem', color: '#9ca3af', margin: '4px 0 0 0' }}>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '4px 0 0 0' }}>
                   Raw Earth Observation numbers and SoilGrids layers converted into plain-language agronomic evaluations.
                 </p>
               </div>
@@ -604,10 +634,10 @@ export const FieldAnalysisPage: React.FC = () => {
       {!isPredicted && !loading && (
         <div className="glass-card" style={{ textAlign: 'center', padding: '36px 20px' }}>
           <Compass size={36} style={{ color: '#10b981', margin: '0 auto 12px auto' }} />
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#ffffff', margin: '0 0 6px 0' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 6px 0' }}>
             Location Selected: Ready for Analysis
           </h3>
-          <p style={{ color: '#9ca3af', fontSize: '0.85rem', maxWidth: '600px', margin: '0 auto 18px auto' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', maxWidth: '600px', margin: '0 auto 18px auto' }}>
             Adjust your parcel boundaries on the map above if needed, then click <strong>Predict Now</strong> to query Google Earth Engine, Sentinel radar, SoilGrids, and NASA POWER.
           </p>
           <button

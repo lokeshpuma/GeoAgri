@@ -15,7 +15,8 @@ import {
   Printer,
   ArrowLeft,
   RotateCcw,
-  Sparkles
+  Sparkles,
+  AlertTriangle
 } from 'lucide-react';
 import { useWorkflow } from '../context/WorkflowContext';
 import { ReportDownloadButton } from '../components/ReportDownloadButton/ReportDownloadButton';
@@ -216,23 +217,14 @@ export const SummaryReportPage: React.FC = () => {
             <tbody>
               {metricsList.map((m, idx) => (
                 <tr key={idx}>
-                  <td style={{ fontWeight: 600, color: '#ffffff' }}>{m.label}</td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-main)' }}>{m.label}</td>
                   <td style={{ fontWeight: 700, color: '#fbbf24', whiteSpace: 'nowrap' }}>{m.value}</td>
                   <td>
-                    <span
-                      style={{
-                        padding: '3px 8px',
-                        borderRadius: '6px',
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
-                        background: m.rating === 'optimal' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                        color: m.rating === 'optimal' ? '#34d399' : '#fbbf24',
-                      }}
-                    >
+                    <span className={`badge ${m.rating === 'optimal' ? 'badge-high' : 'badge-moderate'}`}>
                       {m.interpretation}
                     </span>
                   </td>
-                  <td style={{ fontSize: '0.82rem', color: '#d1d5db' }}>{m.implication}</td>
+                  <td style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>{m.implication}</td>
                 </tr>
               ))}
             </tbody>
@@ -249,19 +241,19 @@ export const SummaryReportPage: React.FC = () => {
         <div className="report-section glass-card" style={{ height: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
             <Award size={18} style={{ color: '#10b981' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
               3. Land Suitability Assessment
             </h3>
           </div>
-          <div style={{ background: 'rgba(16, 185, 129, 0.12)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '10px', padding: '14px', marginBottom: '12px' }}>
-            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#34d399' }}>
+          <div style={{ background: suit.score === 0 ? 'rgba(239, 68, 68, 0.12)' : 'rgba(16, 185, 129, 0.12)', border: suit.score === 0 ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '10px', padding: '14px', marginBottom: '12px' }}>
+            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: suit.score === 0 ? '#ef4444' : '#10b981' }}>
               {suit.grade} Suitability ({Math.round(suit.score * 100)}%)
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#9ca3af', marginTop: '2px' }}>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
               Diagnostic Confidence: <strong>{Math.round(suit.confidence * 100)}%</strong>
             </div>
           </div>
-          <div style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-main)' }}>
             <strong>Limiting Factors:</strong>
             <ul style={{ paddingLeft: '18px', marginTop: '6px' }}>
               {suit.limiting_factors.map((f, i) => (
@@ -275,7 +267,7 @@ export const SummaryReportPage: React.FC = () => {
         <div className="report-section glass-card" style={{ height: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
             <Droplets size={18} style={{ color: '#38bdf8' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
               4. Irrigation & Water Balance
             </h3>
           </div>
@@ -293,7 +285,7 @@ export const SummaryReportPage: React.FC = () => {
               </span>
             </div>
           </div>
-          <div style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-main)' }}>
             Seasonal effective rainfall is estimated at <strong>{irri.effective_rainfall_mm} mm</strong>. Soil moisture levels are adequate with supplemental watering required during flowering and pod development.
           </div>
         </div>
@@ -302,7 +294,7 @@ export const SummaryReportPage: React.FC = () => {
         <div className="report-section glass-card" style={{ height: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
             <ShieldAlert size={18} style={{ color: '#f59e0b' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
               5. Climate Risk Scorecard
             </h3>
           </div>
@@ -365,20 +357,20 @@ export const SummaryReportPage: React.FC = () => {
                 return (
                   <tr key={idx}>
                     <td style={{ fontWeight: 700, color: idx === 0 ? '#fbbf24' : '#9ca3af' }}>#{idx + 1}</td>
-                    <td style={{ fontWeight: 600, color: '#ffffff' }}>{c.crop_name}</td>
+                    <td style={{ fontWeight: 600, color: 'var(--text-main)' }}>{c.crop_name}</td>
                     <td>
-                      <span style={{ color: '#34d399', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <span style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <Leaf size={12} /> {companion?.companion_crop_name || "Cowpea (Lobia)"}
                       </span>
                     </td>
-                    <td style={{ textAlign: 'right', fontWeight: 700, color: '#34d399' }}>
+                    <td style={{ textAlign: 'right', fontWeight: 700, color: '#10b981' }}>
                       {(c.recommendation_score * 100).toFixed(1)}%
                     </td>
                     <td style={{ textAlign: 'right', fontWeight: 700, color: '#fbbf24' }}>
-                      {totalYield} t <span style={{ fontSize: '0.72rem', color: '#9ca3af' }}>({c.expected_yield_t_ha.p50} t/ha)</span>
+                      {totalYield} t <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>({c.expected_yield_t_ha.p50} t/ha)</span>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                      <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', padding: '2px 8px', borderRadius: '4px', fontWeight: 700, fontSize: '0.75rem' }}>
+                      <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 8px', borderRadius: '4px', fontWeight: 700, fontSize: '0.75rem' }}>
                         +{boost}%
                       </span>
                     </td>
@@ -386,7 +378,7 @@ export const SummaryReportPage: React.FC = () => {
                       <span className="badge badge-high" style={{ fontSize: '0.75rem' }}>{c.irrigation_mode}</span>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                      <span style={{ color: c.climate_risk_score < 35 ? '#34d399' : '#fbbf24', fontWeight: 600, fontSize: '0.8rem' }}>
+                      <span style={{ color: c.climate_risk_score < 35 ? '#10b981' : '#fbbf24', fontWeight: 600, fontSize: '0.8rem' }}>
                         {c.climate_risk_score < 35 ? 'Low' : 'Moderate'}
                       </span>
                     </td>
@@ -424,8 +416,8 @@ export const SummaryReportPage: React.FC = () => {
             <tbody>
               {top10Crops.map((c, idx) => (
                 <tr key={idx}>
-                  <td style={{ color: '#9ca3af', fontWeight: 600 }}>{idx + 1}</td>
-                  <td style={{ fontWeight: 600, color: '#ffffff' }}>{c.crop_name}</td>
+                  <td style={{ color: 'var(--text-muted)', fontWeight: 600 }}>{idx + 1}</td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-main)' }}>{c.crop_name}</td>
                   <td style={{ textAlign: 'right', fontWeight: 700, color: '#fbbf24' }}>
                     {(c.expected_production_t?.p50 || (c.expected_yield_t_ha.p50 * farmArea)).toFixed(1)} t
                   </td>
@@ -578,10 +570,10 @@ export const SummaryReportPage: React.FC = () => {
       <section className="report-section glass-card no-print">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
               9. Export & Share Agricultural Intelligence Dossier
             </h3>
-            <p style={{ fontSize: '0.8rem', color: '#9ca3af', margin: '4px 0 0 0' }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '4px 0 0 0' }}>
               Download a high-resolution, branded PDF report containing all field data, satellite metrics, and crop forecasts.
             </p>
           </div>

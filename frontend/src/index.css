@@ -198,8 +198,34 @@
 }
 
 [data-theme="light"] .detected-location-card {
-  background: #fdf2f8;
-  border-color: #fbcfe8;
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+[data-theme="light"] .detected-location-card.non-arable-alert {
+  background: #fef2f2 !important;
+  border-color: #fecaca !important;
+}
+
+[data-theme="light"] .badge-high {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+  font-weight: 700;
+}
+
+[data-theme="light"] .badge-moderate {
+  background: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
+  font-weight: 700;
+}
+
+[data-theme="light"] .badge-low {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+  font-weight: 700;
 }
 
 [data-theme="light"] .preset-area-chip {
@@ -304,21 +330,56 @@
 }
 
 [data-theme="light"] .pipeline-stage-row {
-  background: #f8fafc;
+  background: #ffffff;
   border-color: #e2e8f0;
   color: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .pipeline-stage-row .stage-title {
+  color: #0f172a !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pipeline-stage-row .stage-source {
+  color: #64748b !important;
 }
 
 [data-theme="light"] .pipeline-stage-row.done {
-  background: #ecfdf5;
-  border-color: #a7f3d0;
+  background: #f0fdf4;
+  border-color: #86efac;
   color: #065f46;
+}
+
+[data-theme="light"] .pipeline-stage-row.done .stage-title {
+  color: #064e3b !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pipeline-stage-row.done .stage-source {
+  color: #047857 !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .pipeline-stage-row.done .stage-status {
+  color: #059669 !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .pipeline-stage-row.current {
   background: #fffbeb;
   border-color: #fde68a;
   color: #92400e;
+}
+
+[data-theme="light"] .pipeline-stage-row.current .stage-title {
+  color: #78350f !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pipeline-stage-row.current .stage-status {
+  color: #b45309 !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .advanced-soil-accordion {
@@ -605,10 +666,10 @@
   box-shadow: 0 0 10px var(--accent-green-glow);
 }
 
-/* Detected Location Card (Kaggle & ICAR) */
+/* Detected Location Card (Global Agricultural Dataset & Reverse Geocoded) */
 .detected-location-card {
-  background: rgba(236, 72, 153, 0.06);
-  border: 1px solid rgba(236, 72, 153, 0.25);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 10px;
   padding: 12px 14px;
   display: flex;

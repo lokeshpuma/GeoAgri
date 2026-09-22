@@ -19,6 +19,7 @@ import {
   Award
 } from 'lucide-react';
 import { useWorkflow } from '../context/WorkflowContext';
+import { GeoAgriLogo } from '../components/GeoAgriLogo/GeoAgriLogo';
 
 const HOW_IT_WORKS_STAGES = [
   {
@@ -162,7 +163,7 @@ export const WorkspacePage: React.FC = () => {
       {/* 1. HERO SECTION */}
       <section className="workspace-hero">
         <div className="hero-badge">
-          <Sparkles size={14} style={{ color: '#10b981' }} />
+          <GeoAgriLogo size={18} />
           <span>GeoAgri AI • Location-Driven Agricultural Intelligence</span>
         </div>
 

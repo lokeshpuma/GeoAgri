@@ -1,6 +1,7 @@
 import React from 'react';
-import { Sparkles, RefreshCw, Sun, Moon } from 'lucide-react';
+import { RefreshCw, Sun, Moon } from 'lucide-react';
 import { useWorkflow } from '../../context/WorkflowContext';
+import { GeoAgriLogo } from '../GeoAgriLogo/GeoAgriLogo';
 
 const STEP_TITLES: Record<number, string> = {
   1: "Step 1/4 • GeoAgri AI Overview",
@@ -15,8 +16,8 @@ export const PageHeader: React.FC = () => {
   return (
     <header className="app-header">
       <div className="brand">
-        <div className="brand-icon">
-          <Sparkles style={{ color: '#ffffff' }} size={22} />
+        <div className="brand-icon" style={{ background: 'transparent', padding: 0, overflow: 'hidden' }}>
+          <GeoAgriLogo size={32} />
         </div>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

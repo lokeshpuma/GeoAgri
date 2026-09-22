@@ -54,6 +54,11 @@ def run_decision_fusion(
     mod_e = model_outputs.get("model_e", {})
 
     land_suit_val = mod_a.get("score", 0.70)
+    land_grade = mod_a.get("grade", "")
+
+    # HARD GUARDRAIL: Return 0 crops for water bodies or polar/alpine non-arable biomes
+    if land_suit_val == 0.0 or "Water Body" in land_grade or "Polar Glacial" in land_grade or "High Alpine" in land_grade:
+        return []
 
     # Adjust weights based on irrigation preference
     weights = DEFAULT_WEIGHTS.copy()
@@ -79,6 +84,10 @@ def run_decision_fusion(
 
         crop_rec_val = rec_data.get("score", 0.50)
         suitability_score = rec_data.get("suitability_score", 0.50)
+
+        # Skip crops that received hard 0 from agronomic or lethal thermal filters
+        if crop_rec_val <= 0.0 or suitability_score <= 0.0:
+            continue
 
         # Model C Irrigation normalization
         c_data = mod_c.get(crop_id, {})

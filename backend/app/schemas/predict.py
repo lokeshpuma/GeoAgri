@@ -62,7 +62,7 @@ class FieldSummary(BaseModel):
     used_fallback_buffer: bool
 
 class LandSuitability(BaseModel):
-    grade: Literal["High", "Moderate", "Low", "Not Suitable"]
+    grade: str
     score: float
     confidence: float
     limiting_factors: list[str]
