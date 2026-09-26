@@ -164,14 +164,18 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
                     <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#3b82f6" }} />
                     Main ({crop.crop_name}): <strong style={{ color: "var(--text-main)", marginLeft: 2 }}>{mainTotalYield} t</strong>
                   </span>
-                  <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#10b981" }} />
-                    Companion ({intercropName}): <strong style={{ color: "#10b981", marginLeft: 2 }}>+{intercropTotalYield} t</strong>
-                  </span>
+                  {hasIntercrop && (
+                    <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#10b981" }} />
+                      Companion ({intercropName}): <strong style={{ color: "#10b981", marginLeft: 2 }}>+{intercropTotalYield} t</strong>
+                    </span>
+                  )}
                 </div>
-                <span style={{ color: "#10b981", fontWeight: 600 }}>
-                  +{(crop.intercrop_options?.[0]?.yield_boost_pct ? (crop.intercrop_options[0].yield_boost_pct * 100).toFixed(1) : 14.5)}% Advantage
-                </span>
+                {hasIntercrop && crop.intercrop_options?.[0]?.yield_boost_pct && (
+                  <span style={{ color: "#10b981", fontWeight: 600 }}>
+                    +{(crop.intercrop_options[0].yield_boost_pct * 100).toFixed(1)}% Advantage
+                  </span>
+                )}
               </div>
             </div>
           );

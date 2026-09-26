@@ -87,7 +87,6 @@ export const CropSuitabilityRanking: React.FC<CropSuitabilityRankingProps> = ({ 
           const intercropYieldPerHa = hasIntercrop ? Number((mainYieldPerHa * 0.58).toFixed(2)) : 0;
           const intercropTotalYield = hasIntercrop ? Number((intercropYieldPerHa * intercropArea).toFixed(2)) : 0;
           const combinedYield = Number((mainTotalYield + intercropTotalYield).toFixed(2));
-          const sustainability = 12 - idx * 2;
           const matchPercent = Math.min(100, Math.round(crop.recommendation_score * 100));
 
           return (
@@ -167,7 +166,11 @@ export const CropSuitabilityRanking: React.FC<CropSuitabilityRankingProps> = ({ 
                   <span style={{ fontSize: "0.8rem", color: "#9ca3af" }}>{hasIntercrop ? "Companion Partner:" : "Cropping System:"}</span>
                 </div>
                 <span style={{ fontSize: "0.85rem", fontWeight: 700, color: hasIntercrop ? "#f3f4f6" : "#9ca3af" }}>
-                  {hasIntercrop ? intercropName : "Sole Cropping (Monoculture)"}
+                  {hasIntercrop
+                    ? intercropName
+                    : crop.intercrop_data_available === false
+                    ? "Companion data not yet available"
+                    : "Sole Cropping (Monoculture)"}
                 </span>
               </div>
 

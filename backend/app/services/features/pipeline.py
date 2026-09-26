@@ -16,10 +16,21 @@ class FeaturePipeline:
         self.feature_names = self._load_manifest()
 
     def _load_manifest(self) -> list[str]:
-        if os.path.exists(self.manifest_path):
-            with open(self.manifest_path, "r") as f:
-                data = json.load(f)
-                return data.get("feature_names", [])
+        candidates = [
+            self.manifest_path,
+            "backend/ml/models/feature_manifest.json",
+            "ml/models/feature_manifest.json"
+        ]
+        for p in candidates:
+            if p and os.path.exists(p):
+                try:
+                    with open(p, "r") as f:
+                        data = json.load(f)
+                        names = data.get("feature_names", [])
+                        if len(names) == 78:
+                            return names
+                except Exception:
+                    pass
         # Fallback list if file not created yet
         return [f"feature_{i}" for i in range(78)]
 
@@ -27,6 +38,7 @@ class FeaturePipeline:
         """
         Extracts 78-layer feature dictionary matching manifest names.
         Imputes any missing/NaN values with regional median defaults.
+        Preserves core physical and agronomic observation measurements.
         """
         sat = profile.get("satellite", {})
         weather = profile.get("weather", {})
@@ -79,6 +91,17 @@ class FeaturePipeline:
             if val is None or np.isnan(val):
                 val = defaults.get(f_name, 0.5)
             vector[f_name] = round(float(val), 4)
+
+        # Always preserve core physical and agronomic features for Models A-E
+        for core_key in [
+            "rainfall_mm", "temp_mean_c", "temp_max_c", "temp_min_c", "humidity_pct",
+            "ph", "organic_carbon_g_kg", "nitrogen_g_kg", "phosphorus_ppm", "potassium_ppm",
+            "texture_clay_pct", "texture_sand_pct", "texture_silt_pct",
+            "elevation", "slope", "twi", "ndvi", "ndvi_mean", "ndmi", "ndwi",
+            "slope_mean", "twi_mean"
+        ]:
+            if core_key in raw_map:
+                vector[core_key] = raw_map[core_key]
 
         # Ensure spatial coordinates are preserved for bioclimatic routing
         lat = raw_map.get("latitude", 13.32)

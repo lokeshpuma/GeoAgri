@@ -30,12 +30,14 @@ MANIFEST
 .venv/
 env/
 venv/
+backend/venv/
 ENV/
 env.bak/
 venv.bak/
 
 # Pytest / Coverage
 .pytest_cache/
+backend/.pytest_cache/
 .coverage
 .coverage.*
 .cache
@@ -59,6 +61,8 @@ dist-ssr
 .DS_Store
 .DS_Store?
 ._*
+__MACOSX/
+*/__MACOSX/
 .Spotlight-V100
 .Trashes
 ehthumbs.db

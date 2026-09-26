@@ -111,6 +111,7 @@ export interface FullReportResponse {
     }>;
     rationale: string;
     data_confidence: "high" | "medium" | "low";
+    intercrop_data_available?: boolean;
   }>;
   yield_summary: {
     top_recommended_crop: string;

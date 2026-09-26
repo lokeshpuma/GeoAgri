@@ -23,6 +23,20 @@ class IntercropOption(BaseModel):
     companion_share_factor: float = 0.25
     rationale: str
 
+# Reviewed agronomic allowlist for crops that genuinely grow best alone / dedicated sole-cropping
+# with verified scientific rationale (e.g. allelopathic suppression, dense specialized plantation,
+# viral vectors/quality degradation, microclimate aeration).
+GENUINE_SOLE_CROPS: dict[str, str] = {
+    "tea": "Dense perennial Camellia sinensis plantation with shade tree canopy; sole cropped under high rainfall.",
+    "tobacco": "High-grade commercial Solanaceae; strictly sole-cropped to prevent Tobacco Mosaic Virus (TMV) and leaf quality loss.",
+    "cumin": "Arid sensitive spice; prone to blight and Fusarium wilt, requires clean sole-crop aeration.",
+    "clover": "Forage legume broadcast as pure dense sward or green manure pasture.",
+    "olive": "Perennial Olea europaea grove crop with extensive shallow root spread.",
+    "pistachio": "Specialized arid Pistacia vera nut tree orchard.",
+    "almond": "Dedicated Prunus dulcis nut orchard with specialized pollination and disease management.",
+    "walnut": "Juglone allelopathy severely stunts adjacent annual crops; strictly solitary or dedicated Juglans regia orchard."
+}
+
 class CropProfile(BaseModel):
     crop_id: str
     crop_name: str
@@ -38,6 +52,8 @@ class CropProfile(BaseModel):
     baseline_yield_t_ha: QuantileValue
     data_confidence: Literal["high", "medium", "low"]
     intercrop_options: list[IntercropOption] = Field(default_factory=list)
+    intercrop_data_available: bool = True
+    sole_crop_rationale: str | None = None
 
 class CropRegistry:
     def __init__(self, registry_file: str | None = None):
@@ -276,7 +292,16 @@ class CropRegistry:
             opts = matrix_data.get(crop_id, [])
             if opts:
                 profile.intercrop_options = opts
-            # When genuinely no intercrop data exists, leave as empty list - never fabricate fallback
+                profile.intercrop_data_available = True
+                profile.sole_crop_rationale = None
+            elif crop_id in GENUINE_SOLE_CROPS:
+                profile.intercrop_options = []
+                profile.intercrop_data_available = True
+                profile.sole_crop_rationale = GENUINE_SOLE_CROPS[crop_id]
+            else:
+                profile.intercrop_options = []
+                profile.intercrop_data_available = False
+                profile.sole_crop_rationale = "Companion data not yet available for this crop."
 
 
 # Default global registry instance

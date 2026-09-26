@@ -80,7 +80,8 @@ async def generate_full_report(req: PredictRequest):
                 intercrop_options=intercrop_opts,
                 rationale=r["rationale"],
                 data_confidence=r["data_confidence"],
-                regional_agronomic_prior=r.get("regional_agronomic_prior", 1.0)
+                regional_agronomic_prior=r.get("regional_agronomic_prior", 1.0),
+                intercrop_data_available=r.get("intercrop_data_available", True)
             )
             formatted_recs.append(rec_crop)
 

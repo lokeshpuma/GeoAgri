@@ -434,5 +434,520 @@
       "companion_share_factor": 0.3,
       "rationale": "Combining Coffee with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
     }
+  ],
+  "groundnut": [
+    {
+      "companion_crop_id": "pigeon_pea",
+      "companion_crop_name": "Pigeon Pea (Red Gram)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Groundnut + Pigeonpea (7:1 row ratio) is an ICAR benchmark dryland system; shallow groundnut canopy pairs with deep-rooted pigeonpea."
+    },
+    {
+      "companion_crop_id": "castor",
+      "companion_crop_name": "Castor",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Groundnut + Castor provides windbreak barrier protection, diverts leafminers, and enhances temporal water utilization."
+    },
+    {
+      "companion_crop_id": "sunflower",
+      "companion_crop_name": "Sunflower",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Groundnut + Sunflower (6:2 ratio) improves solar radiation capture and provides pollinator nectar synergy."
+    }
+  ],
+  "soybean": [
+    {
+      "companion_crop_id": "pigeon_pea",
+      "companion_crop_name": "Pigeon Pea (Red Gram)",
+      "yield_boost_pct": 0.22,
+      "companion_share_factor": 0.25,
+      "rationale": "Soybean + Pigeonpea (4:2 row ratio) utilizes differential growth durations (90d vs 180d) with zero inter-row competition."
+    },
+    {
+      "companion_crop_id": "maize",
+      "companion_crop_name": "Maize",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Soybean + Maize pairs C3 legume nitrogen fixation with high-radiation C4 cereal photosynthesis."
+    },
+    {
+      "companion_crop_id": "sorghum",
+      "companion_crop_name": "Sorghum (Jowar)",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.2,
+      "rationale": "Soybean + Sorghum (4:2 ratio) suppresses weeds and mitigates early-season dry spell risks."
+    }
+  ],
+  "finger_millet": [
+    {
+      "companion_crop_id": "pigeon_pea",
+      "companion_crop_name": "Pigeon Pea (Red Gram)",
+      "yield_boost_pct": 0.2,
+      "companion_share_factor": 0.2,
+      "rationale": "Finger Millet + Pigeonpea (8:2 or 10:2 ratio) is the classic Karnataka dryland standard optimizing vertical canopy tiers."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.2,
+      "rationale": "Finger Millet + Cowpea provides rapid green soil cover, biological nitrogen fixation, and soil moisture conservation."
+    }
+  ],
+  "sorghum": [
+    {
+      "companion_crop_id": "pigeon_pea",
+      "companion_crop_name": "Pigeon Pea (Red Gram)",
+      "yield_boost_pct": 0.24,
+      "companion_share_factor": 0.25,
+      "rationale": "Sorghum + Pigeonpea (2:1 ratio) is the premier semi-arid intercrop system maximizing land equivalent ratio (LER > 1.25)."
+    },
+    {
+      "companion_crop_id": "soybean",
+      "companion_crop_name": "Soybean",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Sorghum + Soybean (4:2 ratio) maintains balanced nitrogen dynamics and controls Striga weed infestation."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Sorghum + Cowpea provides dual grain-fodder security and rapid ground shading to conserve topsoil moisture."
+    }
+  ],
+  "pearl_millet": [
+    {
+      "companion_crop_id": "pigeon_pea",
+      "companion_crop_name": "Pigeon Pea (Red Gram)",
+      "yield_boost_pct": 0.2,
+      "companion_share_factor": 0.25,
+      "rationale": "Pearl Millet + Pigeonpea (4:2 ratio) stabilizes yield against erratic rainfall in dry semi-arid belts."
+    },
+    {
+      "companion_crop_id": "cluster_bean",
+      "companion_crop_name": "Cluster Bean (Guar)",
+      "yield_boost_pct": 0.17,
+      "companion_share_factor": 0.2,
+      "rationale": "Pearl Millet + Cluster Bean (Guar) combines deep taproot legume moisture mining with fibrous millet roots."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Pearl Millet + Cowpea improves protein yield and reduces soil surface evaporation via dense early mulch."
+    }
+  ],
+  "cassava": [
+    {
+      "companion_crop_id": "groundnut",
+      "companion_crop_name": "Groundnut (Peanut)",
+      "yield_boost_pct": 0.25,
+      "companion_share_factor": 0.3,
+      "rationale": "Cassava + Groundnut (1:3 alley ratio) utilizes open interspaces during early 75 days before cassava canopy closure."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.2,
+      "companion_share_factor": 0.25,
+      "rationale": "Cassava + Cowpea provides short-cycle pulse return while fixing nitrogen for tuber bulk expansion."
+    }
+  ],
+  "turmeric": [
+    {
+      "companion_crop_id": "maize",
+      "companion_crop_name": "Maize",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Turmeric + Maize provides partial overhead microclimate shade beneficial during turmeric rhizome emergence."
+    },
+    {
+      "companion_crop_id": "chilli",
+      "companion_crop_name": "Chilli",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Turmeric + Chilli strip companion system utilizes common raised bed irrigation and fertilizer regimes."
+    }
+  ],
+  "castor": [
+    {
+      "companion_crop_id": "groundnut",
+      "companion_crop_name": "Groundnut (Peanut)",
+      "yield_boost_pct": 0.2,
+      "companion_share_factor": 0.3,
+      "rationale": "Castor + Groundnut (1:5 ratio) uses wide castor spacing to harvest groundnut pods before castor branches outward."
+    },
+    {
+      "companion_crop_id": "green_gram",
+      "companion_crop_name": "Green Gram (Moong)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Castor + Green Gram provides 60-day early pulse harvest and enriches root-zone nitrogen for castor."
+    }
+  ],
+  "sugarcane": [
+    {
+      "companion_crop_id": "potato",
+      "companion_crop_name": "Potato",
+      "yield_boost_pct": 0.24,
+      "companion_share_factor": 0.25,
+      "rationale": "Autumn Sugarcane + Potato (1:2 inter-row) utilizes wide furrow spacing before cane tillering."
+    },
+    {
+      "companion_crop_id": "mustard",
+      "companion_crop_name": "Mustard",
+      "yield_boost_pct": 0.2,
+      "companion_share_factor": 0.2,
+      "rationale": "Sugarcane + Mustard provides quick winter oilseed cash flow without impeding subsequent spring cane growth."
+    },
+    {
+      "companion_crop_id": "black_gram",
+      "companion_crop_name": "Black Gram (Urad)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Spring Sugarcane + Black Gram fixes nitrogen in early cane furrows and reduces early weed pressure."
+    }
+  ],
+  "wheat": [
+    {
+      "companion_crop_id": "mustard",
+      "companion_crop_name": "Mustard",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.2,
+      "rationale": "Wheat + Mustard (9:1 strip ratio) is the premier North Indian rabi intercrop maximizing spatial light and oilseed value."
+    },
+    {
+      "companion_crop_id": "chickpea",
+      "companion_crop_name": "Chickpea (Gram)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.25,
+      "rationale": "Wheat + Chickpea (4:2 ratio) provides complementary nitrogen donation and balanced soil nutrient exploitation."
+    }
+  ],
+  "durum_wheat": [
+    {
+      "companion_crop_id": "chickpea",
+      "companion_crop_name": "Chickpea (Gram)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.25,
+      "rationale": "Durum Wheat + Chickpea (4:2 ratio) improves grain protein and optimizes moisture mining on vertisols."
+    },
+    {
+      "companion_crop_id": "safflower",
+      "companion_crop_name": "Safflower",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Durum Wheat + Safflower strip system harnesses deep subsoil moisture on residual black soils."
+    }
+  ],
+  "barley": [
+    {
+      "companion_crop_id": "mustard",
+      "companion_crop_name": "Mustard",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Barley + Mustard (8:1 ratio) provides reliable drought-tolerant rabi yield in marginal soils."
+    },
+    {
+      "companion_crop_id": "chickpea",
+      "companion_crop_name": "Chickpea (Gram)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.25,
+      "rationale": "Barley + Chickpea (6:2 ratio) improves biological nitrogen transfer and enhances total digestible feed."
+    }
+  ],
+  "mustard": [
+    {
+      "companion_crop_id": "chickpea",
+      "companion_crop_name": "Chickpea (Gram)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Mustard + Chickpea (1:4 ratio) provides excellent aphid trap-crop benefits and symbiotic nitrogen transfer."
+    },
+    {
+      "companion_crop_id": "wheat",
+      "companion_crop_name": "Wheat",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.2,
+      "rationale": "Mustard + Wheat (1:9 ratio) maximizes systemic land use efficiency and rabi return."
+    }
+  ],
+  "chilli": [
+    {
+      "companion_crop_id": "onion",
+      "companion_crop_name": "Onion",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Chilli + Onion (1:2 row ratio) repels thrips vectors and exploits divergent root depth strata."
+    },
+    {
+      "companion_crop_id": "coriander",
+      "companion_crop_name": "Coriander",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Chilli + Coriander provides natural insect pest diversion and quick herb return before chilli flowering."
+    }
+  ],
+  "tomato": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Tomato + Cowpea inter-row pairing enriches soil nitrogen and enhances soil microbial activity."
+    },
+    {
+      "companion_crop_id": "coriander",
+      "companion_crop_name": "Coriander",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Tomato + Coriander attracts beneficial syrphid flies and parasitoid wasps for biological pest control."
+    }
+  ],
+  "eggplant": [
+    {
+      "companion_crop_id": "coriander",
+      "companion_crop_name": "Coriander",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Eggplant + Coriander acts as a companion nectar source attracting natural predators of shoot borers."
+    },
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Eggplant + Cowpea improves ground nitrogen and suppresses early-season weed development."
+    }
+  ],
+  "potato": [
+    {
+      "companion_crop_id": "mustard",
+      "companion_crop_name": "Mustard",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.2,
+      "rationale": "Potato + Mustard companion border system emits glucosinolate root exudates that deter soil-borne pests."
+    },
+    {
+      "companion_crop_id": "wheat",
+      "companion_crop_name": "Wheat",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Potato + Wheat relay system enables early autumn potato tuberization followed by wheat canopy spread."
+    }
+  ],
+  "onion": [
+    {
+      "companion_crop_id": "chilli",
+      "companion_crop_name": "Chilli",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.25,
+      "rationale": "Onion + Chilli companion cropping deters fungal pathogens and optimizes bed surface utilization."
+    },
+    {
+      "companion_crop_id": "coriander",
+      "companion_crop_name": "Coriander",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Onion + Coriander provides fast multi-tier herb returns without root interference."
+    }
+  ],
+  "sunflower": [
+    {
+      "companion_crop_id": "pigeon_pea",
+      "companion_crop_name": "Pigeon Pea (Red Gram)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Sunflower + Pigeonpea (2:1 or 4:2 ratio) provides drought-hardy spatial complementarity."
+    },
+    {
+      "companion_crop_id": "groundnut",
+      "companion_crop_name": "Groundnut (Peanut)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.25,
+      "rationale": "Sunflower + Groundnut (2:6 ratio) pairs tall heliotropic head development with low spreading legume pods."
+    }
+  ],
+  "safflower": [
+    {
+      "companion_crop_id": "chickpea",
+      "companion_crop_name": "Chickpea (Gram)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Safflower + Chickpea (1:3 ratio) pairs deep taproot safflower extraction (up to 2m) with chickpea root nodules."
+    },
+    {
+      "companion_crop_id": "coriander",
+      "companion_crop_name": "Coriander",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Safflower + Coriander (2:4 ratio) diversifies early winter returns and suppresses weeds."
+    }
+  ],
+  "sesame": [
+    {
+      "companion_crop_id": "green_gram",
+      "companion_crop_name": "Green Gram (Moong)",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.25,
+      "rationale": "Sesame + Green Gram (2:2 ratio) provides simultaneous harvest with superior soil nutrient preservation."
+    },
+    {
+      "companion_crop_id": "pigeon_pea",
+      "companion_crop_name": "Pigeon Pea (Red Gram)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.2,
+      "rationale": "Sesame + Pigeonpea (4:1 ratio) utilizes sesame rapid maturity followed by pigeonpea podding."
+    }
+  ],
+  "cluster_bean": [
+    {
+      "companion_crop_id": "pearl_millet",
+      "companion_crop_name": "Pearl Millet (Bajra)",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Cluster Bean + Pearl Millet (2:1 ratio) is the benchmark arid legume-cereal intercrop for Rajasthan/Gujarat drylands."
+    },
+    {
+      "companion_crop_id": "sesame",
+      "companion_crop_name": "Sesame",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Cluster Bean + Sesame (1:1 ratio) pairs two heat-hardy crops with complementary mycorrhizal associations."
+    }
+  ],
+  "cowpea": [
+    {
+      "companion_crop_id": "sorghum",
+      "companion_crop_name": "Sorghum (Jowar)",
+      "yield_boost_pct": 0.2,
+      "companion_share_factor": 0.3,
+      "rationale": "Cowpea + Sorghum (1:2 ratio) enables cowpea vine climbing on sorghum stalks, increasing total forage and grain biomass."
+    },
+    {
+      "companion_crop_id": "maize",
+      "companion_crop_name": "Maize",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Cowpea + Maize provides balanced nitrogen replenishment and complete soil surface shade."
+    }
+  ],
+  "coriander": [
+    {
+      "companion_crop_id": "chickpea",
+      "companion_crop_name": "Chickpea (Gram)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.25,
+      "rationale": "Coriander + Chickpea (1:4 ratio) improves pest deterrence through essential oil volatiles while gaining fixed nitrogen."
+    },
+    {
+      "companion_crop_id": "safflower",
+      "companion_crop_name": "Safflower",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Coriander + Safflower provides low-cost spice harvest during early vegetative stages of safflower."
+    }
+  ],
+  "pea": [
+    {
+      "companion_crop_id": "mustard",
+      "companion_crop_name": "Mustard",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.2,
+      "rationale": "Field Pea + Mustard (4:1 ratio) stabilizes cool-season grain yield and deters powdery mildew spread."
+    },
+    {
+      "companion_crop_id": "wheat",
+      "companion_crop_name": "Wheat",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.25,
+      "rationale": "Field Pea + Wheat (2:4 ratio) enriches nitrogen status of wheat roots and reduces fertilizer requirements."
+    }
+  ],
+  "fava_bean": [
+    {
+      "companion_crop_id": "barley",
+      "companion_crop_name": "Barley",
+      "yield_boost_pct": 0.18,
+      "companion_share_factor": 0.25,
+      "rationale": "Fava Bean + Barley (2:4 ratio) is an established FAO cool-temperate mixture with superior crude protein content."
+    },
+    {
+      "companion_crop_id": "wheat",
+      "companion_crop_name": "Wheat",
+      "yield_boost_pct": 0.16,
+      "companion_share_factor": 0.25,
+      "rationale": "Fava Bean + Wheat utilizes robust nodulation to donate up to 40 kg N/ha to the cereal companion."
+    }
+  ],
+  "cabbage": [
+    {
+      "companion_crop_id": "tomato",
+      "companion_crop_name": "Tomato",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Cabbage + Tomato companion cropping repels diamondback moths through solanaceous aromatic volatiles."
+    },
+    {
+      "companion_crop_id": "coriander",
+      "companion_crop_name": "Coriander",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.15,
+      "rationale": "Cabbage + Coriander lures beneficial predator insects that feed on cabbage caterpillars."
+    }
+  ],
+  "cauliflower": [
+    {
+      "companion_crop_id": "tomato",
+      "companion_crop_name": "Tomato",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Cauliflower + Tomato reduces insect oviposition on curds through companion olfactory masking."
+    },
+    {
+      "companion_crop_id": "coriander",
+      "companion_crop_name": "Coriander",
+      "yield_boost_pct": 0.12,
+      "companion_share_factor": 0.15,
+      "rationale": "Cauliflower + Coriander provides early border harvest and insect pest suppression."
+    }
+  ],
+  "okra": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.15,
+      "companion_share_factor": 0.2,
+      "rationale": "Okra + Cowpea (1:1 ratio) reduces root-knot nematode damage and fixes nitrogen around upright okra stalks."
+    },
+    {
+      "companion_crop_id": "cluster_bean",
+      "companion_crop_name": "Cluster Bean (Guar)",
+      "yield_boost_pct": 0.14,
+      "companion_share_factor": 0.2,
+      "rationale": "Okra + Cluster Bean combines two mucilaginous vegetable pulses with identical soil moisture demands."
+    }
+  ],
+  "guava": [
+    {
+      "companion_crop_id": "cowpea",
+      "companion_crop_name": "Cowpea (Lobia)",
+      "yield_boost_pct": 0.2,
+      "companion_share_factor": 0.3,
+      "rationale": "Guava + Cowpea green manure alley intercrop enriches orchard organic matter and suppresses orchard weed flush."
+    },
+    {
+      "companion_crop_id": "turmeric",
+      "companion_crop_name": "Turmeric",
+      "yield_boost_pct": 0.22,
+      "companion_share_factor": 0.25,
+      "rationale": "Guava + Turmeric utilizes shaded inter-row alleys of young guava orchards for high-value spice cash flow."
+    }
   ]
 }

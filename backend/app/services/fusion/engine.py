@@ -153,6 +153,8 @@ def run_decision_fusion(
 
         # Intercrop options
         intercrops = [opt.model_dump() for opt in crop_profile.intercrop_options]
+        intercrop_avail = getattr(crop_profile, "intercrop_data_available", True)
+        sole_rationale = getattr(crop_profile, "sole_crop_rationale", None)
 
         candidates.append({
             "crop_id": crop_id,
@@ -167,6 +169,8 @@ def run_decision_fusion(
             "climate_risk_score": risk_score,
             "climate_risk_note": risk_note,
             "intercrop_options": intercrops,
+            "intercrop_data_available": intercrop_avail,
+            "sole_crop_rationale": sole_rationale,
             "data_confidence": conf,
             "fusion_inputs": {
                 "land_suit": round(land_suit_val, 4),

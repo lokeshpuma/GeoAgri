@@ -28,7 +28,7 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
     const mainYieldPerHa = crop.expected_yield_t_ha?.p50 || 2.5;
     const hasIntercrop = Boolean(crop.intercrop_options && crop.intercrop_options.length > 0);
 
-    let intercropName = "None (Sole Crop)";
+    let intercropName = crop.intercrop_data_available === false ? "Data not yet available" : "None (Sole Crop)";
     let yieldBoost = 0;
     let companionShare = 0.0;
 
@@ -47,7 +47,6 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
     const intercropYieldPerHa = hasIntercrop ? Number((mainYieldPerHa * 0.58).toFixed(2)) : 0;
     const intercropTotalYield = hasIntercrop ? Number((intercropYieldPerHa * intercropArea).toFixed(2)) : 0;
     const combinedYield = Number((mainTotalYield + intercropTotalYield).toFixed(2));
-    const sustainability = hasIntercrop ? 12 : 5;
     const score = Number((crop.recommendation_score * 100).toFixed(1));
 
     return {
@@ -61,7 +60,6 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
       intercropTotalYield,
       combinedYield,
       yieldBoost,
-      sustainability,
       score,
       category: crop.category,
       irrigation: crop.irrigation_mode || "Supplemental",
@@ -98,13 +96,12 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
       "Main Crop",
       "Intercrop Companion",
       "Main Yield (t/ha)",
-      "Main Production 75% (t)",
+      "Main Production (t)",
       "Intercrop Yield (t/ha)",
-      "Intercrop Production 25% (t)",
+      "Intercrop Production (t)",
       "Combined Production (t)",
-      "Yield Advantage (%)",
-      "Sustainability Index (%)",
-      "Score",
+      "Intercrop Yield Advantage (%)",
+      "Recommendation Score",
       "Category",
       "Irrigation Mode"
     ];
@@ -121,8 +118,7 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
           r.intercropYieldPerHa,
           r.intercropTotalYield,
           r.combinedYield,
-          `+${r.yieldBoost}%`,
-          `+${r.sustainability}%`,
+          r.hasIntercrop ? `"+${r.yieldBoost}%"` : '"N/A (Sole Crop)"',
           r.score,
           `"${r.category}"`,
           `"${r.irrigation}"`
