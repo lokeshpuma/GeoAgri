@@ -217,6 +217,10 @@ def compute_bioclimatic_affinity(crop_id: str, lat: float, lon: float, rainfall:
     return 1.0
 
 
+# Alias for explicit transparency in API contracts and UI diagnostics
+compute_regional_agronomic_prior = compute_bioclimatic_affinity
+
+
 class ModelBRecommendation:
     def __init__(self, model_path: str | None = None):
         self.model_artifact = None
@@ -341,10 +345,20 @@ class ModelBRecommendation:
                 blended_score = round(float(np.clip(raw_blended / 1.65, 0.05, 1.0)), 3)
                 suitability_score = round(float(np.clip(blended_score * (0.8 + 0.2 * ndvi), 0.05, 1.0)), 3)
 
+                # Derive diagnostic confidence from ML classifier probability and data confidence
+                if crop.crop_id in ml_scores and crop.data_confidence == "high":
+                    ml_prob = ml_scores[crop.crop_id]
+                    conf = round(float(np.clip(0.60 + 0.35 * min(1.0, ml_prob * 3.5), 0.50, 0.95)), 2)
+                elif crop.data_confidence == "medium":
+                    conf = 0.65
+                else:
+                    conf = 0.30
+
                 results[crop.crop_id] = {
                     "score": blended_score,
                     "suitability_score": suitability_score,
-                    "confidence": 0.90 if (crop.crop_id in ml_scores and crop.data_confidence == "high") else (0.75 if crop.data_confidence == "medium" else 0.55),
+                    "regional_agronomic_prior": geo_affinity,
+                    "confidence": conf,
                     "is_fallback": False
                 }
             return results
@@ -372,7 +386,8 @@ class ModelBRecommendation:
             results[crop.crop_id] = {
                 "score": final_score,
                 "suitability_score": round(final_score * 0.9, 3),
-                "confidence": 0.50,
+                "regional_agronomic_prior": geo_affinity,
+                "confidence": 0.40,
                 "is_fallback": True
             }
         return results

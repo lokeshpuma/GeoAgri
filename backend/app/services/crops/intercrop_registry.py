@@ -10,39 +10,16 @@ from pathlib import Path
 from functools import lru_cache
 import pandas as pd
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 CROP_PROFILE_PATH = BASE_DIR / "ml" / "data" / "processed" / "crop_profile_best.csv"
 INTERCROP_PAIRS_PATH = BASE_DIR / "ml" / "data" / "processed" / "intercrop_pairs_best.csv"
 INTERCROP_MATRIX_PATH = BASE_DIR / "ml" / "data" / "processed" / "intercrop_matrix.json"
 
 
 def normalize_crop_name(value) -> str:
-    if pd.isna(value):
-        return "unknown"
+    from app.services.crops.crop_taxonomy import normalize_crop_id
+    return normalize_crop_id(value)
 
-    crop = str(value).strip().lower()
-    crop = crop.replace(" ", "_").replace("&", "_").replace("-", "_")
-
-    while "__" in crop:
-        crop = crop.replace("__", "_")
-
-    crop = crop.strip("_")
-
-    mapping = {
-        "pigeonpeas": "pigeon_pea",
-        "mothbeans": "moth_bean",
-        "kidneybeans": "kidney_bean",
-        "mungbean": "mung_bean",
-        "greengram": "green_gram",
-        "blackgram": "black_gram",
-        "muskmelon": "muskmelon",
-        "watermelon": "watermelon",
-        "green_manure": "green_manure",
-        "green_gram": "green_gram",
-        "black_gram": "black_gram",
-    }
-
-    return mapping.get(crop, crop)
 
 
 @lru_cache(maxsize=1)

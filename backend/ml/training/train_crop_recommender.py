@@ -7,8 +7,8 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
 BASE_DIR = Path(__file__).resolve().parent
-PROCESSED_DIR = BASE_DIR / "data" / "processed"
-MODELS_DIR = BASE_DIR / "models"
+PROCESSED_DIR = BASE_DIR.parent / "data" / "processed"
+MODELS_DIR = BASE_DIR.parent / "models"
 
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
 

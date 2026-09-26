@@ -6,7 +6,9 @@ Provides Pydantic schemas and registry lookup for 100+ Indian crops with confide
 from __future__ import annotations
 import os
 import json
+from pathlib import Path
 from typing import Literal
+import pandas as pd
 from pydantic import BaseModel, Field
 
 class QuantileValue(BaseModel):
@@ -46,11 +48,31 @@ class CropRegistry:
             self._initialize_seed_registry()
 
     def load_from_json(self, filepath: str):
+        from app.services.crops.crop_taxonomy import normalize_crop_id, get_crop_display_name
         with open(filepath, "r") as f:
             data = json.load(f)
             for item in data:
+                cid = item.get("crop_id", "")
+                if "_var_" in cid:
+                    continue
+                canonical_id = normalize_crop_id(cid)
+                item["crop_id"] = canonical_id
+                if not item.get("crop_name") or item["crop_name"] == cid:
+                    item["crop_name"] = get_crop_display_name(canonical_id)
+                # Remap companion crop ids and deduplicate
+                cleaned_opts = []
+                seen_comps = set()
+                for opt in item.get("intercrop_options", []):
+                    c_comp = normalize_crop_id(opt.get("companion_crop_id", ""))
+                    if c_comp in seen_comps or c_comp == canonical_id:
+                        continue
+                    seen_comps.add(c_comp)
+                    opt["companion_crop_id"] = c_comp
+                    opt["companion_crop_name"] = get_crop_display_name(c_comp)
+                    cleaned_opts.append(opt)
+                item["intercrop_options"] = cleaned_opts
                 profile = CropProfile(**item)
-                self._crops[profile.crop_id] = profile
+                self._crops[canonical_id] = profile
 
     def save_to_json(self, filepath: str):
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
@@ -59,13 +81,15 @@ class CropRegistry:
             json.dump(data, f, indent=2)
 
     def get_crop(self, crop_id: str) -> CropProfile | None:
-        return self._crops.get(crop_id)
+        from app.services.crops.crop_taxonomy import normalize_crop_id
+        canonical_id = normalize_crop_id(crop_id)
+        return self._crops.get(canonical_id)
 
     def list_crops(self) -> list[CropProfile]:
         return list(self._crops.values())
 
     def _initialize_seed_registry(self):
-        """Seed registry with 100+ Indian crops if json not compiled yet."""
+        """Seed registry with canonical Indian crops without synthetic duplicates."""
         categories = {
             "cereals": [
                 ("rice", "Rice", "kharif", 1200.0, 20.0, 35.0, 5.5, 7.5, 1000.0, 2500.0, QuantileValue(p10=2.2, p50=3.5, p90=5.0), "high"),
@@ -84,7 +108,7 @@ class CropRegistry:
                 ("green_gram", "Green Gram (Moong)", "kharif", 350.0, 22.0, 35.0, 6.2, 7.5, 300.0, 600.0, QuantileValue(p10=0.5, p50=0.7, p90=1.2), "high"),
                 ("black_gram", "Black Gram (Urad)", "kharif", 350.0, 22.0, 35.0, 6.0, 7.5, 300.0, 600.0, QuantileValue(p10=0.5, p50=0.8, p90=1.3), "high"),
                 ("lentil", "Lentil (Masoor)", "rabi", 300.0, 15.0, 25.0, 6.0, 7.5, 250.0, 450.0, QuantileValue(p10=0.6, p50=1.0, p90=1.6), "high"),
-                ("field_pea", "Field Pea", "rabi", 350.0, 10.0, 22.0, 6.0, 7.5, 300.0, 500.0, QuantileValue(p10=0.9, p50=1.4, p90=2.1), "medium"),
+                ("pea", "Field Pea", "rabi", 350.0, 10.0, 22.0, 6.0, 7.5, 300.0, 500.0, QuantileValue(p10=0.9, p50=1.4, p90=2.1), "medium"),
                 ("cowpea", "Cowpea (Lobia)", "kharif", 350.0, 20.0, 35.0, 5.5, 7.5, 300.0, 600.0, QuantileValue(p10=0.6, p50=1.1, p90=1.7), "medium"),
                 ("moth_bean", "Moth Bean", "kharif", 250.0, 24.0, 40.0, 6.0, 8.0, 200.0, 450.0, QuantileValue(p10=0.3, p50=0.5, p90=0.9), "high"),
                 ("cluster_bean", "Cluster Bean (Guar)", "kharif", 250.0, 22.0, 42.0, 7.0, 8.5, 200.0, 450.0, QuantileValue(p10=0.6, p50=1.1, p90=1.8), "high"),
@@ -94,7 +118,7 @@ class CropRegistry:
             "oilseeds": [
                 ("groundnut", "Groundnut (Peanut)", "kharif", 500.0, 22.0, 32.0, 5.8, 7.2, 450.0, 800.0, QuantileValue(p10=1.2, p50=1.8, p90=2.6), "high"),
                 ("soybean", "Soybean", "kharif", 550.0, 20.0, 32.0, 6.0, 7.5, 450.0, 850.0, QuantileValue(p10=1.0, p50=1.4, p90=2.1), "high"),
-                ("rapeseed_mustard", "Rapeseed & Mustard", "rabi", 350.0, 10.0, 25.0, 6.0, 7.5, 250.0, 500.0, QuantileValue(p10=0.9, p50=1.4, p90=2.0), "high"),
+                ("mustard", "Mustard", "rabi", 350.0, 10.0, 25.0, 6.0, 7.5, 250.0, 500.0, QuantileValue(p10=0.9, p50=1.4, p90=2.0), "high"),
                 ("sunflower", "Sunflower", "rabi", 500.0, 18.0, 32.0, 6.0, 7.8, 400.0, 750.0, QuantileValue(p10=0.8, p50=1.2, p90=1.8), "medium"),
                 ("sesame", "Sesame (Til)", "kharif", 350.0, 24.0, 36.0, 5.5, 7.8, 300.0, 600.0, QuantileValue(p10=0.3, p50=0.5, p90=0.8), "medium"),
                 ("safflower", "Safflower (Kusum)", "rabi", 350.0, 15.0, 30.0, 6.0, 8.0, 250.0, 500.0, QuantileValue(p10=0.5, p50=0.9, p90=1.4), "medium"),
@@ -114,7 +138,7 @@ class CropRegistry:
                 ("coffee", "Coffee", "perennial", 1400.0, 15.0, 28.0, 5.5, 6.5, 1200.0, 2000.0, QuantileValue(p10=0.6, p50=1.0, p90=1.5), "high"),
                 ("rubber", "Rubber", "perennial", 2000.0, 20.0, 34.0, 4.5, 6.0, 1800.0, 3000.0, QuantileValue(p10=1.2, p50=1.7, p90=2.3), "low"),
                 ("arecanut", "Arecanut", "perennial", 1500.0, 18.0, 35.0, 5.5, 7.5, 1200.0, 2200.0, QuantileValue(p10=1.0, p50=1.5, p90=2.2), "low"),
-                ("berseem_clover", "Berseem (Egyptian Clover)", "rabi", 550.0, 12.0, 28.0, 6.5, 8.2, 350.0, 700.0, QuantileValue(p10=28.0, p50=42.0, p90=60.0), "high"),
+                ("clover", "Berseem Clover", "rabi", 550.0, 12.0, 28.0, 6.5, 8.2, 350.0, 700.0, QuantileValue(p10=28.0, p50=42.0, p90=60.0), "high"),
                 ("cassava", "Cassava", "annual", 900.0, 20.0, 36.0, 5.0, 7.5, 800.0, 1800.0, QuantileValue(p10=12.0, p50=20.0, p90=32.0), "high"),
             ],
             "vegetables": [
@@ -132,7 +156,7 @@ class CropRegistry:
             "fruits": [
                 ("mango", "Mango", "perennial", 900.0, 24.0, 38.0, 5.5, 7.5, 750.0, 1200.0, QuantileValue(p10=5.0, p50=8.5, p90=14.0), "high"),
                 ("banana", "Banana", "perennial", 1500.0, 15.0, 35.0, 6.0, 7.5, 1200.0, 2200.0, QuantileValue(p10=30.0, p50=45.0, p90=60.0), "high"),
-                ("citrus", "Citrus (Orange/Lemon)", "perennial", 1000.0, 13.0, 38.0, 5.5, 7.5, 800.0, 1300.0, QuantileValue(p10=8.0, p50=14.0, p90=20.0), "high"),
+                ("orange", "Orange", "perennial", 1000.0, 13.0, 38.0, 5.5, 7.5, 800.0, 1300.0, QuantileValue(p10=8.0, p50=14.0, p90=20.0), "high"),
                 ("apple", "Apple", "perennial", 1000.0, 6.0, 22.0, 5.5, 6.8, 800.0, 1200.0, QuantileValue(p10=6.0, p50=10.0, p90=16.0), "high"),
                 ("grapes", "Grapes", "perennial", 800.0, 15.0, 38.0, 6.0, 7.5, 600.0, 1000.0, QuantileValue(p10=14.0, p50=22.0, p90=30.0), "high"),
                 ("pomegranate", "Pomegranate", "perennial", 600.0, 18.0, 38.0, 6.5, 8.0, 500.0, 900.0, QuantileValue(p10=6.0, p50=10.0, p90=15.0), "high"),
@@ -151,8 +175,6 @@ class CropRegistry:
             ]
         }
 
-        # Expand to 100+ crops by generating realistic sub-varieties/regional strains
-        extended_counter = 1
         for category, crop_list in categories.items():
             for c_id, c_name, season, water, t_min, t_max, ph_min, ph_max, r_min, r_max, yield_val, confidence in crop_list:
                 profile = CropProfile(
@@ -173,37 +195,47 @@ class CropRegistry:
                 )
                 self._crops[c_id] = profile
 
-        # Generate region/variant specific entries to reach 105 crops total
-        base_ids = list(self._crops.keys())
-        for b_id in base_ids:
-            if len(self._crops) >= 105:
-                break
-            base_p = self._crops[b_id]
-            var_id = f"{b_id}_var_{extended_counter}"
-            var_name = f"{base_p.crop_name} (Hybrid Var. {extended_counter})"
-            extended_counter += 1
-            
-            var_profile = CropProfile(
-                crop_id=var_id,
-                crop_name=var_name,
-                category=base_p.category,
-                season=base_p.season,
-                water_need_mm=round(base_p.water_need_mm * 0.95, 1),
-                ideal_temp_min=base_p.ideal_temp_min,
-                ideal_temp_max=base_p.ideal_temp_max,
-                ideal_ph_min=base_p.ideal_ph_min,
-                ideal_ph_max=base_p.ideal_ph_max,
-                ideal_rainfall_min=base_p.ideal_rainfall_min,
-                ideal_rainfall_max=base_p.ideal_rainfall_max,
-                baseline_yield_t_ha=QuantileValue(
-                    p10=round(base_p.baseline_yield_t_ha.p10 * 1.05, 2),
-                    p50=round(base_p.baseline_yield_t_ha.p50 * 1.08, 2),
-                    p90=round(base_p.baseline_yield_t_ha.p90 * 1.10, 2)
-                ),
-                data_confidence="low",
-                intercrop_options=[]
-            )
-            self._crops[var_id] = var_profile
+        # Seed additional real species from crop_profile_best.csv without synthetic duplicates
+        from app.services.crops.crop_taxonomy import normalize_crop_id, get_crop_display_name
+        profile_candidates = [
+            "backend/ml/data/processed/crop_profile_best.csv",
+            "ml/data/processed/crop_profile_best.csv"
+        ]
+        for p_path in profile_candidates:
+            if os.path.exists(p_path):
+                try:
+                    df_p = pd.read_csv(p_path)
+                    for _, row in df_p.iterrows():
+                        c_id = normalize_crop_id(row.get("crop_id"))
+                        if c_id not in self._crops and c_id != "unknown":
+                            c_name = str(row.get("crop_name", get_crop_display_name(c_id)))
+                            category = str(row.get("category", "general"))
+                            season_raw = str(row.get("seasons", "kharif"))
+                            season = season_raw.split("|")[0] if season_raw else "kharif"
+                            yp = float(row.get("yield_potential_t_ha", 2.0))
+                            self._crops[c_id] = CropProfile(
+                                crop_id=c_id,
+                                crop_name=c_name,
+                                category=category,
+                                season=season,
+                                water_need_mm=float(row.get("water_need_mm", 600.0)),
+                                ideal_temp_min=float(row.get("temp_min_c", 15.0)),
+                                ideal_temp_max=float(row.get("temp_max_c", 35.0)),
+                                ideal_ph_min=float(row.get("ph_min", 6.0)),
+                                ideal_ph_max=float(row.get("ph_max", 7.5)),
+                                ideal_rainfall_min=float(row.get("rain_min_mm", 400.0)),
+                                ideal_rainfall_max=float(row.get("rain_max_mm", 1200.0)),
+                                baseline_yield_t_ha=QuantileValue(
+                                    p10=round(yp * 0.7, 2),
+                                    p50=round(yp, 2),
+                                    p90=round(yp * 1.3, 2),
+                                ),
+                                data_confidence=str(row.get("data_confidence", "low")),
+                                intercrop_options=[]
+                            )
+                    break
+                except Exception:
+                    pass
 
         # Attach companion intercrop options from intercrop_matrix.json
         matrix_candidates = [
@@ -215,26 +247,37 @@ class CropRegistry:
             if os.path.exists(m_path):
                 try:
                     with open(m_path, "r") as f:
-                        matrix_data = json.load(f)
+                        raw_matrix = json.load(f)
+                    from app.services.crops.crop_taxonomy import normalize_crop_id, get_crop_display_name
+                    for raw_k, opts in raw_matrix.items():
+                        c_k = normalize_crop_id(raw_k)
+                        clean_opts = []
+                        seen_c = set()
+                        for opt in opts:
+                            c_comp = normalize_crop_id(opt.get("companion_crop_id", ""))
+                            if c_comp in seen_c or c_comp == c_k or c_comp == "unknown":
+                                continue
+                            seen_c.add(c_comp)
+                            clean_opts.append(
+                                IntercropOption(
+                                    companion_crop_id=c_comp,
+                                    companion_crop_name=get_crop_display_name(c_comp),
+                                    yield_boost_pct=float(opt.get("yield_boost_pct", 0.15)),
+                                    companion_share_factor=float(opt.get("companion_share_factor", 0.25)),
+                                    rationale=str(opt.get("rationale", f"Companion intercropping with {get_crop_display_name(c_comp)} optimizes nitrogen and canopy use."))
+                                )
+                            )
+                        matrix_data[c_k] = clean_opts
                     break
                 except Exception:
                     pass
 
         for crop_id, profile in self._crops.items():
-            base_key = crop_id.split("_var_")[0]
-            opts = matrix_data.get(base_key, [])
+            opts = matrix_data.get(crop_id, [])
             if opts:
-                profile.intercrop_options = [IntercropOption(**opt) for opt in opts]
-            elif not profile.intercrop_options:
-                profile.intercrop_options = [
-                    IntercropOption(
-                        companion_crop_id="cowpea",
-                        companion_crop_name="Cowpea (Lobia)",
-                        yield_boost_pct=0.15,
-                        companion_share_factor=0.25,
-                        rationale="Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-                    )
-                ]
+                profile.intercrop_options = opts
+            # When genuinely no intercrop data exists, leave as empty list - never fabricate fallback
+
 
 # Default global registry instance
 _registry_instance: CropRegistry | None = None

@@ -1,29 +1,17 @@
-import json
-import re
+import sys
 from pathlib import Path
 
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent
-RAW_DIR = BASE_DIR / "data" / "raw"
-PROCESSED_DIR = BASE_DIR / "data" / "processed"
-RULES_PATH = BASE_DIR.parent / "app" / "rules" / "crop_rules_india.json"
+sys.path.insert(0, str(BASE_DIR.parent.parent))
+
+from app.services.crops.crop_taxonomy import normalize_crop_id
+RAW_DIR = BASE_DIR.parent / "data" / "raw"
+PROCESSED_DIR = BASE_DIR.parent / "data" / "processed"
+RULES_PATH = BASE_DIR.parent.parent / "app" / "rules" / "crop_rules_india.json"
 
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-
-CROP_SYNONYMS = {
-    "pigeonpeas": "pigeon_pea",
-    "mothbeans": "moth_bean",
-    "kidneybeans": "kidney_bean",
-    "mungbean": "mung_bean",
-    "greengram": "green_gram",
-    "blackgram": "black_gram",
-    "green gram": "green_gram",
-    "black gram": "black_gram",
-    "green manure": "green_manure",
-    "muskmelon": "muskmelon",
-    "watermelon": "watermelon",
-}
 
 CATEGORY_DEFAULTS = {
     "cereal": {
@@ -184,6 +172,8 @@ EXTENDED_CROPS = {
         "mint",
     ],
     "fruit": [
+        "apple",
+        "orange",
         "mango",
         "banana",
         "papaya",
@@ -241,24 +231,7 @@ EXTENDED_CROPS = {
 
 
 def normalize_crop(value):
-    if pd.isna(value):
-        return "unknown"
-
-    crop = str(value).strip().lower()
-    crop = crop.replace('"', "")
-    crop = crop.replace("'", "")
-
-    if crop in CROP_SYNONYMS:
-        crop = CROP_SYNONYMS[crop]
-
-    crop = crop.replace(" ", "_")
-    crop = crop.replace("&", "_")
-    crop = crop.replace("-", "_")
-
-    while "__" in crop:
-        crop = crop.replace("__", "_")
-
-    return crop.strip("_")
+    return normalize_crop_id(value)
 
 
 def first_line_has_header(path, keywords):
@@ -371,45 +344,25 @@ def build_intercrop_dataset():
             "Crop_recommendation_with_intercrops.csv is missing"
         )
 
-    pairs = []
+    # Read directly as CSV to avoid leaking column headers into rows
+    df_raw = pd.read_csv(path)
+    main_col = "main_crop" if "main_crop" in df_raw.columns else df_raw.columns[7]
+    inter_col = "interm_crop" if "interm_crop" in df_raw.columns else df_raw.columns[8]
 
-    with path.open("r", encoding="utf-8", errors="ignore") as f:
-        for line in f:
-            tokens = line.strip().split(",")
+    df_raw["primary_crop"] = df_raw[main_col].apply(normalize_crop)
+    df_raw["intercrop"] = df_raw[inter_col].apply(normalize_crop)
 
-            text_tokens = [
-                token.strip()
-                for token in tokens
-                if is_text_token(token)
-            ]
+    # Drop any rows where primary is equal to intercrop or missing
+    df_valid = df_raw[df_raw["primary_crop"] != df_raw["intercrop"]].dropna(
+        subset=["primary_crop", "intercrop"]
+    )
 
-            for i in range(0, len(text_tokens) - 1, 2):
-                primary = normalize_crop(text_tokens[i])
-                intercrop = normalize_crop(text_tokens[i + 1])
-
-                if primary == intercrop:
-                    continue
-
-                pairs.append(
-                    {
-                        "primary_crop": primary,
-                        "intercrop": intercrop,
-                    }
-                )
-
-    df = pd.DataFrame(pairs)
-
-    if df.empty:
-        df = pd.DataFrame(
-            columns=["primary_crop", "intercrop", "support"]
-        )
-    else:
-        df = (
-            df.groupby(["primary_crop", "intercrop"])
-            .size()
-            .reset_index(name="support")
-            .sort_values("support", ascending=False)
-        )
+    df = (
+        df_valid.groupby(["primary_crop", "intercrop"])
+        .size()
+        .reset_index(name="support")
+        .sort_values(by=["support", "primary_crop", "intercrop"], ascending=[False, True, True])
+    )
 
     output_path = PROCESSED_DIR / "intercrop_pairs_best.csv"
     df.to_csv(output_path, index=False)
@@ -514,16 +467,19 @@ def build_extended_crop_profiles():
             ),
         }
 
+    from app.services.crops.crop_taxonomy import get_crop_display_name
+
     for category, crop_list in EXTENDED_CROPS.items():
         defaults = CATEGORY_DEFAULTS.get(category, {})
 
-        for crop_id in crop_list:
+        for raw_id in crop_list:
+            crop_id = normalize_crop(raw_id)
             if crop_id in crops:
                 continue
 
             crops[crop_id] = {
                 "crop_id": crop_id,
-                "crop_name": crop_id.replace("_", " ").title(),
+                "crop_name": get_crop_display_name(crop_id),
                 "category": category,
                 "seasons": "kharif|rabi",
                 "temp_min_c": defaults.get("temp_min_c", 15.0),
@@ -546,6 +502,7 @@ def build_extended_crop_profiles():
 def build_crop_profile(recommendation_df, intercrop_df, yield_df):
     profile_df = build_extended_crop_profiles()
 
+    # Calculate real empirical statistical grounding from recommendation dataset
     rec_profile = (
         recommendation_df.groupby("label")
         .agg(
@@ -556,10 +513,18 @@ def build_crop_profile(recommendation_df, intercrop_df, yield_df):
             avg_humidity_pct=("humidity", "mean"),
             avg_ph=("ph", "mean"),
             avg_rainfall_mm=("rainfall", "mean"),
+            emp_temp_min=("temperature", lambda x: round(float(x.quantile(0.05)), 1)),
+            emp_temp_max=("temperature", lambda x: round(float(x.quantile(0.95)), 1)),
+            emp_rain_min=("rainfall", lambda x: round(float(x.quantile(0.05)), 1)),
+            emp_rain_max=("rainfall", lambda x: round(float(x.quantile(0.95)), 1)),
+            emp_ph_min=("ph", lambda x: round(float(x.quantile(0.05)), 1)),
+            emp_ph_max=("ph", lambda x: round(float(x.quantile(0.95)), 1)),
+            emp_water_need=("rainfall", lambda x: round(float(x.mean()), 1)),
         )
         .reset_index()
         .rename(columns={"label": "crop_id"})
     )
+    rec_profile["emp_confidence"] = "high"
 
     yield_profile = (
         yield_df.groupby("crop")
@@ -587,11 +552,45 @@ def build_crop_profile(recommendation_df, intercrop_df, yield_df):
             columns=["crop_id", "intercrop_partners"]
         )
 
+    # Merge real statistics
     profile_df = profile_df.merge(
         rec_profile,
         on="crop_id",
         how="left",
     )
+
+    # Ensure numerical columns are float before assignment
+    float_cols = ["temp_min_c", "temp_max_c", "rain_min_mm", "rain_max_mm", "ph_min", "ph_max", "water_need_mm", "yield_potential_t_ha"]
+    for col in float_cols:
+        profile_df[col] = profile_df[col].astype(float)
+
+    # For crops with real statistical grounding (the 22 in Crop_recommendation.csv):
+    # Set data_confidence = high, and update envelope limits with empirical percentiles
+    has_emp = profile_df["emp_confidence"] == "high"
+    profile_df.loc[has_emp, "data_confidence"] = "high"
+    profile_df.loc[has_emp, "temp_min_c"] = profile_df.loc[has_emp, "emp_temp_min"]
+    profile_df.loc[has_emp, "temp_max_c"] = profile_df.loc[has_emp, "emp_temp_max"]
+    profile_df.loc[has_emp, "rain_min_mm"] = profile_df.loc[has_emp, "emp_rain_min"]
+    profile_df.loc[has_emp, "rain_max_mm"] = profile_df.loc[has_emp, "emp_rain_max"]
+    profile_df.loc[has_emp, "ph_min"] = profile_df.loc[has_emp, "emp_ph_min"]
+    profile_df.loc[has_emp, "ph_max"] = profile_df.loc[has_emp, "emp_ph_max"]
+    profile_df.loc[has_emp, "water_need_mm"] = profile_df.loc[has_emp, "emp_water_need"]
+
+    # For crops without empirical grounding:
+    # Ensure avg_N/P/K/temp/hum/ph/rain are NaN (not copy-pasted/templated averages)
+    # and data_confidence remains "low"
+    profile_df.loc[~has_emp, "data_confidence"] = "low"
+    profile_df.loc[~has_emp, "avg_N"] = float("nan")
+    profile_df.loc[~has_emp, "avg_P"] = float("nan")
+    profile_df.loc[~has_emp, "avg_K"] = float("nan")
+    profile_df.loc[~has_emp, "avg_temperature_c"] = float("nan")
+    profile_df.loc[~has_emp, "avg_humidity_pct"] = float("nan")
+    profile_df.loc[~has_emp, "avg_ph"] = float("nan")
+    profile_df.loc[~has_emp, "avg_rainfall_mm"] = float("nan")
+
+    # Drop temporary emp columns
+    emp_cols = [c for c in profile_df.columns if c.startswith("emp_")]
+    profile_df = profile_df.drop(columns=emp_cols)
 
     profile_df = profile_df.merge(
         yield_profile,
@@ -613,11 +612,21 @@ def build_crop_profile(recommendation_df, intercrop_df, yield_df):
         "yield_median_t_ha"
     ].fillna(profile_df["yield_potential_t_ha"])
 
+    # Round numerical averages to 2 decimals
+    stat_cols = ["avg_N", "avg_P", "avg_K", "avg_temperature_c", "avg_humidity_pct", "avg_ph", "avg_rainfall_mm"]
+    for c in stat_cols:
+        profile_df[c] = profile_df[c].round(2)
+
+    # Ensure crop_id is unique
+    profile_df = profile_df.drop_duplicates(subset=["crop_id"]).reset_index(drop=True)
+
     output_path = PROCESSED_DIR / "crop_profile_best.csv"
     profile_df.to_csv(output_path, index=False)
 
     print(f"Saved crop profile dataset: {output_path}")
     print(f"Crop profiles: {len(profile_df)}")
+    print(f"High-confidence crops: {(profile_df['data_confidence'] == 'high').sum()}")
+    print(f"Low-confidence crops: {(profile_df['data_confidence'] == 'low').sum()}")
 
 
 if __name__ == "__main__":

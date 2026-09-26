@@ -26,39 +26,35 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
   // Build rows with intercropping calculations
   const rows = crops.map((crop, idx) => {
     const mainYieldPerHa = crop.expected_yield_t_ha?.p50 || 2.5;
-    const mainArea = farmArea * 0.75;
-    const intercropArea = farmArea * 0.25;
+    const hasIntercrop = Boolean(crop.intercrop_options && crop.intercrop_options.length > 0);
 
-    const mainTotalYield = Number((mainYieldPerHa * mainArea).toFixed(2));
+    let intercropName = "None (Sole Crop)";
+    let yieldBoost = 0;
+    let companionShare = 0.0;
 
-    let intercropName = "Cowpea (Lobia)";
-    let yieldBoost = 12.5;
-
-    if (crop.intercrop_options && crop.intercrop_options.length > 0) {
+    if (hasIntercrop) {
       const opt = crop.intercrop_options[0];
       intercropName = opt.companion_crop_name;
       yieldBoost = Number((opt.yield_boost_pct * 100).toFixed(1));
-    } else if (idx % 3 === 0) {
-      intercropName = "Black Gram (Urad)";
-      yieldBoost = 14.0;
-    } else if (idx % 3 === 1) {
-      intercropName = "Cowpea (Lobia)";
-      yieldBoost = 15.2;
-    } else {
-      intercropName = "Sesame";
-      yieldBoost = 11.8;
+      companionShare = opt.companion_share_factor || 0.25;
     }
 
-    const intercropYieldPerHa = Number((mainYieldPerHa * 0.58).toFixed(2));
-    const intercropTotalYield = Number((intercropYieldPerHa * intercropArea).toFixed(2));
+    const mainShare = hasIntercrop ? (1.0 - companionShare) : 1.0;
+    const mainArea = farmArea * mainShare;
+    const intercropArea = farmArea * companionShare;
+
+    const mainTotalYield = Number((mainYieldPerHa * mainArea).toFixed(2));
+    const intercropYieldPerHa = hasIntercrop ? Number((mainYieldPerHa * 0.58).toFixed(2)) : 0;
+    const intercropTotalYield = hasIntercrop ? Number((intercropYieldPerHa * intercropArea).toFixed(2)) : 0;
     const combinedYield = Number((mainTotalYield + intercropTotalYield).toFixed(2));
-    const sustainability = 12 - (idx % 4) * 2;
+    const sustainability = hasIntercrop ? 12 : 5;
     const score = Number((crop.recommendation_score * 100).toFixed(1));
 
     return {
       id: crop.crop_id || String(idx),
       mainCrop: crop.crop_name,
       intercrop: intercropName,
+      hasIntercrop,
       mainYieldPerHa,
       mainTotalYield,
       intercropYieldPerHa,
@@ -257,33 +253,41 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
                   <div style={{ fontSize: "0.7rem", color: "#9ca3af", textTransform: "capitalize" }}>{r.category}</div>
                 </td>
                 <td style={{ padding: "10px 8px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <Leaf size={12} style={{ color: "#34d399" }} />
-                    <span style={{ color: "#6ee7b7", fontWeight: 600 }}>{r.intercrop}</span>
-                  </div>
+                  {r.hasIntercrop ? (
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <Leaf size={12} style={{ color: "#34d399" }} />
+                      <span style={{ color: "#6ee7b7", fontWeight: 600 }}>{r.intercrop}</span>
+                    </div>
+                  ) : (
+                    <span style={{ color: "var(--text-muted)" }}>None (Sole)</span>
+                  )}
                 </td>
                 <td style={{ padding: "10px 8px", textAlign: "right", color: "#f3f4f6" }}>
                   {r.mainTotalYield} <span style={{ fontSize: "0.7rem", color: "#9ca3af" }}>({r.mainYieldPerHa} t/ha)</span>
                 </td>
-                <td style={{ padding: "10px 8px", textAlign: "right", color: "#34d399", fontWeight: 600 }}>
-                  +{r.intercropTotalYield}
+                <td style={{ padding: "10px 8px", textAlign: "right", color: r.hasIntercrop ? "#34d399" : "var(--text-muted)", fontWeight: 600 }}>
+                  {r.hasIntercrop ? `+${r.intercropTotalYield}` : "—"}
                 </td>
                 <td style={{ padding: "10px 8px", textAlign: "right", color: "#fbbf24", fontWeight: 700 }}>
                   {r.combinedYield} t
                 </td>
                 <td style={{ padding: "10px 8px", textAlign: "right" }}>
-                  <span
-                    style={{
-                      background: "rgba(16, 185, 129, 0.15)",
-                      color: "#34d399",
-                      padding: "2px 8px",
-                      borderRadius: 4,
-                      fontWeight: 700,
-                      fontSize: "0.75rem",
-                    }}
-                  >
-                    +{r.yieldBoost}%
-                  </span>
+                  {r.hasIntercrop ? (
+                    <span
+                      style={{
+                        background: "rgba(16, 185, 129, 0.15)",
+                        color: "#34d399",
+                        padding: "2px 8px",
+                        borderRadius: 4,
+                        fontWeight: 700,
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      +{r.yieldBoost}%
+                    </span>
+                  ) : (
+                    <span style={{ color: "var(--text-muted)", fontSize: "0.75rem" }}>—</span>
+                  )}
                 </td>
                 <td style={{ padding: "10px 8px", textAlign: "center" }}>
                   <span

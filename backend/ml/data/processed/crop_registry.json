@@ -26,11 +26,11 @@
         "rationale": "Combining Rice with Black Gram (Urad) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
-        "companion_crop_id": "greengram",
-        "companion_crop_name": "Greengram",
+        "companion_crop_id": "green_gram",
+        "companion_crop_name": "Green Gram (Moong)",
         "yield_boost_pct": 0.15,
         "companion_share_factor": 0.25,
-        "rationale": "Combining Rice with Greengram optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Rice with Green Gram (Moong) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
         "companion_crop_id": "cowpea",
@@ -59,7 +59,15 @@
       "p90": 5.2
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "maize",
@@ -121,7 +129,15 @@
       "p90": 1.56
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "pearl_millet",
@@ -136,12 +152,20 @@
     "ideal_rainfall_min": 300.0,
     "ideal_rainfall_max": 650.0,
     "baseline_yield_t_ha": {
-      "p10": 0.8,
-      "p50": 1.3,
-      "p90": 2.2
+      "p10": 0.92,
+      "p50": 1.04,
+      "p90": 1.21
     },
-    "data_confidence": "medium",
-    "intercrop_options": []
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "finger_millet",
@@ -161,7 +185,15 @@
       "p90": 2.5
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "barley",
@@ -181,7 +213,15 @@
       "p90": 1.86
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "small_millets",
@@ -201,7 +241,43 @@
       "p90": 1.5
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "durum_wheat",
+    "crop_name": "Durum Wheat",
+    "category": "cereals",
+    "season": "rabi",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 14.0,
+    "ideal_temp_max": 30.0,
+    "ideal_ph_min": 6.5,
+    "ideal_ph_max": 8.2,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.2,
+      "p50": 3.4,
+      "p90": 4.8
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "chickpea",
@@ -223,18 +299,18 @@
     "data_confidence": "high",
     "intercrop_options": [
       {
-        "companion_crop_id": "rapeseed_mustard",
-        "companion_crop_name": "Rapeseed & Mustard",
+        "companion_crop_id": "mustard",
+        "companion_crop_name": "Mustard",
         "yield_boost_pct": 0.1,
         "companion_share_factor": 0.2,
-        "rationale": "Combining Chickpea (Gram) with Rapeseed & Mustard optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Chickpea (Gram) with Mustard optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
         "companion_crop_id": "linseed",
-        "companion_crop_name": "Linseed",
+        "companion_crop_name": "Linseed (Flaxseed)",
         "yield_boost_pct": 0.13,
         "companion_share_factor": 0.25,
-        "rationale": "Combining Chickpea (Gram) with Linseed optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Chickpea (Gram) with Linseed (Flaxseed) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
         "companion_crop_id": "barley",
@@ -269,21 +345,21 @@
         "companion_crop_name": "Sorghum (Jowar)",
         "yield_boost_pct": 0.1,
         "companion_share_factor": 0.2,
-        "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Sorghum (Jowar) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Pigeon Pea (Arhar/Tur) with Sorghum (Jowar) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
-        "companion_crop_id": "millet",
-        "companion_crop_name": "Millet",
+        "companion_crop_id": "pearl_millet",
+        "companion_crop_name": "Pearl Millet (Bajra)",
         "yield_boost_pct": 0.13,
         "companion_share_factor": 0.25,
-        "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Millet optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Pigeon Pea (Arhar/Tur) with Pearl Millet (Bajra) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
         "companion_crop_id": "groundnut",
         "companion_crop_name": "Groundnut (Peanut)",
         "yield_boost_pct": 0.16,
         "companion_share_factor": 0.3,
-        "rationale": "Combining Pigeon Pea (Red Gram/Arhar) with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Pigeon Pea (Arhar/Tur) with Groundnut (Peanut) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       }
     ]
   },
@@ -300,9 +376,9 @@
     "ideal_rainfall_min": 300.0,
     "ideal_rainfall_max": 600.0,
     "baseline_yield_t_ha": {
-      "p10": 0.45,
-      "p50": 0.57,
-      "p90": 0.9
+      "p10": 0.52,
+      "p50": 0.81,
+      "p90": 1.15
     },
     "data_confidence": "high",
     "intercrop_options": [
@@ -391,11 +467,11 @@
     "data_confidence": "high",
     "intercrop_options": [
       {
-        "companion_crop_id": "rapeseed_mustard",
-        "companion_crop_name": "Rapeseed & Mustard",
+        "companion_crop_id": "mustard",
+        "companion_crop_name": "Mustard",
         "yield_boost_pct": 0.1,
         "companion_share_factor": 0.2,
-        "rationale": "Combining Lentil (Masoor) with Rapeseed & Mustard optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Lentil (Masoor) with Mustard optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
         "companion_crop_id": "barley",
@@ -407,7 +483,7 @@
     ]
   },
   {
-    "crop_id": "field_pea",
+    "crop_id": "pea",
     "crop_name": "Field Pea",
     "category": "pulses",
     "season": "rabi",
@@ -419,12 +495,20 @@
     "ideal_rainfall_min": 300.0,
     "ideal_rainfall_max": 500.0,
     "baseline_yield_t_ha": {
-      "p10": 0.9,
-      "p50": 1.4,
-      "p90": 2.1
+      "p10": 4.62,
+      "p50": 5.3,
+      "p90": 5.95
     },
-    "data_confidence": "medium",
-    "intercrop_options": []
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "cowpea",
@@ -444,7 +528,15 @@
       "p90": 1.11
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "moth_bean",
@@ -459,12 +551,83 @@
     "ideal_rainfall_min": 200.0,
     "ideal_rainfall_max": 450.0,
     "baseline_yield_t_ha": {
-      "p10": 0.3,
-      "p50": 0.5,
-      "p90": 0.9
+      "p10": 0.36,
+      "p50": 0.46,
+      "p90": 0.76
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "pearl_millet",
+        "companion_crop_name": "Pearl Millet (Bajra)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Moth Bean with Pearl Millet (Bajra) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "sesame",
+        "companion_crop_name": "Sesame (Til)",
+        "yield_boost_pct": 0.1,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Moth Bean with Sesame (Til) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "cluster_bean",
+    "crop_name": "Cluster Bean (Guar)",
+    "category": "pulses",
+    "season": "kharif",
+    "water_need_mm": 250.0,
+    "ideal_temp_min": 22.0,
+    "ideal_temp_max": 42.0,
+    "ideal_ph_min": 7.0,
+    "ideal_ph_max": 8.5,
+    "ideal_rainfall_min": 200.0,
+    "ideal_rainfall_max": 450.0,
+    "baseline_yield_t_ha": {
+      "p10": 0.6,
+      "p50": 1.1,
+      "p90": 1.8
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "fava_bean",
+    "crop_name": "Fava Bean (Broad Bean)",
+    "category": "pulses",
+    "season": "rabi",
+    "water_need_mm": 400.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 25.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.8,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 550.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.5,
+      "p50": 2.6,
+      "p90": 3.8
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "horse_gram",
@@ -484,7 +647,15 @@
       "p90": 1.1
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "groundnut",
@@ -504,7 +675,15 @@
       "p90": 1.71
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "soybean",
@@ -524,11 +703,19 @@
       "p90": 2.1
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
-    "crop_id": "rapeseed_mustard",
-    "crop_name": "Rapeseed & Mustard",
+    "crop_id": "mustard",
+    "crop_name": "Mustard",
     "category": "oilseeds",
     "season": "rabi",
     "water_need_mm": 350.0,
@@ -544,7 +731,15 @@
       "p90": 0.82
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "sunflower",
@@ -564,7 +759,15 @@
       "p90": 1.8
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "sesame",
@@ -584,7 +787,15 @@
       "p90": 0.51
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "safflower",
@@ -604,7 +815,15 @@
       "p90": 1.4
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "castor",
@@ -624,7 +843,15 @@
       "p90": 2.3
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "niger_seed",
@@ -644,7 +871,15 @@
       "p90": 0.7
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "cotton",
@@ -689,6 +924,118 @@
     ]
   },
   {
+    "crop_id": "almond",
+    "crop_name": "Almond",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 800.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 36.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 750.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.5,
+      "p50": 2.4,
+      "p90": 3.5
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "olive",
+    "crop_name": "Olive",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.5,
+    "ideal_ph_max": 8.5,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 4.0,
+      "p50": 7.5,
+      "p90": 11.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "pistachio",
+    "crop_name": "Pistachio",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 16.0,
+    "ideal_temp_max": 40.0,
+    "ideal_ph_min": 7.0,
+    "ideal_ph_max": 8.5,
+    "ideal_rainfall_min": 250.0,
+    "ideal_rainfall_max": 600.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.2,
+      "p50": 2.0,
+      "p90": 3.2
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "walnut",
+    "crop_name": "Walnut",
+    "category": "cash_crops",
+    "season": "perennial",
+    "water_need_mm": 850.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 32.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.8,
+      "p50": 3.0,
+      "p90": 4.5
+    },
+    "data_confidence": "medium",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
     "crop_id": "sugarcane",
     "crop_name": "Sugarcane",
     "category": "cash_crops",
@@ -706,7 +1053,15 @@
       "p90": 95.0
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "jute",
@@ -761,7 +1116,15 @@
       "p90": 2.5
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "tea",
@@ -781,7 +1144,15 @@
       "p90": 3.0
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "coffee",
@@ -843,7 +1214,15 @@
       "p90": 2.3
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "arecanut",
@@ -863,7 +1242,71 @@
       "p90": 2.2
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "clover",
+    "crop_name": "Berseem Clover",
+    "category": "cash_crops",
+    "season": "rabi",
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 12.0,
+    "ideal_temp_max": 28.0,
+    "ideal_ph_min": 6.5,
+    "ideal_ph_max": 8.2,
+    "ideal_rainfall_min": 350.0,
+    "ideal_rainfall_max": 700.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.33,
+      "p50": 2.63,
+      "p90": 3.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "cassava",
+    "crop_name": "Cassava",
+    "category": "cash_crops",
+    "season": "annual",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 36.0,
+    "ideal_ph_min": 5.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 800.0,
+    "ideal_rainfall_max": 1800.0,
+    "baseline_yield_t_ha": {
+      "p10": 12.0,
+      "p50": 20.0,
+      "p90": 32.0
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "potato",
@@ -883,7 +1326,15 @@
       "p90": 30.0
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "onion",
@@ -903,7 +1354,15 @@
       "p90": 25.0
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "tomato",
@@ -923,7 +1382,15 @@
       "p90": 36.0
     },
     "data_confidence": "high",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "eggplant",
@@ -943,7 +1410,15 @@
       "p90": 30.0
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "cabbage",
@@ -963,7 +1438,15 @@
       "p90": 34.0
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "cauliflower",
@@ -983,7 +1466,15 @@
       "p90": 28.0
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "okra",
@@ -1003,7 +1494,15 @@
       "p90": 16.0
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "chilli",
@@ -1023,7 +1522,15 @@
       "p90": 3.8
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "garlic",
@@ -1043,7 +1550,15 @@
       "p90": 10.0
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "ginger",
@@ -1063,7 +1578,15 @@
       "p90": 25.0
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "mango",
@@ -1150,8 +1673,8 @@
     ]
   },
   {
-    "crop_id": "citrus",
-    "crop_name": "Citrus (Orange/Lemon)",
+    "crop_id": "orange",
+    "crop_name": "Orange",
     "category": "fruits",
     "season": "perennial",
     "water_need_mm": 1000.0,
@@ -1173,14 +1696,14 @@
         "companion_crop_name": "Cowpea (Lobia)",
         "yield_boost_pct": 0.1,
         "companion_share_factor": 0.2,
-        "rationale": "Combining Citrus (Orange/Lemon) with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Orange with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
         "companion_crop_id": "green_manure",
         "companion_crop_name": "Green Manure",
         "yield_boost_pct": 0.17,
         "companion_share_factor": 0.3,
-        "rationale": "Combining Citrus (Orange/Lemon) with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Orange with Green Manure optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       }
     ]
   },
@@ -1205,17 +1728,17 @@
     "intercrop_options": [
       {
         "companion_crop_id": "clover",
-        "companion_crop_name": "Clover",
+        "companion_crop_name": "Berseem Clover",
         "yield_boost_pct": 0.1,
         "companion_share_factor": 0.2,
-        "rationale": "Combining Apple with Clover optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Apple with Berseem Clover optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
         "companion_crop_id": "pea",
-        "companion_crop_name": "Pea",
+        "companion_crop_name": "Field Pea",
         "yield_boost_pct": 0.14,
         "companion_share_factor": 0.25,
-        "rationale": "Combining Apple with Pea optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+        "rationale": "Combining Apple with Field Pea optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
       },
       {
         "companion_crop_id": "green_manure",
@@ -1314,7 +1837,15 @@
       "p90": 22.0
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "papaya",
@@ -1481,7 +2012,15 @@
       "p90": 30.0
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "coriander",
@@ -1501,7 +2040,15 @@
       "p90": 1.5
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "cumin",
@@ -1521,7 +2068,15 @@
       "p90": 0.9
     },
     "data_confidence": "medium",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "cardamom",
@@ -1541,7 +2096,15 @@
       "p90": 0.5
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
     "crop_id": "black_pepper",
@@ -1561,1130 +2124,1449 @@
       "p90": 1.8
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
-    "crop_id": "rice_var_1",
-    "crop_name": "Rice (Hybrid Var. 1)",
-    "category": "cereals",
+    "crop_id": "oats",
+    "crop_name": "Oats",
+    "category": "cereal",
     "season": "kharif",
-    "water_need_mm": 1140.0,
-    "ideal_temp_min": 20.0,
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
     "ideal_temp_max": 35.0,
     "ideal_ph_min": 5.5,
     "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 1000.0,
-    "ideal_rainfall_max": 2500.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
     "baseline_yield_t_ha": {
-      "p10": 2.31,
-      "p50": 3.78,
-      "p90": 5.5
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
-    "crop_id": "wheat_var_2",
-    "crop_name": "Wheat (Hybrid Var. 2)",
-    "category": "cereals",
-    "season": "rabi",
-    "water_need_mm": 427.5,
+    "crop_id": "rye",
+    "crop_name": "Rye",
+    "category": "cereal",
+    "season": "kharif",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "triticale",
+    "crop_name": "Triticale",
+    "category": "cereal",
+    "season": "kharif",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "foxtail_millet",
+    "crop_name": "Foxtail Millet",
+    "category": "cereal",
+    "season": "kharif",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "kodo_millet",
+    "crop_name": "Kodo Millet",
+    "category": "cereal",
+    "season": "kharif",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "little_millet",
+    "crop_name": "Little Millet",
+    "category": "cereal",
+    "season": "kharif",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "proso_millet",
+    "crop_name": "Proso Millet",
+    "category": "cereal",
+    "season": "kharif",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "barnyard_millet",
+    "crop_name": "Barnyard Millet",
+    "category": "cereal",
+    "season": "kharif",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "browntop_millet",
+    "crop_name": "Browntop Millet",
+    "category": "cereal",
+    "season": "kharif",
+    "water_need_mm": 650.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 2.1,
+      "p50": 3.0,
+      "p90": 3.9
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "kidney_bean",
+    "crop_name": "Kidney Bean (Rajma)",
+    "category": "pulse",
+    "season": "kharif",
+    "water_need_mm": 105.9,
+    "ideal_temp_min": 15.8,
+    "ideal_temp_max": 24.3,
+    "ideal_ph_min": 5.5,
+    "ideal_ph_max": 6.0,
+    "ideal_rainfall_min": 63.3,
+    "ideal_rainfall_max": 143.9,
+    "baseline_yield_t_ha": {
+      "p10": 0.7,
+      "p50": 0.87,
+      "p90": 1.44
+    },
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "maize",
+        "companion_crop_name": "Maize",
+        "yield_boost_pct": 0.08,
+        "companion_share_factor": 0.2,
+        "rationale": "Combining Kidney Bean (Rajma) with Maize optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      },
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.12,
+        "companion_share_factor": 0.25,
+        "rationale": "Combining Kidney Bean (Rajma) with Cowpea (Lobia) optimizes nitrogen fixation, canopy ground-cover, and land equivalent ratio."
+      }
+    ]
+  },
+  {
+    "crop_id": "adzuki_bean",
+    "crop_name": "Adzuki Bean",
+    "category": "pulse",
+    "season": "kharif",
+    "water_need_mm": 450.0,
     "ideal_temp_min": 12.0,
-    "ideal_temp_max": 25.0,
+    "ideal_temp_max": 32.0,
     "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 350.0,
-    "ideal_rainfall_max": 650.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 300.0,
+    "ideal_rainfall_max": 800.0,
     "baseline_yield_t_ha": {
-      "p10": 2.62,
-      "p50": 4.1,
-      "p90": 5.72
+      "p10": 0.84,
+      "p50": 1.2,
+      "p90": 1.56
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
-    "crop_id": "maize_var_3",
-    "crop_name": "Maize (Hybrid Var. 3)",
-    "category": "cereals",
+    "crop_id": "linseed",
+    "crop_name": "Linseed (Flaxseed)",
+    "category": "oilseed",
     "season": "kharif",
-    "water_need_mm": 570.0,
-    "ideal_temp_min": 18.0,
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 15.0,
     "ideal_temp_max": 35.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 500.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
     "ideal_rainfall_max": 1000.0,
     "baseline_yield_t_ha": {
-      "p10": 2.52,
-      "p50": 3.89,
-      "p90": 6.05
+      "p10": 0.39,
+      "p50": 0.45,
+      "p90": 0.51
     },
-    "data_confidence": "low",
-    "intercrop_options": []
+    "data_confidence": "high",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
-    "crop_id": "sorghum_var_4",
-    "crop_name": "Sorghum (Jowar) (Hybrid Var. 4)",
-    "category": "cereals",
+    "crop_id": "oil_palm",
+    "crop_name": "Oil Palm",
+    "category": "oilseed",
     "season": "kharif",
-    "water_need_mm": 427.5,
-    "ideal_temp_min": 20.0,
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.05,
+      "p50": 1.5,
+      "p90": 1.95
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "jatropha",
+    "crop_name": "Jatropha",
+    "category": "oilseed",
+    "season": "kharif",
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.05,
+      "p50": 1.5,
+      "p90": 1.95
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "camelina",
+    "crop_name": "Camelina",
+    "category": "oilseed",
+    "season": "kharif",
+    "water_need_mm": 550.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 1.05,
+      "p50": 1.5,
+      "p90": 1.95
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "carrot",
+    "crop_name": "Carrot",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "radish",
+    "crop_name": "Radish",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "beetroot",
+    "crop_name": "Beetroot",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "bottle_gourd",
+    "crop_name": "Bottle Gourd",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "bitter_gourd",
+    "crop_name": "Bitter Gourd",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "cucumber",
+    "crop_name": "Cucumber",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "pumpkin",
+    "crop_name": "Pumpkin",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "spinach",
+    "crop_name": "Spinach",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "fenugreek",
+    "crop_name": "Fenugreek",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "capsicum",
+    "crop_name": "Capsicum",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "mint",
+    "crop_name": "Mint",
+    "category": "vegetable",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 33.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 900.0,
+    "baseline_yield_t_ha": {
+      "p10": 14.0,
+      "p50": 20.0,
+      "p90": 26.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "lemon",
+    "crop_name": "Lemon",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
     "ideal_temp_max": 38.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 8.5,
-    "ideal_rainfall_min": 400.0,
-    "ideal_rainfall_max": 800.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.05,
-      "p50": 1.62,
-      "p90": 2.75
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "pearl_millet_var_5",
-    "crop_name": "Pearl Millet (Bajra) (Hybrid Var. 5)",
-    "category": "cereals",
-    "season": "kharif",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 22.0,
-    "ideal_temp_max": 40.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 8.0,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 650.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.84,
-      "p50": 1.4,
-      "p90": 2.42
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "finger_millet_var_6",
-    "crop_name": "Finger Millet (Ragi) (Hybrid Var. 6)",
-    "category": "cereals",
-    "season": "kharif",
-    "water_need_mm": 380.0,
-    "ideal_temp_min": 18.0,
-    "ideal_temp_max": 32.0,
-    "ideal_ph_min": 5.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 350.0,
-    "ideal_rainfall_max": 750.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.05,
-      "p50": 1.73,
-      "p90": 2.75
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "barley_var_7",
-    "crop_name": "Barley (Hybrid Var. 7)",
-    "category": "cereals",
-    "season": "rabi",
-    "water_need_mm": 380.0,
-    "ideal_temp_min": 12.0,
-    "ideal_temp_max": 24.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.8,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 500.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.89,
-      "p50": 3.02,
-      "p90": 4.4
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "small_millets_var_8",
-    "crop_name": "Small Millets (Hybrid Var. 8)",
-    "category": "cereals",
-    "season": "kharif",
-    "water_need_mm": 285.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 5.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 250.0,
-    "ideal_rainfall_max": 600.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.53,
-      "p50": 0.97,
-      "p90": 1.65
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "chickpea_var_9",
-    "crop_name": "Chickpea (Gram) (Hybrid Var. 9)",
-    "category": "pulses",
-    "season": "rabi",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 15.0,
-    "ideal_temp_max": 28.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 8.0,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 550.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.84,
-      "p50": 1.3,
-      "p90": 1.98
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "pigeon_pea_var_10",
-    "crop_name": "Pigeon Pea (Arhar) (Hybrid Var. 10)",
-    "category": "pulses",
-    "season": "kharif",
-    "water_need_mm": 475.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 450.0,
-    "ideal_rainfall_max": 800.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.63,
-      "p50": 0.97,
-      "p90": 1.65
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "green_gram_var_11",
-    "crop_name": "Green Gram (Moong) (Hybrid Var. 11)",
-    "category": "pulses",
-    "season": "kharif",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 22.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 6.2,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 600.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.53,
-      "p50": 0.76,
-      "p90": 1.32
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "black_gram_var_12",
-    "crop_name": "Black Gram (Urad) (Hybrid Var. 12)",
-    "category": "pulses",
-    "season": "kharif",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 22.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 600.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.53,
-      "p50": 0.86,
-      "p90": 1.43
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "lentil_var_13",
-    "crop_name": "Lentil (Masoor) (Hybrid Var. 13)",
-    "category": "pulses",
-    "season": "rabi",
-    "water_need_mm": 285.0,
-    "ideal_temp_min": 15.0,
-    "ideal_temp_max": 25.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 250.0,
-    "ideal_rainfall_max": 450.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.63,
-      "p50": 1.08,
-      "p90": 1.76
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "field_pea_var_14",
-    "crop_name": "Field Pea (Hybrid Var. 14)",
-    "category": "pulses",
-    "season": "rabi",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 10.0,
-    "ideal_temp_max": 22.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 500.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.95,
-      "p50": 1.51,
-      "p90": 2.31
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "cowpea_var_15",
-    "crop_name": "Cowpea (Lobia) (Hybrid Var. 15)",
-    "category": "pulses",
-    "season": "kharif",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 600.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.63,
-      "p50": 1.19,
-      "p90": 1.87
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "moth_bean_var_16",
-    "crop_name": "Moth Bean (Hybrid Var. 16)",
-    "category": "pulses",
-    "season": "kharif",
-    "water_need_mm": 237.5,
-    "ideal_temp_min": 24.0,
-    "ideal_temp_max": 40.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 8.0,
-    "ideal_rainfall_min": 200.0,
-    "ideal_rainfall_max": 450.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.32,
-      "p50": 0.54,
-      "p90": 0.99
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "horse_gram_var_17",
-    "crop_name": "Horse Gram (Kulthi) (Hybrid Var. 17)",
-    "category": "pulses",
-    "season": "kharif",
-    "water_need_mm": 237.5,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 34.0,
-    "ideal_ph_min": 5.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 200.0,
-    "ideal_rainfall_max": 500.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.42,
-      "p50": 0.76,
-      "p90": 1.21
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "groundnut_var_18",
-    "crop_name": "Groundnut (Peanut) (Hybrid Var. 18)",
-    "category": "oilseeds",
-    "season": "kharif",
-    "water_need_mm": 475.0,
-    "ideal_temp_min": 22.0,
-    "ideal_temp_max": 32.0,
-    "ideal_ph_min": 5.8,
-    "ideal_ph_max": 7.2,
-    "ideal_rainfall_min": 450.0,
-    "ideal_rainfall_max": 800.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.26,
-      "p50": 1.94,
-      "p90": 2.86
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "soybean_var_19",
-    "crop_name": "Soybean (Hybrid Var. 19)",
-    "category": "oilseeds",
-    "season": "kharif",
-    "water_need_mm": 522.5,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 32.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 450.0,
-    "ideal_rainfall_max": 850.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.05,
-      "p50": 1.51,
-      "p90": 2.31
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "rapeseed_mustard_var_20",
-    "crop_name": "Rapeseed & Mustard (Hybrid Var. 20)",
-    "category": "oilseeds",
-    "season": "rabi",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 10.0,
-    "ideal_temp_max": 25.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 250.0,
-    "ideal_rainfall_max": 500.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.95,
-      "p50": 1.51,
-      "p90": 2.2
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "sunflower_var_21",
-    "crop_name": "Sunflower (Hybrid Var. 21)",
-    "category": "oilseeds",
-    "season": "rabi",
-    "water_need_mm": 475.0,
-    "ideal_temp_min": 18.0,
-    "ideal_temp_max": 32.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.8,
-    "ideal_rainfall_min": 400.0,
-    "ideal_rainfall_max": 750.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.84,
-      "p50": 1.3,
-      "p90": 1.98
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "sesame_var_22",
-    "crop_name": "Sesame (Til) (Hybrid Var. 22)",
-    "category": "oilseeds",
-    "season": "kharif",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 24.0,
-    "ideal_temp_max": 36.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.8,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 600.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.32,
-      "p50": 0.54,
-      "p90": 0.88
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "safflower_var_23",
-    "crop_name": "Safflower (Kusum) (Hybrid Var. 23)",
-    "category": "oilseeds",
-    "season": "rabi",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 15.0,
-    "ideal_temp_max": 30.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 8.0,
-    "ideal_rainfall_min": 250.0,
-    "ideal_rainfall_max": 500.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.53,
-      "p50": 0.97,
-      "p90": 1.54
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "castor_var_24",
-    "crop_name": "Castor Seed (Hybrid Var. 24)",
-    "category": "oilseeds",
-    "season": "kharif",
-    "water_need_mm": 475.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 400.0,
-    "ideal_rainfall_max": 750.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.05,
-      "p50": 1.73,
-      "p90": 2.53
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "niger_seed_var_25",
-    "crop_name": "Niger Seed (Hybrid Var. 25)",
-    "category": "oilseeds",
-    "season": "kharif",
-    "water_need_mm": 332.5,
-    "ideal_temp_min": 18.0,
-    "ideal_temp_max": 32.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 600.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.21,
-      "p50": 0.43,
-      "p90": 0.77
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "cotton_var_26",
-    "crop_name": "Cotton (Hybrid Var. 26)",
-    "category": "cash_crops",
-    "season": "kharif",
-    "water_need_mm": 665.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 35.0,
     "ideal_ph_min": 6.0,
     "ideal_ph_max": 8.0,
     "ideal_rainfall_min": 600.0,
-    "ideal_rainfall_max": 1100.0,
+    "ideal_rainfall_max": 1500.0,
     "baseline_yield_t_ha": {
-      "p10": 1.47,
-      "p50": 2.27,
-      "p90": 3.52
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
     },
     "data_confidence": "low",
-    "intercrop_options": []
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   },
   {
-    "crop_id": "sugarcane_var_27",
-    "crop_name": "Sugarcane (Hybrid Var. 27)",
-    "category": "cash_crops",
-    "season": "annual",
-    "water_need_mm": 1710.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 38.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.8,
-    "ideal_rainfall_min": 1200.0,
-    "ideal_rainfall_max": 2500.0,
-    "baseline_yield_t_ha": {
-      "p10": 57.75,
-      "p50": 75.6,
-      "p90": 104.5
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "jute_var_28",
-    "crop_name": "Jute (Hybrid Var. 28)",
-    "category": "cash_crops",
+    "crop_id": "sweet_lime",
+    "crop_name": "Sweet Lime",
+    "category": "fruit",
     "season": "kharif",
-    "water_need_mm": 950.0,
-    "ideal_temp_min": 24.0,
-    "ideal_temp_max": 37.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 1200.0,
-    "ideal_rainfall_max": 2000.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.89,
-      "p50": 2.7,
-      "p90": 3.74
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "tobacco_var_29",
-    "crop_name": "Tobacco (Hybrid Var. 29)",
-    "category": "cash_crops",
-    "season": "rabi",
-    "water_need_mm": 475.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 32.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 450.0,
-    "ideal_rainfall_max": 750.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.26,
-      "p50": 1.94,
-      "p90": 2.75
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "tea_var_30",
-    "crop_name": "Tea (Hybrid Var. 30)",
-    "category": "cash_crops",
-    "season": "perennial",
-    "water_need_mm": 1520.0,
-    "ideal_temp_min": 18.0,
-    "ideal_temp_max": 30.0,
-    "ideal_ph_min": 4.5,
-    "ideal_ph_max": 5.5,
-    "ideal_rainfall_min": 1500.0,
-    "ideal_rainfall_max": 2500.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.58,
-      "p50": 2.38,
-      "p90": 3.3
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "coffee_var_31",
-    "crop_name": "Coffee (Hybrid Var. 31)",
-    "category": "cash_crops",
-    "season": "perennial",
-    "water_need_mm": 1330.0,
-    "ideal_temp_min": 15.0,
-    "ideal_temp_max": 28.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 6.5,
-    "ideal_rainfall_min": 1200.0,
-    "ideal_rainfall_max": 2000.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.63,
-      "p50": 1.08,
-      "p90": 1.65
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "rubber_var_32",
-    "crop_name": "Rubber (Hybrid Var. 32)",
-    "category": "cash_crops",
-    "season": "perennial",
-    "water_need_mm": 1900.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 34.0,
-    "ideal_ph_min": 4.5,
-    "ideal_ph_max": 6.0,
-    "ideal_rainfall_min": 1800.0,
-    "ideal_rainfall_max": 3000.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.26,
-      "p50": 1.84,
-      "p90": 2.53
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "arecanut_var_33",
-    "crop_name": "Arecanut (Hybrid Var. 33)",
-    "category": "cash_crops",
-    "season": "perennial",
-    "water_need_mm": 1425.0,
-    "ideal_temp_min": 18.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 1200.0,
-    "ideal_rainfall_max": 2200.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.05,
-      "p50": 1.62,
-      "p90": 2.42
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "potato_var_34",
-    "crop_name": "Potato (Hybrid Var. 34)",
-    "category": "vegetables",
-    "season": "rabi",
-    "water_need_mm": 475.0,
-    "ideal_temp_min": 12.0,
-    "ideal_temp_max": 24.0,
-    "ideal_ph_min": 5.2,
-    "ideal_ph_max": 6.8,
-    "ideal_rainfall_min": 400.0,
-    "ideal_rainfall_max": 600.0,
-    "baseline_yield_t_ha": {
-      "p10": 16.8,
-      "p50": 23.76,
-      "p90": 33.0
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "onion_var_35",
-    "crop_name": "Onion (Hybrid Var. 35)",
-    "category": "vegetables",
-    "season": "rabi",
-    "water_need_mm": 427.5,
-    "ideal_temp_min": 13.0,
-    "ideal_temp_max": 28.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 350.0,
-    "ideal_rainfall_max": 550.0,
-    "baseline_yield_t_ha": {
-      "p10": 12.6,
-      "p50": 19.44,
-      "p90": 27.5
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "tomato_var_36",
-    "crop_name": "Tomato (Hybrid Var. 36)",
-    "category": "vegetables",
-    "season": "zaid",
-    "water_need_mm": 570.0,
-    "ideal_temp_min": 18.0,
-    "ideal_temp_max": 30.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.0,
-    "ideal_rainfall_min": 450.0,
-    "ideal_rainfall_max": 800.0,
-    "baseline_yield_t_ha": {
-      "p10": 18.9,
-      "p50": 27.0,
-      "p90": 39.6
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "eggplant_var_37",
-    "crop_name": "Eggplant (Brinjal) (Hybrid Var. 37)",
-    "category": "vegetables",
-    "season": "zaid",
-    "water_need_mm": 475.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 32.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 6.8,
-    "ideal_rainfall_min": 400.0,
-    "ideal_rainfall_max": 700.0,
-    "baseline_yield_t_ha": {
-      "p10": 15.75,
-      "p50": 23.76,
-      "p90": 33.0
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "cabbage_var_38",
-    "crop_name": "Cabbage (Hybrid Var. 38)",
-    "category": "vegetables",
-    "season": "rabi",
-    "water_need_mm": 380.0,
-    "ideal_temp_min": 15.0,
-    "ideal_temp_max": 22.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 6.8,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 500.0,
-    "baseline_yield_t_ha": {
-      "p10": 18.9,
-      "p50": 27.0,
-      "p90": 37.4
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "cauliflower_var_39",
-    "crop_name": "Cauliflower (Hybrid Var. 39)",
-    "category": "vegetables",
-    "season": "rabi",
-    "water_need_mm": 380.0,
-    "ideal_temp_min": 15.0,
-    "ideal_temp_max": 22.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 6.8,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 500.0,
-    "baseline_yield_t_ha": {
-      "p10": 14.7,
-      "p50": 21.6,
-      "p90": 30.8
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "okra_var_40",
-    "crop_name": "Okra (Bhindi) (Hybrid Var. 40)",
-    "category": "vegetables",
-    "season": "zaid",
-    "water_need_mm": 427.5,
-    "ideal_temp_min": 22.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 6.8,
-    "ideal_rainfall_min": 400.0,
-    "ideal_rainfall_max": 700.0,
-    "baseline_yield_t_ha": {
-      "p10": 8.4,
-      "p50": 12.96,
-      "p90": 17.6
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "chilli_var_41",
-    "crop_name": "Chilli (Hybrid Var. 41)",
-    "category": "vegetables",
-    "season": "kharif",
-    "water_need_mm": 475.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 400.0,
-    "ideal_rainfall_max": 700.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.58,
-      "p50": 2.7,
-      "p90": 4.18
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "garlic_var_42",
-    "crop_name": "Garlic (Hybrid Var. 42)",
-    "category": "vegetables",
-    "season": "rabi",
-    "water_need_mm": 380.0,
-    "ideal_temp_min": 12.0,
-    "ideal_temp_max": 25.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.0,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 500.0,
-    "baseline_yield_t_ha": {
-      "p10": 4.73,
-      "p50": 7.56,
-      "p90": 11.0
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "ginger_var_43",
-    "crop_name": "Ginger (Hybrid Var. 43)",
-    "category": "vegetables",
-    "season": "kharif",
-    "water_need_mm": 1235.0,
-    "ideal_temp_min": 19.0,
-    "ideal_temp_max": 30.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 6.5,
-    "ideal_rainfall_min": 1200.0,
-    "ideal_rainfall_max": 1800.0,
-    "baseline_yield_t_ha": {
-      "p10": 12.6,
-      "p50": 19.44,
-      "p90": 27.5
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "mango_var_44",
-    "crop_name": "Mango (Hybrid Var. 44)",
-    "category": "fruits",
-    "season": "perennial",
-    "water_need_mm": 855.0,
-    "ideal_temp_min": 24.0,
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
     "ideal_temp_max": 38.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 750.0,
-    "ideal_rainfall_max": 1200.0,
-    "baseline_yield_t_ha": {
-      "p10": 5.25,
-      "p50": 9.18,
-      "p90": 15.4
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "banana_var_45",
-    "crop_name": "Banana (Hybrid Var. 45)",
-    "category": "fruits",
-    "season": "perennial",
-    "water_need_mm": 1425.0,
-    "ideal_temp_min": 15.0,
-    "ideal_temp_max": 35.0,
-    "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 1200.0,
-    "ideal_rainfall_max": 2200.0,
-    "baseline_yield_t_ha": {
-      "p10": 31.5,
-      "p50": 48.6,
-      "p90": 66.0
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "citrus_var_46",
-    "crop_name": "Citrus (Orange/Lemon) (Hybrid Var. 46)",
-    "category": "fruits",
-    "season": "perennial",
-    "water_need_mm": 950.0,
-    "ideal_temp_min": 13.0,
-    "ideal_temp_max": 38.0,
-    "ideal_ph_min": 5.5,
-    "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 800.0,
-    "ideal_rainfall_max": 1300.0,
-    "baseline_yield_t_ha": {
-      "p10": 8.4,
-      "p50": 15.12,
-      "p90": 22.0
-    },
-    "data_confidence": "low",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "almond",
-    "crop_name": "Almond",
-    "category": "cash_crops",
-    "season": "perennial",
-    "water_need_mm": 850.0,
-    "ideal_temp_min": 15.0,
-    "ideal_temp_max": 36.0,
     "ideal_ph_min": 6.0,
     "ideal_ph_max": 8.0,
-    "ideal_rainfall_min": 350.0,
-    "ideal_rainfall_max": 750.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
     "baseline_yield_t_ha": {
-      "p10": 1.6,
-      "p50": 2.5,
-      "p90": 3.6
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
     },
-    "data_confidence": "high",
+    "data_confidence": "low",
     "intercrop_options": [
       {
-        "companion_crop_id": "berseem_clover",
-        "companion_crop_name": "Berseem (Clover)",
-        "yield_boost_pct": 0.12,
-        "companion_share_factor": 0.2,
-        "rationale": "Leguminous cover cropping fixes nitrogen and boosts orchard soil moisture retention."
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
       }
     ]
   },
   {
-    "crop_id": "olive",
-    "crop_name": "Olive",
-    "category": "cash_crops",
-    "season": "perennial",
-    "water_need_mm": 550.0,
-    "ideal_temp_min": 12.0,
-    "ideal_temp_max": 38.0,
-    "ideal_ph_min": 6.5,
-    "ideal_ph_max": 8.5,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 700.0,
-    "baseline_yield_t_ha": {
-      "p10": 4.5,
-      "p50": 7.5,
-      "p90": 11.0
-    },
-    "data_confidence": "high",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "fava_bean",
-        "companion_crop_name": "Fava Bean",
-        "yield_boost_pct": 0.14,
-        "companion_share_factor": 0.22,
-        "rationale": "Winter legume intercropping supplies biological nitrogen to olive groves."
-      }
-    ]
-  },
-  {
-    "crop_id": "pistachio",
-    "crop_name": "Pistachio",
-    "category": "cash_crops",
-    "season": "perennial",
-    "water_need_mm": 650.0,
-    "ideal_temp_min": 16.0,
-    "ideal_temp_max": 40.0,
-    "ideal_ph_min": 7.0,
-    "ideal_ph_max": 8.5,
-    "ideal_rainfall_min": 250.0,
-    "ideal_rainfall_max": 600.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.2,
-      "p50": 2.0,
-      "p90": 3.2
-    },
-    "data_confidence": "medium",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "walnut",
-    "crop_name": "Walnut",
-    "category": "cash_crops",
-    "season": "perennial",
-    "water_need_mm": 850.0,
+    "crop_id": "pineapple",
+    "crop_name": "Pineapple",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
     "ideal_temp_min": 10.0,
-    "ideal_temp_max": 32.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "litchi",
+    "crop_name": "Litchi",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "custard_apple",
+    "crop_name": "Custard Apple",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "sapota",
+    "crop_name": "Sapota",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "amla",
+    "crop_name": "Amla",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "jackfruit",
+    "crop_name": "Jackfruit",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "fig",
+    "crop_name": "Fig",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "dates",
+    "crop_name": "Dates",
+    "category": "fruit",
+    "season": "kharif",
+    "water_need_mm": 900.0,
+    "ideal_temp_min": 10.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 600.0,
+    "ideal_rainfall_max": 1500.0,
+    "baseline_yield_t_ha": {
+      "p10": 10.5,
+      "p50": 15.0,
+      "p90": 19.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "mesta",
+    "crop_name": "Mesta",
+    "category": "plantation",
+    "season": "kharif",
+    "water_need_mm": 1000.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 800.0,
+    "ideal_rainfall_max": 1800.0,
+    "baseline_yield_t_ha": {
+      "p10": 7.0,
+      "p50": 10.0,
+      "p90": 13.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "cashew",
+    "crop_name": "Cashew",
+    "category": "plantation",
+    "season": "kharif",
+    "water_need_mm": 1000.0,
+    "ideal_temp_min": 20.0,
+    "ideal_temp_max": 38.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 800.0,
+    "ideal_rainfall_max": 1800.0,
+    "baseline_yield_t_ha": {
+      "p10": 7.0,
+      "p50": 10.0,
+      "p90": 13.0
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "lucerne",
+    "crop_name": "Lucerne",
+    "category": "fodder",
+    "season": "kharif",
+    "water_need_mm": 600.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 17.5,
+      "p50": 25.0,
+      "p90": 32.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "napier_grass",
+    "crop_name": "Napier Grass",
+    "category": "fodder",
+    "season": "kharif",
+    "water_need_mm": 600.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 17.5,
+      "p50": 25.0,
+      "p90": 32.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "guinea_grass",
+    "crop_name": "Guinea Grass",
+    "category": "fodder",
+    "season": "kharif",
+    "water_need_mm": 600.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 17.5,
+      "p50": 25.0,
+      "p90": 32.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "maize_fodder",
+    "crop_name": "Maize Fodder",
+    "category": "fodder",
+    "season": "kharif",
+    "water_need_mm": 600.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 17.5,
+      "p50": 25.0,
+      "p90": 32.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "sorghum_fodder",
+    "crop_name": "Sorghum Fodder",
+    "category": "fodder",
+    "season": "kharif",
+    "water_need_mm": 600.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 8.0,
+    "ideal_rainfall_min": 400.0,
+    "ideal_rainfall_max": 1000.0,
+    "baseline_yield_t_ha": {
+      "p10": 17.5,
+      "p50": 25.0,
+      "p90": 32.5
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "fennel",
+    "crop_name": "Fennel",
+    "category": "spice_medicinal",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
     "ideal_ph_min": 6.0,
     "ideal_ph_max": 7.5,
     "ideal_rainfall_min": 500.0,
-    "ideal_rainfall_max": 1000.0,
+    "ideal_rainfall_max": 1200.0,
     "baseline_yield_t_ha": {
-      "p10": 1.8,
-      "p50": 3.0,
-      "p90": 4.5
+      "p10": 5.6,
+      "p50": 8.0,
+      "p90": 10.4
     },
-    "data_confidence": "medium",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "cluster_bean",
-    "crop_name": "Cluster Bean (Guar)",
-    "category": "pulses",
-    "season": "kharif",
-    "water_need_mm": 250.0,
-    "ideal_temp_min": 22.0,
-    "ideal_temp_max": 42.0,
-    "ideal_ph_min": 7.0,
-    "ideal_ph_max": 8.5,
-    "ideal_rainfall_min": 200.0,
-    "ideal_rainfall_max": 450.0,
-    "baseline_yield_t_ha": {
-      "p10": 0.6,
-      "p50": 1.1,
-      "p90": 1.8
-    },
-    "data_confidence": "high",
+    "data_confidence": "low",
     "intercrop_options": [
       {
-        "companion_crop_id": "pearl_millet",
-        "companion_crop_name": "Pearl Millet (Bajra)",
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
         "yield_boost_pct": 0.15,
         "companion_share_factor": 0.25,
-        "rationale": "Guar-Bajra intercropping is a resilient arid cropping system fixing nitrogen in sandy soils."
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
       }
     ]
   },
   {
-    "crop_id": "fava_bean",
-    "crop_name": "Fava Bean (Broad Bean)",
-    "category": "pulses",
-    "season": "rabi",
-    "water_need_mm": 400.0,
-    "ideal_temp_min": 12.0,
-    "ideal_temp_max": 25.0,
+    "crop_id": "isabgol",
+    "crop_name": "Isabgol",
+    "category": "spice_medicinal",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
     "ideal_ph_min": 6.0,
-    "ideal_ph_max": 7.8,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 550.0,
-    "baseline_yield_t_ha": {
-      "p10": 1.5,
-      "p50": 2.6,
-      "p90": 3.8
-    },
-    "data_confidence": "high",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "berseem_clover",
-    "crop_name": "Berseem (Egyptian Clover)",
-    "category": "cash_crops",
-    "season": "rabi",
-    "water_need_mm": 550.0,
-    "ideal_temp_min": 12.0,
-    "ideal_temp_max": 28.0,
-    "ideal_ph_min": 6.5,
-    "ideal_ph_max": 8.2,
-    "ideal_rainfall_min": 350.0,
-    "ideal_rainfall_max": 700.0,
-    "baseline_yield_t_ha": {
-      "p10": 28.0,
-      "p50": 42.0,
-      "p90": 60.0
-    },
-    "data_confidence": "high",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "durum_wheat",
-    "crop_name": "Durum Wheat",
-    "category": "cereals",
-    "season": "rabi",
-    "water_need_mm": 400.0,
-    "ideal_temp_min": 14.0,
-    "ideal_temp_max": 30.0,
-    "ideal_ph_min": 6.5,
-    "ideal_ph_max": 8.2,
-    "ideal_rainfall_min": 300.0,
-    "ideal_rainfall_max": 550.0,
-    "baseline_yield_t_ha": {
-      "p10": 2.2,
-      "p50": 3.4,
-      "p90": 4.8
-    },
-    "data_confidence": "high",
-    "intercrop_options": []
-  },
-  {
-    "crop_id": "cassava",
-    "crop_name": "Cassava",
-    "category": "cash_crops",
-    "season": "annual",
-    "water_need_mm": 900.0,
-    "ideal_temp_min": 20.0,
-    "ideal_temp_max": 36.0,
-    "ideal_ph_min": 5.0,
     "ideal_ph_max": 7.5,
-    "ideal_rainfall_min": 800.0,
-    "ideal_rainfall_max": 1800.0,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1200.0,
     "baseline_yield_t_ha": {
-      "p10": 12.0,
-      "p50": 20.0,
-      "p90": 32.0
+      "p10": 5.6,
+      "p50": 8.0,
+      "p90": 10.4
     },
-    "data_confidence": "high",
-    "intercrop_options": []
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "aloe_vera",
+    "crop_name": "Aloe Vera",
+    "category": "spice_medicinal",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 5.6,
+      "p50": 8.0,
+      "p90": 10.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "lemongrass",
+    "crop_name": "Lemongrass",
+    "category": "spice_medicinal",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 5.6,
+      "p50": 8.0,
+      "p90": 10.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "mentha",
+    "crop_name": "Mentha",
+    "category": "spice_medicinal",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 5.6,
+      "p50": 8.0,
+      "p90": 10.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "ashwagandha",
+    "crop_name": "Ashwagandha",
+    "category": "spice_medicinal",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 5.6,
+      "p50": 8.0,
+      "p90": 10.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "stevia",
+    "crop_name": "Stevia",
+    "category": "spice_medicinal",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 5.6,
+      "p50": 8.0,
+      "p90": 10.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
+  },
+  {
+    "crop_id": "basil",
+    "crop_name": "Basil",
+    "category": "spice_medicinal",
+    "season": "kharif",
+    "water_need_mm": 700.0,
+    "ideal_temp_min": 15.0,
+    "ideal_temp_max": 35.0,
+    "ideal_ph_min": 6.0,
+    "ideal_ph_max": 7.5,
+    "ideal_rainfall_min": 500.0,
+    "ideal_rainfall_max": 1200.0,
+    "baseline_yield_t_ha": {
+      "p10": 5.6,
+      "p50": 8.0,
+      "p90": 10.4
+    },
+    "data_confidence": "low",
+    "intercrop_options": [
+      {
+        "companion_crop_id": "cowpea",
+        "companion_crop_name": "Cowpea (Lobia)",
+        "yield_boost_pct": 0.15,
+        "companion_share_factor": 0.25,
+        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+      }
+    ]
   }
 ]

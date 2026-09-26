@@ -56,8 +56,8 @@ export const CropPredictionPage: React.FC = () => {
   const top10Crops = crops.slice(0, 10);
   const topCrop = top5Crops[0];
   const companionOpt = topCrop?.intercrop_options?.[0];
-  const companionName = companionOpt?.companion_crop_name || "Cowpea (Lobia)";
-  const boostPct = companionOpt ? (companionOpt.yield_boost_pct * 100).toFixed(1) : "15.0";
+  const companionName = companionOpt?.companion_crop_name || "";
+  const boostPct = companionOpt ? (companionOpt.yield_boost_pct * 100).toFixed(1) : "0.0";
   const topNames = top5Crops.map(c => c.crop_name).join(", ");
 
   // Chart data for Top 10 crops
@@ -348,8 +348,6 @@ export const CropPredictionPage: React.FC = () => {
               {top5Crops.map((crop, idx) => {
                 const isExpanded = expandedInsightCropId === crop.crop_id;
                 const companion = crop.intercrop_options?.[0];
-                const companionName = companion ? companion.companion_crop_name : "Cowpea (Lobia)";
-                const boost = companion ? (companion.yield_boost_pct * 100).toFixed(1) : "14.5";
 
                 return (
                   <div key={crop.crop_id || idx} className="glass-card crop-insight-card">
@@ -370,9 +368,15 @@ export const CropPredictionPage: React.FC = () => {
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span className="badge badge-high" style={{ fontSize: '0.72rem' }}>
-                          +{boost}% Companion Synergy
-                        </span>
+                        {companion ? (
+                          <span className="badge badge-high" style={{ fontSize: '0.72rem' }}>
+                            +{(companion.yield_boost_pct * 100).toFixed(1)}% {companion.companion_crop_name}
+                          </span>
+                        ) : (
+                          <span className="badge badge-low" style={{ fontSize: '0.72rem', opacity: 0.7 }}>
+                            Sole Cropping
+                          </span>
+                        )}
                         {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                       </div>
                     </div>
@@ -395,7 +399,11 @@ export const CropPredictionPage: React.FC = () => {
                         <strong>Irrigation Requirement:</strong> Demands {crop.water_need_mm} mm under {crop.irrigation_mode} water management.
                       </div>
                       <div className="insight-bullet-item">
-                        <strong>Intercrop Benefit:</strong> Co-planting with {companionName} boosts harvest by +{boost}% via atmospheric nitrogen fixation.
+                        <strong>Intercrop Benefit:</strong> {companion ? (
+                          `Co-planting with ${companion.companion_crop_name} boosts harvest by +${(companion.yield_boost_pct * 100).toFixed(1)}% via ${companion.rationale || 'symbiotic nutrient & canopy synergy'}.`
+                        ) : (
+                          "Cultivated as a sole crop; no agronomic intercrop pairing indicated."
+                        )}
                       </div>
                       <div className="insight-bullet-item">
                         <strong>Yield Expectation:</strong> Median P50 forecast of {crop.expected_yield_t_ha.p50} t/ha (Total: {(crop.expected_yield_t_ha.p50 * farmArea).toFixed(1)} tonnes across {farmArea.toFixed(2)} ha).
@@ -531,20 +539,41 @@ export const CropPredictionPage: React.FC = () => {
                     flexDirection: 'column',
                     gap: '6px'
                   }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#38bdf8' }}>
-                        Symbiotic Companion Pairing
-                      </span>
-                      <span className="badge badge-high" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
-                        +{boostPct}% Synergy
-                      </span>
-                    </div>
-                    <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
-                      Intercrop with {companionName}
-                    </div>
-                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
-                      Recommended <strong>75:25 spatial arrangement</strong> boosts total parcel harvest via atmospheric nitrogen fixation and canopy layering.
-                    </p>
+                    {companionOpt ? (
+                      <>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#38bdf8' }}>
+                            Symbiotic Companion Pairing
+                          </span>
+                          <span className="badge badge-high" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                            +{boostPct}% Synergy
+                          </span>
+                        </div>
+                        <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                          Intercrop with {companionName}
+                        </div>
+                        <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                          Recommended <strong>{Math.round((1 - companionOpt.companion_share_factor) * 100)}:{Math.round(companionOpt.companion_share_factor * 100)} spatial arrangement</strong> boosts total parcel harvest via atmospheric nitrogen fixation and canopy layering.
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#94a3b8' }}>
+                            Cropping Pattern
+                          </span>
+                          <span className="badge badge-low" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                            Sole Crop
+                          </span>
+                        </div>
+                        <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                          Sole Cropping Optimized
+                        </div>
+                        <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                          No verified intercrop pairing identified for this crop under current soil and climate regimes. Monoculture management recommended.
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   {/* Card 3: Irrigation */}

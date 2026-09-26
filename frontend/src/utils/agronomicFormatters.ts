@@ -294,8 +294,10 @@ export function generateAgronomicRecommendation(report: any): string {
 
   const topNames = topCrops.map((c: any) => c.crop_name).join(", ");
   const companionOpt = topCrop?.intercrop_options?.[0];
-  const companionName = companionOpt?.companion_crop_name || "Cowpea (Lobia)";
-  const boostPct = companionOpt ? (companionOpt.yield_boost_pct * 100).toFixed(1) : "14.5";
+
+  const companionBullet = companionOpt
+    ? `- **Symbiotic Companion Pairing:** Intercropping with **${companionOpt.companion_crop_name}** in a ${Math.round((1 - companionOpt.companion_share_factor) * 100)}:${Math.round(companionOpt.companion_share_factor * 100)} spatial arrangement delivers a **+${(companionOpt.yield_boost_pct * 100).toFixed(1)}%** yield synergy via ${companionOpt.rationale || 'atmospheric nitrogen fixation and canopy layering'}.`
+    : `- **Cropping Strategy:** Cultivated under **sole cropping (monoculture)** management; no symbiotic companion pairing indicated under current soil parameters.`;
 
   return `Based on the selected location's satellite vegetation condition (NDVI: ${sat.ndvi.toFixed(2)}, NDMI: ${sat.ndmi.toFixed(2)}), soil characteristics (pH: ${env.ph.toFixed(2)}, SOC: ${env.organic_carbon_g_kg.toFixed(1)} g/kg), rainfall (${env.rainfall_mm.toFixed(0)} mm), temperature (${env.temp_mean_c.toFixed(1)}°C), moisture availability, irrigation feasibility (${irri.recommended_mode}) and climate risk (${risk.overall_risk_level}), the following crop combinations were ranked: **${topNames}**.
 
@@ -303,7 +305,7 @@ Your parcel demonstrates **${suit.grade} Suitability (${Math.round(suit.score * 
 
 ### Key Agronomic Action Plan:
 - **Primary Cultivar Allocation:** **${topCrop?.crop_name || "Top Recommended Crop"}** ranks #1 with a **${Math.round((topCrop?.recommendation_score || 0.8) * 100)}% suitability score**, offering an expected median yield of **${topCrop?.expected_yield_t_ha?.p50 || 0} tonnes/ha** (P10–P90 range: ${topCrop?.expected_yield_t_ha?.p10}–${topCrop?.expected_yield_t_ha?.p90} t/ha).
-- **Symbiotic Companion Pairing:** Intercropping with **${companionName}** in a 75:25 spatial arrangement delivers a **+${boostPct}%** yield synergy via atmospheric nitrogen fixation and canopy layering.
+${companionBullet}
 - **Irrigation Strategy:** Evaluated as **${irri.recommended_mode.toUpperCase()}** with an estimated seasonal crop water requirement of **${irri.total_water_demand_m3.toLocaleString()} m³** against **${irri.effective_rainfall_mm} mm** effective rainfall.
 - **Climate Resilience:** Overall climatic vulnerability is **${risk.overall_risk_level}** (Drought Stress: ${risk.drought_risk_score.toFixed(0)}%, Heat Stress: ${risk.heat_risk_score.toFixed(0)}%). Advisory: ${risk.note}`;
 }

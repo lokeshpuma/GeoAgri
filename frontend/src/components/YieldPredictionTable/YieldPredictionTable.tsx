@@ -64,7 +64,7 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
               const totalTonnes = (crop.expected_production_t?.p50 || (p50Yield * farmArea)).toFixed(1);
 
               const companion = crop.intercrop_options?.[0];
-              const boostPct = companion ? (companion.yield_boost_pct * 100).toFixed(1) : "14.5";
+              const boostPct = companion ? (companion.yield_boost_pct * 100).toFixed(1) : null;
 
               const suitability = (crop.recommendation_score * 100).toFixed(1);
 
@@ -97,10 +97,16 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
                   </td>
 
                   <td style={{ padding: '12px 14px' }}>
-                    <div style={{ fontSize: '0.85rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
-                      <Leaf size={13} style={{ color: '#34d399', flexShrink: 0 }} />
-                      <span>{companion?.companion_crop_name || "Cowpea (Lobia)"}</span>
-                    </div>
+                    {companion ? (
+                      <div style={{ fontSize: '0.85rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
+                        <Leaf size={13} style={{ color: '#34d399', flexShrink: 0 }} />
+                        <span>{companion.companion_crop_name}</span>
+                      </div>
+                    ) : (
+                      <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                        None (Sole)
+                      </div>
+                    )}
                   </td>
 
                   <td style={{ padding: '12px 14px', textAlign: 'right' }}>
@@ -115,18 +121,22 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
                   </td>
 
                   <td style={{ padding: '12px 14px', textAlign: 'center' }}>
-                    <span
-                      style={{
-                        background: 'rgba(16, 185, 129, 0.15)',
-                        color: '#34d399',
-                        padding: '3px 8px',
-                        borderRadius: '6px',
-                        fontSize: '0.75rem',
-                        fontWeight: 700,
-                      }}
-                    >
-                      +{boostPct}%
-                    </span>
+                    {boostPct !== null ? (
+                      <span
+                        style={{
+                          background: 'rgba(16, 185, 129, 0.15)',
+                          color: '#34d399',
+                          padding: '3px 8px',
+                          borderRadius: '6px',
+                          fontSize: '0.75rem',
+                          fontWeight: 700,
+                        }}
+                      >
+                        +{boostPct}%
+                      </span>
+                    ) : (
+                      <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>—</span>
+                    )}
                   </td>
 
                   <td style={{ padding: '12px 14px', textAlign: 'center' }}>

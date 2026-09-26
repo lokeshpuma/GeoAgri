@@ -100,8 +100,8 @@ export const SummaryReportPage: React.FC = () => {
   const top10Crops = crops.slice(0, 10);
   const topCrop = top5Crops[0];
   const companionOpt = topCrop?.intercrop_options?.[0];
-  const companionName = companionOpt?.companion_crop_name || "Cowpea (Lobia)";
-  const boostPct = companionOpt ? (companionOpt.yield_boost_pct * 100).toFixed(1) : "15.0";
+  const companionName = companionOpt?.companion_crop_name || "";
+  const boostPct = companionOpt ? (companionOpt.yield_boost_pct * 100).toFixed(1) : "0.0";
 
   // Environmental interpretation list
   const metricsList = [
@@ -359,9 +359,13 @@ export const SummaryReportPage: React.FC = () => {
                     <td style={{ fontWeight: 700, color: idx === 0 ? '#fbbf24' : '#9ca3af' }}>#{idx + 1}</td>
                     <td style={{ fontWeight: 600, color: 'var(--text-main)' }}>{c.crop_name}</td>
                     <td>
-                      <span style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <Leaf size={12} /> {companion?.companion_crop_name || "Cowpea (Lobia)"}
-                      </span>
+                      {companion ? (
+                        <span style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <Leaf size={12} /> {companion.companion_crop_name}
+                        </span>
+                      ) : (
+                        <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>None (Sole)</span>
+                      )}
                     </td>
                     <td style={{ textAlign: 'right', fontWeight: 700, color: '#10b981' }}>
                       {(c.recommendation_score * 100).toFixed(1)}%
@@ -370,9 +374,13 @@ export const SummaryReportPage: React.FC = () => {
                       {totalYield} t <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>({c.expected_yield_t_ha.p50} t/ha)</span>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                      <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 8px', borderRadius: '4px', fontWeight: 700, fontSize: '0.75rem' }}>
-                        +{boost}%
-                      </span>
+                      {companion ? (
+                        <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 8px', borderRadius: '4px', fontWeight: 700, fontSize: '0.75rem' }}>
+                          +{(companion.yield_boost_pct * 100).toFixed(1)}%
+                        </span>
+                      ) : (
+                        <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>—</span>
+                      )}
                     </td>
                     <td style={{ textAlign: 'center', textTransform: 'capitalize' }}>
                       <span className="badge badge-high" style={{ fontSize: '0.75rem' }}>{c.irrigation_mode}</span>
@@ -484,26 +492,53 @@ export const SummaryReportPage: React.FC = () => {
 
           {/* Action 2: Symbiotic Companion Pairing */}
           <div className="action-card">
-            <div className="action-card-header">
-              <div className="action-icon-pill" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
-                <Leaf size={16} />
-              </div>
-              <span className="action-type-badge">Symbiotic Companion Pairing</span>
-            </div>
-            <div className="action-main-val">
-              {companionName}
-            </div>
-            <div className="action-meta-row">
-              <span className="badge badge-high" style={{ fontSize: '0.72rem', background: 'rgba(56, 189, 248, 0.2)', color: '#38bdf8' }}>
-                +{boostPct}% Yield Synergy
-              </span>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                75:25 Spatial Intercrop
-              </span>
-            </div>
-            <p className="action-desc">
-              Intercropping in a 75:25 spatial ratio accelerates atmospheric nitrogen fixation, improves soil organic matter turnover, and optimizes canopy light interception.
-            </p>
+            {companionOpt ? (
+              <>
+                <div className="action-card-header">
+                  <div className="action-icon-pill" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
+                    <Leaf size={16} />
+                  </div>
+                  <span className="action-type-badge">Symbiotic Companion Pairing</span>
+                </div>
+                <div className="action-main-val">
+                  {companionName}
+                </div>
+                <div className="action-meta-row">
+                  <span className="badge badge-high" style={{ fontSize: '0.72rem', background: 'rgba(56, 189, 248, 0.2)', color: '#38bdf8' }}>
+                    +{boostPct}% Yield Synergy
+                  </span>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                    75:25 Spatial Intercrop
+                  </span>
+                </div>
+                <p className="action-desc">
+                  Intercropping in a 75:25 spatial ratio accelerates atmospheric nitrogen fixation, improves soil organic matter turnover, and optimizes canopy light interception.
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="action-card-header">
+                  <div className="action-icon-pill" style={{ background: 'rgba(148, 163, 184, 0.15)', color: '#94a3b8' }}>
+                    <Leaf size={16} />
+                  </div>
+                  <span className="action-type-badge">Cropping Strategy</span>
+                </div>
+                <div className="action-main-val">
+                  Sole Cropping Optimized
+                </div>
+                <div className="action-meta-row">
+                  <span className="badge badge-low" style={{ fontSize: '0.72rem' }}>
+                    Monoculture
+                  </span>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                    100% Primary Canopy
+                  </span>
+                </div>
+                <p className="action-desc">
+                  No verified symbiotic intercrop partner indicated for this cultivar under local edaphic parameters. Full parcel area dedicated to primary crop.
+                </p>
+              </>
+            )}
           </div>
 
           {/* Action 3: Precision Irrigation Strategy */}

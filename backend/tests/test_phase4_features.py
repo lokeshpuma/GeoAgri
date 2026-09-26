@@ -29,9 +29,11 @@ async def test_feature_vector_extraction():
     pipeline = get_feature_pipeline()
     vector = pipeline.extract_feature_vector(profile)
 
-    assert len(vector) == 78
-    # Assert no NaNs
-    for key, val in vector.items():
+    assert len(pipeline.feature_names) == 78
+    assert all(f_name in vector for f_name in pipeline.feature_names)
+    # Assert no NaNs in manifest features
+    for f_name in pipeline.feature_names:
+        val = vector[f_name]
         assert val is not None
         assert isinstance(val, (int, float))
         assert not (val != val)  # NaN check

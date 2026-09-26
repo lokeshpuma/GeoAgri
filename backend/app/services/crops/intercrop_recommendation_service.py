@@ -8,10 +8,11 @@ from functools import lru_cache
 from pathlib import Path
 import joblib
 import numpy as np
+import pandas as pd
 
 from app.services.crops import intercrop_registry
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 MODELS_DIR = BASE_DIR / "ml" / "models"
 MODEL_PATH = MODELS_DIR / "crop_recommender.pkl"
 META_PATH = MODELS_DIR / "crop_recommender_meta.pkl"
@@ -86,35 +87,52 @@ def _rule_score(crop, env, season):
     return round(_clamp(total), 4), notes
 
 
-def _model_probabilities(soil):
+def _model_probabilities(soil, env=None):
     model, meta = _load_model()
 
-    if model is None or meta is None:
+    if model is None or meta is None or soil is None:
         return {}
 
-    if soil is None:
-        return {}
+    soil_clean = {str(k).lower(): v for k, v in soil.items()} if isinstance(soil, dict) else {}
+    env_clean = {str(k).lower(): v for k, v in env.items()} if isinstance(env, dict) else {}
 
     required = ["n", "p", "k"]
-    if not all(key in soil for key in required):
+    if not all(key in soil_clean for key in required):
         return {}
 
-    features = np.array(
-        [
-            [
-                float(soil.get("n", 0.0)),
-                float(soil.get("p", 0.0)),
-                float(soil.get("k", 0.0)),
-                float(soil.get("temperature", 25.0)),
-                float(soil.get("humidity", 60.0)),
-                float(soil.get("ph", 6.5)),
-                float(soil.get("rainfall", 500.0)),
-            ]
-        ]
-    )
-
     try:
-        probabilities = model.predict_proba(features)[0]
+        n_val = float(soil_clean.get("n", 0.0))
+        p_val = float(soil_clean.get("p", 0.0))
+        k_val = float(soil_clean.get("k", 0.0))
+
+        temp_val = float(
+            soil_clean.get("temperature",
+                soil_clean.get("temp",
+                    env_clean.get("temp_c",
+                        env_clean.get("temp_mean_c",
+                            env_clean.get("temperature", 25.0)))))
+        )
+        hum_val = float(
+            soil_clean.get("humidity",
+                env_clean.get("humidity_pct",
+                    env_clean.get("humidity", 60.0)))
+        )
+        ph_val = float(
+            soil_clean.get("ph",
+                env_clean.get("ph", 6.5))
+        )
+        rain_val = float(
+            soil_clean.get("rainfall",
+                env_clean.get("rainfall_mm",
+                    env_clean.get("rainfall", 500.0)))
+        )
+
+        feat_names = meta.get("features", ["N", "P", "K", "temperature", "humidity", "ph", "rainfall"])
+        features_df = pd.DataFrame(
+            [[n_val, p_val, k_val, temp_val, hum_val, ph_val, rain_val]],
+            columns=feat_names,
+        )
+        probabilities = model.predict_proba(features_df)[0]
         classes = meta.get("classes", [])
 
         result = {}
@@ -127,28 +145,49 @@ def _model_probabilities(soil):
         return {}
 
 
-def recommend_intercrops(env, season, limit=100, soil=None) -> list[dict]:
+def recommend_intercrops(env, season, limit=100, soil=None, only_validated=False) -> list[dict]:
     crops = intercrop_registry.get_all_crops()
-    model_probs = _model_probabilities(soil)
+    model_probs = _model_probabilities(soil, env=env)
 
     recommendations = []
 
     for crop in crops:
+        is_validated = (crop.get("data_confidence") == "high")
+        if only_validated and not is_validated:
+            continue
+
         rule_score, notes = _rule_score(crop, env, season)
         model_score = model_probs.get(crop["crop_id"], None)
 
-        if model_score is not None:
-            recommendation_score = 0.55 * rule_score + 0.45 * model_score
-            notes.append("ML model confidence available")
+        if is_validated:
+            if model_score is not None:
+                recommendation_score = 0.45 * rule_score + 0.55 * model_score
+                confidence = "high"
+                confidence_score = round(0.80 + 0.19 * model_score, 4)
+                notes.append("ML model confidence available")
+            else:
+                recommendation_score = rule_score
+                confidence = "medium"
+                confidence_score = 0.70
         else:
-            recommendation_score = rule_score
+            # Low confidence crop without real empirical grounding
+            confidence = "low"
+            confidence_score = 0.35
+            # Scale down low confidence unvalidated crops so they do not artificially dominate validated crops
+            recommendation_score = round(rule_score * 0.70, 4)
+            notes.append("Recommendation based on low-confidence unvalidated data")
 
         recommendations.append(
             {
                 "crop": crop,
+                "crop_id": crop["crop_id"],
+                "crop_name": crop.get("crop_name", crop["crop_id"]),
                 "rule_score": round(rule_score, 4),
-                "model_score": model_score,
+                "model_score": round(model_score, 4) if model_score is not None else None,
                 "recommendation_score": round(recommendation_score, 4),
+                "confidence": confidence,
+                "confidence_score": confidence_score,
+                "is_validated": is_validated,
                 "rationale_bits": notes,
             }
         )

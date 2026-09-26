@@ -101,10 +101,16 @@ class ModelASuitability:
             else:
                 grade = "Not Suitable"
 
+            # Derive diagnostic confidence from observation completeness and sensor agreement
+            expected_keys = ["ph", "organic_carbon_g_kg", "slope_mean", "twi_mean", "ndvi_mean"]
+            present_keys = sum(1 for k in expected_keys if k in feature_vector)
+            completeness = present_keys / len(expected_keys)
+            derived_confidence = round(float(max(0.35, min(0.95, 0.55 + 0.35 * completeness - 0.05 * len(limiting_factors)))), 2)
+
             return {
                 "grade": grade,
                 "score": round(score, 3),
-                "confidence": 0.90,
+                "confidence": derived_confidence,
                 "limiting_factors": limiting_factors,
                 "is_fallback": False
             }
@@ -123,7 +129,7 @@ class ModelASuitability:
         return {
             "grade": grade,
             "score": round(score, 3),
-            "confidence": 0.60,
+            "confidence": 0.50,
             "limiting_factors": ["Using fallback suitability evaluation"],
             "is_fallback": True
         }

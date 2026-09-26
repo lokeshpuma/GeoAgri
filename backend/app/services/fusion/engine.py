@@ -40,10 +40,12 @@ def fusion_score(
 def run_decision_fusion(
     model_outputs: dict,
     irrigation_preference: str | None = None,
-    limit: int = 100
+    limit: int = 100,
+    include_low_confidence: bool = False
 ) -> list[dict]:
     """
     Fuses outputs from Models A-E across all crops, ranks descending, and returns top recommendations.
+    Hard-blocks data_confidence == 'low' crops from ranked output before scoring unless explicitly opted in.
     """
     registry = get_crop_registry()
     
@@ -71,19 +73,31 @@ def run_decision_fusion(
         weights["yield"] = 0.30
         weights["crop_recommendation"] = 0.40
 
-    recommendations = []
+    w1 = weights.get("land_suitability", 0.15)
+    w2 = weights.get("crop_recommendation", 0.40)
+    w3 = weights.get("irrigation_cost", 0.10)
+    w4 = weights.get("yield", 0.25)
+    w5 = weights.get("climate_risk", 0.10)
+
+    candidates = []
 
     for crop_id, rec_data in mod_b.items():
         crop_profile = registry.get_crop(crop_id)
         if not crop_profile:
             continue
 
+        conf = crop_profile.data_confidence
+
+        # BUG 3 FIX: Hard-block low-confidence crops from competing in top ranked output
+        if conf == "low" and not include_low_confidence:
+            continue
+
         crop_name = crop_profile.crop_name
         category = crop_profile.category
-        conf = crop_profile.data_confidence
 
         crop_rec_val = rec_data.get("score", 0.50)
         suitability_score = rec_data.get("suitability_score", 0.50)
+        regional_prior = rec_data.get("regional_agronomic_prior", 1.0)
 
         # Skip crops that received hard 0 from agronomic or lethal thermal filters
         if crop_rec_val <= 0.0 or suitability_score <= 0.0:
@@ -96,7 +110,6 @@ def run_decision_fusion(
         irrig_cost_norm = 0.1 if mode == "rainfed" else (0.5 if mode == "supplemental" else 0.9)
 
         # Model D Yield normalization: evaluate against crop's own potential (p90)
-        # for fair cross-species comparison across diverse global crops
         d_data = mod_d.get(crop_id, {})
         p10 = d_data.get("p10", crop_profile.baseline_yield_t_ha.p10)
         p50 = d_data.get("p50", crop_profile.baseline_yield_t_ha.p50)
@@ -120,47 +133,99 @@ def run_decision_fusion(
             weights=weights
         )
 
-        # Deterministic rationale template
-        if f_score >= 0.70:
-            pos_factor = "high agronomic compatibility and favorable water balance"
-        elif yield_norm > 0.6:
-            pos_factor = "strong potential yield performance"
-        else:
-            pos_factor = "stable climate risk resilience"
+        # BUG 2 FIX: Compute weighted contributions and rank drivers dynamically
+        term_crop_rec = w2 * crop_rec_val
+        term_yield = w4 * yield_norm
+        term_land = w1 * land_suit_val
+        term_water_eff = w3 * (1.0 - irrig_cost_norm)
+        term_resilience = w5 * (1.0 - climate_risk_norm)
 
-        neg_factor = f"note {mode} irrigation requirement ({round(water_need)}mm water need)" if mode != "rainfed" else "minimal supplementary water overhead"
-        rationale = f"{crop_name} ranks well due to {pos_factor}; {neg_factor}."
+        contributions = [
+            ("Agronomic Match (Model B)", term_crop_rec),
+            ("Yield Potential (Model D)", term_yield),
+            ("Land Suitability (Model A)", term_land),
+            ("Water Efficiency", term_water_eff),
+            ("Climate Resilience", term_resilience),
+        ]
+        contributions.sort(key=lambda x: x[1], reverse=True)
+        top1_name, top1_val = contributions[0]
+        top2_name, top2_val = contributions[1]
 
         # Intercrop options
         intercrops = [opt.model_dump() for opt in crop_profile.intercrop_options]
 
-        recommendations.append({
+        candidates.append({
             "crop_id": crop_id,
             "crop_name": crop_name,
             "category": category,
             "recommendation_score": f_score,
             "suitability_score": suitability_score,
+            "regional_agronomic_prior": regional_prior,
             "expected_yield_t_ha": {"p10": p10, "p50": p50, "p90": p90},
             "irrigation_mode": mode,
             "water_need_mm": water_need,
             "climate_risk_score": risk_score,
             "climate_risk_note": risk_note,
             "intercrop_options": intercrops,
-            "rationale": rationale,
-            "data_confidence": conf
+            "data_confidence": conf,
+            "fusion_inputs": {
+                "land_suit": round(land_suit_val, 4),
+                "crop_rec": round(crop_rec_val, 4),
+                "irrig_cost_norm": round(irrig_cost_norm, 4),
+                "yield_norm": round(yield_norm, 4),
+                "climate_risk_norm": round(climate_risk_norm, 4)
+            },
+            "_top_drivers": (top1_name, top1_val, top2_name, top2_val),
+            "_regional_prior": regional_prior,
+            "_mode": mode,
+            "_water_need": water_need,
+            "_risk_score": risk_score
         })
 
     # Sort descending by recommendation_score
-    recommendations.sort(key=lambda x: x["recommendation_score"], reverse=True)
+    candidates.sort(key=lambda x: x["recommendation_score"], reverse=True)
 
     # Ensure distinct crop species diversity across top recommendations
     distinct_recs = []
     seen_base_crops = set()
-    for rec in recommendations:
-        base_crop_id = rec["crop_id"].split("_var_")[0]
+    rank = 1
+
+    for item in candidates:
+        base_crop_id = item["crop_id"].split("_var_")[0]
         if base_crop_id not in seen_base_crops:
             seen_base_crops.add(base_crop_id)
+
+            # Build exact dynamic rationale naming top 2 contributing terms with numeric values
+            top1_name, top1_val, top2_name, top2_val = item["_top_drivers"]
+            prior = item["_regional_prior"]
+            mode = item["_mode"]
+            water_need = item["_water_need"]
+            risk_score = item["_risk_score"]
+
+            if prior >= 1.15:
+                prior_note = f", reinforced by regional agronomic prior ({prior:.2f}x)"
+            elif prior <= 0.85:
+                prior_note = f", moderated by regional agronomic prior ({prior:.2f}x)"
+            else:
+                prior_note = ""
+
+            water_note = (
+                f"requires {mode} irrigation ({round(water_need)}mm water need)"
+                if mode != "rainfed"
+                else "minimal supplementary water overhead"
+            )
+
+            rationale = (
+                f"{item['crop_name']} ranks #{rank} driven primarily by {top1_name} (+{top1_val:.3f}) "
+                f"and {top2_name} (+{top2_val:.3f}){prior_note}; {water_note} with {risk_score:.0f}/100 climate risk."
+            )
+
+            # Clean temporary keys
+            rec = {k: v for k, v in item.items() if not k.startswith("_")}
+            rec["rationale"] = rationale
             distinct_recs.append(rec)
+            rank += 1
+
         if len(distinct_recs) >= limit:
             break
 

@@ -79,14 +79,15 @@ async def generate_full_report(req: PredictRequest):
                 climate_risk_note=r["climate_risk_note"],
                 intercrop_options=intercrop_opts,
                 rationale=r["rationale"],
-                data_confidence=r["data_confidence"]
+                data_confidence=r["data_confidence"],
+                regional_agronomic_prior=r.get("regional_agronomic_prior", 1.0)
             )
             formatted_recs.append(rec_crop)
 
         top_rec = formatted_recs[0] if formatted_recs else None
 
         # Intercrop boost math for top crop
-        top_pair_str = "None"
+        top_pair_str = "None (Sole Cropping)"
         intercrop_boost_t = 0.0
         if top_rec and top_rec.intercrop_options:
             opt = top_rec.intercrop_options[0]

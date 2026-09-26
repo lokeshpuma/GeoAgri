@@ -29,11 +29,6 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
     ? crop.intercrop_options[0]
     : null;
 
-  const companionName = primaryIntercrop ? primaryIntercrop.companion_crop_name : "Cowpea (Lobia)";
-  const yieldBoostPct = primaryIntercrop
-    ? (primaryIntercrop.yield_boost_pct * 100).toFixed(1)
-    : "14.5";
-
   // Production calculation
   const p50YieldHa = crop.expected_yield_t_ha?.p50 || 2.5;
   const totalProductionTonnes = crop.expected_production_t?.p50 || (p50YieldHa * farmArea);
@@ -76,13 +71,22 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
       {/* Main Title & Companion Crop */}
       <div className="crop-rec-title-block">
         <h3 className="crop-main-name">{crop.crop_name}</h3>
-        <div className="companion-intercrop-banner">
-          <Leaf size={15} style={{ color: '#10b981', flexShrink: 0 }} />
-          <span>
-            Companion: <strong className="companion-name-text" style={{ color: 'var(--text-main)' }}>+{companionName}</strong>
-          </span>
-          <span className="yield-boost-pill">+{yieldBoostPct}% Yield Boost</span>
-        </div>
+        {primaryIntercrop ? (
+          <div className="companion-intercrop-banner">
+            <Leaf size={15} style={{ color: '#10b981', flexShrink: 0 }} />
+            <span>
+              Companion: <strong className="companion-name-text" style={{ color: 'var(--text-main)' }}>+{primaryIntercrop.companion_crop_name}</strong>
+            </span>
+            <span className="yield-boost-pill">+{(primaryIntercrop.yield_boost_pct * 100).toFixed(1)}% Yield Boost</span>
+          </div>
+        ) : (
+          <div className="companion-intercrop-banner" style={{ opacity: 0.75 }}>
+            <Leaf size={15} style={{ color: '#9ca3af', flexShrink: 0 }} />
+            <span>
+              Management: <strong className="companion-name-text" style={{ color: 'var(--text-main)' }}>Sole Cropping</strong>
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Key Metric Grid */}

@@ -53,6 +53,7 @@ class RecommendedCrop(BaseModel):
     intercrop_options: list[IntercropOption]
     rationale: str
     data_confidence: Literal["high", "medium", "low"]
+    regional_agronomic_prior: float = 1.0
 
 class FieldSummary(BaseModel):
     area_ha: float

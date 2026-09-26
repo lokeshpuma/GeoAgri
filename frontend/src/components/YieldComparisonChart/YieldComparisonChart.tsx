@@ -55,23 +55,28 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {top5.map((crop, idx) => {
           const mainYieldPerHa = crop.expected_yield_t_ha?.p50 || 2.5;
-          const mainArea = farmArea * 0.75;
-          const intercropArea = farmArea * 0.25;
+          const hasIntercrop = Boolean(crop.intercrop_options && crop.intercrop_options.length > 0);
 
-          const mainTotalYield = Number((mainYieldPerHa * mainArea).toFixed(2));
-
-          let intercropName = "Cowpea (Lobia)";
-          if (crop.intercrop_options && crop.intercrop_options.length > 0) {
-            intercropName = crop.intercrop_options[0].companion_crop_name;
+          let intercropName = "";
+          let companionShare = 0.0;
+          if (hasIntercrop) {
+            const opt = crop.intercrop_options[0];
+            intercropName = opt.companion_crop_name;
+            companionShare = opt.companion_share_factor || 0.25;
           }
 
-          const intercropYieldPerHa = mainYieldPerHa * 0.58;
-          const intercropTotalYield = Number((intercropYieldPerHa * intercropArea).toFixed(2));
+          const mainShare = hasIntercrop ? (1.0 - companionShare) : 1.0;
+          const mainArea = farmArea * mainShare;
+          const intercropArea = farmArea * companionShare;
+
+          const mainTotalYield = Number((mainYieldPerHa * mainArea).toFixed(2));
+          const intercropYieldPerHa = hasIntercrop ? (mainYieldPerHa * 0.58) : 0;
+          const intercropTotalYield = hasIntercrop ? Number((intercropYieldPerHa * intercropArea).toFixed(2)) : 0;
           const combinedYield = Number((mainTotalYield + intercropTotalYield).toFixed(2));
-          const maxVal = Math.max(...top5.map((c: any) => ((c.expected_yield_t_ha?.p50 || 2.5) * farmArea * 0.75 * 1.5)), combinedYield * 1.2, 1);
+          const maxVal = Math.max(...top5.map((c: any) => ((c.expected_yield_t_ha?.p50 || 2.5) * farmArea * 1.2)), combinedYield * 1.2, 1);
 
           const mainPct = Math.min(100, Math.round((mainTotalYield / maxVal) * 100));
-          const intercropPct = Math.min(100, Math.round((intercropTotalYield / maxVal) * 100));
+          const intercropPct = hasIntercrop ? Math.min(100, Math.round((intercropTotalYield / maxVal) * 100)) : 0;
 
           return (
             <div
@@ -94,9 +99,15 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
                   <span style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--text-main)" }}>
                     {crop.crop_name}
                   </span>
-                  <span style={{ fontSize: "0.8rem", color: "#10b981", fontWeight: 600 }}>
-                    + {intercropName}
-                  </span>
+                  {hasIntercrop ? (
+                    <span style={{ fontSize: "0.8rem", color: "#10b981", fontWeight: 600 }}>
+                      + {intercropName}
+                    </span>
+                  ) : (
+                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontWeight: 500 }}>
+                      (Sole Cropping)
+                    </span>
+                  )}
                 </div>
                 <div style={{ textAlign: "right" }}>
                   <span style={{ fontSize: "0.95rem", fontWeight: 800, color: "var(--accent-amber)" }}>
