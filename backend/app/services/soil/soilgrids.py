@@ -3,6 +3,8 @@ ISRIC SoilGrids REST Client Service.
 Fetches topsoil (0-5cm) soil properties (pH, Organic Carbon, Nitrogen proxy, Clay %, Sand %, Silt %).
 Applies weighted blending when user supplies manual soil health card data (`manual_soil`).
 """
+from __future__ import annotations
+
 
 import os
 import httpx

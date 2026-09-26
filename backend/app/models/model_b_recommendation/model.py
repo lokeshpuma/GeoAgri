@@ -5,6 +5,8 @@ Stage 2: Agronomic rule filter (temperature, rainfall, pH, season window).
 Stage 3: Geographic & bioclimatic agro-ecological zone affinity routing (Karnataka, California, Egypt, Pampas, Rajasthan, Punjab, etc.).
 Includes resilient fallback path.
 """
+from __future__ import annotations
+
 
 import os
 import joblib

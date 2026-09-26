@@ -9,6 +9,8 @@ Determines whether any (longitude, latitude) coordinate on Earth is:
 
 Backed by Natural Earth 110m vector polygons and FAO GAEZ bioclimatic classification.
 """
+from __future__ import annotations
+
 
 import os
 import json

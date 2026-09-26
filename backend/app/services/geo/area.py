@@ -2,6 +2,8 @@
 Geodesic Polygon Area & Buffer Service.
 Computes field area in hectares on WGS84 ellipsoid and handles point fallback buffering.
 """
+from __future__ import annotations
+
 
 import math
 from typing import Tuple, List

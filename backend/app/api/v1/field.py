@@ -5,6 +5,7 @@ Calculates instant geodesic polygon area for interactive frontend feedback.
 """
 
 from __future__ import annotations
+from typing import Optional, List, Tuple
 from fastapi import APIRouter
 from pydantic import BaseModel
 from app.services.geo.area import compute_polygon_area_ha
@@ -12,8 +13,8 @@ from app.services.geo.area import compute_polygon_area_ha
 router = APIRouter()
 
 class FieldAreaRequest(BaseModel):
-    polygon: list[tuple[float, float]] | None = None
-    point: tuple[float, float] | None = None
+    polygon: Optional[List[Tuple[float, float]]] = None
+    point: Optional[Tuple[float, float]] = None
 
 @router.post("/field/area")
 async def calculate_field_area(req: FieldAreaRequest):

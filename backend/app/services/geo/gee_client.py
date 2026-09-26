@@ -3,6 +3,8 @@ Google Earth Engine (GEE) Client Service.
 Extracts Sentinel-2, Sentinel-1, and SRTM base spectral/terrain features over a field polygon.
 Falls back to high-fidelity mock calculations when credentials are not configured or GEE API is unavailable.
 """
+from __future__ import annotations
+
 
 import os
 import random

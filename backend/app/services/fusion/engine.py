@@ -3,6 +3,8 @@ Multi-Attribute Decision Fusion Engine.
 Fuses land suitability, crop recommendation score, irrigation cost, expected yield, and climate risk.
 Optimizes for balanced crop planning, enforcing exact weighting rules and human-readable rationale generation.
 """
+from __future__ import annotations
+
 
 from app.services.crops.registry import get_crop_registry
 

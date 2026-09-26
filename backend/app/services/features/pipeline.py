@@ -3,6 +3,8 @@
 Extracts and normalizes the exact 78-layer engineered feature vector required by Models A-E
 based on backend/ml/models/feature_manifest.json. Imputes NaNs with documented default fallbacks.
 """
+from __future__ import annotations
+
 
 import os
 import json

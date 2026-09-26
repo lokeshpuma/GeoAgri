@@ -4,6 +4,8 @@ Invokes Models A, B, C, D, and E in parallel using asyncio.gather.
 Enforces fallback table isolation: an exception or timeout in any single model degrades that model to fallback
 and sets model_status[model_name] = "fallback" without crashing the pipeline.
 """
+from __future__ import annotations
+
 
 import asyncio
 from app.models.model_a_suitability.model import ModelASuitability

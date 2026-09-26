@@ -2,6 +2,8 @@
 Unified Environmental Profile Service.
 Combines geospatial area, satellite features (GEE), weather metrics (NASA POWER), and soil properties (SoilGrids) into a single cohesive profile.
 """
+from __future__ import annotations
+
 
 from app.services.geo.area import compute_polygon_area_ha
 from app.services.geo.gee_client import fetch_satellite_features

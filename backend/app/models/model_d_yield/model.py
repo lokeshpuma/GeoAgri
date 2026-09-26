@@ -5,6 +5,8 @@ cultivar profiles dynamically modulated across soil organic carbon, thermal regi
 NDVI canopy vigor, soil pH, and precipitation water-balance response curves.
 Includes resilient fallback path.
 """
+from __future__ import annotations
+
 
 import numpy as np
 from app.services.crops.registry import get_crop_registry, QuantileValue

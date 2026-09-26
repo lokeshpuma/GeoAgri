@@ -4,27 +4,27 @@ Matches data contracts in Section 4 of GeoAgri AI specification.
 """
 
 from __future__ import annotations
-from typing import Literal
+from typing import Literal, Optional, List, Tuple
 from pydantic import BaseModel, Field
 
 class ManualSoil(BaseModel):
-    ph: float | None = None
-    organic_carbon: float | None = None
-    nitrogen: float | None = None
-    phosphorus: float | None = None
-    potassium: float | None = None
-    texture_clay_pct: float | None = None
-    texture_sand_pct: float | None = None
-    texture_silt_pct: float | None = None
+    ph: Optional[float] = None
+    organic_carbon: Optional[float] = None
+    nitrogen: Optional[float] = None
+    phosphorus: Optional[float] = None
+    potassium: Optional[float] = None
+    texture_clay_pct: Optional[float] = None
+    texture_sand_pct: Optional[float] = None
+    texture_silt_pct: Optional[float] = None
 
 class PredictRequest(BaseModel):
-    polygon: list[tuple[float, float]] | None = None
-    point: tuple[float, float] | None = None
+    polygon: Optional[List[Tuple[float, float]]] = None
+    point: Optional[Tuple[float, float]] = None
     season: Literal["kharif", "rabi", "zaid", "annual", "perennial"] = "kharif"
     limit: int = 100
-    irrigation_preference: Literal["rainfed", "supplemental", "full"] | None = None
-    manual_soil: ManualSoil | None = None
-    area_ha: float | None = None
+    irrigation_preference: Optional[Literal["rainfed", "supplemental", "full"]] = None
+    manual_soil: Optional[ManualSoil] = None
+    area_ha: Optional[float] = None
 
 class QuantileValue(BaseModel):
     p10: float
