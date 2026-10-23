@@ -280,4 +280,6 @@ async def generate_full_report(req: PredictRequest):
             land_records=record_summary
         )
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Prediction pipeline error: {str(e)}")
