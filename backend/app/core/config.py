@@ -38,9 +38,17 @@ class Settings(BaseSettings):
     OPEN_METEO_ENABLED: bool = True
 
     # Soil data
-    SOILGRIDS_SOURCE: str = "local"  # "local" | "gee"
+    SOILGRIDS_SOURCE: str = "gee"  # "gee" | "local"
     SOILGRIDS_LOCAL_DIR: str = "backend/ml/data/raw/external/soil/soilgrids"
-    SOILGRIDS_API_URL: str = "https://rest.isric.org/soilgrids/v2.0/properties/query"
+
+    # Land Intelligence & Records (PRD v2.0 §8, §9)
+    LAND_RECORDS_MOCK_FALLBACK: bool = False
+    BHUVAN_WMS_ENDPOINT: str = "https://bhuvan-vec2.nrsc.gov.in/bhuvan/wms"
+    KSRSAC_REST_ENDPOINT: str = "https://ksrsac.karnataka.gov.in/geoserver/wms"
+    MAX_UPLOAD_SIZE_MB: int = 15
+    ENABLE_BHUVAN_LIVE_QUERY: bool = True
+    LAND_CLASS_RULES_PATH: str = "app/rules/land_class_rules.yaml"
+    IRRIGABILITY_RULES_PATH: str = "app/rules/irrigability_rules.yaml"
 
     # Credentials (optional)
     CDSE_CLIENT_ID: str = ""

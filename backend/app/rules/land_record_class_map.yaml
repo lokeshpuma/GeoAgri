@@ -1,0 +1,127 @@
+# Land Record Revenue Term -> GeoAgri Classification Mapping (PRD v2.0 §6.5)
+# Initial revenue mappings for Karnataka / South India land records (Bhoomi, Pahani, RTC, e-Khata)
+
+terms:
+  # Agricultural
+  bagayat:
+    class: "AGRICULTURAL"
+    subclass: "garden_land"
+    description: "Garden / irrigated plantation land"
+  neeravari:
+    class: "AGRICULTURAL"
+    subclass: "wetland_irrigated"
+    description: "Wetland / canal or tank irrigated cultivable land"
+  jirayat:
+    class: "AGRICULTURAL"
+    subclass: "dryland_cultivable"
+    description: "Dry cultivable agricultural land"
+  khushki:
+    class: "AGRICULTURAL"
+    subclass: "rainfed_dryland"
+    description: "Dry rainfed agricultural land"
+  tari:
+    class: "AGRICULTURAL"
+    subclass: "paddy_wetland"
+    description: "Paddy or seasonal wetland"
+
+  # Wasteland
+  kharab_a:
+    class: "WASTELAND"
+    subclass: "pot_kharab_a"
+    description: "Uncultivable land assigned to farmer (roads, ditches, rocky patches)"
+    reclaimable: "possible"
+  kharab_b:
+    class: "WASTELAND"
+    subclass: "pot_kharab_b"
+    description: "Government-owned uncultivable land (reserved for public purposes, footpaths, streams)"
+    reclaimable: "unlikely"
+  kharab:
+    class: "WASTELAND"
+    subclass: "barren_uncultivable"
+    description: "Uncultivable / non-assessed wasteland"
+    reclaimable: "unlikely"
+  gomala:
+    class: "WASTELAND"
+    subclass: "grazing_pasture"
+    description: "Village common grazing land / pasture"
+    reclaimable: "unlikely"
+  gairan:
+    class: "WASTELAND"
+    subclass: "grazing_land"
+    description: "Common grazing land"
+    reclaimable: "unlikely"
+  hullubanni:
+    class: "WASTELAND"
+    subclass: "grassland"
+    description: "Grassland or scrub pasture"
+    reclaimable: "possible"
+
+  # Legal Forest
+  aranya:
+    class: "FOREST_LEGAL"
+    subclass: "reserved_forest"
+    description: "Forest department land"
+  forest:
+    class: "FOREST_LEGAL"
+    subclass: "reserved_forest"
+    description: "Gazetted forest land"
+  reserved_forest:
+    class: "FOREST_LEGAL"
+    subclass: "reserved_forest"
+    description: "State or Central reserved forest"
+  protected_forest:
+    class: "FOREST_LEGAL"
+    subclass: "protected_forest"
+    description: "Protected forest sanctuary or reserve"
+
+  # Urban / Built-up
+  non_agricultural:
+    class: "URBAN_BUILT"
+    subclass: "converted_land"
+    description: "Section 95 DC converted non-agricultural land"
+  na_converted:
+    class: "URBAN_BUILT"
+    subclass: "converted_land"
+    description: "Officially converted for non-agricultural use"
+  residential:
+    class: "URBAN_BUILT"
+    subclass: "residential"
+    description: "Residential layout / e-Khata site"
+  commercial:
+    class: "URBAN_BUILT"
+    subclass: "commercial"
+    description: "Commercial building / complex"
+  industrial:
+    class: "URBAN_BUILT"
+    subclass: "industrial"
+    description: "KIADB / industrial zone"
+  e_khata:
+    class: "URBAN_BUILT"
+    subclass: "urban_property"
+    description: "Urban local body property record"
+  e_swathu:
+    class: "URBAN_BUILT"
+    subclass: "gram_panchayat_property"
+    description: "Rural non-agricultural gram panchayat property"
+
+  # Water Body
+  kere:
+    class: "WATER_BODY"
+    subclass: "tank_lake"
+    description: "Village irrigation tank or lake"
+  halla:
+    class: "WATER_BODY"
+    subclass: "stream"
+    description: "Natural watercourse or stream"
+  kaluve:
+    class: "WATER_BODY"
+    subclass: "canal"
+    description: "Irrigation canal or feeder channel"
+  tank:
+    class: "WATER_BODY"
+    subclass: "reservoir"
+    description: "Public tank or reservoir"
+  river:
+    class: "WATER_BODY"
+    subclass: "river"
+    description: "Perennial or seasonal river bed"

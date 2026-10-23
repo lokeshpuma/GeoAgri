@@ -41,8 +41,8 @@ export const SummaryReportPage: React.FC = () => {
   };
 
   const farmArea = report?.field_summary?.area_ha || formData.areaHa;
-  const centroidLat = report?.field_summary?.centroid_lat || 17.3850;
-  const centroidLon = report?.field_summary?.centroid_lon || 78.4867;
+  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1] || 14.0);
+  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0] || 75.75);
 
   const env = report?.environment || {
     rainfall_mm: 700.1,
@@ -175,7 +175,29 @@ export const SummaryReportPage: React.FC = () => {
           </div>
           <div className="summary-data-cell">
             <span className="cell-label">Geodesic Parcel Area</span>
-            <strong className="cell-val" style={{ color: '#10b981' }}>{farmArea.toFixed(2)} Hectares</strong>
+            <strong className="cell-val" style={{ color: '#10b981' }}>
+              {farmArea != null ? `${farmArea.toFixed(2)} Hectares` : 'N/A (Point Query)'}
+            </strong>
+          </div>
+          <div className="summary-data-cell">
+            <span className="cell-label">Land Classification</span>
+            <strong className="cell-val" style={{ color: report?.land_class?.dominant === 'AGRICULTURAL' ? '#10b981' : '#ef4444' }}>
+              {report?.land_class?.dominant || 'AGRICULTURAL'} {report?.land_class?.subclass ? `(${report.land_class.subclass})` : ''}
+            </strong>
+          </div>
+          <div className="summary-data-cell">
+            <span className="cell-label">Irrigability Verdict</span>
+            <strong className="cell-val" style={{
+              color: report?.irrigability?.verdict === 'IRRIGABLE' ? '#10b981' : (report?.irrigability?.verdict === 'CONDITIONALLY_IRRIGABLE' ? '#f59e0b' : '#ef4444')
+            }}>
+              {report?.irrigability?.verdict ? report.irrigability.verdict.replace('_', ' ') : 'IRRIGABLE'}
+            </strong>
+          </div>
+          <div className="summary-data-cell">
+            <span className="cell-label">Usable Irrigable Area</span>
+            <strong className="cell-val" style={{ color: '#10b981' }}>
+              {report?.irrigability?.irrigable_area_ha != null ? `${report.irrigability.irrigable_area_ha.toFixed(2)} Hectares` : (farmArea != null ? `${farmArea.toFixed(2)} Ha` : 'N/A')}
+            </strong>
           </div>
           <div className="summary-data-cell">
             <span className="cell-label">Target Season</span>
@@ -192,6 +214,23 @@ export const SummaryReportPage: React.FC = () => {
             </strong>
           </div>
         </div>
+
+        {report?.irrigability && (report.irrigability.verdict === 'NOT_IRRIGABLE' || report.irrigability.verdict === 'NOT_IRRIGABLE_PROVISIONAL') && (
+          <div style={{
+            marginTop: '16px',
+            padding: '16px',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            border: '1px solid #ef4444',
+            borderRadius: '10px'
+          }}>
+            <strong style={{ color: '#ef4444', display: 'block', marginBottom: '6px' }}>
+              ⚠ Regulatory Notice: Cultivation Excluded ({report.irrigability.verdict.replace('_', ' ')})
+            </strong>
+            <p style={{ margin: 0, fontSize: '0.85rem', color: '#9ca3af' }}>
+              {report.irrigability.reasons?.[0]?.reason || 'Plot falls within protected, water, urban, or wasteland boundaries.'}
+            </p>
+          </div>
+        )}
       </section>
 
       {/* SECTION 2: SATELLITE & ENVIRONMENTAL ANALYSIS */}

@@ -43,8 +43,8 @@ export const CropPredictionPage: React.FC = () => {
 
   const crops = report?.recommended_crops || [];
   const farmArea = report?.field_summary?.area_ha || formData.areaHa;
-  const centroidLat = report?.field_summary?.centroid_lat || 17.3850;
-  const centroidLon = report?.field_summary?.centroid_lon || 78.4867;
+  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1] || 14.0);
+  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0] || 75.75);
 
   const suit = report?.land_suitability || { grade: "High", score: 0.83, confidence: 0.90 };
   const irri = report?.irrigation_summary || { recommended_mode: "Rainfed", total_water_demand_m3: 11400, effective_rainfall_mm: 789.8 };
@@ -102,7 +102,97 @@ export const CropPredictionPage: React.FC = () => {
         </div>
       </div>
 
-      {crops.length === 0 ? (
+      {report?.irrigability && (report.irrigability.verdict === 'NOT_IRRIGABLE' || report.irrigability.verdict === 'NOT_IRRIGABLE_PROVISIONAL') ? (
+        <div className="glass-card" style={{
+          padding: '36px 28px',
+          border: '2px solid #ef4444',
+          backgroundColor: isLight ? '#fef2f2' : 'rgba(239, 68, 68, 0.1)',
+          borderRadius: '16px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{
+              backgroundColor: '#ef4444',
+              borderRadius: '50%',
+              padding: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff'
+            }}>
+              <ShieldAlert size={32} />
+            </div>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span style={{
+                  backgroundColor: '#ef4444',
+                  color: '#ffffff',
+                  fontWeight: 700,
+                  fontSize: '0.75rem',
+                  padding: '4px 10px',
+                  borderRadius: '9999px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  {report.irrigability.verdict.replace('_', ' ')}
+                </span>
+                <span style={{ fontSize: '0.85rem', color: '#9ca3af' }}>
+                  Land Classification: <strong>{report.land_class?.dominant || 'NON-AGRICULTURAL'}</strong> {report.land_class?.subclass ? `(${report.land_class.subclass})` : ''}
+                </span>
+              </div>
+              <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#ef4444', marginTop: '6px' }}>
+                Cultivation & Irrigation Not Permitted On This Plot
+              </h2>
+            </div>
+          </div>
+
+          <p style={{ fontSize: '0.95rem', color: isLight ? '#374151' : '#d1d5db', lineHeight: 1.6 }}>
+            {report.irrigability.reasons?.[0]?.reason ||
+              'This parcel is classified under legal forest, water body, urban built-up, or severe terrain exclusion. In accordance with PRD compliance rules, agronomic crop recommendation models are bypassed.'}
+          </p>
+
+          {report.irrigability.reasons && report.irrigability.reasons.length > 0 && (
+            <div style={{
+              backgroundColor: isLight ? '#ffffff' : 'rgba(0, 0, 0, 0.25)',
+              padding: '16px',
+              borderRadius: '10px',
+              border: '1px solid rgba(239, 68, 68, 0.2)'
+            }}>
+              <h4 style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '8px', color: '#ef4444' }}>
+                Evidence & Regulatory Grounding:
+              </h4>
+              <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '0.85rem', color: '#9ca3af' }}>
+                {report.irrigability.reasons.map((r, idx) => (
+                  <li key={idx} style={{ marginBottom: '4px' }}>
+                    <strong>{r.rule_id}</strong>: {r.reason} (Layer: {r.layer})
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => goToStep(1)}
+            >
+              <ArrowLeft size={16} />
+              <span>Select Different Plot On Map</span>
+            </button>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => goToStep(4)}
+            >
+              <span>View Full Legal & Terrain Report</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
+      ) : crops.length === 0 ? (
         <div className="glass-card" style={{ textAlign: 'center', padding: '48px 24px' }}>
           <Sprout size={48} style={{ color: '#10b981', margin: '0 auto 16px auto' }} />
           <h3 style={{ fontSize: '1.2rem', fontWeight: 600 }}>No Crop Predictions Yet</h3>
@@ -160,9 +250,28 @@ export const CropPredictionPage: React.FC = () => {
               <Layers size={16} style={{ color: '#10b981' }} />
               <div>
                 <span className="summary-pill-label">Field Area</span>
-                <strong className="summary-pill-val">{farmArea.toFixed(2)} ha</strong>
+                <strong className="summary-pill-val">
+                  {farmArea != null ? `${farmArea.toFixed(2)} ha` : 'Point Query'}
+                </strong>
+                {report?.irrigability?.irrigable_area_ha != null && farmArea != null && report.irrigability.irrigable_area_ha < farmArea && (
+                  <span style={{ fontSize: '0.75rem', color: '#10b981', display: 'block' }}>
+                    Usable: {report.irrigability.irrigable_area_ha.toFixed(2)} ha
+                  </span>
+                )}
               </div>
             </div>
+
+            {report?.irrigability && (
+              <div className="summary-pill-item">
+                <ShieldAlert size={16} style={{ color: report.irrigability.verdict === 'IRRIGABLE' ? '#10b981' : '#f59e0b' }} />
+                <div>
+                  <span className="summary-pill-label">Irrigability Verdict</span>
+                  <strong className="summary-pill-val" style={{ color: report.irrigability.verdict === 'IRRIGABLE' ? '#10b981' : '#f59e0b' }}>
+                    {report.irrigability.verdict.replace('_', ' ')}
+                  </strong>
+                </div>
+              </div>
+            )}
 
             <div className="summary-pill-item">
               <Calendar size={16} style={{ color: '#f59e0b' }} />

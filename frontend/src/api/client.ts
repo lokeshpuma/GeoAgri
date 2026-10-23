@@ -48,13 +48,54 @@ export interface PredictRequestPayload {
   } | null;
 }
 
+export interface LandClassification {
+  dominant: "AGRICULTURAL" | "FOREST_LEGAL" | "FOREST_COVER" | "WASTELAND" | "URBAN_BUILT" | "WATER_BODY" | "UNKNOWN";
+  class_shares: Record<string, number>;
+  subclass?: string | null;
+  legal_forest_status?: string;
+  confidence: number;
+}
+
+export interface IrrigabilityReason {
+  rule_id: string;
+  verdict: string;
+  reason: string;
+  layer: string;
+}
+
+export interface Irrigability {
+  verdict: "IRRIGABLE" | "CONDITIONALLY_IRRIGABLE" | "NOT_IRRIGABLE" | "NOT_IRRIGABLE_PROVISIONAL" | "UNVERIFIED";
+  reasons: IrrigabilityReason[];
+  reclaimable?: string | null;
+  irrigable_area_ha?: number | null;
+  irrigation_options: string[];
+  crop_models: "evaluated" | "skipped_not_irrigable";
+}
+
+export interface LandRecordSummary {
+  providers: Array<{ id: string; name: string; status: string; records_found: number }>;
+  record?: Record<string, any> | null;
+}
+
+export interface LandInquiryResponse {
+  query: Record<string, any>;
+  admin: Record<string, any>;
+  land_class: LandClassification;
+  irrigability: Irrigability;
+  land_records: LandRecordSummary;
+  layers: Array<Record<string, any>>;
+  data_quality: { observed_feature_share: number; notes: string[] };
+  disclaimer: string;
+  assessment_timestamp: string;
+}
+
 export interface FullReportResponse {
   field_summary: {
-    area_ha: number;
+    area_ha: number | null;
     centroid_lon: number;
     centroid_lat: number;
     polygon_valid: boolean;
-    used_fallback_buffer: boolean;
+    boundary_source?: string;
   };
   land_suitability: {
     grade: "High" | "Moderate" | "Low" | "Not Suitable" | string;
@@ -144,12 +185,16 @@ export interface FullReportResponse {
     disclaimer: string;
   };
   model_status: {
-    model_a: "ok" | "fallback";
-    model_b: "ok" | "fallback";
-    model_c: "ok" | "fallback";
-    model_d: "ok" | "fallback";
-    model_e: "ok" | "fallback";
+    model_a: "ok" | "fallback" | "skipped_not_irrigable";
+    model_b: "ok" | "fallback" | "skipped_not_irrigable";
+    model_c: "ok" | "fallback" | "skipped_not_irrigable";
+    model_d: "ok" | "fallback" | "skipped_not_irrigable";
+    model_e: "ok" | "fallback" | "skipped_not_irrigable";
   };
+  land_class?: LandClassification | null;
+  irrigability?: Irrigability | null;
+  land_records?: LandRecordSummary | null;
+  disclaimer?: string;
 }
 
 export async function fetchFullReport(payload: PredictRequestPayload): Promise<FullReportResponse> {
@@ -195,7 +240,7 @@ export async function fetchFullReport(payload: PredictRequestPayload): Promise<F
   }
 }
 
-export async function fetchFieldArea(polygon: [number, number][]): Promise<{ area_ha: number; polygon_valid: boolean }> {
+export async function fetchFieldArea(polygon: [number, number][]): Promise<{ area_ha: number | null; polygon_valid: boolean }> {
   try {
     const response = await fetch(`${API_BASE_URL}/field/area`, {
       method: "POST",
@@ -208,6 +253,35 @@ export async function fetchFieldArea(polygon: [number, number][]): Promise<{ are
     return await response.json();
   } catch (err) {
     console.warn("Backend /field/area unavailable, using fallback:", err);
-    return { area_ha: 2.85, polygon_valid: true };
+    return { area_ha: null, polygon_valid: false };
   }
+}
+
+export async function fetchLandInquiry(payload: {
+  polygon?: [number, number][];
+  point?: [number, number];
+  survey_ref?: Record<string, any>;
+}): Promise<LandInquiryResponse> {
+  const response = await fetch(`${API_BASE_URL}/land/inquiry`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  if (!response.ok) {
+    throw new Error(`Land Inquiry error: ${response.statusText}`);
+  }
+  return await response.json();
+}
+
+export async function uploadLandRecord(file: File): Promise<{ doc_token: string; summary: Record<string, any> }> {
+  const formData = new FormData();
+  formData.append("file", file);
+  const response = await fetch(`${API_BASE_URL}/land/records/upload`, {
+    method: "POST",
+    body: formData
+  });
+  if (!response.ok) {
+    throw new Error(`Upload failed: ${response.statusText}`);
+  }
+  return await response.json();
 }

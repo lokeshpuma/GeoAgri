@@ -1,0 +1,39 @@
+# Land Classification Engine Decision Rules (PRD v2.0 §5, §14)
+# Multi-sensor classification fusing satellite imagery, terrain, and land records
+
+version: "2.0"
+
+thresholds:
+  water:
+    worldcover_class: 80
+    min_share_for_dominant: 0.35
+    ndwi_min: 0.25
+  urban:
+    worldcover_class: 50
+    min_share_for_dominant: 0.30
+    building_density_sqm_per_ha: 1500.0
+  forest_cover:
+    worldcover_class: 10
+    hansen_treecover_min_pct: 60.0
+    min_share_for_dominant: 0.50
+    ndvi_min: 0.65
+  wasteland:
+    worldcover_classes: [60, 70, 90]   # Bare/sparse, snow/ice, herbaceous wetland
+    min_share_for_dominant: 0.45
+    barren_rocky_slope_min_deg: 25.0
+  cropland:
+    worldcover_class: 40
+    min_share_for_dominant: 0.30
+    min_ndvi_growing_season: 0.30
+
+plantation_detection:
+  known_crop_subtypes: ["coffee", "tea", "arecanut", "rubber", "coconut", "cardamom"]
+  max_slope_deg: 35.0
+  rtc_override_allowed: true
+
+confidence_scoring:
+  single_sensor_rs: 0.70
+  multi_sensor_consistent: 0.85
+  verified_official_record: 0.98
+  user_provided_document: 0.90
+  conflicting_signals: 0.50

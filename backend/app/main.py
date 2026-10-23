@@ -5,12 +5,12 @@ Initializes FastAPI app, CORS middleware, routes, and crop registry loading.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1 import predict, field, health
+from app.api.v1 import predict, field, health, land
 
 app = FastAPI(
     title="GeoAgri AI – Global Agricultural Intelligence API",
     description="Location-driven global agricultural decision-support API for land analysis, crop selection, yield prediction, water balance, and climate risk.",
-    version="1.0.0"
+    version="2.0.0"
 )
 
 # Enable CORS for local React dev server
@@ -26,6 +26,7 @@ app.add_middleware(
 app.include_router(predict.router, prefix="/api/v1", tags=["Prediction"])
 app.include_router(field.router, prefix="/api/v1", tags=["Field"])
 app.include_router(health.router, prefix="/api/v1", tags=["Health & Crops"])
+app.include_router(land.router, prefix="/api/v1", tags=["Land Intelligence & Records"])
 
 @app.get("/")
 async def root():

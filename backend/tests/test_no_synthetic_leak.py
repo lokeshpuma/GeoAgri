@@ -18,7 +18,7 @@ def test_gee_synthetic_blocked_when_live_fails(monkeypatch):
 
     with patch("ee.Image", side_effect=Exception("GEE Service Unavailable (simulated)")):
         with pytest.raises(RuntimeError) as exc_info:
-            fetch_satellite_features(None, (78.4867, 17.3850))
+            fetch_satellite_features(None, (77.5867, 12.9650))
         assert "Live GEE satellite extraction failed" in str(exc_info.value)
     get_settings.cache_clear()
 
@@ -31,7 +31,7 @@ def test_gee_synthetic_allowed_only_when_flag_set(monkeypatch):
 
     from app.services.geo.gee_client import fetch_satellite_features
 
-    res = fetch_satellite_features(None, (78.4867, 17.3850))
+    res = fetch_satellite_features(None, (77.5867, 12.9650))
     assert "elevation" in res
     assert "ndvi" in res
     get_settings.cache_clear()

@@ -17,11 +17,11 @@ import { MultiCroppingTable } from '../components/MultiCroppingTable/MultiCroppi
 
 export const Dashboard: React.FC = () => {
   const [polygonPts, setPolygonPts] = useState<[number, number][]>([
-    [78.4850, 17.3850],
-    [78.4870, 17.3850],
-    [78.4870, 17.3870],
-    [78.4850, 17.3870],
-    [78.4850, 17.3850]
+    [77.5850, 12.9650],
+    [77.5870, 12.9650],
+    [77.5870, 12.9670],
+    [77.5850, 12.9670],
+    [77.5850, 12.9650]
   ]);
   const [pointPt, setPointPt] = useState<[number, number] | undefined>(undefined);
   const [areaHa, setAreaHa] = useState<number>(2.35);
@@ -104,11 +104,11 @@ export const Dashboard: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <FieldSummaryCard
               areaHa={report ? report.field_summary.area_ha : areaHa}
-              centroidLon={report ? report.field_summary.centroid_lon : 78.4860}
-              centroidLat={report ? report.field_summary.centroid_lat : 17.3850}
+              centroidLon={report ? report.field_summary.centroid_lon : (polygonPts[0]?.[0] || 77.5860)}
+              centroidLat={report ? report.field_summary.centroid_lat : (polygonPts[0]?.[1] || 12.9660)}
               season={season}
               polygonValid={report ? report.field_summary.polygon_valid : true}
-              usedFallbackBuffer={report ? report.field_summary.used_fallback_buffer : false}
+              boundarySource={report?.field_summary?.boundary_source}
             />
 
             {/* Filter Configuration Panel */}
@@ -249,9 +249,9 @@ export const Dashboard: React.FC = () => {
             {/* Conditional Views */}
             {activeView === 'intercrop' ? (
               <>
-                <CropSuitabilityRanking crops={report.recommended_crops} farmArea={report.field_summary.area_ha} />
-                <YieldComparisonChart crops={report.recommended_crops} farmArea={report.field_summary.area_ha} />
-                <MultiCroppingTable crops={report.recommended_crops} farmArea={report.field_summary.area_ha} />
+                <CropSuitabilityRanking crops={report.recommended_crops} farmArea={report.field_summary.area_ha ?? undefined} />
+                <YieldComparisonChart crops={report.recommended_crops} farmArea={report.field_summary.area_ha ?? undefined} />
+                <MultiCroppingTable crops={report.recommended_crops} farmArea={report.field_summary.area_ha ?? undefined} />
               </>
             ) : (
               <CropTable crops={report.recommended_crops} />

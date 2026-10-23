@@ -1,487 +1,472 @@
-# GeoAgri AI — Product Requirements Document (PRD)
+# GeoAgri AI — Product Requirements Document (PRD) v2.0
 
-**Version:** 1.0 · **Date:** 2026-10-23 · **Target:** turn the current prototype into a real, evidence-based plot-level agricultural intelligence system (Karnataka first → India → global)
-**Implementation tool:** Antigravity (coding agent). Read §0 first.
+**Version:** 2.0 · **Date:** 2026-10-23 · **Supersedes:** PRD v1.0 (kept in §A as the delta base)
+**Scope of v2:** add **land-class + irrigability classification** (forest, wasteland, urban/built-up, water → *explicitly "NOT IRRIGABLE"*), a **land-records enquiry layer** (Karnataka e-Khata/e-Swathu, Bhoomi RTC, ULPIN, other states, other countries) driven by **coordinates + credentials**, and a **mandatory change set** that Antigravity must apply to the repo.
+**Implementation tool:** Antigravity (coding agent). **Read §0 and §3 first.**
 
 ---
 
-## 0. Instructions to the coding agent (Antigravity) — read before touching code
+## 0. Instructions to the coding agent (Antigravity) — non-negotiable
 
-1. This PRD is the source of truth. If code and PRD disagree, follow the PRD and note the change in `CHANGELOG.md`.
-2. **Never fabricate data.** No synthetic satellite values, soil values, parcel IDs, survey numbers, areas or crop records may reach a user-facing response unless the response is explicitly flagged `data_quality: "synthetic"` AND `ALLOW_SYNTHETIC_DATA=true` (dev only, default `false`).
-3. **Fail loudly and honestly.** If a source is unreachable or a layer is missing, return `UNVERIFIED` / `unavailable` with a reason. Never silently substitute a default.
-4. **Evidence gate first, crop models second.** No crop recommendation is produced before the land-eligibility assessment (§5, §9).
-5. Work in small commits (one per data source, one per service, one per model retrain). Run `pytest -v` in `backend/` and `npm run build` in `frontend/` before each commit.
-6. Do not scrape citizen portals (Bhoomi, Dishaank, Bhuvan UI, India-WRIS UI, Aranya Bhoomi). Use only the access routes listed in §6. Several of these portals disallow automated access via `robots.txt`.
-7. Every dataset downloaded goes into `backend/ml/data/raw/external/<category>/<source>/` with a `SOURCE.md` (URL, licence, retrieval date, row/feature count, bbox). Use `backend/ml/data/scripts/download_datasets.py` and `DATA_GUIDE.md`.
-8. Secrets live only in `backend/.env` (git-ignored). Never commit keys or service-account JSON.
+1. This PRD is the source of truth. If code and PRD disagree, follow the PRD and log it in `CHANGELOG.md`.
+2. **Never fabricate data.** No synthetic satellite, soil, weather, parcel, survey-number, khata, area or crop values may reach a user-facing response. Synthetic data exists only when `ALLOW_SYNTHETIC_DATA=true` **and** the response is flagged `data_quality: "synthetic"`.
+3. **Fail loudly and honestly.** A missing/unreachable source returns `unknown` / `unavailable` + reason. Never a silent default (no `18.5`, `145.0`, `0.58`, `1.0 ha`, no Hyderabad centroid).
+4. **Evidence gate first, crops second.** Land class and irrigability are computed **before** any crop model runs (§5, §7).
+5. **Do not scrape or bypass** Bhoomi, e-Swathu/e-Khata portals, Dishaank, K-GIS, Bhuvan UI, India-WRIS, Aranya Bhoomi. They are CAPTCHA/OTP/robots-restricted citizen services. Allowed access routes are only those in §6.3 (official data-sharing, user-uploaded documents, open datasets, documented WMS/APIs).
+6. **No personal data.** Owner names, Aadhaar, phone, PAN and addresses of persons are stripped at parse time and never stored, logged or returned (§6.4).
+7. Small commits: one per data source, service, model retrain. Run `pytest -v` (backend) and `npm run build` (frontend) before each commit.
+8. Secrets only in `backend/.env` (git-ignored). Never commit keys, service-account JSON or downloaded land records.
+9. **"Force change" rule:** items in §3 are mandatory. Do not mark a phase complete until its §3 grep/test gate passes.
 
 ---
 
 ## 1. Product summary
 
-GeoAgri today predicts crops for a clicked coordinate. The goal is to answer a harder, more useful question:
-
-> "For **this specific plot**, is the land physically and legally usable for agriculture, how much of it is usable, and — only then — which crops, yields, irrigation needs and climate risks apply?"
+> "For **this coordinate / plot**: what *is* the land (agriculture, forest, wasteland, urban, water), what do official records say, **can it be irrigated**, and — only if it can — which crops, yield, water need and climate risk apply?"
 
 ### 1.1 Goals
-- G1. Plot-level eligibility assessment (parcel → exclusions → usable area) with explicit evidence, provenance and confidence.
-- G2. Real data end-to-end: remove mock/synthetic fallbacks from the production path.
-- G3. Retrain Models A–E on real, licensed, documented datasets with region-held-out validation.
-- G4. Karnataka-first, with a clean path to other Indian states and a global fallback.
-- G5. Free-tier operation: every runtime dependency usable at zero cost for a student/non-commercial deployment (§6.2).
+- **G1.** Classify every enquiry into a **land class** and an **irrigability verdict** with evidence, source, date, confidence.
+- **G2.** Show a clear, unmissable **"NOT IRRIGABLE"** result (with reasons) for forest, urban/built-up, water body, and wasteland; no crop list for those.
+- **G3.** Enquire land details by **coordinates** (and optional survey/khata number) through pluggable land-record providers (Karnataka first → India → other countries).
+- **G4.** Real data end-to-end (v1 goal retained); models retrained on documented data.
+- **G5.** Free-tier operation where possible; credentials that are needed are listed exactly (§8).
 
 ### 1.2 Non-goals
-- Not a legal land-title or survey tool. Output must never claim legal ownership or boundary certainty.
-- No ownership/personal data storage (names, Aadhaar, phone) from land records.
-- No scraping or bulk harvesting of government portals.
-- No surveyor-grade accuracy claims.
+- Not a legal title, survey, or conversion/zoning certificate. Output is **decision support**, never legal proof.
+- No ownership/personal data. No scraping. No claim of surveyor accuracy.
+- "Not irrigable" means *as currently classified and evidenced*; it is not a statement that the land can never be reclaimed (wasteland can be reclaimable — §5.4).
 
 ---
 
-## 2. Current state (verified from the uploaded repo)
+## 2. What changed since PRD v1.0 (verified from `GeoAgri-main_2.zip`)
 
-| # | File | Finding | Required change |
-|---|------|---------|-----------------|
-| 1 | `backend/app/services/geo/gee_client.py` | `GEE_MOCK_FALLBACK` defaults to `true`; any exception in the live branch silently falls through to synthetic values seeded from lat/lon. In the *live* branch, `evi, savi, ndmi, nbr, gndvi, ndsi`, raw bands `b1…b12` and Sentinel-1 `vv/vh/rvi` are **hard-coded constants** (e.g. `evi: 0.58`). Only elevation/slope/aspect/hillshade, NDVI and NDWI are actually computed. Live branch also uses a single median composite with no date window. | Compute every feature from imagery or mark it `missing`. Add date window, cloud masking, provenance. Remove silent fallback. |
-| 2 | `backend/app/services/soil/soilgrids.py` | Depends on ISRIC REST API, which ISRIC has **paused with no restoration date**. `phosphorus_ppm` (18.5) and `potassium_ppm` (145) are constants — SoilGrids does not provide P or K. Falls back to a seeded synthetic soil. | Read SoilGrids from file/COG/GEE (§6). Source P/K from Soil Health Card statistics or user input, flagged `estimated`/`user_provided`. |
-| 3 | `backend/app/services/weather/nasa_power.py` | Season windows hard-coded to 2023–2024; 4 s timeout; synthetic fallback. | Parameterise year/season, use climatology + last-N-years, add Open-Meteo fallback, no synthetic fallback. |
-| 4 | `backend/app/services/geo/area.py` | A point input becomes a 100 m-radius circle (≈3.14 ha); no input returns `1.0 ha` at a hard-coded Hyderabad centroid. | Remove. Require a polygon; return `UNVERIFIED` otherwise. |
-| 5 | `backend/app/services/geo/land_mask.py` | Only a Natural Earth 110 m land/ocean check (+ coarse desert/polar boxes). Everything else is "arable". | Keep as ocean screen only; replace with eligibility engine. |
-| 6 | `backend/app/api/v1/predict.py` | Flow is profile → 78 features → Models A–E → fusion. No eligibility step. | Add eligibility gate before the profile/model stages. |
-| 7 | `backend/ml/data/raw/Crop_yield.csv` etc. | Three small CSVs of unknown provenance (no `SOURCE.md`). First yield rows include `rice, 14.9 t/ha, humidity 32%`, which is agronomically implausible for India. | Document provenance; validate or replace with FAOSTAT/APY/ICRISAT-derived data (§6.5). |
-| 8 | `frontend/src/components/MapSelector/MapSelector.tsx` | Hard-coded example locations; click places a marker only. | Real parcel/polygon selection, overlays, evidence panel. |
-| 9 | `docker-compose.yml`, `.env.example` | `GEE_MOCK_FALLBACK=true` in compose; no DB. | Default to real data; add PostGIS. |
-| 10 | `backend/requirements.txt` | No geospatial I/O stack. | Add geopandas, rasterio, pyogrio, pyarrow, duckdb, SQLAlchemy+GeoAlchemy2, psycopg, pystac-client, planetary-computer, owslib, cachetools. |
+### 2.1 Done by Antigravity (Phase 0 — confirmed in code/CHANGELOG)
+| Item | Evidence |
+|---|---|
+| Typed settings, `ALLOW_SYNTHETIC_DATA=false`, `GEE_MOCK_FALLBACK=false` defaults | `backend/app/core/config.py`, `.env.example`, `docker-compose.yml` |
+| PostGIS service + geospatial deps | `docker-compose.yml`, `requirements.txt` (geopandas, rasterio, pyogrio, pyarrow, duckdb, SQLAlchemy, GeoAlchemy2, psycopg, pystac-client, planetary-computer, owslib, cachetools) |
+| Live `/health` checker, no mocks | `backend/app/services/health/checker.py` |
+| `test_no_synthetic_leak.py` | `backend/tests/` |
+| SoilGrids REST replaced by GEE/OpenLandMap queries | `services/soil/soilgrids.py` (per CHANGELOG) |
+| 2 sample datasets + `SOURCE.md`; legacy CSV `SOURCE.md` | `ml/data/raw/external/{labels/ftw_india,geo/hydrorivers}`, `ml/data/raw/SOURCE.md` |
 
-The existing 5-model architecture (A suitability, B recommendation, C irrigation, D yield, E climate risk), the fusion engine, the 78-feature manifest, FastAPI backend and React/MapLibre frontend are **kept**.
+### 2.2 Still wrong in the repo (must be fixed — see §3)
+| # | File | Remaining problem |
+|---|---|---|
+| 1 | `services/geo/area.py` | Point → 100 m circle (3.14 ha); no input → `1.0 ha` at Hyderabad `78.4867, 17.3850`. |
+| 2 | `services/geo/land_mask.py` | Only Natural Earth 110 m ocean/land check; everything on land is "arable". |
+| 3 | `api/v1/predict.py` | No eligibility/irrigability gate; flow is profile → features → models → fusion. |
+| 4 | `schemas/predict.py` | `FieldSummary.used_fallback_buffer`; no land-class / irrigability / land-record blocks. |
+| 5 | `services/soil/soilgrids.py` | Still contains constants `phosphorus_ppm 18.5`, `potassium_ppm 145.0` (lines ~49–50, ~88–89) and a seeded RNG synthetic block (~107–119). |
+| 6 | `services/geo/gee_client.py` | Live branch still has hard-coded `"evi": 0.58` (~line 78) and a derived `evi = ndvi*0.88` (~line 110, not a real EVI). Other indices/radar values need audit. |
+| 7 | `core/config.py` | Stale `SOILGRIDS_API_URL` (REST is paused). |
+| 8 | `frontend/.../MapSelector.tsx` | Hard-coded Karnataka centroid/presets; click = point marker only; no polygon, overlays, evidence panel. |
+| 9 | `ml/data/raw/external/` | Only 2 of ~15 datasets downloaded; WorldCover, MS buildings, HydroLAKES, GHSL, OSM, forest/protected layers absent. |
+| 10 | `app/rules/` | Only `agronomic_rules.yaml`; no `land_class_rules.yaml` / `irrigability_rules.yaml`. |
 
 ---
 
-## 3. Users and use cases
+## 3. MANDATORY CHANGE SET (force-apply) — with pass/fail gates
 
+Antigravity must apply every row. Each has a **gate** that must pass before the item is closed.
+
+| ID | Change | Gate (must pass) |
+|---|---|---|
+| **M1** | **Delete the point-buffer and default-centroid logic** in `area.py`. Require a valid polygon for any area. A bare point returns `area_ha: null` and the land enquiry still runs on the point (see §9.2). Remove `used_fallback_buffer` from schema (breaking change → log). | `grep -rn "78.4867\|17.3850\|default_buffer_m\|used_fallback_buffer" backend frontend/src` → **no matches**. Test: point-only request ⇒ `area_ha is None`. |
+| **M2** | **Remove every hard-coded agronomic constant** in `soilgrids.py` (`18.5`, `145.0`) and the seeded-RNG synthetic soil branch. P/K come only from: user soil test → Soil Health Card district stats (`quality: estimated`) → `missing`. | `grep -rn "18\.5\|145\.0\|rng.uniform" backend/app/services/soil` → none. `test_no_synthetic_leak.py` extended and green. |
+| **M3** | **Remove hard-coded spectral values** in `gee_client.py` (`evi: 0.58`, radar constants, raw-band constants). Compute EVI properly (`2.5*(NIR−RED)/(NIR+6*RED−7.5*BLUE+1)` on scaled SR), or return `missing`. Add date window, SCL cloud mask, provenance. | Unit test: no literal feature constants returned; every feature carries `{value, source, observed_at, quality}`. |
+| **M4** | **New package `backend/app/services/landclass/`** — land-class classifier (§5). **New package `backend/app/services/irrigability/`** — irrigability engine (§7). | `pytest backend/tests/test_phase8_landclass.py test_phase9_irrigability.py` green; §13 matrix passes. |
+| **M5** | **New package `backend/app/services/landrecords/`** — provider registry + adapters (§6). Adapters: `user_document` (RTC/e-Khata upload), `ksrsac_official` (stub until approved), `bhuvan_wms` (display/validation), `open_layers`. | `GET /api/v1/land/inquiry` returns provider status per provider; unavailable provider ⇒ `state:"unavailable"` with reason, never fake data. |
+| **M6** | **Gate the prediction pipeline.** `predict.py` calls land-class → irrigability **first**. If `irrigability.verdict == "NOT_IRRIGABLE"` **or** land class ∈ {FOREST, URBAN_BUILT, WATER_BODY, WASTELAND} ⇒ return the classification and `recommended_crops: []`, `models: "skipped_not_irrigable"`. Environmental profile is built from the **eligible sub-polygon** only. | Test: lake, dense urban block, reserved-forest polygon, barren rocky wasteland ⇒ HTTP 200, `irrigability.verdict=="NOT_IRRIGABLE"`, no crop list, model runtime ≈ 0. |
+| **M7** | **Schema update** (`schemas/predict.py`): add `LandClassification`, `Irrigability`, `LandRecordSummary`, `Provenance` models (§10); `FullReportResponse` gains `land_class`, `irrigability`, `land_records`, `eligibility`. | OpenAPI shows the new blocks; `documentation/api_reference.md` regenerated. |
+| **M8** | **Rules in YAML, not code:** `backend/app/rules/land_class_rules.yaml`, `irrigability_rules.yaml`, `land_record_class_map.yaml` (§5.3, §7.3, §6.5). | Changing a threshold in YAML changes the verdict without code edits (test). |
+| **M9** | **Frontend:** polygon draw/edit + file import; coordinate enquiry; **red "NOT IRRIGABLE" banner** with reasons; land-class legend; layer toggles; evidence + land-record panel; "provisional" styling; remove demo presets unless `VITE_DEMO_MODE=true`. | `npm run build` green; manual check list in §11 passes. |
+| **M10** | **Data download** (§12 + `DATA_GUIDE.md`): run script for all zero-key sets; add new sources (Hansen, Karnataka protected areas, SRTM slope, etc.) with `SOURCE.md` each. | `/api/v1/map-layers` lists every layer as `ready` or `unavailable` + reason. |
+| **M11** | **Config cleanup:** delete `SOILGRIDS_API_URL`; add env vars in §8; update `.env.example`, `docker-compose.yml`, `render.yaml`, `vercel.json`. | App boots with only `.env.example` keys documented. |
+| **M12** | **Tests:** add `test_phase8_landclass.py`, `test_phase9_irrigability.py`, `test_landrecords_privacy.py` (PII stripped), `test_land_inquiry_api.py`; update `test_phase3…7` to drop mock assumptions. | `pytest -v` all green. |
+
+---
+
+## 4. Users and flows
 | Persona | Need |
 |---|---|
-| Farmer / FPO advisor | "Can I grow crops on this survey plot? Which crop gives the best return?" |
-| Agri-extension officer | Evidence-backed, explainable recommendation with data sources and dates. |
-| Student/reviewer (project evaluation) | Reproducible pipeline, real datasets, honest limitations. |
+| Farmer / FPO advisor | "I have survey no. X (or this GPS pin). Is it farmable and irrigable?" |
+| Extension officer | Evidence-backed land class + records summary + irrigation feasibility. |
+| Student / reviewer | Reproducible, honest, documented data pipeline. |
 
-Primary flows: (1) search/draw/import a plot → (2) see eligibility evidence → (3) get crop/yield/irrigation/risk report → (4) export PDF with provenance.
+Flow: **enquire** (pin / polygon / survey no. / upload RTC or e-Khata) → **land class + records** → **irrigability verdict** → *(only if irrigable/conditional)* crops, yield, water need, risk → **PDF with provenance**.
 
 ---
 
-## 4. Core principle — the evidence gate
+## 5. Land-class classification (new core)
 
-Every response carries an `eligibility_status`. Crop recommendation behaviour depends on it.
-
-| Status | Meaning | Crop output |
+### 5.1 Classes
+| Class code | Meaning | Typical evidence |
 |---|---|---|
-| `VERIFIED_AGRICULTURAL` | Official record supports agricultural class **and** an official boundary was used; no blocking conflict. | Allowed. |
-| `AGRICULTURAL_CANDIDATE` | Imagery/land-cover suggests cultivation; no official verification (e.g. user-drawn polygon). | Allowed, labelled **provisional**, stricter confidence. |
-| `RESTRICTED_LEGAL` | Official layer shows protected/reserved/notified restriction over the plot. | Blocked for affected area. |
-| `NON_AGRICULTURAL_BUILT` | Plot (or selected area) is predominantly building/built-up. | Blocked for field crops on obstructed area. |
-| `WATER_BODY` | Plot intersects mapped/detected water. | Blocked for affected area. |
-| `UNVERIFIED` | Essential evidence missing, stale or conflicting. | No definitive classification; no confident crop result. |
+| `AGRICULTURAL` | Cropland / fallow cropland / orchards & plantations | RTC land type, WorldCover 40, DW crops (time series), FtW-calibrated rules |
+| `FOREST_LEGAL` | Reserved / protected / notified forest | **Official** forest boundary or protected-area polygon (WDPA, KSRSAC Karnataka protected areas) |
+| `FOREST_COVER` | Dense tree cover *without* legal confirmation | WorldCover 10, Hansen `treecover2000` ≥ T_tree **and** no plantation signature |
+| `WASTELAND` | Barren/rocky, scrub, gullied, salt-affected, sandy, waterlogged, degraded land (NRSC Wastelands Atlas categories) | Bhuvan wasteland WMS, WorldCover 60/20/30 + DW bare, slope, soil (salinity proxies), RTC "kharab/gomala/…" classes |
+| `URBAN_BUILT` | Built-up / urban / settlement / industrial | WorldCover 50, DW built, MS/OSM buildings, GHSL, e-Khata present, OSM `landuse=residential/commercial/industrial` |
+| `WATER_BODY` | Lake, tank, reservoir, river channel | HydroLAKES, JRC GSW occurrence, WorldCover 80, DW water, OSM `natural=water` |
+| `UNKNOWN` | Evidence missing/conflicting | — |
 
-**Hard rules**
-- `VERIFIED_AGRICULTURAL` is only reachable with an official parcel boundary **and** an official recorded land class. Until the Karnataka data-sharing route (§6.3) is approved, the best achievable status is `AGRICULTURAL_CANDIDATE`.
-- Partial overlap → compute usable area, do not reject the whole parcel:
-  `A_eligible = A_parcel − area( union(confirmed exclusion geometries) ∩ parcel )` (union first, to avoid double subtraction).
-- No arbitrary buffers (no circle around a lake/river/forest) unless an official rule geometry is supplied. Rules with a setback must cite the rule in `sources`.
-- Trees ≠ reserved forest; absence of trees ≠ unrestricted. Forest legal status comes only from official boundary data; otherwise `protected_area_overlap: "unknown"`.
+A plot may be **mixed**: output per-class **area shares** (`class_shares`) and a dominant class. Union exclusions first to avoid double counting.
 
----
+### 5.2 Hard rules
+- **Tree cover ≠ legal forest.** In Karnataka, coffee/areca/coconut/rubber plantations (Western Ghats, coast, Malnad) look like tree cover. `FOREST_COVER` requires no plantation signature (regular row spacing/ phenology via DW/NDVI seasonality, RTC land type = plantation, or `AGRICULTURAL` records). Otherwise → `UNKNOWN` + reason `tree_cover_may_be_plantation`.
+- **No arbitrary buffers** around forest/water/buildings unless an official rule with a citation is supplied.
+- **Bare ≠ wasteland.** Harvested/fallow fields are bare for months. Use ≥12-month crop-probability time series (DW `crops` p90) and historical cropland (WorldCover 2020/2021, FtW fields) before assigning `WASTELAND`.
+- **Urban vs agricultural conflict:** e-Khata/e-Swathu present or ≥ T_urban built share ⇒ `URBAN_BUILT` dominates unless an RTC shows the plot as agricultural *and* built share is small (farmhouse). Footprint area only is subtracted (a farmhouse ≠ whole-plot rejection).
+- Precedence on conflict: **official record > official layer > multi-source remote-sensing consensus > single-source remote sensing**. Each decision lists the sources it used.
 
-## 5. Functional requirements
+### 5.3 Wasteland sub-classes (reason codes)
+Initial list from the NRSC Wastelands Atlas categories (NRSC mapped 28 wasteland classes at 1:50,000 for 2003-04/2005-06 — **exact class legend must be confirmed from the Bhuvan Wastelands layer legend**, ⚠ not enumerated on the page checked):
+`gullied_ravinous`, `land_with_scrub`, `land_without_scrub`, `waterlogged_marshy`, `salt_affected`, `shifting_cultivation`, `degraded_notified_forest`, `degraded_pasture`, `degraded_plantation`, `sandy_area`, `mining_industrial_waste`, `barren_rocky`, `steep_sloping`, `snow_glacial`.
+Remote-sensing proxies (all thresholds in `land_class_rules.yaml`, calibrated per §14.3): bare-soil fraction (WorldCover 60, DW `bare`), low NDVI p90 over 12 months, slope (SRTM) and rock/stone indicators, SoilGrids texture/pH/EC proxies (salinity is *not* directly available → flag `salinity_unknown`), JRC GSW seasonality for waterlogging.
 
-### 5.1 Plot selection & geometry
-- **FR-1** User can draw a polygon, import GeoJSON/KML/zipped Shapefile, or (when available) pick an official parcel by clicking.
-- **FR-2** `boundary_source` ∈ `official_cadastral | user_imported | user_drawn`. Persist and display it.
-- **FR-3** Geometry validation: valid ring, CRS EPSG:4326 in / EPSG:32643 (UTM 43N, Karnataka) or local UTM for area, `make_valid`, max area and vertex limits, reject self-intersections that cannot be repaired.
-- **FR-4** Area is computed geodesically from the polygon. A bare point never produces an area.
-- **FR-5** Optional survey-number entry (`district/taluk/hobli/village/survey_no/hissa_no`) stored as `user_declared`; it is **never** treated as verified without an official source.
-
-### 5.2 Eligibility engine (new service `backend/app/services/eligibility/`)
-- **FR-6** Layers checked in this order, each returning `{status, overlap_area_ha, source, source_date, confidence}`:
-  1. Official parcel + recorded land class (if available)
-  2. Official restrictions: reserved/notified forest, protected areas (WDPA)
-  3. Water: official water-body/reservoir layers, HydroLAKES, JRC GSW occurrence, WorldCover/Dynamic World water
-  4. Buildings/built-up: Microsoft ML footprints, OSM buildings, GHSL built-up, WorldCover class 50, Dynamic World `built`
-  5. Land-cover evidence: ESA WorldCover 2021 + Dynamic World time series (≥12 months, cloud-filtered)
-- **FR-7** Missing layer → status contribution `unknown`, plus a human-readable reason. Never `false`/`clear` by default.
-- **FR-8** Output the structured contract in §8.2 including `eligible_agriculture_area_ha`, per-layer evidence and `reasons[]`.
-- **FR-9** Fallow/harvested fields must remain assessable: use crop-probability **time series** (max/percentile over a year), not a single image.
-- **FR-10** Thresholds live in `backend/app/rules/eligibility_rules.yaml` (not in code) and are calibrated per §13.3.
-
-### 5.3 Crop intelligence (existing models, gated)
-- **FR-11** `POST /api/v1/predict/full-report` calls eligibility first. If status ∈ {`RESTRICTED_LEGAL`, `NON_AGRICULTURAL_BUILT`, `WATER_BODY`} → return the eligibility result and **no** crop list. If `UNVERIFIED` → return reasons and no confident recommendation (optionally a clearly labelled low-confidence exploratory list when the user opts in).
-- **FR-12** Environmental profile is built only from the **eligible polygon**, not the original polygon (mask exclusions).
-- **FR-13** Every feature in the 78-vector carries `{value, source, observed_at, quality: observed|derived|estimated|user_provided|missing}`. Models receive `NaN` for `missing` and handle it (LightGBM native / imputer with flag). Response reports the share of features that are observed.
-- **FR-14** N, P, K: SoilGrids does not provide P/K. Sources, in order: user soil-test input → Soil Health Card district/block statistics (labelled `estimated`) → `missing`. Never a constant.
-- **FR-15** Season handling: `kharif | rabi | zaid | perennial` with explicit date windows per region (configurable), climatology (e.g., 10-year mean) + the latest observed season.
-- **FR-16** Tiered confidence for crops (from `geoagri_data_expansion_training_prompt.md`): Tier A (real yield history) = ML + P10/P50/P90 yield; Tier B (envelope only) = transparent envelope-match score, no yield numbers.
-- **FR-17** Intercrop synergy computed per site/pair (no fixed +15%); always also report best monoculture so the UI can show which wins.
-
-### 5.4 Map & UI
-- **FR-18** MapLibre selector: basemap switch (OSM / satellite / terrain), polygon draw/edit, file import, parcel highlight, legend, layer toggles (land cover, buildings, water, forest/protected, eligible area).
-- **FR-19** Evidence panel: status badge, reasons, per-layer table with source + date + licence, usable-area figure, data-quality meter, "what would verify this" hints.
-- **FR-20** If the plot is `UNVERIFIED` or `AGRICULTURAL_CANDIDATE`, show a persistent banner — never present as verified.
-- **FR-21** Remove hard-coded demo locations from production builds (keep behind `VITE_DEMO_MODE`).
-- **FR-22** PDF report includes provenance table (source, date, licence/attribution strings required by the licences in §6).
-
-### 5.5 Platform
-- **FR-23** `GET /api/v1/map-layers` lists available layers with `coverage_bbox`, `source_date`, `licence`, `status` (ready|unavailable).
-- **FR-24** Caching: per-source TTL cache (weather 24 h, land cover 30 d, static layers until re-ingest) and request de-duplication.
-- **FR-25** Rate limiting and polite clients (user-agent, back-off) for every external API (e.g. Nominatim ≤ 1 req/s, caching mandatory).
-- **FR-26** `/api/v1/health` reports per-dependency status (GEE, NASA POWER, Open-Meteo, DB, layer availability) — no mocking.
+### 5.4 Reclaimability note
+Wasteland output includes `reclaimable: "possible" | "unlikely" | "unknown"` (e.g., scrub/ degraded pasture often reclaimable; barren rocky, snow/glacial, steep slopes unlikely). It is informational and never makes the verdict "irrigable".
 
 ---
 
-## 6. Data requirements
+## 6. Land-record enquiry layer (new)
 
-> Legend — **Key?**: what credential the *source* requires. "None" means no API key at all. Items marked ⚠ were **not fully verifiable** when this PRD was written (portal blocked automated access, page did not state it, or URL pattern comes from prior knowledge) — the agent/owner must confirm before relying on them.
+### 6.1 Reality check (verified during research — be honest in the UI/README)
+| Source | Finding | Consequence |
+|---|---|---|
+| **Bhoomi / RTC** (`landrecords.karnataka.gov.in`) | Citizen portal, per-record, no public API/key found; automated fetch blocked. | **No key to obtain.** Use user-uploaded RTC or an official data-sharing arrangement. |
+| **e-Khata / e-Swathu** | Property (urban/gram panchayat) records held by local bodies; no public API documented; third-party sites (e.g., Landeed) are private, non-government. | Presence of an e-Khata/e-Swathu = strong **urban/non-agricultural property** signal. Accept user-uploaded copy only. |
+| **ULPIN / Bhu-Aadhaar** (14-digit parcel ID from vertex coordinates; DoLR concept note) | Karnataka listed as **pilot** (as of Mar 2023 note); DoLR lists OGC-compliant APIs as an *objective*, not a launched public service; raw ID reveals location, public form is a mapped number. | Treat ULPIN as an optional identifier field; no public lookup. Re-check status periodically. |
+| **Dishaank** (NeGD) | Mobile app, no API documented. | Manual verification aid only. |
+| **K-GIS / KSRSAC** | Layers exist (cadastral/village/forest/600+ thematic); "map/web services for external use" mentioned but no public API docs. | **Official request** to `ksrsac-gok@karnataka.gov.in` (Phase 7). |
+| **Bhuvan** | WMS access for thematic layers (LULC, **Wasteland**, Urban Land Use, Water Bodies, Salt-affected & waterlogged, Erosion, Flood). Page says *APIs are "being developed"*. No licence text found. | Use WMS for **display/validation**; bulk reuse unconfirmed. No token documented. |
+| **Other Indian states** | Public portals are per-record; no free bulk APIs (pages for UP Bhulekh and Bengal Banglarbhumi say the same). | Same provider pattern per state later. |
+| **Third-party aggregators** | Some commercial providers offer land-record APIs under agreements; terms/price unverified. | Optional adapter; only with a signed contract and legal review. |
 
-### 6.1 Source matrix (all links requested + additions)
+> **There is no free public "Bhoomi/e-Khata API key" to plug in.** The product therefore supports four lawful routes, in this priority: (1) official data-sharing credentials (when granted), (2) user-supplied record documents, (3) documented WMS/open datasets, (4) coordinate-based remote-sensing inference. The UI always states which route produced each fact.
 
-| # | Source | Role in GeoAgri | Key / credential | Free usage | Access route | Licence / terms (as read) | Verdict |
-|---|--------|-----------------|------------------|------------|--------------|---------------------------|---------|
-| 1 | **Karnataka State GIS portal** (`stategisportal.nic.in/.../State/29`) | Parcels, village maps, forest boundary, 600+ thematic layers | ⚠ Portal blocks automated fetch (robots). KSRSAC material mentions "map/web services for external application use" but documents no public API | Unknown | Formal data request to KSRSAC (contact listed in NeGD entry: `ksrsac-gok@karnataka.gov.in`) | Not stated | **Request access; do not scrape.** |
-| 2 | **Dishaank** (`negd.gov.in/isl/Directory/statedata/424`) | Survey no./hissa, parcel boundary, RTC | No public API documented (listing itself asks for "API development") | App is free for citizens | Mobile app only | Not stated | **Use manually / via official data-sharing only.** |
-| 3 | **Bhoomi** (`landrecords.karnataka.gov.in`) | RTC / mutation, recorded land class | ⚠ Portal blocks automated fetch; no public bulk API found | Per-record citizen service | Citizen portal (CAPTCHA/OTP) | Not stated | **Do not automate.** Accept user-provided RTC data only. |
-| 4 | **BhuNaksha** (`nic.gov.in/project/bhunaksha`) | Cadastral map software used by 19 states | No public API; access follows each state's land-records rules | n/a | Per-state deployment | n/a | **Future per-state integration.** |
-| 5 | **ESA WorldCover** 2020 v100 / 2021 v200 | 10 m land-cover baseline | **None** (anonymous S3: `s3://esa-worldcover/v200/2021/map`, `--no-sign-request`; also GEE `ESA/WorldCover/v200`; Terrascope needs login only for its viewer/client) | Free | S3 / Zenodo (DOI 10.5281/zenodo.7254221) / GEE | CC BY 4.0, "free of charge, without restriction of use" | ✅ **Use.** |
-| 6 | **Google Dynamic World** (`GOOGLE/DYNAMICWORLD/V1`) | 10 m near-real-time land cover & crop probability, 2015-06 → present | **GEE access** (Cloud project registered for Earth Engine) — not an API key | Free for noncommercial (tiers §6.2) | Earth Engine API | CC BY 4.0 + Sentinel notice | ✅ **Use (time series).** |
-| 7 | **Bhuvan Store** (`bhuvan-app1.nrsc.gov.in/2dresources/bhuvanstore.php`) | India LULC (1:50k 2005-06, 2011-12, 2015-16; 1:250k to 2022-23), wasteland, water | ⚠ Registration not stated; WMS/WMTS URLs listed without a token | Viewing/WMS free; some products downloadable | WMS `https://bhuvan-vec2.nrsc.gov.in/bhuvan/wms`, WMTS `https://bhuvan-vec2.nrsc.gov.in/bhuvan/gwc/service/wmts`, LULC250K WMS `https://bhuvan-ras2.nrsc.gov.in/cgi-bin/LULC250K.exe`; no WFS listed | No terms found | ⚠ **Use WMS for display/validation; treat bulk reuse as unconfirmed.** |
-| 8 | **Bhuvan portal** (`bhuvan.nrsc.gov.in`) | Water-body census, UWBIS, thematic viewers | ⚠ No developer API/key documented on the page read | Viewing free | Web viewers | — | Reference only. |
-| 9 | **Microsoft Global ML Building Footprints** | Building polygons (2014–2024 imagery) | **None** | Free | `https://bfppub.blob.core.windows.net/%24web/2026-08-13/dataset-links.csv` → per-country/quadkey files (`.csv.gz` containing line-delimited GeoJSON, EPSG:4326, `confidence`, `height`); also Planetary Computer `ms-buildings` | CDLA-Permissive-2.0 | ✅ **Use.** |
-| 10 | **GHSL** (JRC) | Built-up surface/volume/height, settlement class | **None** | Free | `human-settlement.emergency.copernicus.eu/datasets.php` — GHS-BUILT-S R2023A (100 m, 10 m for 2018), GHS-SMOD, GHS-BUILT-H, GHS-OBAT | "Reuse authorised with proper acknowledgment" | ✅ **Use as built-up cross-check.** |
-| 11 | **OpenStreetMap** | Buildings, roads, landuse (farmland/farmyard/residential) | **None** | Free; Nominatim ≤ 1 req/s, identify app, cache, no bulk/autocomplete | Geofabrik India extract (bulk) or Overpass (light use) | ODbL (attribution + share-alike) | ✅ **Use bulk extract; do not hammer public APIs.** |
-| 12 | **India-WRIS / NWIC** (`nwic.in/wris`) | Reservoirs, dams, canals, command areas, basins | ⚠ Portal blocks automated fetch; third-party notes cite ArcGIS REST at `arc.indiawris.gov.in/server/rest/services/` (unverified) | Unknown | Test the REST endpoint manually in QGIS | Not read | ⚠ **Verify manually, then ingest.** |
-| 13 | **Bhuvan WBIS** (`bhuvan-wbis.nrsc.gov.in`) | Water-body spread monitoring (≥10 ha class) | ⚠ Not verified | — | Viewer | — | Supplementary only; not complete for small tanks. |
-| 14 | **JRC Global Surface Water** (`JRC/GSW1_4/GlobalSurfaceWater`) | 30 m water occurrence/seasonality 1984–2021 | GEE access | Free | Earth Engine | "Free of charge without restriction"; attribute "EC JRC/Google" | ✅ **Use.** |
-| 15 | **HydroLAKES** | Global lake polygons | **None** | Free | `https://data.hydrosheds.org/file/hydrolakes/HydroLAKES_polys_v10_shp.zip` (820 MB) / `.gdb.zip` (763 MB) | CC BY 4.0 | ✅ **Use (global fallback).** |
-| 16 | **HydroRIVERS** | Global river lines | **None** | Free | Asia: `https://data.hydrosheds.org/file/HydroRIVERS/HydroRIVERS_v10_as_shp.zip` (91 MB) | Free for scientific, educational and commercial use (HydroSHEDS terms) | ✅ **Use.** |
-| 17 | **Aranya Bhoomi** (Play Store `com.ksrsac.forestboundary`) | Forest-boundary verification (KSRSAC + Forest Dept) | App only; no export/API listed | — | Mobile app | — | **Verification aid only.** Forest legal layer must come via KSRSAC/Forest Dept request. |
-| 18 | **Forest Survey of India** (`fsi.nic.in/reading-material`) | ISFR forest cover reports, forest-type map | ⚠ Terms not read (footer: © FSI) | Reports downloadable | Web | Copyright FSI | Reference + statistics; **not** the legal Reserved Forest layer. |
-| 19 | **Protected Planet / WDPA** | Protected-area polygons | API uses an **access token** (page links "API Access Key"); bulk download from site | Free for non-commercial | Download / API / GEE `WCMC/WDPA/current/polygons` | **No commercial use without UNEP-WCMC written permission; no redistribution via downloads/web services**; cite with version month/year | ⚠ **Use for college/non-commercial; do not expose raw polygons for download.** |
-| 20 | **FAO/IIASA GAEZ** | Crop suitability, attainable yield, agro-climatic zones (up to 280 crop/land-use types) | **None** stated | Free data portal | `https://data.apps.fao.org/gaez/` (v4 at `gaez.fao.org`) | ⚠ Licence not stated on pages read | ✅ Use as priors; confirm licence. |
-| 21 | **FAO ECOCROP** | Crop climate/soil envelopes (~2,500 species) | **None** | Free | Discontinued ~2015, served via GAEZ platform: `https://ecocrop.apps.fao.org/ecocrop/srv/en/cropSearchForm`, catalog `https://data.apps.fao.org/catalog/dataset/ecocrop` | ⚠ No licence; **no bulk export confirmed** | Build a polite, cached, resumable scraper only if the catalog offers no bulk file; check catalog first. |
-| 22 | **ISRIC SoilGrids 2.0** | 250 m soil properties (pH, SOC, N, clay/sand/silt …) | **None** | Free | **REST API paused** (no ETA). Use WebDAV `https://files.isric.org/soilgrids/latest/data/` (folders `phh2o, soc, nitrogen, clay, sand, silt, bdod, cec, cfvo, ocd, ocs, wrb`) or GEE | CC BY 4.0 | ✅ **Use files/GEE, not REST.** |
-| 23 | **Copernicus Data Space (CDSE)** | Sentinel-1/2 archive, STAC/OData/openEO/Sentinel Hub | **Free account → OAuth client (client_id/secret)**, not a simple API key | openEO: **10,000 credits/month** for general users (documented) ; Sentinel Hub / OData quotas ⚠ not verified | `dataspace.copernicus.eu` APIs | Free & open Sentinel data terms | ✅ **Secondary/backup to GEE.** |
-| 24 | **NASA POWER** | Daily rainfall, temp, RH, solar radiation | **None** | "No set rate limit" (NASA SME, May 2023), heavy use may be restricted → cache | `https://power.larc.nasa.gov/api/temporal/{daily,climatology}/point` | NASA open data | ✅ **Primary weather.** |
-| 25 | **Open-Meteo** (addition) | Backup weather + ERA5 history 1940→ | **None** for non-commercial | **10,000 calls/day** free non-commercial | `open-meteo.com` | CC BY 4.0 (attribution); commercial = paid plan | ✅ **Fallback weather / training features.** |
-| 26 | **Microsoft Planetary Computer** (addition) | STAC access to Sentinel-2, WorldCover, JRC GSW, MS buildings, DEMs | ⚠ Docs page not loadable; typically open STAC + short-lived SAS tokens via the `planetary-computer` package | ⚠ | `planetarycomputer.microsoft.com` | Per dataset | Optional GEE alternative. |
-| 27 | **data.gov.in / India Data Portal** (addition) | APY district yields, Soil Health Card | data.gov.in resource APIs use a **free API key** (register on the portal) ⚠ | Free | `data.gov.in`, `indiadataportal.com` (APY source `data.desagri.gov.in`, login may apply) | Per-dataset (often GODL-India) ⚠ | Use for yield + soil nutrient priors. |
+### 6.2 Provider interface
+`backend/app/services/landrecords/base.py`
+```python
+class LandRecordProvider(Protocol):
+    name: str
+    async def available(self) -> ProviderStatus            # ready | unavailable(reason) | needs_credentials
+    async def by_coordinate(self, lon: float, lat: float) -> RecordResult | None
+    async def by_reference(self, ref: SurveyRef) -> RecordResult | None   # district/taluk/hobli/village/survey/hissa or khata/property id
+```
+`RecordResult` = `{parcel_id, ulpin?, admin{state,district,taluk,hobli,village}, survey_no?, hissa_no?, recorded_land_class?, recorded_use?, recorded_extent_ha?, irrigation_source?, geometry?, boundary_source, source_name, source_date, verification: official|user_provided|unverified}`. **No owner fields exist in the type.**
 
-### 6.2 Credentials actually needed (everything else is key-less)
+### 6.3 Adapters to implement
+| Adapter | Status at v2 | Behaviour |
+|---|---|---|
+| `user_document` | **Implement fully** | Upload RTC/Pahani PDF/photo, e-Khata/e-Swathu extract, or enter fields manually. Parse (pdf text → OCR fallback), extract survey/hissa, village, extent, **land type**, irrigation source, khata type (A/B/e-Swathu). Mark `verification: user_provided`. Never "official". |
+| `ksrsac_official` | Stub + config | Reads `KSRSAC_API_BASE_URL` + `KSRSAC_API_KEY` (or mTLS/OAuth as the MoU specifies). If unset ⇒ `needs_credentials`. Implement against the written API spec when received; no guessing endpoints. |
+| `bhuvan_wms` | Implement | OWSLib `GetFeatureInfo`/`GetMap` against documented Bhuvan WMS endpoints to *sample* LULC/Wasteland/Urban/Water at a coordinate for **validation/display**; tagged `reference_only`. Honour polite rate limits; cache. Confirm layer names in QGIS first (⚠). |
+| `open_layers` | Implement | Local WorldCover, DW, GHSL, MS buildings, OSM, HydroLAKES/RIVERS, protected areas, Hansen, SRTM (§12). |
+| `third_party_aggregator` | Interface only | Disabled by default; requires contract + legal sign-off. |
+| `india_other_states/*`, `global/*` | Phase 8 | Same interface; see §6.6. |
 
-| Credential | Needed for | Cost | How |
+### 6.4 Privacy and legality
+- Parsers drop owner name, father/husband name, Aadhaar, phone, PAN, bank, address at the **parser layer** (allow-list of fields, not deny-list). Test `test_landrecords_privacy.py` feeds a fixture RTC containing PII and asserts none survives in DB, logs, or response.
+- Uploaded documents are processed in memory/temp storage and deleted after parsing unless the user opts in to save; retention default 0.
+- Cite legal basis in README: user-supplied documents about their own land; official data under written agreement; open data under stated licences.
+
+### 6.5 Record → land-class mapping (`land_record_class_map.yaml`)
+Maps recorded Karnataka classifications to GeoAgri classes. **Initial entries come from prior knowledge and must be validated with a Karnataka revenue-record source or KSRSAC before release (⚠):**
+| Recorded term (RTC / revenue) | GeoAgri class |
+|---|---|
+| Bagayat / Neeravari / Jirayat / Khushki (garden / irrigated / dry cultivable) | `AGRICULTURAL` |
+| Kharab (A/B: uncultivable/ non-assessed) | `WASTELAND` (if no other info) |
+| Gomala / grazing / Gairan / Hullubanni | `WASTELAND` (grazing; `reclaimable: unlikely`) |
+| Forest / Aranya / Reserved / Protected | `FOREST_LEGAL` |
+| Non-agricultural (conversion order, N.A.) / Residential / Commercial / Industrial | `URBAN_BUILT` |
+| Tank / Kere / Halla / Water | `WATER_BODY` |
+| Unknown term | `UNKNOWN` + reason `unmapped_record_term` (never guess) |
+
+### 6.6 Beyond Karnataka (Phase 8 — all ⚠ to verify before building)
+Country adapters follow the same interface. Candidates (open/public): India — other state Bhulekh portals (per-record); USA — USDA Cropland Data Layer + SSURGO soils; EU — national LPIS/open parcel sets where published (e.g., Netherlands BRP, France RPG); Brazil — CAR/SICAR public downloads; global fallback — WorldCover, Dynamic World, Hansen, OSM landuse, GHSL, MS buildings, WDPA (non-commercial). Each adapter ships with `SOURCE.md`, licence, coverage bbox, and a reliability grade. Do **not** claim parcel-level coverage where only land-cover exists.
+
+---
+
+## 7. Irrigability engine (new)
+
+### 7.1 Verdicts
+| Verdict | Meaning | UI |
+|---|---|---|
+| `IRRIGABLE` | Land is agricultural and passes terrain/soil/water-access checks | Green; crop output allowed |
+| `CONDITIONALLY_IRRIGABLE` | Agricultural but with limits (slope, texture, salinity unknown, water source far/unknown) | Amber; crop output allowed with limits listed |
+| `NOT_IRRIGABLE` | Forest, urban/built-up, water body, wasteland, or hard terrain/soil limit | **Red banner "NOT IRRIGABLE"**; no crops |
+| `NOT_IRRIGABLE_PROVISIONAL` | Same as above but based only on remote-sensing evidence (no official record) | Red-hatched banner + "provisional" |
+| `UNVERIFIED` | Evidence missing/conflicting | Grey; no definitive verdict |
+
+### 7.2 Decision order (stop at first hit)
+1. `land_class ∈ {FOREST_LEGAL, URBAN_BUILT, WATER_BODY}` with official/record/multi-source evidence ⇒ `NOT_IRRIGABLE` (reason codes: `reserved_or_protected_forest`, `urban_built_up`, `water_body`).
+2. `land_class == WASTELAND` ⇒ `NOT_IRRIGABLE` (reason `wasteland:<subclass>`) with `reclaimable` note.
+3. `land_class == FOREST_COVER` (physical only) ⇒ `NOT_IRRIGABLE_PROVISIONAL`.
+4. Same classes from remote sensing alone ⇒ `NOT_IRRIGABLE_PROVISIONAL`.
+5. `AGRICULTURAL` ⇒ evaluate **terrain, soil, water access** (§7.3). Hard limit ⇒ `NOT_IRRIGABLE`; soft limits ⇒ `CONDITIONALLY_IRRIGABLE`; none ⇒ `IRRIGABLE`.
+6. Otherwise `UNVERIFIED`.
+For mixed plots, compute `irrigable_area_ha = A_parcel − area(union(non-irrigable classes) ∩ parcel) − area(hard-limit zones)` and report both the dominant verdict and the usable area.
+
+### 7.3 Checks for agricultural land (`irrigability_rules.yaml`)
+Thresholds are **initial, configurable and must be calibrated** — modelled on FAO land-irrigability practice (slope, soil texture/depth, drainage, salinity, water availability); do not present as validated.
+| Check | Data | Initial rule (tunable) |
+|---|---|---|
+| Slope | SRTM/Cop-DEM | > `T_slope_hard` ⇒ hard limit for surface irrigation; > `T_slope_soft` ⇒ drip/sprinkler only |
+| Soil texture | SoilGrids clay/sand/silt | Very coarse (sand > T) or very heavy clay ⇒ soft limit (infiltration/drainage) |
+| Salinity / sodicity | Not in SoilGrids; user soil test or Bhuvan "Salt affected & waterlogged" WMS | Unknown ⇒ soft limit `salinity_unknown`; Bhuvan hit ⇒ hard/soft per rules |
+| Waterlogging | JRC GSW seasonality, Bhuvan layer | Persistent ⇒ limit |
+| Water access | Distance to HydroRIVERS/HydroLAKES/OSM canals; India-WRIS command areas when verified (⚠); recorded irrigation source from RTC | None found ⇒ `rainfed_only` soft limit; never assume a well/canal |
+| Rainfall adequacy | NASA POWER / Open-Meteo climatology | Informational for irrigation need (Model C) |
+Output includes `irrigation_options: ["canal","well/borewell","tank","drip","sprinkler","rainfed_only"]` as **possible**, each with the evidence that supports it, and `water_source_evidence[]`.
+
+### 7.4 Model C relationship
+Model C (irrigation need) runs **only** for `IRRIGABLE` / `CONDITIONALLY_IRRIGABLE`. For other verdicts the response says why irrigation is not applicable instead of returning a number.
+
+---
+
+## 8. Credentials and environment variables (exactly what needs a key)
+| Credential | Needed for | Cost | Notes |
 |---|---|---|---|
-| **Google Cloud project registered for Earth Engine (noncommercial)** | Dynamic World, JRC GSW, SRTM, Sentinel-2 composites, optional WorldCover/WDPA via GEE | Free: **Community tier 150 EECU-hours/month**; Contributor 1,000 EECU-h/month (needs billing account on file; EE use itself uncharged); Partner 100,000 EECU-h/month (application, weeks). Reverify noncommercial status yearly. Quota is soft: after exhaustion the project drops to restricted concurrency. | Steps in `DATA_GUIDE.md` §2. ⚠ The tiers page does not say whether service accounts are allowed — confirm in the console; dev can use `earthengine authenticate --project <id>`. **Commercial deployment requires a commercial EE licence.** |
-| **CDSE account + OAuth client** | Sentinel archive fallback | Free | Register at dataspace.copernicus.eu → create OAuth client. |
-| **data.gov.in API key** | Programmatic APY/SHC pulls | Free | Register on data.gov.in → My Account → API key. |
-| **WDPA/Protected Planet token** | Only if using their API (bulk download needs none) | Free (non-commercial) | Request on `api.protectedplanet.net`. |
-| **KSRSAC data-sharing approval** | Official Karnataka parcels, forest and water layers | Unknown (government process) | Written request (project letter from the college guide recommended). |
+| **GEE project** (`GEE_PROJECT_ID`, optional service account) | Dynamic World, JRC GSW, Hansen, SRTM, Sentinel-2 | Free noncommercial tier | Not an API key; confirm service-account use for your tier. Commercial use needs a licence. |
+| **KSRSAC / Karnataka official data-sharing** (`KSRSAC_API_BASE_URL`, `KSRSAC_API_KEY`) | Official parcels, forest, village boundaries, records | Government process | **Does not exist until granted.** Leave blank; adapter reports `needs_credentials`. |
+| **data.gov.in API key** | APY yields, Soil Health Card resources | Free | Register on portal. |
+| **CDSE OAuth client** | Sentinel backup | Free | |
+| **WDPA token** | Only if using WDPA API (bulk download needs none) | Free, non-commercial | |
+| **Global Forest Watch API key** (optional) | GFW Data API (alternative to Hansen via GEE) | Free (⚠ confirm flow) | Hansen via GEE needs no extra key. |
+| **Bhuvan** | WMS display/validation | None found | No token documented; confirm terms before bulk use. |
+Key-less: NASA POWER, Open-Meteo, ESA WorldCover (S3), MS Buildings, GHSL, HydroLAKES/RIVERS, SoilGrids files, FAOSTAT, GAEZ, OSM.
 
-Zero-key sources: NASA POWER, Open-Meteo, ESA WorldCover (S3), Microsoft Buildings, GHSL, HydroLAKES/HydroRIVERS, SoilGrids files, FAOSTAT, GAEZ, OSM extracts.
-
-### 6.3 Karnataka parcel & land-record reality (decision record)
-- No public bulk API/download for survey-number parcels (Dishaank/Bhoomi/K-GIS) was found. Dishaank's NeGD listing documents no API.
-- A third-party Source Cooperative repo (`source.coop/krishnaglodha/ksrsac-gis`) re-hosts **KGIS administrative boundaries only** (State, District, Taluk, AC, PC as Parquet). It is **not** parcels, owned by an individual, licence not stated, authorisation unclear → use only as a convenience for admin boundaries after checking with KSRSAC, otherwise take boundaries from the official KGIS downloads page.
-- **Decision:** ship v1 with user-drawn/imported polygons (`AGRICULTURAL_CANDIDATE` ceiling) and run a parallel track to obtain an official data-sharing arrangement with KSRSAC for one pilot village. Architecture (§7) must accept an official parcel layer with zero code change beyond a new ingestion adapter.
-
-### 6.4 Data folder layout (all under `backend/ml/data/`)
-
+`backend/.env.example` additions (delete `SOILGRIDS_API_URL`):
 ```
-backend/ml/data/
-├── raw/
-│   ├── (existing 3 CSVs — keep, add SOURCE.md after provenance check)
-│   └── external/
-│       ├── agronomy/
-│       │   ├── faostat_qcl/            # Production_Crops_Livestock normalized CSV
-│       │   ├── ecocrop/                # crop envelopes (if bulk obtainable)
-│       │   ├── gaez_v5/                # crop suitability / attainable yield rasters (Karnataka clip)
-│       │   ├── apy_india/              # district Area-Production-Yield
-│       │   ├── icrisat_district/       # ICRISAT/VDSA district database
-│       │   └── soil_health_card/       # nutrient statistics
-│       ├── soil/soilgrids/             # clipped GeoTIFFs (Karnataka bbox)
-│       ├── climate/                    # nasa_power/, open_meteo_era5/ caches
-│       ├── geo/
-│       │   ├── admin_kgis/             # state/district/taluk/village boundaries
-│       │   ├── worldcover_2021/        # 3°x3° COG tiles N09–N18, E072–E078
-│       │   ├── dynamic_world/          # exported composites (from GEE)
-│       │   ├── jrc_gsw/                # exported from GEE
-│       │   ├── buildings_ms/           # India quadkey files, Karnataka-filtered
-│       │   ├── ghsl/                   # GHS-BUILT-S tiles
-│       │   ├── osm_geofabrik/          # india-latest.osm.pbf → Karnataka extract
-│       │   ├── hydrolakes/ hydrorivers/
-│       │   ├── india_wris/             # once access verified
-│       │   ├── bhuvan_lulc/            # WMS-derived samples for validation only
-│       │   ├── forest_boundary/        # official layer once approved
-│       │   └── wdpa/                   # non-commercial, not redistributed
-│       └── labels/
-│           ├── ftw_india/              # ~10k field polygons (validation of cropland detection)
-│           ├── worldcereal_ref/        # CC-BY reference data (large, subset only)
-│           └── cropharvest/            # crop-type points (CC-BY-SA)
-├── processed/                          # derived tables used by training (versioned)
-├── geo/                                # PostGIS-ready GeoParquet created by ingestion
-└── scripts/download_datasets.py
+# --- land records
+LAND_RECORD_PROVIDERS=user_document,open_layers,bhuvan_wms   # add ksrsac_official after approval
+KSRSAC_API_BASE_URL=
+KSRSAC_API_KEY=
+BHUVAN_WMS_BASE=https://bhuvan-vec2.nrsc.gov.in/bhuvan/wms
+BHUVAN_LULC250K_WMS=https://bhuvan-ras2.nrsc.gov.in/cgi-bin/LULC250K.exe
+UPLOAD_MAX_MB=10
+UPLOAD_RETENTION_SECONDS=0
+GFW_API_KEY=
+# --- classification
+LAND_CLASS_RULES=backend/app/rules/land_class_rules.yaml
+IRRIGABILITY_RULES=backend/app/rules/irrigability_rules.yaml
+LAND_RECORD_CLASS_MAP=backend/app/rules/land_record_class_map.yaml
 ```
-Add large paths to `.gitignore`; commit only `SOURCE.md` and small samples. Karnataka bbox for clipping: **lon 74.0–78.6, lat 11.5–18.5** (add 0.1° margin).
-
-### 6.5 Training datasets by model
-
-| Model | Task | Primary training data | Notes |
-|---|---|---|---|
-| **A – Land suitability** | Score land for cultivation | Rule/ML hybrid: GAEZ suitability priors, terrain (SRTM/Cop-DEM), SoilGrids, climate | Validate against GAEZ and FtW India field polygons (cropland present/absent). |
-| **B – Crop recommendation** | Rank crops | Existing 3 CSVs (after provenance review) + FAO ECOCROP envelopes (Tier B) + FAOSTAT/APY presence as weak labels (Tier A) | Features must be ones computable live (rainfall, temp, humidity, pH, N, P, K via user/SHC). Retrain on the **real** feature set. |
-| **C – Irrigation** | Water demand / need | NASA POWER/ERA5 (rainfall, ET proxies), crop coefficients (FAO-56 tables — add as `processed/crop_kc.csv` with citation), soil water (SoilGrids texture) | Output must show assumptions. |
-| **D – Yield (P10/P50/P90)** | Quantile yield | District-year yields: **APY / ICRISAT district database / FAOSTAT** joined to season climate (NASA POWER or ERA5), SoilGrids at district centroid, irrigated fraction | **Spatial CV: hold out districts/states**, never random rows. Tier A crops only. |
-| **E – Climate risk** | Drought/heat/flood risk | NASA POWER/ERA5 multi-year anomalies, JRC GSW (flood recurrence), Bhuvan flood layers (reference) | Report method + years used. |
-| **Eligibility (rules + optional ML)** | Cropland vs non-crop | WorldCover + Dynamic World + building/water layers; **calibrate thresholds** on FtW India polygons (+ WorldCereal/CropHarvest subsets where regions match) | Optional stretch: small Sentinel-2 time-series classifier. |
-
-Labelling honesty: no public parcel-level crop-type ground truth for Karnataka was identified. Therefore B and D are trained from district/agronomic data (weak supervision) and must be reported as such; do not claim field-level accuracy.
+Frontend: `VITE_API_BASE_URL`, `VITE_MAP_STYLE_URL`, `VITE_DEMO_MODE=false`.
 
 ---
 
-## 7. Architecture
+## 9. Functional requirements
 
-```
-React + MapLibre  ──►  FastAPI (existing)
-                         ├─ parcels/        (geometry in, validation, import, official adapters)
-                         ├─ eligibility/    (layer checks → status → usable area)
-                         ├─ geo/            (GEE client, raster samplers, PostGIS queries)
-                         ├─ weather/        (NASA POWER → Open-Meteo fallback)
-                         ├─ soil/           (SoilGrids file/COG/GEE, SHC priors)
-                         ├─ features/       (78-feature vector with provenance)
-                         └─ models/ A–E + fusion (existing, gated)
-PostgreSQL + PostGIS (vector layers)   ·   COG/GeoTIFF store (rasters)   ·   cache (in-memory → Redis optional)
-```
-- Dev: GeoParquet + GeoPandas/DuckDB acceptable; production path: PostGIS in `docker-compose.yml` (`postgis/postgis`), ingestion scripts in `backend/app/services/ingest/`.
-- Rasters served by direct windowed reads (rasterio) from local COGs; GEE used for time series and layers not stored locally.
-- Vector tiles for polygons in the UI (pg_tileserv/martin or on-demand GeoJSON for small extents); never ship national datasets to the browser.
-- Keep `main.py` structure; add routers `parcels.py`, `eligibility.py`, `layers.py`.
+### 9.1 Geometry
+- **FR-1** Draw polygon, import GeoJSON/KML/zipped SHP, or pick an official parcel (when an official layer exists).
+- **FR-2** `boundary_source ∈ official_cadastral | user_imported | user_drawn | point_only`; persist and display.
+- **FR-3** Validate/repair geometry (`make_valid`), limits on area/vertices; geodesic area (WGS84); local UTM for overlay math (EPSG:32643 for Karnataka).
+- **FR-4** A point never produces an area (M1).
+
+### 9.2 Coordinate enquiry (the "use coordinates + key to enquire land details" requirement)
+- **FR-5** `GET /api/v1/land/inquiry?lat=&lon=` and `POST` with geometry. Steps: (a) resolve admin hierarchy from local boundaries (state/district/taluk/village when available); (b) sample all open layers at the point (or aggregate over polygon); (c) query every enabled provider `by_coordinate`; (d) classify land (§5); (e) irrigability (§7); (f) return a provenance table. Providers needing credentials that are not configured report `needs_credentials`.
+- **FR-6** Optional reference lookup: `district/taluk/hobli/village/survey_no/hissa_no` or `khata/property id` → provider `by_reference`; user-declared values are `user_declared` until a provider verifies them.
+- **FR-7** Document upload: `POST /api/v1/land/records/upload` (PDF/JPG/PNG ≤ `UPLOAD_MAX_MB`) → parsed fields, user confirms/edits before they are used.
+
+### 9.3 Classification & gate
+- **FR-8** Every response carries `land_class`, `class_shares`, `irrigability`, `reasons[]`, `sources[]`, `confidence`, `data_quality`.
+- **FR-9** Missing layer ⇒ `unknown` + reason (never "clear").
+- **FR-10** `NOT_IRRIGABLE*` or `UNVERIFIED` ⇒ no crop list (optional opt-in low-confidence exploratory list for `UNVERIFIED` only, clearly labelled).
+- **FR-11** Environmental profile built from the eligible sub-polygon only.
+- **FR-12** 78-feature vector carries `{value, source, observed_at, quality: observed|derived|estimated|user_provided|missing}`; models receive `NaN` for missing.
+
+### 9.4 UI
+- **FR-13** Red **NOT IRRIGABLE** banner (plus provisional variant), class badge, reasons list, usable-area figure, "why" tooltips per layer, and "what would verify this" hints (e.g., upload RTC, request KSRSAC access).
+- **FR-14** Map: basemap switch (OSM/satellite/terrain), polygon tools, import, layer toggles (land cover, forest/protected, water, buildings, wasteland WMS, eligible area), legend with accessible colours, attribution control per active layer.
+- **FR-15** Land-record panel: provider status chips (ready / needs credentials / unavailable), parsed record fields (no PII), verification level.
+- **FR-16** Persistent disclaimer: "Decision-support only. Not a legal land record, conversion certificate or survey."
+- **FR-17** PDF report includes classification, irrigability, record summary, provenance table, attributions, disclaimer.
+
+### 9.5 Platform
+- **FR-18** `GET /api/v1/map-layers`, `GET /api/v1/health` (per provider/layer status), TTL caches (weather 24 h, land cover 30 d, static layers until re-ingest), polite rate limits (Nominatim ≤ 1 req/s, Bhuvan modest, cache all), circuit breaker per source.
 
 ---
 
-## 8. API contracts
+## 10. API contracts
 
-### 8.1 Endpoints
-- `POST /api/v1/parcels/validate` — body: GeoJSON geometry; returns validity, area_ha, repaired flag.
-- `POST /api/v1/parcels/import` — GeoJSON/KML/zip-SHP upload.
-- `GET  /api/v1/parcels/identify?lat=&lon=` — official parcel when a layer is loaded; otherwise `404` with `{"status":"UNVERIFIED","reason":"no official parcel layer for this location"}`.
-- `GET  /api/v1/parcels/{parcel_id}` — recorded details + provenance (no ownership data).
-- `POST /api/v1/land-eligibility/assess` — body `{geometry, boundary_source, survey_ref?}`; returns §8.2.
-- `GET  /api/v1/map-layers` — layer catalogue.
-- `POST /api/v1/predict/full-report` — unchanged route; **adds `eligibility` block and gating** (FR-11).
-- `GET  /api/v1/health` — per-dependency status.
+### 10.1 Endpoints
+`POST /api/v1/land/inquiry` · `GET /api/v1/land/inquiry?lat&lon` · `POST /api/v1/land/records/upload` · `GET /api/v1/land/providers` · `POST /api/v1/parcels/validate|import` · `GET /api/v1/map-layers` · `GET /api/v1/health` · `POST /api/v1/predict/full-report` (adds gating + blocks below).
 
-### 8.2 Eligibility response
+### 10.2 Land inquiry response
 ```json
 {
-  "parcel_id": "string|null",
-  "boundary_source": "official_cadastral|user_imported|user_drawn",
-  "eligibility_status": "AGRICULTURAL_CANDIDATE",
-  "recorded_land_class": null,
-  "parcel_area_ha": 1.82,
-  "building_overlap_area_ha": 0.03,
-  "water_overlap_area_ha": 0.0,
-  "protected_area_overlap": "unknown",
-  "current_land_cover": {"worldcover_2021": {"cropland_frac": 0.81}, "dynamic_world": {"crops_prob_p90": 0.64, "window": "2025-10..2026-09"}},
-  "eligible_agriculture_area_ha": 1.79,
-  "layers": [{"name":"ms_buildings","state":"checked","overlap_ha":0.03,"source_date":"2026-08-13","licence":"CDLA-Permissive-2.0"}],
+  "query": {"lon": 75.75, "lat": 13.32, "boundary_source": "point_only", "area_ha": null},
+  "admin": {"state": "Karnataka", "district": null, "taluk": null, "village": null, "source": "kgis_admin_boundaries|unavailable"},
+  "land_class": {
+    "dominant": "WASTELAND",
+    "class_shares": {"WASTELAND": 0.82, "AGRICULTURAL": 0.10, "URBAN_BUILT": 0.08},
+    "subclass": "barren_rocky",
+    "legal_forest_status": "unknown",
+    "confidence": 0.71
+  },
+  "irrigability": {
+    "verdict": "NOT_IRRIGABLE_PROVISIONAL",
+    "reasons": [
+      {"code": "wasteland:barren_rocky", "evidence": ["worldcover_2021:class60=0.78", "srtm_slope_pct=21"], "source_date": "2021"},
+      {"code": "no_official_record", "evidence": []}
+    ],
+    "reclaimable": "unlikely",
+    "irrigable_area_ha": null,
+    "irrigation_options": [],
+    "crop_models": "skipped_not_irrigable"
+  },
+  "land_records": {
+    "providers": [
+      {"name": "user_document", "state": "no_document"},
+      {"name": "ksrsac_official", "state": "needs_credentials"},
+      {"name": "bhuvan_wms", "state": "checked", "reference_only": true, "lulc": "…"}
+    ],
+    "record": null
+  },
+  "layers": [{"name": "worldcover_2021", "state": "checked", "licence": "CC BY 4.0", "source_date": "2021"}],
   "data_quality": {"observed_feature_share": 0.0, "notes": []},
-  "reasons": ["Official parcel boundary not available; user-drawn polygon used","Forest/protected status unknown (official layer not loaded)"],
-  "sources": [],
+  "disclaimer": "Decision-support only. Not a legal land record or survey.",
   "assessment_timestamp": "ISO-8601"
 }
 ```
-`null`/`"unknown"` are valid and intentional.
+`null`, `"unknown"` and `needs_credentials` are valid, intentional values.
 
-### 8.3 Parcel record (PostGIS table `parcels`)
-`parcel_id, country, state, district, taluk, hobli, village_code, survey_number, subdivision_number, geometry(Polygon,4326), recorded_area_ha, recorded_land_class, source_name, source_date, boundary_verification_status`. All nullable except `parcel_id, geometry, source_name`. **No owner fields.**
-
----
-
-## 9. Eligibility algorithm (reference)
-
-1. Validate geometry; compute geodesic area; reject/flag if > configured max.
-2. Official layers (if loaded): restricted-forest/protected ∩ plot → `RESTRICTED_LEGAL` portion; recorded land class != agricultural → `UNVERIFIED`/non-agricultural with reason.
-3. Water union = official water polygons ∪ HydroLAKES ∪ (JRC GSW occurrence ≥ T_w) ∪ (WorldCover 80 / DW `water` persistently ≥ T_dw). Compute overlap.
-4. Built union = MS footprints (confidence ≥ T_b) ∪ OSM `building=*` ∪ WorldCover 50 ∪ DW `built` persistent ∪ GHSL BUILT-S > T_g. Compute overlap (footprint area only — a farmhouse ≠ whole plot rejection).
-5. Exclusion union → `A_eligible = A_parcel − area(exclusion_union ∩ parcel)`.
-6. Land-cover evidence on `parcel − exclusion_union`: WorldCover class 40 fraction; DW `crops` probability percentile over ≥12 months; allow fallow (high bare + historical crop signal).
-7. Status: legal restriction dominant → `RESTRICTED_LEGAL`; else if built/water exclusion covers ≥ T_dominant of plot → `NON_AGRICULTURAL_BUILT`/`WATER_BODY`; else if official parcel+class agricultural → `VERIFIED_AGRICULTURAL`; else if cropland evidence ≥ T_crop → `AGRICULTURAL_CANDIDATE`; else `UNVERIFIED`.
-8. Any layer unavailable adds a reason; if unavailable layers could change the outcome (forest/water official) the status cannot exceed `AGRICULTURAL_CANDIDATE`.
-
-Reference class codes — WorldCover: 10 tree, 20 shrub, 30 grass, **40 cropland**, **50 built-up**, 60 bare, 70 snow/ice, **80 water**, 90 herbaceous wetland, 95 mangroves, 100 moss/lichen. Dynamic World: 0 water, 1 trees, 2 grass, 3 flooded vegetation, **4 crops**, 5 shrub, **6 built**, 7 bare, 8 snow/ice.
-Thresholds `T_*` are config values (start: `T_crop`=0.5 cropland fraction or DW crops p90 ≥ 0.4; `T_dominant`=0.6) and **must be calibrated** (§13.3) — they are initial guesses, not validated constants.
+### 10.3 Parcel table (PostGIS `parcels`)
+`parcel_id, country, state, district, taluk, hobli, village_code, survey_number, subdivision_number, ulpin (nullable), geometry(Polygon,4326), recorded_area_ha, recorded_land_class, class_geoagri, source_name, source_date, verification (official|user_provided|unverified)`. **No owner fields.**
 
 ---
 
-## 10. ML requirements
-
-1. **Feature honesty:** retrain on the features the live pipeline can truly compute. Reduce the 78-feature set where features are constants/unavailable (e.g. raw-band duplicates); regenerate `feature_manifest.json`.
-2. **Soil units (SoilGrids):** `phh2o` ×10 (pH), `soc` dg/kg, `nitrogen` cg/kg, `clay/sand/silt` g/kg — convert in one tested helper.
-3. **Validation:** region-held-out (leave-state/district-out) CV for B/D; report per-crop metrics; compare against baseline (district mean yield).
-4. **Tiering:** Tier A ML+quantiles, Tier B envelope-match; expose `confidence_tier` in API/UI/PDF.
-5. **Reproducibility:** `backend/ml/training/` scripts read only from `raw/external/**` and `processed/`; fixed seeds; `model_cards` updated with data sources, dates, limits.
-6. **Registry expansion:** follow `geoagri_data_expansion_training_prompt.md` (2,000+ species where ECOCROP data is obtainable; fail loudly if not).
-7. **Provenance review** of the 3 legacy CSVs; if provenance cannot be established, demote them to "demo/baseline" and say so in the model cards.
-
----
-
-## 11. Frontend requirements (MapLibre/React)
-- Parcel/polygon tools, file import, layer toggles, legend, evidence panel, status banner (FR-18–22).
-- Show `data_quality` and `confidence_tier`; "provisional" styling for candidate/unverified.
-- Attribution control listing every active layer's required credit (OSM, ESA WorldCover, Dynamic World, Copernicus, JRC, UNEP-WCMC/IUCN etc.).
-- Accessible colour palette for statuses; responsive layout; error states for every unavailable layer.
+## 11. Frontend acceptance checklist
+1. Click a lake ⇒ red banner "NOT IRRIGABLE — Water body", no crop UI.
+2. Draw polygon on dense Bengaluru block ⇒ "NOT IRRIGABLE — Urban / built-up", e-Khata hint shown.
+3. Polygon inside a protected area (layer loaded) ⇒ "NOT IRRIGABLE — Reserved/protected forest".
+4. Barren/rocky hill ⇒ "NOT IRRIGABLE (provisional) — Wasteland: barren rocky" + reclaimable note.
+5. Farm plot with farmhouse ⇒ amber/green with usable area reduced by building footprint.
+6. Pin only ⇒ classification shown, area "—", no invented size.
+7. Provider with no credentials ⇒ chip "needs credentials", never fake data.
+8. Upload sample RTC ⇒ parsed fields editable, PII absent, badge "user-provided".
 
 ---
 
-## 12. Implementation plan (hand each phase to Antigravity as a task)
+## 12. Data requirements (downloads → `backend/ml/data/raw/external/…`)
+All v1 sources remain (see `DATA_GUIDE.md`): WorldCover 2021, HydroLAKES/RIVERS, MS buildings, GHSL, OSM Karnataka, FtW India, FAOSTAT, SoilGrids, GAEZ, ECOCROP, NASA POWER, Open-Meteo. Run:
+```
+python backend/ml/data/scripts/download_datasets.py --all
+```
+**New in v2 (add to script / DATA_GUIDE; each with SOURCE.md):**
+| Dataset | Use | Access | Status |
+|---|---|---|---|
+| Hansen Global Forest Change (`treecover2000`, loss/gain) | Physical forest cover | GEE (`UMD/hansen/global_forest_change_*`; the 2015_v1_3 ID was confirmed, use the latest version in the GEE catalogue) | ⚠ licence/version to confirm |
+| Karnataka Protected Areas 2022 (KML, source KSRSAC, listed "Public Domain" on OpenCity) | Interim protected-forest polygons | `data.opencity.in` resource page (page showed no direct file link — download via the portal UI) | ⚠ completeness/authority unverified; **not** the legal Reserved Forest layer |
+| WDPA / Protected Planet | Global protected areas | Bulk download (non-commercial) | v1 |
+| Bhuvan thematic WMS: LULC 50K/250K, **Wastelands**, Urban Land Use, Water Bodies, Salt Affected & Waterlogged, Erosion, Flood | Wasteland/urban/water *validation* and display | Documented WMS endpoints; confirm layer names in QGIS | ⚠ terms/layer names unverified |
+| SRTM / Copernicus DEM → slope raster | Slope limits | GEE or local | v1 |
+| NRSC Wastelands Atlas 2019 (report) | Class definitions, state statistics | Public document | reference |
+| Soil Health Card nutrient stats | P/K priors | data.gov.in (API key) | ⚠ |
 
-**Phase 0 — Foundations (1–2 days)**
-- Create `DATA_GUIDE.md` workflow; run `download_datasets.py` for zero-key sets; add `SOURCE.md` per dataset.
-- Add PostGIS service + new dependencies; `.env.example` updates (§15); set `GEE_MOCK_FALLBACK=false` default; introduce `ALLOW_SYNTHETIC_DATA`.
-- *Done when:* app boots; `/health` reports real per-dependency state; synthetic data impossible unless flag set.
-
-**Phase 1 — Honest data services (3–4 days)**
-- Rewrite `gee_client.py` (all features computed, date window, cloud/SCL masking, provenance) and `soilgrids.py` (file/GEE source), `nasa_power.py` (parameterised seasons, Open-Meteo fallback), `area.py` (no point buffer).
-- *Done when:* tests prove no constants leak; missing source → `missing` + reason.
-
-**Phase 2 — Geometry & ingestion (3–4 days)**
-- Parcels router, validation/import, PostGIS ingestion adapters for: admin boundaries, WorldCover tiles, MS buildings, HydroLAKES, HydroRIVERS, OSM extract, WDPA (non-commercial flag), GHSL.
-- *Done when:* `assess` returns overlaps for a test polygon using local layers only.
-
-**Phase 3 — Eligibility engine (3–5 days)**
-- Implement §9, `eligibility_rules.yaml`, statuses, usable-area math, reasons, provenance.
-- *Done when:* the test matrix in §13.1 passes.
-
-**Phase 4 — Gate the predictions (1–2 days)**
-- Wire gate into `predict.py`; mask profile to eligible area; response schema update.
-
-**Phase 5 — Data & models (5–8 days)**
-- Ingest FAOSTAT/APY/ICRISAT/SHC; rebuild training tables; retrain B & D (spatial CV); update A/C/E inputs; registry expansion; model cards.
-
-**Phase 6 — Frontend (4–6 days)**
-- §11. Replace demo locations; evidence panel; import; overlays.
-
-**Phase 7 — Karnataka official data track (parallel)**
-- Send KSRSAC request; when approved implement `official_cadastral` adapter; enable `VERIFIED_AGRICULTURAL`.
-
-**Phase 8 — India/global expansion**
-- Per-state adapters; global fallbacks (WorldCover, DW, MS buildings, HydroLAKES, WDPA, SoilGrids, GAEZ).
+Folder additions: `geo/hansen/`, `geo/protected_areas_ka/`, `geo/bhuvan_wms_samples/`, `geo/slope/`, `processed/land_class_training/`.
+Add large paths to `.gitignore`; commit only `SOURCE.md` + small samples.
 
 ---
 
-## 13. Testing and validation
+## 13. Architecture
+```
+React + MapLibre ──► FastAPI
+   ├─ landrecords/   providers: user_document · ksrsac_official · bhuvan_wms · open_layers · (states/countries)
+   ├─ landclass/     class shares, subclass, forest-legal vs cover, wasteland subclasses
+   ├─ irrigability/  verdict + usable area + irrigation options
+   ├─ parcels/ · geo/ · weather/ · soil/ · features/
+   └─ models A–E + fusion (existing, gated by landclass+irrigability)
+PostGIS (vectors) · COG store (rasters) · cache (in-memory → Redis optional)
+```
+Routers added: `landinquiry.py`, `landrecords.py`, `parcels.py`, `layers.py`. Keep `main.py` structure. Vector layers served as GeoJSON for small extents only; never ship national datasets to the browser.
 
-### 13.1 Eligibility test matrix (pytest + fixtures with small GeoJSONs)
+---
+
+## 14. Testing and validation
+
+### 14.1 Test matrix (pytest + small GeoJSON fixtures)
 | Case | Expected |
 |---|---|
-| Polygon over a known lake (HydroLAKES / WorldCover water) | `WATER_BODY`, no crop list |
-| Polygon fully on a dense urban block in Bengaluru | `NON_AGRICULTURAL_BUILT`, no crop list |
-| Farm plot with one farmhouse | Candidate; building area subtracted; crop list allowed |
-| Polygon inside a protected area (when layer loaded) | `RESTRICTED_LEGAL` |
-| Fallow/harvested cropland (low NDVI now, crops history) | Candidate (not rejected) |
-| Point-only request | `UNVERIFIED`, no area invented |
-| Any layer unavailable | reason listed; status ≤ candidate; no silent default |
-| Overlapping water + building exclusions | union area, no double subtraction (`A_eligible ≥ 0`) |
+| Polygon on HydroLAKES lake | `WATER_BODY` → `NOT_IRRIGABLE`, no crops |
+| Dense Bengaluru block | `URBAN_BUILT` → `NOT_IRRIGABLE` |
+| Polygon in protected area (layer loaded) | `FOREST_LEGAL` → `NOT_IRRIGABLE` |
+| Dense tree cover, no legal layer | `FOREST_COVER` → `NOT_IRRIGABLE_PROVISIONAL` |
+| Coffee/areca plantation (plantation signature or RTC) | **not** forest; `AGRICULTURAL` / `UNKNOWN` with reason |
+| Barren rocky hill | `WASTELAND` / `barren_rocky` |
+| Harvested/fallow cropland | `AGRICULTURAL` (not wasteland) |
+| Farm + farmhouse | footprint subtracted, crops allowed |
+| RTC says Kharab, remote sensing says crops | conflict reason; record wins as `user_provided`, verdict flagged "document vs imagery conflict" |
+| e-Khata uploaded | `URBAN_BUILT` hint dominates; reason cites document |
+| Point only | classification yes, `area_ha=null` |
+| Provider without credentials | `needs_credentials`, no fake record |
 | Invalid/self-intersecting polygon | repaired or rejected with message |
+| PII in uploaded RTC | none survives anywhere |
+| Overlapping exclusions | union area, no double subtraction, `A ≥ 0` |
 
-### 13.2 Existing tests
-Update `backend/tests/test_phase3_geo_services.py` … `test_phase7_api.py` to remove mock assumptions; add `test_phase8_eligibility.py`, `test_no_synthetic_leak.py`, `test_units_soilgrids.py`.
+### 14.2 Existing tests: update `test_phase3…7`; keep `test_no_synthetic_leak.py` green.
 
-### 13.3 Calibration
-- Build a labelled validation set: FtW India field polygons (cropland positives) plus sampled non-crop locations (water/built from OSM/MS) → tune `T_*`; report precision/recall per class in `documentation/result/`.
-- Manually inspect ≥ 30 Karnataka plots on satellite imagery (agri, fallow, plantation, built, water, forest edge) and record agreement.
+### 14.3 Calibration
+- Labelled set: FtW India polygons (cropland positives) + sampled non-crop (water/built/forest/bare) from OSM/MS/WorldCover/WDPA → tune `T_*`; report precision/recall per class in `documentation/result/land_class_validation.md`.
+- Manual review of **≥ 50 Karnataka plots** on satellite imagery (agri, fallow, plantation, built, water, reserved-forest edge, barren rocky, scrub) — agreement target ≥ 90 % (stretch 95 %).
 
-### 13.4 Acceptance metrics (targets, to be confirmed after calibration)
-- 0 synthetic values in any production response.
-- Eligibility agreement with manual review ≥ 90 % on the 30-plot set (stretch ≥ 95 %).
-- Yield model beats district-mean baseline under district-held-out CV (report MAE/RMSE/pinball loss).
-- p95 latency: eligibility ≤ 5 s for ≤ 50 ha polygon with local layers; full report ≤ 15 s (GEE calls cached).
-
----
-
-## 14. Non-functional requirements
-- **Provenance everywhere:** each value has source + date + quality.
-- **Privacy:** no ownership/PII; logs omit precise user polygons unless user opts in.
-- **Legal/licensing:** attribution strings required (OSM ODbL, WorldCover/Dynamic World/HydroLAKES CC BY 4.0, MS CDLA-Permissive-2.0, JRC "EC JRC/Google", GHSL acknowledgement, WDPA citation with release month/year). **WDPA and Earth Engine are non-commercial only unless separately licensed** — document in README.
-- **Resilience:** timeouts, retries with back-off, circuit breaker per source, cached last-good with age displayed (never presented as fresh).
-- **Security:** secrets via env; upload size/type limits; geometry complexity limits; CORS config.
-- **Observability:** structured logs with source latency/failure counters.
-- **Disclaimer text** in UI/PDF: "Decision-support only. Not a legal land record or survey."
+### 14.4 Acceptance metrics (confirm after calibration)
+- 0 synthetic values; 0 constants matching §3 grep gates.
+- Class agreement with manual set ≥ 90 %; **no plantation misclassified as forest** in the plantation subset ≥ 95 %.
+- p95 latency: land inquiry ≤ 5 s with local layers; full report ≤ 15 s.
+- Yield model beats district-mean baseline under district-held-out CV (v1 metric).
 
 ---
 
-## 15. Environment variables (`backend/.env.example` additions)
-```
-# --- behaviour
-ENV=development
-ALLOW_SYNTHETIC_DATA=false          # dev-only escape hatch
-GEE_MOCK_FALLBACK=false             # default flipped to false
-
-# --- Google Earth Engine (noncommercial project)
-GEE_PROJECT_ID=
-GEE_SERVICE_ACCOUNT=                # optional; confirm allowed for your tier
-GEE_PRIVATE_KEY_PATH=
-
-# --- weather
-NASA_POWER_API_URL=https://power.larc.nasa.gov/api/temporal/daily/point
-OPEN_METEO_ENABLED=true
-
-# --- soil (REST API paused; use files/GEE)
-SOILGRIDS_SOURCE=local              # local | gee
-SOILGRIDS_LOCAL_DIR=backend/ml/data/raw/external/soil/soilgrids
-
-# --- optional credentials
-CDSE_CLIENT_ID=
-CDSE_CLIENT_SECRET=
-DATA_GOV_IN_API_KEY=
-WDPA_API_TOKEN=
-
-# --- spatial DB
-DATABASE_URL=postgresql+psycopg://geoagri:geoagri@localhost:5432/geoagri
-
-# --- polite clients
-HTTP_USER_AGENT=GeoAgri/1.0 (contact: your-email@example.com)
-
-# --- Fusion weights & cache (existing)
-WEIGHT_LAND_SUITABILITY=0.20
-WEIGHT_CROP_RECOMMENDATION=0.25
-WEIGHT_IRRIGATION_COST=0.15
-WEIGHT_YIELD=0.25
-WEIGHT_CLIMATE_RISK=0.15
-CACHE_TTL_SECONDS=86400
-```
-Frontend: `VITE_MAP_STYLE_URL`, `VITE_API_BASE_URL`, `VITE_DEMO_MODE=false`.
+## 15. Implementation plan (hand to Antigravity phase by phase)
+| Phase | Work | Done when |
+|---|---|---|
+| **1** | M1–M3, M11: remove fabricated fallbacks, config cleanup | grep gates pass; tests green |
+| **2** | M10: download all datasets, ingest to PostGIS/COG, `/map-layers` | every layer `ready` or `unavailable`+reason |
+| **3** | M4 (landclass) + M8 rules + calibration scripts | §14.1 land-class rows pass |
+| **4** | M4 (irrigability) + Model C gating | irrigability rows pass |
+| **5** | M5 landrecords providers, upload parser, privacy tests | `test_landrecords_privacy.py` green |
+| **6** | M6–M7 gate + schema + API docs | lake/urban/forest/wasteland return no crops |
+| **7** | M9 frontend (banner, panels, import, layers) | §11 checklist passes |
+| **8** | Retrain Models B & D (spatial CV), model cards (v1 §10) | beats baseline |
+| **9 (parallel)** | KSRSAC written request; implement official adapter on receipt | `VERIFIED_AGRICULTURAL` reachable |
+| **10** | Other states + countries (§6.6) | per-adapter SOURCE.md + tests |
 
 ---
 
-## 16. Risks, open questions, and items not verified
+## 16. Non-functional
+Provenance on every value (source, date, quality) · privacy (no PII, no polygon logs without opt-in) · licences/attributions (OSM ODbL; WorldCover/Dynamic World/HydroLAKES/SoilGrids CC BY 4.0; MS CDLA-Permissive-2.0; JRC "EC JRC/Google"; GHSL acknowledgement; WDPA citation with release month/year; Hansen citation; KSRSAC/Bhuvan credit) · resilience (timeouts, retries, circuit breaker, cached-last-good with age) · security (upload type/size limits, malware-safe parsing, CORS) · observability (structured logs, per-source latency/failure counters).
 
-| Risk / open item | Mitigation |
+---
+
+## 17. Risks and unverified items
+| Risk / item | Mitigation |
 |---|---|
-| Official Karnataka parcels not obtainable | Candidate-only mode (honest); continue KSRSAC request; user-drawn/imported polygons. |
-| GEE quota (Community 150 EECU-h/month) exhausted by many users | Cache aggressively, pre-compute composites, reduce to needed bands, move static layers to local COGs, CDSE/Planetary Computer fallback. |
-| GEE service-account rules for noncommercial projects not confirmed | Test early (Phase 0); fallback to local-rasters-only mode. |
-| WDPA/GEE commercial restrictions | Keep project non-commercial or obtain UNEP-WCMC permission; do not redistribute raw polygons. |
-| Bhuvan licence unclear | Display/validate only until confirmed. |
-| India-WRIS, Bhoomi, K-GIS pages blocked automated reading | Verify manually; no scraping. |
-| SoilGrids pH/OC are modelled 250 m; P/K unavailable | Show uncertainty; user soil test input prioritised. |
-| ESA WorldCover 2021 overall accuracy ≈ 76.7 % | Treat as evidence, combine with DW time series; never as legal proof. |
-| Legacy CSV provenance unknown | Review, document or replace (§10.7). |
-| Dataset URLs can change (e.g. MS buildings moved host; dated `dataset-links.csv`) | Scripts read the latest listing; `SOURCE.md` stores retrieval date. |
-| ⚠ Not verified at writing time | SoilGrids VRT file-name pattern, FAOSTAT bulk URL, WorldCover tile-file names (from prior knowledge), GAEZ/ECOCROP/Bhuvan/SHC licences, CDSE Sentinel Hub quotas, Planetary Computer terms, data.gov.in key flow. |
+| **No public land-records API/key for Bhoomi, e-Khata/e-Swathu, ULPIN** | User-document route + KSRSAC request; UI says so plainly |
+| Official forest/parcel layers unavailable | Max status provisional; Karnataka Protected Areas KML as interim, labelled non-legal |
+| Plantations misread as forest | Plantation signature + record override + reason codes |
+| Wasteland vs fallow confusion | 12-month time series + historical cropland |
+| Salinity/sodicity not in open data | `salinity_unknown` soft limit; user soil test; Bhuvan layer |
+| GEE quota / noncommercial terms | Cache, pre-export COGs, CDSE fallback |
+| WDPA/GEE non-commercial | Keep project non-commercial or obtain permission |
+| ⚠ **Not verified in this research** | Bhuvan layer names/terms; Karnataka RTC/e-Khata field layouts and land-type vocabulary (§6.5); Hansen current version/licence; GFW API key flow; India-WRIS endpoint; OpenCity KML download path and completeness; third-party aggregator terms; country adapter datasets in §6.6; exact NRSC wasteland class legend |
 
 ---
 
-## 17. Definition of done
-1. Boots with real data only; `/health` shows real dependency state.
-2. Eligibility gate live; the §13.1 matrix passes; UI shows status, reasons, sources and usable area.
-3. Models B & D retrained on documented real data with spatial CV and model cards.
-4. `DATA_GUIDE.md` steps reproduce the full data folder on a clean machine.
-5. README documents licences, non-commercial constraints, limitations and the disclaimer.
-6. No secrets in git; `pytest -v` and `npm run build` pass.
+## 18. Definition of done
+1. Boots with real data only; `/health` shows real provider/layer state.
+2. All **M1–M12** gates pass; no grep-gate hits.
+3. Lake, urban, forest, wasteland cases return **NOT IRRIGABLE** with reasons and no crops; plantation and fallow cases are not misclassified.
+4. Coordinate enquiry returns classification + provider statuses + provenance; credential-gated providers say so.
+5. RTC/e-Khata upload works with PII stripped.
+6. Models B & D retrained on documented data with spatial CV and model cards.
+7. `DATA_GUIDE.md` reproduces the data folder on a clean machine; README documents licences, non-commercial limits, limitations and the disclaimer.
+8. No secrets in git; `pytest -v` and `npm run build` pass.
+
+---
+
+## A. Carry-over from PRD v1.0 (unchanged unless contradicted above)
+Evidence-gate statuses (`VERIFIED_AGRICULTURAL`, `AGRICULTURAL_CANDIDATE`, `RESTRICTED_LEGAL`, `NON_AGRICULTURAL_BUILT`, `WATER_BODY`, `UNVERIFIED`) remain in the `eligibility` block and map as: `FOREST_LEGAL→RESTRICTED_LEGAL`, `URBAN_BUILT→NON_AGRICULTURAL_BUILT`, `WATER_BODY→WATER_BODY`, `AGRICULTURAL` with official record+boundary → `VERIFIED_AGRICULTURAL`, otherwise `AGRICULTURAL_CANDIDATE`. v1 §5 (FR crop intelligence, season handling, tiered confidence, intercrop), §6.1 source matrix, §6.5 training datasets, §9 eligibility algorithm, §10 ML requirements and §12 data-folder layout continue to apply; the 78-feature honesty rules (FR-13/14) are now enforced by M2/M3.

@@ -274,8 +274,8 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Dynamically detect location from coordinates using Kaggle/ICAR dataset + reverse geocoding
   useEffect(() => {
-    const lat = formData.pointPt ? formData.pointPt[1] : (formData.polygonPts[0]?.[1] || 17.3850);
-    const lon = formData.pointPt ? formData.pointPt[0] : (formData.polygonPts[0]?.[0] || 78.4867);
+    const lat = formData.pointPt ? formData.pointPt[1] : (formData.polygonPts[0]?.[1] || 14.0);
+    const lon = formData.pointPt ? formData.pointPt[0] : (formData.polygonPts[0]?.[0] || 75.75);
 
     let active = true;
     detectLocationFromCoordinates(lat, lon).then(result => {

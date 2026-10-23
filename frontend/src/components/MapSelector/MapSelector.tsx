@@ -372,7 +372,7 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
 
     try {
       const res = await fetchFieldArea(preset.polygon);
-      const computedArea = Number(res.area_ha.toFixed(2));
+      const computedArea = res.area_ha != null ? Number(res.area_ha.toFixed(2)) : preset.defaultAreaHa;
       setAreaHa(computedArea);
       onPolygonChange(preset.polygon, computedArea, preset.name);
     } catch {

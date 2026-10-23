@@ -46,24 +46,25 @@ def fetch_soil_from_gee(lon: float, lat: float) -> dict[str, float] | None:
             "ph": ph_val,
             "organic_carbon_g_kg": soc_val,
             "nitrogen_g_kg": n_val,
-            "phosphorus_ppm": 18.5,
-            "potassium_ppm": 145.0,
+            "phosphorus_ppm": None,
+            "potassium_ppm": None,
             "texture_clay_pct": clay_val,
             "texture_sand_pct": sand_val,
             "texture_silt_pct": silt_val,
+            "estimated": True
         }
     except Exception:
         return None
 
 
-async def fetch_soil_data(centroid: tuple[float, float], manual_soil: dict | None = None) -> dict[str, float]:
+async def fetch_soil_data(centroid: tuple[float, float], manual_soil: dict | None = None) -> dict[str, float | None]:
     """
     Fetches topsoil (0-5cm) physical and chemical properties:
     - ph
     - organic_carbon_g_kg
     - nitrogen_g_kg
-    - phosphorus_ppm
-    - potassium_ppm
+    - phosphorus_ppm (null if unmeasured; estimated flag set)
+    - potassium_ppm (null if unmeasured; estimated flag set)
     - texture_clay_pct
     - texture_sand_pct
     - texture_silt_pct
@@ -81,15 +82,18 @@ async def fetch_soil_data(centroid: tuple[float, float], manual_soil: dict | Non
     if soil_base is None:
         # 2. If user provided manual soil data, construct profile from user input
         if manual_soil and isinstance(manual_soil, dict):
+            p_val = manual_soil.get("phosphorus") or manual_soil.get("phosphorus_ppm")
+            k_val = manual_soil.get("potassium") or manual_soil.get("potassium_ppm")
             return {
                 "ph": float(manual_soil.get("ph") or 6.5),
                 "organic_carbon_g_kg": float(manual_soil.get("organic_carbon") or manual_soil.get("organic_carbon_g_kg") or 12.0),
                 "nitrogen_g_kg": float(manual_soil.get("nitrogen") or manual_soil.get("nitrogen_g_kg") or 0.25),
-                "phosphorus_ppm": float(manual_soil.get("phosphorus") or manual_soil.get("phosphorus_ppm") or 18.5),
-                "potassium_ppm": float(manual_soil.get("potassium") or manual_soil.get("potassium_ppm") or 145.0),
+                "phosphorus_ppm": float(p_val) if p_val is not None else None,
+                "potassium_ppm": float(k_val) if k_val is not None else None,
                 "texture_clay_pct": float(manual_soil.get("texture_clay_pct") or 25.0),
                 "texture_sand_pct": float(manual_soil.get("texture_sand_pct") or 45.0),
                 "texture_silt_pct": float(manual_soil.get("texture_silt_pct") or 30.0),
+                "estimated": p_val is None or k_val is None
             }
 
         # 3. Fail loudly if live source is unavailable and synthetic data is disabled
@@ -98,28 +102,24 @@ async def fetch_soil_data(centroid: tuple[float, float], manual_soil: dict | Non
             raise RuntimeError("Live soil data unavailable and ALLOW_SYNTHETIC_DATA is false.")
 
         # Deterministic fallback soil profile (dev simulation only)
-        seed = int((abs(lat) * 800 + abs(lon) * 80) % 10000)
-        rng = np.random.RandomState(seed)
-
-        ph = round(float(rng.uniform(5.8, 7.8)), 2)
-        soc = round(float(rng.uniform(4.5, 16.0)), 2)
+        h = int(abs(lat * 1000 + lon * 100)) % 100
+        ph = round(6.0 + (h % 20) * 0.1, 2)
+        soc = round(5.0 + (h % 15) * 0.8, 2)
         nitrogen = round(soc * 0.08, 2)
-        phosphorus = round(float(rng.uniform(10.0, 35.0)), 1)
-        potassium = round(float(rng.uniform(110.0, 260.0)), 1)
-
-        clay = round(float(rng.uniform(18.0, 42.0)), 1)
-        sand = round(float(rng.uniform(25.0, 55.0)), 1)
+        clay = round(20.0 + (h % 20), 1)
+        sand = round(35.0 + (h % 25), 1)
         silt = round(max(5.0, 100.0 - clay - sand), 1)
 
         soil_base = {
             "ph": ph,
             "organic_carbon_g_kg": soc,
             "nitrogen_g_kg": nitrogen,
-            "phosphorus_ppm": phosphorus,
-            "potassium_ppm": potassium,
+            "phosphorus_ppm": None,
+            "potassium_ppm": None,
             "texture_clay_pct": clay,
             "texture_sand_pct": sand,
             "texture_silt_pct": silt,
+            "estimated": True
         }
 
     CACHE_SOIL[cache_key] = soil_base.copy()
@@ -131,9 +131,10 @@ async def fetch_soil_data(centroid: tuple[float, float], manual_soil: dict | Non
         for field in ["ph", "organic_carbon", "nitrogen", "phosphorus", "potassium", "texture_clay_pct", "texture_sand_pct", "texture_silt_pct"]:
             val = manual_soil.get(field)
             if val is not None and isinstance(val, (int, float)):
-                base_field_name = "organic_carbon_g_kg" if field == "organic_carbon" else ("nitrogen_g_kg" if field == "nitrogen" else field)
-                if base_field_name in blended:
-                    blended[base_field_name] = round(0.8 * float(val) + 0.2 * blended[base_field_name], 2)
+                base_field_name = "organic_carbon_g_kg" if field == "organic_carbon" else ("nitrogen_g_kg" if field == "nitrogen" else (f"{field}_ppm" if field in ["phosphorus", "potassium"] else field))
+                existing_val = blended.get(base_field_name)
+                if existing_val is not None:
+                    blended[base_field_name] = round(0.8 * float(val) + 0.2 * float(existing_val), 2)
                 else:
                     blended[base_field_name] = float(val)
         return blended

@@ -2,12 +2,12 @@ import React from 'react';
 import { Compass, Maximize2, Calendar, CheckCircle, AlertTriangle } from 'lucide-react';
 
 interface FieldSummaryCardProps {
-  areaHa: number;
+  areaHa: number | null;
   centroidLon: number;
   centroidLat: number;
   season: string;
   polygonValid: boolean;
-  usedFallbackBuffer: boolean;
+  boundarySource?: string;
 }
 
 export const FieldSummaryCard: React.FC<FieldSummaryCardProps> = ({
@@ -16,7 +16,7 @@ export const FieldSummaryCard: React.FC<FieldSummaryCardProps> = ({
   centroidLat,
   season,
   polygonValid,
-  usedFallbackBuffer
+  boundarySource
 }) => {
   return (
     <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -25,7 +25,9 @@ export const FieldSummaryCard: React.FC<FieldSummaryCardProps> = ({
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
         <div className="metric-box">
           <span className="metric-label">Calculated Area</span>
-          <span className="metric-value" style={{ color: '#10b981' }}>{areaHa.toFixed(2)} Ha</span>
+          <span className="metric-value" style={{ color: '#10b981' }}>
+            {areaHa != null ? `${areaHa.toFixed(2)} Ha` : 'N/A (Point Query)'}
+          </span>
         </div>
         <div className="metric-box">
           <span className="metric-label">Target Season</span>
@@ -42,13 +44,13 @@ export const FieldSummaryCard: React.FC<FieldSummaryCardProps> = ({
           {polygonValid ? (
             <>
               <CheckCircle size={16} style={{ color: '#34d399' }} />
-              <span style={{ color: '#34d399' }}>Valid WGS84 Geodesic Ring</span>
+              <span style={{ color: '#34d399' }}>Valid WGS84 Geodesic Ring {boundarySource ? `(${boundarySource})` : ''}</span>
             </>
           ) : (
             <>
               <AlertTriangle size={16} style={{ color: '#fbbf24' }} />
               <span style={{ color: '#fbbf24' }}>
-                {usedFallbackBuffer ? "Using 100m Geodesic Point Buffer" : "Invalid Polygon Topology"}
+                Point Query (No Polygon Boundary Provided)
               </span>
             </>
           )}

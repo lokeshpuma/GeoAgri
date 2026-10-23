@@ -1,0 +1,34 @@
+# Irrigability Engine Rules Configuration (PRD v2.0 §7.3)
+# Tunable agronomic thresholds modelled on FAO Land Irrigability Guidelines
+
+version: "2.0"
+
+hard_limits:
+  slope_deg_max: 20.0             # > 20 deg cannot be irrigated safely without extreme erosion
+  forest_legal: true              # Reserved / protected forest cannot be irrigated
+  urban_built: true               # Urban / residential cannot be irrigated
+  water_body: true                # Perennial water bodies cannot be cropped
+
+soft_limits:
+  slope_deg_drip_only: 8.0        # 8-20 deg requires drip/sprinkler only
+  sand_pct_max: 82.0              # > 82% sand = excessive permeability
+  clay_pct_max: 65.0              # > 65% clay = poor aeration / waterlogging
+  distance_to_water_m_max: 4000.0 # > 4000m requires groundwater or rainfed mode
+
+setbacks_m:
+  water_body_riparian: 30.0
+  building_footprint_buffer: 5.0
+
+irrigation_modes:
+  - id: "canal"
+    requires: ["canal_proximity_m_le_1000", "rtc_neeravari"]
+  - id: "borewell_well"
+    requires: ["groundwater_safe_zone"]
+  - id: "tank"
+    requires: ["tank_proximity_m_le_1500"]
+  - id: "drip"
+    requires: ["slope_le_20"]
+  - id: "sprinkler"
+    requires: ["slope_le_15"]
+  - id: "rainfed_only"
+    requires: []

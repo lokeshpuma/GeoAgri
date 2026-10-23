@@ -19,11 +19,11 @@ def test_feature_manifest_exists_and_valid():
 @pytest.mark.asyncio
 async def test_feature_vector_extraction():
     polygon = [
-        (78.4850, 17.3850),
-        (78.4870, 17.3850),
-        (78.4870, 17.3870),
-        (78.4850, 17.3870),
-        (78.4850, 17.3850)
+        (77.5850, 12.9650),
+        (77.5870, 12.9650),
+        (77.5870, 12.9670),
+        (77.5850, 12.9670),
+        (77.5850, 12.9650)
     ]
     manual_soil = {"ph": 6.8, "organic_carbon": 12.0}
     profile = await build_environmental_profile(polygon, None, season="kharif", manual_soil=manual_soil)
