@@ -216,7 +216,13 @@ export async function fetchFullReport(payload: PredictRequestPayload): Promise<F
       let errorDetail = "";
       try {
         const errJson = await response.json();
-        errorDetail = errJson.detail || errJson.message || "";
+        if (Array.isArray(errJson.detail)) {
+          errorDetail = errJson.detail.map((d: any) => `${d.loc?.slice(-1)[0] || 'field'}: ${d.msg}`).join("; ");
+        } else if (typeof errJson.detail === 'object') {
+          errorDetail = JSON.stringify(errJson.detail);
+        } else {
+          errorDetail = errJson.detail || errJson.message || "";
+        }
       } catch {
         // Not JSON
       }

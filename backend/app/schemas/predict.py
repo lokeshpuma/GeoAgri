@@ -23,9 +23,9 @@ class PredictRequest(BaseModel):
     polygon: list[list[float]] | None = None
     point: list[float] | None = None
     area_ha: float | None = None
-    season: Literal["kharif", "rabi", "zaid", "annual"] = "kharif"
-    limit: int = Field(default=10, ge=1, le=50)
-    irrigation_preference: Literal["rainfed", "supplemental", "full"] = "rainfed"
+    season: Literal["kharif", "rabi", "zaid", "annual", "perennial"] = "kharif"
+    limit: int = Field(default=10, ge=1, le=250)
+    irrigation_preference: Literal["rainfed", "supplemental", "full"] | None = "rainfed"
     manual_soil: ManualSoilInput | None = None
     survey_ref: dict[str, Any] | None = None
 

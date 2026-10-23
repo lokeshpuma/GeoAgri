@@ -152,7 +152,7 @@ async def generate_full_report(req: PredictRequest):
         # 6. Decision Fusion & Crop Ranking
         recs = run_decision_fusion(
             model_outputs=model_outputs,
-            irrigation_preference=req.irrigation_preference,
+            irrigation_preference=req.irrigation_preference or "rainfed",
             limit=req.limit
         )
 
