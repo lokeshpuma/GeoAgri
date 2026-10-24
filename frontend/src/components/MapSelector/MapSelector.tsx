@@ -20,86 +20,11 @@ export interface MapSelectorProps {
   onPolygonChange: (polygon: [number, number][], areaHa: number, name?: string) => void;
   onPointChange: (point: [number, number], name?: string) => void;
   initialPolygon?: [number, number][];
-  initialAreaHa?: number;
+  initialArea?: number;
   selectedPoint?: [number, number];
   report?: FullReportResponse | null;
   isPredicted?: boolean;
 }
-
-export const PRESET_REGIONS = [
-  {
-    name: "Karnataka Field (Ragi / Coffee / Arecanut / Paddy)",
-    centroid: [75.7500, 13.3200] as [number, number], // [lng, lat] - Karnataka
-    polygon: [
-      [75.7460, 13.3170],
-      [75.7540, 13.3170],
-      [75.7540, 13.3230],
-      [75.7460, 13.3230],
-      [75.7460, 13.3170]
-    ] as [number, number][],
-    defaultAreaHa: 2.85
-  },
-  {
-    name: "California Central Valley, USA (Almonds / Grapes / Citrus)",
-    centroid: [-120.2500, 36.7500] as [number, number],
-    polygon: [
-      [-120.2550, 36.7460],
-      [-120.2450, 36.7460],
-      [-120.2450, 36.7540],
-      [-120.2550, 36.7540],
-      [-120.2550, 36.7460]
-    ] as [number, number][],
-    defaultAreaHa: 5.40
-  },
-  {
-    name: "Nile Delta, Egypt (Cotton / Wheat / Rice / Maize)",
-    centroid: [31.2500, 30.7500] as [number, number],
-    polygon: [
-      [31.2450, 30.7460],
-      [31.2550, 30.7460],
-      [31.2550, 30.7540],
-      [31.2450, 30.7540],
-      [31.2450, 30.7460]
-    ] as [number, number][],
-    defaultAreaHa: 3.20
-  },
-  {
-    name: "Pampas, Argentina (Soybean / Maize / Wheat)",
-    centroid: [-61.5000, -34.5000] as [number, number],
-    polygon: [
-      [-61.5060, -34.5040],
-      [-61.4940, -34.5040],
-      [-61.4940, -34.4960],
-      [-61.5060, -34.4960],
-      [-61.5060, -34.5040]
-    ] as [number, number][],
-    defaultAreaHa: 8.50
-  },
-  {
-    name: "Rajasthan Field, India (Pearl Millet / Mustard / Guar)",
-    centroid: [73.0243, 26.2389] as [number, number],
-    polygon: [
-      [73.0200, 26.2350],
-      [73.0280, 26.2350],
-      [73.0280, 26.2420],
-      [73.0200, 26.2420],
-      [73.0200, 26.2350]
-    ] as [number, number][],
-    defaultAreaHa: 4.10
-  },
-  {
-    name: "Punjab Field, India (Wheat / Paddy / Mustard)",
-    centroid: [75.8573, 30.9010] as [number, number],
-    polygon: [
-      [75.8550, 30.9000],
-      [75.8600, 30.9000],
-      [75.8600, 30.9040],
-      [75.8550, 30.9040],
-      [75.8550, 30.9000]
-    ] as [number, number][],
-    defaultAreaHa: 3.42
-  }
-];
 
 export type AnalysisLayerType = 'standard' | 'satellite' | 'terrain';
 
@@ -195,8 +120,8 @@ function getMapStyleDefinition(): string | maplibregl.StyleSpecification {
 export const MapSelector: React.FC<MapSelectorProps> = ({
   onPolygonChange,
   onPointChange,
-  initialPolygon = PRESET_REGIONS[0].polygon,
-  initialAreaHa = PRESET_REGIONS[0].defaultAreaHa,
+  initialPolygon = [],
+  initialArea = 0,
   selectedPoint,
   report = null,
   isPredicted = false
@@ -208,54 +133,13 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
   const [mapLoaded, setMapLoaded] = useState<boolean>(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [polygonPts, setPolygonPts] = useState<[number, number][]>(initialPolygon);
-  const [areaHa, setAreaHa] = useState<number>(initialAreaHa);
+  const [areaHa, setAreaHa] = useState<number>(initialArea);
   const [activeLayer, setActiveLayer] = useState<AnalysisLayerType>('standard');
   const [isLocating, setIsLocating] = useState<boolean>(false);
-  const [selectedPresetName, setSelectedPresetName] = useState<string>(PRESET_REGIONS[0].name);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleImportPolygon = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      try {
-        const text = event.target?.result as string;
-        const data = JSON.parse(text);
-        let coords: [number, number][] = [];
-        if (data.type === 'FeatureCollection' && data.features?.[0]?.geometry) {
-          const geom = data.features[0].geometry;
-          coords = geom.coordinates[0];
-        } else if (data.type === 'Feature' && data.geometry) {
-          coords = data.geometry.coordinates[0];
-        } else if (data.type === 'Polygon') {
-          coords = data.coordinates[0];
-        } else if (Array.isArray(data) && data.length >= 3) {
-          coords = data;
-        }
-        if (coords.length >= 3) {
-          const areaRes = await fetchFieldArea(coords);
-          const area = areaRes?.area_ha ?? 0;
-          setPolygonPts(coords);
-          setAreaHa(area);
-          setSelectedPresetName(file.name);
-          onPolygonChange(coords, area, file.name);
-          if (mapRef.current) {
-            const bounds = new maplibregl.LngLatBounds();
-            coords.forEach(pt => bounds.extend(pt));
-            mapRef.current.fitBounds(bounds, { padding: 40 });
-          }
-        }
-      } catch (err) {
-        console.error("Failed to parse polygon file", err);
-      }
-    };
-    reader.readAsText(file);
-  };
 
   // Compute current display coordinates [lng, lat]
-  const currentLng = selectedPoint ? selectedPoint[0] : polygonPts[0] ? polygonPts[0][0] : PRESET_REGIONS[0].centroid[0];
-  const currentLat = selectedPoint ? selectedPoint[1] : polygonPts[0] ? polygonPts[0][1] : PRESET_REGIONS[0].centroid[1];
+  const currentLng = selectedPoint ? selectedPoint[0] : polygonPts[0] ? polygonPts[0][0] : 0;
+  const currentLat = selectedPoint ? selectedPoint[1] : polygonPts[0] ? polygonPts[0][1] : 20;
 
   // Update base layer styling when activeLayer changes
   const applyLayerStyling = useCallback((map: maplibregl.Map, layer: AnalysisLayerType) => {
@@ -386,7 +270,6 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
 
         marker.setLngLat([lng, lat]);
         setPolygonPts([]);
-        setSelectedPresetName(`Pin (${lat.toFixed(4)}°N, ${lng.toFixed(4)}°E)`);
 
         onPointChange([lng, lat], `Custom Location (${lat.toFixed(4)}°N, ${lng.toFixed(4)}°E)`);
       });
@@ -448,34 +331,7 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
     }
   }, [polygonPts, mapLoaded]);
 
-  // Select Preset Region
-  const handleSelectPreset = async (preset: typeof PRESET_REGIONS[0]) => {
-    setPolygonPts(preset.polygon);
-    setSelectedPresetName(preset.name);
 
-    if (mapRef.current) {
-      mapRef.current.flyTo({
-        center: preset.centroid,
-        zoom: 14,
-        speed: 1.2,
-        essential: true
-      });
-    }
-
-    if (markerRef.current) {
-      markerRef.current.setLngLat(preset.centroid);
-    }
-
-    try {
-      const res = await fetchFieldArea(preset.polygon);
-      const computedArea = res.area_ha != null ? Number(res.area_ha.toFixed(2)) : preset.defaultAreaHa;
-      setAreaHa(computedArea);
-      onPolygonChange(preset.polygon, computedArea, preset.name);
-    } catch {
-      setAreaHa(preset.defaultAreaHa);
-      onPolygonChange(preset.polygon, preset.defaultAreaHa, preset.name);
-    }
-  };
 
   // Zoom handlers
   const handleZoomIn = () => {
@@ -519,7 +375,6 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
         }
 
         setPolygonPts([]);
-        setSelectedPresetName(`Current Location (${lat.toFixed(4)}°N, ${lng.toFixed(4)}°E)`);
         onPointChange([lng, lat], `Current Location (${lat.toFixed(4)}°N, ${lng.toFixed(4)}°E)`);
       },
       (err) => {
@@ -549,50 +404,13 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <input
-            type="file"
-            ref={fileInputRef}
-            accept=".geojson,.json"
-            onChange={handleImportPolygon}
-            style={{ display: 'none' }}
-          />
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            className="btn-secondary"
-            style={{ fontSize: '0.75rem', padding: '4px 10px', display: 'flex', alignItems: 'center', gap: '4px' }}
-            title="Import parcel boundary polygon (GeoJSON/JSON)"
-          >
-            <Upload size={13} />
-            <span>Import Polygon</span>
-          </button>
           <span className="badge badge-high" style={{ fontSize: '0.78rem', padding: '4px 10px' }}>
             {areaHa > 0 ? `${areaHa.toFixed(2)} Ha Target Area` : "Target Coordinate"}
           </span>
         </div>
       </div>
 
-      {/* 2. Preset Regions Selector (Gated with VITE_DEMO_MODE per FR-21 / M23) */}
-      {import.meta.env.VITE_DEMO_MODE === 'true' && (
-        <div className="preset-chips-row" role="group" aria-label="Field Presets">
-          {PRESET_REGIONS.map((preset) => {
-            const isSelected = selectedPresetName === preset.name;
-            return (
-              <button
-                key={preset.name}
-                type="button"
-                onClick={() => handleSelectPreset(preset)}
-                className={`preset-region-btn ${isSelected ? 'active' : ''}`}
-                title={`Switch to ${preset.name}`}
-              >
-                <MapPin size={13} style={{ color: isSelected ? 'var(--accent-green)' : '#9ca3af' }} />
-                <span>{preset.name.split(' (')[0]}</span>
-                {isSelected && <Check size={13} style={{ color: 'var(--accent-green)', marginLeft: '4px' }} />}
-              </button>
-            );
-          })}
-        </div>
-      )}
+      {/* 2. Map Viewport & Overlays */}
 
       {/* 3. Map Viewport & Overlays */}
       <div className="map-viewport-wrapper">

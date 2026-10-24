@@ -203,6 +203,19 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - `pytest` (backend): 110 passed, 3008 warnings in 71.28s
 - Baseline verified and logged.
 
+## [PRD v3.0 - Phase P1 Remove Defaults & File Import] - 2026-10-24
+### Changed / Removed
+- Deleted `zzz.GeoJSON` and dead page `Dashboard.tsx`.
+- Removed `PRESET_REGIONS` from `WorkflowContext.tsx` and `MapSelector.tsx`.
+- Removed polygon import button and handlers (`handleImportPolygon`, file input).
+- Made context defaults strictly empty: `polygonPts: []`, `pointPt: undefined`, `areaHa: 0`, `detectedLocation: null`.
+- Removed silent coordinate fallbacks (`|| 14.0`, `|| 75.75`) in `FieldAnalysisPage`, `CropPredictionPage`, and `SummaryReportPage`.
+- Guarded `runPredictNow` in `WorkflowContext.tsx` against missing polygon/pin.
+- Added `AreaValidationError` typed error in `frontend/src/api/client.ts`.
+- Gate G-D1 (no presets/defaults in code) and Gate G-D2 (no import/zzz.GeoJSON) verified: passed.
+- Frontend build: 0 errors in 3.02s. Backend tests: 110 passed in 76.87s.
+
+
 
 
 

@@ -41,8 +41,8 @@ export const SummaryReportPage: React.FC = () => {
   };
 
   const farmArea = report?.field_summary?.area_ha || formData.areaHa;
-  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1] || 14.0);
-  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0] || 75.75);
+  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1]);
+  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0]);
 
   const env = report?.environment || {
     rainfall_mm: 700.1,

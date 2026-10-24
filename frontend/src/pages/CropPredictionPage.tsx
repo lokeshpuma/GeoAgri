@@ -44,8 +44,8 @@ export const CropPredictionPage: React.FC = () => {
 
   const crops = report?.recommended_crops || [];
   const farmArea = report?.field_summary?.area_ha || formData.areaHa;
-  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1] || 14.0);
-  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0] || 75.75);
+  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1]);
+  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0]);
 
   const suit = report?.land_suitability || { grade: "High", score: 0.83, confidence: 0.90 };
   const irri = report?.irrigation_summary || { recommended_mode: "Rainfed", total_water_demand_m3: 11400, effective_rainfall_mm: 789.8 };

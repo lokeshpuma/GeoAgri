@@ -104,13 +104,13 @@ export function sanitizeToEnglish(text: string): string {
  * Curated benchmark dataset of primary agricultural zones across all continents.
  */
 export const GLOBAL_AGRI_REGIONS: AgriculturalLocation[] = [
-  // 1. Karnataka, India (DEFAULT PINPOINT - Western Ghats & Southern Dry Zone)
+  // 1. Karnataka, India (Western Ghats & Southern Dry Zone)
   {
     district: "Chikmagalur / Hassan",
     state: "Karnataka",
     country: "India",
-    lat: 13.3200,
-    lon: 75.7500,
+    lat: 13.3161,
+    lon: 75.7720,
     agroZone: "Western Ghats & Southern Hills (Karnataka High-Elevation Zone)",
     primarySoil: "Lateritic Loams & Humic Red Soils",
     rainfallRegime: "1200–2200 mm (Southwest Monsoonal)",
