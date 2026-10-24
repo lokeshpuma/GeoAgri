@@ -80,6 +80,26 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - **Verification Gates**:
   - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed (M1, M2, M11, M13, M18, M20), 96 backend tests passed, and frontend built with 0 errors.
 
+## [PRD v2.1 - Step S05 Classifier Evidence & YAML Rules] - 2026-10-24
+### Fixed & Verified (M15, M29)
+- **Evidence Collector (`app/services/landclass/evidence.py`) (M15)**:
+  - Implemented `Evidence` container tracking multi-sensor observations, detection responses, independent supporting sources, and water access.
+- **Dynamic Classifier (`app/services/landclass/classifier.py`) (M15, M29)**:
+  - Rewrote classifier to dynamically load all thresholds and confidence scores from `land_class_rules.yaml` (`detection:`, `thresholds:`, `confidence_scoring:`).
+  - Eliminated hardcoded numeric constants (`0.85`, `0.88`, `0.90`, `0.95`).
+  - Implemented M29 consensus check: provisional remote-sensing verdicts require >= 2 independent sources agreeing; single-source hits return `dominant=UNKNOWN` with `subclass=single_source_only`.
+  - Added robust plantation detection and wasteland slope criteria.
+- **Dynamic Irrigability Engine (`app/services/irrigability/engine.py`) (M15, M29)**:
+  - Dynamically reads thresholds (`hard_limits`, `soft_limits`, `irrigation_modes`) from `irrigability_rules.yaml`.
+  - Implemented water-access verification (§7.3, M29): checks distance to water, surface water proximity, and recorded irrigation sources without assuming canals/wells.
+  - Returns `UNVERIFIED` for missing evidence or `single_source_only` classifications.
+- **New Test Suites**:
+  - `tests/test_rules_are_live.py`: Verified changing thresholds in `land_class_rules.yaml` and `irrigability_rules.yaml` directly flips classification and irrigability verdicts without code modifications.
+  - `tests/test_unknown_without_evidence.py`: Verified empty inputs yield `UNKNOWN` and `UNVERIFIED`, and single-source remote-sensing signals require consensus (>= 2 independent sources) or yield `single_source_only` `UNVERIFIED`.
+- **Verification Gates**:
+  - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed (M1, M2, M11, M13, M18, M20), 102 backend tests passed, and frontend built with 0 errors.
+
+
 
 
 

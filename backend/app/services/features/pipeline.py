@@ -103,10 +103,11 @@ class FeaturePipeline:
             "ph", "organic_carbon_g_kg", "nitrogen_g_kg", "phosphorus_ppm", "potassium_ppm",
             "texture_clay_pct", "texture_sand_pct", "texture_silt_pct",
             "elevation", "slope", "twi", "ndvi", "ndvi_mean", "ndmi", "ndwi",
-            "slope_mean", "twi_mean"
+            "slope_mean", "twi_mean", "vv", "vh", "sar_vv", "sar_vh", "latitude", "longitude"
         ]:
             if core_key in raw_map:
                 vector[core_key] = raw_map[core_key]
+
 
         lat = raw_map.get("latitude")
         lon = raw_map.get("longitude")
