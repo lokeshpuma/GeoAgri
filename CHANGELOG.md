@@ -56,5 +56,12 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - **Typed Error Handling (M26)**: Added input geometry validation in `predict.py` returning HTTP 400 for invalid coordinates or polygons with < 3 points. Added evidence exception containment returning HTTP 200 `UNVERIFIED` with warnings rather than HTTP 500 crashes. Outer exceptions logged with structured request IDs rather than raw stack trace dumps.
 - **New Test Suite (`test_no_default_leak.py`)**: Verified all-missing profile yields `observed_feature_share==0`, `UNKNOWN` land class, `UNVERIFIED` irrigability, HTTP 400 on invalid geometry, and HTTP 200 `UNVERIFIED` on forced evidence exceptions. All tests passed.
 
+## [PRD v2.1 - Step S03 Dependencies & Rollback Scaffolding] - 2026-10-24
+### Fixed & Verified (M25, M27)
+- **Dependencies (M25)**: Added and verified `mapbox-vector-tile>=2.0.0`, `requests>=2.31.0`, `pypdf>=3.17.0`, `pytesseract>=0.3.10`, and `SQLAlchemy[asyncio]>=2.0.0` in `backend/requirements.txt`.
+- **Verification Script (`scripts/verify.sh`)**: Implemented automated script that sequentially validates Grep Gates (M1, M2, M11, M13, M18, M20), runs backend pytest suite (59 passed), and builds frontend production bundle. Exit code 0 verified.
+- **Rollback Scaffolding & Drill (`scripts/rollback_drill.sh`) (M27)**: Executed §19.6 rollback drill verifying git stashing, detached checkout to `baseline-v2.0` (tests passed), detached checkout to step tag (tests passed), return to `integrate/detection`, and runtime off-switch verification (`LAND_DETECTION_MODE=off LAND_GATE_MODE=off`). Drill printed `ROLLBACK OK`.
+
+
 
 
