@@ -44,7 +44,35 @@ GeoAgri AI is a location-driven agricultural decision-support platform designed 
                      │ Ranked 100+ Crop Plan
                      ▼
 ┌────────────────────────────────────────┐
-│ REST API & React Interactive Dashboard │ (FastAPI + Vite/Leaflet)
+│ REST API & React Interactive Dashboard │ (FastAPI + Vite / MapLibre GL)
+└────────────────────────────────────────┘
+```
+
+---
+
+### 2.1 Boundary Studio Data Flow (v3.0.0)
+```
+[User Drawing / GPS / Coordinates]
+            │
+            ▼
+┌────────────────────────────────────────┐
+│ Boundary Studio (`features/boundary/`)  │
+├────────────────────────────────────────┤
+│ • BoundaryMap.tsx (MapLibre GL)        │ Full-bleed satellite / terrain canvas
+│ • useBoundaryDraw.ts                   │ Undo/redo stack (50 steps), tools
+│ • boundaryMath.ts (@turf)              │ Live area (ha/ac/gun), kinks detection
+│ • SearchBar.tsx                        │ Coordinate parser + geocoder + GPS
+│ • PlotSummaryPanel.tsx                 │ Metric cards & GeoJSON export
+└───────────────────┬────────────────────┘
+                    │ Confirmed Ring [[lng,lat],...]
+                    ▼
+┌────────────────────────────────────────┐
+│ POST /api/v1/field/area Validation     │ (shapely + pyproj WGS84 geodesic)
+└───────────────────┬────────────────────┘
+                    │ Server-Verified Area (ha)
+                    ▼
+┌────────────────────────────────────────┐
+│ Field Analysis Preview & GEE Pipeline  │ (Step 3 → Step 4 → Step 5)
 └────────────────────────────────────────┘
 ```
 

@@ -288,6 +288,22 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - Fixed bug A12 regex replacement in `SummaryReportPage.tsx` ensuring proper string rendering without raw underscores.
 - Frontend production build: 0 errors in 2.63s. Backend tests: 116 passed in 63.75s.
 
+## [PRD v3.0 - Phase P8 Cleanup & Documentation] - 2026-10-24
+### Added
+- Implemented `frontend/src/features/boundary/useBoundaryDraw.ts` with 50-step snapshot undo/redo history stack, vertex manipulation, midpoint insertion, and geometry validity callbacks.
+- Added comprehensive unit tests in `frontend/src/features/boundary/useBoundaryDraw.test.ts` (3 passed in 25ms). Total Vitest tests: 7 passed in 843ms.
+- Added keyboard shortcuts in `BoundaryStudioPage.tsx` (`D` for polygon, `R` for rectangle, `E` for select/edit, `P` for pin, `Esc` for pan).
+- Restyled `WorkspacePage.tsx` with editorial Fraunces display typography, topographic contour SVG background, and lazy-rendered collapsible architecture sections per PRD §6.6.
+- Updated `documentation/api_reference.md` documenting `POST /api/v1/field/area` request/response schemas and HTTP 422 error codes.
+- Updated `documentation/architecture.md` detailing the MapLibre GL Boundary Studio data pipeline.
+- Updated `README.md` and `run.md` documenting the 5-step workflow, verification commands, and environment flags.
+- Updated `frontend/.env.example` with `VITE_GEOCODER_URL`, `VITE_SATELLITE_TILES_URL`, `VITE_MAP_STYLE_URL`, `VITE_ENABLE_3D_TERRAIN`, and `VITE_DEMO_MODE`.
+- Final full suite verification:
+  - Backend `pytest`: 116 passed in 72.46s.
+  - Frontend `npm test`: 7 passed in 843ms.
+  - Frontend `npm run build`: 0 errors in 2.70s.
+
+
 
 
 

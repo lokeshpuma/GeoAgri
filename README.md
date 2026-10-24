@@ -31,7 +31,7 @@
 
 - [Overview](#-overview)
 - [Key Features](#-key-features)
-- [4-Step Intelligence Workflow](#-4-step-intelligence-workflow)
+- [5-Step Intelligence Workflow](#-5-step-intelligence-workflow)
 - [Explainable AI Advisor (Copilot Chatbot)](#-explainable-ai-advisor-copilot-chatbot)
 - [System Architecture](#-system-architecture)
 - [The 5 Core AI Models (Parallel Async Pipeline)](#-the-5-core-ai-models-parallel-async-pipeline)
@@ -99,33 +99,36 @@ Unlike traditional agricultural tools that query static rule tables for a single
 ### 6. 📑 Executive 3-Page Agricultural Intelligence Dossier (PDF Export)
 - Generate a printable, publication-grade executive PDF intelligence report formatted for bank crop insurance, farm managers, and agronomists.
 
-### 7. 🎨 Executive Enterprise Design System
-- Modern glassmorphism UI with curated HSL color palettes and dynamic ambient particle animations.
-- Full high-contrast support for both **Dark Mode** and **Light Mode**.
-- Responsive 2-column Additional Agronomic Crop Insights grid.
-- Clickable header brand logo for instant navigation back to the Workspace.
+### 7. 🎨 "Terra Noir" Design System
+- Obsidian dark surfaces with warm gold and luminous emerald accents, paired with an "Ivory" light mode.
+- Editorial display typography (Fraunces), refined UI sans (Plus Jakarta Sans), and monospace numerals (JetBrains Mono).
+- Glassmorphic panels with tokenized elevation, blur filters, and micro-interactions.
+- Strict WCAG 2.2 AA contrast compliance and full `prefers-reduced-motion` accessibility.
 
 ---
 
-## 🔄 4-Step Intelligence Workflow
+## 🔄 5-Step Intelligence Workflow
 
-GeoAgri AI guides users through a seamless 4-step progressive intelligence pipeline:
+GeoAgri AI guides users through a seamless 5-step progressive intelligence pipeline:
 
 ```mermaid
 graph LR
-    S1[Step 1: Workspace<br/>Global Overview] --> S2[Step 2: Field Analysis<br/>Satellite & Soil Sensing]
-    S2 --> S3[Step 3: Crop Prediction<br/>Multi-Crop & Yield Fusion]
-    S3 --> S4[Step 4: Summary & Report<br/>Executive Dossier]
+    S1[Step 1: Workspace<br/>Global Overview] --> S2[Step 2: Boundary Studio<br/>Interactive Polygon Draw]
+    S2 --> S3[Step 3: Field Intelligence<br/>Satellite & Soil Sensing]
+    S3 --> S4[Step 4: Crop Prediction<br/>Multi-Crop & Yield Fusion]
+    S4 --> S5[Step 5: Executive Report<br/>Agricultural Dossier]
 ```
 
-1. **Step 1: Workspace (Overview)**  
-   System architecture dashboard, global agricultural region presets, satellite telemetry engine overview, and global parcel search.
-2. **Step 2: Location & Field Analysis (Location & Satellite)**  
-   Interactive geodesic parcel boundary selector, real-time area calculation (`ha` and `acres`), multi-spectral Sentinel-1/2 telemetry, SoilGrids chemical profiles, and Model A Land Suitability Assessment.
-3. **Step 3: Crop Prediction (Multi-Crop & Yield)**  
-   Top 5 multi-crop rankings, 2-column deep agronomic profiling, interactive yield uncertainty charts (P10/P50/P90), and the structured 4-card AI Agricultural Action Plan.
-4. **Step 4: Summary & Report (Full Intelligence)**  
-   Executive agricultural intelligence dossier, water balance ledger, climate risk scorecard, and one-click printable PDF report generation.
+1. **Step 1: Workspace (`#home`)**  
+   Planetary overview, intelligence architecture, connected Earth observation data sources, and quick launch to field drawing.
+2. **Step 2: Boundary Studio (`#boundary`)**  
+   Full-bleed MapLibre satellite mapping engine. Draw interactive parcel corners, paste lat/lon coordinates, view live geodesic area (ha, acres, guntas), check real-time geometric validity (kinks/bow-tie detection), and confirm parcel geometry verified by backend Shapely engine.
+3. **Step 3: Field Intelligence (`#analysis`)**  
+   Read-only field extent preview map, multi-spectral Sentinel-1/2 GEE telemetry, SoilGrids 3D chemical profiles, NASA POWER climatology, and Model A Land Suitability Assessment.
+4. **Step 4: Crop Prediction (`#crops`)**  
+   Ranked multi-crop recommendations, companion legume intercropping pairings (+15% yield boost), probabilistic quantile yield distributions (P10/P50/P90), and seasonal water balances.
+5. **Step 5: Executive Report (`#report`)**  
+   Synthesized agricultural intelligence dossier, environmental scorecard, water demand budgets, climate risk matrix, and exportable printable PDF report.
 
 ---
 

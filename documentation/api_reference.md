@@ -112,10 +112,49 @@ Returns health and availability of registered land record providers (`user_docum
 
 ---
 
-### 6. `POST /api/v1/field/area`
-Calculates WGS84 geodesic area in hectares for interactive polygon geometries.
+### 6. `POST /api/v1/field/area` (PRD v3.0 §7)
+Validates polygon boundary geometry using Shapely and computes geodesic area in hectares on the WGS84 ellipsoid.
+
+#### Request Schema
+```json
+{
+  "polygon": [
+    [75.7500, 13.3200],
+    [75.7510, 13.3200],
+    [75.7510, 13.3210],
+    [75.7500, 13.3210],
+    [75.7500, 13.3200]
+  ],
+  "point": null
+}
+```
+
+#### Success Response (`200 OK`)
+```json
+{
+  "area_ha": 1.2345,
+  "perimeter_m": 445.2,
+  "centroid": [75.7505, 13.3205],
+  "centroid_lon": 75.7505,
+  "centroid_lat": 13.3205,
+  "polygon_valid": true,
+  "boundary_source": "user_drawn",
+  "area_method": "geodesic"
+}
+```
+*Note: Point-only requests return `{"area_ha": null, "polygon_valid": false, "centroid": [lon, lat]}`.*
+
+#### Error Response (`422 Unprocessable Content`)
+Returns a structured error detail object with `{ code, message }`:
+- `SELF_INTERSECTION`: Edges cross each other (bow-tie shape).
+- `TOO_SMALL`: Area is less than `0.01` ha (~100 m²).
+- `TOO_LARGE`: Area exceeds `1000.0` ha.
+- `NOT_CLOSED`: First vertex does not match last vertex.
+- `TOO_FEW_VERTICES`: Less than 3 distinct corners.
+- `OUT_OF_RANGE`: Coordinates outside standard WGS84 latitude/longitude bounds.
 
 ---
 
 ### 7. `GET /api/v1/health`
 Checks operational telemetry for upstream data providers, PostGIS database, and Earth Engine.
+

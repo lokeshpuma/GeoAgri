@@ -60,6 +60,33 @@ export const BoundaryStudioPage: React.FC = () => {
     }
   }, []);
 
+  // Keyboard shortcuts (PRD §4.2 FR-B13)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if user is typing in an input
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+        return;
+      }
+
+      const key = e.key.toLowerCase();
+      if (key === 'd') {
+        setActiveTool('polygon');
+      } else if (key === 'r') {
+        setActiveTool('rectangle');
+      } else if (key === 'e') {
+        setActiveTool('select');
+      } else if (key === 'p') {
+        setActiveTool('pin');
+      } else if (key === 'escape') {
+        setActiveTool('pan');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const handleGeometryChange = useCallback(
     (poly: [number, number][] | null, pin: [number, number] | null) => {
       setPolygonCoords(poly);
