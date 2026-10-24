@@ -182,7 +182,7 @@ export const SummaryReportPage: React.FC = () => {
           <div className="summary-data-cell">
             <span className="cell-label">Land Classification</span>
             <strong className="cell-val" style={{ color: report?.land_class?.dominant === 'AGRICULTURAL' ? '#10b981' : '#ef4444' }}>
-              {report?.land_class?.dominant || 'AGRICULTURAL'} {report?.land_class?.subclass ? `(${report.land_class.subclass})` : ''}
+              {report?.land_class?.dominant?.replace(/_/g, ' ') || 'AGRICULTURAL'} {report?.land_class?.subclass ? `(${report.land_class.subclass.replace(/_/g, ' ')})` : ''}
             </strong>
           </div>
           <div className="summary-data-cell">
@@ -190,7 +190,7 @@ export const SummaryReportPage: React.FC = () => {
             <strong className="cell-val" style={{
               color: report?.irrigability?.verdict === 'IRRIGABLE' ? '#10b981' : (report?.irrigability?.verdict === 'CONDITIONALLY_IRRIGABLE' ? '#f59e0b' : '#ef4444')
             }}>
-              {report?.irrigability?.verdict ? report.irrigability.verdict.replace('_', ' ') : 'IRRIGABLE'}
+              {report?.irrigability?.verdict ? report.irrigability.verdict.replace(/_/g, ' ') : 'IRRIGABLE'}
             </strong>
           </div>
           <div className="summary-data-cell">

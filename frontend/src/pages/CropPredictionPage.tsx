@@ -18,7 +18,8 @@ import {
   CheckCircle,
   Leaf,
   Compass,
-  AlertTriangle
+  AlertTriangle,
+  Eye
 } from 'lucide-react';
 import {
   BarChart,
@@ -102,7 +103,49 @@ export const CropPredictionPage: React.FC = () => {
         </div>
       </div>
 
-      {report?.irrigability && (report.irrigability.verdict === 'NOT_IRRIGABLE' || report.irrigability.verdict === 'NOT_IRRIGABLE_PROVISIONAL') ? (
+      {/* SHADOW MODE BANNER STRIP (PRD v2.1 §5A.7, §19.4, M23) */}
+      {report?.gate_mode === 'shadow' && (
+        <div style={{
+          backgroundColor: isLight ? '#fef3c7' : 'rgba(245, 158, 11, 0.15)',
+          border: '1px solid #f59e0b',
+          borderRadius: '10px',
+          padding: '12px 20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '12px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Eye size={18} style={{ color: '#f59e0b', flexShrink: 0 }} />
+            <span style={{ fontWeight: 700, color: '#f59e0b', fontSize: '0.88rem', letterSpacing: '0.04em' }}>
+              SHADOW MODE — verdict not enforced
+            </span>
+          </div>
+          <span style={{ fontSize: '0.78rem', color: isLight ? '#92400e' : '#fcd34d' }}>
+            Land detection & irrigability verdict ({report?.irrigability?.verdict?.replace(/_/g, ' ') || 'SHADOW'}) are computed for telemetry; crop models are fully evaluated.
+          </span>
+        </div>
+      )}
+
+      {/* PARTLY CHECKED WARNING NOTICE (PRD v2.1 M23) */}
+      {report?.detection?.warnings && report.detection.warnings.length > 0 && (
+        <div style={{
+          backgroundColor: isLight ? '#fffbeb' : 'rgba(245, 158, 11, 0.1)',
+          border: '1px dashed #f59e0b',
+          borderRadius: '8px',
+          padding: '8px 16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          fontSize: '0.82rem',
+          color: isLight ? '#b45309' : '#fde68a'
+        }}>
+          <AlertTriangle size={15} style={{ flexShrink: 0 }} />
+          <span><strong>Partly checked:</strong> {report.detection.warnings.join('; ')}</span>
+        </div>
+      )}
+
+      {report?.irrigability && (report.irrigability.verdict === 'NOT_IRRIGABLE' || report.irrigability.verdict === 'NOT_IRRIGABLE_PROVISIONAL') && report?.gate_mode === 'enforce' ? (
         <div className="glass-card" style={{
           padding: '36px 28px',
           border: '2px solid #ef4444',
@@ -136,10 +179,10 @@ export const CropPredictionPage: React.FC = () => {
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em'
                 }}>
-                  {report.irrigability.verdict.replace('_', ' ')}
+                  {report.irrigability.verdict.replace(/_/g, ' ')}
                 </span>
                 <span style={{ fontSize: '0.85rem', color: '#9ca3af' }}>
-                  Land Classification: <strong>{report.land_class?.dominant || 'NON-AGRICULTURAL'}</strong> {report.land_class?.subclass ? `(${report.land_class.subclass})` : ''}
+                  Land Classification: <strong>{report.land_class?.dominant?.replace(/_/g, ' ') || 'NON-AGRICULTURAL'}</strong> {report.land_class?.subclass ? `(${report.land_class.subclass.replace(/_/g, ' ')})` : ''}
                 </span>
               </div>
               <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#ef4444', marginTop: '6px' }}>
@@ -267,7 +310,7 @@ export const CropPredictionPage: React.FC = () => {
                 <div>
                   <span className="summary-pill-label">Irrigability Verdict</span>
                   <strong className="summary-pill-val" style={{ color: report.irrigability.verdict === 'IRRIGABLE' ? '#10b981' : '#f59e0b' }}>
-                    {report.irrigability.verdict.replace('_', ' ')}
+                    {report.irrigability.verdict.replace(/_/g, ' ')}
                   </strong>
                 </div>
               </div>
@@ -307,6 +350,185 @@ export const CropPredictionPage: React.FC = () => {
               </div>
             </div>
           </section>
+
+          {/* DETECTION PANEL (PRD v2.1 §5A, M16, M23) */}
+          {report?.detection && (
+            <section className="glass-card" style={{ padding: '20px 24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Layers size={18} style={{ color: 'var(--accent-green)' }} />
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>
+                    Physical & Land Surface Detection
+                  </h3>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{
+                    fontSize: '0.72rem',
+                    padding: '3px 8px',
+                    borderRadius: '6px',
+                    backgroundColor: report.gate_mode === 'enforce' ? '#ef4444' : (report.gate_mode === 'shadow' ? '#f59e0b' : '#6b7280'),
+                    color: '#ffffff',
+                    fontWeight: 600,
+                    textTransform: 'uppercase'
+                  }}>
+                    Gate: {report.gate_mode || 'off'}
+                  </span>
+                </div>
+              </div>
+
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '12px'
+              }}>
+                {/* 1. Forest */}
+                <div className="detection-feature-card" style={{
+                  padding: '14px',
+                  borderRadius: '10px',
+                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid var(--border-color)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Forest Cover</span>
+                    <span style={{
+                      fontSize: '0.7rem',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      fontWeight: 700,
+                      backgroundColor: report.detection.forest?.state === 'detected' ? (report.detection.forest?.plantation_signature ? '#3b82f6' : '#ef4444') : (report.detection.forest?.state === 'not detected' ? '#10b981' : '#6b7280'),
+                      color: '#ffffff'
+                    }}>
+                      {report.detection.forest?.plantation_signature ? 'PLANTATION' : (report.detection.forest?.state?.toUpperCase() || 'UNKNOWN')}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
+                    {report.detection.forest?.share != null ? `${(report.detection.forest.share * 100).toFixed(1)}% share` : 'N/A'}
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                    Source: {report.detection.forest?.source || 'ESA WorldCover / Hansen'}
+                  </div>
+                  {report.detection.forest?.plantation_signature && (
+                    <div style={{ fontSize: '0.7rem', color: '#3b82f6', marginTop: '2px', fontWeight: 600 }}>
+                      Plantation guarded (not forest)
+                    </div>
+                  )}
+                </div>
+
+                {/* 2. Buildings */}
+                <div className="detection-feature-card" style={{
+                  padding: '14px',
+                  borderRadius: '10px',
+                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid var(--border-color)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Buildings</span>
+                    <span style={{
+                      fontSize: '0.7rem',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      fontWeight: 700,
+                      backgroundColor: report.detection.buildings?.state === 'detected' ? '#ef4444' : (report.detection.buildings?.state === 'not detected' ? '#10b981' : '#6b7280'),
+                      color: '#ffffff'
+                    }}>
+                      {report.detection.buildings?.state?.toUpperCase() || 'UNKNOWN'}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
+                    {report.detection.buildings?.share != null ? `${(report.detection.buildings.share * 100).toFixed(1)}% footprint` : (report.detection.buildings?.footprint_m2 != null ? `${report.detection.buildings.footprint_m2.toFixed(0)} m²` : 'None')}
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                    Source: {report.detection.buildings?.source || 'OpenFreeMap / MS Buildings'}
+                  </div>
+                </div>
+
+                {/* 3. Roads */}
+                <div className="detection-feature-card" style={{
+                  padding: '14px',
+                  borderRadius: '10px',
+                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid var(--border-color)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Roads & Transit</span>
+                    <span style={{
+                      fontSize: '0.7rem',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      fontWeight: 700,
+                      backgroundColor: report.detection.roads?.state === 'detected' ? '#ef4444' : (report.detection.roads?.state === 'not detected' ? '#10b981' : '#6b7280'),
+                      color: '#ffffff'
+                    }}>
+                      {report.detection.roads?.state?.toUpperCase() || 'UNKNOWN'}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
+                    {report.detection.roads?.state === 'detected' ? 'Road Traversing' : 'No Public Roads'}
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                    Source: {report.detection.roads?.source || 'OpenFreeMap Vector Tiles'}
+                  </div>
+                </div>
+
+                {/* 4. Water */}
+                <div className="detection-feature-card" style={{
+                  padding: '14px',
+                  borderRadius: '10px',
+                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid var(--border-color)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Water Bodies</span>
+                    <span style={{
+                      fontSize: '0.7rem',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      fontWeight: 700,
+                      backgroundColor: report.detection.water?.state === 'detected' ? '#ef4444' : (report.detection.water?.state === 'not detected' ? '#10b981' : '#6b7280'),
+                      color: '#ffffff'
+                    }}>
+                      {report.detection.water?.state?.toUpperCase() || 'UNKNOWN'}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
+                    {report.detection.water?.share != null ? `${(report.detection.water.share * 100).toFixed(1)}% water` : 'None'}
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                    Source: {report.detection.water?.source || 'HydroLAKES / ESA WorldCover'}
+                  </div>
+                </div>
+
+                {/* 5. Terrain */}
+                <div className="detection-feature-card" style={{
+                  padding: '14px',
+                  borderRadius: '10px',
+                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid var(--border-color)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Terrain & Relief</span>
+                    <span style={{
+                      fontSize: '0.7rem',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      fontWeight: 700,
+                      backgroundColor: report.detection.terrain?.state === 'detected' ? '#ef4444' : '#10b981',
+                      color: '#ffffff'
+                    }}>
+                      {report.detection.terrain?.state === 'detected' ? 'STEEP SLOPE' : 'SUITABLE'}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
+                    {report.detection.terrain?.slope_mean != null ? `${report.detection.terrain.slope_mean.toFixed(1)}° slope` : 'Gentle slope'}
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                    {report.detection.terrain?.elevation_mean != null ? `Elev: ${report.detection.terrain.elevation_mean.toFixed(0)}m • ` : ''}
+                    Source: Copernicus GLO-30
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* SECTION 2 — TOP 5 MULTI-CROP RECOMMENDATIONS OR NON-ARABLE NOTICE */}
           {top5Crops.length === 0 ? (

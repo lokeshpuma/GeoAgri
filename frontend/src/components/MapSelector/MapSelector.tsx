@@ -11,7 +11,8 @@ import {
   RefreshCw,
   AlertTriangle,
   Sparkles,
-  Check
+  Check,
+  Upload
 } from 'lucide-react';
 import { fetchFieldArea, FullReportResponse } from '../../api/client';
 
@@ -210,6 +211,46 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
   const [activeLayer, setActiveLayer] = useState<AnalysisLayerType>('standard');
   const [isLocating, setIsLocating] = useState<boolean>(false);
   const [selectedPresetName, setSelectedPresetName] = useState<string>(PRESET_REGIONS[0].name);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImportPolygon = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      try {
+        const text = event.target?.result as string;
+        const data = JSON.parse(text);
+        let coords: [number, number][] = [];
+        if (data.type === 'FeatureCollection' && data.features?.[0]?.geometry) {
+          const geom = data.features[0].geometry;
+          coords = geom.coordinates[0];
+        } else if (data.type === 'Feature' && data.geometry) {
+          coords = data.geometry.coordinates[0];
+        } else if (data.type === 'Polygon') {
+          coords = data.coordinates[0];
+        } else if (Array.isArray(data) && data.length >= 3) {
+          coords = data;
+        }
+        if (coords.length >= 3) {
+          const areaRes = await fetchFieldArea(coords);
+          const area = areaRes?.area_ha ?? 0;
+          setPolygonPts(coords);
+          setAreaHa(area);
+          setSelectedPresetName(file.name);
+          onPolygonChange(coords, area, file.name);
+          if (mapRef.current) {
+            const bounds = new maplibregl.LngLatBounds();
+            coords.forEach(pt => bounds.extend(pt));
+            mapRef.current.fitBounds(bounds, { padding: 40 });
+          }
+        }
+      } catch (err) {
+        console.error("Failed to parse polygon file", err);
+      }
+    };
+    reader.readAsText(file);
+  };
 
   // Compute current display coordinates [lng, lat]
   const currentLng = selectedPoint ? selectedPoint[0] : polygonPts[0] ? polygonPts[0][0] : PRESET_REGIONS[0].centroid[0];
@@ -453,31 +494,50 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <input
+            type="file"
+            ref={fileInputRef}
+            accept=".geojson,.json"
+            onChange={handleImportPolygon}
+            style={{ display: 'none' }}
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="btn-secondary"
+            style={{ fontSize: '0.75rem', padding: '4px 10px', display: 'flex', alignItems: 'center', gap: '4px' }}
+            title="Import parcel boundary polygon (GeoJSON/JSON)"
+          >
+            <Upload size={13} />
+            <span>Import Polygon</span>
+          </button>
           <span className="badge badge-high" style={{ fontSize: '0.78rem', padding: '4px 10px' }}>
             {areaHa > 0 ? `${areaHa.toFixed(2)} Ha Target Area` : "Target Coordinate"}
           </span>
         </div>
       </div>
 
-      {/* 2. Preset Regions Selector */}
-      <div className="preset-chips-row" role="group" aria-label="Field Presets">
-        {PRESET_REGIONS.map((preset) => {
-          const isSelected = selectedPresetName === preset.name;
-          return (
-            <button
-              key={preset.name}
-              type="button"
-              onClick={() => handleSelectPreset(preset)}
-              className={`preset-region-btn ${isSelected ? 'active' : ''}`}
-              title={`Switch to ${preset.name}`}
-            >
-              <MapPin size={13} style={{ color: isSelected ? 'var(--accent-green)' : '#9ca3af' }} />
-              <span>{preset.name.split(' (')[0]}</span>
-              {isSelected && <Check size={13} style={{ color: 'var(--accent-green)', marginLeft: '4px' }} />}
-            </button>
-          );
-        })}
-      </div>
+      {/* 2. Preset Regions Selector (Gated with VITE_DEMO_MODE per FR-21 / M23) */}
+      {import.meta.env.VITE_DEMO_MODE === 'true' && (
+        <div className="preset-chips-row" role="group" aria-label="Field Presets">
+          {PRESET_REGIONS.map((preset) => {
+            const isSelected = selectedPresetName === preset.name;
+            return (
+              <button
+                key={preset.name}
+                type="button"
+                onClick={() => handleSelectPreset(preset)}
+                className={`preset-region-btn ${isSelected ? 'active' : ''}`}
+                title={`Switch to ${preset.name}`}
+              >
+                <MapPin size={13} style={{ color: isSelected ? 'var(--accent-green)' : '#9ca3af' }} />
+                <span>{preset.name.split(' (')[0]}</span>
+                {isSelected && <Check size={13} style={{ color: 'var(--accent-green)', marginLeft: '4px' }} />}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* 3. Map Viewport & Overlays */}
       <div className="map-viewport-wrapper">

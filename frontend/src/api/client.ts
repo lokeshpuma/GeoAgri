@@ -85,6 +85,9 @@ export interface LandInquiryResponse {
   land_records: LandRecordSummary;
   layers: Array<Record<string, any>>;
   data_quality: { observed_feature_share: number; notes: string[] };
+  detection?: Record<string, any> | null;
+  gate_mode?: string | null;
+  area_check?: Record<string, any> | null;
   disclaimer: string;
   assessment_timestamp: string;
 }
@@ -194,6 +197,10 @@ export interface FullReportResponse {
   land_class?: LandClassification | null;
   irrigability?: Irrigability | null;
   land_records?: LandRecordSummary | null;
+  detection?: Record<string, any> | null;
+  gate_mode?: string | null;
+  area_check?: Record<string, any> | null;
+  imputed_features?: string[] | null;
   disclaimer?: string;
 }
 
