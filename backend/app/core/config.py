@@ -49,6 +49,8 @@ class Settings(BaseSettings):
     ENABLE_BHUVAN_LIVE_QUERY: bool = True
     LAND_CLASS_RULES_PATH: str = "app/rules/land_class_rules.yaml"
     IRRIGABILITY_RULES_PATH: str = "app/rules/irrigability_rules.yaml"
+    LAND_CLASS_RULES: str = "backend/app/rules/land_class_rules.yaml"
+    IRRIGABILITY_RULES: str = "backend/app/rules/irrigability_rules.yaml"
 
     # Detection & Gating (PRD v2.1 §5A.7, §19.4)
     LAND_DETECTION_MODE: str = "shadow"  # off | shadow | enforce

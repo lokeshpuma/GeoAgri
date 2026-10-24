@@ -37,3 +37,28 @@ confidence_scoring:
   verified_official_record: 0.98
   user_provided_document: 0.90
   conflicting_signals: 0.50
+
+detection:
+  point_only_acres: 0.7          # circle used only when no polygon (donor default)
+  legacy_strict: false           # true = any built-up pixel/road in the circle blocks (donor behaviour)
+  min_independent_sources: 2     # for provisional remote-sensing-only verdicts
+  forest:
+    cover_share_min: 0.50        # WorldCover 10 and/or Hansen treecover >= hansen_min within the plot
+    hansen_treecover_min_pct: 60
+    plantation_guard: true
+  buildings:
+    urban_dominant_share_min: 0.30   # built share of plot -> URBAN_BUILT
+    farmhouse_max_share: 0.05        # below this: subtract footprint, stay AGRICULTURAL
+  roads:
+    deduct_lines: false              # roads reported; area deducted only from polygon evidence
+    assumed_half_width_m: {}         # opt-in per class, flagged `assumed`
+  water:
+    share_min: 0.35
+  terrain:
+    report_only: true                # verdict thresholds live in irrigability_rules.yaml
+    slope_window_m_min: 90
+  timeouts:
+    per_source_s: 6
+    total_budget_s: 8
+  cache_ttl_s: 86400
+

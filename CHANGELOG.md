@@ -62,6 +62,25 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - **Verification Script (`scripts/verify.sh`)**: Implemented automated script that sequentially validates Grep Gates (M1, M2, M11, M13, M18, M20), runs backend pytest suite (59 passed), and builds frontend production bundle. Exit code 0 verified.
 - **Rollback Scaffolding & Drill (`scripts/rollback_drill.sh`) (M27)**: Executed §19.6 rollback drill verifying git stashing, detached checkout to `baseline-v2.0` (tests passed), detached checkout to step tag (tests passed), return to `integrate/detection`, and runtime off-switch verification (`LAND_DETECTION_MODE=off LAND_GATE_MODE=off`). Drill printed `ROLLBACK OK`.
 
+## [PRD v2.1 - Step S04 Detection Engine Redesign] - 2026-10-24
+### Fixed & Verified (M16, M22, M28)
+- **Detection Engine (`app/services/landclass/detection.py`) (M16, M22)**:
+  - Ported and redesigned donor `area_check.py` per PRD v2.1 §5A.
+  - Implemented polygon-level mask evaluation using exact Shapely polygon rasterization (`rasterio.features.rasterize`), supporting both parcel polygons and point-only circles (`AREA_CHECK_ACRES`, `area_ha=null`).
+  - Implemented share-based rules: built-up share >= 0.30 dominates as urban; farmhouse share < 0.05 stays agricultural and subtracts building footprint (`footprint_ha`).
+  - Implemented plantation guard: high tree cover with RTC or known crop plantation signature (`bagayat`, `areca`, `coffee`, etc.) is kept distinct from natural forest cover and not blocked.
+  - Ignored farm tracks and paths in transportation layer.
+  - Honest missing layer reporting: unresponsive layers report `unknown` with warnings, never "clear" or "pass" (D5).
+  - Parallel multi-source execution with thread pool, strict timeouts (<= 6s per source, <= 8s total budget), and thread-safe TTL cache returning deep copies (D7).
+  - Maintained `app/services/geo/area_check.py` as a thin deprecated re-export layer with legacy output translation (`to_legacy_area_check`).
+- **Offline Detection Matrix Suite (`tests/test_detection_offline.py`)**:
+  - Implemented 35 offline test cases covering all §5A.6 matrix scenarios (cropland 40, farmhouse deduction, 40% urban dominant, 70% tree forest cover, plantation guard, single-source OSM wood unverified, WDPA official layer, DEM-only unverified, WorldCover 404 sea, farm tracks ignored, cache immutability, polygon rasterization).
+- **Latency & Resilience Suite (`tests/test_detection_budget.py`) (M28)**:
+  - Verified slow/hanging sources (20s sleep) are cleanly timed out within total budget (<= 8s), returning HTTP 200 with warnings and `state=unavailable` without crashing.
+- **Verification Gates**:
+  - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed (M1, M2, M11, M13, M18, M20), 96 backend tests passed, and frontend built with 0 errors.
+
+
 
 
 
