@@ -38,3 +38,14 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - `pytest -v` baseline execution: 54 passed in 59.86s
 - `npm run build` baseline execution: 0 errors in 2.21s
 
+## [PRD v2.1 - Step S01 Kill Fabrication] - 2026-10-24
+### Fixed & Verified (M13, M14, M17, M20, M21)
+- **Killed Fabricated Providers (M13)**: Rewrote `bhuvan_wms.py` and `open_layers.py` to perform real cheap probes and return `None` on unreachable layers instead of hardcoded synthetic agricultural records.
+- **Grep Gate M13**: `grep -rn "Agricultural / Cultivable|Agricultural Cropland" backend/app` -> 0 matches.
+- **Record Override Rules (M14)**: Enforced in `manager.py` and `classifier.py` that only records with `verification in ['official', 'user_provided']` can override classification, with conflict detection against remote-sensing signals.
+- **Config Cleanup (M20)**: Removed `LAND_RECORDS_MOCK_FALLBACK` and guessed `KSRSAC_REST_ENDPOINT`. Added detection & gating flags (`LAND_DETECTION_MODE`, `LAND_GATE_MODE`, etc.) to `config.py` and `.env.example`.
+- **Grep Gate M20**: `grep -rn "ksrsac.karnataka.gov.in/geoserver" backend` -> 0 matches.
+- **Honest Provenance (M17)**: `land.py` computes true observed feature share, reports genuine layer states, and leaves `admin.state` null when no boundary/record is present.
+- **Non-Mocking Test Suite (M21)**: Replaced mock on `LandClassifier.classify` with genuine raster environment input. Added `test_no_coordinate_defaults_to_agricultural` and meta-test `test_meta_no_tests_patch_classifier`. All 56 tests passed.
+
+

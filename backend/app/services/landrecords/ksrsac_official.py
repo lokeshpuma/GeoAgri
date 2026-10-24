@@ -8,14 +8,16 @@ from __future__ import annotations
 import os
 from typing import Any
 from app.services.landrecords.base import LandRecordProvider, ProviderStatus, RecordResult, SurveyRef
+from app.core.config import get_settings
 
 
 class KSRSACOfficialProvider:
     name: str = "ksrsac_official"
 
     def __init__(self):
-        self.api_base_url = os.getenv("KSRSAC_API_BASE_URL", "")
-        self.api_key = os.getenv("KSRSAC_API_KEY", "")
+        settings = get_settings()
+        self.api_base_url = settings.KSRSAC_API_BASE_URL
+        self.api_key = settings.KSRSAC_API_KEY
 
     async def available(self) -> ProviderStatus:
         if not self.api_base_url or not self.api_key:

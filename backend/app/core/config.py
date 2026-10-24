@@ -41,14 +41,25 @@ class Settings(BaseSettings):
     SOILGRIDS_SOURCE: str = "gee"  # "gee" | "local"
     SOILGRIDS_LOCAL_DIR: str = "backend/ml/data/raw/external/soil/soilgrids"
 
-    # Land Intelligence & Records (PRD v2.0 §8, §9)
-    LAND_RECORDS_MOCK_FALLBACK: bool = False
+    # Land Intelligence & Records (PRD v2.0 §8, §9, v2.1 M20)
+    KSRSAC_API_BASE_URL: str = ""
+    KSRSAC_API_KEY: str = ""
     BHUVAN_WMS_ENDPOINT: str = "https://bhuvan-vec2.nrsc.gov.in/bhuvan/wms"
-    KSRSAC_REST_ENDPOINT: str = "https://ksrsac.karnataka.gov.in/geoserver/wms"
     MAX_UPLOAD_SIZE_MB: int = 15
     ENABLE_BHUVAN_LIVE_QUERY: bool = True
     LAND_CLASS_RULES_PATH: str = "app/rules/land_class_rules.yaml"
     IRRIGABILITY_RULES_PATH: str = "app/rules/irrigability_rules.yaml"
+
+    # Detection & Gating (PRD v2.1 §5A.7, §19.4)
+    LAND_DETECTION_MODE: str = "shadow"  # off | shadow | enforce
+    LAND_GATE_MODE: str = "shadow"       # off | shadow | enforce
+    AREA_CHECK_ACRES: float = 0.7
+    OPENFREEMAP_TILEJSON: str = "https://tiles.openfreemap.org/planet"
+    OVERPASS_URL: str = "https://overpass-api.de/api/interpreter"
+    DETECTION_PER_SOURCE_TIMEOUT_S: float = 6.0
+    DETECTION_TOTAL_BUDGET_S: float = 8.0
+    DETECTION_CACHE_TTL_S: int = 86400
+    UPLOAD_RETENTION_SECONDS: int = 0
 
     # Credentials (optional)
     CDSE_CLIENT_ID: str = ""

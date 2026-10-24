@@ -49,7 +49,7 @@ class LandRecordManager:
             ref = SurveyRef(**survey_ref)
             for p in self.providers:
                 rec = await p.by_reference(ref)
-                if rec:
+                if rec and rec.verification in ["official", "user_provided"]:
                     matched_record = rec.model_dump()
                     break
 
@@ -57,7 +57,7 @@ class LandRecordManager:
         if not matched_record:
             for p in self.providers:
                 rec = await p.by_coordinate(lon, lat)
-                if rec:
+                if rec and rec.verification in ["official", "user_provided"]:
                     matched_record = rec.model_dump()
                     break
 

@@ -55,6 +55,36 @@ async def land_inquiry_post(req: LandInquiryRequest):
 
         now_iso = datetime.now(timezone.utc).isoformat()
 
+        admin_info = (record_summary.record.get("admin") if (record_summary.record and record_summary.record.get("admin")) else {
+            "state": None,
+            "district": None,
+            "taluk": None,
+            "village": None,
+            "source": None
+        })
+
+        total_feats = len(vector) if vector else 1
+        observed_cnt = sum(1 for v in vector.values() if v is not None and v != 0.0) if vector else 0
+        observed_share = round(observed_cnt / total_feats, 2)
+
+        sat_ready = bool(profile.get("satellite") and any(profile["satellite"].values()))
+        weather_ready = bool(profile.get("weather") and any(profile["weather"].values()))
+        soil_ready = bool(profile.get("soil") and any(profile["soil"].values()))
+
+        layers = [
+            {"name": "esa_worldcover_2021", "state": "checked" if sat_ready else "unavailable", "licence": "CC BY 4.0", "source_date": "2021"},
+            {"name": "copernicus_dem_glo30", "state": "checked" if sat_ready else "unavailable", "licence": "Open Access", "source_date": "2021"},
+            {"name": "sentinel2_sr", "state": "checked" if sat_ready else "unavailable", "licence": "CC BY-SA 3.0 IGO", "source_date": "2024"},
+            {"name": "hydrolakes", "state": "checked" if sat_ready else "unavailable", "licence": "CC BY 4.0", "source_date": "2019"}
+        ]
+
+        notes = []
+        if sat_ready:
+            notes.append("Elevation and slope derived from 30m DEM")
+            notes.append("Spectral indices computed from Sentinel-2 SR")
+        if not sat_ready and not weather_ready and not soil_ready:
+            notes.append("External remote sensing and weather sources unavailable")
+
         return LandInquiryResponse(
             query={
                 "lon": lon,
@@ -62,25 +92,14 @@ async def land_inquiry_post(req: LandInquiryRequest):
                 "boundary_source": "user_drawn" if req.polygon else "point_only",
                 "area_ha": area_ha
             },
-            admin={
-                "state": "Karnataka",
-                "district": None,
-                "taluk": None,
-                "village": None,
-                "source": "kgis_admin_boundaries|local_open_source"
-            },
+            admin=admin_info,
             land_class=land_class,
             irrigability=irrigability,
             land_records=record_summary,
-            layers=[
-                {"name": "esa_worldcover_2021", "state": "checked", "licence": "CC BY 4.0", "source_date": "2021"},
-                {"name": "copernicus_dem_glo30", "state": "checked", "licence": "Open Access", "source_date": "2021"},
-                {"name": "sentinel2_sr", "state": "checked", "licence": "CC BY-SA 3.0 IGO", "source_date": "2024"},
-                {"name": "hydrolakes", "state": "checked", "licence": "CC BY 4.0", "source_date": "2019"}
-            ],
+            layers=layers,
             data_quality={
-                "observed_feature_share": 0.85,
-                "notes": ["Elevation and slope derived from 30m DEM", "Spectral indices computed from Sentinel-2 SR"]
+                "observed_feature_share": observed_share,
+                "notes": notes
             },
             disclaimer="Decision-support only. Not a legal land record, conversion certificate or official survey.",
             assessment_timestamp=now_iso

@@ -171,6 +171,8 @@ class LandClassification(BaseModel):
     subclass: str | None = None
     legal_forest_status: str = "unknown"
     confidence: float
+    conflict: bool = False
+    conflict_reason: str | None = None
 
 
 class Irrigability(BaseModel):

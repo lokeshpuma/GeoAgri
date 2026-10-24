@@ -50,18 +50,28 @@ class LandClassifier:
         layer_hits = layer_hits or []
         layer_names = [h.get("name", "").lower() for h in layer_hits]
 
-        # 1. Document / Record Override
-        if record:
+        # 1. Document / Record Override (PRD v2.1 M14)
+        if record and record.get("verification") in ["official", "user_provided"]:
             rec_class = record.get("class_geoagri") or record.get("recorded_land_class")
             if rec_class in ["AGRICULTURAL", "FOREST_LEGAL", "FOREST_COVER", "WASTELAND", "URBAN_BUILT", "WATER_BODY"]:
                 sub = record.get("subclass")
                 legal_forest = "reserved_forest" if rec_class == "FOREST_LEGAL" else "none"
+                ndwi = float(features.get("ndwi", 0.0))
+                slope = float(features.get("slope", 0.0))
+                is_water = any("water" in n or "hydrolakes" in n for n in layer_names)
+                conflict = False
+                confidence = 0.95
+                if rec_class == "AGRICULTURAL" and (is_water or ndwi > 0.35 or slope > 22.0):
+                    conflict = True
+                    confidence = 0.50
                 return LandClassification(
                     dominant=rec_class,
                     class_shares={rec_class: 1.0},
                     subclass=sub,
                     legal_forest_status=legal_forest,
-                    confidence=0.95
+                    confidence=confidence,
+                    conflict=conflict,
+                    conflict_reason="record_vs_imagery_conflict" if conflict else None
                 )
 
         # 2. Check Protected Area / Legal Forest Layer
