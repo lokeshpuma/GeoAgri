@@ -99,6 +99,21 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - **Verification Gates**:
   - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed (M1, M2, M11, M13, M18, M20), 102 backend tests passed, and frontend built with 0 errors.
 
+## [PRD v2.1 - Step S06 User Document Rewrite] - 2026-10-24
+### Fixed & Verified (M19)
+- **User Document Provider Rewrite (`app/services/landrecords/user_document.py`) (M19)**:
+  - Added PDF binary handling via `pypdf` without crashing on raw UTF-8 decoding; optional OCR via `pytesseract` for images.
+  - Implemented unit conversion: acres and guntas to hectares ('2 acres 20 guntas' => 0.9713 ha ±0.001 per PRD specification; hectares and guntas standalone).
+  - Enforced no silent default class: unmapped revenue terms yield `UNKNOWN` with `subclass=unmapped_record_term`.
+  - Added word-boundary regex (`\b(?:borewell|well)\b`) preventing words like "dwelling" or "farewell" from falsely triggering irrigation sources.
+  - Implemented session-isolated document store with TTL expiration (`UPLOAD_RETENTION_SECONDS`) and sha256 content tokenization.
+- **Privacy & Unit Test Suites**:
+  - `tests/test_landrecords_privacy.py`: Verified fixture RTC containing owner name, Aadhaar, PAN, phone, and address has all PII stripped.
+  - `tests/test_user_document_units.py`: Verified unit conversion (2 acres 20 guntas => 0.9713 ha), cross-session isolation (Session B cannot access Session A records), in-memory PDF parsing, word-boundary protection, and unmapped term UNKNOWN mapping.
+- **Verification Gates**:
+  - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed (M1, M2, M11, M13, M18, M20), 107 backend tests passed, and frontend built with 0 errors.
+
+
 
 
 
