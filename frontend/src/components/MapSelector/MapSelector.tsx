@@ -114,7 +114,8 @@ function getMapStyleDefinition(): string | maplibregl.StyleSpecification {
     (typeof globalThis !== 'undefined' && (globalThis as any).NEXT_PUBLIC_MAP_STYLE_URL) ||
     '';
 
-  if (envUrl && typeof envUrl === 'string' && envUrl.trim().length > 0) {
+  // Use external style only if explicitly configured with a full tile service (ignore demotiles which lacks satellite/terrain raster layers)
+  if (envUrl && typeof envUrl === 'string' && envUrl.trim().length > 0 && !envUrl.includes('demotiles.maplibre.org')) {
     return envUrl.trim();
   }
 
@@ -337,6 +338,43 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
         setMapLoaded(true);
         applyLayerStyling(map, activeLayer);
 
+        // Add boundary polygon source and layers
+        const geojson: any = {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: polygonPts && polygonPts.length >= 3 ? [polygonPts] : []
+          }
+        };
+
+        if (!map.getSource('field-polygon-source')) {
+          map.addSource('field-polygon-source', {
+            type: 'geojson',
+            data: geojson
+          });
+
+          map.addLayer({
+            id: 'field-polygon-fill',
+            type: 'fill',
+            source: 'field-polygon-source',
+            paint: {
+              'fill-color': '#10b981',
+              'fill-opacity': 0.28
+            }
+          });
+
+          map.addLayer({
+            id: 'field-polygon-line',
+            type: 'line',
+            source: 'field-polygon-source',
+            paint: {
+              'line-color': '#10b981',
+              'line-width': 2.5
+            }
+          });
+        }
+
         // Resize to ensure crisp canvas
         map.resize();
       });
@@ -392,6 +430,23 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
       applyLayerStyling(mapRef.current, activeLayer);
     }
   }, [activeLayer, mapLoaded, applyLayerStyling]);
+
+  // Update polygon overlay when polygonPts changes
+  useEffect(() => {
+    if (mapRef.current && mapLoaded) {
+      const src = mapRef.current.getSource('field-polygon-source') as maplibregl.GeoJSONSource | undefined;
+      if (src) {
+        src.setData({
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: polygonPts && polygonPts.length >= 3 ? [polygonPts] : []
+          }
+        });
+      }
+    }
+  }, [polygonPts, mapLoaded]);
 
   // Select Preset Region
   const handleSelectPreset = async (preset: typeof PRESET_REGIONS[0]) => {
