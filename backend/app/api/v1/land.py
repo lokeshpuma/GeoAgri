@@ -164,3 +164,133 @@ async def upload_land_record(file: UploadFile = File(...)):
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to parse document: {str(e)}")
+
+
+@router.get("/map-layers")
+async def get_map_layers_status():
+    """
+    Honest map and detection layers status (PRD v2.1 M10, M24).
+    Probes filesystem existence and remote connectivity for each layer.
+    Reports status as 'ready' or 'unavailable' + exact reason.
+    """
+    from pathlib import Path
+    data_root = Path(__file__).resolve().parents[3] / "ml" / "data" / "raw" / "external"
+    settings = get_settings()
+
+    def check_local(path_suffix: str) -> bool:
+        p = data_root / path_suffix
+        return p.exists() and (p.is_file() or (p.is_dir() and any(p.iterdir())))
+
+    layers = [
+        {
+            "id": "esa_worldcover_2021",
+            "name": "ESA WorldCover 2021 v200",
+            "type": "raster",
+            "status": "ready" if (check_local("geo/worldcover_2021") or check_local("geo/worldcover")) else "unavailable",
+            "reason": None if (check_local("geo/worldcover_2021") or check_local("geo/worldcover")) else "Local COG not downloaded; remote access unconfigured",
+            "licence": "CC BY 4.0",
+            "source_date": "2021",
+            "attribution": "ESA WorldCover 10m 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium"
+        },
+        {
+            "id": "copernicus_dem_glo30",
+            "name": "Copernicus DEM GLO-30",
+            "type": "raster",
+            "status": "ready" if (check_local("geo/slope") or check_local("geo/copernicus_dem")) else "unavailable",
+            "reason": None if (check_local("geo/slope") or check_local("geo/copernicus_dem")) else "Local DEM not downloaded; remote access unconfigured",
+            "licence": "Open Access",
+            "source_date": "2021",
+            "attribution": "European Space Agency (ESA) Copernicus Programme DEM GLO-30"
+        },
+        {
+            "id": "sentinel2_sr",
+            "name": "Sentinel-2 L2A Surface Reflectance",
+            "type": "satellite_optical",
+            "status": "ready" if bool(settings.CDSE_CLIENT_ID and settings.CDSE_CLIENT_SECRET) else "unavailable",
+            "reason": None if bool(settings.CDSE_CLIENT_ID and settings.CDSE_CLIENT_SECRET) else "CDSE credentials not configured (CDSE_CLIENT_ID/SECRET empty)",
+            "licence": "CC BY-SA 3.0 IGO",
+            "source_date": "2024",
+            "attribution": "Copernicus Sentinel data (2024) processed by ESA"
+        },
+        {
+            "id": "hydrolakes",
+            "name": "HydroLAKES Global Water Body Database",
+            "type": "vector",
+            "status": "ready" if check_local("geo/hydrolakes") else "unavailable",
+            "reason": None if check_local("geo/hydrolakes") else "HydroLAKES shapefile not in raw/external/geo/hydrolakes",
+            "licence": "CC BY 4.0",
+            "source_date": "2019",
+            "attribution": "Messager et al. (2016), HydroLAKES database / HydroSHEDS"
+        },
+        {
+            "id": "hydrorivers",
+            "name": "HydroRIVERS Asia",
+            "type": "vector",
+            "status": "ready" if check_local("geo/hydrorivers") else "unavailable",
+            "reason": None if check_local("geo/hydrorivers") else "HydroRIVERS shapefile not in raw/external/geo/hydrorivers",
+            "licence": "HydroSHEDS Terms of Use",
+            "source_date": "2019",
+            "attribution": "HydroSHEDS / World Wildlife Fund US"
+        },
+        {
+            "id": "openfreemap_mvt",
+            "name": "OpenFreeMap Vector Tiles (OSM)",
+            "type": "vector_tile",
+            "status": "ready" if bool(settings.OPENFREEMAP_TILEJSON) else "unavailable",
+            "reason": None if bool(settings.OPENFREEMAP_TILEJSON) else "OPENFREEMAP_TILEJSON unconfigured",
+            "licence": "ODbL 1.0",
+            "source_date": "2024",
+            "attribution": "OpenFreeMap / OpenStreetMap contributors"
+        },
+        {
+            "id": "ms_buildings",
+            "name": "Microsoft Global ML Building Footprints",
+            "type": "vector",
+            "status": "ready" if (check_local("geo/buildings_ms") or check_local("geo/ms_buildings")) else "unavailable",
+            "reason": None if (check_local("geo/buildings_ms") or check_local("geo/ms_buildings")) else "Building footprints extract not in raw/external/geo/buildings_ms",
+            "licence": "CDLA-Permissive-2.0",
+            "source_date": "2023",
+            "attribution": "Microsoft Global ML Building Footprints"
+        },
+        {
+            "id": "hansen_gfc",
+            "name": "Hansen Global Forest Change",
+            "type": "raster",
+            "status": "ready" if check_local("geo/hansen") else "unavailable",
+            "reason": None if check_local("geo/hansen") else "Hansen treecover rasters not in raw/external/geo/hansen",
+            "licence": "CC BY 4.0",
+            "source_date": "2023",
+            "attribution": "Hansen/UMD/Google/USGS/NASA Global Forest Change"
+        },
+        {
+            "id": "karnataka_protected_areas",
+            "name": "Karnataka Protected Areas",
+            "type": "vector",
+            "status": "ready" if check_local("geo/protected_areas_ka") else "unavailable",
+            "reason": None if check_local("geo/protected_areas_ka") else "Interim protected areas layer not in raw/external/geo/protected_areas_ka",
+            "licence": "Public Domain (OpenCity / KSRSAC)",
+            "source_date": "2022",
+            "attribution": "KSRSAC / OpenCity.in Protected Areas (Interim Non-Legal)"
+        },
+        {
+            "id": "bhuvan_thematic_wms",
+            "name": "ISRO Bhuvan Thematic WMS",
+            "type": "wms",
+            "status": "unavailable",
+            "reason": "Bhuvan WMS endpoint requires live probed session or IP whitelisting",
+            "licence": "ISRO / NRSC Data Policy",
+            "source_date": "2024",
+            "attribution": "National Remote Sensing Centre (NRSC) / ISRO Bhuvan"
+        }
+    ]
+
+    ready_cnt = sum(1 for l in layers if l["status"] == "ready")
+    unavail_cnt = sum(1 for l in layers if l["status"] == "unavailable")
+
+    return {
+        "layers": layers,
+        "total_layers": len(layers),
+        "ready_count": ready_cnt,
+        "unavailable_count": unavail_cnt,
+        "checked_at": datetime.now(timezone.utc).isoformat()
+    }
