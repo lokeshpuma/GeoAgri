@@ -1,8 +1,9 @@
-# GeoAgri AI — Product Requirements Document (PRD) v2.0
+# GeoAgri AI — Product Requirements Document (PRD) v2.1
 
-**Version:** 2.0 · **Date:** 2026-10-23 · **Supersedes:** PRD v1.0 (kept in §A as the delta base)
-**Scope of v2:** add **land-class + irrigability classification** (forest, wasteland, urban/built-up, water → *explicitly "NOT IRRIGABLE"*), a **land-records enquiry layer** (Karnataka e-Khata/e-Swathu, Bhoomi RTC, ULPIN, other states, other countries) driven by **coordinates + credentials**, and a **mandatory change set** that Antigravity must apply to the repo.
-**Implementation tool:** Antigravity (coding agent). **Read §0 and §3 first.**
+**Version:** 2.1 · **Date:** 2026-10-24 · **Supersedes:** PRD v2.0 (all v2.0 sections remain in force unless a v2.1 section says otherwise)
+**Scope of v2.1:** (1) audit result of the "after PRD v2.0" build and **force-fix list**; (2) **forest & building detection** ported from `GeoAgri-added_forest_and_building_detection.zip` and redesigned; (3) **rollback / safe-integration plan**; (4) an ordered **Antigravity runbook** (§20).
+**Integration target:** `geoagri_ai_after_finishing_the_prd.md_file_.zip` (v2.0 build). **Donor (read-only):** `GeoAgri-added_forest_and_building_detection.zip`.
+**Implementation tool:** Antigravity (coding agent). **Read §0, §2B, §3B, §19, §20 first.**
 
 ---
 
@@ -16,7 +17,11 @@
 6. **No personal data.** Owner names, Aadhaar, phone, PAN and addresses of persons are stripped at parse time and never stored, logged or returned (§6.4).
 7. Small commits: one per data source, service, model retrain. Run `pytest -v` (backend) and `npm run build` (frontend) before each commit.
 8. Secrets only in `backend/.env` (git-ignored). Never commit keys, service-account JSON or downloaded land records.
-9. **"Force change" rule:** items in §3 are mandatory. Do not mark a phase complete until its §3 grep/test gate passes.
+9. **"Force change" rule:** items in §3 **and §3B** are mandatory. Do not mark a phase complete until its grep/test gate passes.
+10. **Never mock the unit under test.** Tests may stub network/raster readers; they must not patch `LandClassifier.classify`, `IrrigabilityEngine.evaluate` or provider return values to force an outcome (M21).
+11. **A provider returns real data or `None`.** No hard-coded `RecordResult`, no hard-coded `layers[]`/`data_quality`, no defaults standing in for missing features (A1–A7).
+12. **Integrate safely.** Follow §19 (git baseline, one commit + tag per step, runtime flags). The donor zip is read-only; copy only the files named in §2B.3.
+13. **Report real test results.** If a command cannot run, write `NOT RUN` and why. Never claim a pass you did not observe.
 
 ---
 
@@ -50,7 +55,7 @@
 | SoilGrids REST replaced by GEE/OpenLandMap queries | `services/soil/soilgrids.py` (per CHANGELOG) |
 | 2 sample datasets + `SOURCE.md`; legacy CSV `SOURCE.md` | `ml/data/raw/external/{labels/ftw_india,geo/hydrorivers}`, `ml/data/raw/SOURCE.md` |
 
-### 2.2 Still wrong in the repo (must be fixed — see §3)
+### 2.2 Still wrong in the v1 repo (historic list; items 1–7 were fixed in the v2.0 build — see §2B for the current state)
 | # | File | Remaining problem |
 |---|---|---|
 | 1 | `services/geo/area.py` | Point → 100 m circle (3.14 ha); no input → `1.0 ha` at Hyderabad `78.4867, 17.3850`. |
@@ -63,6 +68,69 @@
 | 8 | `frontend/.../MapSelector.tsx` | Hard-coded Karnataka centroid/presets; click = point marker only; no polygon, overlays, evidence panel. |
 | 9 | `ml/data/raw/external/` | Only 2 of ~15 datasets downloaded; WorldCover, MS buildings, HydroLAKES, GHSL, OSM, forest/protected layers absent. |
 | 10 | `app/rules/` | Only `agronomic_rules.yaml`; no `land_class_rules.yaml` / `irrigability_rules.yaml`. |
+
+---
+
+## 2B. Audit of the "after PRD v2.0" build (`geoagri_ai_after_finishing_the_prd.md_file_.zip`) — v2.1 findings
+
+Method: full read of the new v2 modules (`landclass/`, `irrigability/`, `landrecords/*`, `api/v1/land.py`, `predict.py`, schemas, rules, tests, frontend refs), grep gates M1–M3, `python -m compileall` on `backend/app`, `backend/tests`, `backend/ml/training`.
+**Not verified:** `pytest -v` and `npm run build` could not be executed in the audit sandbox (PyPI/npm unreachable). Antigravity must run both first (§20, step S0) and record the real result in `CHANGELOG.md`. Compile check (syntax only) passed.
+
+### 2B.1 What v2.0 got right (keep; do not regress)
+| Item | Status |
+|---|---|
+| M1 `area.py`: no point buffer, no Hyderabad default; point → `area_ha: null` | ✅ grep gate clean |
+| M2 `soilgrids.py`: P/K are `None` unless user-provided; no seeded RNG | ✅ grep gate clean |
+| M3 `gee_client.py`: real `compute_evi()`; synthetic branch only when `ALLOW_SYNTHETIC_DATA` | ✅ (spot-checked) |
+| M6 gate in `predict.py`: NOT_IRRIGABLE* ⇒ `recommended_crops: []`, models `skipped_not_irrigable` | ✅ implemented |
+| M7 schemas (`LandClassification`, `Irrigability`, `LandRecordSummary`, `LandInquiryResponse`) | ✅ |
+| Rules files, `/land/inquiry`, `/land/providers`, `/land/records/upload`, UI banner in `CropPredictionPage.tsx` | ✅ present |
+
+### 2B.2 Defects (severity-ordered) — each is fixed by a §3B change
+| ID | Sev | File | Defect | Effect |
+|---|---|---|---|---|
+| **A1** | **CRITICAL** | `services/landrecords/bhuvan_wms.py` | `by_coordinate()` never calls the WMS; it returns a **hard-coded record** `class_geoagri="AGRICULTURAL"`, "NRSC Bhuvan LULC 1:50K, 2022", for *every* coordinate on Earth. | Violates §0.2 (fabricated data). |
+| **A2** | **CRITICAL** | `services/landrecords/open_layers.py` | Same: returns `AGRICULTURAL` "ESA WorldCover 2021 + Copernicus DEM" without reading any layer; `available()` always `ready`, `records_found=5`. | Fabricated provenance. |
+| **A3** | **CRITICAL** | `landrecords/manager.py` + `landclass/classifier.py` | Manager returns the *first non-None record* (order: user_document, ksrsac, **bhuvan_wms**, open_layers); classifier's "record override" then returns that class at **confidence 0.95**. | Every plot classifies `AGRICULTURAL`; **forest / water / urban / wasteland can never be detected from real inputs and the NOT-IRRIGABLE gate never fires.** |
+| **A4** | **CRITICAL** | `tests/test_land_inquiry_and_gating.py`, `test_phase8_landclass.py` | Gating test **patches `LandClassifier.classify`** to return WATER_BODY; inquiry tests only assert keys exist and verdict ∈ allowed set. | A3 is invisible to the suite. |
+| **A5** | HIGH | `landclass/classifier.py` | `layer_hits` is never passed by `predict.py`/`land.py`, so water/building/protected-area layers are **never consulted**. YAML rules are loaded but **never read**. Class shares are literals (0.85, 0.88, 0.90, 0.95…). Plantation test is a lat/lon box + elevation. No WorldCover/OSM/buildings/Hansen evidence. | Forest & building detection effectively **absent**; "shares" are invented. |
+| **A6** | HIGH | `api/v1/land.py` | Hard-coded `admin.state="Karnataka"` for any coordinate; `layers[]` always lists WorldCover/DEM/Sentinel-2/HydroLAKES as `"checked"`; `data_quality.observed_feature_share: 0.85` literal; notes claim Sentinel-2 was used. | Fabricated provenance (§0.2, §0.3). |
+| **A7** | HIGH | `features/pipeline.py` | `_std/_max/_min` invented as ±5 %/10 % of the value; `None→0.0`; hidden defaults (`ph 6.5`, `lat 13.32`, `lon 75.75`, `elev 320`, `temp 25`, `rain 800`, generic `0.5`). Classifier/engine read these (`slope` default 2.0, `ndvi` 0.0). | Violates FR-12/13 feature honesty; silent defaults drive land class. |
+| **A8** | HIGH | `landrecords/user_document.py` | Decodes **bytes as UTF-8** (PDF/JPG uploads → garbage; the RTC use-case does not work); extent regex treats **acres as hectares** (no guntas); **defaults to `AGRICULTURAL`** when no term matches; `"well" in text` matches "farewell/swelling"; token uses Python `hash()` (per-process random, `% 1e6` collisions); store is a **process-global dict shared by all users** (cross-user leakage, §6.4); `by_coordinate` returns any stored record with geometry (geometry is never set → dead code). | Wrong data, privacy risk. |
+| **A9** | HIGH | `irrigability/engine.py` | Thresholds (20°, 8°, 82 %, 65 %) hard-coded; `irrigability_rules.yaml` ignored (violates M8). Never returns `UNVERIFIED`. Water-access check (§7.3) absent. Building deduction uses A5's invented shares. | Rules not tunable; no honest "don't know". |
+| **A10** | MED | `core/config.py` | `KSRSAC_REST_ENDPOINT` is a **guessed URL**; `LAND_RECORDS_MOCK_FALLBACK` flag exists though no mock path should exist; `KSRSACOfficialProvider` reads `os.getenv` instead of settings. | Misleading config. |
+| **A11** | MED | `api/v1/predict.py`, `land.py` | Blanket `except Exception → HTTP 500 detail=str(e)` and `traceback.print_exc()`. | Leaks internals; no structured logging. |
+| **A12** | MED | `frontend CropPredictionPage.tsx` | `verdict.replace('_',' ')` replaces only the first underscore → "NOT IRRIGABLE_PROVISIONAL". Demo presets in `MapSelector.tsx` still present with no `VITE_DEMO_MODE` gate (FR-21); polygon file import (GeoJSON/KML/zipped SHP, FR-1) not found. | UX/spec gaps. |
+| **A13** | MED | `CHANGELOG.md` | Stops at "Phase 0". All v2 work is undocumented (breaks §0.1). | Audit trail missing. |
+| **A14** | LOW | misc | `SQLAlchemy[asyncio]` (donor) vs `SQLAlchemy` (after) mismatch; `mapbox-vector-tile` absent; `config.py` defaults `SOILGRIDS_SOURCE="gee"` but `.env.example` still says `local`. | Merge friction. |
+
+### 2B.3 What the donor zip (`GeoAgri-added_forest_and_building_detection.zip`) actually is
+It is a branch of the **original v1 repo** (not of v2.0) plus one feature. Files it truly adds/changes:
+| Donor file | What it is | Disposition |
+|---|---|---|
+| `backend/app/services/geo/area_check.py` (472 lines) | **The detection engine**: a ≈0.7-acre (≈30 m radius) circle around the pin is checked against **ESA WorldCover v200 10 m** (COG on AWS), **Copernicus DEM GLO-30** (COG on AWS), **OpenStreetMap via OpenFreeMap vector tiles** (Overpass as backup). Detects roads, railways, runways, **buildings**, **forest**, snow/ice, steep/high terrain, water/wetland/mangrove/bare/tundra, settlements/industry/quarries/landfill/cemetery/military, national parks/nature reserves. Parallel threads, LRU cache, partial-failure warnings. | **PORT (refactor)** — §5A |
+| `backend/tests/test_area_check.py` (231 lines, offline) | Synthetic-raster + stubbed-network tests | **PORT** and extend |
+| `backend/requirements.txt` | adds `mapbox-vector-tile>=2.0.0`, `SQLAlchemy[asyncio]` | **MERGE** |
+| `frontend/src/api/client.ts` | `area_check?` response type | **ADAPT** into `land_class.detection` types |
+| `frontend/src/pages/CropPredictionPage.tsx` | "land cannot be farmed" banner + "partly checked" notice + passed notice | **ADAPT** to `detection` block |
+| `README.md` | "0.7-Acre Land Check" section | **ADAPT** |
+| `MapSelector.tsx`, `WorkflowContext.tsx` | Only demo-preset coordinates changed | **IGNORE** |
+| `predict.py`, `schemas/predict.py`, `config.py`, `main.py`, `area.py`, `gee_client.py`, `soilgrids.py`, `PRD.md`, `test_phase3/4/5/7*`, `test_no_synthetic_leak.py` | **Older v1 versions** | **DO NOT COPY** — they would erase v2.0 (resurrect the 100 m buffer bug, drop the land router, remove land settings, restore P/K constants) |
+
+### 2B.4 Defects in the donor's detection logic that must be fixed while porting
+| ID | Defect | Required behaviour in v2.1 |
+|---|---|---|
+| **D1** | Evaluates only a **30 m circle at the centroid**; the user's polygon is ignored. | Evaluate the **polygon** (raster mask / geometry intersection). Circle only for point-only enquiries (`AREA_CHECK_ACRES`, default 0.7). |
+| **D2** | **Any single WorldCover built-up pixel (class 50) rules out the whole area** (10 m pixels, ≈77 % overall accuracy; a farmhouse = rejection). Contradicts §5.2 "farmhouse ≠ whole-plot rejection". | Share-based rule + footprint subtraction (`building_share`, `footprint_ha`). Legacy behaviour available only as `detection.legacy_strict: true` for point-only. |
+| **D3** | "Forest" = tree cover > 50 % **or OSM `landuse=forest/natural=wood`** → blocked. Coffee/areca/coconut/rubber plantations (Malnad, Kodagu, coastal Karnataka) would be called forest. | Output `forest.kind = "cover"` (physical) vs `"legal"` (protected/reserved polygon). Cover ⇒ `FOREST_COVER` + plantation-signature guard (§5A.4). Only protected-area/forest-boundary hits ⇒ `FOREST_LEGAL`. |
+| **D4** | Slope threshold 15° / elevation 4000 m hard-coded and **differs from irrigability rules** (8° soft, 20° hard). 30 m DEM over a 30 m radius ≈ 5 pixels → noisy slope. | Detection returns raw metrics only; verdict thresholds live **only** in `irrigability_rules.yaml`. Slope computed over polygon (min window ≈ 90 m). |
+| **D5** | `is_agricultural = (not reasons) if sources else None`: if **only the DEM** answers, `sources=[DEM]`, `reasons=[]` ⇒ **`True`** (false "clear"). | Require WorldCover **and** (OSM **or** local buildings layer) to state "not detected". Otherwise per-feature state `unknown`; overall `UNVERIFIED`. (§7 FR-7: missing ≠ clear.) |
+| **D6** | Worst-case wait ≈ 40 s per source; `requests` blocking; p95 target is ≤ 5 s. | Per-source timeout ≤ 6 s, total budget ≤ 8 s, circuit breaker, TTL cache (24 h–30 d), return partial with warnings. |
+| **D7** | Cache stores/returns the **same mutable dict**; no TTL. | Deep-copy on read; TTL; key on geometry hash + source versions. |
+| **D8** | Network-only. Local COGs downloaded per `DATA_GUIDE.md` are never used. | **Local-first** (local WorldCover COG, local MS-buildings/OSM extract, local DEM/slope), remote COG/tiles as fallback; `source` and `source_date` recorded. |
+| **D9** | OSM is treated as authority for "National park / nature reserve". OSM ≠ legal boundary. | Report as `basis: osm` with `legal_status: "unverified"`; legal only from WDPA/KSRSAC/Forest Dept layer. |
+| **D10** | Thresholds (0.5, 15, 4000) in code constants. | Move to `land_class_rules.yaml` `detection:` block (§5A.3). |
+| **D11** | OpenFreeMap terms of service not verified in this research (⚠). | Document in `SOURCE.md`; production should self-host or use the Geofabrik extract; respect ODbL attribution. |
 
 ---
 
@@ -84,6 +152,33 @@ Antigravity must apply every row. Each has a **gate** that must pass before the 
 | **M10** | **Data download** (§12 + `DATA_GUIDE.md`): run script for all zero-key sets; add new sources (Hansen, Karnataka protected areas, SRTM slope, etc.) with `SOURCE.md` each. | `/api/v1/map-layers` lists every layer as `ready` or `unavailable` + reason. |
 | **M11** | **Config cleanup:** delete `SOILGRIDS_API_URL`; add env vars in §8; update `.env.example`, `docker-compose.yml`, `render.yaml`, `vercel.json`. | App boots with only `.env.example` keys documented. |
 | **M12** | **Tests:** add `test_phase8_landclass.py`, `test_phase9_irrigability.py`, `test_landrecords_privacy.py` (PII stripped), `test_land_inquiry_api.py`; update `test_phase3…7` to drop mock assumptions. | `pytest -v` all green. |
+
+---
+
+## 3B. ADDITIONAL MANDATORY CHANGES (v2.1) — force-apply, with gates
+
+M1–M12 above stay mandatory (**M4, M6 are re-opened**: implemented but functionally defeated by A3 until M13–M15 land). **M13–M30 are new.** Order of execution is in §20; rollback rules in §19. A change is closed only when its gate passes **and** `pytest -v` + `npm run build` are green.
+
+| ID | Change | Gate (must pass) |
+|---|---|---|
+| **M13** | **Kill fabricated providers.** `bhuvan_wms.by_coordinate` must perform a real WMS `GetFeatureInfo` (OWSLib/httpx, timeout ≤ 6 s) or return `None`. `open_layers` must read real local/remote layers (§5A) or return `None`. Neither may return a hard-coded `RecordResult`. `available()` reports truth: `ready` only after a successful cheap probe (cached 5 min), else `unavailable(reason)`. | Test with network blocked: `bhuvan_wms.by_coordinate(...) is None`, `open_layers.by_coordinate(...) is None`, provider status `unavailable`. `grep -rn "Agricultural / Cultivable\|Agricultural Cropland" backend/app` → no matches. |
+| **M14** | **Record-override rules.** Only records with `verification ∈ {official, user_provided}` may override remote-sensing classification. `reference_only`/`unverified` sources contribute **evidence**, never a class. If a record conflicts with ≥ 2 independent evidence sources → keep record class but set `conflict: true`, confidence ≤ 0.5, reason `record_vs_imagery_conflict`. | Test: manager with only reference sources ⇒ `record is None`; lake fixture + no document ⇒ `WATER_BODY`. |
+| **M15** | **Classifier consumes real evidence.** New `landclass/evidence.py` (`collect_evidence(geometry|point) -> Evidence`) feeds `LandClassifier.classify(evidence, features, record)`. All thresholds read from `land_class_rules.yaml` (`detection:` + `thresholds:`). Class shares are **computed** from measured shares; no numeric literals for shares/confidence in code (confidence from `confidence_scoring:` in YAML). Insufficient evidence ⇒ `UNKNOWN`. | `test_rules_are_live`: changing a YAML threshold flips a fixture verdict. `test_unknown_without_evidence`. No literal `0.85/0.88/0.90/0.95` in `classifier.py`. |
+| **M16** | **Port forest & building detection** from the donor (`area_check.py`) as `services/landclass/detection.py`, refactored per §5A (D1–D11). Keep `services/geo/area_check.py` as a thin deprecated re-export for one release. | §5A.6 test matrix green; `tests/test_detection_*.py` offline. |
+| **M17** | **Honest provenance in `land.py` / `predict.py`.** `layers[]`, `data_quality`, `admin`, `sources` come from the actual `Evidence` object (`state: checked|unavailable|skipped`, with `source_date`, `licence`). `admin.state` only from boundary data or `null`. No literal `0.85`. | Test: with all sources stubbed unavailable, response lists them `unavailable`, `observed_feature_share == 0`, `admin.state is None`. |
+| **M18** | **Feature-vector honesty (A7).** Remove invented `_std/_max/_min`; remove silent defaults. Missing ⇒ `None/NaN` + `quality:"missing"`. If a model cannot accept NaN, impute **inside the model wrapper only**, and list `imputed_features[]` in the response; `observed_feature_share` = real share. Classifier/engine must treat missing as `unknown`, never as 0/2.0/default. | `test_no_default_leak.py`: all-missing profile ⇒ `observed_feature_share==0`, land class `UNKNOWN`/irrigability `UNVERIFIED`. `grep -n "13\.32\|75\.75\|320\.0\|, 0\.5)" backend/app/services/features` → no matches. |
+| **M19** | **Rewrite `user_document.py` (A8).** (a) Accept PDF/JPG/PNG/TXT; PDF → `pypdf` text, image/scanned → optional OCR (`pytesseract`, off if not installed ⇒ `needs_ocr`), never decode binary as UTF-8. (b) Units: acres, guntas (40 guntas = 1 acre ⚠ verify), hectares → `recorded_extent_ha`. (c) **No default class**: unmatched term ⇒ `UNKNOWN` + `unmapped_record_term`. (d) Word-boundary regex (`\bwell\b`, `\bborewell\b`). (e) Token = `sha256(content)[:16]` + random session id. (f) Store is **per session** with TTL (`UPLOAD_RETENTION_SECONDS`, default 0 = delete after response), never process-global. (g) Return `fields_found[]`, `parse_confidence`, and require user confirmation before the record is used. | `test_landrecords_privacy.py`: PII fixture (owner, father name, Aadhaar-like, phone, PAN) ⇒ none survives in response/log/store. `test_user_document_units.py`: "2 acres 20 guntas" ⇒ 0.9713 ha ±0.001. Cross-session test: session B cannot read session A record. PDF fixture parses. |
+| **M20** | **Config cleanup (A10).** Delete `LAND_RECORDS_MOCK_FALLBACK`, delete guessed `KSRSAC_REST_ENDPOINT`; keep `KSRSAC_API_BASE_URL` / `KSRSAC_API_KEY` (empty by default) read via `get_settings()`. Add detection settings (§5A.7). Update `.env.example`, `docker-compose.yml`, `render.yaml`, `vercel.json`. | App boots from `.env.example` only; `grep -rn "ksrsac.karnataka.gov.in/geoserver" backend` → none. |
+| **M21** | **Tests that do not mock the thing under test (A4).** Add end-to-end gating tests that stub only the **network/raster readers** (evidence) — never `LandClassifier.classify`. Add regression `test_no_coordinate_defaults_to_agricultural`. | See §14.1 matrix; CI fails if any gating test patches `classify` (a meta-test greps for `patch(".*LandClassifier.classify")` in `tests/`). |
+| **M22** | **Port + extend donor tests** (`test_area_check.py` → `test_detection_*.py`); keep them offline. | ≥ 25 detection tests, all offline, green. |
+| **M23** | **Frontend.** (a) Detection panel: Forest / Buildings / Roads / Water / Terrain rows with state (`detected / not detected / unknown`), share, basis, source; (b) fix label `replace(/_/g,' ')`; (c) gate demo presets with `VITE_DEMO_MODE` (FR-21); (d) polygon draw/import (FR-1, FR-14); (e) "partly checked" notice (from donor) driven by `detection.warnings`; (f) show `gate_mode` (`enforce|shadow|off`) and a visible "SHADOW MODE — verdict not enforced" strip when not enforcing. | `npm run build` green; checklist §11 (+ rows 9–12) passes. |
+| **M24** | **Docs.** `CHANGELOG.md` entry for every v2.0 + v2.1 change (A13); `README.md` detection section (adapted from donor, thresholds from YAML), licences/attributions; regenerate `documentation/api_reference.md`; `SOURCE.md` for WorldCover tiles, Copernicus DEM, OpenFreeMap, Bhuvan WMS, Hansen, protected areas. | Files exist; every `SOURCE.md` has URL/licence/date/limits. |
+| **M25** | **Dependencies.** Add `mapbox-vector-tile>=2.0.0`, `requests` (or use `httpx` consistently), `pypdf`, optional `pytesseract`; use `SQLAlchemy[asyncio]`; pin versions; Dockerfile uses a rasterio wheel with HTTP/`/vsicurl/` support. Add `scripts/verify.sh` (pytest + build + grep gates). | `pip install -r backend/requirements.txt` clean; `scripts/verify.sh` exit 0. |
+| **M26** | **Error handling (A11).** Replace blanket `except → HTTP 500 str(e)` and `traceback.print_exc()` with `logging` + typed errors (400 invalid geometry, 422 schema, 502 upstream, 500 generic message with `request_id`). | Test: forced evidence exception ⇒ 200 with `UNVERIFIED` + warning (not 500); invalid polygon ⇒ 400. |
+| **M27** | **Rollback scaffolding (§19).** `git init`, baseline tag, step tags, flags `LAND_DETECTION_MODE`, `LAND_GATE_MODE`, backup zip + checksums, `scripts/rollback_drill.sh`. | Drill (§19.6) executed once and logged in `CHANGELOG.md`. |
+| **M28** | **Latency/resilience (D6/D7).** Per-source timeout, total budget, circuit breaker, TTL cache with deep copies, structured logs of source latency/failure. | `test_detection_budget.py`: slow stubs ⇒ result ≤ 8 s with warnings. |
+| **M29** | **UNVERIFIED path (A9).** Classifier and engine must be able to return `UNKNOWN` / `UNVERIFIED`. Remote-sensing-only `NOT_IRRIGABLE_PROVISIONAL` requires ≥ 2 independent sources agreeing (e.g., WorldCover + OSM/MS-buildings for urban; WorldCover + Hansen/DW for forest); a single source ⇒ `UNVERIFIED` with reason `single_source_only`. Implement the water-access check of §7.3 or report `water_access: unknown`. | Tests for both. |
+| **M30** | **Attribution & licence strings** shown in UI/PDF for every active layer: OSM ODbL, OpenFreeMap, ESA WorldCover (CC BY 4.0), Copernicus DEM, Microsoft Buildings (CDLA-Permissive-2.0), Hansen/UMD, WDPA, Bhuvan/NRSC. | UI attribution control lists active layers; PDF includes them. |
 
 ---
 
@@ -127,6 +222,116 @@ Remote-sensing proxies (all thresholds in `land_class_rules.yaml`, calibrated pe
 
 ### 5.4 Reclaimability note
 Wasteland output includes `reclaimable: "possible" | "unlikely" | "unknown"` (e.g., scrub/ degraded pasture often reclaimable; barren rocky, snow/glacial, steep slopes unlikely). It is informational and never makes the verdict "irrigable".
+
+---
+
+## 5A. Forest & building detection (ported from the donor, redesigned) — new in v2.1
+
+### 5A.1 Purpose
+Give the classifier **measured evidence** about forest, buildings, roads, water and terrain for the exact plot (or the area around a pin), with per-feature `state ∈ detected | not_detected | unknown`, share/area, basis and source — so §5 classes and §7 verdicts are derived from data, not literals.
+
+### 5A.2 Evidence sources (local-first, then remote; all key-less)
+| Evidence | Primary (local, `raw/external/…`) | Remote fallback | Notes |
+|---|---|---|---|
+| Land cover (tree 10, built 50, bare 60, water 80, wetland 90…) | `geo/worldcover_2021/*.tif` | `/vsicurl/https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_{tile}_Map.tif` (as in donor) | CC BY 4.0; ≈ 77 % overall accuracy → evidence, not proof |
+| Buildings | `geo/buildings_ms/*` (Karnataka quadkeys), OSM extract | OpenFreeMap vector tiles `building` layer (zoom 14) → Overpass backup | CDLA-Permissive-2.0 / ODbL |
+| Roads / rail / runways | OSM extract | OpenFreeMap `transportation`, `aeroway` layers | farm tracks/paths ignored (donor logic kept) |
+| Forest cover | WorldCover 10, Hansen `treecover2000` (GEE/COG), Dynamic World `trees` | OpenFreeMap `landcover=wood` | physical cover only |
+| Legal forest / protected | WDPA (non-commercial), Karnataka Protected Areas KML (⚠), KSRSAC forest layer when granted | OpenFreeMap `park` (national_park / nature_reserve / protected_area) — **unverified, OSM** | legal only from non-OSM sources |
+| Water | HydroLAKES, JRC GSW, WorldCover 80, DW water | OpenFreeMap `water` | |
+| Terrain | local DEM/slope COG | Copernicus DEM GLO-30 COG (`copernicus-dem-30m` bucket, as in donor ⚠ licence/terms to confirm) | |
+`Evidence` records, per source: `state (checked|unavailable|skipped)`, `source`, `source_date`, `licence`, `latency_ms`, `warning`.
+
+### 5A.3 Rules (all in `land_class_rules.yaml → detection:`; initial values are guesses to be calibrated, §14.3)
+```yaml
+detection:
+  point_only_acres: 0.7          # circle used only when no polygon (donor default)
+  legacy_strict: false           # true = any built-up pixel/road in the circle blocks (donor behaviour)
+  min_independent_sources: 2     # for provisional remote-sensing-only verdicts
+  forest:
+    cover_share_min: 0.50        # WorldCover 10 and/or Hansen treecover >= hansen_min within the plot
+    hansen_treecover_min_pct: 60
+    plantation_guard: true
+  buildings:
+    urban_dominant_share_min: 0.30   # built share of plot -> URBAN_BUILT
+    farmhouse_max_share: 0.05        # below this: subtract footprint, stay AGRICULTURAL
+  roads:
+    deduct_lines: false              # roads reported; area deducted only from polygon evidence
+    assumed_half_width_m: {}         # opt-in per class, flagged `assumed`
+  water:
+    share_min: 0.35
+  terrain:
+    report_only: true                # verdict thresholds live in irrigability_rules.yaml
+    slope_window_m_min: 90
+  timeouts:
+    per_source_s: 6
+    total_budget_s: 8
+  cache_ttl_s: 86400
+```
+
+### 5A.4 Mapping to classes
+| Detection result | Class | Notes |
+|---|---|---|
+| `forest.kind=legal` (WDPA / forest boundary / protected polygon from a non-OSM source) | `FOREST_LEGAL` | `NOT_IRRIGABLE` |
+| `forest.kind=cover`, share ≥ `cover_share_min`, **no plantation signature** | `FOREST_COVER` | `NOT_IRRIGABLE_PROVISIONAL` (needs ≥ 2 sources) |
+| tree cover high **with** plantation signature (RTC says plantation, regular row/phenology signal, or inside known plantation zone *and* an RTC/user confirmation) | `AGRICULTURAL` subclass `agroforestry_plantation` (or `UNKNOWN` + `tree_cover_may_be_plantation`) | A lat/lon box alone is **not** a plantation signature |
+| `buildings.share ≥ urban_dominant_share_min` (or built-up share) | `URBAN_BUILT` | `NOT_IRRIGABLE` with official/e-Khata evidence, else provisional |
+| `buildings.share < farmhouse_max_share` | `AGRICULTURAL` with `footprint_ha` deducted | farm + farmhouse stays assessable |
+| water share ≥ `water.share_min` | `WATER_BODY` | |
+| bare/rocky + slope metric | `WASTELAND` subclass per §5.3 | thresholds from `irrigability_rules.yaml`/`land_class_rules.yaml` |
+| required sources unavailable | `UNKNOWN` | never "clear" (D5) |
+
+### 5A.5 Response block (added to `FullReportResponse` and `LandInquiryResponse`)
+```json
+"detection": {
+  "mode": "enforce",
+  "geometry_basis": "polygon",
+  "forest":    {"state": "detected", "kind": "cover", "share": 0.62,
+                "basis": ["worldcover:10=0.58", "hansen:treecover>=60=0.66"],
+                "plantation_signature": false, "legal_status": "unverified"},
+  "buildings": {"state": "detected", "share": 0.04, "footprint_ha": 0.03, "count": 2,
+                "basis": ["ms_buildings", "osm:building"]},
+  "roads":     {"state": "not_detected", "basis": ["osm:transportation"]},
+  "water":     {"state": "unknown", "basis": [], "reason": "worldcover_unavailable"},
+  "terrain":   {"state": "checked", "mean_slope_deg": 6.1, "max_elevation_m": 812, "source": "copernicus_dem_glo30"},
+  "sources":   [{"name": "esa_worldcover_2021", "state": "checked", "source_date": "2021", "licence": "CC BY 4.0", "latency_ms": 420}],
+  "warnings":  ["OpenStreetMap tiles unavailable (Timeout); buildings from local layer only"]
+}
+```
+Deprecated alias for one release: `area_check` (old donor shape) is derived from `detection` so the donor UI keeps working during migration.
+
+### 5A.6 Detection test matrix (offline; stub readers, never the classifier)
+| Case | Expected |
+|---|---|
+| 100 % WorldCover 40 | forest/buildings `not_detected` → `AGRICULTURAL` |
+| 1 built pixel (farmhouse) in a 1 ha polygon | `buildings.state=detected`, share < 0.05, **AGRICULTURAL**, footprint deducted; with `legacy_strict=true` + point-only ⇒ blocked |
+| 40 % built | `URBAN_BUILT` |
+| 70 % tree, no plantation signature, no legal layer | `FOREST_COVER` → `NOT_IRRIGABLE_PROVISIONAL` |
+| 70 % tree + RTC says plantation / areca | `AGRICULTURAL` (not forest) |
+| tree cover only from OSM `landcover=wood` (single source) | `UNVERIFIED` (`single_source_only`) |
+| polygon inside WDPA polygon | `FOREST_LEGAL` → `NOT_IRRIGABLE` |
+| OSM `park=national_park` only | `forest.legal_status="unverified"`; not `FOREST_LEGAL` |
+| only DEM answers | `UNVERIFIED` (D5), **not** "clear" |
+| WorldCover 404 tile | open water (sea), as donor |
+| farm track / footpath near plot | ignored |
+| tiles down → Overpass fallback; both down | warnings, partial, no crash |
+| slow sources (stubs sleep 20 s) | total ≤ 8 s, warnings |
+| cached result mutated by caller | cache unaffected (deep copy) |
+| point-only | circle `AREA_CHECK_ACRES`; `area_ha=null` |
+| polygon spanning two WorldCover tiles | mosaic correct shares |
+
+### 5A.7 Settings (`backend/.env.example`)
+```
+LAND_DETECTION_MODE=shadow        # off | shadow | enforce   (see §19)
+LAND_GATE_MODE=shadow             # off | shadow | enforce
+AREA_CHECK_ACRES=0.7
+OPENFREEMAP_TILEJSON=https://tiles.openfreemap.org/planet
+OVERPASS_URL=https://overpass-api.de/api/interpreter
+DETECTION_PER_SOURCE_TIMEOUT_S=6
+DETECTION_TOTAL_BUDGET_S=8
+DETECTION_CACHE_TTL_S=86400
+```
+Start in **shadow** (computed, returned, logged, not enforced); switch to **enforce** only after §14.3 calibration meets the metrics in §14.4.
 
 ---
 
@@ -296,6 +501,7 @@ Frontend: `VITE_API_BASE_URL`, `VITE_MAP_STYLE_URL`, `VITE_DEMO_MODE=false`.
 `POST /api/v1/land/inquiry` · `GET /api/v1/land/inquiry?lat&lon` · `POST /api/v1/land/records/upload` · `GET /api/v1/land/providers` · `POST /api/v1/parcels/validate|import` · `GET /api/v1/map-layers` · `GET /api/v1/health` · `POST /api/v1/predict/full-report` (adds gating + blocks below).
 
 ### 10.2 Land inquiry response
+(v2.1: the response also carries the `detection` block of §5A.5 and `gate_mode`; `layers[]`, `data_quality` and `admin` must be derived from real evidence per M17.)
 ```json
 {
   "query": {"lon": 75.75, "lat": 13.32, "boundary_source": "point_only", "area_ha": null},
@@ -347,7 +553,11 @@ Frontend: `VITE_API_BASE_URL`, `VITE_MAP_STYLE_URL`, `VITE_DEMO_MODE=false`.
 5. Farm plot with farmhouse ⇒ amber/green with usable area reduced by building footprint.
 6. Pin only ⇒ classification shown, area "—", no invented size.
 7. Provider with no credentials ⇒ chip "needs credentials", never fake data.
-8. Upload sample RTC ⇒ parsed fields editable, PII absent, badge "user-provided".
+8. Upload sample RTC (PDF **and** text) ⇒ parsed fields editable, PII absent, badge "user-provided", acres/guntas converted.
+9. Pin in dense forest (no protected layer) ⇒ "NOT IRRIGABLE (provisional) — Forest cover" with detection row Forest = detected, kind = cover, basis listed; **coffee/areca plantation fixture ⇒ not forest**.
+10. Plot containing buildings ⇒ detection row Buildings = detected, share %, footprint ha; usable area reduced; if share ≥ urban threshold ⇒ "NOT IRRIGABLE — Urban / built-up".
+11. Source down ⇒ row shows `unknown` + warning chip ("partly checked"), never a green tick; label reads `NOT IRRIGABLE_PROVISIONAL` fixed to "NOT IRRIGABLE PROVISIONAL".
+12. `LAND_GATE_MODE=shadow` ⇒ "SHADOW MODE — verdict not enforced" strip; `off` ⇒ no banner; `enforce` ⇒ crops hidden for non-irrigable.
 
 ---
 
@@ -406,6 +616,13 @@ Routers added: `landinquiry.py`, `landrecords.py`, `parcels.py`, `layers.py`. Ke
 | Invalid/self-intersecting polygon | repaired or rejected with message |
 | PII in uploaded RTC | none survives anywhere |
 | Overlapping exclusions | union area, no double subtraction, `A ≥ 0` |
+| **No network, no record** (any coordinate) | `land_records.record is null`; class `UNKNOWN`; verdict `UNVERIFIED` — never `AGRICULTURAL` (A1–A3 regression) |
+| Reference-only provider (Bhuvan/open layers) says "agricultural", imagery says lake | `WATER_BODY` (record override denied, M14) |
+| Evidence stubs: 70 % tree, no plantation, no legal layer | `FOREST_COVER` → `NOT_IRRIGABLE_PROVISIONAL`; with `LAND_GATE_MODE=shadow` crops still returned + `gate_mode:"shadow"` |
+| Evidence stubs: polygon inside WDPA polygon | `FOREST_LEGAL` → `NOT_IRRIGABLE`, crops `[]` |
+| Evidence stubs: 1 farmhouse in 1 ha | `AGRICULTURAL`, footprint deducted |
+| YAML threshold changed | verdict changes with no code edit |
+| Provider/evidence exception | HTTP 200 with `UNVERIFIED` + warning, not 500 |
 
 ### 14.2 Existing tests: update `test_phase3…7`; keep `test_no_synthetic_leak.py` green.
 
@@ -416,12 +633,13 @@ Routers added: `landinquiry.py`, `landrecords.py`, `parcels.py`, `layers.py`. Ke
 ### 14.4 Acceptance metrics (confirm after calibration)
 - 0 synthetic values; 0 constants matching §3 grep gates.
 - Class agreement with manual set ≥ 90 %; **no plantation misclassified as forest** in the plantation subset ≥ 95 %.
-- p95 latency: land inquiry ≤ 5 s with local layers; full report ≤ 15 s.
+- Detection on the labelled set (§20 S11, ≥ 100 points): forest recall ≥ 90 %, building-dominant recall ≥ 90 %, **plantation→forest false-positive rate ≤ 5 %**, farmland false-block rate ≤ 5 %. Report honestly if unmet and stay in `shadow`.
+- p95 latency: land inquiry ≤ 5 s with local layers (≤ 8 s hard budget with remote fallback); full report ≤ 15 s.
 - Yield model beats district-mean baseline under district-held-out CV (v1 metric).
 
 ---
 
-## 15. Implementation plan (hand to Antigravity phase by phase)
+## 15. Implementation plan (v2.0 phases — **superseded by the §20 runbook for ordering**)
 | Phase | Work | Done when |
 |---|---|---|
 | **1** | M1–M3, M11: remove fabricated fallbacks, config cleanup | grep gates pass; tests green |
@@ -452,6 +670,11 @@ Provenance on every value (source, date, quality) · privacy (no PII, no polygon
 | Salinity/sodicity not in open data | `salinity_unknown` soft limit; user soil test; Bhuvan layer |
 | GEE quota / noncommercial terms | Cache, pre-export COGs, CDSE fallback |
 | WDPA/GEE non-commercial | Keep project non-commercial or obtain permission |
+| Detection thresholds (30 % built, 50 % tree, 60 % Hansen…) are guesses | Shadow mode + calibration (§20 S11); YAML-tunable |
+| OpenFreeMap / Overpass availability and terms ⚠; Copernicus DEM bucket terms ⚠ | Local-first layers; self-host/Geofabrik extract for production; attribution |
+| WorldCover 10 m is ≈ 77 % accurate; single built pixel ≠ building | Share-based rules, ≥ 2 independent sources for provisional verdicts |
+| Plantation (coffee/areca/coconut) vs forest confusion | Plantation guard, RTC override, `UNKNOWN` when unsure |
+| `pytest`/`npm run build` not executed during the v2.1 audit (sandbox had no PyPI/npm access) | S0 records real baseline results |
 | ⚠ **Not verified in this research** | Bhuvan layer names/terms; Karnataka RTC/e-Khata field layouts and land-type vocabulary (§6.5); Hansen current version/licence; GFW API key flow; India-WRIS endpoint; OpenCity KML download path and completeness; third-party aggregator terms; country adapter datasets in §6.6; exact NRSC wasteland class legend |
 
 ---
@@ -464,7 +687,91 @@ Provenance on every value (source, date, quality) · privacy (no PII, no polygon
 5. RTC/e-Khata upload works with PII stripped.
 6. Models B & D retrained on documented data with spatial CV and model cards.
 7. `DATA_GUIDE.md` reproduces the data folder on a clean machine; README documents licences, non-commercial limits, limitations and the disclaimer.
-8. No secrets in git; `pytest -v` and `npm run build` pass.
+8. No secrets in git; `pytest -v` and `npm run build` pass (**observed**, not assumed).
+9. Forest and building detection live (§5A) with per-feature state/share/basis in API and UI; verified on the fixtures and the labelled set.
+10. A1–A14 closed with evidence in `CHANGELOG.md`; M13–M30 gates pass; `scripts/verify.sh` exit 0.
+11. Rollback drill prints `ROLLBACK OK`; `baseline-v2.0` and `step-S*` tags exist; flags documented and defaulted to `shadow` until metrics pass.
+
+---
+
+---
+
+## 19. Rollback and safe-integration plan (mandatory)
+
+Neither zip contains a `.git` directory, so there is currently **no way to undo a change**. Fix that first.
+
+### 19.1 Baseline (before any edit)
+```bash
+cd GeoAgri-main                         # the "after PRD v2.0" project is the integration target
+cp -r . ../GeoAgri-main_BACKUP_v2.0     # plain folder copy kept OUTSIDE the repo
+(cd .. && zip -qr GeoAgri_BACKUP_v2.0.zip GeoAgri-main_BACKUP_v2.0 && sha256sum GeoAgri_BACKUP_v2.0.zip > GeoAgri_BACKUP_v2.0.sha256)
+git init -b main && git add -A && git commit -m "baseline: after-PRD v2.0 as received"
+git tag baseline-v2.0
+git checkout -b integrate/detection
+```
+The donor zip is **read-only**: extract to a separate folder (`../donor/`), copy files out one at a time per §2B.3. Never `cp -r donor/* .`.
+
+### 19.2 One commit per step, one tag per commit
+Each step in §20 ends with `pytest -v`, `npm run build`, grep gates, then:
+```bash
+git add -A && git commit -m "S03: <title> (M13,M14)" && git tag step-S03
+```
+
+### 19.3 Rolling back
+| Need | Command |
+|---|---|
+| Undo the last step, keep history | `git revert HEAD` |
+| Return to a known-good step | `git switch -c rollback/from-S07 step-S06` (or `git reset --hard step-S06` on the integration branch) |
+| Return to the original v2.0 | `git switch main` (tag `baseline-v2.0`) |
+| Restore from outside git | unzip `GeoAgri_BACKUP_v2.0.zip`, verify `sha256sum -c GeoAgri_BACKUP_v2.0.sha256` |
+| Containers | tag before building: `docker tag geoagri-backend:latest geoagri-backend:v2.0`; roll back with `docker compose up -d` pinned to that tag |
+| Data | no schema migrations in v2.1. If any are added later, each needs an Alembic `downgrade` and a test |
+
+### 19.4 Runtime switches (rollback without redeploying)
+| Flag | Values | Effect |
+|---|---|---|
+| `LAND_DETECTION_MODE` | `off` / `shadow` / `enforce` | `off`: detection not run (v2.0 behaviour); `shadow`: run, return `detection`, log, **do not** feed the verdict; `enforce`: feeds classifier |
+| `LAND_GATE_MODE` | `off` / `shadow` / `enforce` | `off`: no gating (crops always computed, banner hidden); `shadow`: verdict returned **and** crops computed, UI shows "SHADOW MODE"; `enforce`: gating as §7 |
+| `VITE_DETECTION_UI` | `true` / `false` | hides the detection panel |
+| `area_check` response alias | present for one release | old UI keeps working while migrating |
+Defaults for first deployment: `shadow` / `shadow`. Promote to `enforce` only when §14.4 metrics pass; demote with one env change.
+
+### 19.5 Compatibility rules
+- New response fields are additive (`detection`, `gate_mode`, `imputed_features`); do not rename existing fields in the same release.
+- Removing `used_fallback_buffer` / `area_check` is a documented breaking change scheduled one release later.
+- New env vars have safe defaults; the app must boot without them.
+
+### 19.6 Rollback drill (run once, record in `CHANGELOG.md`)
+`scripts/rollback_drill.sh`: (1) `git stash -u`; (2) `git switch --detach baseline-v2.0` → `pytest -q` → record pass/fail; (3) `git switch --detach step-S<last>` → `pytest -q`; (4) `git switch integrate/detection`; (5) set `LAND_DETECTION_MODE=off LAND_GATE_MODE=off`, call `/api/v1/predict/full-report` and assert v2.0-shaped output. The drill must print `ROLLBACK OK`.
+
+---
+
+## 20. Antigravity runbook — ordered, force-apply
+
+**Rules for the agent:** do the steps in order; do not skip a gate; if a gate fails, fix it before moving on; if blocked for > 2 attempts, stop and write the blocker into `CHANGELOG.md` — do **not** work around it with a default, a mock, or a looser test. Never patch the unit under test in a test (M21). Never copy donor files not listed in §2B.3.
+
+**Master prompt to paste into Antigravity:**
+> Read `PRD.md` (v2.1) fully. Execute §20 steps S0→S14 in order on branch `integrate/detection`, one commit and one tag per step (§19.2). For each step run the gate listed; paste the command output into `CHANGELOG.md`. Do not fabricate data, defaults, provenance, or test results. Do not overwrite v2.0 files with donor files except as §2B.3 allows. If a command cannot run (network, credentials), record it as `NOT RUN` with the reason and continue only if the next step does not depend on it.
+
+| Step | Do | Gate |
+|---|---|---|
+| **S0** | §19.1 baseline. Install deps; run `pytest -v` and `npm run build` **unmodified** and record real results (audit could not run them). | Baseline results recorded; tag `baseline-v2.0` |
+| **S1** | Kill fabrication: **M13, M14, M17, M20** (providers return real data or `None`; record-override rules; honest `land.py`; config cleanup). Add the failing regression tests first (M21 `test_no_coordinate_defaults_to_agricultural`) and watch them fail on baseline, then pass. | grep gates M13/M20; regression test red→green |
+| **S2** | **M18, M26** feature honesty + error handling. | `test_no_default_leak.py`; grep gate M18 |
+| **S3** | **M25** dependencies + `scripts/verify.sh`; **M27** flags + rollback drill script. | `scripts/verify.sh` exit 0 |
+| **S4** | **M16, M22, M28**: port `area_check.py` → `landclass/detection.py` per §5A (D1–D11); port tests; offline stubs. Leave `geo/area_check.py` as deprecated re-export. | §5A.6 matrix green; budget test green |
+| **S5** | **M15, M29**: classifier consumes `Evidence`; rules from YAML; UNKNOWN/UNVERIFIED paths; irrigability reads YAML, adds water-access check. | `test_rules_are_live`, `test_unknown_without_evidence` |
+| **S6** | **M19** `user_document` rewrite (PDF, units, privacy, sessions). | privacy + units + PDF + cross-session tests |
+| **S7** | Wire `detection` into `predict.py` and `land.py` responses (§5A.5) with `LAND_DETECTION_MODE`/`LAND_GATE_MODE` semantics; keep `area_check` alias. | contract tests in §14.1 |
+| **S8** | Data: run `download_datasets.py` for WorldCover, MS buildings, HydroLAKES, OSM extract; add Hansen/protected-area/slope per §12; `SOURCE.md` each; `/map-layers` honest status (**M10, M24**). | each layer `ready` or `unavailable`+reason |
+| **S9** | **M23** frontend: detection panel, label fix, demo-mode gate, polygon draw/import, shadow strip. | `npm run build`; §11 checklist rows 1–12 |
+| **S10** | **M30** attributions in UI/PDF; docs (**M24**): README, `api_reference.md`, CHANGELOG for v2.0 + v2.1. | docs present; UI attribution lists layers |
+| **S11** | Calibration set + report (§14.3): ≥ 100 labelled points (forest, built, farmland, plantation, water, wasteland), ≥ 50 manual plots. Output `documentation/result/detection_validation.md` with precision/recall per class. | Metrics computed (may be below target — report honestly) |
+| **S12** | Models B & D retrain on documented data (v1 §10) — only if S1–S11 are green. | model cards updated |
+| **S13** | Rollback drill (§19.6) → must print `ROLLBACK OK`. | drill log in CHANGELOG |
+| **S14** | Promote flags to `enforce` **only if** §14.4 detection metrics pass; otherwise leave `shadow` and record why. Final `scripts/verify.sh`. | verify exit 0; flags recorded |
+
+**Stop conditions (agent must halt and report):** a gate fails twice; a step needs a credential not in `.env`; a change would require copying a "DO NOT COPY" donor file; a test would need to mock the unit under test.
 
 ---
 
