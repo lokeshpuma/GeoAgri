@@ -211,6 +211,10 @@ class FullReportResponse(BaseModel):
     irrigability: Irrigability | None = None
     land_records: LandRecordSummary | None = None
     eligibility: dict[str, Any] | None = None
+    detection: dict[str, Any] | None = None
+    gate_mode: str | None = None
+    area_check: dict[str, Any] | None = None
+    imputed_features: list[str] | None = None
     disclaimer: str = "Decision-support only. Not a legal land record, conversion certificate or survey."
 
 
@@ -222,5 +226,9 @@ class LandInquiryResponse(BaseModel):
     land_records: LandRecordSummary
     layers: list[dict[str, Any]] = []
     data_quality: dict[str, Any] = {"observed_feature_share": 0.0, "notes": []}
+    detection: dict[str, Any] | None = None
+    gate_mode: str | None = None
+    area_check: dict[str, Any] | None = None
     disclaimer: str = "Decision-support only. Not a legal land record, conversion certificate or survey."
     assessment_timestamp: str
+

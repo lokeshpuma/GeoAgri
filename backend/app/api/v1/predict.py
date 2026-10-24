@@ -16,6 +16,7 @@ from app.schemas.predict import (
     ClimateRiskSummary, IntercropSummary, ModelStatus, LandClassification,
     Irrigability, LandRecordSummary
 )
+from app.core.config import get_settings
 from app.services.features.profile import build_environmental_profile
 from app.services.features.pipeline import get_feature_pipeline
 from app.models.registry import get_model_registry
@@ -23,6 +24,8 @@ from app.services.fusion.engine import run_decision_fusion
 from app.services.landclass.classifier import get_land_classifier
 from app.services.irrigability.engine import get_irrigability_engine
 from app.services.landrecords.manager import get_land_record_manager
+from app.services.landclass.evidence import collect_evidence
+from app.services.landclass.detection import to_legacy_area_check
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -30,6 +33,10 @@ router = APIRouter()
 
 @router.post("/predict/full-report", response_model=FullReportResponse)
 async def generate_full_report(req: PredictRequest):
+    settings = get_settings()
+    det_mode = settings.LAND_DETECTION_MODE.lower()
+    gate_mode = settings.LAND_GATE_MODE.lower()
+
     # Validation per M26
     if req.polygon is not None:
         if len(req.polygon) < 3:
@@ -122,21 +129,47 @@ async def generate_full_report(req: PredictRequest):
                 ),
                 land_class=unknown_class,
                 irrigability=unverified_irrigability,
-                land_records=LandRecordSummary(providers=[], record=None)
+                land_records=LandRecordSummary(providers=[], record=None),
+                detection=None,
+                gate_mode=gate_mode,
+                area_check=None,
+                imputed_features=None
             )
 
         # 2. Extract 78-layer feature vector
         pipeline = get_feature_pipeline()
         vector = pipeline.extract_feature_vector(profile)
+        _, imputed_features = pipeline.impute_for_model(vector)
 
-        # 3. Land Intelligence Layer (Records, Classification, Irrigability)
+        # 3. Land Intelligence Layer (Records, Classification, Detection, Irrigability)
         lon = profile["field_summary"]["centroid_lon"]
         lat = profile["field_summary"]["centroid_lat"]
         record_mgr = get_land_record_manager()
         record_summary = await record_mgr.get_summary(lon, lat, req.survey_ref)
 
+        evidence = None
+        detection_dict = None
+        area_check_alias = None
+
+        if det_mode != "off":
+            try:
+                evidence = collect_evidence(
+                    lat=lat,
+                    lon=lon,
+                    polygon=req.polygon,
+                    rtc_record=record_summary.record,
+                    features=vector
+                )
+                detection_dict = evidence.detection
+                area_check_alias = to_legacy_area_check(evidence.detection, lat=lat, lon=lon)
+            except Exception as det_err:
+                logger.warning("Detection collection error: %s", det_err)
+
         classifier = get_land_classifier()
-        land_class = classifier.classify(vector, record=record_summary.record)
+        if det_mode == "enforce" and evidence is not None:
+            land_class = classifier.classify(evidence=evidence, record=record_summary.record)
+        else:
+            land_class = classifier.classify(vector, record=record_summary.record)
 
         engine = get_irrigability_engine()
         gross_area = req.area_ha if (req.area_ha is not None and req.area_ha > 0) else profile["field_summary"]["area_ha"]
@@ -150,9 +183,10 @@ async def generate_full_report(req: PredictRequest):
         s = profile["soil"]
         sat = profile["satellite"]
 
-        # 4. PREDICTION GATING (PRD v2.0 §7.2, §10, M6):
-        # Non-irrigable plots return ZERO crops, red verdict, and BYPASS Models A-E execution completely.
-        if irrigability.verdict in ["NOT_IRRIGABLE", "NOT_IRRIGABLE_PROVISIONAL"]:
+        # 4. PREDICTION GATING (PRD v2.1 §5A.7, §7.2, §10, M6):
+        # Non-irrigable plots return ZERO crops, red verdict, and BYPASS Models A-E execution completely
+        # ONLY when gate_mode == "enforce". In shadow or off mode, continue and compute recommendations.
+        if irrigability.verdict in ["NOT_IRRIGABLE", "NOT_IRRIGABLE_PROVISIONAL"] and gate_mode == "enforce":
             limiting = [r["reason"] for r in irrigability.reasons]
             return FullReportResponse(
                 field_summary=FieldSummary(**profile["field_summary"]),
@@ -207,7 +241,7 @@ async def generate_full_report(req: PredictRequest):
                 irrigation_summary=IrrigationSummary(
                     recommended_mode="Not Applicable",
                     total_water_demand_m3=0.0,
-                    effective_rainfall_mm=round(w["rainfall_mm"] * 0.75, 1)
+                    effective_rainfall_mm=round(w.get("rainfall_mm", 0.0) * 0.75, 1)
                 ),
                 climate_risk_summary=ClimateRiskSummary(
                     overall_risk_level="Critical",
@@ -230,10 +264,14 @@ async def generate_full_report(req: PredictRequest):
                 ),
                 land_class=land_class,
                 irrigability=irrigability,
-                land_records=record_summary
+                land_records=record_summary,
+                detection=detection_dict,
+                gate_mode=gate_mode,
+                area_check=area_check_alias,
+                imputed_features=imputed_features
             )
 
-        # 5. Parallel Models A-E execution (For Irrigable and Conditionally Irrigable plots)
+        # 5. Parallel Models A-E execution (For Irrigable, Conditionally Irrigable, or Shadow-mode plots)
         model_reg = get_model_registry()
         model_outputs = await model_reg.run_models_parallel(vector, season=req.season)
 
@@ -348,7 +386,7 @@ async def generate_full_report(req: PredictRequest):
             irrigation_summary=IrrigationSummary(
                 recommended_mode=top_rec.irrigation_mode if top_rec else "rainfed",
                 total_water_demand_m3=round(top_rec.water_need_mm * 10.0 * calc_area, 1) if top_rec else 0.0,
-                effective_rainfall_mm=round(w["rainfall_mm"] * 0.75, 1)
+                effective_rainfall_mm=round(w.get("rainfall_mm", 0.0) * 0.75, 1)
             ),
             climate_risk_summary=ClimateRiskSummary(
                 overall_risk_level="Low" if (top_rec and top_rec.climate_risk_score < 35) else ("Moderate" if (top_rec and top_rec.climate_risk_score < 60) else "High"),
@@ -365,7 +403,11 @@ async def generate_full_report(req: PredictRequest):
             model_status=ModelStatus(**model_outputs["model_status"]),
             land_class=land_class,
             irrigability=irrigability,
-            land_records=record_summary
+            land_records=record_summary,
+            detection=detection_dict,
+            gate_mode=gate_mode,
+            area_check=area_check_alias,
+            imputed_features=imputed_features
         )
     except HTTPException:
         raise

@@ -118,6 +118,9 @@ def test_prediction_gating_bypasses_models_for_non_irrigable_plot(monkeypatch):
         }
     }
 
+    from app.core.config import get_settings
+    monkeypatch.setattr(get_settings(), "LAND_GATE_MODE", "enforce")
+
     with patch("app.api.v1.predict.build_environmental_profile", new_callable=AsyncMock, return_value=water_profile):
         payload = {
             "polygon": [
@@ -138,6 +141,7 @@ def test_prediction_gating_bypasses_models_for_non_irrigable_plot(monkeypatch):
         # Gate asserts:
         assert data["land_class"]["dominant"] == "WATER_BODY"
         assert data["irrigability"]["verdict"] == "NOT_IRRIGABLE"
+        assert data["gate_mode"] == "enforce"
         assert data["recommended_crops"] == []
         assert data["model_status"]["model_a"] == "skipped_not_irrigable"
         assert data["model_status"]["model_b"] == "skipped_not_irrigable"
@@ -146,6 +150,81 @@ def test_prediction_gating_bypasses_models_for_non_irrigable_plot(monkeypatch):
         assert data["model_status"]["model_e"] == "skipped_not_irrigable"
         assert data["land_suitability"]["grade"] == "Not Suitable"
         assert "water" in data["irrigability"]["reasons"][0]["rule_id"].lower()
+
+
+def test_prediction_gating_shadow_mode_returns_crops(monkeypatch):
+    """
+    PRD v2.1 §5A.7 & §14.1:
+    When LAND_GATE_MODE=shadow, non-irrigable verdict is computed and gate_mode='shadow'
+    is returned, but crop models are NOT skipped.
+    """
+    from app.core.config import get_settings
+    monkeypatch.setattr(get_settings(), "LAND_GATE_MODE", "shadow")
+
+    water_profile = {
+        "field_summary": {
+            "area_ha": 2.5,
+            "centroid_lon": 77.586,
+            "centroid_lat": 12.966,
+            "polygon_valid": True,
+            "boundary_source": "user_drawn"
+        },
+        "centroid": (77.586, 12.966),
+        "season": "kharif",
+        "satellite": {
+            "ndwi": 0.65,
+            "ndvi": -0.20,
+            "evi": -0.10,
+            "savi": -0.10,
+            "ndmi": 0.50,
+            "elevation": 800.0,
+            "slope": 1.0,
+            "twi": 12.0,
+            "vv": -15.0,
+            "vh": -25.0
+        },
+        "weather": {
+            "rainfall_mm": 800.0,
+            "temp_max_c": 30.0,
+            "temp_min_c": 20.0,
+            "temp_mean_c": 25.0,
+            "humidity_pct": 70.0,
+            "solar_radiation_mj_m2": 18.0
+        },
+        "soil": {
+            "ph": 7.0,
+            "organic_carbon_g_kg": 15.0,
+            "nitrogen_g_kg": 1.2,
+            "phosphorus_ppm": None,
+            "potassium_ppm": None,
+            "texture_clay_pct": 20.0,
+            "texture_sand_pct": 40.0,
+            "texture_silt_pct": 40.0
+        }
+    }
+
+    with patch("app.api.v1.predict.build_environmental_profile", new_callable=AsyncMock, return_value=water_profile):
+        payload = {
+            "polygon": [
+                [77.5850, 12.9650],
+                [77.5870, 12.9650],
+                [77.5870, 12.9670],
+                [77.5850, 12.9670],
+                [77.5850, 12.9650]
+            ],
+            "season": "kharif",
+            "limit": 10,
+            "irrigation_preference": "rainfed"
+        }
+        response = client.post("/api/v1/predict/full-report", json=payload)
+        assert response.status_code == 200
+        data = response.json()
+
+        assert data["land_class"]["dominant"] == "WATER_BODY"
+        assert data["irrigability"]["verdict"] == "NOT_IRRIGABLE"
+        assert data["gate_mode"] == "shadow"
+        assert len(data["recommended_crops"]) > 0
+        assert data["detection"] is not None
 
 
 @pytest.mark.asyncio
