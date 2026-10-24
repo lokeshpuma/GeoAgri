@@ -7,6 +7,7 @@ import { WorkspacePage } from './pages/WorkspacePage';
 import { FieldAnalysisPage } from './pages/FieldAnalysisPage';
 import { CropPredictionPage } from './pages/CropPredictionPage';
 import { SummaryReportPage } from './pages/SummaryReportPage';
+import { ToastProvider } from './ui/Toast';
 
 const WorkflowContainer: React.FC = () => {
   const { currentStep } = useWorkflow();
@@ -50,9 +51,11 @@ const WorkflowContainer: React.FC = () => {
 
 export const App: React.FC = () => {
   return (
-    <WorkflowProvider>
-      <WorkflowContainer />
-    </WorkflowProvider>
+    <ToastProvider>
+      <WorkflowProvider>
+        <WorkflowContainer />
+      </WorkflowProvider>
+    </ToastProvider>
   );
 };
 
