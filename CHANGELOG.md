@@ -196,6 +196,14 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Rollback to legacy behavior is guaranteed via `LAND_DETECTION_MODE=off LAND_GATE_MODE=off`.
 - **Status**: PRD v2.1 Force-Fix Complete across all 18 items (M13–M30) and 15 Runbook Steps (S0–S14).
 
+## [PRD v3.0 - Phase P0 Baseline] - 2026-10-24
+### Recorded
+- Git status: clean; tag: `pre-v3`
+- `npm run build` (frontend): 0 errors, built in 2.28s
+- `pytest` (backend): 110 passed, 3008 warnings in 71.28s
+- Baseline verified and logged.
+
+
 
 
 
