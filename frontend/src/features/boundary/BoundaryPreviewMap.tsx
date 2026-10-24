@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { BASEMAPS } from './mapStyles';
+import { UNIFIED_MAP_STYLE } from './mapStyles';
 
 export interface BoundaryPreviewMapProps {
   polygon: [number, number][];
@@ -22,9 +22,10 @@ export const BoundaryPreviewMap: React.FC<BoundaryPreviewMapProps> = ({
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: BASEMAPS.satellite.style,
+      style: UNIFIED_MAP_STYLE,
       center: point || (polygon.length > 0 ? polygon[0] : [0, 20]),
       zoom: 14,
+      maxZoom: 22,
       interactive: true,
       attributionControl: false,
     });

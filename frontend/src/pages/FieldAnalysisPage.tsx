@@ -73,10 +73,10 @@ export const FieldAnalysisPage: React.FC = () => {
       {/* Top Title Bar */}
       <div className="page-title-row">
         <div>
-          <span className="step-tag">STEP 2 OF 4 • DATA ACQUISITION & SENSING</span>
+          <span className="step-tag">STEP 3 OF 5 • FIELD INTELLIGENCE & SENSING</span>
           <h1 className="page-title">Location & Field Analysis</h1>
           <p className="page-subtitle">
-            Select a field location on the interactive map to begin geospatial, satellite, soil, and environmental analysis.
+            Geospatial, satellite, soil, and environmental diagnostics for your confirmed parcel boundary.
           </p>
         </div>
 
@@ -84,10 +84,10 @@ export const FieldAnalysisPage: React.FC = () => {
           <button
             type="button"
             className="btn-secondary"
-            onClick={() => goToStep(1)}
+            onClick={() => goToStep(2)}
           >
             <ArrowLeft size={16} />
-            <span>Workspace</span>
+            <span>Boundary Studio</span>
           </button>
 
           {isPredicted && (
@@ -215,22 +215,6 @@ export const FieldAnalysisPage: React.FC = () => {
                   title="Edit land parcel area in hectares"
                 />
                 <span style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-muted)' }}>Hectares</span>
-              </div>
-
-              {/* Quick Human-Changeable Presets */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', marginTop: '2px' }}>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', fontWeight: 600 }}>Quick Presets:</span>
-                {[0.5, 1.0, 2.35, 5.0, 10.0].map((presetHa) => (
-                  <button
-                    key={presetHa}
-                    type="button"
-                    onClick={() => updateFormData({ areaHa: presetHa })}
-                    className={`preset-area-chip ${formData.areaHa === presetHa ? 'active' : ''}`}
-                    title={`Set parcel size to ${presetHa} Ha`}
-                  >
-                    {presetHa === 2.35 ? '2.35 Ha (Def)' : `${presetHa} Ha`}
-                  </button>
-                ))}
               </div>
             </div>
 

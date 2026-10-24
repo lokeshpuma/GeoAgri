@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useWorkflow } from '../../context/WorkflowContext';
-import { BoundaryMap } from './BoundaryMap';
+import { BoundaryMap, SearchTargetValue } from './BoundaryMap';
 import { ToolDock } from './ToolDock';
 import { PlotSummaryPanel } from './PlotSummaryPanel';
 import { SearchBar } from './SearchBar';
@@ -40,7 +40,8 @@ export const BoundaryStudioPage: React.FC = () => {
 
   const [isVerifying, setIsVerifying] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [searchTarget, setSearchTarget] = useState<[number, number] | null>(null);
+  const [searchTarget, setSearchTarget] = useState<SearchTargetValue>(null);
+  const [isCoachDismissed, setIsCoachDismissed] = useState(false);
 
   // Restore draft from storage on mount
   useEffect(() => {
@@ -118,42 +119,38 @@ export const BoundaryStudioPage: React.FC = () => {
         }
       } catch (err) {
         console.warn('Server area verification failed, using client geometry estimate:', err);
-        showToast({
-          type: 'warn',
-          title: 'Server Verification Notice',
-          message: 'Could not verify area with server; using client geodesic calculation.',
-        });
       }
     }
 
     setIsVerifying(false);
     setIsConfirmed(true);
 
-    // Write to WorkflowContext
-    updateFormData({
-      polygonPts: polygonCoords || [],
-      pointPt: pinCoords || undefined,
-      areaHa: finalAreaHa,
-      selectedPresetName: plotName || (polygonCoords ? 'Drawn Boundary' : 'Selected Pin'),
-    });
-
+    // Save final confirmed draft
     saveBoundaryDraft({
-      mode: polygonCoords ? 'polygon' : 'pin',
+      mode: polygonCoords ? 'polygon' : pinCoords ? 'pin' : 'none',
       polygon: polygonCoords,
       pin: pinCoords,
-      name: plotName,
-      areaHa: finalAreaHa,
-      areaSource,
+      name: plotName || (polygonCoords ? 'Custom Drawn Field' : 'Field Pin'),
       confirmed: true,
+      areaHa: finalAreaHa,
+    });
+
+    // Update global workflow context
+    updateFormData({
+      polygonPts: polygonCoords || [],
+      pointPt: pinCoords || (polygonCoords ? polygonCoords[0] : undefined),
+      areaHa: Number(finalAreaHa.toFixed(2)),
+      selectedPresetName: plotName || 'Custom Drawn Field',
     });
 
     showToast({
       type: 'success',
       title: 'Boundary Confirmed',
-      message: `${finalAreaHa > 0 ? finalAreaHa.toFixed(2) + ' ha' : 'Pin location'} confirmed. Navigating to Analysis...`,
+      message: `${finalAreaHa.toFixed(2)} Ha verified (${areaSource}). Advancing to Field Analysis.`,
+      durationMs: 2500,
     });
 
-    // Advance to Step 3 (Field Analysis)
+    // Navigate to Step 3: Field Analysis
     setTimeout(() => {
       goToStep(3);
     }, 400);
@@ -163,6 +160,7 @@ export const BoundaryStudioPage: React.FC = () => {
     setPolygonCoords(null);
     setPinCoords(null);
     setIsConfirmed(false);
+    setIsCoachDismissed(false);
     clearBoundaryDraft();
     updateFormData({
       polygonPts: [],
@@ -190,8 +188,8 @@ export const BoundaryStudioPage: React.FC = () => {
     >
       {/* Top Search Bar */}
       <SearchBar
-        onFlyTo={(coords) => setSearchTarget(coords)}
-        onDropSearchMarker={(coords) => setSearchTarget(coords)}
+        onFlyTo={(coords, zoom) => setSearchTarget({ coords, zoom })}
+        onDropSearchMarker={(coords) => setSearchTarget({ coords, zoom: 16 })}
       />
 
       {/* Left Tool Dock */}
@@ -240,9 +238,9 @@ export const BoundaryStudioPage: React.FC = () => {
         onLabelOpacityChange={setLabelOpacity}
       />
 
-      {/* Center Coach Card when empty */}
-      {!hasBoundary && (
-        <CoachCard />
+      {/* Corner Coach Card when empty */}
+      {!hasBoundary && !isCoachDismissed && (
+        <CoachCard onDismiss={() => setIsCoachDismissed(true)} />
       )}
     </div>
   );

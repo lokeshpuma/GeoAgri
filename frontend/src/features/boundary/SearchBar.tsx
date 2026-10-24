@@ -1,7 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Navigation, X, MapPin } from 'lucide-react';
+import { Search, Navigation, X, MapPin, Loader2 } from 'lucide-react';
 import { IconButton } from '../../ui/IconButton';
 import { useToast } from '../../ui/Toast';
+
+export interface SearchResultItem {
+  name: string;
+  detail?: string;
+  coords: [number, number];
+  zoom?: number;
+}
 
 export interface SearchBarProps {
   onFlyTo: (coords: [number, number], zoom?: number) => void;
@@ -10,7 +17,7 @@ export interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarker }) => {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<Array<{ name: string; coords: [number, number] }>>([]);
+  const [results, setResults] = useState<SearchResultItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -53,58 +60,78 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
     return null;
   };
 
-  // Debounced search
+  // Debounced search for place names and coordinates
   useEffect(() => {
-    if (!query.trim()) {
+    const trimmed = query.trim();
+    if (!trimmed) {
       setResults([]);
       setShowDropdown(false);
       return;
     }
 
-    const coords = parseCoordinates(query);
+    const coords = parseCoordinates(trimmed);
     if (coords) {
       setResults([
         {
-          name: `Coordinates: ${coords[1].toFixed(4)}°N, ${coords[0].toFixed(4)}°E`,
+          name: `${coords[1].toFixed(5)}°, ${coords[0].toFixed(5)}°`,
+          detail: 'Direct Geographic Coordinates',
           coords,
+          zoom: 16,
         },
       ]);
       setShowDropdown(true);
       return;
     }
 
-    const geocoderUrl = import.meta.env.VITE_GEOCODER_URL;
-    if (!geocoderUrl) {
-      // No geocoder configured, show hint
-      setResults([
-        {
-          name: 'Search by coordinates (e.g. "12.9716, 77.5946")',
-          coords: [0, 0],
-        },
-      ]);
-      setShowDropdown(true);
-      return;
-    }
+    // Free OpenStreetMap Photon geocoder by default with zero API key required
+    const geocoderUrl = import.meta.env.VITE_GEOCODER_URL || 'https://photon.komoot.io/api/';
 
     const timer = setTimeout(async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`${geocoderUrl}?q=${encodeURIComponent(query)}&limit=5`);
+        const res = await fetch(`${geocoderUrl}?q=${encodeURIComponent(trimmed)}&limit=6`);
         if (res.ok) {
           const data = await res.json();
-          const items = (data.features || []).map((f: any) => ({
-            name: f.properties?.label || f.properties?.name || 'Unknown place',
-            coords: f.geometry?.coordinates as [number, number],
-          }));
+          const items: SearchResultItem[] = (data.features || []).map((f: any) => {
+            const props = f.properties || {};
+            const name = props.name || props.street || 'Place';
+
+            // Build detailed context subtitle
+            const detailParts = [
+              props.city || props.town || props.village || props.county,
+              props.state,
+              props.country,
+            ].filter(Boolean);
+            // Remove duplicates
+            const cleanDetail = detailParts.filter((p, idx) => p !== name && detailParts.indexOf(p) === idx).join(', ');
+
+            // Calculate context-aware zoom level
+            const placeType = props.type || props.osm_value || '';
+            let zoom = 14;
+            if (placeType === 'country') zoom = 5;
+            else if (placeType === 'state' || placeType === 'region') zoom = 7;
+            else if (placeType === 'county' || placeType === 'district') zoom = 10;
+            else if (placeType === 'city' || placeType === 'town') zoom = 12;
+            else if (placeType === 'village' || placeType === 'suburb') zoom = 14;
+            else if (placeType === 'farm' || placeType === 'farmland') zoom = 16;
+
+            return {
+              name,
+              detail: cleanDetail || undefined,
+              coords: f.geometry?.coordinates as [number, number],
+              zoom,
+            };
+          });
+
           setResults(items);
-          setShowDropdown(true);
+          setShowDropdown(items.length > 0);
         }
       } catch (err) {
         console.warn('Geocoder request failed:', err);
       } finally {
         setIsLoading(false);
       }
-    }, 400);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [query]);
@@ -120,15 +147,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
     return () => document.removeEventListener('mousedown', handleOutside);
   }, []);
 
-  const handleSelect = (coords: [number, number]) => {
-    if (coords[0] === 0 && coords[1] === 0) return;
-    onFlyTo(coords, 16);
-    if (onDropSearchMarker) onDropSearchMarker(coords);
+  const handleSelect = (item: SearchResultItem) => {
+    if (!item.coords || (item.coords[0] === 0 && item.coords[1] === 0)) return;
+    const zoom = item.zoom || 15;
+    onFlyTo(item.coords, zoom);
+    if (onDropSearchMarker) onDropSearchMarker(item.coords);
     setShowDropdown(false);
+    setQuery(item.name + (item.detail ? `, ${item.detail}` : ''));
     showToast({
       type: 'info',
       title: 'Navigated to location',
-      message: `${coords[1].toFixed(4)}°N, ${coords[0].toFixed(4)}°E`,
+      message: `${item.name} (${item.coords[1].toFixed(4)}°N, ${item.coords[0].toFixed(4)}°E)`,
       durationMs: 3000,
     });
   };
@@ -148,7 +177,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
       pos => {
         setIsLocating(false);
         const coords: [number, number] = [pos.coords.longitude, pos.coords.latitude];
-        onFlyTo(coords, 16);
+        onFlyTo(coords, 17);
         if (onDropSearchMarker) onDropSearchMarker(coords);
         showToast({
           type: 'success',
@@ -177,7 +206,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 'var(--z-panel)',
-        width: 'min(460px, 92vw)',
+        width: 'min(480px, 92vw)',
         pointerEvents: 'auto',
       }}
     >
@@ -191,14 +220,19 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
           background: 'var(--glass-strong)',
           borderRadius: 'var(--r-pill)',
           boxShadow: 'var(--elev-2)',
+          border: '1px solid var(--glass-border)',
         }}
       >
-        <Search size={18} style={{ color: 'var(--ink-3)', flexShrink: 0 }} />
+        {isLoading ? (
+          <Loader2 size={18} className="animate-spin" style={{ color: 'var(--emerald-500)', flexShrink: 0 }} />
+        ) : (
+          <Search size={18} style={{ color: 'var(--ink-3)', flexShrink: 0 }} />
+        )}
         <input
           type="text"
           value={query}
           onChange={e => setQuery(e.target.value)}
-          placeholder="Search place or paste lat, lng..."
+          placeholder="Search place (e.g. California, Punjab) or lat, lng..."
           aria-label="Search map location"
           style={{
             flex: 1,
@@ -212,14 +246,21 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
           onKeyDown={e => {
             if (e.key === 'Enter') {
               const coords = parseCoordinates(query);
-              if (coords) handleSelect(coords);
-              else if (results.length > 0) handleSelect(results[0].coords);
+              if (coords) {
+                handleSelect({ name: `${coords[1].toFixed(4)}°, ${coords[0].toFixed(4)}°`, coords, zoom: 16 });
+              } else if (results.length > 0) {
+                handleSelect(results[0]);
+              }
             }
           }}
         />
         {query && (
           <button
-            onClick={() => setQuery('')}
+            onClick={() => {
+              setQuery('');
+              setResults([]);
+              setShowDropdown(false);
+            }}
             aria-label="Clear search"
             style={{
               background: 'none',
@@ -256,9 +297,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
             left: 0,
             right: 0,
             background: 'var(--bg-1)',
+            border: '1px solid var(--glass-border)',
             borderRadius: 'var(--r-md)',
             boxShadow: 'var(--elev-3)',
-            maxHeight: '240px',
+            maxHeight: '260px',
             overflowY: 'auto',
             padding: '6px',
           }}
@@ -268,9 +310,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
               key={i}
               role="button"
               tabIndex={0}
-              onClick={() => handleSelect(r.coords)}
+              onClick={() => handleSelect(r)}
               onKeyDown={e => {
-                if (e.key === 'Enter') handleSelect(r.coords);
+                if (e.key === 'Enter') handleSelect(r);
               }}
               style={{
                 display: 'flex',
@@ -278,22 +320,29 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
                 gap: '10px',
                 padding: '8px 12px',
                 borderRadius: 'var(--r-xs)',
-                cursor: r.coords[0] === 0 ? 'default' : 'pointer',
+                cursor: 'pointer',
                 color: 'var(--ink-1)',
                 fontSize: '0.8125rem',
                 transition: 'background var(--t-fast) var(--ease-out)',
               }}
               onMouseEnter={e => {
-                if (r.coords[0] !== 0) (e.currentTarget as HTMLElement).style.background = 'var(--bg-2)';
+                (e.currentTarget as HTMLElement).style.background = 'var(--bg-2)';
               }}
               onMouseLeave={e => {
                 (e.currentTarget as HTMLElement).style.background = 'transparent';
               }}
             >
               <MapPin size={16} style={{ color: 'var(--emerald-500)', flexShrink: 0 }} />
-              <span style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {r.name}
-              </span>
+              <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', textAlign: 'left' }}>
+                <span style={{ fontWeight: 600, color: 'var(--ink-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {r.name}
+                </span>
+                {r.detail && (
+                  <span style={{ fontSize: '0.75rem', color: 'var(--ink-3)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {r.detail}
+                  </span>
+                )}
+              </div>
             </div>
           ))}
         </div>

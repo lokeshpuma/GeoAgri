@@ -2,9 +2,16 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { DrawTool, BasemapId, BoundaryValidationResult } from './boundaryTypes';
-import { BASEMAPS } from './mapStyles';
-import { evaluateBoundary, normalizeRing, simplifyFreehand } from './boundaryMath';
+import { UNIFIED_MAP_STYLE, BASEMAP_LAYER_IDS, BASEMAPS } from './mapStyles';
+import { evaluateBoundary, normalizeRing } from './boundaryMath';
 import { useToast } from '../../ui/Toast';
+
+export interface SearchTargetObject {
+  coords: [number, number];
+  zoom?: number;
+}
+
+export type SearchTargetValue = [number, number] | SearchTargetObject | null;
 
 export interface BoundaryMapProps {
   activeTool: DrawTool;
@@ -15,7 +22,7 @@ export interface BoundaryMapProps {
   initialPin: [number, number] | null;
   onGeometryChange: (coords: [number, number][] | null, pin: [number, number] | null) => void;
   onValidationChange: (validation: BoundaryValidationResult) => void;
-  searchTarget: [number, number] | null;
+  searchTarget: SearchTargetValue;
 }
 
 export const BoundaryMap: React.FC<BoundaryMapProps> = ({
@@ -38,84 +45,97 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
   const [pinCoords, setPinCoords] = useState<[number, number] | null>(() => initialPin || null);
   const [history, setHistory] = useState<[number, number][][]>([]);
   const [future, setFuture] = useState<[number, number][][]>([]);
-  const isDrawingFreehand = useRef(false);
   const { showToast } = useToast();
 
   // Initialize Map
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
-    const basemapConfig = BASEMAPS[activeBasemap];
-
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
-      style: basemapConfig.style,
+      style: UNIFIED_MAP_STYLE,
       center: initialPolygon && initialPolygon.length > 0
         ? initialPolygon[0]
         : initialPin
         ? initialPin
-        : [0, 20], // World view default (PRD §4.3 FR-S4)
+        : [0, 20], // World view default
       zoom: initialPolygon || initialPin ? 15 : 2,
+      maxZoom: 22, // Enable parcel-scale zoom down to high-resolution meters (< 30m window)
       attributionControl: { compact: false },
     });
 
     map.addControl(new maplibregl.NavigationControl({ showCompass: true }), 'top-right');
-    map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-right');
+    map.addControl(new maplibregl.ScaleControl({ unit: 'metric', maxWidth: 120 }), 'bottom-right');
 
     map.on('load', () => {
+      // Set active basemap visibility on load
+      Object.entries(BASEMAP_LAYER_IDS).forEach(([id, layerId]) => {
+        if (map.getLayer(layerId)) {
+          map.setLayoutProperty(
+            layerId,
+            'visibility',
+            id === activeBasemap ? 'visible' : 'none'
+          );
+        }
+      });
+
       // Add GeoJSON polygon source & layers for boundary rendering
-      map.addSource('boundary-polygon', {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: [],
-        },
-      });
+      if (!map.getSource('boundary-polygon')) {
+        map.addSource('boundary-polygon', {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [],
+          },
+        });
 
-      // Polygon fill layer
-      map.addLayer({
-        id: 'boundary-polygon-fill',
-        type: 'fill',
-        source: 'boundary-polygon',
-        filter: ['==', '$type', 'Polygon'],
-        paint: {
-          'fill-color': '#22c58b',
-          'fill-opacity': 0.25,
-        },
-      });
+        // Polygon fill layer
+        map.addLayer({
+          id: 'boundary-polygon-fill',
+          type: 'fill',
+          source: 'boundary-polygon',
+          filter: ['==', '$type', 'Polygon'],
+          paint: {
+            'fill-color': '#22c58b',
+            'fill-opacity': 0.25,
+          },
+        });
 
-      // Polygon outline layer
-      map.addLayer({
-        id: 'boundary-polygon-line',
-        type: 'line',
-        source: 'boundary-polygon',
-        paint: {
-          'line-color': '#22c58b',
-          'line-width': 3,
-          'line-dasharray': [1, 0],
-        },
-      });
+        // Polygon outline layer
+        map.addLayer({
+          id: 'boundary-polygon-line',
+          type: 'line',
+          source: 'boundary-polygon',
+          paint: {
+            'line-color': '#22c58b',
+            'line-width': 3,
+            'line-dasharray': [1, 0],
+          },
+        });
+      }
 
       // Vertex point handles
-      map.addSource('boundary-vertices', {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: [],
-        },
-      });
+      if (!map.getSource('boundary-vertices')) {
+        map.addSource('boundary-vertices', {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [],
+          },
+        });
 
-      map.addLayer({
-        id: 'boundary-vertex-handles',
-        type: 'circle',
-        source: 'boundary-vertices',
-        paint: {
-          'circle-radius': 6,
-          'circle-color': '#f3f1ea',
-          'circle-stroke-width': 2,
-          'circle-stroke-color': '#05090a',
-        },
-      });
+        map.addLayer({
+          id: 'boundary-vertex-handles',
+          type: 'circle',
+          source: 'boundary-vertices',
+          paint: {
+            'circle-radius': 6,
+            'circle-color': '#f3f1ea',
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#05090a',
+          },
+        });
+      }
 
       mapRef.current = map;
       updateMapLayers(vertices);
@@ -126,34 +146,19 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     };
   }, []);
 
-  // Update basemap style
+  // Instant zero-flash Basemap visibility toggle
   useEffect(() => {
-    if (!mapRef.current || !mapRef.current.isStyleLoaded()) return;
-    const basemapConfig = BASEMAPS[activeBasemap];
-    mapRef.current.setStyle(basemapConfig.style);
-    mapRef.current.once('style.load', () => {
-      // Re-add layers
-      const map = mapRef.current;
-      if (!map) return;
-      if (!map.getSource('boundary-polygon')) {
-        map.addSource('boundary-polygon', {
-          type: 'geojson',
-          data: { type: 'FeatureCollection', features: [] },
-        });
-        map.addLayer({
-          id: 'boundary-polygon-fill',
-          type: 'fill',
-          source: 'boundary-polygon',
-          paint: { 'fill-color': '#22c58b', 'fill-opacity': 0.25 },
-        });
-        map.addLayer({
-          id: 'boundary-polygon-line',
-          type: 'line',
-          source: 'boundary-polygon',
-          paint: { 'line-color': '#22c58b', 'line-width': 3 },
-        });
+    const map = mapRef.current;
+    if (!map || !map.isStyleLoaded()) return;
+
+    Object.entries(BASEMAP_LAYER_IDS).forEach(([id, layerId]) => {
+      if (map.getLayer(layerId)) {
+        map.setLayoutProperty(
+          layerId,
+          'visibility',
+          id === activeBasemap ? 'visible' : 'none'
+        );
       }
-      updateMapLayers(vertices);
     });
   }, [activeBasemap]);
 
@@ -190,7 +195,7 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
       }
     } else {
       const polySource: any = map.getSource('boundary-polygon');
-      polySource.setData({ type: 'FeatureCollection', features: [] });
+      if (polySource) polySource.setData({ type: 'FeatureCollection', features: [] });
       const vertSource: any = map.getSource('boundary-vertices');
       if (vertSource) vertSource.setData({ type: 'FeatureCollection', features: [] });
     }
@@ -218,26 +223,29 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     }
   }, [vertices, pinCoords, activeTool]);
 
-  // Search target fly-to
+  // Search target fly-to with context-aware zoom
   useEffect(() => {
     if (!searchTarget || !mapRef.current) return;
-    mapRef.current.flyTo({ center: searchTarget, zoom: 16, speed: 1.4 });
+    const center = Array.isArray(searchTarget) ? searchTarget : searchTarget.coords;
+    const zoom = Array.isArray(searchTarget) ? 15 : (searchTarget.zoom || 15);
+
+    mapRef.current.flyTo({ center, zoom, speed: 1.4 });
 
     if (!searchMarkerRef.current) {
       const el = document.createElement('div');
       el.className = 'search-pulse-marker';
       el.style.width = '14px';
       el.style.height = '14px';
-      el.style.background = '#d9ad4f';
+      el.style.background = '#22c58b';
       el.style.borderRadius = '50%';
       el.style.border = '2px solid #ffffff';
-      el.style.boxShadow = '0 0 12px #d9ad4f';
+      el.style.boxShadow = '0 0 12px #22c58b';
 
       searchMarkerRef.current = new maplibregl.Marker({ element: el })
-        .setLngLat(searchTarget)
+        .setLngLat(center)
         .addTo(mapRef.current);
     } else {
-      searchMarkerRef.current.setLngLat(searchTarget);
+      searchMarkerRef.current.setLngLat(center);
     }
   }, [searchTarget]);
 
@@ -310,30 +318,6 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
       map.off('dblclick', handleDblClick);
     };
   }, [activeTool, vertices]);
-
-  // Undo / Redo handlers
-  const handleUndo = useCallback(() => {
-    if (history.length === 0) return;
-    const prev = history[history.length - 1];
-    setFuture(f => [vertices, ...f]);
-    setHistory(h => h.slice(0, -1));
-    setVertices(prev);
-  }, [history, vertices]);
-
-  const handleRedo = useCallback(() => {
-    if (future.length === 0) return;
-    const next = future[0];
-    setHistory(h => [...h, vertices]);
-    setFuture(f => f.slice(1));
-    setVertices(next);
-  }, [future, vertices]);
-
-  const handleClear = useCallback(() => {
-    setHistory(h => [...h, vertices]);
-    setVertices([]);
-    setPinCoords(null);
-    if (pinMarkerRef.current) pinMarkerRef.current.remove();
-  }, [vertices]);
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 'calc(100vh - 140px)' }}>
