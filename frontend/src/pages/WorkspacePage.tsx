@@ -191,7 +191,7 @@ export const WorkspacePage: React.FC = () => {
               gap: '12px'
             }}
           >
-            <span>Analyse Your Location</span>
+            <span>Draw Your Land</span>
             <ArrowRight size={22} />
           </button>
         </div>

@@ -224,7 +224,7 @@ export const SummaryReportPage: React.FC = () => {
             borderRadius: '10px'
           }}>
             <strong style={{ color: '#ef4444', display: 'block', marginBottom: '6px' }}>
-              ⚠ Regulatory Notice: Cultivation Excluded ({report.irrigability.verdict.replace('_', ' ')})
+              ⚠ Regulatory Notice: Cultivation Excluded ({report.irrigability.verdict.replace(/_/g, ' ')})
             </strong>
             <p style={{ margin: 0, fontSize: '0.85rem', color: '#9ca3af' }}>
               {report.irrigability.reasons?.[0]?.reason || 'Plot falls within protected, water, urban, or wasteland boundaries.'}

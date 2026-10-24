@@ -247,6 +247,48 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - Wrapped application in `ToastProvider` in `frontend/src/App.tsx`.
 - Frontend build: 0 errors in 2.50s. Backend tests: 110 passed in 65.90s.
 
+## [PRD v3.0 - Phase P4 Boundary Studio] - 2026-10-24
+### Added
+- Created `frontend/src/features/boundary/`:
+  - `boundaryTypes.ts`: Typed data models for boundary states, draw tools, and validation issues.
+  - `boundaryMath.ts`: Real geodesic area, perimeter, vertices, kinks self-intersection checks, and counter-clockwise outer ring normalizer using `@turf/area`, `@turf/length`, `@turf/kinks`, and `@turf/centroid`.
+  - `boundaryStorage.ts`: LocalStorage persistence with key `geoagri.boundary.v1` and draft restore banner.
+  - `mapStyles.ts`: Multi-source basemap definitions (Satellite, Streets, Terrain, Dark) with custom label opacity control.
+  - `CoachCard.tsx`: Centered instruction modal guiding parcel discovery and placement.
+  - `SearchBar.tsx`: Coordinate parser (supports degrees/cardinals and decimal lat/lng), geocoder support, and Locate Me GPS trigger.
+  - `BasemapSwitcher.tsx`: Floating bottom-left basemap selector and label opacity slider.
+  - `ToolDock.tsx`: Floating left tool rail with Draw Polygon (D), Rectangle (R), Circle (C), Freehand (F), Edit (E), Pin (P), Undo/Redo, and Clear.
+  - `PlotSummaryPanel.tsx`: Right glass metrics panel with live area in hectares/acres/guntas, perimeter, centroid coordinates, server-verified badge, and GeoJSON copy/download export.
+  - `BoundaryMap.tsx`: Full-bleed MapLibre GL engine with live polygon rendering, vertex handles, and interactive creation.
+  - `BoundaryStudioPage.tsx`: Step 2 studio page integrating map, tool dock, search, and summary panel.
+  - `BoundaryPreviewMap.tsx`: Read-only field extent preview for Step 3 Field Analysis.
+- Vitest unit tests in `src/features/boundary/boundaryMath.test.ts`: 4 passed in 300ms.
+
+## [PRD v3.0 - Phase P5 Backend Validation] - 2026-10-24
+### Added / Changed
+- Updated `backend/app/api/v1/field.py`:
+  - Enforced `shapely` polygon validity checks (closed ring, ≥ 4 points, no self-intersections/kinks).
+  - Enforced parcel bounds (`FIELD_MIN_HA = 0.01` to `FIELD_MAX_HA = 1000.0`).
+  - Returns HTTP 422 with `{ code, message }` (`SELF_INTERSECTION`, `TOO_SMALL`, `TOO_LARGE`, `NOT_CLOSED`, `TOO_FEW_VERTICES`).
+  - Added additive fields: `{ perimeter_m, centroid: [lng, lat], polygon_valid: true, area_method: "geodesic" }`.
+- Updated `backend/app/schemas/predict.py`: Added optional `plot_name` and `boundary_source` attributes to `PredictRequest`.
+- Added test suite `backend/tests/test_field_area_validation.py` verifying all 6 edge cases: 6 passed in 1.34s.
+
+## [PRD v3.0 - Phase P6 & P7 Workflow & Restyle] - 2026-10-24
+### Changed
+- Expanded `WorkflowContext.tsx` to 5-step sequential flow (`StepNumber = 1 | 2 | 3 | 4 | 5`):
+  1: Workspace / Home (`#home`)
+  2: Boundary Studio (`#boundary`)
+  3: Field Analysis (`#analysis`)
+  4: Crop Prediction (`#crops`)
+  5: Summary & Report (`#report`)
+- Updated `BottomWorkflowNav.tsx` and `PageHeader.tsx` reflecting 5-step rail.
+- Wired Step 1 CTA button to "Draw Your Land →" navigating directly to Step 2.
+- Integrated `BoundaryPreviewMap` into `FieldAnalysisPage.tsx` with "Edit Boundary in Studio ↗" CTA and deleted legacy `MapSelector.tsx`.
+- Fixed bug A12 regex replacement in `SummaryReportPage.tsx` ensuring proper string rendering without raw underscores.
+- Frontend production build: 0 errors in 2.63s. Backend tests: 116 passed in 63.75s.
+
+
 
 
 

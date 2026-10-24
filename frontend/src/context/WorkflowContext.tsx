@@ -3,9 +3,7 @@ import { fetchFullReport, FullReportResponse, PredictRequestPayload } from '../a
 
 import { detectLocationFromCoordinates, DetectedLocationResult, findNearestAgriDistrict } from '../utils/locationDataset';
 
-export type StepNumber = 1 | 2 | 3 | 4;
-
-
+export type StepNumber = 1 | 2 | 3 | 4 | 5;
 
 export interface WorkflowFormData {
   polygonPts: [number, number][];
@@ -70,17 +68,23 @@ interface WorkflowContextType {
 const WorkflowContext = createContext<WorkflowContextType | undefined>(undefined);
 
 const STEP_HASHES: Record<StepNumber, string> = {
-  1: '#workspace',
-  2: '#field-analysis',
-  3: '#crop-prediction',
-  4: '#summary'
+  1: '#home',
+  2: '#boundary',
+  3: '#analysis',
+  4: '#crops',
+  5: '#report'
 };
 
 const HASH_TO_STEP: Record<string, StepNumber> = {
+  '#home': 1,
   '#workspace': 1,
-  '#field-analysis': 2,
-  '#crop-prediction': 3,
-  '#summary': 4
+  '#boundary': 2,
+  '#analysis': 3,
+  '#field-analysis': 3,
+  '#crops': 4,
+  '#crop-prediction': 4,
+  '#report': 5,
+  '#summary': 5
 };
 
 export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -153,19 +157,14 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const isStepAccessible = (step: StepNumber): boolean => {
     if (step === 1 || step === 2) return true;
-    if (step === 3) return analysisStatus.predictionComplete || isPredicted || report !== null;
-    if (step === 4) return analysisStatus.cropAnalysisComplete;
+    if (step === 3) return (formData.polygonPts && formData.polygonPts.length >= 3) || formData.pointPt !== undefined;
+    if (step === 4) return analysisStatus.predictionComplete || isPredicted || report !== null;
+    if (step === 5) return analysisStatus.cropAnalysisComplete;
     return false;
   };
 
   const goToStep = (step: StepNumber) => {
-    // Strictly guard Steps 3 and 4:
-    // Cannot access Step 3 before Predict Now on Page 2 has finished!
-    if (step === 3 && !isStepAccessible(3)) {
-      return;
-    }
-    // Cannot access Step 4 before crop analysis has completed!
-    if (step === 4 && !isStepAccessible(4)) {
+    if (!isStepAccessible(step)) {
       return;
     }
 
@@ -245,7 +244,7 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         predictionComplete: true,
         cropAnalysisComplete: false,
       }));
-      setMaxUnlockedStep(3); // Step 3 unlocked; Step 4 remains locked until crop analysis
+      setMaxUnlockedStep(4);
       return true;
     } catch (err: any) {
       clearInterval(stageInterval);
@@ -257,16 +256,16 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   /**
-   * Action when user clicks "Analyse All Crops →" on Page 2.
-   * Completes crop analysis readiness and unlocks Step 4.
+   * Action when user clicks "Analyse All Crops →" on Step 3 (Field Analysis).
+   * Completes crop analysis readiness and unlocks Step 4 & 5.
    */
   const startCropAnalysis = () => {
     setAnalysisStatus(prev => ({
       ...prev,
       cropAnalysisComplete: true,
     }));
-    setMaxUnlockedStep(4);
-    goToStep(3);
+    setMaxUnlockedStep(5);
+    goToStep(4);
   };
 
   // Sync hash with browser history
@@ -274,11 +273,7 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const handleHashChange = () => {
       const step = HASH_TO_STEP[window.location.hash];
       if (step) {
-        if (step <= 2) {
-          setCurrentStep(step);
-        } else if (step === 3 && isStepAccessible(3)) {
-          setCurrentStep(step);
-        } else if (step === 4 && isStepAccessible(4)) {
+        if (step <= 2 || isStepAccessible(step)) {
           setCurrentStep(step);
         }
       }

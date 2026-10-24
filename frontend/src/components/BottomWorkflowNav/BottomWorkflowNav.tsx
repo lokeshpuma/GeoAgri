@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, MapPinned, Sprout, FileText, ChevronRight, Check, LucideIcon } from 'lucide-react';
+import { LayoutDashboard, PenTool, MapPinned, Sprout, FileText, ChevronRight, Check, LucideIcon } from 'lucide-react';
 import { useWorkflow, StepNumber } from '../../context/WorkflowContext';
 
 interface StepMeta {
@@ -18,18 +18,24 @@ const STEPS: StepMeta[] = [
   },
   {
     step: 2,
+    title: "Boundary Studio",
+    subtitle: "Draw Field",
+    icon: PenTool,
+  },
+  {
+    step: 3,
     title: "Field Analysis",
     subtitle: "Location & Satellite",
     icon: MapPinned,
   },
   {
-    step: 3,
+    step: 4,
     title: "Crop Prediction",
     subtitle: "Multi-Crop & Yield",
     icon: Sprout,
   },
   {
-    step: 4,
+    step: 5,
     title: "Summary & Report",
     subtitle: "Full Intelligence",
     icon: FileText,

@@ -4,6 +4,7 @@ import { PageHeader } from './components/PageHeader/PageHeader';
 import { BottomWorkflowNav } from './components/BottomWorkflowNav/BottomWorkflowNav';
 import { AgriChatBot } from './components/AgriChatBot/AgriChatBot';
 import { WorkspacePage } from './pages/WorkspacePage';
+import { BoundaryStudioPage } from './features/boundary/BoundaryStudioPage';
 import { FieldAnalysisPage } from './pages/FieldAnalysisPage';
 import { CropPredictionPage } from './pages/CropPredictionPage';
 import { SummaryReportPage } from './pages/SummaryReportPage';
@@ -17,10 +18,12 @@ const WorkflowContainer: React.FC = () => {
       case 1:
         return <WorkspacePage />;
       case 2:
-        return <FieldAnalysisPage />;
+        return <BoundaryStudioPage />;
       case 3:
-        return <CropPredictionPage />;
+        return <FieldAnalysisPage />;
       case 4:
+        return <CropPredictionPage />;
+      case 5:
         return <SummaryReportPage />;
       default:
         return <WorkspacePage />;
