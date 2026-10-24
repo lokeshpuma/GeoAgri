@@ -32,9 +32,15 @@ async def test_feature_vector_extraction():
 
     assert len(pipeline.feature_names) == 78
     assert all(f_name in vector for f_name in pipeline.feature_names)
-    # Assert no NaNs in manifest features
+    # Honest observation checks: soil and coordinates are preserved
+    assert 6.5 <= vector["ph"] <= 7.0
+    assert vector["latitude"] is not None
+    assert vector["longitude"] is not None
+
+    # Model input layer test: imputes missing features into dense numeric array
+    clean_vector, imputed_names = pipeline.impute_for_model(vector)
     for f_name in pipeline.feature_names:
-        val = vector[f_name]
+        val = clean_vector[f_name]
         assert val is not None
         assert isinstance(val, (int, float))
         assert not (val != val)  # NaN check

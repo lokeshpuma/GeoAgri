@@ -85,15 +85,32 @@ class LandClassifier:
                 confidence=0.98
             )
 
-        # 3. Extract spectral and terrain signals
-        ndwi = float(features.get("ndwi", 0.0))
-        ndvi = float(features.get("ndvi", 0.0))
-        slope = float(features.get("slope", 0.0))
-        elevation = float(features.get("elevation", 0.0))
-        vh = float(features.get("vh", -18.0))
+        # 3. Check for missing evidence vs extract spectral and terrain signals
+        raw_ndwi = features.get("ndwi")
+        raw_ndvi = features.get("ndvi")
+        raw_slope = features.get("slope")
+        raw_elevation = features.get("elevation")
+        raw_vh = features.get("vh")
+
+        is_water_layer = any("hydrolakes" in n or "water" in n for n in layer_names)
+        is_urban_layer = any("ghsl" in n or "building" in n or "urban" in n for n in layer_names)
+
+        if raw_ndwi is None and raw_ndvi is None and raw_slope is None and not is_water_layer and not is_urban_layer:
+            return LandClassification(
+                dominant="UNKNOWN",
+                class_shares={"UNKNOWN": 1.0},
+                subclass="insufficient_evidence",
+                legal_forest_status="unknown",
+                confidence=0.0
+            )
+
+        ndwi = float(raw_ndwi) if raw_ndwi is not None else 0.0
+        ndvi = float(raw_ndvi) if raw_ndvi is not None else 0.0
+        slope = float(raw_slope) if raw_slope is not None else 0.0
+        elevation = float(raw_elevation) if raw_elevation is not None else 0.0
+        vh = float(raw_vh) if raw_vh is not None else -18.0
 
         # 3a. Water body check
-        is_water_layer = any("hydrolakes" in n or "water" in n for n in layer_names)
         if is_water_layer or ndwi > 0.35:
             water_share = 0.95 if is_water_layer else min(1.0, 0.5 + ndwi)
             other_share = round(1.0 - water_share, 2)

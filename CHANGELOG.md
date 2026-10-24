@@ -48,4 +48,13 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - **Honest Provenance (M17)**: `land.py` computes true observed feature share, reports genuine layer states, and leaves `admin.state` null when no boundary/record is present.
 - **Non-Mocking Test Suite (M21)**: Replaced mock on `LandClassifier.classify` with genuine raster environment input. Added `test_no_coordinate_defaults_to_agricultural` and meta-test `test_meta_no_tests_patch_classifier`. All 56 tests passed.
 
+## [PRD v2.1 - Step S02 Feature Honesty & Error Handling] - 2026-10-24
+### Fixed & Verified (M18, M26)
+- **Feature Vector Honesty (M18)**: Removed all invented `_std`, `_max`, `_min` multipliers and silent defaults (`ph 6.5`, `elev 320.0`, `lat 13.32`, `lon 75.75`, `0.5`) from `services/features/pipeline.py`. Missing features remain `None/NaN`. Added explicit `impute_for_model` method so raw vector remains authentic while dense model arrays are isolated.
+- **Grep Gate M18**: `grep -rn "13\.32|75\.75|320\.0|, 0\.5)" backend/app/services/features` -> 0 matches.
+- **Missing Data Evaluation**: `classifier.py` and `engine.py` evaluate all-missing features as `dominant="UNKNOWN"` and `verdict="UNVERIFIED"`.
+- **Typed Error Handling (M26)**: Added input geometry validation in `predict.py` returning HTTP 400 for invalid coordinates or polygons with < 3 points. Added evidence exception containment returning HTTP 200 `UNVERIFIED` with warnings rather than HTTP 500 crashes. Outer exceptions logged with structured request IDs rather than raw stack trace dumps.
+- **New Test Suite (`test_no_default_leak.py`)**: Verified all-missing profile yields `observed_feature_share==0`, `UNKNOWN` land class, `UNVERIFIED` irrigability, HTTP 400 on invalid geometry, and HTTP 200 `UNVERIFIED` on forced evidence exceptions. All tests passed.
+
+
 

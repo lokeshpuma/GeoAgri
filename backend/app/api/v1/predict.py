@@ -7,11 +7,14 @@ irrigability gating, parallel model execution, fusion, and production math.
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
+import logging
+import uuid
 from app.schemas.predict import (
     PredictRequest, FullReportResponse, QuantileValue, IntercropOption,
     RecommendedCrop, FieldSummary, LandSuitability, EnvironmentSummary,
     SatelliteFeatures, YieldSummary, ProductionSummary, IrrigationSummary,
-    ClimateRiskSummary, IntercropSummary, ModelStatus
+    ClimateRiskSummary, IntercropSummary, ModelStatus, LandClassification,
+    Irrigability, LandRecordSummary
 )
 from app.services.features.profile import build_environmental_profile
 from app.services.features.pipeline import get_feature_pipeline
@@ -21,21 +24,106 @@ from app.services.landclass.classifier import get_land_classifier
 from app.services.irrigability.engine import get_irrigability_engine
 from app.services.landrecords.manager import get_land_record_manager
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
 @router.post("/predict/full-report", response_model=FullReportResponse)
 async def generate_full_report(req: PredictRequest):
+    # Validation per M26
+    if req.polygon is not None:
+        if len(req.polygon) < 3:
+            raise HTTPException(status_code=400, detail="Invalid polygon geometry: polygon must have at least 3 points.")
+        for pt in req.polygon:
+            if not isinstance(pt, (list, tuple)) or len(pt) < 2:
+                raise HTTPException(status_code=400, detail="Invalid polygon geometry: invalid coordinate point format.")
+            lon_val, lat_val = pt[0], pt[1]
+            if not (-180.0 <= lon_val <= 180.0 and -90.0 <= lat_val <= 90.0):
+                raise HTTPException(status_code=400, detail=f"Invalid polygon geometry: coordinate out of bounds ({lon_val}, {lat_val}).")
+
     try:
         manual_soil_dict = req.manual_soil.model_dump() if req.manual_soil else None
         
-        # 1. Build environmental profile (geodesic geometry, weather, soil, satellite)
-        profile = await build_environmental_profile(
-            polygon_pts=req.polygon,
-            point_pt=req.point,
-            season=req.season,
-            manual_soil=manual_soil_dict
-        )
+        # 1. Build environmental profile with exception containment per M26
+        try:
+            profile = await build_environmental_profile(
+                polygon_pts=req.polygon,
+                point_pt=req.point,
+                season=req.season,
+                manual_soil=manual_soil_dict
+            )
+        except Exception as ev_err:
+            logger.warning("Upstream environmental profile/evidence exception: %s", ev_err)
+            c_lon = req.point[0] if req.point else (req.polygon[0][0] if req.polygon else 0.0)
+            c_lat = req.point[1] if req.point else (req.polygon[0][1] if req.polygon else 0.0)
+            unknown_class = LandClassification(
+                dominant="UNKNOWN",
+                class_shares={"UNKNOWN": 1.0},
+                subclass="insufficient_evidence",
+                legal_forest_status="unknown",
+                confidence=0.0
+            )
+            unverified_irrigability = Irrigability(
+                verdict="UNVERIFIED",
+                reasons=[{
+                    "rule_id": "upstream_evidence_failure",
+                    "verdict": "UNVERIFIED",
+                    "reason": f"External evidence services encountered an error: {str(ev_err)}",
+                    "layer": "evidence_pipeline"
+                }],
+                reclaimable="unknown",
+                irrigable_area_ha=None,
+                irrigation_options=[],
+                crop_models="skipped_not_irrigable"
+            )
+            return FullReportResponse(
+                field_summary=FieldSummary(
+                    area_ha=req.area_ha,
+                    centroid_lon=c_lon,
+                    centroid_lat=c_lat,
+                    polygon_valid=bool(req.polygon),
+                    boundary_source="user_drawn" if req.polygon else "point_only"
+                ),
+                land_suitability=LandSuitability(
+                    grade="Not Evaluated",
+                    score=0.0,
+                    confidence=0.0,
+                    limiting_factors=[f"Evidence retrieval warning: {str(ev_err)}"]
+                ),
+                environment=EnvironmentSummary(
+                    rainfall_mm=0.0, temp_max_c=0.0, temp_min_c=0.0, temp_mean_c=0.0,
+                    humidity_pct=0.0, solar_radiation_mj_m2=0.0, ph=7.0,
+                    organic_carbon_g_kg=0.0, nitrogen_g_kg=0.0, texture_clay_pct=0.0,
+                    texture_sand_pct=0.0, texture_silt_pct=0.0
+                ),
+                satellite_features=SatelliteFeatures(
+                    ndvi=0.0, ndwi=0.0, evi=0.0, savi=0.0, ndmi=0.0, elevation=0.0,
+                    slope=0.0, twi=0.0, vv=0.0, vh=0.0
+                ),
+                recommended_crops=[],
+                yield_summary=YieldSummary(
+                    top_recommended_crop="None (Unverified)", p10_t_ha=0.0, p50_t_ha=0.0, p90_t_ha=0.0
+                ),
+                production_summary=ProductionSummary(
+                    top_recommended_crop="None (Unverified)", p10_t=0.0, p50_t=0.0, p90_t=0.0, area_ha=req.area_ha
+                ),
+                irrigation_summary=IrrigationSummary(
+                    recommended_mode="rainfed", total_water_demand_m3=0.0, effective_rainfall_mm=0.0
+                ),
+                climate_risk_summary=ClimateRiskSummary(
+                    overall_risk_level="Unknown", drought_risk_score=0.0, heat_risk_score=0.0,
+                    excess_rain_risk_score=0.0, note="Evidence retrieval warning"
+                ),
+                intercrop_summary=IntercropSummary(top_pair="N/A", estimated_production_boost_t=0.0),
+                model_status=ModelStatus(
+                    model_a="skipped_not_irrigable", model_b="skipped_not_irrigable",
+                    model_c="skipped_not_irrigable", model_d="skipped_not_irrigable",
+                    model_e="skipped_not_irrigable"
+                ),
+                land_class=unknown_class,
+                irrigability=unverified_irrigability,
+                land_records=LandRecordSummary(providers=[], record=None)
+            )
 
         # 2. Extract 78-layer feature vector
         pipeline = get_feature_pipeline()
@@ -279,7 +367,9 @@ async def generate_full_report(req: PredictRequest):
             irrigability=irrigability,
             land_records=record_summary
         )
+    except HTTPException:
+        raise
     except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Prediction pipeline error: {str(e)}")
+        request_id = str(uuid.uuid4())[:8]
+        logger.error("Prediction pipeline error [%s]: %s", request_id, e, exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Prediction pipeline internal error (ref: {request_id})")

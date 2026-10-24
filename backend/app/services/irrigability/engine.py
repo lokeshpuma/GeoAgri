@@ -50,6 +50,21 @@ class IrrigabilityEngine:
         """
         reasons = []
         dominant = land_class.dominant
+        # 0. Missing / Unknown evidence
+        if dominant == "UNKNOWN":
+            return Irrigability(
+                verdict="UNVERIFIED",
+                reasons=[{
+                    "rule_id": "missing_evidence:unknown_land_class",
+                    "verdict": "UNVERIFIED",
+                    "reason": "Insufficient satellite or legal record evidence to establish land classification.",
+                    "layer": "multi_sensor_inventory"
+                }],
+                reclaimable="unknown",
+                irrigable_area_ha=None,
+                irrigation_options=[],
+                crop_models="skipped_not_irrigable"
+            )
 
         # 1. Forest Legal / Urban Built / Water Body
         if dominant == "FOREST_LEGAL":
@@ -131,10 +146,28 @@ class IrrigabilityEngine:
                 crop_models="skipped_not_irrigable"
             )
 
-        # 4. Agricultural Land -> Evaluate terrain, soil, and water
-        slope = float(features.get("slope", 2.0))
-        clay = float(features.get("texture_clay_pct", 25.0))
-        sand = float(features.get("texture_sand_pct", 45.0))
+        raw_slope = features.get("slope")
+        raw_clay = features.get("texture_clay_pct")
+        raw_sand = features.get("texture_sand_pct")
+
+        if raw_slope is None and raw_clay is None:
+            return Irrigability(
+                verdict="UNVERIFIED",
+                reasons=[{
+                    "rule_id": "missing_evidence:unverified_soil_terrain",
+                    "verdict": "UNVERIFIED",
+                    "reason": "Missing terrain slope and soil texture evidence to evaluate irrigability feasibility.",
+                    "layer": "soil_and_dem"
+                }],
+                reclaimable="unknown",
+                irrigable_area_ha=None,
+                irrigation_options=[],
+                crop_models="skipped_not_irrigable"
+            )
+
+        slope = float(raw_slope) if raw_slope is not None else 2.0
+        clay = float(raw_clay) if raw_clay is not None else 25.0
+        sand = float(raw_sand) if raw_sand is not None else 45.0
 
         # Check hard terrain limit
         if slope > 20.0:
