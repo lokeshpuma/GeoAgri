@@ -1,93 +1,121 @@
-# GeoAgri AI API Reference
+# GeoAgri AI API Reference (v2.1)
 
-## Endpoints Summary
+Base URL: `/api/v1`
+
+---
+
+## Endpoints
 
 ### 1. `POST /api/v1/predict/full-report`
-Primary decision-support endpoint.
+Primary agronomic decision-support and land analysis endpoint.
 
-#### Request Example
+#### Request Schema
 ```json
 {
   "polygon": [
-    [78.4850, 17.3850],
-    [78.4870, 17.3850],
-    [78.4870, 17.3870],
-    [78.4850, 17.3870],
-    [78.4850, 17.3850]
+    [75.7460, 13.3170],
+    [75.7540, 13.3170],
+    [75.7540, 13.3230],
+    [75.7460, 13.3230],
+    [75.7460, 13.3170]
   ],
+  "point": null,
+  "area_ha": 2.85,
   "season": "kharif",
   "limit": 10,
   "irrigation_preference": "rainfed",
   "manual_soil": {
     "ph": 6.8,
-    "organic_carbon": 12.0
-  }
+    "organic_carbon_g_kg": 12.0
+  },
+  "survey_ref": null
 }
 ```
+
+#### Response Structure
+- `field_summary`: Area, centroid coordinates, boundary source, polygon validity.
+- `land_suitability`: FAO land suitability grade, score, and limiting factors.
+- `environment`: Weather and soil physical/chemical parameters.
+- `satellite_features`: Spectral indices (NDVI, NDWI, EVI, SAVI, NDMI), elevation, slope, TWI, SAR VV/VH.
+- `recommended_crops`: Ranked crop species with quantile yield (P10/P50/P90), production, water needs, and companion intercrop options.
+- `land_class`: Dominant land class (`AGRICULTURAL`, `FOREST_LEGAL`, `FOREST_COVER`, `WASTELAND`, `URBAN_BUILT`, `WATER_BODY`, `UNKNOWN`), class shares, subclass, confidence.
+- `irrigability`: Verdict (`IRRIGABLE`, `CONDITIONALLY_IRRIGABLE`, `NOT_IRRIGABLE`, `NOT_IRRIGABLE_PROVISIONAL`, `UNVERIFIED`), reasons, usable area, irrigation options.
+- `detection`: Physical surface detector output for forest, buildings, roads, water, and terrain.
+- `gate_mode`: Operational gating mode (`off`, `shadow`, `enforce`).
+- `area_check`: Legacy backward-compatible donor area check schema.
+- `imputed_features`: List of feature names imputed inside model wrapper (if any).
+
+---
+
+### 2. `POST /api/v1/land/inquiry` & `GET /api/v1/land/inquiry?lat=&lon=`
+Quick land regulatory, classification, and physical feature inquiry without running full crop ML models.
+
+#### Response Structure
+- `query`: Coordinate and area metadata.
+- `admin`: State, district, taluk, village administrative boundaries.
+- `land_class`: Dominant class and class shares.
+- `irrigability`: Verdict and legal/physical limiting reasons.
+- `land_records`: Verified official and user records found.
+- `detection`: Exact multi-feature detection metrics.
+- `gate_mode`: Runtime gating switch.
+- `layers`: Status and licensing of contributing spatial layers.
+
+---
+
+### 3. `GET /api/v1/map-layers`
+Honest map and detection layers telemetry endpoint (PRD v2.1 M10, M24).
 
 #### Response Example
 ```json
 {
-  "field_summary": {
-    "area_ha": 2.35,
-    "centroid_lon": 78.4860,
-    "centroid_lat": 17.3850,
-    "polygon_valid": true,
-    "used_fallback_buffer": false
-  },
-  "land_suitability": {
-    "grade": "High",
-    "score": 0.85,
-    "confidence": 0.90,
-    "limiting_factors": []
-  },
-  "recommended_crops": [
+  "layers": [
     {
-      "crop_id": "maize",
-      "crop_name": "Maize",
-      "category": "cereals",
-      "recommendation_score": 0.82,
-      "suitability_score": 0.80,
-      "expected_yield_t_ha": { "p10": 2.4, "p50": 3.6, "p90": 5.5 },
-      "expected_production_t": { "p10": 5.64, "p50": 8.46, "p90": 12.92 },
-      "irrigation_mode": "rainfed",
-      "water_need_mm": 600.0,
-      "climate_risk_score": 15.0,
-      "climate_risk_note": "Low climatic risk profile during active growing window.",
-      "intercrop_options": [
-        {
-          "companion_crop_id": "pigeonpeas",
-          "companion_crop_name": "Pigeon Pea (Arhar)",
-          "yield_boost_pct": 0.18,
-          "companion_share_factor": 0.25,
-          "rationale": "Combining Maize with Pigeon Pea optimizes nitrogen uptake."
-        }
-      ],
-      "rationale": "Maize ranks well due to high agronomic compatibility; minimal supplementary water overhead.",
-      "data_confidence": "high"
+      "id": "esa_worldcover_2021",
+      "name": "ESA WorldCover 2021 v200",
+      "type": "raster",
+      "status": "ready",
+      "reason": null,
+      "licence": "CC BY 4.0",
+      "source_date": "2021",
+      "attribution": "ESA WorldCover 10m 2021"
+    },
+    {
+      "id": "copernicus_dem_glo30",
+      "name": "Copernicus DEM GLO-30",
+      "type": "raster",
+      "status": "ready",
+      "reason": null,
+      "licence": "Open Access",
+      "source_date": "2021",
+      "attribution": "Copernicus DEM GLO-30"
     }
   ],
-  "model_status": {
-    "model_a": "ok",
-    "model_b": "ok",
-    "model_c": "ok",
-    "model_d": "ok",
-    "model_e": "ok"
-  }
+  "total_layers": 10,
+  "ready_count": 8,
+  "unavailable_count": 2,
+  "checked_at": "2026-10-24T02:00:00Z"
 }
 ```
 
 ---
 
-### 2. `POST /api/v1/field/area`
-Quick area computation helper.
+### 4. `POST /api/v1/land/records/upload`
+Uploads land record documents (PDF, image, text) for parsing extent and land classification.
+- Strips PII (Aadhaar, PAN, phone, owner names).
+- Session-isolated with TTL retention (`UPLOAD_RETENTION_SECONDS`).
+- Word-boundary matching for irrigation facilities.
 
 ---
 
-### 3. `GET /api/v1/crops`
-List crop profiles in the crop registry.
+### 5. `GET /api/v1/land/providers`
+Returns health and availability of registered land record providers (`user_document`, `ksrsac_official`, `bhuvan_wms`, `open_layers`).
 
 ---
 
-### 4. `GET /api/v1/health`
-Service health & liveness check.
+### 6. `POST /api/v1/field/area`
+Calculates WGS84 geodesic area in hectares for interactive polygon geometries.
+
+---
+
+### 7. `GET /api/v1/health`
+Checks operational telemetry for upstream data providers, PostGIS database, and Earth Engine.

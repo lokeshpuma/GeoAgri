@@ -640,6 +640,23 @@ export const SummaryReportPage: React.FC = () => {
         </div>
       </section>
 
+      {/* SECTION 8B: OPEN DATA ATTRIBUTIONS & LICENCES (PRD v2.1 M30) */}
+      <section className="report-section glass-card" style={{ marginTop: '16px', padding: '16px 20px', fontSize: '0.74rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+        <h4 style={{ fontSize: '0.85rem', fontWeight: 700, margin: '0 0 6px 0', color: 'var(--text-main)' }}>
+          Data Sources, Licences & Open Data Attributions (PRD v2.1 M30)
+        </h4>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '8px' }}>
+          <div><strong>• OpenStreetMap (OSM) / OpenFreeMap:</strong> © OpenStreetMap contributors, ODbL 1.0. Vector tiles under CC BY-SA 2.0.</div>
+          <div><strong>• ESA WorldCover 2021:</strong> © ESA WorldCover consortium 2021 / Contains modified Copernicus Sentinel data (2021), CC BY 4.0.</div>
+          <div><strong>• Copernicus DEM GLO-30:</strong> European Space Agency (ESA) Copernicus Programme, Open Access.</div>
+          <div><strong>• Microsoft Open Buildings:</strong> Microsoft Global ML Building Footprints, CDLA-Permissive-2.0.</div>
+          <div><strong>• Hansen / Global Forest Watch:</strong> Hansen, UMD, Google, USGS, NASA, CC BY 4.0.</div>
+          <div><strong>• HydroSHEDS / HydroLAKES:</strong> Messager et al. (2016) / WWF US, CC BY 4.0.</div>
+          <div><strong>• Protected Planet / WDPA:</strong> UNEP-WCMC & IUCN (2024), Non-Commercial Research & Decision Support.</div>
+          <div><strong>• ISRO Bhuvan:</strong> National Remote Sensing Centre (NRSC), Department of Space, Government of India.</div>
+        </div>
+      </section>
+
       {/* SECTION 9: REPORT DOWNLOAD & ACTION DOCK */}
       <section className="report-section glass-card no-print">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>

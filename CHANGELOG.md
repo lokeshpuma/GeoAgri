@@ -113,6 +113,51 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - **Verification Gates**:
   - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed (M1, M2, M11, M13, M18, M20), 107 backend tests passed, and frontend built with 0 errors.
 
+## [PRD v2.1 - Step S07 Predict & Land API Wiring] - 2026-10-24
+### Fixed & Verified (§5A.5, §5A.7, §7.2, §10, M6)
+- **API Response Wiring (`predict.py`, `land.py`)**:
+  - Wired `detection`, `gate_mode`, `area_check`, and `imputed_features` into `FullReportResponse` and `LandInquiryResponse`.
+  - Wired `collect_evidence` and `to_legacy_area_check` to run on point coordinates or parcel polygons.
+  - Implemented runtime gating switches (`LAND_DETECTION_MODE`, `LAND_GATE_MODE`: `off | shadow | enforce`).
+  - Enforced that when `LAND_GATE_MODE=shadow`, non-irrigable verdicts are returned with `gate_mode="shadow"`, while crop recommendation models are fully evaluated.
+  - When `LAND_GATE_MODE=enforce`, non-irrigable plots bypass models and return empty crops.
+- **Verification Gates**:
+  - `tests/test_land_inquiry_and_gating.py`: Added shadow-mode test and verified gating bypass in enforce mode.
+  - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed, 108 backend tests passed, frontend built with 0 errors.
+
+## [PRD v2.1 - Step S08 Data Layers & Provenance] - 2026-10-24
+### Fixed & Verified (M10, M24)
+- **External Dataset Provenance (`SOURCE.md`)**:
+  - Created standardized `SOURCE.md` files for ESA WorldCover 2021, Copernicus DEM GLO-30, Microsoft Open Buildings, HydroLAKES, OpenFreeMap, and WDPA.
+- **Map Layers API (`GET /api/v1/map-layers`)**:
+  - Implemented honest status reporting endpoint probing filesystem existence and remote connectivity across 10 spatial layers.
+  - Returns `ready` or `unavailable` + precise reason, license, and attribution.
+- **Verification Gates**:
+  - `tests/test_map_layers.py`: Verified status structure, licensing, and reason strings.
+  - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed, 109 backend tests passed, frontend built with 0 errors.
+
+## [PRD v2.1 - Step S09 Frontend Detection Panel & Presets] - 2026-10-24
+### Fixed & Verified (M23)
+- **Physical Surface Detection Panel (`CropPredictionPage.tsx`)**:
+  - Implemented 5 feature cards: Forest (with plantation safeguard indicator), Buildings, Roads & Transit, Water Bodies, and Terrain & Relief.
+  - Reports state (`detected`, `not detected`, `unknown`), measured share/footprint, and data source.
+  - Added visible `SHADOW MODE — verdict not enforced` banner strip and partly-checked warning notices.
+  - Fixed underscore replacement `replace(/_/g, ' ')` across `CropPredictionPage.tsx` and `SummaryReportPage.tsx`.
+- **Polygon Import & Demo Preset Gating (`MapSelector.tsx`)**:
+  - Gated demo presets with `VITE_DEMO_MODE` environment switch per FR-21.
+  - Added "Import Polygon" GeoJSON file upload and interactive auto-centering.
+- **Verification Gates**:
+  - `scripts/verify.sh` executed cleanly (Exit 0): All 6 Grep Gates passed, 109 backend tests passed, frontend built with 0 errors.
+
+## [PRD v2.1 - Step S10 Documentation & Open Data Attributions] - 2026-10-24
+### Fixed & Verified (M24, M30)
+- **Open Data Attributions (`SummaryReportPage.tsx`, `README.md`)**:
+  - Added formal attribution block displaying copyright and open licenses for OSM (ODbL), ESA WorldCover (CC BY 4.0), Copernicus DEM, Microsoft Open Buildings, Hansen GFC, HydroSHEDS, WDPA, and ISRO Bhuvan in both screen UI and exported PDF.
+- **Documentation Overhaul**:
+  - Updated `README.md` with Physical Detection Engine specification, runtime switch matrix, and license catalog.
+  - Completely refreshed `documentation/api_reference.md` documenting all v2.1 endpoints and schemas.
+
+
 
 
 

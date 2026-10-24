@@ -538,17 +538,34 @@ pytest -v
 
 ---
 
-## ⚙️ Configuration & Environment Variables
+## 🛰️ Physical Land Surface Detection Engine (PRD v2.1 §5A)
+
+GeoAgri AI incorporates a multi-sensor, multi-modal physical surface detection engine (`services/landclass/detection.py`) adapted and redesigned from donor area check specifications:
+
+- **Exact Polygon Masking:** Rasterizes parcel boundaries to evaluate precise class pixel fractions rather than point assumptions.
+- **Physical Exclusions:**
+  - **Forest:** Physical tree canopy density (ESA WorldCover, Hansen GFC) distinct from plantation agroforestry.
+  - **Buildings:** OpenFreeMap vector tiles & Microsoft Open Buildings footprints; separates dominant built-up land from legitimate farmhouse setbacks (< 0.05 ha footprint).
+  - **Roads:** Distinguishes public highways, primary, secondary, and residential roads from farm access tracks and footpaths.
+  - **Water Bodies:** Permanent water bodies, reservoirs, wetlands, and seasonal lake boundaries (HydroLAKES, WorldCover 80/90).
+  - **Terrain:** Topographic elevation, mean and maximum slope angles, and TWI from Copernicus DEM GLO-30.
+- **Plantation Safeguard:** Detects commercial plantation signatures (Arecanut, Coconut, Coffee, Rubber) preventing false classification as protected forest cover.
+- **Resilience Budget:** Strict timeouts (≤ 6s per source, ≤ 8s total budget) with thread-safe deep-copy TTL cache.
+
+---
+
+## ⚙️ Configuration & Runtime Switches
 
 | Variable | Default Value | Description |
 | :--- | :--- | :--- |
 | `ENV` | `development` | Runtime environment (`development` / `production`) |
 | `LOG_LEVEL` | `INFO` | Application logging level (`DEBUG`, `INFO`, `WARNING`) |
-| `GEE_MOCK_FALLBACK` | `true` | When `true`, enables synthetic satellite fallback when Google Cloud GEE keys are not mounted |
-| `GEE_SERVICE_ACCOUNT` | `""` | Google Earth Engine service account email |
-| `GEE_PRIVATE_KEY_PATH`| `""` | Path to Google Earth Engine private service key JSON |
-| `NASA_POWER_API_URL` | `https://power.larc.nasa.gov/...` | NASA POWER point climatology API endpoint |
-| `SOILGRIDS_API_URL` | `https://rest.isric.org/...` | ISRIC SoilGrids REST API endpoint |
+| `ALLOW_SYNTHETIC_DATA` | `false` | When `false`, strictly disables synthetic mock fallbacks across all pipelines |
+| `LAND_DETECTION_MODE` | `shadow` | Surface detection mode: `off` (disabled), `shadow` (computed & displayed), `enforce` (drives classification) |
+| `LAND_GATE_MODE` | `shadow` | Prediction gating mode: `off` (crops computed), `shadow` (crops computed + banner strip), `enforce` (bypasses crop models for non-irrigable) |
+| `AREA_CHECK_ACRES` | `0.7` | Default circle sampling radius for point queries without drawn polygon |
+| `OPENFREEMAP_TILEJSON` | `https://tiles.openfreemap.org/planet` | OpenFreeMap MVT vector tile source |
+| `OVERPASS_URL` | `https://overpass-api.de/api/interpreter` | OpenStreetMap Overpass API fallback endpoint |
 | `WEIGHT_LAND_SUITABILITY` | `0.20` | Weight of FAO Land Suitability in Decision Fusion |
 | `WEIGHT_CROP_RECOMMENDATION`| `0.25` | Weight of Model B ML recommendation score |
 | `WEIGHT_IRRIGATION_COST` | `0.15` | Penalty weight for irrigation water deficit |
@@ -558,18 +575,19 @@ pytest -v
 
 ---
 
-## 🛡 Resilience & Fallback Architecture
+## 📜 Open Data Attributions & Licences (PRD v2.1 M30)
 
-Agricultural technology must function reliably in remote regions with variable network connectivity. GeoAgri AI guarantees zero-downtime resilience through **graceful degradation**:
+This system integrates and acknowledges the following open datasets and public telemetry services:
 
-1. **API Fallbacks:**  
-   If Google Earth Engine, NASA POWER, or ISRIC SoilGrids encounters rate limits or connection interruptions, the platform immediately activates local bioclimatic and spatial estimation models.
-2. **Model Isolation:**  
-   If any single AI model encounters a runtime anomaly, that specific model degrades to its certified agronomic heuristic table while setting its status flag to `fallback`. The remaining four models continue running at full fidelity.
-3. **Manual Overrides:**  
-   Any remote sensing or digital soil layer can be manually superseded with physical laboratory soil test reports directly from the user interface.
-4. **Cold-Start Resilience:**  
-   The frontend API client includes a 90-second timeout controller and automatic retry handling to gracefully accommodate free-tier cloud instance wake-ups.
+1. **OpenStreetMap (OSM) & OpenFreeMap:** © OpenStreetMap contributors, licensed under the [Open Database License (ODbL) 1.0](https://opendatacommons.org/licenses/odbl/). Vector tile cartography under CC BY-SA 2.0.
+2. **ESA WorldCover 2021 v200:** © ESA WorldCover consortium 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium, licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+3. **Copernicus DEM GLO-30:** European Space Agency (ESA) Copernicus Programme, distributed under Copernicus Open Access Terms.
+4. **Microsoft Global ML Building Footprints:** Microsoft AI for Good Research Lab, licensed under [CDLA-Permissive-2.0](https://cdla.dev/permissive-2-0/).
+5. **Hansen Global Forest Change (GFW / UMD):** Hansen, M. C., et al. (Science 2013), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+6. **HydroSHEDS & HydroLAKES:** Messager, M.L., et al. (Nature Communications 2016) / WWF US, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+7. **World Database on Protected Areas (WDPA):** UNEP-WCMC and IUCN (2024), Protected Planet, Non-Commercial Research & Educational Use.
+8. **ISRO Bhuvan Thematic Services:** National Remote Sensing Centre (NRSC), Indian Space Research Organisation (ISRO), Government of India.
+9. **Fields of the World (FtW India):** Kerner Lab / Source Cooperative, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ---
 
