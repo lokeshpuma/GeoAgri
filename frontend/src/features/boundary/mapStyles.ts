@@ -42,8 +42,9 @@ export const BASEMAP_LAYER_IDS: Record<BasemapId, string> = {
  * is an instantaneous, zero-flash visibility toggle that never resets
  * GeoJSON boundary polygon sources or WebGL context.
  *
- * Notice layer maxzoom: 24 enables overzooming raster imagery down to
- * high-resolution parcel scales (< 30m window).
+ * Notice source maxzoom: 18 for Esri Satellite prevents non-existent level 19
+ * tiles ("Map data not yet available"), while layer maxzoom: 24 enables smooth
+ * GPU raster overzooming down to sub-meter parcel scales (< 30m window).
  */
 export const UNIFIED_MAP_STYLE: any = {
   version: 8,
@@ -55,7 +56,7 @@ export const UNIFIED_MAP_STYLE: any = {
           'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       ],
       tileSize: 256,
-      maxzoom: 19,
+      maxzoom: 18,
       attribution: 'Tiles &copy; Esri &mdash; USDA, USGS, AeroGRID, IGN',
     },
     'osm-streets': {
@@ -63,6 +64,7 @@ export const UNIFIED_MAP_STYLE: any = {
       tiles: [
         'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
         'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+        'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
       ],
       tileSize: 256,
       maxzoom: 19,
@@ -84,6 +86,7 @@ export const UNIFIED_MAP_STYLE: any = {
       tiles: [
         'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
         'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+        'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
       ],
       tileSize: 256,
       maxzoom: 19,

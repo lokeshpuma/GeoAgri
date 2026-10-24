@@ -43,6 +43,15 @@ export const BoundaryStudioPage: React.FC = () => {
   const [searchTarget, setSearchTarget] = useState<SearchTargetValue>(null);
   const [isCoachDismissed, setIsCoachDismissed] = useState(false);
 
+  // Undo & Redo state management
+  const [canUndo, setCanUndo] = useState(false);
+  const [canRedo, setCanRedo] = useState(false);
+  const [undoTrigger, setUndoTrigger] = useState(0);
+  const [redoTrigger, setRedoTrigger] = useState(0);
+
+  const handleUndo = useCallback(() => setUndoTrigger(prev => prev + 1), []);
+  const handleRedo = useCallback(() => setRedoTrigger(prev => prev + 1), []);
+
   // Restore draft from storage on mount
   useEffect(() => {
     const draft = loadBoundaryDraft();
@@ -70,11 +79,31 @@ export const BoundaryStudioPage: React.FC = () => {
         return;
       }
 
+      // Undo / Redo keyboard shortcuts
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        if (e.shiftKey) {
+          handleRedo();
+        } else {
+          handleUndo();
+        }
+        return;
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') {
+        e.preventDefault();
+        handleRedo();
+        return;
+      }
+
       const key = e.key.toLowerCase();
       if (key === 'd') {
         setActiveTool('polygon');
       } else if (key === 'r') {
         setActiveTool('rectangle');
+      } else if (key === 'c') {
+        setActiveTool('circle');
+      } else if (key === 'f') {
+        setActiveTool('freehand');
       } else if (key === 'e') {
         setActiveTool('select');
       } else if (key === 'p') {
@@ -86,7 +115,7 @@ export const BoundaryStudioPage: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [handleUndo, handleRedo]);
 
   const handleGeometryChange = useCallback(
     (poly: [number, number][] | null, pin: [number, number] | null) => {
@@ -161,6 +190,8 @@ export const BoundaryStudioPage: React.FC = () => {
     setPinCoords(null);
     setIsConfirmed(false);
     setIsCoachDismissed(false);
+    setCanUndo(false);
+    setCanRedo(false);
     clearBoundaryDraft();
     updateFormData({
       polygonPts: [],
@@ -196,10 +227,10 @@ export const BoundaryStudioPage: React.FC = () => {
       <ToolDock
         activeTool={activeTool}
         onSelectTool={setActiveTool}
-        canUndo={false}
-        canRedo={false}
-        onUndo={() => {}}
-        onRedo={() => {}}
+        canUndo={canUndo}
+        canRedo={canRedo}
+        onUndo={handleUndo}
+        onRedo={handleRedo}
         onClear={handleClear}
         hasBoundary={hasBoundary}
       />
@@ -215,6 +246,12 @@ export const BoundaryStudioPage: React.FC = () => {
         onGeometryChange={handleGeometryChange}
         onValidationChange={setValidation}
         searchTarget={searchTarget}
+        undoTrigger={undoTrigger}
+        redoTrigger={redoTrigger}
+        onHistoryStateChange={(u, r) => {
+          setCanUndo(u);
+          setCanRedo(r);
+        }}
       />
 
       {/* Right Plot Summary Panel */}
