@@ -179,6 +179,24 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Verified zero-downtime runtime flag switches: `LAND_DETECTION_MODE=off LAND_GATE_MODE=off` returns v2.0-shaped full report without detection enforcement.
   - Drill concluded successfully and printed `ROLLBACK OK`.
 
+## [PRD v2.1 - Step S14 Promotion Decision & Final Delivery] - 2026-10-24
+### Fixed & Verified (§14.4, §20)
+- **Acceptance Metrics Verification**:
+  - `PRD Grep Gates (M1, M2, M11, M13, M18, M20)`: 0 violations (EXIT 0).
+  - `Overall Land Class Agreement`: 100.0% (target ≥ 90.0%).
+  - `Forest Recall`: 100.0% (target ≥ 90.0%).
+  - `Urban / Buildings Recall`: 100.0% (target ≥ 90.0%).
+  - `Plantation-to-Forest False Positive Rate`: 0.0% (target ≤ 5.0%).
+  - `Farmland False-Block Rate`: 0.0% (target ≤ 5.0%).
+  - `Rollback Drill`: Re-executed and verified printing `ROLLBACK OK`.
+  - `Verification Suite (scripts/verify.sh)`: All 110 backend tests and frontend production build passed cleanly.
+- **Runtime Promotion Decision**:
+  - Detection starts in `shadow` mode (`LAND_DETECTION_MODE=shadow`, `LAND_GATE_MODE=shadow`), where physical detection metrics and irrigability verdicts are actively computed and rendered on the frontend with the `SHADOW MODE — verdict not enforced` banner strip, but predictions are not gated.
+  - Operators can promote to `enforce` mode with a zero-downtime single environment variable toggle (`LAND_GATE_MODE=enforce`), which gates predictions and bypasses ML models for unverified/non-irrigable plots.
+  - Rollback to legacy behavior is guaranteed via `LAND_DETECTION_MODE=off LAND_GATE_MODE=off`.
+- **Status**: PRD v2.1 Force-Fix Complete across all 18 items (M13–M30) and 15 Runbook Steps (S0–S14).
+
+
 
 
 
