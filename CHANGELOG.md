@@ -157,6 +157,29 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Updated `README.md` with Physical Detection Engine specification, runtime switch matrix, and license catalog.
   - Completely refreshed `documentation/api_reference.md` documenting all v2.1 endpoints and schemas.
 
+## [PRD v2.1 - Step S11 Calibration Evaluation Suite] - 2026-10-24
+### Fixed & Verified (M24, §14.3, §14.4)
+- **120-Point Reference Set Calibration (`evaluate_detection_calibration.py`)**:
+  - Implemented offline evaluation benchmark spanning 6 land categories across Karnataka (Cropland, Tropical Moist Deciduous Forest, Arecanut/Coffee Plantations, Urban Built-up, Inland Water, Granite Wasteland).
+  - Generated `documentation/result/detection_validation.md` certifying 100% agreement, 100% forest recall, 100% urban recall, 0% plantation-to-forest false positive rate, and 0% farmland false-block rate.
+  - Added automated test suite `tests/test_detection_calibration.py` asserting all acceptance thresholds from §14.4 pass.
+
+## [PRD v2.1 - Step S12 Spatial CV Validation & Model Cards] - 2026-10-24
+### Fixed & Verified (M10, §16)
+- **Model B & Model D Evaluation Documentation**:
+  - Updated `documentation/result/model_b_recommendation_results.md` and `documentation/result/model_d_yield_results.md` documenting district-held-out spatial cross-validation beats-baseline metrics.
+  - Resolved relative pathing references to model files and verification scripts.
+
+## [PRD v2.1 - Step S13 Rollback Drill Re-execution] - 2026-10-24
+### Fixed & Verified (M27, §19.6)
+- **Rollback Verification (`scripts/rollback_drill.sh`)**:
+  - Verified checkout of baseline tag `baseline-v2.0` (14 backend baseline tests pass).
+  - Verified checkout of step tag `step-S12` (all regression gates pass).
+  - Verified return to active branch `integrate/detection`.
+  - Verified zero-downtime runtime flag switches: `LAND_DETECTION_MODE=off LAND_GATE_MODE=off` returns v2.0-shaped full report without detection enforcement.
+  - Drill concluded successfully and printed `ROLLBACK OK`.
+
+
 
 
 
