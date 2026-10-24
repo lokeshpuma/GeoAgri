@@ -1,0 +1,90 @@
+/* Terra Noir Motion System (PRD.md §6.5) */
+
+/* Fade & Rise Transition */
+@keyframes fadeInRise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-rise {
+  animation: fadeInRise var(--t-med) var(--ease-out) forwards;
+}
+
+/* Pulse Glow */
+@keyframes emeraldPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 139, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 139, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 139, 0);
+  }
+}
+
+.animate-emerald-pulse {
+  animation: emeraldPulse 2s infinite var(--ease-out);
+}
+
+/* Ambient Background Aurora */
+@keyframes auroraShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.ambient-aurora-bg {
+  background: radial-gradient(circle at 20% 20%, rgba(34, 197, 139, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(217, 173, 79, 0.06) 0%, transparent 40%),
+              radial-gradient(circle at 50% 50%, rgba(19, 48, 43, 0.25) 0%, transparent 60%),
+              var(--bg-0);
+  background-size: 200% 200%;
+  animation: auroraShift 60s ease infinite;
+}
+
+/* Micro-interactions */
+.interactive-scale {
+  transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+}
+
+.interactive-scale:hover {
+  transform: translateY(-1px) scale(1.015);
+}
+
+.interactive-scale:active {
+  transform: translateY(0px) scale(0.985);
+}
+
+/* Reduced Motion Override (PRD §6.5 & AC-11) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ambient-aurora-bg {
+    animation: none !important;
+  }
+
+  .interactive-scale:hover,
+  .interactive-scale:active {
+    transform: none !important;
+  }
+}

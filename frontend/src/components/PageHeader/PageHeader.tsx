@@ -4,10 +4,11 @@ import { useWorkflow } from '../../context/WorkflowContext';
 import { GeoAgriLogo } from '../GeoAgriLogo/GeoAgriLogo';
 
 const STEP_TITLES: Record<number, string> = {
-  1: "Step 1/4 • GeoAgri AI Overview",
-  2: "Step 2/4 • Location & Field Analysis",
-  3: "Step 3/4 • Multi-Crop Prediction",
-  4: "Step 4/4 • Detailed Summary & Report",
+  1: "Step 1/5 • Overview",
+  2: "Step 2/5 • Boundary Studio",
+  3: "Step 3/5 • Field Intelligence",
+  4: "Step 4/5 • Crop Prediction",
+  5: "Step 5/5 • Executive Report",
 };
 
 export const PageHeader: React.FC = () => {

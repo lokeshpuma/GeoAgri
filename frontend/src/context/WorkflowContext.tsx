@@ -3,89 +3,7 @@ import { fetchFullReport, FullReportResponse, PredictRequestPayload } from '../a
 
 import { detectLocationFromCoordinates, DetectedLocationResult, findNearestAgriDistrict } from '../utils/locationDataset';
 
-export type StepNumber = 1 | 2 | 3 | 4;
-
-export interface PresetRegion {
-  name: string;
-  centroid: [number, number];
-  polygon: [number, number][];
-  defaultAreaHa: number;
-}
-
-export const PRESET_REGIONS: PresetRegion[] = [
-  {
-    name: "Karnataka Field (Ragi / Coffee / Arecanut / Paddy)",
-    centroid: [13.3200, 75.7500],
-    polygon: [
-      [75.7460, 13.3170],
-      [75.7540, 13.3170],
-      [75.7540, 13.3230],
-      [75.7460, 13.3230],
-      [75.7460, 13.3170]
-    ],
-    defaultAreaHa: 2.85
-  },
-  {
-    name: "California Central Valley, USA (Almonds / Grapes / Citrus)",
-    centroid: [36.7500, -120.2500],
-    polygon: [
-      [-120.2550, 36.7460],
-      [-120.2450, 36.7460],
-      [-120.2450, 36.7540],
-      [-120.2550, 36.7540],
-      [-120.2550, 36.7460]
-    ],
-    defaultAreaHa: 5.40
-  },
-  {
-    name: "Nile Delta, Egypt (Cotton / Wheat / Rice / Maize)",
-    centroid: [30.7500, 31.2500],
-    polygon: [
-      [31.2450, 30.7460],
-      [31.2550, 30.7460],
-      [31.2550, 30.7540],
-      [31.2450, 30.7540],
-      [31.2450, 30.7460]
-    ],
-    defaultAreaHa: 3.20
-  },
-  {
-    name: "Pampas, Argentina (Soybean / Maize / Wheat)",
-    centroid: [-34.5000, -61.5000],
-    polygon: [
-      [-61.5060, -34.5040],
-      [-61.4940, -34.5040],
-      [-61.4940, -34.4960],
-      [-61.5060, -34.4960],
-      [-61.5060, -34.5040]
-    ],
-    defaultAreaHa: 8.50
-  },
-  {
-    name: "Rajasthan Field, India (Pearl Millet / Mustard / Guar)",
-    centroid: [26.2389, 73.0243],
-    polygon: [
-      [73.0200, 26.2350],
-      [73.0280, 26.2350],
-      [73.0280, 26.2420],
-      [73.0200, 26.2420],
-      [73.0200, 26.2350]
-    ],
-    defaultAreaHa: 4.10
-  },
-  {
-    name: "Punjab Field, India (Wheat / Paddy / Mustard)",
-    centroid: [30.9010, 75.8573],
-    polygon: [
-      [75.8550, 30.9000],
-      [75.8600, 30.9000],
-      [75.8600, 30.9040],
-      [75.8550, 30.9040],
-      [75.8550, 30.9000]
-    ],
-    defaultAreaHa: 3.42
-  }
-];
+export type StepNumber = 1 | 2 | 3 | 4 | 5;
 
 export interface WorkflowFormData {
   polygonPts: [number, number][];
@@ -141,7 +59,6 @@ interface WorkflowContextType {
   startCropAnalysis: () => void;
   runAnalysis: () => Promise<boolean>;
   updateFormData: (partial: Partial<WorkflowFormData>) => void;
-  selectPreset: (preset: PresetRegion) => void;
   isStepAccessible: (step: StepNumber) => boolean;
   toggleTheme: () => void;
   isChatOpen: boolean;
@@ -151,17 +68,23 @@ interface WorkflowContextType {
 const WorkflowContext = createContext<WorkflowContextType | undefined>(undefined);
 
 const STEP_HASHES: Record<StepNumber, string> = {
-  1: '#workspace',
-  2: '#field-analysis',
-  3: '#crop-prediction',
-  4: '#summary'
+  1: '#home',
+  2: '#boundary',
+  3: '#analysis',
+  4: '#crops',
+  5: '#report'
 };
 
 const HASH_TO_STEP: Record<string, StepNumber> = {
+  '#home': 1,
   '#workspace': 1,
-  '#field-analysis': 2,
-  '#crop-prediction': 3,
-  '#summary': 4
+  '#boundary': 2,
+  '#analysis': 3,
+  '#field-analysis': 3,
+  '#crops': 4,
+  '#crop-prediction': 4,
+  '#report': 5,
+  '#summary': 5
 };
 
 export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -171,17 +94,18 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [loading, setLoading] = useState<boolean>(false);
   const [isPredicted, setIsPredicted] = useState<boolean>(false);
   const [analysisStatus, setAnalysisStatus] = useState<AnalysisStatus>({
-    locationSelected: true,
+    locationSelected: false,
     predictionComplete: false,
     cropAnalysisComplete: false,
   });
-  const [detectedLocation, setDetectedLocation] = useState<DetectedLocationResult | null>(() => {
-    return findNearestAgriDistrict(PRESET_REGIONS[0].centroid[0], PRESET_REGIONS[0].centroid[1]);
-  });
+  const [detectedLocation, setDetectedLocation] = useState<DetectedLocationResult | null>(null);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('geoagri_theme');
       if (saved === 'light' || saved === 'dark') return saved;
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light';
+      }
     }
     return 'dark';
   });
@@ -202,18 +126,23 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<WorkflowFormData>({
-    polygonPts: PRESET_REGIONS[0].polygon,
+    polygonPts: [],
     pointPt: undefined,
-    areaHa: PRESET_REGIONS[0].defaultAreaHa,
+    areaHa: 0,
     season: "kharif",
     irrigationPref: "",
     phInput: "",
     socInput: "",
-    selectedPresetName: PRESET_REGIONS[0].name
+    selectedPresetName: ""
   });
 
   const updateFormData = (partial: Partial<WorkflowFormData>) => {
-    setFormData(prev => ({ ...prev, ...partial }));
+    setFormData(prev => {
+      const next = { ...prev, ...partial };
+      const hasLocation = (next.polygonPts && next.polygonPts.length >= 3) || next.pointPt !== undefined;
+      setAnalysisStatus(s => ({ ...s, locationSelected: hasLocation }));
+      return next;
+    });
     // If coordinates change, require re-predicting
     if (partial.polygonPts || partial.pointPt) {
       setIsPredicted(false);
@@ -226,38 +155,16 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-  const selectPreset = (preset: PresetRegion) => {
-    setFormData(prev => ({
-      ...prev,
-      polygonPts: preset.polygon,
-      pointPt: undefined,
-      areaHa: preset.defaultAreaHa,
-      selectedPresetName: preset.name
-    }));
-    setIsPredicted(false);
-    setAnalysisStatus(prev => ({
-      ...prev,
-      predictionComplete: false,
-      cropAnalysisComplete: false,
-    }));
-    setMaxUnlockedStep(2);
-  };
-
   const isStepAccessible = (step: StepNumber): boolean => {
     if (step === 1 || step === 2) return true;
-    if (step === 3) return analysisStatus.predictionComplete || isPredicted || report !== null;
-    if (step === 4) return analysisStatus.cropAnalysisComplete;
+    if (step === 3) return (formData.polygonPts && formData.polygonPts.length >= 3) || formData.pointPt !== undefined;
+    if (step === 4) return analysisStatus.predictionComplete || isPredicted || report !== null;
+    if (step === 5) return analysisStatus.cropAnalysisComplete;
     return false;
   };
 
   const goToStep = (step: StepNumber) => {
-    // Strictly guard Steps 3 and 4:
-    // Cannot access Step 3 before Predict Now on Page 2 has finished!
-    if (step === 3 && !isStepAccessible(3)) {
-      return;
-    }
-    // Cannot access Step 4 before crop analysis has completed!
-    if (step === 4 && !isStepAccessible(4)) {
+    if (!isStepAccessible(step)) {
       return;
     }
 
@@ -274,8 +181,13 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Dynamically detect location from coordinates using Kaggle/ICAR dataset + reverse geocoding
   useEffect(() => {
-    const lat = formData.pointPt ? formData.pointPt[1] : (formData.polygonPts[0]?.[1] || 14.0);
-    const lon = formData.pointPt ? formData.pointPt[0] : (formData.polygonPts[0]?.[0] || 75.75);
+    const lat = formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1];
+    const lon = formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0];
+
+    if (lat === undefined || lon === undefined) {
+      setDetectedLocation(null);
+      return;
+    }
 
     let active = true;
     detectLocationFromCoordinates(lat, lon).then(result => {
@@ -294,6 +206,11 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
    * Runs the real backend pipeline while advancing live processing stages.
    */
   const runPredictNow = async (): Promise<boolean> => {
+    if (formData.polygonPts.length < 3 && !formData.pointPt) {
+      setError("Please define a field boundary polygon or drop a pin before running prediction.");
+      return false;
+    }
+
     setLoading(true);
     setError(null);
     setPipelineStageIndex(1);
@@ -327,7 +244,7 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         predictionComplete: true,
         cropAnalysisComplete: false,
       }));
-      setMaxUnlockedStep(3); // Step 3 unlocked; Step 4 remains locked until crop analysis
+      setMaxUnlockedStep(4);
       return true;
     } catch (err: any) {
       clearInterval(stageInterval);
@@ -339,16 +256,16 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   /**
-   * Action when user clicks "Analyse All Crops →" on Page 2.
-   * Completes crop analysis readiness and unlocks Step 4.
+   * Action when user clicks "Analyse All Crops →" on Step 3 (Field Analysis).
+   * Completes crop analysis readiness and unlocks Step 4 & 5.
    */
   const startCropAnalysis = () => {
     setAnalysisStatus(prev => ({
       ...prev,
       cropAnalysisComplete: true,
     }));
-    setMaxUnlockedStep(4);
-    goToStep(3);
+    setMaxUnlockedStep(5);
+    goToStep(4);
   };
 
   // Sync hash with browser history
@@ -356,11 +273,7 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const handleHashChange = () => {
       const step = HASH_TO_STEP[window.location.hash];
       if (step) {
-        if (step <= 2) {
-          setCurrentStep(step);
-        } else if (step === 3 && isStepAccessible(3)) {
-          setCurrentStep(step);
-        } else if (step === 4 && isStepAccessible(4)) {
+        if (step <= 2 || isStepAccessible(step)) {
           setCurrentStep(step);
         }
       }
@@ -388,7 +301,6 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         startCropAnalysis,
         runAnalysis: runPredictNow,
         updateFormData,
-        selectPreset,
         isStepAccessible,
         toggleTheme,
         isChatOpen,

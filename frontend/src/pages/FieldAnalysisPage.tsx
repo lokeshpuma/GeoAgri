@@ -22,7 +22,8 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import { useWorkflow, PIPELINE_STAGES } from '../context/WorkflowContext';
-import { MapSelector } from '../components/MapSelector/MapSelector';
+import { BoundaryPreviewMap } from '../features/boundary/BoundaryPreviewMap';
+import { Button } from '../ui/Button';
 import { SuitabilityBanner } from '../components/SuitabilityBanner/SuitabilityBanner';
 import { IrrigationPanel } from '../components/IrrigationPanel/IrrigationPanel';
 import { ClimateRiskReport } from '../components/ClimateRiskReport/ClimateRiskReport';
@@ -60,8 +61,8 @@ export const FieldAnalysisPage: React.FC = () => {
   const [showAllTechnicalData, setShowAllTechnicalData] = useState<boolean>(false);
 
   // Field coordinates
-  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1] || 14.0);
-  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0] || 75.75);
+  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1]);
+  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0]);
   const areaHa = formData.areaHa || report?.field_summary?.area_ha || null;
 
   const env = report?.environment;
@@ -120,28 +121,25 @@ export const FieldAnalysisPage: React.FC = () => {
 
       {/* 1. INTERACTIVE MAP & SELECTED FIELD SIDE PANEL */}
       <div className="top-grid">
-        <MapSelector
-          onPolygonChange={(pts, ha, name) => {
-            updateFormData({
-              polygonPts: pts,
-              areaHa: Number(ha.toFixed(2)),
-              pointPt: undefined,
-              selectedPresetName: name || "Selected Field Boundary"
-            });
-          }}
-          onPointChange={(pt, name) => {
-            updateFormData({
-              pointPt: pt,
-              polygonPts: [],
-              selectedPresetName: name || `Custom Pin (${pt[1].toFixed(4)}°N, ${pt[0].toFixed(4)}°E)`
-            });
-          }}
-          initialPolygon={formData.polygonPts}
-          initialAreaHa={formData.areaHa}
-          selectedPoint={formData.pointPt}
-          report={report}
-          isPredicted={isPredicted}
-        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <BoundaryPreviewMap
+            polygon={formData.polygonPts}
+            point={formData.pointPt}
+            height="340px"
+          />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--ink-3)' }}>
+              {formData.polygonPts.length >= 3 ? `${formData.polygonPts.length} corners · ${formData.areaHa} ha` : 'Pin coordinate location'}
+            </span>
+            <Button
+              variant="glass"
+              size="sm"
+              onClick={() => goToStep(2)}
+            >
+              Edit Boundary in Studio ↗
+            </Button>
+          </div>
+        </div>
 
         {/* Map Side Panel: "Selected Field" & "Predict Now" CTA */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>

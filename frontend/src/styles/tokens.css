@@ -1,0 +1,147 @@
+/* Terra Noir Design Tokens (PRD.md §6.2) */
+
+:root,
+:root[data-theme="dark"] {
+  /* Surfaces */
+  --bg-0: #05090a;
+  --bg-1: #0a1112;
+  --bg-2: #101a1a;
+  --bg-3: #172524;
+  --glass: rgba(16, 26, 26, 0.62);
+  --glass-strong: rgba(16, 26, 26, 0.86);
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+  /* Ink */
+  --ink-1: #f3f1ea;
+  --ink-2: #b9c2bd;
+  --ink-3: #7f8d87;
+
+  /* Accents */
+  --emerald-500: #22c58b;
+  --emerald-300: #7be8bd;
+  --emerald-glow: rgba(34, 197, 139, 0.35);
+  --gold-500: #d9ad4f;
+  --gold-300: #f0cf85;
+  --gold-glow: rgba(217, 173, 79, 0.30);
+  --danger: #ff6b6b;
+  --warn: #ffb454;
+  --info: #6cb6ff;
+  --ok: #22c58b;
+
+  /* Gradients */
+  --grad-brand: linear-gradient(135deg, #22c58b 0%, #d9ad4f 100%);
+  --grad-surface: radial-gradient(120% 120% at 10% 0%, #13302b 0%, #05090a 60%);
+
+  /* Temporary aliases for backward compatibility */
+  --bg-primary: var(--bg-0);
+  --bg-card: var(--glass-strong);
+  --bg-card-border: var(--glass-border);
+  --bg-input: var(--bg-2);
+  --accent-green: var(--emerald-500);
+  --accent-green-glow: var(--emerald-glow);
+  --accent-teal: #14b8a6;
+  --accent-amber: var(--gold-500);
+  --accent-amber-glow: var(--gold-glow);
+  --accent-red: var(--danger);
+  --accent-blue: var(--info);
+  --text-main: var(--ink-1);
+  --text-muted: var(--ink-2);
+  --text-dim: var(--ink-3);
+  --shadow-main: var(--elev-2);
+}
+
+:root[data-theme="light"] {
+  /* Surfaces */
+  --bg-0: #f6f3ea;
+  --bg-1: #fbf9f3;
+  --bg-2: #ffffff;
+  --bg-3: #efeadc;
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-strong: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(20, 40, 30, 0.10);
+
+  /* Ink */
+  --ink-1: #0f2a22;
+  --ink-2: #3e5a4f;
+  --ink-3: #6c8378;
+
+  /* Accents */
+  --emerald-500: #0f9b6a;
+  --emerald-300: #47c79a;
+  --emerald-glow: rgba(15, 155, 106, 0.25);
+  --gold-500: #b8862b;
+  --gold-300: #d7a94c;
+  --gold-glow: rgba(184, 134, 43, 0.22);
+  --danger: #d64545;
+  --warn: #c77a16;
+  --info: #2563eb;
+  --ok: #0f9b6a;
+
+  /* Gradients */
+  --grad-brand: linear-gradient(135deg, #0f9b6a 0%, #b8862b 100%);
+  --grad-surface: radial-gradient(120% 120% at 10% 0%, #fbf9f3 0%, #f6f3ea 60%);
+
+  /* Temporary aliases */
+  --bg-primary: var(--bg-0);
+  --bg-card: var(--bg-2);
+  --bg-card-border: var(--glass-border);
+  --bg-input: var(--bg-1);
+  --accent-green: var(--emerald-500);
+  --accent-green-glow: var(--emerald-glow);
+  --accent-teal: #0d9488;
+  --accent-amber: var(--gold-500);
+  --accent-amber-glow: var(--gold-glow);
+  --accent-red: var(--danger);
+  --accent-blue: var(--info);
+  --text-main: var(--ink-1);
+  --text-muted: var(--ink-2);
+  --text-dim: var(--ink-3);
+  --shadow-main: var(--elev-1);
+}
+
+:root {
+  /* Typography */
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-family: var(--font-ui);
+
+  /* Radii */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+  --radius-sm: var(--r-xs);
+  --radius-md: var(--r-sm);
+  --radius-lg: var(--r-md);
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 72px;
+
+  /* Elevations */
+  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --elev-2: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --elev-3: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--glass-border);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast: 140ms;
+  --t-med: 260ms;
+  --t-slow: 520ms;
+
+  /* Z-Index */
+  --z-map: 0;
+  --z-panel: 20;
+  --z-header: 40;
+  --z-modal: 80;
+  --z-toast: 100;
+}

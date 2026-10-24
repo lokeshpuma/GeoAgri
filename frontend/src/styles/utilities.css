@@ -1,0 +1,63 @@
+/* Terra Noir Utilities (PRD.md §6.4 & §6.7) */
+
+/* Glass Panels */
+.glass-panel {
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-md);
+  box-shadow: var(--elev-2);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass panel top-edge subtle highlight */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  pointer-events: none;
+}
+
+/* Fallback for browsers that do not support backdrop-filter */
+@supports not (backdrop-filter: blur(18px)) {
+  .glass-panel {
+    background: var(--bg-1);
+    opacity: 0.96;
+  }
+}
+
+/* Screen reader only utility (WCAG 2.2 AA) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Flex / Grid helpers */
+.flex-row-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}

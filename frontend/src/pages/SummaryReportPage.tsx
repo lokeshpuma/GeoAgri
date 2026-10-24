@@ -41,8 +41,8 @@ export const SummaryReportPage: React.FC = () => {
   };
 
   const farmArea = report?.field_summary?.area_ha || formData.areaHa;
-  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1] || 14.0);
-  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0] || 75.75);
+  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1]);
+  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0]);
 
   const env = report?.environment || {
     rainfall_mm: 700.1,
@@ -224,7 +224,7 @@ export const SummaryReportPage: React.FC = () => {
             borderRadius: '10px'
           }}>
             <strong style={{ color: '#ef4444', display: 'block', marginBottom: '6px' }}>
-              ⚠ Regulatory Notice: Cultivation Excluded ({report.irrigability.verdict.replace('_', ' ')})
+              ⚠ Regulatory Notice: Cultivation Excluded ({report.irrigability.verdict.replace(/_/g, ' ')})
             </strong>
             <p style={{ margin: 0, fontSize: '0.85rem', color: '#9ca3af' }}>
               {report.irrigability.reasons?.[0]?.reason || 'Plot falls within protected, water, urban, or wasteland boundaries.'}

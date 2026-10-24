@@ -253,21 +253,45 @@ export async function fetchFullReport(payload: PredictRequestPayload): Promise<F
   }
 }
 
-export async function fetchFieldArea(polygon: [number, number][]): Promise<{ area_ha: number | null; polygon_valid: boolean }> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/field/area`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ polygon })
-    });
-    if (!response.ok) {
-      throw new Error(`Area API error: ${response.statusText}`);
-    }
-    return await response.json();
-  } catch (err) {
-    console.warn("Backend /field/area unavailable, using fallback:", err);
-    return { area_ha: null, polygon_valid: false };
+export class AreaValidationError extends Error {
+  status: number;
+  code?: string;
+  constructor(message: string, status: number = 500, code?: string) {
+    super(message);
+    this.name = "AreaValidationError";
+    this.status = status;
+    this.code = code;
   }
+}
+
+export interface AreaResponse {
+  area_ha: number | null;
+  perimeter_m?: number;
+  centroid?: [number, number];
+  polygon_valid: boolean;
+  area_method?: string;
+}
+
+export async function fetchFieldArea(polygon: [number, number][]): Promise<AreaResponse> {
+  const response = await fetch(`${API_BASE_URL}/field/area`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ polygon })
+  });
+  if (!response.ok) {
+    let errCode: string | undefined;
+    let errMsg = `Area API error: ${response.statusText}`;
+    try {
+      const errData = await response.json();
+      if (errData?.code) errCode = errData.code;
+      if (errData?.message) errMsg = errData.message;
+      if (errData?.detail) errMsg = typeof errData.detail === 'string' ? errData.detail : JSON.stringify(errData.detail);
+    } catch {
+      // ignore json parse error
+    }
+    throw new AreaValidationError(errMsg, response.status, errCode);
+  }
+  return await response.json();
 }
 
 export async function fetchLandInquiry(payload: {

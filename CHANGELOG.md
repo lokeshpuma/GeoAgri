@@ -196,6 +196,117 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Rollback to legacy behavior is guaranteed via `LAND_DETECTION_MODE=off LAND_GATE_MODE=off`.
 - **Status**: PRD v2.1 Force-Fix Complete across all 18 items (M13–M30) and 15 Runbook Steps (S0–S14).
 
+## [PRD v3.0 - Phase P0 Baseline] - 2026-10-24
+### Recorded
+- Git status: clean; tag: `pre-v3`
+- `npm run build` (frontend): 0 errors, built in 2.28s
+- `pytest` (backend): 110 passed, 3008 warnings in 71.28s
+- Baseline verified and logged.
+
+## [PRD v3.0 - Phase P1 Remove Defaults & File Import] - 2026-10-24
+### Changed / Removed
+- Deleted `zzz.GeoJSON` and dead page `Dashboard.tsx`.
+- Removed `PRESET_REGIONS` from `WorkflowContext.tsx` and `MapSelector.tsx`.
+- Removed polygon import button and handlers (`handleImportPolygon`, file input).
+- Made context defaults strictly empty: `polygonPts: []`, `pointPt: undefined`, `areaHa: 0`, `detectedLocation: null`.
+- Removed silent coordinate fallbacks (`|| 14.0`, `|| 75.75`) in `FieldAnalysisPage`, `CropPredictionPage`, and `SummaryReportPage`.
+- Guarded `runPredictNow` in `WorkflowContext.tsx` against missing polygon/pin.
+- Added `AreaValidationError` typed error in `frontend/src/api/client.ts`.
+- Gate G-D1 (no presets/defaults in code) and Gate G-D2 (no import/zzz.GeoJSON) verified: passed.
+- Frontend build: 0 errors in 3.02s. Backend tests: 110 passed in 76.87s.
+
+## [PRD v3.0 - Phase P2 Design Tokens + Base Styles] - 2026-10-24
+### Added
+- Created `frontend/src/styles/tokens.css` with Terra Noir dark and ivory light design tokens, surface gradients, accents, elevations, and backward-compatibility aliases.
+- Created `frontend/src/styles/base.css` with resets, custom scrollbars, focus rings, tabular figures, and smooth 250ms theme transitions.
+- Created `frontend/src/styles/typography.css` with display hierarchy (Fraunces), UI typography (Plus Jakarta Sans), and monospace numerals (JetBrains Mono).
+- Created `frontend/src/styles/motion.css` with fadeInRise, aurora background animations, micro-interactions, and `@media (prefers-reduced-motion: reduce)` overrides.
+- Created `frontend/src/styles/utilities.css` with `.glass-panel` backdrop filters, fallback support, and `.sr-only` accessibility classes.
+- Updated `frontend/src/main.tsx` importing the new style sheets.
+- Updated `frontend/index.html` loading `Fraunces` and `JetBrains Mono` and removing obsolete Leaflet CSS link.
+- Updated `WorkflowContext.tsx` respecting `prefers-color-scheme` on first visit while preserving localStorage persistence.
+- Frontend build: 0 errors in 2.40s. Backend tests: 110 passed in 74.44s.
+
+## [PRD v3.0 - Phase P3 UI Kit] - 2026-10-24
+### Added
+- Implemented core reusable UI components in `frontend/src/ui/`:
+  - `Button.tsx`: Variants (primary, secondary, glass, ghost, danger), sizes (sm, md, lg), focus visible ring, loading spinner, and micro-interactions.
+  - `IconButton.tsx`: 40px minimum touch target, mandatory aria-label for accessibility, active indicator, glass & solid variants.
+  - `GlassPanel.tsx`: Tokenized backdrop blur, 1px glass border, top-edge gradient highlight, and elevation levels.
+  - `Badge.tsx`: Color variants (emerald, gold, danger, warn, info, neutral) with optional status dot.
+  - `Tooltip.tsx`: Accessible hover/focus tooltip with delay and smooth fade-in rise.
+  - `Toast.tsx`: Toast notification context provider and floating toast container with auto-dismiss.
+  - `Skeleton.tsx`: Shimmer loading placeholder supporting custom dimensions and circular avatars.
+  - `Tabs.tsx`: Accessible tablist/tabpanel with pill and line indicator styles.
+  - `Slider.tsx`: Range input with emerald gradient track fill and monospace numeric readout.
+  - `Toggle.tsx`: Accessible switch control with smooth spring thumb motion and emerald glow.
+  - `Popover.tsx`: Accessible dropdown flyout with outside-click dismissal.
+  - `EmptyState.tsx`: Structured empty/idle placeholder with display typography and action slot.
+  - `StatNumber.tsx`: Monospace numeric counter with smooth cubic-bezier count-up animation and reduced-motion fallback.
+  - `index.ts`: Centralized barrel exports.
+- Wrapped application in `ToastProvider` in `frontend/src/App.tsx`.
+- Frontend build: 0 errors in 2.50s. Backend tests: 110 passed in 65.90s.
+
+## [PRD v3.0 - Phase P4 Boundary Studio] - 2026-10-24
+### Added
+- Created `frontend/src/features/boundary/`:
+  - `boundaryTypes.ts`: Typed data models for boundary states, draw tools, and validation issues.
+  - `boundaryMath.ts`: Real geodesic area, perimeter, vertices, kinks self-intersection checks, and counter-clockwise outer ring normalizer using `@turf/area`, `@turf/length`, `@turf/kinks`, and `@turf/centroid`.
+  - `boundaryStorage.ts`: LocalStorage persistence with key `geoagri.boundary.v1` and draft restore banner.
+  - `mapStyles.ts`: Multi-source basemap definitions (Satellite, Streets, Terrain, Dark) with custom label opacity control.
+  - `CoachCard.tsx`: Centered instruction modal guiding parcel discovery and placement.
+  - `SearchBar.tsx`: Coordinate parser (supports degrees/cardinals and decimal lat/lng), geocoder support, and Locate Me GPS trigger.
+  - `BasemapSwitcher.tsx`: Floating bottom-left basemap selector and label opacity slider.
+  - `ToolDock.tsx`: Floating left tool rail with Draw Polygon (D), Rectangle (R), Circle (C), Freehand (F), Edit (E), Pin (P), Undo/Redo, and Clear.
+  - `PlotSummaryPanel.tsx`: Right glass metrics panel with live area in hectares/acres/guntas, perimeter, centroid coordinates, server-verified badge, and GeoJSON copy/download export.
+  - `BoundaryMap.tsx`: Full-bleed MapLibre GL engine with live polygon rendering, vertex handles, and interactive creation.
+  - `BoundaryStudioPage.tsx`: Step 2 studio page integrating map, tool dock, search, and summary panel.
+  - `BoundaryPreviewMap.tsx`: Read-only field extent preview for Step 3 Field Analysis.
+- Vitest unit tests in `src/features/boundary/boundaryMath.test.ts`: 4 passed in 300ms.
+
+## [PRD v3.0 - Phase P5 Backend Validation] - 2026-10-24
+### Added / Changed
+- Updated `backend/app/api/v1/field.py`:
+  - Enforced `shapely` polygon validity checks (closed ring, ≥ 4 points, no self-intersections/kinks).
+  - Enforced parcel bounds (`FIELD_MIN_HA = 0.01` to `FIELD_MAX_HA = 1000.0`).
+  - Returns HTTP 422 with `{ code, message }` (`SELF_INTERSECTION`, `TOO_SMALL`, `TOO_LARGE`, `NOT_CLOSED`, `TOO_FEW_VERTICES`).
+  - Added additive fields: `{ perimeter_m, centroid: [lng, lat], polygon_valid: true, area_method: "geodesic" }`.
+- Updated `backend/app/schemas/predict.py`: Added optional `plot_name` and `boundary_source` attributes to `PredictRequest`.
+- Added test suite `backend/tests/test_field_area_validation.py` verifying all 6 edge cases: 6 passed in 1.34s.
+
+## [PRD v3.0 - Phase P6 & P7 Workflow & Restyle] - 2026-10-24
+### Changed
+- Expanded `WorkflowContext.tsx` to 5-step sequential flow (`StepNumber = 1 | 2 | 3 | 4 | 5`):
+  1: Workspace / Home (`#home`)
+  2: Boundary Studio (`#boundary`)
+  3: Field Analysis (`#analysis`)
+  4: Crop Prediction (`#crops`)
+  5: Summary & Report (`#report`)
+- Updated `BottomWorkflowNav.tsx` and `PageHeader.tsx` reflecting 5-step rail.
+- Wired Step 1 CTA button to "Draw Your Land →" navigating directly to Step 2.
+- Integrated `BoundaryPreviewMap` into `FieldAnalysisPage.tsx` with "Edit Boundary in Studio ↗" CTA and deleted legacy `MapSelector.tsx`.
+- Fixed bug A12 regex replacement in `SummaryReportPage.tsx` ensuring proper string rendering without raw underscores.
+- Frontend production build: 0 errors in 2.63s. Backend tests: 116 passed in 63.75s.
+
+## [PRD v3.0 - Phase P8 Cleanup & Documentation] - 2026-10-24
+### Added
+- Implemented `frontend/src/features/boundary/useBoundaryDraw.ts` with 50-step snapshot undo/redo history stack, vertex manipulation, midpoint insertion, and geometry validity callbacks.
+- Added comprehensive unit tests in `frontend/src/features/boundary/useBoundaryDraw.test.ts` (3 passed in 25ms). Total Vitest tests: 7 passed in 843ms.
+- Added keyboard shortcuts in `BoundaryStudioPage.tsx` (`D` for polygon, `R` for rectangle, `E` for select/edit, `P` for pin, `Esc` for pan).
+- Restyled `WorkspacePage.tsx` with editorial Fraunces display typography, topographic contour SVG background, and lazy-rendered collapsible architecture sections per PRD §6.6.
+- Updated `documentation/api_reference.md` documenting `POST /api/v1/field/area` request/response schemas and HTTP 422 error codes.
+- Updated `documentation/architecture.md` detailing the MapLibre GL Boundary Studio data pipeline.
+- Updated `README.md` and `run.md` documenting the 5-step workflow, verification commands, and environment flags.
+- Updated `frontend/.env.example` with `VITE_GEOCODER_URL`, `VITE_SATELLITE_TILES_URL`, `VITE_MAP_STYLE_URL`, `VITE_ENABLE_3D_TERRAIN`, and `VITE_DEMO_MODE`.
+- Final full suite verification:
+  - Backend `pytest`: 116 passed in 72.46s.
+  - Frontend `npm test`: 7 passed in 843ms.
+  - Frontend `npm run build`: 0 errors in 2.70s.
+
+
+
+
+
 
 
 

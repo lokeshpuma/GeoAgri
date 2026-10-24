@@ -28,6 +28,8 @@ class PredictRequest(BaseModel):
     irrigation_preference: Literal["rainfed", "supplemental", "full"] | None = "rainfed"
     manual_soil: ManualSoilInput | None = None
     survey_ref: dict[str, Any] | None = None
+    plot_name: str | None = None
+    boundary_source: str | None = None
 
 
 class QuantileValue(BaseModel):
