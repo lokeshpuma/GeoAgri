@@ -19,11 +19,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
 
   /**
    * Parse coordinates like:
-   * "13.32, 75.75", "13.32°N 75.75°E", "13.3200,-75.7500"
+   * "12.9716, 77.5946", "12.97°N 77.59°E", "12.9716,-77.5946"
    */
   const parseCoordinates = (text: string): [number, number] | null => {
     const clean = text.trim();
-    // Pattern with degrees/cardinals: 13.32°N, 75.75°E
+    // Pattern with degrees/cardinals: 12.97°N, 77.59°E
     const dmsRegex = /([0-9.]+)\s*°?\s*([NSns])?[,\s]+([0-9.]+)\s*°?\s*([EWew])?/;
     const dmsMatch = clean.match(dmsRegex);
     if (dmsMatch) {
@@ -78,7 +78,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
       // No geocoder configured, show hint
       setResults([
         {
-          name: 'Search by coordinates (e.g. "13.3200, 75.7500")',
+          name: 'Search by coordinates (e.g. "12.9716, 77.5946")',
           coords: [0, 0],
         },
       ]);
