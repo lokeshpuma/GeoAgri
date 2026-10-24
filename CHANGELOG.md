@@ -215,6 +215,18 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - Gate G-D1 (no presets/defaults in code) and Gate G-D2 (no import/zzz.GeoJSON) verified: passed.
 - Frontend build: 0 errors in 3.02s. Backend tests: 110 passed in 76.87s.
 
+## [PRD v3.0 - Phase P2 Design Tokens + Base Styles] - 2026-10-24
+### Added
+- Created `frontend/src/styles/tokens.css` with Terra Noir dark and ivory light design tokens, surface gradients, accents, elevations, and backward-compatibility aliases.
+- Created `frontend/src/styles/base.css` with resets, custom scrollbars, focus rings, tabular figures, and smooth 250ms theme transitions.
+- Created `frontend/src/styles/typography.css` with display hierarchy (Fraunces), UI typography (Plus Jakarta Sans), and monospace numerals (JetBrains Mono).
+- Created `frontend/src/styles/motion.css` with fadeInRise, aurora background animations, micro-interactions, and `@media (prefers-reduced-motion: reduce)` overrides.
+- Created `frontend/src/styles/utilities.css` with `.glass-panel` backdrop filters, fallback support, and `.sr-only` accessibility classes.
+- Updated `frontend/src/main.tsx` importing the new style sheets.
+- Updated `frontend/index.html` loading `Fraunces` and `JetBrains Mono` and removing obsolete Leaflet CSS link.
+- Updated `WorkflowContext.tsx` respecting `prefers-color-scheme` on first visit while preserving localStorage persistence.
+- Frontend build: 0 errors in 2.40s. Backend tests: 110 passed in 74.44s.
+
 
 
 

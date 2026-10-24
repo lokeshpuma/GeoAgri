@@ -99,6 +99,9 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('geoagri_theme');
       if (saved === 'light' || saved === 'dark') return saved;
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light';
+      }
     }
     return 'dark';
   });
