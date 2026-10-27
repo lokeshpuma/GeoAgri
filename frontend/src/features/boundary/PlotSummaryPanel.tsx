@@ -25,6 +25,7 @@ export interface PlotSummaryPanelProps {
   isVerifying: boolean;
   onConfirm: () => void;
   polygonCoords: [number, number][] | null;
+  serverError?: { code?: string; message: string } | null;
 }
 
 export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
@@ -37,6 +38,7 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
   isVerifying,
   onConfirm,
   polygonCoords,
+  serverError,
 }) => {
   const [copied, setCopied] = useState(false);
   const { showToast } = useToast();
@@ -110,7 +112,7 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
     URL.revokeObjectURL(url);
   };
 
-  const canConfirm = isPinMode ? pinCoords !== null : validation.valid;
+  const canConfirm = (isPinMode ? pinCoords !== null : validation.valid) && !serverError;
 
   return (
     <div
@@ -196,6 +198,30 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
             }}
           >
             <strong>Pin only:</strong> Area unknown; environmental & regulatory models will use point coordinates without parcel perimeter.
+          </div>
+        )}
+
+        {/* Server Area Error Banner (PRD §3.3 S5) */}
+        {serverError && (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '4px',
+              padding: '10px 12px',
+              background: 'rgba(255, 107, 107, 0.15)',
+              border: '1px solid rgba(255, 107, 107, 0.4)',
+              borderRadius: 'var(--r-xs)',
+              color: 'var(--danger)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, fontSize: '0.8125rem' }}>
+              <AlertTriangle size={15} style={{ flexShrink: 0 }} />
+              <span>{serverError.code || 'AREA_VALIDATION_ERROR'}</span>
+            </div>
+            <div style={{ fontSize: '0.75rem', lineHeight: 1.4, paddingLeft: '23px' }}>
+              {serverError.message}
+            </div>
           </div>
         )}
 

@@ -35,6 +35,9 @@ export interface PredictRequestPayload {
   season: "kharif" | "rabi" | "zaid" | "annual" | "perennial";
   limit?: number;
   area_ha?: number;
+  plot_name?: string | null;
+  boundary_source?: string | null;
+  area_source?: string | null;
   irrigation_preference?: "rainfed" | "supplemental" | "full" | null;
   manual_soil?: {
     ph?: number | null;
@@ -283,9 +286,8 @@ export async function fetchFieldArea(polygon: [number, number][]): Promise<AreaR
     let errMsg = `Area API error: ${response.statusText}`;
     try {
       const errData = await response.json();
-      if (errData?.code) errCode = errData.code;
-      if (errData?.message) errMsg = errData.message;
-      if (errData?.detail) errMsg = typeof errData.detail === 'string' ? errData.detail : JSON.stringify(errData.detail);
+      errCode = errData?.detail?.code ?? errData?.code ?? 'AREA_CALCULATION_FAILED';
+      errMsg = errData?.detail?.message ?? (typeof errData?.detail === 'string' ? errData.detail : null) ?? errData?.message ?? `Area API error: ${response.statusText}`;
     } catch {
       // ignore json parse error
     }

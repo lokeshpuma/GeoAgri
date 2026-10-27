@@ -54,4 +54,20 @@ describe('boundaryMath tests (AC-1..AC-8)', () => {
     expect(result.areaAcres).toBeCloseTo(result.areaHa * 2.47105, 1);
     expect(result.areaGuntas).toBeCloseTo(result.areaAcres * 40, 1);
   });
+
+  it('computes interior geometric centroid using @turf/centroid (PRD §3.3 S6)', () => {
+    const square: [number, number][] = [
+      [75.750, 13.320],
+      [75.760, 13.320],
+      [75.760, 13.330],
+      [75.750, 13.330],
+      [75.750, 13.320],
+    ];
+    const result = evaluateBoundary(square);
+    expect(result.centroid).not.toBeNull();
+    // Centroid must be near the midpoint (75.755, 13.325), NOT the first vertex [75.750, 13.320]
+    expect(result.centroid![0]).toBeCloseTo(75.755, 3);
+    expect(result.centroid![1]).toBeCloseTo(13.325, 3);
+    expect(result.centroid).not.toEqual(square[0]);
+  });
 });

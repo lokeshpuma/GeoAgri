@@ -10,6 +10,7 @@ import { DrawTool, BasemapId, BoundaryValidationResult } from './boundaryTypes';
 import { saveBoundaryDraft, loadBoundaryDraft, clearBoundaryDraft } from './boundaryStorage';
 import { fetchFieldArea } from '../../api/client';
 import { useToast } from '../../ui/Toast';
+import centroid from '@turf/centroid';
 
 export const BoundaryStudioPage: React.FC = () => {
   const { formData, updateFormData, goToStep } = useWorkflow();
@@ -40,6 +41,7 @@ export const BoundaryStudioPage: React.FC = () => {
 
   const [isVerifying, setIsVerifying] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [serverError, setServerError] = useState<{ code?: string; message: string } | null>(null);
   const [searchTarget, setSearchTarget] = useState<SearchTargetValue>(null);
   const [isCoachDismissed, setIsCoachDismissed] = useState(false);
 
@@ -122,6 +124,8 @@ export const BoundaryStudioPage: React.FC = () => {
       setPolygonCoords(poly);
       setPinCoords(pin);
       setIsConfirmed(false);
+      setServerError(null);
+      updateFormData({ confirmed: false });
       // Save draft
       saveBoundaryDraft({
         mode: poly ? 'polygon' : pin ? 'pin' : 'none',
@@ -131,23 +135,57 @@ export const BoundaryStudioPage: React.FC = () => {
         confirmed: false,
       });
     },
-    [plotName]
+    [plotName, updateFormData]
   );
 
   const handleConfirm = async () => {
     setIsVerifying(true);
+    setServerError(null);
     let finalAreaHa = validation.areaHa;
-    let areaSource: 'server' | 'client-estimate' = 'client-estimate';
+    let areaSource: 'calculated' | 'manual' = 'calculated';
 
     if (polygonCoords && polygonCoords.length >= 3) {
       try {
         const serverArea = await fetchFieldArea(polygonCoords);
         if (serverArea && serverArea.area_ha != null) {
           finalAreaHa = serverArea.area_ha;
-          areaSource = 'server';
         }
-      } catch (err) {
-        console.warn('Server area verification failed, using client geometry estimate:', err);
+      } catch (err: any) {
+        setIsVerifying(false);
+        const code = err?.code || 'AREA_VALIDATION_ERROR';
+        const message = err?.message || 'Server rejected boundary geometry.';
+        setServerError({ code, message });
+        showToast({
+          type: 'error',
+          title: `Validation Error (${code})`,
+          message: message,
+          durationMs: 4000,
+        });
+        return; // PRD §3.3 S5: Block confirmation on 422 errors!
+      }
+    }
+
+    // Centroid extraction via @turf/centroid (PRD §3.3 S6)
+    let computedCentroid: [number, number] | undefined = pinCoords || undefined;
+    if (polygonCoords && polygonCoords.length >= 3) {
+      try {
+        const ring = [...polygonCoords];
+        if (ring[0][0] !== ring[ring.length - 1][0] || ring[0][1] !== ring[ring.length - 1][1]) {
+          ring.push(ring[0]);
+        }
+        const polyFeature: any = {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: [ring],
+          },
+        };
+        const c = centroid(polyFeature);
+        computedCentroid = [c.geometry.coordinates[0], c.geometry.coordinates[1]];
+      } catch (e) {
+        console.warn('Centroid computation error:', e);
+        computedCentroid = validation.centroid || undefined;
       }
     }
 
@@ -164,18 +202,22 @@ export const BoundaryStudioPage: React.FC = () => {
       areaHa: finalAreaHa,
     });
 
-    // Update global workflow context
+    // Update global workflow context (PRD §3.3 S7, S8)
     updateFormData({
       polygonPts: polygonCoords || [],
-      pointPt: pinCoords || (polygonCoords ? polygonCoords[0] : undefined),
+      pointPt: computedCentroid,
       areaHa: Number(finalAreaHa.toFixed(2)),
-      selectedPresetName: plotName || 'Custom Drawn Field',
+      plotName: plotName || (polygonCoords ? 'Custom Drawn Field' : 'Field Pin'),
+      boundarySource: polygonCoords ? 'drawn' : 'point',
+      areaSource: areaSource,
+      confirmed: true,
+      selectedPresetName: plotName || (polygonCoords ? 'Custom Drawn Field' : 'Field Pin'),
     });
 
     showToast({
       type: 'success',
       title: 'Boundary Confirmed',
-      message: `${finalAreaHa.toFixed(2)} Ha verified (${areaSource}). Advancing to Field Analysis.`,
+      message: `${finalAreaHa.toFixed(2)} Ha verified. Advancing to Field Analysis.`,
       durationMs: 2500,
     });
 
@@ -189,6 +231,7 @@ export const BoundaryStudioPage: React.FC = () => {
     setPolygonCoords(null);
     setPinCoords(null);
     setIsConfirmed(false);
+    setServerError(null);
     setIsCoachDismissed(false);
     setCanUndo(false);
     setCanRedo(false);
@@ -197,6 +240,7 @@ export const BoundaryStudioPage: React.FC = () => {
       polygonPts: [],
       pointPt: undefined,
       areaHa: 0,
+      confirmed: false,
     });
     showToast({
       type: 'info',
@@ -265,6 +309,7 @@ export const BoundaryStudioPage: React.FC = () => {
         isVerifying={isVerifying}
         onConfirm={handleConfirm}
         polygonCoords={polygonCoords}
+        serverError={serverError}
       />
 
       {/* Bottom-left Basemap Switcher */}

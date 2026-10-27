@@ -337,4 +337,23 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `venv/bin/python -m pytest -q`: 117 passed in 68.29s (offline).
   - `npm test`: 7 passed in 2.46s.
   - `npm run build`: built in 5.56s.
-- Git tag: `phase-R2` pending commit.
+- Git tag: `phase-R2` created at commit `df4fdff`.
+
+## [PRD v3.1 - Phase R3 Frontend Contract Fixes] - 2026-10-27
+### Fixed & Verified (S4–S9)
+- **Nested Area Error Parsing in client.ts (S4)**: Updated `fetchFieldArea` in `frontend/src/api/client.ts` to extract `detail?.code` and `detail?.message` from HTTP 422 error payloads, throwing structured `AreaValidationError`.
+- **Confirmation Block on 422 Errors (S5)**: In `BoundaryStudioPage.tsx` and `PlotSummaryPanel.tsx`, disabled the Confirm Boundary button when an area validation error is present, displaying an explicit error banner with the exact error code and human message.
+- **True Interior Centroid Extraction via @turf/centroid (S6)**: Replaced `polygonCoords[0]` with `centroid(polyFeature)` using `@turf/centroid` in `BoundaryStudioPage.tsx`, ensuring subsequent analysis models receive the true parcel center rather than a boundary corner.
+- **Forward Boundary and Area Provenance (S7)**: Updated `WorkflowFormData` and `PredictRequestPayload` forwarding `plot_name`, `boundary_source: 'drawn'`, and `area_source` into `POST /api/v1/predict/full-report`.
+- **Strict Step 3 Confirmation Gate (S8)**: In `WorkflowContext.tsx`, updated `isStepAccessible` so Step 3 strictly requires `confirmed === true`.
+- **Automatic Re-locking and Report Clearing on Boundary Edit (S9)**: In `WorkflowContext.tsx` and `BoundaryStudioPage.tsx`, any vertex modification or geometry clear sets `confirmed = false`, resets `maxUnlockedStep` to 2, clears existing `report`, and resets analysis status.
+- **New Vitest Test Suites**:
+  - `src/api/client.test.ts`: Verifies nested `detail.code` / `detail.message` extraction on 422, flat fallback parsing, and successful 200 parsing (3 passed).
+  - `src/features/boundary/boundaryMath.test.ts`: Added test verifying `@turf/centroid` computes the interior centroid rather than the first corner vertex (5 passed).
+- **Gate Execution (§8)**:
+  - `grep -rn "detail?.code" frontend/src/api/client.ts`: 1 match (PASSED).
+  - `grep -rn "@turf/centroid" frontend/src`: 2 matches (PASSED).
+  - `npm test`: 11 passed in 1.52s (PASSED).
+  - `npm run build`: built in 2.30s with zero errors (PASSED).
+  - `venv/bin/python -m pytest -q`: 117 passed in 64.92s (PASSED).
+- Git tag: `phase-R3` pending commit.

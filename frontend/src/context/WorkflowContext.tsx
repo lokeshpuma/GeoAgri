@@ -9,6 +9,10 @@ export interface WorkflowFormData {
   polygonPts: [number, number][];
   pointPt?: [number, number];
   areaHa: number;
+  plotName?: string;
+  boundarySource?: string;
+  areaSource?: string;
+  confirmed?: boolean;
   season: "kharif" | "rabi" | "zaid" | "annual" | "perennial";
   irrigationPref: "rainfed" | "supplemental" | "full" | "";
   phInput: string;
@@ -139,27 +143,30 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const updateFormData = (partial: Partial<WorkflowFormData>) => {
     setFormData(prev => {
       const next = { ...prev, ...partial };
-      const hasLocation = (next.polygonPts && next.polygonPts.length >= 3) || next.pointPt !== undefined;
+      const hasLocation = ((next.polygonPts && next.polygonPts.length >= 3) || next.pointPt !== undefined) && next.confirmed === true;
       setAnalysisStatus(s => ({ ...s, locationSelected: hasLocation }));
       return next;
     });
-    // If coordinates change, require re-predicting
-    if (partial.polygonPts || partial.pointPt) {
-      setIsPredicted(false);
-      setAnalysisStatus(prev => ({
-        ...prev,
-        predictionComplete: false,
-        cropAnalysisComplete: false,
-      }));
-      setMaxUnlockedStep(2);
+    // If coordinates change or confirmed is false/cleared, re-lock steps 3-5 and clear report (PRD S8, S9)
+    if (partial.polygonPts || partial.pointPt || partial.confirmed === false) {
+      if (partial.confirmed !== true) {
+        setIsPredicted(false);
+        setReport(null);
+        setAnalysisStatus(prev => ({
+          ...prev,
+          predictionComplete: false,
+          cropAnalysisComplete: false,
+        }));
+        setMaxUnlockedStep(2);
+      }
     }
   };
 
   const isStepAccessible = (step: StepNumber): boolean => {
     if (step === 1 || step === 2) return true;
-    if (step === 3) return (formData.polygonPts && formData.polygonPts.length >= 3) || formData.pointPt !== undefined;
-    if (step === 4) return analysisStatus.predictionComplete || isPredicted || report !== null;
-    if (step === 5) return analysisStatus.cropAnalysisComplete;
+    if (step === 3) return formData.confirmed === true;
+    if (step === 4) return (analysisStatus.predictionComplete || isPredicted || report !== null) && formData.confirmed === true;
+    if (step === 5) return analysisStatus.cropAnalysisComplete && formData.confirmed === true;
     return false;
   };
 
@@ -226,6 +233,9 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       season: formData.season,
       limit: 100,
       area_ha: formData.areaHa,
+      plot_name: formData.plotName || undefined,
+      boundary_source: formData.boundarySource || (formData.polygonPts.length > 0 ? 'drawn' : 'point'),
+      area_source: formData.areaSource || 'calculated',
       irrigation_preference: formData.irrigationPref ? (formData.irrigationPref as any) : null,
       manual_soil: (formData.phInput || formData.socInput) ? {
         ph: formData.phInput ? parseFloat(formData.phInput) : null,
