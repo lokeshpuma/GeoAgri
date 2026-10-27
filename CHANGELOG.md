@@ -286,7 +286,8 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - Wired Step 1 CTA button to "Draw Your Land →" navigating directly to Step 2.
 - Integrated `BoundaryPreviewMap` into `FieldAnalysisPage.tsx` with "Edit Boundary in Studio ↗" CTA and deleted legacy `MapSelector.tsx`.
 - Fixed bug A12 regex replacement in `SummaryReportPage.tsx` ensuring proper string rendering without raw underscores.
-- Frontend production build: 0 errors in 2.63s. Backend tests: 116 passed in 63.75s.
+- Restyle status: *partial (WorkspacePage + Studio only; legacy pages still rely on un-tokenized index.css)*.
+- Frontend production build: 0 errors in 2.63s. Backend tests: 116 passed in 63.75s (*unverified offline until R1 socket isolation*).
 
 ## [PRD v3.0 - Phase P8 Cleanup & Documentation] - 2026-10-24
 ### Added
@@ -298,10 +299,16 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - Updated `documentation/architecture.md` detailing the MapLibre GL Boundary Studio data pipeline.
 - Updated `README.md` and `run.md` documenting the 5-step workflow, verification commands, and environment flags.
 - Updated `frontend/.env.example` with `VITE_GEOCODER_URL`, `VITE_SATELLITE_TILES_URL`, `VITE_MAP_STYLE_URL`, `VITE_ENABLE_3D_TERRAIN`, and `VITE_DEMO_MODE`.
-- Final full suite verification:
-  - Backend `pytest`: 116 passed in 72.46s.
-  - Frontend `npm test`: 7 passed in 843ms.
-  - Frontend `npm run build`: 0 errors in 2.70s.
+
+## [PRD v3.1 - Phase R0 Baseline Truth Verification] - 2026-10-27
+### Recorded Real Output (§1)
+- `npm ci`: Added 432 packages in 4s. `maplibre-gl 6.10.0`, `terra-draw ^1.38`, `terra-draw-maplibre-gl-adapter ^1.5` installed cleanly.
+- `npm run build`: Single JS bundle `1,994.39 kB` (561.09 kB gzip), built in 2.50s. Vite warning: chunk larger than 500 kB (no code splitting yet).
+- `npm test`: 7 passed in 856ms across 2 files (`boundaryMath.test.ts`, `useBoundaryDraw.test.ts`).
+- `pytest tests/test_field_area_validation.py`: 6 passed in 3.10s (with Starlette HTTP_422 deprecation warnings).
+- `pytest tests`: 116 passed in 68.40s with network enabled. Slowest tests reach network (6–8s each). Offline execution unverified until socket blocking added in R1.
+- `Lighthouse / axe / Playwright`: NOT RUN (not yet installed in repository).
+- Git tag: `pre-v3.1` created at commit `3511214`.
 
 
 
