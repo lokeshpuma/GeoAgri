@@ -12,8 +12,9 @@ from datetime import datetime, timezone
 from typing import Any
 from fastapi import APIRouter, HTTPException, UploadFile, File, Query
 from pydantic import BaseModel
+import logging
 from app.core.config import get_settings
-from app.schemas.predict import LandInquiryResponse
+from app.schemas.predict import LandInquiryResponse, LandClassification
 from app.services.features.profile import build_environmental_profile
 from app.services.features.pipeline import get_feature_pipeline
 from app.services.landclass.classifier import get_land_classifier
@@ -22,7 +23,9 @@ from app.services.landrecords.manager import get_land_record_manager
 from app.services.landrecords.user_document import UserDocumentProvider
 from app.services.landclass.evidence import collect_evidence
 from app.services.landclass.detection import to_legacy_area_check
+from app.api.errors import handle_internal_error
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
@@ -58,6 +61,7 @@ async def land_inquiry_post(req: LandInquiryRequest):
         detection_dict = None
         area_check_alias = None
 
+        detection_failed = False
         if det_mode != "off":
             try:
                 evidence = collect_evidence(
@@ -69,12 +73,24 @@ async def land_inquiry_post(req: LandInquiryRequest):
                 )
                 detection_dict = evidence.detection
                 area_check_alias = to_legacy_area_check(evidence.detection, lat=lat, lon=lon)
-            except Exception:
-                pass
+            except Exception as det_err:
+                logger.warning("Detection collection error: %s", det_err)
+                detection_dict = {"state": "unavailable", "reason": str(det_err)}
+                detection_failed = True
 
         classifier = get_land_classifier()
         if det_mode == "enforce" and evidence is not None:
             land_class = classifier.classify(evidence=evidence, record=record_summary.record)
+        elif det_mode == "enforce" and detection_failed:
+            land_class = LandClassification(
+                dominant="UNKNOWN",
+                class_shares={"UNKNOWN": 1.0},
+                subclass="detection_unavailable",
+                legal_forest_status="unknown",
+                confidence=0.0,
+                conflict=False,
+                conflict_reason=detection_dict.get("reason", "Detection collection failed")
+            )
         else:
             land_class = classifier.classify(vector, record=record_summary.record)
 
@@ -92,18 +108,31 @@ async def land_inquiry_post(req: LandInquiryRequest):
         })
 
         total_feats = len(vector) if vector else 1
-        observed_cnt = sum(1 for v in vector.values() if v is not None and v != 0.0) if vector else 0
+        observed_cnt = sum(1 for v in vector.values() if v is not None) if vector else 0
         observed_share = round(observed_cnt / total_feats, 2)
 
-        sat_ready = bool(profile.get("satellite") and any(profile["satellite"].values()))
-        weather_ready = bool(profile.get("weather") and any(profile["weather"].values()))
-        soil_ready = bool(profile.get("soil") and any(profile["soil"].values()))
+        sat_ready = bool(profile.get("satellite") and any(v is not None for v in profile["satellite"].values()))
+        weather_ready = bool(profile.get("weather") and any(v is not None for v in profile["weather"].values()))
+        soil_ready = bool(profile.get("soil") and any(v is not None for v in profile["soil"].values()))
 
+        det_sources = (detection_dict.get("sources") if isinstance(detection_dict, dict) else []) or []
+        known_sources = [
+            ("esa_worldcover_2021", "CC BY 4.0", "2021", sat_ready or "esa_worldcover_2021" in det_sources),
+            ("copernicus_dem_glo30", "Open Access", "2021", sat_ready or "copernicus_dem_glo30" in det_sources),
+            ("sentinel2_sr", "CC BY-SA 3.0 IGO", "2024", sat_ready or "sentinel2_sr" in det_sources),
+            ("hydrolakes", "CC BY 4.0", "2019", "hydrolakes" in det_sources or sat_ready),
+            ("openfreemap_vector_tiles", "ODbL", "2024", any("openfreemap" in str(s).lower() or "osm" in str(s).lower() for s in det_sources)),
+            ("open_meteo_weather", "CC BY 4.0", "2024", weather_ready),
+            ("isric_soilgrids", "CC BY 4.0", "2020", soil_ready),
+        ]
         layers = [
-            {"name": "esa_worldcover_2021", "state": "checked" if sat_ready else "unavailable", "licence": "CC BY 4.0", "source_date": "2021"},
-            {"name": "copernicus_dem_glo30", "state": "checked" if sat_ready else "unavailable", "licence": "Open Access", "source_date": "2021"},
-            {"name": "sentinel2_sr", "state": "checked" if sat_ready else "unavailable", "licence": "CC BY-SA 3.0 IGO", "source_date": "2024"},
-            {"name": "hydrolakes", "state": "checked" if sat_ready else "unavailable", "licence": "CC BY 4.0", "source_date": "2019"}
+            {
+                "name": name,
+                "state": "checked" if active else "unavailable",
+                "licence": lic,
+                "source_date": sdate
+            }
+            for name, lic, sdate, active in known_sources
         ]
 
         notes = []
@@ -136,7 +165,7 @@ async def land_inquiry_post(req: LandInquiryRequest):
             assessment_timestamp=now_iso
         )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Land enquiry error: {str(e)}")
+        handle_internal_error(e, "land_inquiry")
 
 
 @router.get("/land/inquiry", response_model=LandInquiryResponse)

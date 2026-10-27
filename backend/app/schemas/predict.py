@@ -30,6 +30,7 @@ class PredictRequest(BaseModel):
     survey_ref: dict[str, Any] | None = None
     plot_name: str | None = None
     boundary_source: str | None = None
+    area_source: str | None = None
 
 
 class QuantileValue(BaseModel):
@@ -77,6 +78,8 @@ class FieldSummary(BaseModel):
     centroid_lat: float
     polygon_valid: bool
     boundary_source: str = "user_drawn"
+    plot_name: str | None = None
+    area_source: str | None = None
 
 
 class LandSuitability(BaseModel):
@@ -87,20 +90,20 @@ class LandSuitability(BaseModel):
 
 
 class EnvironmentSummary(BaseModel):
-    rainfall_mm: float
-    temp_max_c: float
-    temp_min_c: float
-    temp_mean_c: float
-    humidity_pct: float
-    solar_radiation_mj_m2: float
-    ph: float
-    organic_carbon_g_kg: float
-    nitrogen_g_kg: float
+    rainfall_mm: float | None = None
+    temp_max_c: float | None = None
+    temp_min_c: float | None = None
+    temp_mean_c: float | None = None
+    humidity_pct: float | None = None
+    solar_radiation_mj_m2: float | None = None
+    ph: float | None = None
+    organic_carbon_g_kg: float | None = None
+    nitrogen_g_kg: float | None = None
     phosphorus_ppm: float | None = None
     potassium_ppm: float | None = None
-    texture_clay_pct: float
-    texture_sand_pct: float
-    texture_silt_pct: float
+    texture_clay_pct: float | None = None
+    texture_sand_pct: float | None = None
+    texture_silt_pct: float | None = None
 
 
 class SatelliteFeatures(BaseModel):

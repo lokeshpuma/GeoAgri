@@ -46,10 +46,22 @@ from app.services.landclass.detection import (
 AREA_ACRES = float(os.getenv("AREA_CHECK_ACRES", "0.7"))
 AREA_RADIUS_M = round(math.sqrt(AREA_ACRES * 4046.8564224 / math.pi), 1)
 AREA_LABEL = f"{AREA_ACRES:g}-acre area"
-FOREST_MAX_FRACTION = 0.5
+from pathlib import Path
+import yaml
+
+def _load_yaml_rules() -> Dict[str, Any]:
+    rules_path = Path(__file__).resolve().parents[2] / "rules" / "land_class_rules.yaml"
+    if rules_path.exists():
+        try:
+            with open(rules_path, "r", encoding="utf-8") as f:
+                return yaml.safe_load(f) or {}
+        except Exception:
+            pass
+    return {}
+
+_rules = _load_yaml_rules()
+_forest_share = float(_rules.get("thresholds", {}).get("forest_cover", {}).get("min_share_for_dominant", 0.5))
 MAJORITY_FRACTION = 0.5
-MAX_SLOPE_DEG = 15.0
-MAX_ELEVATION_M = 4000.0
 
 TILE_ZOOM = 14
 TILE_TIMEOUT_S = 10
@@ -66,7 +78,7 @@ ANY_PIXEL_BLOCKERS = {
     70: "Snow / ice",
 }
 MAJORITY_BLOCKERS = {
-    10: ("Forest", FOREST_MAX_FRACTION),
+    10: ("Forest", _forest_share),
     60: ("Bare land / desert or rock", MAJORITY_FRACTION),
     80: ("Water body", MAJORITY_FRACTION),
     90: ("Wetland", MAJORITY_FRACTION),

@@ -310,16 +310,31 @@ All notable changes to the GeoAgri project will be documented in this file in ac
 - `Lighthouse / axe / Playwright`: NOT RUN (not yet installed in repository).
 - Git tag: `pre-v3.1` created at commit `3511214`.
 
+## [PRD v3.1 - Phase R1 Offline, Trustworthy Tests] - 2026-10-27
+### Fixed & Verified (B7, B9)
+- **Offline Pytest Harness (B7)**: Installed `pytest-socket>=0.8.0`, configured `backend/pytest.ini` with `addopts = -m "not network"`, and created session-scoped `block_network_sockets` fixture in `backend/tests/conftest.py` with `disable_socket(allow_unix_socket=True)`.
+- **Clean Deprecation Fix**: Replaced deprecated `status.HTTP_422_UNPROCESSABLE_ENTITY` with `status.HTTP_422_UNPROCESSABLE_CONTENT` across `backend/app/api/v1/field.py`.
+- **Gate Execution (§8)**:
+  - `pytest -q`: 117 passed in 67.51s with socket blocking active (offline).
+- Git tag: `phase-R1` created at commit `0938d28`.
 
-
-
-
-
-
-
-
-
-
-
-
-
+## [PRD v3.1 - Phase R2 Backend Honesty and Detection Gating] - 2026-10-27
+### Fixed & Verified (B1–B6, B8, B10, B11)
+- **Enforce Detection and Gating by Default (B1)**: Set `LAND_DETECTION_MODE: str = "enforce"` and `LAND_GATE_MODE: str = "enforce"` in `backend/app/core/config.py` and `backend/.env.example`.
+- **Eliminate Fallback Zeroes and Inappropriate Defaults (B2)**: Updated `backend/app/schemas/predict.py` ensuring every field in `EnvironmentSummary` is typed as `float | None = None`. Updated `backend/app/api/v1/predict.py` replacing all `s.get("ph", 7.0)`, `w.get("rainfall_mm", 0.0)`, etc., with `s.get(...)`, `w.get(...)` (no fallback zeroes or synthetic constants).
+- **Surface Boundary & Area Provenance (B3)**: Added `plot_name: str | None = None` and `area_source: str | None = None` to `FieldSummary` and `PredictRequest`, echoing them accurately into `field_summary` in `/api/v1/predict/full-report`.
+- **Unswallowed Detection Collection Errors (B4)**: In `backend/app/api/v1/land.py`, replaced `except Exception: pass` with explicit error recording (`detection: {state: "unavailable", reason: str(err)}`) and yielding `LandClassification` with `dominant="UNKNOWN"` and `verdict="UNVERIFIED"` under enforce mode.
+- **Honest Data Quality and Layer Reporting (B5)**: In `backend/app/api/v1/land.py`, `observed_feature_share` is computed honestly as `count(vector.values() not None) / total_features`. `layers[]` lists actual consulted layers with license and source date.
+- **Eliminate Blocking Requests in Async Path (B6)**: Replaced `requests.get/post` in `backend/app/services/landclass/detection.py` with `httpx` with strict 6s timeouts. Updated mock in `test_detection_offline.py` to mock `httpx`.
+- **Eliminate Hardcoded Threshold Constants (B8)**: Removed `FOREST_MAX_FRACTION`, `MAX_SLOPE_DEG`, and `MAX_ELEVATION_M` from `backend/app/services/geo/area_check.py`, loading thresholds dynamically from `land_class_rules.yaml`.
+- **Proper Error Handling (B10)**: Created `backend/app/api/errors.py` with `handle_internal_error(exc, operation)`. Handled exceptions in `predict.py` and `land.py` returning structured `{code: "INTERNAL", request_id, message}` without leaking raw stack trace dumps.
+- **Gate Execution (§8)**:
+  - `grep -rn "LAND_DETECTION_MODE: str = \"enforce\"" backend/app/core/config.py && grep -rn "LAND_GATE_MODE: str = \"enforce\"" backend/app/core/config.py`: 2 matches.
+  - `grep -rnE "s\.get\(\"[a-z_]+\", *(0\.0|7\.0)\)|w\.get\(\"[a-z_]+\", *0\.0\)" backend/app/api`: 0 matches (PASSED).
+  - `grep -rn "except Exception:\s*$" -A1 backend/app/api | grep -n "pass"`: 0 matches (PASSED).
+  - `grep -rnE "requests\.(get|post)" backend/app/services/landclass backend/app/api`: 0 matches (PASSED).
+  - `grep -rnE "MAX_SLOPE_DEG|MAX_ELEVATION_M|FOREST_MAX_FRACTION" backend/app`: 0 matches (PASSED).
+  - `venv/bin/python -m pytest -q`: 117 passed in 68.29s (offline).
+  - `npm test`: 7 passed in 2.46s.
+  - `npm run build`: built in 5.56s.
+- Git tag: `phase-R2` pending commit.

@@ -52,9 +52,9 @@ class Settings(BaseSettings):
     LAND_CLASS_RULES: str = "backend/app/rules/land_class_rules.yaml"
     IRRIGABILITY_RULES: str = "backend/app/rules/irrigability_rules.yaml"
 
-    # Detection & Gating (PRD v2.1 §5A.7, §19.4)
-    LAND_DETECTION_MODE: str = "shadow"  # off | shadow | enforce
-    LAND_GATE_MODE: str = "shadow"       # off | shadow | enforce
+    # Detection & Gating (PRD v2.1 §5A.7, §19.4, v3.1 B1)
+    LAND_DETECTION_MODE: str = "enforce"  # off | shadow | enforce
+    LAND_GATE_MODE: str = "enforce"       # off | shadow | enforce
     AREA_CHECK_ACRES: float = 0.7
     OPENFREEMAP_TILEJSON: str = "https://tiles.openfreemap.org/planet"
     OVERPASS_URL: str = "https://overpass-api.de/api/interpreter"

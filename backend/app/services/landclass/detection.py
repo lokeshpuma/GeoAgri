@@ -35,7 +35,7 @@ import numpy as np
 import rasterio
 from rasterio.transform import from_origin, rowcol
 from rasterio.windows import Window
-import requests
+import httpx
 from shapely.affinity import scale as scale_geom, translate
 from shapely.geometry import Point, Polygon, MultiPolygon, shape, mapping
 import yaml
@@ -430,11 +430,8 @@ def _tile_url_template() -> str:
     if cached and now - cached[1] < 6 * 3600:
         return cached[0]
     settings = get_settings()
-    tj = requests.get(
-        settings.OPENFREEMAP_TILEJSON,
-        timeout=6,
-        headers={"User-Agent": settings.HTTP_USER_AGENT}
-    ).json()
+    with httpx.Client(timeout=6.0, headers={"User-Agent": settings.HTTP_USER_AGENT}) as client:
+        tj = client.get(settings.OPENFREEMAP_TILEJSON).json()
     url = tj["tiles"][0]
     _tile_url_cache["tiles"] = (url, now)
     return url
@@ -469,14 +466,15 @@ def vector_tile_check(
     ty_min = int((gy - r) // 4096)
     ty_max = int((gy + r) // 4096)
 
-    for tx in range(tx_min, tx_max + 1):
-        for ty in range(ty_min, ty_max + 1):
-            tile_url = template.format(z=14, x=tx % n, y=ty)
-            resp = requests.get(tile_url, timeout=6, headers={"User-Agent": settings.HTTP_USER_AGENT})
-            if resp.status_code == 204 or not resp.content:
-                continue
-            resp.raise_for_status()
-            layers = mapbox_vector_tile.decode(resp.content, default_options={"y_coord_down": True})
+    with httpx.Client(timeout=6.0, headers={"User-Agent": settings.HTTP_USER_AGENT}) as client:
+        for tx in range(tx_min, tx_max + 1):
+            for ty in range(ty_min, ty_max + 1):
+                tile_url = template.format(z=14, x=tx % n, y=ty)
+                resp = client.get(tile_url)
+                if resp.status_code == 204 or not resp.content:
+                    continue
+                resp.raise_for_status()
+                layers = mapbox_vector_tile.decode(resp.content, default_options={"y_coord_down": True})
 
             for layer_name, layer in layers.items():
                 scale = 4096 / layer.get("extent", 4096)
@@ -589,12 +587,11 @@ def overpass_check(lat: float, lon: float, radius_m: float = 30.0) -> Dict[str, 
     error = None
     for url in urls:
         try:
-            resp = requests.post(
-                url,
-                data={"data": overpass_query(lat, lon, radius_m)},
-                timeout=6,
-                headers={"User-Agent": settings.HTTP_USER_AGENT}
-            )
+            with httpx.Client(timeout=6.0, headers={"User-Agent": settings.HTTP_USER_AGENT}) as client:
+                resp = client.post(
+                    url,
+                    data={"data": overpass_query(lat, lon, radius_m)}
+                )
             resp.raise_for_status()
             found = osm_reasons(resp.json().get("elements", []))
             return {

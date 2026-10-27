@@ -26,6 +26,7 @@ from app.services.irrigability.engine import get_irrigability_engine
 from app.services.landrecords.manager import get_land_record_manager
 from app.services.landclass.evidence import collect_evidence
 from app.services.landclass.detection import to_legacy_area_check
+from app.api.errors import handle_internal_error
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -175,9 +176,11 @@ async def generate_full_report(req: PredictRequest):
         gross_area = req.area_ha if (req.area_ha is not None and req.area_ha > 0) else profile["field_summary"]["area_ha"]
         irrigability = engine.evaluate(land_class, vector, area_ha=gross_area, record=record_summary.record)
 
-        # Update field summary with boundary source
-        profile["field_summary"]["boundary_source"] = "user_drawn" if req.polygon else ("point_only" if req.point else "user_provided")
+        # Update field summary with boundary source, plot_name, and area_source
+        profile["field_summary"]["boundary_source"] = req.boundary_source or ("user_drawn" if req.polygon else ("point_only" if req.point else "user_provided"))
         profile["field_summary"]["area_ha"] = gross_area
+        profile["field_summary"]["plot_name"] = req.plot_name
+        profile["field_summary"]["area_source"] = req.area_source or ("manual" if req.area_ha is not None and req.area_ha > 0 else "calculated")
 
         w = profile["weather"]
         s = profile["soil"]
@@ -197,20 +200,20 @@ async def generate_full_report(req: PredictRequest):
                     limiting_factors=limiting
                 ),
                 environment=EnvironmentSummary(
-                    rainfall_mm=w.get("rainfall_mm", 0.0),
-                    temp_max_c=w.get("temp_max_c", 0.0),
-                    temp_min_c=w.get("temp_min_c", 0.0),
-                    temp_mean_c=w.get("temp_mean_c", 0.0),
-                    humidity_pct=w.get("humidity_pct", 0.0),
-                    solar_radiation_mj_m2=w.get("solar_radiation_mj_m2", 0.0),
-                    ph=s.get("ph", 7.0),
-                    organic_carbon_g_kg=s.get("organic_carbon_g_kg", 0.0),
-                    nitrogen_g_kg=s.get("nitrogen_g_kg", 0.0),
+                    rainfall_mm=w.get("rainfall_mm"),
+                    temp_max_c=w.get("temp_max_c"),
+                    temp_min_c=w.get("temp_min_c"),
+                    temp_mean_c=w.get("temp_mean_c"),
+                    humidity_pct=w.get("humidity_pct"),
+                    solar_radiation_mj_m2=w.get("solar_radiation_mj_m2"),
+                    ph=s.get("ph"),
+                    organic_carbon_g_kg=s.get("organic_carbon_g_kg"),
+                    nitrogen_g_kg=s.get("nitrogen_g_kg"),
                     phosphorus_ppm=s.get("phosphorus_ppm"),
                     potassium_ppm=s.get("potassium_ppm"),
-                    texture_clay_pct=s.get("texture_clay_pct", 0.0),
-                    texture_sand_pct=s.get("texture_sand_pct", 0.0),
-                    texture_silt_pct=s.get("texture_silt_pct", 0.0)
+                    texture_clay_pct=s.get("texture_clay_pct"),
+                    texture_sand_pct=s.get("texture_sand_pct"),
+                    texture_silt_pct=s.get("texture_silt_pct")
                 ),
                 satellite_features=SatelliteFeatures(
                     ndvi=sat.get("ndvi", 0.0),
@@ -241,7 +244,7 @@ async def generate_full_report(req: PredictRequest):
                 irrigation_summary=IrrigationSummary(
                     recommended_mode="Not Applicable",
                     total_water_demand_m3=0.0,
-                    effective_rainfall_mm=round(w.get("rainfall_mm", 0.0) * 0.75, 1)
+                    effective_rainfall_mm=round((w.get("rainfall_mm") or 0.0) * 0.75, 1)
                 ),
                 climate_risk_summary=ClimateRiskSummary(
                     overall_risk_level="Critical",
@@ -342,20 +345,20 @@ async def generate_full_report(req: PredictRequest):
                 limiting_factors=mod_a.get("limiting_factors", [])
             ),
             environment=EnvironmentSummary(
-                rainfall_mm=w.get("rainfall_mm", 0.0),
-                temp_max_c=w.get("temp_max_c", 0.0),
-                temp_min_c=w.get("temp_min_c", 0.0),
-                temp_mean_c=w.get("temp_mean_c", 0.0),
-                humidity_pct=w.get("humidity_pct", 0.0),
-                solar_radiation_mj_m2=w.get("solar_radiation_mj_m2", 0.0),
-                ph=s.get("ph", 7.0),
-                organic_carbon_g_kg=s.get("organic_carbon_g_kg", 0.0),
-                nitrogen_g_kg=s.get("nitrogen_g_kg", 0.0),
+                rainfall_mm=w.get("rainfall_mm"),
+                temp_max_c=w.get("temp_max_c"),
+                temp_min_c=w.get("temp_min_c"),
+                temp_mean_c=w.get("temp_mean_c"),
+                humidity_pct=w.get("humidity_pct"),
+                solar_radiation_mj_m2=w.get("solar_radiation_mj_m2"),
+                ph=s.get("ph"),
+                organic_carbon_g_kg=s.get("organic_carbon_g_kg"),
+                nitrogen_g_kg=s.get("nitrogen_g_kg"),
                 phosphorus_ppm=s.get("phosphorus_ppm"),
                 potassium_ppm=s.get("potassium_ppm"),
-                texture_clay_pct=s.get("texture_clay_pct", 0.0),
-                texture_sand_pct=s.get("texture_sand_pct", 0.0),
-                texture_silt_pct=s.get("texture_silt_pct", 0.0)
+                texture_clay_pct=s.get("texture_clay_pct"),
+                texture_sand_pct=s.get("texture_sand_pct"),
+                texture_silt_pct=s.get("texture_silt_pct")
             ),
             satellite_features=SatelliteFeatures(
                 ndvi=sat.get("ndvi", 0.0),
@@ -386,7 +389,7 @@ async def generate_full_report(req: PredictRequest):
             irrigation_summary=IrrigationSummary(
                 recommended_mode=top_rec.irrigation_mode if top_rec else "rainfed",
                 total_water_demand_m3=round(top_rec.water_need_mm * 10.0 * calc_area, 1) if top_rec else 0.0,
-                effective_rainfall_mm=round(w.get("rainfall_mm", 0.0) * 0.75, 1)
+                effective_rainfall_mm=round((w.get("rainfall_mm") or 0.0) * 0.75, 1)
             ),
             climate_risk_summary=ClimateRiskSummary(
                 overall_risk_level="Low" if (top_rec and top_rec.climate_risk_score < 35) else ("Moderate" if (top_rec and top_rec.climate_risk_score < 60) else "High"),
@@ -412,6 +415,4 @@ async def generate_full_report(req: PredictRequest):
     except HTTPException:
         raise
     except Exception as e:
-        request_id = str(uuid.uuid4())[:8]
-        logger.error("Prediction pipeline error [%s]: %s", request_id, e, exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Prediction pipeline internal error (ref: {request_id})")
+        handle_internal_error(e, "predict")

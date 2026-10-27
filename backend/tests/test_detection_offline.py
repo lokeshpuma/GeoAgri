@@ -144,7 +144,22 @@ def _fake_tile_server(monkeypatch, layers_for_tile):
         return Resp(mapbox_vector_tile.encode(layers, default_options={"y_coord_down": True}) if layers else b"")
 
     monkeypatch.setattr(detection, "_tile_url_template", lambda: "https://tiles.test/{z}/{x}/{y}.pbf")
-    monkeypatch.setattr(detection.requests, "get", fake_get)
+    if hasattr(detection, "httpx"):
+        class FakeClient:
+            def __init__(self, *args, **kwargs):
+                pass
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                pass
+            def get(self, url, **kwargs):
+                return fake_get(url)
+            def post(self, url, **kwargs):
+                return fake_get(url)
+        monkeypatch.setattr(detection.httpx, "Client", FakeClient)
+        monkeypatch.setattr(detection.httpx, "get", fake_get)
+    if hasattr(detection, "requests"):
+        monkeypatch.setattr(detection.requests, "get", fake_get)
 
 
 def _tile_and_offset(lat, lon):

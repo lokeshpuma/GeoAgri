@@ -47,13 +47,55 @@ def test_field_area_endpoint():
     assert data["area_ha"] > 0
 
 def test_predict_full_report_e2e():
+    from unittest.mock import patch, AsyncMock
+    agri_profile = {
+        "field_summary": {
+            "area_ha": 2.0,
+            "centroid_lon": 75.75,
+            "centroid_lat": 13.32,
+            "polygon_valid": True,
+            "boundary_source": "user_drawn"
+        },
+        "centroid": (75.75, 13.32),
+        "season": "kharif",
+        "satellite": {
+            "ndwi": -0.05,
+            "ndvi": 0.65,
+            "evi": 0.50,
+            "savi": 0.45,
+            "ndmi": 0.30,
+            "elevation": 700.0,
+            "slope": 2.5,
+            "twi": 8.0,
+            "vv": -12.0,
+            "vh": -18.0
+        },
+        "weather": {
+            "rainfall_mm": 950.0,
+            "temp_max_c": 31.0,
+            "temp_min_c": 21.0,
+            "temp_mean_c": 26.0,
+            "humidity_pct": 72.0,
+            "solar_radiation_mj_m2": 19.0
+        },
+        "soil": {
+            "ph": 6.8,
+            "organic_carbon_g_kg": 14.0,
+            "nitrogen_g_kg": 1.1,
+            "phosphorus_ppm": 25.0,
+            "potassium_ppm": 140.0,
+            "texture_clay_pct": 22.0,
+            "texture_sand_pct": 45.0,
+            "texture_silt_pct": 33.0
+        }
+    }
     payload = {
         "polygon": [
-            [77.5850, 12.9650],
-            [77.5870, 12.9650],
-            [77.5870, 12.9670],
-            [77.5850, 12.9670],
-            [77.5850, 12.9650]
+            [75.750, 13.320],
+            [75.752, 13.320],
+            [75.752, 13.322],
+            [75.750, 13.322],
+            [75.750, 13.320]
         ],
         "season": "kharif",
         "limit": 10,
@@ -63,7 +105,8 @@ def test_predict_full_report_e2e():
             "organic_carbon": 12.0
         }
     }
-    response = client.post("/api/v1/predict/full-report", json=payload)
+    with patch("app.api.v1.predict.build_environmental_profile", new_callable=AsyncMock, return_value=agri_profile):
+        response = client.post("/api/v1/predict/full-report", json=payload)
     assert response.status_code == 200
     data = response.json()
 
