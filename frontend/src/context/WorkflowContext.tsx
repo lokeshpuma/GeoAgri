@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { fetchFullReport, FullReportResponse, PredictRequestPayload } from '../api/client';
 
 import { detectLocationFromCoordinates, DetectedLocationResult, findNearestAgriDistrict } from '../utils/locationDataset';
+import { getCoordinatesCentroid } from '../features/boundary/boundaryMath';
 
 export type StepNumber = 1 | 2 | 3 | 4 | 5;
 
@@ -188,8 +189,9 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Dynamically detect location from coordinates using Kaggle/ICAR dataset + reverse geocoding
   useEffect(() => {
-    const lat = formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1];
-    const lon = formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0];
+    const center = getCoordinatesCentroid(formData.polygonPts, formData.pointPt);
+    const lat = center ? center[1] : undefined;
+    const lon = center ? center[0] : undefined;
 
     if (lat === undefined || lon === undefined) {
       setDetectedLocation(null);

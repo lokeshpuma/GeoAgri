@@ -50,7 +50,7 @@ GeoAgri AI is a location-driven agricultural decision-support platform designed 
 
 ---
 
-### 2.1 Boundary Studio Data Flow (v3.0.0)
+### 2.1 Boundary Studio Data Flow (v3.1.0)
 ```
 [User Drawing / GPS / Coordinates]
             │
@@ -58,23 +58,24 @@ GeoAgri AI is a location-driven agricultural decision-support platform designed 
 ┌────────────────────────────────────────┐
 │ Boundary Studio (`features/boundary/`)  │
 ├────────────────────────────────────────┤
-│ • BoundaryMap.tsx (MapLibre GL)        │ Full-bleed satellite / terrain canvas
-│ • useBoundaryDraw.ts                   │ Undo/redo stack (50 steps), tools
-│ • boundaryMath.ts (@turf)              │ Live area (ha/ac/gun), kinks detection
-│ • SearchBar.tsx                        │ Coordinate parser + geocoder + GPS
-│ • PlotSummaryPanel.tsx                 │ Metric cards & GeoJSON export
+│ • BoundaryMap.tsx (TerraDraw Engine)   │ Full-bleed satellite / terrain canvas
+│ • useBoundaryDraw.ts                   │ TerraDraw adapter, undo/redo (50 steps)
+│ • boundaryMath.ts (@turf)              │ Geodesic area, perimeter, kinks check
+│ • SearchBar.tsx                        │ Photon geocoder + coord jump + GPS
+│ • PlotSummaryPanel.tsx                 │ Metric cards, validation badge
 └───────────────────┬────────────────────┘
-                    │ Confirmed Ring [[lng,lat],...]
+                    │ Confirmed Ring [[lng,lat],...] + Centroid Point
                     ▼
 ┌────────────────────────────────────────┐
 │ POST /api/v1/field/area Validation     │ (shapely + pyproj WGS84 geodesic)
 └───────────────────┬────────────────────┘
-                    │ Server-Verified Area (ha)
+                    │ Server-Verified Area (ha) [Blocks on 422 errors]
                     ▼
 ┌────────────────────────────────────────┐
 │ Field Analysis Preview & GEE Pipeline  │ (Step 3 → Step 4 → Step 5)
 └────────────────────────────────────────┘
 ```
+
 
 ---
 
@@ -104,3 +105,17 @@ GeoAgri AI is a location-driven agricultural decision-support platform designed 
 $$\text{FusionScore} = w_1 \cdot \text{LandSuit} + w_2 \cdot \text{CropRec} - w_3 \cdot \text{IrrigCost}_{\text{norm}} + w_4 \cdot \text{Yield}_{\text{norm}} - w_5 \cdot \text{Risk}_{\text{norm}}$$
 
 Default weights: $w_1=0.20, w_2=0.25, w_3=0.15, w_4=0.25, w_5=0.15$.
+
+---
+
+### 6. Frontend Tokenized Design System & Performance
+- **Theme Palettes (Terra Noir & Terra Ivory)**: Centralized design tokens defined in `frontend/src/theme/palette.ts` and `frontend/src/index.css`. Zero hardcoded hex or rgba color literals exist in TSX component code.
+- **Component Stylesheets**: Modular CSS classes organized under `frontend/src/styles/components/` for UI Kit, Boundary Studio, Field Analysis, Crop Prediction, Workspace, and Summary Report. Inline styles are strictly limited to dynamic runtime properties (slider track widths, popup coordinate offsets).
+- **Route Code Splitting**: All primary route pages (`BoundaryStudioPage`, `FieldAnalysisPage`, `CropPredictionPage`, `SummaryReportPage`) and auxiliary widgets (`AgriChatBot`) are lazy loaded via `React.lazy` with zero-inline-style animated suspense fallbacks.
+- **Rollup Vendor Chunks**: Heavy geospatial and visualization libraries are separated into discrete vendor chunks (`vendor-maplibre`, `vendor-terradraw`, `vendor-charts`, `vendor-turf`, `vendor-icons`, `vendor-react`), reducing initial entry JavaScript down to **~65 kB gzip** and completely eliminating bundle chunk size warnings.
+
+---
+
+### 7. Offline Testing & Network Isolation
+- **Socket Level Isolation**: Backend pytest execution enforces a socket blocker in `backend/tests/conftest.py` preventing any live HTTP, DNS, or socket calls during test execution. Tests requiring live network access are explicitly tagged with `@pytest.mark.network`.
+- **Full Test Suite Execution**: All 117 backend unit and integration tests execute 100% offline in under 60 seconds.

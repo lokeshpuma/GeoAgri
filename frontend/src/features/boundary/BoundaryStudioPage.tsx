@@ -7,6 +7,7 @@ import { SearchBar } from './SearchBar';
 import { BasemapSwitcher } from './BasemapSwitcher';
 import { CoachCard } from './CoachCard';
 import { DrawTool, BasemapId, BoundaryValidationResult } from './boundaryTypes';
+import { useBoundaryDraw } from './useBoundaryDraw';
 import { saveBoundaryDraft, loadBoundaryDraft, clearBoundaryDraft } from './boundaryStorage';
 import { fetchFieldArea } from '../../api/client';
 import { useToast } from '../../ui/Toast';
@@ -16,7 +17,6 @@ export const BoundaryStudioPage: React.FC = () => {
   const { formData, updateFormData, goToStep } = useWorkflow();
   const { showToast } = useToast();
 
-  const [activeTool, setActiveTool] = useState<DrawTool>('polygon');
   const [activeBasemap, setActiveBasemap] = useState<BasemapId>('satellite');
   const [labelOpacity, setLabelOpacity] = useState<number>(0.85);
 
@@ -38,6 +38,18 @@ export const BoundaryStudioPage: React.FC = () => {
     vertexCount: 0,
     centroid: null,
   });
+
+  const boundaryDraw = useBoundaryDraw({
+    initialPolygon: formData.polygonPts && formData.polygonPts.length > 0 ? formData.polygonPts : null,
+    initialPin: formData.pointPt || null,
+    onGeometryChange: (coords, pin) => {
+      setPolygonCoords(coords);
+      setPinCoords(pin);
+    },
+    onValidationChange: setValidation,
+  });
+
+  const { activeTool, setActiveTool } = boundaryDraw;
 
   const [isVerifying, setIsVerifying] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);

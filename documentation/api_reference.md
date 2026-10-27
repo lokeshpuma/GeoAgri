@@ -1,4 +1,4 @@
-# GeoAgri AI API Reference (v2.1)
+# GeoAgri AI API Reference (v3.1)
 
 Base URL: `/api/v1`
 
@@ -19,7 +19,7 @@ Primary agronomic decision-support and land analysis endpoint.
     [75.7460, 13.3230],
     [75.7460, 13.3170]
   ],
-  "point": null,
+  "point": [75.7500, 13.3200],
   "area_ha": 2.85,
   "season": "kharif",
   "limit": 10,
@@ -28,6 +28,8 @@ Primary agronomic decision-support and land analysis endpoint.
     "ph": 6.8,
     "organic_carbon_g_kg": 12.0
   },
+  "plot_name": "My Field",
+  "boundary_source": "drawn",
   "survey_ref": null
 }
 ```
@@ -35,12 +37,12 @@ Primary agronomic decision-support and land analysis endpoint.
 #### Response Structure
 - `field_summary`: Area, centroid coordinates, boundary source, polygon validity.
 - `land_suitability`: FAO land suitability grade, score, and limiting factors.
-- `environment`: Weather and soil physical/chemical parameters.
+- `environment`: Weather and soil physical/chemical parameters. If data is unavailable or when the request is gated, missing values are returned as `null` (strictly never fabricated as `0.0` or `7.0`).
 - `satellite_features`: Spectral indices (NDVI, NDWI, EVI, SAVI, NDMI), elevation, slope, TWI, SAR VV/VH.
-- `recommended_crops`: Ranked crop species with quantile yield (P10/P50/P90), production, water needs, and companion intercrop options.
+- `recommended_crops`: Ranked crop species with quantile yield (P10/P50/P90), production, water needs, and companion intercrop options. If land is gated as `NOT_IRRIGABLE` (e.g. water bodies, dense urban, rock, reserved forest), ML models are skipped and `recommended_crops` is `[]`.
 - `land_class`: Dominant land class (`AGRICULTURAL`, `FOREST_LEGAL`, `FOREST_COVER`, `WASTELAND`, `URBAN_BUILT`, `WATER_BODY`, `UNKNOWN`), class shares, subclass, confidence.
 - `irrigability`: Verdict (`IRRIGABLE`, `CONDITIONALLY_IRRIGABLE`, `NOT_IRRIGABLE`, `NOT_IRRIGABLE_PROVISIONAL`, `UNVERIFIED`), reasons, usable area, irrigation options.
-- `detection`: Physical surface detector output for forest, buildings, roads, water, and terrain.
+- `detection`: Physical surface detector output for forest, buildings, roads, water, and terrain, plus query sources telemetry.
 - `gate_mode`: Operational gating mode (`off`, `shadow`, `enforce`).
 - `area_check`: Legacy backward-compatible donor area check schema.
 - `imputed_features`: List of feature names imputed inside model wrapper (if any).

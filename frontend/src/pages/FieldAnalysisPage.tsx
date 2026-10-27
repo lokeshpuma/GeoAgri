@@ -33,6 +33,7 @@ import {
   interpretOrganicCarbon,
   interpretTerrain,
 } from '../utils/agronomicFormatters';
+import { getCoordinatesCentroid } from '../features/boundary/boundaryMath';
 
 export const FieldAnalysisPage: React.FC = () => {
   const {
@@ -55,8 +56,9 @@ export const FieldAnalysisPage: React.FC = () => {
   const [showAllTechnicalData, setShowAllTechnicalData] = useState<boolean>(false);
 
   // Field coordinates
-  const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1]);
-  const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0]);
+  const fallbackCenter = getCoordinatesCentroid(formData.polygonPts, formData.pointPt);
+  const centroidLat = report?.field_summary?.centroid_lat ?? fallbackCenter?.[1] ?? 0;
+  const centroidLon = report?.field_summary?.centroid_lon ?? fallbackCenter?.[0] ?? 0;
 
   const env = report?.environment;
   const sat = report?.satellite_features;

@@ -206,6 +206,22 @@ export function evaluateBoundary(coords: [number, number][]): BoundaryValidation
 }
 
 /**
+ * Returns centroid as [lon, lat] for polygon or point
+ */
+export function getCoordinatesCentroid(
+  polygon?: [number, number][] | null,
+  point?: [number, number] | null
+): [number, number] | null {
+  if (point) return point;
+  if (!polygon || polygon.length < 3) return null;
+  try {
+    return evaluateBoundary(polygon).centroid;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Freehand simplification capped at 200 vertices
  */
 export function simplifyFreehand(coords: [number, number][]): [number, number][] {

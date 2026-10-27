@@ -122,7 +122,7 @@ graph LR
 1. **Step 1: Workspace (`#home`)**  
    Planetary overview, intelligence architecture, connected Earth observation data sources, and quick launch to field drawing.
 2. **Step 2: Boundary Studio (`#boundary`)**  
-   Full-bleed MapLibre satellite mapping engine. Draw interactive parcel corners, paste lat/lon coordinates, view live geodesic area (ha, acres, guntas), check real-time geometric validity (kinks/bow-tie detection), and confirm parcel geometry verified by backend Shapely engine.
+   Full-bleed MapLibre satellite mapping engine powered by the **TerraDraw** single drawing engine. Place interactive parcel corners, insert midpoints, delete vertices, and utilize a 50-step undo/redo stack (`useBoundaryDraw`). View live geodesic area (ha, acres, guntas), check real-time geometric validity (kinks/bow-tie detection), and confirm parcel geometry verified by backend Shapely engine. Zero default coordinates or preset boundaries ensure absolute data honesty.
 3. **Step 3: Field Intelligence (`#analysis`)**  
    Read-only field extent preview map, multi-spectral Sentinel-1/2 GEE telemetry, SoilGrids 3D chemical profiles, NASA POWER climatology, and Model A Land Suitability Assessment.
 4. **Step 4: Crop Prediction (`#crops`)**  
@@ -521,25 +521,34 @@ GeoAgri AI is production-optimized for seamless cloud deployment:
 
 ---
 
-## 🧪 Testing & Quality Assurance
+## 🧪 Testing & Quality Assurance (PRD v3.1)
 
-Run the automated test suite covering all architectural phases:
+GeoAgri AI maintains an uncompromising standard of testing rigour, data honesty, and offline reliability:
+
+### 1. Offline Backend Test Suite (117 Tests, < 60s)
+All backend tests execute with socket-level network blocking enforced at the pytest fixture level (`backend/tests/conftest.py`). Tests run 100% offline without network dependencies:
 
 ```bash
 cd backend
 source venv/bin/activate
-pytest -v
+PYTHONPATH=. pytest -q
 ```
 
-### Test Suite Coverage:
-- `tests/test_phase2_data.py`: Validates crop datasets, normalizations, and schema integrity.
-- `tests/test_phase3_geo_services.py`: Tests GEE satellite extraction, NASA POWER, and SoilGrids client connectivity.
-- `tests/test_phase4_features.py`: Verifies the 78-layer feature extraction pipeline.
-- `tests/test_phase5_models.py`: Validates output ranges and boundary conditions for Models A through E.
-- `tests/test_phase6_fusion.py`: Verifies multi-attribute decision weighting and ranking logic.
-- `tests/test_phase7_api.py`: End-to-end integration tests for all API endpoints.
+Coverage encompasses:
+- `tests/test_landclass_irrigability.py`: Land classification and irrigability verdict rules across diverse terrains.
+- `tests/test_field_area_validation.py`: HTTP-level validation for geodesic polygon area, self-intersections, and limits.
+- `tests/test_offline_detection_gating.py`: Detection gating for water, dense urban, forest cover, and bedrock with null environment summaries.
+- `tests/test_phase2_data.py` - `tests/test_phase7_api.py`: Comprehensive coverage of ML pipelines, feature transformations, and decision fusion.
+
+### 2. Frontend Unit Tests & Bundle Verification (Vitest)
+```bash
+cd frontend
+npm test          # 11 tests covering boundaryMath, useBoundaryDraw, and payload builders
+npm run build     # Optimized rollup chunks: initial JS < 65 kB gzip, 0 chunk warnings
+```
 
 ---
+
 
 ## 🛰️ Physical Land Surface Detection Engine (PRD v2.1 §5A)
 

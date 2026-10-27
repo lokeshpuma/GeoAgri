@@ -416,3 +416,32 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `PYTHONPATH=. venv/bin/python -m pytest -q`: 117 passed, 3009 warnings in 57.51s (well under 3 minutes offline, PASSED).
 - Git tag: `phase-R6` created.
 
+## [PRD v3.1 - Phase R7 Documentation & Release] - 2026-10-27
+### Documented & Released
+- **Documentation Overhaul**:
+  - `README.md`: Updated with PRD v3.1 architecture, TerraDraw single drawing engine, offline socket-blocked test suite, tokenized design system, and zero default coordinates / presets guarantees.
+  - `run.md`: Updated for v3.1.0 release, detailing two-terminal execution, 5-step workflow, offline test commands (`pytest -q`, `npm test`), and PRD §8 gate checks.
+  - `documentation/api_reference.md`: Updated for v3.1 with structured 422 error detail schemas (`{code, message}`), nullable environmental summaries, and detection layer telemetry.
+  - `documentation/architecture.md`: Updated Boundary Studio data flow, tokenized styling system, route code-splitting, manual rollup chunking, and socket-level network isolation.
+  - `backend/.env.example` & `frontend/.env.example`: Updated headers to PRD v3.1 and aligned default environment variables.
+- **Contract & Architecture Invariants Verified**:
+  - Eliminated legacy first-vertex fallbacks (`polygonPts[0]` replaced by `@turf/centroid` helper `getCoordinatesCentroid` across `WorkflowContext.tsx`, `CropPredictionPage.tsx`, `SummaryReportPage.tsx`, `FieldAnalysisPage.tsx`).
+  - Integrated `useBoundaryDraw` in `BoundaryStudioPage.tsx` for tool selection and undo/redo triggers.
+- **Gate Execution (§8 Exact Commands)**:
+  - `grep -rnE "PRESET_REGIONS|defaultAreaHa|initialAreaHa|handleImportPolygon|accept=\"\.geojson" src --include="*.ts" --include="*.tsx" | grep -v "\.test\."`: 0 matches (PASSED).
+  - `grep -rn "terra-draw" src | wc -l`: 2 matches (>= 1, PASSED).
+  - `grep -rn "useBoundaryDraw" src --include="*.tsx" | wc -l`: 2 matches (>= 1, PASSED).
+  - `grep -rnE "polygonCoords\[0\]|polygonPts\[0\]" src`: 0 matches (PASSED).
+  - `grep -rnE "#[0-9a-fA-F]{3,8}\b|rgba?\(" src --include="*.tsx" | grep -v "src/theme/palette.ts"`: 0 matches (PASSED).
+  - `grep -rn "style={{" src --include="*.tsx" | wc -l`: 12 matches (budget ≤ 40, PASSED).
+  - `grep -c "var(--" src/index.css`: 122 var(-- tokens (PASSED).
+  - `npm run build 2>&1 | grep -i "larger than 500"`: 0 matches, built in 2.21s (PASSED).
+  - `npm test`: 11 passed across 3 test files in 790ms (PASSED).
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: 117 passed, 3009 warnings in 60.73s (100% offline with socket blocking, PASSED).
+  - `grep -rn "LAND_DETECTION_MODE: str = \"enforce\"\|LAND_GATE_MODE: str = \"enforce\"" app/core/config.py`: 2 matches (PASSED).
+  - `grep -rnE "s\.get\(\"[a-z_]+\", *(0\.0|7\.0)\)|w\.get\(\"[a-z_]+\", *0\.0\)" app/api`: 0 matches (PASSED).
+  - `grep -rn "except Exception:\s*$" -A1 app/api | grep -n "pass"`: 0 matches (PASSED).
+  - `grep -rnE "requests\.(get|post)" app/services/landclass app/api`: 0 matches (PASSED).
+  - `grep -rnE "MAX_SLOPE_DEG|MAX_ELEVATION_M|FOREST_MAX_FRACTION" app`: 0 matches (PASSED).
+- Git tag: `v3.1.0` created.
+
