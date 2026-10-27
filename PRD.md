@@ -1,364 +1,216 @@
-# GeoAgri AI — PRD v3.0: Boundary Studio (interactive polygon) + Premium UI Overhaul
+# GeoAgri AI — PRD v3.1: Audit Fixes + Full Implementation of Boundary Studio, Premium UI and Detection Gate
 
-**Version:** 3.0 · **Date:** 2026-10-24 · **Amends:** PRD v2.1 (FR-1 polygon import, FR-21 demo presets). Everything in v2.1 not mentioned here stays in force (data honesty, evidence gate, no scraping, no personal data).
-**Target repo:** `GeoAgri-main` (zip: `GeoAgri-after_new_prd.zip`). **Tool:** Antigravity.
-**Scope:** (A) replace downloaded-GeoJSON boundaries with a **user-drawn polygon on the map, in its own section ("Boundary Studio")**; (B) replace the current look with a **premium, interactive design system**; (C) ordered runbook with grep/test gates.
-
----
-
-## 0. Instructions to the coding agent (non-negotiable)
-
-1. This PRD wins over code. Log every deviation in `CHANGELOG.md`.
-2. **No fabricated location data.** After this change there must be **no default polygon, default centroid, preset field or sample GeoJSON** reaching a prediction request. A user must draw (or pin) before anything runs.
-3. Do not touch backend modelling, land-class, irrigability or land-record logic. Backend changes are limited to §7 (polygon validation).
-4. One commit per phase in §14; run `npm run build` (frontend) and `pytest -v` (backend) before each commit. Report real results; write `NOT RUN` + reason if a command cannot run.
-5. No new network calls from the browser except: map tiles, the geocoder in §5.6, and the existing GeoAgri API.
-6. Verify every dependency version against npm before installing (see §10 note on `maplibre-gl`).
-7. Accessibility and `prefers-reduced-motion` are requirements, not polish (§9.7).
+**Version:** 3.1 · **Date:** 2026-10-24 · **Supersedes:** PRD v3.0 for every item marked ❌ or ⚠ below. v3.0 items marked ✅ stay as built. PRD v2.1 (data honesty, evidence gate, no scraping, no personal data) stays in force.
+**Audited build:** `GeoAgri-integrate-detection.zip` · **Tool:** Antigravity
 
 ---
 
-## 1. Audit of the current code (what exists, what is wrong)
+## 0. Rules for the coding agent (non-negotiable)
 
-Read from the uploaded zip.
+1. **Report only what you observed.** If a command was not run or did not finish, write `NOT RUN` / `DID NOT FINISH` plus the reason in `CHANGELOG.md`. Never write "done", "restyled" or "N passed" for something you did not run. (The current changelog claims a full restyle and "116 passed"; the restyle did not happen, §2.)
+2. **No hidden defaults** for location, area, soil, weather, or satellite values anywhere, including inside error/"not irrigable" responses.
+3. **Tested code must be shipped code.** A unit test may only cover a module the app actually imports at runtime. Dead code is deleted, not tested.
+4. **A gate is a command, not an opinion.** A phase is complete only when its listed command prints the stated result.
+5. Do not change ML models, `agronomic_rules.yaml` thresholds, or scraping policy. Do not scrape Bhoomi / e-Swathu / Dishaank / K-GIS.
+6. One commit + one git tag per phase (§12). Run `npm run build`, `npm test`, and the backend tests that apply before each commit.
 
-### 1.1 Polygon / location flow today
-| # | Finding | File |
+---
+
+## 1. What I ran
+
+| Check | Result (observed) |
+|---|---|
+| `npm ci` | OK. `maplibre-gl 6.10.0`, `terra-draw ^1.38`, `terra-draw-maplibre-gl-adapter ^1.5` all install. (The v3.0 worry about the maplibre version is closed.) |
+| `npm run build` | **Passes.** Single JS chunk **1 994 kB** (561 kB gzip); Vite warns >500 kB. No code splitting. |
+| `npm test` | **7 passed** (2 files: `boundaryMath`, `useBoundaryDraw`). |
+| `pytest tests/test_field_area_validation.py` | **6 passed.** |
+| Full `pytest tests` | **DID NOT FINISH** in my sandbox after ~8 min (no output, process still running). The changelog's "116 passed in 72 s" is therefore **unverified**. Likely cause: tests that reach the network (detection/remote COG/tiles). Must be fixed: §6 B7. |
+| Lighthouse / axe / Playwright | NOT RUN (none exist in the repo). |
+
+---
+
+## 2. Audit result — v3.0 gates
+
+| Gate | Result | Evidence |
 |---|---|---|
-| P1 | Boundary comes from **file import** (`<input accept=".geojson,.json">`), `handleImportPolygon` reads only `features[0]` and `coordinates[0]` (first ring of first feature; multi-feature, MultiPolygon, holes silently dropped). | `components/MapSelector/MapSelector.tsx` |
-| P2 | A sample file `zzz.GeoJSON` ships in repo root (Karnataka rectangle, "North Field Farm Parcel"). | repo root |
-| P3 | **Hidden default polygon:** `initialPolygon = PRESET_REGIONS[0].polygon` and `initialAreaHa = 2.85` (Karnataka), also `formData` default in context (`polygonPts: PRESET_REGIONS[0].polygon`, `areaHa: PRESET_REGIONS[0].defaultAreaHa`). A user who does nothing still submits a Karnataka field. Violates v2.1 §0.2/§0.3. | `MapSelector.tsx`, `context/WorkflowContext.tsx` |
-| P4 | **Hidden coordinate defaults:** `lat … \|\| 14.0`, `lon … \|\| 75.75` in context; `PRESET_REGIONS[0].centroid` as map start. | `WorkflowContext.tsx`, `MapSelector.tsx` |
-| P5 | `PRESET_REGIONS` (6 hard-coded fields with invented `defaultAreaHa`) duplicated in **both** `MapSelector.tsx` and `WorkflowContext.tsx`; gated only by `VITE_DEMO_MODE`. | both |
-| P6 | Map **click replaces polygon with a point** (`setPolygonPts([])`). There is no vertex drawing, editing, undo, snapping or validation. | `MapSelector.tsx` |
-| P7 | `fetchFieldArea` swallows backend errors and returns `{area_ha: null}`; import path then does `areaRes?.area_ha ?? 0`, so a failure shows **0 ha** as if valid. | `api/client.ts`, `MapSelector.tsx` |
-| P8 | The map lives inside Step 2 (`FieldAnalysisPage`) mixed with analysis UI; there is no dedicated boundary step. `Dashboard.tsx` also embeds `MapSelector` but is not routed in `App.tsx` (dead code). | `FieldAnalysisPage.tsx`, `Dashboard.tsx`, `App.tsx` |
-| P9 | Base map is **raster only** (OSM / Esri / OpenTopoMap); no vector labels, no dark style, no 3D terrain. `index.html` also loads Leaflet CSS from unpkg and `package.json` ships `leaflet` + `react-leaflet` although the map is MapLibre. | `MapSelector.tsx`, `index.html`, `package.json` |
-
-### 1.2 Theme today
-| # | Finding |
-|---|---|
-| T1 | `index.css` is **one 3 816-line file**, mixing tokens, layout and per-component rules; inline `style={{…}}` is used heavily in TSX (e.g. MapSelector header). Hard to re-theme. |
-| T2 | Tokens are minimal (`--bg-primary`, `--accent-green`, …) with a `[data-theme="light"]` override block. No spacing, type, elevation, motion or z-index scale. |
-| T3 | Look = generic dark "glass card" + ambient orbs. Emerald-on-navy with Plus Jakarta/Outfit; no distinctive identity, no motion language, no micro-interactions. |
-| T4 | `WorkspacePage` is a long marketing scroll (How it works / pipeline / data sources) that delays the actual task (selecting land). |
+| G-D1 no preset/default coordinates in app code | ✅ | Matches only in `*.test.ts`. Gate command must exclude tests. |
+| G-D2 no file import, no `zzz.GeoJSON` | ✅ | Handler, button and file removed. |
+| G-D3 Leaflet removed | ✅ | Not in `package.json`, `index.html` or `src`. |
+| **G-T1** no raw colours in TSX | ❌ | **384** matches (e.g. `new maplibregl.Marker({ color: '#22c58b' })`). |
+| **G-T2** inline styles ≤ 40 | ❌ | **865** `style={{` occurrences. |
+| G-B1 backend area validation | ✅ | 6 tests pass; 422 codes implemented. |
+| AC-9 / theme work (P6) | ❌ | `index.css` is **unchanged** (3 816 lines) and uses **0** new tokens. `tokens.css` only aliases old names to new ones. Only `WorkspacePage` and the new Studio use the new look. The changelog line "Phase P6 & P7 Restyle" overstates this. |
+| Code-splitting / perf (§6.7) | ❌ | No `React.lazy`; one 1.99 MB chunk. |
+| Accessibility checks | ❌ | Not run; no live region, no axe run. |
 
 ---
 
-## 2. Goals and non-goals
+## 3. Audit result — Boundary Studio defects
 
-### 2.1 Goals
-- **G1** The only ways to define land are: **draw a polygon**, or **drop a pin** (point-only enquiry, already supported by backend). No file download/upload needed.
-- **G2** A dedicated **Boundary Studio** section (own step/page) where the user draws, edits, measures and confirms the plot **before** analysis.
-- **G3** Premium visual identity and interaction quality across the whole app, light + dark.
-- **G4** Zero hidden defaults: empty state until the user acts.
-- **G5** Keep every existing backend contract working (`polygon: [[lng,lat],…]`, `/field/area`).
-
-### 2.2 Non-goals
-- No cadastral/survey-grade accuracy claim. Drawn boundaries are **user-asserted**; UI must say "Drawn by you — not a legal survey boundary".
-- No multi-parcel / MultiPolygon / holes in v3.0 (single outer ring). Explicitly rejected with a clear message, not silently trimmed.
-- No change to ML/land-class logic. No accounts/backend persistence of plots in v3.0.
-
----
-
-## 3. New user flow (steps)
-
-Current: `1 Workspace (landing) → 2 Field Analysis (map + data) → 3 Crop Prediction → 4 Summary`.
-
-New: **five steps**
-
-| Step | Page | Hash | Gate |
+| ID | Sev | Defect | Where |
 |---|---|---|---|
-| 1 | `WorkspacePage` (slimmed landing, one hero + CTA "Draw your land") | `#home` | open |
-| 2 | **`BoundaryStudioPage` (new)** | `#boundary` | open |
-| 3 | `FieldAnalysisPage` (no map editing; read-only mini-map of confirmed boundary) | `#analysis` | **boundary confirmed** (valid polygon or pin) |
-| 4 | `CropPredictionPage` | `#crops` | analysis complete (existing rule) |
-| 5 | `SummaryReportPage` | `#report` | crop analysis complete (existing rule) |
+| **S1** | HIGH | **Terra Draw is installed but never imported.** `BoundaryMap.tsx` (545 lines) is a hand-rolled click/mouse engine with its own history stack. PRD §5.2 asked for Terra Draw (or a documented fallback). | `BoundaryMap.tsx`, `package.json` |
+| **S2** | HIGH | **`useBoundaryDraw.ts` and its 3 tests are dead code.** No component imports it. The shipped undo/redo (`undoTrigger`/`redoTrigger` counters inside `BoundaryMap`) is untested. | `useBoundaryDraw.*` |
+| **S3** | HIGH | **Missing editing features:** no midpoint insert (FR-B2), no vertex delete (FR-B2/B14: Delete/Backspace/long-press), no Enter-to-finish, Esc only switches tool (does not cancel an in-progress shape), no Move-whole-polygon tool, no snapping to first vertex/existing vertices (FR-B4), no rubber-band edge, no single-polygon replace prompt (FR-B8), no per-edge length labels. | `BoundaryMap.tsx`, `BoundaryStudioPage.tsx` |
+| **S4** | HIGH | **Server validation failure is swallowed.** `handleConfirm` catches every `fetchFieldArea` error with `console.warn` and proceeds with the client estimate. A server 422 (`SELF_INTERSECTION`, `TOO_LARGE`…) therefore does **not** block Confirm, and "unverified" is not stored or shown in the report. | `BoundaryStudioPage.tsx` |
+| **S5** | HIGH | **Error code is lost.** FastAPI returns `{"detail":{"code","message"}}`; `fetchFieldArea` reads `errData.code` (undefined) and then stringifies `errData.detail`, so `AreaValidationError.code` is never set and the user would see raw JSON. | `api/client.ts`, `api/v1/field.py` |
+| **S6** | MED | **A polygon vertex is sent as the "point".** On confirm: `pointPt: pinCoords \|\| polygonCoords[0]`. The first drawn corner then drives lat/lon for weather/soil/climate. The same bug exists in the context helper (`polygonPts[0]`). Must be the polygon **centroid**. | `BoundaryStudioPage.tsx`, `WorkflowContext.tsx` |
+| **S7** | MED | **Editing after confirm does not re-lock later steps** (AC-7). Context is updated only on Confirm, so a stale report stays reachable while the user edits. | `BoundaryStudioPage.tsx`, context |
+| **S8** | MED | **`plot_name` and `boundary_source` never leave the browser.** Only a type field exists in `client.ts`; the payload builder does not send them, so `boundary_source:"drawn"` / the "Boundary drawn by user" report line cannot work. (Backend computes `boundary_source` itself from `polygon`/`point`.) | `client.ts`, context |
+| **S9** | MED | **Step 3 gate = "any polygon with ≥3 points"**, not `confirmed`. Currently safe only because context is written on Confirm; fragile. | `WorkflowContext.tsx` |
+| **S10** | LOW | Circle uses **32** vertices (PRD said 64). Freehand simplification/200-vertex cap, 500-vertex output cap, antimeridian rejection: not found. Pin marker colour is a raw hex. | `BoundaryMap.tsx` |
+| **S11** | LOW | No live-region announcement, no `aria-pressed` verification, no keyboard help popover (`?`). | Studio |
+| **S12** | LOW | Frontend tests cover only math + the dead hook. No context-gating test, no Playwright smoke test. | `src/**/*.test.*` |
 
-Required code changes: `StepNumber` → `1|2|3|4|5` in `WorkflowContext.tsx`; update `STEP_HASHES`, `HASH_TO_STEP`, `isStepAccessible`, `goToStep`, `BottomWorkflowNav`, `PageHeader` step indicator, `App.tsx` switch. Old hashes (`#analysis` etc.) must still resolve to the right new step; unknown hash → step 1.
+## 4. Audit result — Detection / land-intelligence defects
+
+(Build is the "integrate-detection" branch: detection is called from `predict.py` and `land.py`; verdicts depend on two modes.)
+
+| ID | Sev | Defect | Where |
+|---|---|---|---|
+| **B1** | **CRITICAL** | **Default modes make the feature inert.** `LAND_DETECTION_MODE="shadow"` and `LAND_GATE_MODE="shadow"`. In `shadow`, the classifier ignores detection evidence (`if det_mode == "enforce" …`) and the NOT-IRRIGABLE gate never blocks (`and gate_mode == "enforce"`). Out of the box, forest/urban/water plots still receive crop lists. | `core/config.py`, `predict.py` |
+| **B2** | HIGH | **Hidden defaults in the "not irrigable" response:** `ph=s.get("ph", 7.0)`, `rainfall_mm … 0.0`, `temp … 0.0`, `humidity … 0.0`, etc. Missing data is shown as real zeros. Violates v2.1 §0.2/§0.3. | `predict.py` (gate branch) |
+| **B3** | HIGH | **Provenance partly invented:** `layers[]` marks WorldCover, DEM, Sentinel-2 and HydroLAKES `"checked"` whenever *any* satellite value is non-empty, rather than from what detection actually queried (`detection.sources`). `observed_feature_share` counts `v != 0.0` as "not observed". Notes claim "derived from 30 m DEM / Sentinel-2" on the same basis. | `land.py` |
+| **B4** | HIGH | **Silent failure:** `land.py` wraps detection in `except Exception: pass`; `predict.py` logs a warning and continues as if detection were fine. The user gets a verdict with no sign detection failed. | `land.py`, `predict.py` |
+| **B5** | MED | **Blanket 500 with message echo** in `land.py` (`detail=f"Land enquiry error: {str(e)}"`). `predict.py` is better (request id) — make both the same. | `land.py` |
+| **B6** | MED | **Blocking I/O in async handlers:** `detection.py` uses `requests.get/post` (lines ~433, 475, 592) inside the request path. One slow source stalls the event loop. | `landclass/detection.py` |
+| **B7** | MED | **Full backend suite does not finish offline** (§1). Tests must never touch the network. | `backend/tests` |
+| **B8** | MED | **Deprecated shim still exported:** `services/geo/area_check.py` re-exports detection with its own constants (`MAX_SLOPE_DEG=15`, `MAX_ELEVATION_M=4000`, `FOREST_MAX_FRACTION=0.5`) — duplicates thresholds that must live only in YAML (v2.1 D4/D10). | `area_check.py` |
+| **B9** | LOW | Starlette deprecation warning (`HTTP_422_UNPROCESSABLE_ENTITY`). | `field.py` |
+| ✅ | — | **Fixed since v2.1:** providers no longer return hard-coded `AGRICULTURAL` records; `user_document` no longer defaults to `AGRICULTURAL`; classifier and irrigability read YAML; FOREST_COVER / FOREST_LEGAL separated; plantation guard exists; `to_legacy_area_check` alias returned. Keep. |
 
 ---
 
-## 4. Boundary Studio — functional requirements
+## 5. Frontend implementation requirements (replaces v3.0 §4–§6 where noted)
 
-### 4.1 Layout
-Full-bleed map (≥ 70 vh on desktop, full-screen on mobile) with floating glass panels:
-- **Left rail (tool dock):** Pan, Draw polygon, Rectangle, Circle→polygon, Freehand, Edit vertices, Move, Delete vertex, Undo, Redo, Clear.
-- **Top-center search bar:** place search + "lat, lng" paste + Locate me.
-- **Right panel "Plot Summary":** live metrics (area ha / acres / guntas, perimeter, vertices, centroid lat/lng, validity badge), plot name field, **Confirm boundary** primary button.
-- **Bottom-left:** base-map switcher (Satellite default for drawing · Streets · Terrain · Dark) + opacity slider for labels.
-- **Empty state:** centered coach card "Find your land, then click to place the first corner" with 3 micro-steps; disappears at first vertex.
+### 5.1 Drawing engine — single source of truth (fixes S1–S3, S10)
+- **Adopt Terra Draw** (already installed). Delete the hand-rolled click/mousedown/mousemove logic in `BoundaryMap.tsx`. Modes: `polygon`, `rectangle`, `circle`, `freehand`, `select` (draggable features, draggable + deletable coordinates, **midpoints enabled**), `point`.
+- `useBoundaryDraw` becomes the **only** owner of boundary state and history (50-step snapshot stack). `BoundaryMap` receives the draw instance via the hook; `BoundaryStudioPage` stops keeping separate `polygonCoords`, `undoTrigger`, `redoTrigger` state.
+- Required behaviours (each has a test, §10): click adds vertex with rubber-band edge · click first vertex / double-click / **Enter** closes · **Esc cancels** the in-progress shape (not just changes tool) · midpoint drag inserts vertex · select vertex + `Delete`/`Backspace` removes it (min 3 enforced) · long-press deletes on touch · Move tool drags the whole polygon · snap to first vertex and nearby vertices (10 px, `Alt` disables) · second polygon asks "Replace current boundary?" · circle = **64** vertices · freehand simplified on release and capped at 200 · output ring capped at 500 vertices · antimeridian crossing rejected with a message.
+- Live readout: area (ha/acres/guntas), perimeter, vertex count, per-edge length on hover, validity badge with the exact reason.
+- If Terra Draw proves unusable, the allowed alternative is keeping the custom engine **only if** every behaviour above is implemented and tested **and** `terra-draw*` is removed from `package.json`. Record the decision.
 
-### 4.2 Drawing and editing (FR-B)
-| ID | Requirement |
+### 5.2 Confirm flow (fixes S4–S9)
+1. **Confirm sends the ring to `/field/area` and waits.**
+2. `fetchFieldArea` reads the nested shape: `code = body.detail?.code ?? body.code`, `message = body.detail?.message ?? body.message`; `AreaValidationError.code` is always set for 422.
+3. **422 ⇒ block.** Show the specific message ("Edges cross", "Too small (min 0.01 ha)", …) in the summary panel and keep the user in the Studio.
+4. **Network error / 5xx ⇒ allowed only if the client geometry is valid**, with a visible amber badge "Area not verified by server" stored as `areaSource:'client-estimate'`; the report must repeat this label.
+5. On success store `{polygon, areaHa, areaSource, perimeter_m, centroid, plotName, boundarySource:'drawn', confirmed:true}`. **`pointPt` for a polygon is the server `centroid`** (fallback `@turf/centroid`), never `polygon[0]`. The context lat/lon helper uses the same centroid.
+6. Step 3 gate = `confirmed === true`. Any geometry edit after confirm sets `confirmed=false`, **clears report/analysis state, re-locks Steps 4–5**, and shows "Boundary changed — confirm again to re-run analysis".
+7. Request payload adds `plot_name` and `boundary_source` (`'drawn'|'demo'`); backend echoes them in `FieldSummary`, and the report/PDF prints "Boundary: drawn by user".
+8. Draft restore shows a visible banner with "Clear"; a restored draft is never auto-confirmed.
+
+### 5.3 Premium theme — actually apply it (fixes G-T1/G-T2/AC-9)
+The tokens in `styles/tokens.css` ("Terra Noir"/"Ivory") are good; the rest of the app must now **use** them.
+1. **Split `index.css`** (3 816 lines) into `styles/components/*.css` (one file per component/page) and rewrite every rule to use tokens (`--bg-*`, `--ink-*`, `--emerald-*`, `--gold-*`, `--glass*`, `--r-*`, `--sp-*`, `--elev-*`, `--t-*`). Delete the alias block in `tokens.css` once nothing uses old names.
+2. **Inline-style budget:** convert `style={{…}}` to CSS classes; allowed only for values computed at runtime (positions, progress widths, chart colours). Target **≤ 40**.
+3. **Raw colours:** none in TSX. Chart palette and map marker colours come from a single `src/theme/palette.ts` that reads CSS variables (`getComputedStyle`). Target: grep gate G-T1 returns only that file.
+4. **Restyle all pages and components** listed in v3.0 §6.4 — Field Analysis, Crop Prediction (incl. the NOT IRRIGABLE banner), Summary/Report, Chatbot drawer, Header/step rail (5 steps with lock tooltips), charts (themed palette, gradient fills, custom tooltip), cards (hover tilt on fine pointers, count-up numbers, skeleton shimmer).
+5. **Motion:** step transitions (260 ms), polygon draw-in + soft pulse on close, ambient aurora (paused when tab hidden). `prefers-reduced-motion` disables all of it and uses `jumpTo` instead of `flyTo`.
+6. **Theme switch:** first visit follows `prefers-color-scheme`, choice persists to `localStorage`; light and dark both pass WCAG AA contrast (automated check).
+7. **Performance:** `React.lazy` + `Suspense` for Boundary Studio, Crop Prediction, Summary and charts; `manualChunks` for `maplibre-gl`, `recharts`, `turf`. **Initial JS ≤ 350 kB gzip**; no chunk warning.
+8. **Accessibility:** live region ("Area 2.85 ha, 6 vertices, valid"), `aria-pressed` on tools, `?` shortcuts popover, full keyboard path to draw → confirm.
+
+---
+
+## 6. Backend implementation requirements
+
+| ID | Change |
 |---|---|
-| FR-B1 | Click to add vertices; live rubber-band edge to cursor; **click first vertex, double-click, or Enter** closes the polygon; **Esc** cancels the in-progress shape. |
-| FR-B2 | After closing: drag vertices; **midpoint handles insert** a vertex; select a vertex + `Delete`/`Backspace` removes it (min 3 stays enforced); drag body to move whole polygon (Move tool). |
-| FR-B3 | **Undo/Redo** (Ctrl/Cmd+Z, Shift+Ctrl/Cmd+Z), at least 50 steps; buttons mirror shortcuts. |
-| FR-B4 | **Snapping** to first vertex (closing) and to existing vertices within 10 px; hold `Alt` to disable. |
-| FR-B5 | Rectangle (2 clicks) and Circle (center + radius, converted to a 64-vertex polygon) produce ordinary editable polygons. Freehand is simplified on release (Turf `simplify`, tolerance ≈ 1 m at current zoom) and capped at 200 vertices. |
-| FR-B6 | **Live measurements** while drawing and editing: area (ha, acres, guntas = 1/40 acre), perimeter (m/km), vertex count, per-edge length labels on hover. Computed client-side with `@turf/area`/`@turf/length` for instant feedback; **the confirmed value is re-computed by the backend** (`/field/area`) and the backend value is the one stored and displayed after confirm. Show a small "server-verified ✓" tick. |
-| FR-B7 | **Live validity:** self-intersection (`@turf/kinks`), < 3 vertices, area below min (default 0.01 ha / ~100 m²) or above max (default 1 000 ha) , ring not closed, coordinates out of range. Invalid ⇒ red outline, specific message, **Confirm disabled**. |
-| FR-B8 | **Single polygon only.** A second polygon attempt asks "Replace current boundary?" (no silent replacement). |
-| FR-B9 | **Pin mode:** alternative tool "Drop pin" for point-only enquiry (existing `onPointChange`). Pin and polygon are mutually exclusive; switching asks for confirmation if one exists. Banner under pin mode: "Pin only — area unknown; results are less specific." (matches v2.1 point behaviour: `area_ha: null`.) |
-| FR-B10 | **Confirm boundary** writes polygon (`[[lng,lat],…]`, closed, 5-decimal precision, counter-clockwise outer ring) to context, sets `boundaryConfirmed = true`, unlocks Step 3, and navigates there. Editing after confirm resets `boundaryConfirmed` and re-locks later steps (existing "inputs changed ⇒ re-run" behaviour must be preserved). |
-| FR-B11 | **Draft persistence:** current in-progress/confirmed boundary saved to `localStorage` key `geoagri.boundary.v1` (try/catch, tolerate empty/corrupt) and restored on reload with a toast "Restored your last boundary — Clear". Never restore silently into a prediction. |
-| FR-B12 | **Export (output only):** "Copy GeoJSON" and "Download GeoJSON" of the *drawn* boundary, for the user's own records. No import UI in v3.0 (see §4.4). |
-| FR-B13 | Keyboard operable: tools focusable, shortcuts listed in a `?` popover (D draw, R rectangle, E edit, M move, P pin, Enter finish, Esc cancel, Ctrl+Z/Shift+Ctrl+Z). |
-| FR-B14 | Touch: tap to add vertex, long-press vertex to delete, two-finger pan/zoom never adds a vertex; on-screen "Finish" and "Undo" buttons on mobile. |
+| **B1** | Make detection real by default. `LAND_DETECTION_MODE` default **`enforce`**; `LAND_GATE_MODE` default **`enforce`**. Keep `shadow` and `off` as explicit opt-in modes, and make every response carry `gate_mode`/`detection_mode`. Add a startup log line stating the active modes. When mode ≠ `enforce`, the frontend shows a visible "Preview mode — land check not enforced" banner. Update `.env.example`, `docker-compose.yml`, `render.yaml`. |
+| **B2** | In the gate (NOT_IRRIGABLE) branch, build `EnvironmentSummary` from the profile with **`None` for missing values** (make the schema fields `Optional`), never `0.0`/`7.0`. Frontend renders "—" for null. |
+| **B3** | `layers[]` is built **from `detection.sources`** (each entry: `name`, `state: checked\|partial\|unavailable`, `reason`, `source_date`, `licence`). `observed_feature_share` = fraction of features whose value `is not None` (zero is a valid observation). Remove the unconditional "derived from DEM/Sentinel-2" notes; add a note only for sources that were actually queried. |
+| **B4** | Detection failure is **visible**: response gets `detection: {state:"unavailable", reason}` and the verdict becomes `UNVERIFIED`/`…_PROVISIONAL` per v2.1 D5. Never `pass`. Log with `logger.exception` and request id. |
+| **B5** | One error helper used by `land.py`, `predict.py`, `field.py`: logs the traceback, returns `{code:"INTERNAL", request_id}` — no `str(e)` in the response. |
+| **B6** | Move detection network I/O to `httpx.AsyncClient` (or run the existing sync code via `anyio.to_thread.run_sync`), per-source timeout ≤ 6 s, total ≤ 8 s, TTL cache with deep copy (v2.1 D6/D7). |
+| **B7** | Tests must be offline: add a session-scoped fixture that **blocks sockets** (e.g. `pytest-socket`'s `disable_socket()`); stub raster/tile readers. A test that needs the network is marked `@pytest.mark.network` and excluded by default. Full suite must finish in < 3 min on a clean machine. |
+| **B8** | Delete the threshold constants from `area_check.py` (or delete the shim). All thresholds live in `land_class_rules.yaml` / `irrigability_rules.yaml`; add a test that changing a YAML value changes the verdict. |
+| **B9** | Use `status.HTTP_422_UNPROCESSABLE_CONTENT` (or the literal `422`). |
+| **B10** | Return the error body flat **and** nested so old clients work: `{"detail": {...}, "code": "...", "message": "..."}` via a small exception handler for `FieldValidationError`. |
+| **B11** | `FullReportResponse.field_summary` echoes `plot_name`, `boundary_source`, `area_source`. PDF/report prints them. |
 
-### 4.3 Search and positioning (FR-S)
-- **FR-S1** Place search via geocoder (§5.6) with debounce 400 ms, 5 results, keyboard navigable; selecting flies to the place (zoom 15–17).
-- **FR-S2** Paste "13.3200, 75.7500" or "13.32°N 75.75°E" → parse, validate range, fly there and drop a *search marker* (not a pin/boundary).
-- **FR-S3** "Locate me" uses browser geolocation; denial shows a non-blocking toast.
-- **FR-S4** Initial camera: **world view** (zoom ≈ 2) — not Karnataka. If a restored draft exists, fit to it.
-
-### 4.4 Removal of file-based boundaries (the user's explicit ask)
-- Delete `zzz.GeoJSON`, the `handleImportPolygon` function, the hidden `<input type="file">`, and the "Import Polygon" button.
-- Delete `PRESET_REGIONS` from **both** `MapSelector.tsx` and `WorkflowContext.tsx` and the `VITE_DEMO_MODE` preset row. If demo mode is still wanted for sales demos, move one clearly-labelled sample into `frontend/src/demo/` loaded only when `VITE_DEMO_MODE==='true'` via a visible "Load demo plot" button (never automatic) and the resulting boundary is flagged `source: "demo"` in the request so the backend/report can label it.
-- Keep GeoJSON **export** (FR-B12) only.
-- `README.md`/`run.md`: remove any instruction that tells users to import GeoJSON.
+Land-class tests required (no patching of `LandClassifier.classify` or `IrrigabilityEngine.evaluate`): stub only raster/tile readers with synthetic arrays for — lake polygon → `WATER_BODY`; dense building cover (≥30 %) → `URBAN_BUILT`; one farmhouse (<5 %) → stays `AGRICULTURAL` with footprint deducted; coffee/areca plantation on tree cover → `AGRICULTURAL` subclass `agroforestry_plantation`; dense tree cover without plantation signature → `FOREST_COVER`; protected-area hit → `FOREST_LEGAL`; slope 25° bare rock → `WASTELAND`; slope 12° farmland → irrigable, drip/sprinkler only; slope >20° → `NOT_IRRIGABLE`; only DEM answered → `UNVERIFIED` (never "clear"); road beside plot → reported, not rejected.
 
 ---
 
-## 5. Technical design — Boundary Studio
+## 7. Acceptance criteria
 
-### 5.1 Components (new folder `frontend/src/features/boundary/`)
-```
-BoundaryStudioPage.tsx        // page shell + layout
-BoundaryMap.tsx               // MapLibre instance, basemaps, camera
-useBoundaryDraw.ts            // Terra Draw wiring, history, validity
-ToolDock.tsx                  // left tool rail
-PlotSummaryPanel.tsx          // right glass panel, metrics, Confirm
-SearchBar.tsx                 // geocoder + coordinate parser
-BasemapSwitcher.tsx
-CoachCard.tsx                 // empty state
-boundaryTypes.ts              // BoundaryState, ValidityIssue
-boundaryMath.ts               // turf wrappers: area, perimeter, kinks, units, winding
-boundaryStorage.ts            // localStorage (try/catch)
-```
-`components/MapSelector/MapSelector.tsx` is **deleted**; `FieldAnalysisPage` gets a small read-only `BoundaryPreviewMap.tsx` (non-interactive MapLibre, fitBounds, outline only). `pages/Dashboard.tsx` (unrouted) is deleted.
-
-### 5.2 Drawing engine
-Use **Terra Draw** (`terra-draw` + `terra-draw-maplibre-gl-adapter`) with modes: `polygon`, `rectangle`, `circle`, `freehand`, `select` (with `draggable`, `coordinates.midpoints`, `coordinates.draggable`, `coordinates.deletable`), `point`. Rationale: actively maintained, MapLibre adapter, built-in midpoint/vertex editing, no dependency on mapbox-gl internals. If Antigravity finds Terra Draw unsuitable, the fallback is `@mapbox/mapbox-gl-draw` with the MapLibre CSS-class patch — record the decision in `CHANGELOG.md`. Undo/redo is implemented in `useBoundaryDraw` as a snapshot stack of the feature's coordinates (Terra Draw does not provide it).
-
-### 5.3 State (extend `WorkflowContext`)
-```ts
-interface BoundaryState {
-  mode: 'none' | 'polygon' | 'pin';
-  polygon: [number, number][] | null;   // closed ring, [lng,lat]
-  pin: [number, number] | null;
-  name: string;                         // user plot name
-  areaHa: number | null;                // server-verified; null for pin or unverified
-  areaSource: 'server' | 'client-estimate' | null;
-  confirmed: boolean;
-  source: 'drawn' | 'demo';
-}
-```
-Defaults: `mode:'none'`, everything else `null/false`. **No fallback coordinates anywhere**; any code that builds a request (`runPrediction`, lat/lon helpers around lines 277-278) must throw/disable the button if neither a confirmed polygon nor pin exists.
-
-### 5.4 Geometry rules (`boundaryMath.ts`)
-- Output ring: closed (first = last), CCW, coordinates rounded to 5 decimals, ≤ 500 vertices (simplify if more, then re-validate).
-- Area: `turf.area` m² → ha (`/10 000`), acres (`/4 046.8564224`), guntas (`acres × 40`).
-- Validity: `turf.kinks` empty, `turf.booleanValid` true if available, lat ∈ [−90, 90], lng ∈ [−180, 180], not crossing the antimeridian (reject with message in v3.0).
-
-### 5.5 Map styles
-Replace the raster-only style with a style set built in one `mapStyles.ts`:
-- **Satellite (default for Studio):** Esri World Imagery raster + vector labels overlay.
-- **Streets / Dark:** vector style. Preferred: self-hosted or OpenFreeMap-compatible style via `VITE_MAP_STYLE_URL` (already honoured by current code). Check provider terms before shipping; record in `SOURCE.md`.
-- **Terrain:** OpenTopoMap raster (keep) — optional hillshade/3D terrain if a terrain-RGB source is configured via env; feature-flagged `VITE_ENABLE_3D_TERRAIN` (default false).
-- Attribution control always visible (OSM/Esri/OpenTopoMap licences).
-- Keep a `loadError` + retry state (existing behaviour).
-
-### 5.6 Geocoder
-Configurable by env: `VITE_GEOCODER_URL` (default empty ⇒ search bar shows only coordinate parsing and a hint "Search not configured"). Documented options: Photon (self-hosted or public), MapTiler Geocoding (key), Nominatim **only** if the usage policy is respected (no autocomplete on the public instance). Never hard-code a key; keys in `frontend/.env` (git-ignored) and listed in `.env.example`. Attribution shown beside results.
-
-### 5.7 Data sent to backend
-Unchanged shape: `PredictRequestPayload.polygon?: [number, number][]`, plus optional `plot_name?: string` and `boundary_source?: 'drawn' | 'demo'`. Backend must accept and ignore/echo the two new optional fields without breaking old clients.
+| ID | Criterion | How verified |
+|---|---|---|
+| AC-1 | Fresh load: world-view map, no polygon/pin, Confirm disabled, Step 3 locked | Playwright |
+| AC-2 | Draw → edit vertex → insert midpoint → delete vertex → undo → redo; metrics update each time | Vitest + Playwright |
+| AC-3 | Bow-tie polygon: red state "Edges cross", Confirm disabled | Vitest |
+| AC-4 | Server 422 blocks Confirm and shows its message; server down + valid shape → amber "not verified" badge, flow continues, label reaches the report | Vitest (mock fetch) |
+| AC-5 | Polygon request carries the **centroid** as `point`, plus `plot_name`, `boundary_source:'drawn'` | Vitest on payload builder |
+| AC-6 | Editing after confirm re-locks Steps 4–5 and clears the report | Vitest on context |
+| AC-7 | Pin-only path works; area shown as "unknown" | Playwright |
+| AC-8 | Lake / dense urban / reserved forest / barren rock ⇒ HTTP 200, `NOT_IRRIGABLE`, `recommended_crops == []`, models skipped, **with default settings** (no env override) | pytest |
+| AC-9 | Missing weather/soil in a gated response appear as `null`, not 0 or 7.0 | pytest |
+| AC-10 | `layers[]` lists only sources detection actually queried; killing the network yields `state:"unavailable"` and an `UNVERIFIED` verdict | pytest |
+| AC-11 | Light + dark pass AA contrast; `prefers-reduced-motion` removes motion | axe + manual |
+| AC-12 | Lighthouse (mobile) Performance ≥ 85, Accessibility ≥ 95 | Lighthouse CI |
+| AC-13 | `npm run build` no warnings about chunk size; `npm test` green; `pytest` green and < 3 min offline | CI |
 
 ---
 
-## 6. Premium UI / theme — "Terra Noir" design system
-
-### 6.1 Direction
-Dark, deep-forest **obsidian** surfaces with warm **gold** and luminous **emerald** accents; editorial display serif for headlines, refined sans for UI, mono for coordinates. Feel: expensive field-intelligence instrument, not a SaaS template. A matching **"Ivory"** light theme (warm paper whites, deep green ink, same gold accent). Theme switch persists to `localStorage`, honours `prefers-color-scheme` on first visit, switches with a 250 ms colour transition (disabled under reduced motion).
-
-### 6.2 Tokens (single source: `src/styles/tokens.css`)
-```css
-:root[data-theme="dark"] {
-  /* surfaces */
-  --bg-0:#05090a;  --bg-1:#0a1112;  --bg-2:#101a1a;  --bg-3:#172524;
-  --glass:rgba(16,26,26,.62); --glass-strong:rgba(16,26,26,.86); --glass-border:rgba(255,255,255,.08);
-  /* ink */
-  --ink-1:#f3f1ea; --ink-2:#b9c2bd; --ink-3:#7f8d87;
-  /* accents */
-  --emerald-500:#22c58b; --emerald-300:#7be8bd; --emerald-glow:rgba(34,197,139,.35);
-  --gold-500:#d9ad4f;   --gold-300:#f0cf85;   --gold-glow:rgba(217,173,79,.30);
-  --danger:#ff6b6b; --warn:#ffb454; --info:#6cb6ff; --ok:#22c58b;
-  /* gradients */
-  --grad-brand:linear-gradient(135deg,#22c58b 0%,#d9ad4f 100%);
-  --grad-surface:radial-gradient(120% 120% at 10% 0%,#13302b 0%,#05090a 60%);
-}
-:root[data-theme="light"] {
-  --bg-0:#f6f3ea; --bg-1:#fbf9f3; --bg-2:#ffffff; --bg-3:#efeadc;
-  --glass:rgba(255,255,255,.72); --glass-strong:rgba(255,255,255,.92); --glass-border:rgba(20,40,30,.10);
-  --ink-1:#0f2a22; --ink-2:#3e5a4f; --ink-3:#6c8378;
-  --emerald-500:#0f9b6a; --emerald-300:#47c79a; --emerald-glow:rgba(15,155,106,.25);
-  --gold-500:#b8862b; --gold-300:#d7a94c; --gold-glow:rgba(184,134,43,.22);
-  --danger:#d64545; --warn:#c77a16; --info:#2563eb; --ok:#0f9b6a;
-}
-:root {
-  --font-display:'Fraunces','Cormorant Garamond',Georgia,serif;
-  --font-ui:'Plus Jakarta Sans',system-ui,sans-serif;
-  --font-mono:'JetBrains Mono',ui-monospace,monospace;
-  --r-xs:6px; --r-sm:10px; --r-md:16px; --r-lg:24px; --r-pill:999px;
-  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:72px;
-  --elev-1:0 1px 2px rgba(0,0,0,.25);
-  --elev-2:0 8px 24px rgba(0,0,0,.35);
-  --elev-3:0 24px 64px rgba(0,0,0,.5), 0 0 0 1px var(--glass-border);
-  --ease-out:cubic-bezier(.22,1,.36,1); --ease-spring:cubic-bezier(.34,1.56,.64,1);
-  --t-fast:140ms; --t-med:260ms; --t-slow:520ms;
-  --z-map:0; --z-panel:20; --z-header:40; --z-modal:80; --z-toast:100;
-}
-```
-All colours in components must come from tokens (grep gate G-T1). Contrast: body text ≥ 4.5:1, large text/controls ≥ 3:1 in **both** themes (verify with an automated check, e.g. `axe` or Lighthouse).
-
-### 6.3 Typography
-Display (hero, step titles, big numbers): **Fraunces** 600, optical size on. UI: **Plus Jakarta Sans** 400/500/600/700 (already loaded). Numbers/coordinates: **JetBrains Mono** with `font-variant-numeric: tabular-nums`. Load fonts with `display=swap`; self-host in `public/fonts` for production if CSP forbids Google Fonts.
-Scale: 12 / 14 / 16 / 18 / 22 / 28 / 40 / 56 (clamp-based fluid for hero).
-
-### 6.4 Component restyle list
-Every component in `src/components/*` and every page is restyled onto the tokens. Specific requirements:
-- **Glass panels:** `backdrop-filter: blur(18px) saturate(140%)`, 1 px `--glass-border`, top-edge highlight gradient, `--elev-2`. Provide a no-blur fallback via `@supports not (backdrop-filter…)`.
-- **Buttons:** primary = brand gradient with soft glow and 1.5 % scale-up on hover, press-in on active; secondary = glass with border; icon buttons 40 px hit area minimum; visible `:focus-visible` ring (2 px emerald + 2 px offset).
-- **Cards (MetricCard, CropRecommendationCard, …):** subtle tilt-on-hover (max 4°, pointer-fine only), animated number count-up on first view, skeleton shimmer while loading.
-- **Charts (Recharts):** theme-aware palette (emerald, gold, info, danger), rounded bars, gradient area fills, custom dark tooltip.
-- **NOT IRRIGABLE banner** (from v2.1): unmistakable danger treatment (red/amber glass, large icon, reasons list); fix A12 (`verdict.replaceAll('_',' ')`).
-- **Header / step nav:** 5-step progress rail with animated connector, completed steps show check, locked steps show lock with tooltip explaining the gate.
-- **Chatbot drawer:** same glass language; no layout overlap with the Studio tool dock (z-index tokens).
-- **Toasts, tooltips, popovers, skeletons, empty states** implemented once in `src/ui/` and reused.
-
-### 6.5 Motion language
-- Page transitions: 260 ms fade + 12 px rise between steps (Motion `AnimatePresence`, or CSS only if Motion is not added).
-- Map: `flyTo` with `speed ≈ 1.2`; completed polygon plays a 600 ms outline "draw-in" and a soft emerald pulse; area number animates.
-- Ambient background: replace orbs with a very slow (60 s) aurora gradient + faint topographic-contour SVG pattern; paused when tab hidden and under reduced motion.
-- Hover/press micro-interactions on all interactive elements (≤ 180 ms).
-- **Reduced motion:** `@media (prefers-reduced-motion: reduce)` disables parallax, tilt, aurora, count-ups, flyTo (uses `jumpTo`).
-
-### 6.6 Landing page (`WorkspacePage`)
-Cut to a single immersive hero (above the fold): display headline, one sentence, **"Draw your land →"** CTA to Step 2, plus a muted looping satellite-contour visual (CSS/SVG, no video). Move "How it works / Pipeline / Data sources" into collapsible sections below ("See how it works"), lazy-rendered. Remove the claim text that conflicts with reality (e.g. data sources not actually wired); copy must match README.
-
-### 6.7 Accessibility and performance
-- WCAG 2.2 AA; full keyboard path through Studio; ARIA labels on tools (`aria-pressed` for active tool); live region announcing "Area 2.85 ha, 6 vertices, valid"; map canvas has descriptive `aria-label`.
-- Bundle: lazy-load `BoundaryStudioPage` and chart pages; MapLibre in its own chunk; Lighthouse Performance ≥ 85 mobile, Accessibility ≥ 95.
-- Remove unused deps: `leaflet`, `react-leaflet`, `@types/leaflet`, Leaflet `<link>` in `index.html` (confirm with a grep first).
-
----
-
-## 7. Backend changes (minimal)
-
-1. `POST /api/v1/field/area` — add polygon validation using `shapely` (already in the geo stack; add to requirements if absent): closed ring, ≥ 4 points, `is_valid`, not self-intersecting, area between `FIELD_MIN_HA` (0.01) and `FIELD_MAX_HA` (1000) from settings. Return **HTTP 422** with `{code, message}` (`SELF_INTERSECTION`, `TOO_SMALL`, `TOO_LARGE`, `OUT_OF_RANGE`, `NOT_CLOSED`) instead of silently returning null.
-2. Return `{ area_ha, perimeter_m, centroid:[lng,lat], polygon_valid:true, area_method:"geodesic" }` (extra fields are additive).
-3. `PredictRequest` accepts optional `plot_name`, `boundary_source`; echoed in `FieldSummary`. The report/PDF shows "Boundary: drawn by user" and, when applicable, "Boundary: demo sample".
-4. `client.ts`: `fetchFieldArea` must **throw a typed error** on 4xx/5xx/network failure (fix P7). The Studio shows "Couldn't verify area on server — using estimate" (`areaSource:'client-estimate'`) and still allows Confirm only if the client geometry is valid; the report states the area was unverified.
-5. Add tests in `backend/tests/test_field_area_validation.py`: valid square, bow-tie (self-intersecting) → 422, 2-point ring → 422, 0.001 ha → 422, 5 000 ha → 422, point-only → `area_ha is None`.
-
----
-
-## 8. Acceptance criteria (must all pass)
-
-| ID | Criterion |
-|---|---|
-| AC-1 | Fresh load: map at world view, **no polygon, no pin, "Confirm" disabled, step 3 locked.** |
-| AC-2 | User draws a 5-vertex polygon, edits a vertex, inserts a midpoint, deletes a vertex, undoes and redoes — area/perimeter/vertex count update live each time. |
-| AC-3 | Drawing a bow-tie shows a red invalid state with "Edges cross" and Confirm stays disabled. |
-| AC-4 | Confirm sends exactly the drawn ring; backend-verified area is shown with ✓; Step 3 unlocks. |
-| AC-5 | Pin-only path works; report shows area "unknown" (no invented value). |
-| AC-6 | Reload restores the draft with a visible notice; "Clear" removes it; nothing auto-submits. |
-| AC-7 | Editing the boundary after analysis re-locks Steps 4–5 and shows "Boundary changed — re-run analysis". |
-| AC-8 | No file-import control exists; `zzz.GeoJSON` and `PRESET_REGIONS` are gone (grep gates). |
-| AC-9 | Light and dark themes both pass AA contrast; all colours via tokens. |
-| AC-10 | Keyboard-only user can draw, finish, edit and confirm a polygon. |
-| AC-11 | `prefers-reduced-motion` removes all non-essential motion. |
-| AC-12 | `npm run build` and `pytest -v` green (real results recorded in `CHANGELOG.md`). |
-
----
-
-## 9. Grep / test gates
+## 8. Gate commands (exact)
 
 ```bash
-# G-D1 no hidden location defaults
-grep -rnE "PRESET_REGIONS|75\.75|13\.32|14\.0\b.*lat|defaultAreaHa|initialAreaHa" frontend/src            # → no matches
-# G-D2 no file-import boundary
-grep -rniE "handleImportPolygon|accept=\"\.geojson|Import Polygon" frontend/src                            # → no matches
-test ! -e zzz.GeoJSON && echo OK
-# G-D3 dead map stacks removed
-grep -rnE "react-leaflet|from 'leaflet'|leaflet.css" frontend/src frontend/index.html frontend/package.json # → no matches
-# G-T1 no raw colours in components (tokens only; tokens.css excluded)
-grep -rnE "#[0-9a-fA-F]{3,8}\b|rgba?\(" frontend/src --include=*.tsx                                       # → only chart palette constants file
-# G-T2 inline styles budget
-grep -rn "style={{" frontend/src --include=*.tsx | wc -l                                                    # ≤ 40 (was far higher)
-# G-B1 backend validation
-pytest backend/tests/test_field_area_validation.py -v
+# Frontend
+cd frontend
+grep -rnE "PRESET_REGIONS|defaultAreaHa|initialAreaHa|handleImportPolygon|accept=\"\.geojson" src --include=*.ts --include=*.tsx | grep -v "\.test\." # → none
+grep -rn "terra-draw" src | wc -l                      # ≥ 1  (or the package is removed from package.json — S1 decision)
+grep -rn "useBoundaryDraw" src --include=*.tsx | wc -l # ≥ 1  (S2)
+grep -rnE "polygonCoords\[0\]|polygonPts\[0\]" src     # → none (S6)
+grep -rnE "#[0-9a-fA-F]{3,8}\b|rgba?\(" src --include=*.tsx | grep -v "src/theme/palette.ts" # → none (G-T1)
+grep -rn "style={{" src --include=*.tsx | wc -l        # ≤ 40 (G-T2)
+grep -c "var(--" src/index.css                         # index.css deleted or fully tokenised
+npm run build 2>&1 | grep -i "larger than 500"         # → none
+npm test                                               # all pass
+npx playwright test                                    # smoke: draw → confirm → step 3
+
+# Backend
+cd backend
+python -m pytest -q                                    # finishes < 3 min, no network (B7)
+grep -rn "LAND_DETECTION_MODE: str = \"enforce\"\|LAND_GATE_MODE: str = \"enforce\"" app/core/config.py   # 2 matches (B1)
+grep -rnE "s\.get\(\"[a-z_]+\", *(0\.0|7\.0)\)|w\.get\(\"[a-z_]+\", *0\.0\)" app/api    # → none (B2)
+grep -rn "except Exception:\s*$" -A1 app/api | grep -n "pass"                          # → none (B4)
+grep -rnE "requests\.(get|post)" app/services/landclass app/api                         # → none (B6)
+grep -rnE "MAX_SLOPE_DEG|MAX_ELEVATION_M|FOREST_MAX_FRACTION" app                      # → none (B8)
 ```
-Frontend tests (Vitest + Testing Library, add if absent): `boundaryMath` (area units, winding, kinks), `useBoundaryDraw` undo/redo stack, context gating (step 3 locked until `confirmed`), and one Playwright smoke test (draw → confirm → step 3 reachable).
 
 ---
 
-## 10. Dependencies
+## 9. Phased runbook (one commit + tag per phase)
 
-Add: `terra-draw`, `terra-draw-maplibre-gl-adapter`, `@turf/area`, `@turf/length`, `@turf/kinks`, `@turf/simplify`, `@turf/centroid`, `@turf/boolean-valid` (replace the monolithic `@turf/turf` once imports are split), optionally `motion` (Framer Motion successor) for transitions, `vitest`, `@testing-library/react`, `@playwright/test` (dev).
-Remove: `leaflet`, `react-leaflet`, `@types/leaflet`.
-**Check first:** `package.json` pins `maplibre-gl ^6.10.0`. Confirm that version exists on npm and that the Terra Draw adapter supports it; if not, pin the newest version both support. Pin exact versions, commit the lockfile, and note versions in `CHANGELOG.md`.
+**R0 — Truth baseline.** Tag `pre-v3.1`. Run all commands in §1. Correct `CHANGELOG.md`: mark the "P6 & P7 restyle" entry as *partial (WorkspacePage + Studio only)* and the "116 passed" line as *unverified until R1*. Record real output.
 
----
+**R1 — Offline, trustworthy tests (B7, B9).** Add socket blocking + `network` marker; stub readers; get the full suite finishing offline in < 3 min. Gate: `pytest -q` green.
 
-## 11. Risks
+**R2 — Detection defaults and honesty (B1–B6, B8, B10, B11).** Enforce defaults; nullable environment summary; provenance from `detection.sources`; visible failures; async I/O; delete threshold constants; error helper. Add the land-class tests in §6. Gates: AC-8…AC-10 and backend gate commands.
 
-| Risk | Mitigation |
-|---|---|
-| Users draw rough boundaries; area differs from records | Persistent label "Drawn by you — not a survey boundary"; optional later: compare with land-record extent when available (v2.1 providers). |
-| Geocoder terms / cost | Env-configurable, off by default, coordinate parsing always works. |
-| Large CSS rewrite regresses pages | Phase the theme (§12 P2–P4), screenshot-diff each page before/after, keep class names stable where possible. |
-| Terra Draw API changes | Pin exact versions; isolate in `useBoundaryDraw.ts`. |
-| Satellite tiles (Esri) usage limits | Provide `VITE_SATELLITE_TILES_URL` override; keep attribution; document in `SOURCE.md`. |
+**R3 — Frontend contract fixes (S4–S9).** Fix `fetchFieldArea` error parsing, block on 422, centroid as point, payload fields, `confirmed` gate, re-lock on edit. Vitest for each. Gates AC-4…AC-6.
 
----
+**R4 — Single drawing engine (S1–S3, S10, S11).** Terra Draw + `useBoundaryDraw` as sole state; all behaviours in §5.1; delete dead code; a11y live region and `?` popover. Gates AC-1…AC-3, AC-7.
 
-## 12. Out of scope (future)
-Multi-parcel plots, holes, KML/Shapefile import, saved plots with accounts, sharing a plot by link, comparing drawn boundary with cadastral extent, time-series satellite scrubber on the map.
+**R5 — Tokenise and restyle everything (G-T1, G-T2).** Per §5.3 items 1–6, page by page, with before/after screenshots committed under `documentation/screens/`. Remove alias block. Gate: grep gates G-T1/G-T2 and AC-11.
+
+**R6 — Performance and QA (§5.3 item 7, AC-12, AC-13).** Lazy routes, manual chunks, Lighthouse CI, axe, Playwright smoke. Gate: AC-11…AC-13.
+
+**R7 — Docs and release.** Update `README.md`, `run.md`, `documentation/*`, `.env.example`; changelog with real outputs; tag `v3.1.0`.
+
+**Rollback:** `git reset --hard <previous-tag>`. R1–R3 are independent of R4–R6.
 
 ---
 
-## 13. Docs to update
-`README.md` (new flow + screenshots), `run.md`, `documentation/api_reference.md` (`/field/area` 422 codes, new optional fields), `documentation/architecture.md` (Boundary Studio data flow), `CHANGELOG.md` (one entry per phase), `frontend/.env.example` (`VITE_GEOCODER_URL`, `VITE_SATELLITE_TILES_URL`, `VITE_MAP_STYLE_URL`, `VITE_ENABLE_3D_TERRAIN`, `VITE_DEMO_MODE`).
+## 10. Test list (must exist)
+
+Frontend (Vitest): `boundaryMath` (area units, winding, kinks, antimeridian, vertex caps) · `useBoundaryDraw` (add/close/cancel/insert/delete/min-3/undo/redo/replace) · `fetchFieldArea` (nested 422 body → `code`, network error → typed error) · payload builder (centroid, `plot_name`, `boundary_source`) · context (Step 3 needs `confirmed`; edit after confirm re-locks 4–5 and clears report).
+Frontend (Playwright): draw → confirm → Step 3 reachable; bow-tie blocked; reload shows restore banner.
+Backend (pytest, offline): everything in §6 land-class list · `field/area` codes through the **HTTP layer** and the flat+nested body · gate response has `null` (not `0.0/7.0`) · detection outage ⇒ `UNVERIFIED` · YAML change changes verdict · meta-test: no test patches `LandClassifier.classify` / `IrrigabilityEngine.evaluate`.
 
 ---
 
-## 14. Antigravity runbook (do in this order; one commit + git tag per phase)
+## 11. Kickoff prompt for Antigravity (paste as-is)
 
-**P0 — Baseline.** `git status` clean; tag `pre-v3`. Run `npm ci && npm run build` and `pytest -v`; record real results (or `NOT RUN` + reason) in `CHANGELOG.md`.
-
-**P1 — Remove defaults and file import (no new UI yet).** Delete `zzz.GeoJSON`, `PRESET_REGIONS` (both files), import button/handler; make context defaults empty; guard `runPrediction` and lat/lon helpers; fix `fetchFieldArea` to throw. Delete `Dashboard.tsx`. Gates G-D1, G-D2. App must still build; Step 2 shows a temporary "Draw a boundary first" empty state.
-
-**P2 — Design tokens + base styles.** Create `src/styles/{tokens,base,typography,motion,utilities}.css`; import in `main.tsx`; add theme toggle + persistence; map old variable names (`--accent-green` etc.) to new tokens as **temporary aliases** so nothing breaks. Self-check: both themes render.
-
-**P3 — UI kit.** `src/ui/`: Button, IconButton, GlassPanel, Badge, Tooltip, Toast, Skeleton, Tabs, Slider, Toggle, Popover, EmptyState, StatNumber (count-up). Storybook optional; otherwise a hidden `/#kit` route behind `VITE_DEMO_MODE`.
-
-**P4 — Boundary Studio.** Implement §4–§5 in `features/boundary/`; add step 2 to context/nav/header (§3); wire Confirm → context → Step 3; `BoundaryPreviewMap` in Field Analysis. Add Vitest tests. Gates AC-1…AC-8, AC-10.
-
-**P5 — Backend validation.** §7 changes + tests. Gate G-B1; AC-4, AC-5.
-
-**P6 — Restyle all pages/components.** Landing (§6.6), Field Analysis, Crop Prediction (incl. NOT IRRIGABLE banner + A12 fix), Summary/Report, Chatbot, Header/Nav, Charts. Remove temporary aliases; split/trim `index.css` until only component-scoped CSS modules or small files remain. Gates G-T1, G-T2.
-
-**P7 — Motion, a11y, performance.** §6.5, §6.7; Lighthouse + axe run; Playwright smoke; reduced-motion check. Gates AC-9, AC-11.
-
-**P8 — Cleanup and docs.** Remove unused deps (G-D3), update docs (§13), final full `npm run build` + `pytest -v`; tag `v3.0.0`.
-
-**Rollback:** each phase tag allows `git revert`/`git reset --hard <tag>`; P1–P3 are safe to ship independently; do not start P4 before P1 and P2 pass their gates.
-
----
-
-## 15. Antigravity kickoff prompt (paste as-is)
-
-> Read `PRD_v3.0_Boundary_Studio_and_Premium_UI.md` end to end, then `PRD.md` §0 and §5–§7 for the data-honesty rules. Execute the runbook in §14 strictly in order (P0 → P8). After each phase: run the gates listed for it, update `CHANGELOG.md` with real command output (or `NOT RUN` + reason), commit, and tag. Do not modify land-class, irrigability, land-record or ML code. Never reintroduce default coordinates, preset fields, sample GeoJSON or file-import for boundaries. Stop and ask me if a dependency version in §10 cannot be installed or a gate cannot pass.
+> Read `PRD_v3.1_Remediation_and_Full_Implementation.md` completely. Execute R0 → R7 in order. Before any code change, run the commands in §1 and record real output in `CHANGELOG.md`; correct any earlier changelog claim you cannot reproduce. After each phase run its gate commands from §8, commit, and tag. Do not claim a pass you did not observe; write `NOT RUN` or `DID NOT FINISH` with the reason. Do not change ML models or scraping policy. Never reintroduce default coordinates, preset fields, file-import for boundaries, or hidden numeric defaults. If a gate cannot pass, stop and tell me which one and why.
