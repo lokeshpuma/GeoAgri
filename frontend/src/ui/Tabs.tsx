@@ -25,17 +25,7 @@ export const Tabs: React.FC<TabsProps> = ({
   return (
     <div
       role="tablist"
-      className={className}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: variant === 'pill' ? '6px' : '16px',
-        background: variant === 'pill' ? 'var(--bg-2)' : 'transparent',
-        padding: variant === 'pill' ? '4px' : '0',
-        borderRadius: variant === 'pill' ? 'var(--r-pill)' : '0',
-        border: variant === 'pill' ? '1px solid var(--glass-border)' : 'none',
-        borderBottom: variant === 'line' ? '1px solid var(--glass-border)' : undefined,
-      }}
+      className={`ui-tabs-list ${variant} ${className}`}
     >
       {tabs.map(tab => {
         const isActive = tab.id === activeId;
@@ -45,24 +35,7 @@ export const Tabs: React.FC<TabsProps> = ({
             role="tab"
             aria-selected={isActive}
             onClick={() => onChange(tab.id)}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: variant === 'pill' ? '6px 14px' : '8px 12px',
-              fontSize: '0.875rem',
-              fontWeight: isActive ? 600 : 500,
-              fontFamily: 'var(--font-ui)',
-              color: isActive ? 'var(--ink-1)' : 'var(--ink-2)',
-              background: isActive && variant === 'pill' ? 'var(--glass-strong)' : 'transparent',
-              border: 'none',
-              borderBottom: variant === 'line' && isActive ? '2px solid var(--emerald-500)' : undefined,
-              borderRadius: variant === 'pill' ? 'var(--r-pill)' : '0',
-              boxShadow: isActive && variant === 'pill' ? 'var(--elev-1)' : 'none',
-              cursor: 'pointer',
-              transition: 'all var(--t-fast) var(--ease-out)',
-              whiteSpace: 'nowrap',
-            }}
+            className={`ui-tab-btn ${variant} ${isActive ? 'active' : ''}`}
           >
             {tab.icon && <span>{tab.icon}</span>}
             <span>{tab.label}</span>

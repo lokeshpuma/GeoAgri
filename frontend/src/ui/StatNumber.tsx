@@ -16,7 +16,6 @@ export const StatNumber: React.FC<StatNumberProps> = ({
   durationMs = 800,
 }) => {
   const [displayValue, setDisplayValue] = useState<number>(() => {
-    // Check reduced motion
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return value;
     }
@@ -43,7 +42,6 @@ export const StatNumber: React.FC<StatNumberProps> = ({
     const tick = (now: number) => {
       const elapsed = now - start;
       const progress = Math.min(elapsed / durationMs, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = startVal + (targetVal - startVal) * eased;
       setDisplayValue(current);
@@ -58,29 +56,10 @@ export const StatNumber: React.FC<StatNumberProps> = ({
   }, [value, durationMs]);
 
   return (
-    <span
-      className="type-stat-number"
-      style={{
-        display: 'inline-flex',
-        alignItems: 'baseline',
-        gap: '4px',
-        color: 'var(--ink-1)',
-      }}
-    >
-      {prefix && <span style={{ fontSize: '0.65em', color: 'var(--ink-2)' }}>{prefix}</span>}
+    <span className="ui-stat-number type-stat-number">
+      {prefix && <span className="ui-stat-prefix">{prefix}</span>}
       <span>{displayValue.toFixed(decimals)}</span>
-      {unit && (
-        <span
-          style={{
-            fontSize: '0.55em',
-            color: 'var(--ink-3)',
-            fontFamily: 'var(--font-ui)',
-            fontWeight: 500,
-          }}
-        >
-          {unit}
-        </span>
-      )}
+      {unit && <span className="ui-stat-unit">{unit}</span>}
     </span>
   );
 };

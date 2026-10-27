@@ -3,7 +3,6 @@ import {
   ArrowUpDown,
   Download,
   Search,
-  Table as TableIcon,
   Leaf,
   Layers,
 } from "lucide-react";
@@ -136,63 +135,38 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
   };
 
   return (
-    <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: 18, marginBottom: 24 }}>
+    <div className="glass-card multi-crop-table-wrap">
       {/* Header & Controls */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 16,
-        }}
-      >
+      <div className="multi-crop-top-row">
         <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <Layers size={20} style={{ color: "#10b981" }} />
-            <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0, color: "var(--text-main)" }}>
+          <div className="multi-crop-heading-group">
+            <Layers size={20} className="text-emerald" />
+            <h3 className="multi-crop-title">
               Multi-Cropping Land Allocation & Yield Matrix
             </h3>
           </div>
-          <p style={{ fontSize: "0.75rem", color: "#9ca3af", margin: "4px 0 0 0" }}>
+          <p className="multi-crop-desc">
             75% Main Crop Area ({Number((farmArea * 0.75).toFixed(2))} ha) + 25% Companion Crop Area ({Number((farmArea * 0.25).toFixed(2))} ha)
           </p>
         </div>
 
         {/* Search & Export Buttons */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ position: "relative" }}>
-            <Search
-              size={14}
-              style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", color: "#9ca3af" }}
-            />
+        <div className="multi-crop-ctrl-row">
+          <div className="multi-crop-search-wrap">
+            <Search size={14} className="multi-crop-search-icon" />
             <input
               type="text"
               placeholder="Search crop or companion..."
-              className="form-control"
+              className="form-control multi-crop-search-input"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              style={{ paddingLeft: 32, width: 220, fontSize: "0.8rem" }}
             />
           </div>
 
           <button
             type="button"
             onClick={exportCSV}
-            style={{
-              background: "rgba(16, 185, 129, 0.15)",
-              border: "1px solid rgba(16, 185, 129, 0.3)",
-              color: "#6ee7b7",
-              borderRadius: 8,
-              padding: "8px 14px",
-              fontSize: "0.8rem",
-              fontWeight: 600,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              transition: "all 0.2s ease",
-            }}
+            className="multi-crop-export-btn"
           >
             <Download size={14} />
             <span>Export CSV</span>
@@ -201,109 +175,93 @@ export const MultiCroppingTable: React.FC<MultiCroppingTableProps> = ({ crops = 
       </div>
 
       {/* Table */}
-      <div style={{ overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.85rem" }}>
+      <div className="multi-crop-scroll">
+        <table className="multi-crop-tbl">
           <thead>
-            <tr style={{ borderBottom: "1px solid var(--bg-card-border)", color: "#9ca3af", textAlign: "left" }}>
-              <th style={{ padding: "10px 8px", cursor: "pointer" }} onClick={() => handleSort("mainCrop")}>
-                <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            <tr>
+              <th className="multi-crop-th clickable" onClick={() => handleSort("mainCrop")}>
+                <div className="flex-row-center gap-4">
                   Main Crop <ArrowUpDown size={12} />
                 </div>
               </th>
-              <th style={{ padding: "10px 8px", cursor: "pointer" }} onClick={() => handleSort("intercrop")}>
-                <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+              <th className="multi-crop-th clickable" onClick={() => handleSort("intercrop")}>
+                <div className="flex-row-center gap-4">
                   Companion Crop (25%) <ArrowUpDown size={12} />
                 </div>
               </th>
-              <th style={{ padding: "10px 8px", textAlign: "right" }}>Main Yield (t)</th>
-              <th style={{ padding: "10px 8px", textAlign: "right" }}>Companion Yield (t)</th>
-              <th style={{ padding: "10px 8px", textAlign: "right", cursor: "pointer" }} onClick={() => handleSort("combinedYield")}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 4 }}>
+              <th className="multi-crop-th right">Main Yield (t)</th>
+              <th className="multi-crop-th right">Companion Yield (t)</th>
+              <th className="multi-crop-th right clickable" onClick={() => handleSort("combinedYield")}>
+                <div className="flex-row-center justify-between gap-4">
                   Combined (t) <ArrowUpDown size={12} />
                 </div>
               </th>
-              <th style={{ padding: "10px 8px", textAlign: "right", cursor: "pointer" }} onClick={() => handleSort("yieldBoost")}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 4 }}>
+              <th className="multi-crop-th right clickable" onClick={() => handleSort("yieldBoost")}>
+                <div className="flex-row-center justify-between gap-4">
                   Yield Boost <ArrowUpDown size={12} />
                 </div>
               </th>
-              <th style={{ padding: "10px 8px", textAlign: "center" }}>Irrigation</th>
-              <th style={{ padding: "10px 8px", textAlign: "right", cursor: "pointer" }} onClick={() => handleSort("score")}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 4 }}>
+              <th className="multi-crop-th center">Irrigation</th>
+              <th className="multi-crop-th right clickable" onClick={() => handleSort("score")}>
+                <div className="flex-row-center justify-between gap-4">
                   Score <ArrowUpDown size={12} />
                 </div>
               </th>
             </tr>
           </thead>
           <tbody>
-            {sorted.map((r, idx) => (
-              <tr
-                key={r.id}
-                style={{
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
-                  background: idx % 2 === 0 ? "transparent" : "rgba(255, 255, 255, 0.015)",
-                }}
-              >
-                <td style={{ padding: "10px 8px" }}>
-                  <div style={{ fontWeight: 600, color: "#ffffff" }}>{r.mainCrop}</div>
-                  <div style={{ fontSize: "0.7rem", color: "#9ca3af", textTransform: "capitalize" }}>{r.category}</div>
-                </td>
-                <td style={{ padding: "10px 8px" }}>
-                  {r.hasIntercrop ? (
-                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <Leaf size={12} style={{ color: "#34d399" }} />
-                      <span style={{ color: "#6ee7b7", fontWeight: 600 }}>{r.intercrop}</span>
-                    </div>
-                  ) : (
-                    <span style={{ color: "var(--text-muted)" }}>None (Sole)</span>
-                  )}
-                </td>
-                <td style={{ padding: "10px 8px", textAlign: "right", color: "#f3f4f6" }}>
-                  {r.mainTotalYield} <span style={{ fontSize: "0.7rem", color: "#9ca3af" }}>({r.mainYieldPerHa} t/ha)</span>
-                </td>
-                <td style={{ padding: "10px 8px", textAlign: "right", color: r.hasIntercrop ? "#34d399" : "var(--text-muted)", fontWeight: 600 }}>
-                  {r.hasIntercrop ? `+${r.intercropTotalYield}` : "—"}
-                </td>
-                <td style={{ padding: "10px 8px", textAlign: "right", color: "#fbbf24", fontWeight: 700 }}>
-                  {r.combinedYield} t
-                </td>
-                <td style={{ padding: "10px 8px", textAlign: "right" }}>
-                  {r.hasIntercrop ? (
-                    <span
-                      style={{
-                        background: "rgba(16, 185, 129, 0.15)",
-                        color: "#34d399",
-                        padding: "2px 8px",
-                        borderRadius: 4,
-                        fontWeight: 700,
-                        fontSize: "0.75rem",
-                      }}
-                    >
-                      +{r.yieldBoost}%
+            {sorted.map((r) => {
+              const irrigClass = r.irrigation.toLowerCase() === "rainfed"
+                ? "rainfed"
+                : r.irrigation.toLowerCase() === "supplemental"
+                ? "supplemental"
+                : "other";
+
+              return (
+                <tr key={r.id} className="multi-crop-tr">
+                  <td className="multi-crop-td">
+                    <div className="multi-crop-main-name">{r.mainCrop}</div>
+                    <div className="multi-crop-main-cat">{r.category}</div>
+                  </td>
+                  <td className="multi-crop-td">
+                    {r.hasIntercrop ? (
+                      <div className="multi-crop-companion-group">
+                        <Leaf size={12} className="text-emerald-light" />
+                        <span className="multi-crop-companion-name">{r.intercrop}</span>
+                      </div>
+                    ) : (
+                      <span className="text-ink-3">None (Sole)</span>
+                    )}
+                  </td>
+                  <td className="multi-crop-td right text-ink-1">
+                    {r.mainTotalYield} <span className="text-ink-3">({r.mainYieldPerHa} t/ha)</span>
+                  </td>
+                  <td className={`multi-crop-td right ${r.hasIntercrop ? 'text-emerald-light' : 'text-ink-3'}`}>
+                    {r.hasIntercrop ? `+${r.intercropTotalYield}` : "—"}
+                  </td>
+                  <td className="multi-crop-td right text-gold-light">
+                    {r.combinedYield} t
+                  </td>
+                  <td className="multi-crop-td right">
+                    {r.hasIntercrop ? (
+                      <span className="multi-crop-boost-tag">
+                        +{r.yieldBoost}%
+                      </span>
+                    ) : (
+                      <span className="text-ink-3">—</span>
+                    )}
+                  </td>
+                  <td className="multi-crop-td center">
+                    <span className={`multi-crop-irrig-tag ${irrigClass}`}>
+                      {r.irrigation}
                     </span>
-                  ) : (
-                    <span style={{ color: "var(--text-muted)", fontSize: "0.75rem" }}>—</span>
-                  )}
-                </td>
-                <td style={{ padding: "10px 8px", textAlign: "center" }}>
-                  <span
-                    style={{
-                      fontSize: "0.75rem",
-                      padding: "2px 8px",
-                      borderRadius: 4,
-                      background: r.irrigation === "rainfed" ? "rgba(16, 185, 129, 0.15)" : r.irrigation === "supplemental" ? "rgba(59, 130, 246, 0.15)" : "rgba(245, 158, 11, 0.15)",
-                      color: r.irrigation === "rainfed" ? "#34d399" : r.irrigation === "supplemental" ? "#60a5fa" : "#fbbf24",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {r.irrigation}
-                  </span>
-                </td>
-                <td style={{ padding: "10px 8px", textAlign: "right", color: "#f3f4f6", fontWeight: 700 }}>
-                  {r.score}
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td className="multi-crop-td right text-ink-1">
+                    {r.score}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { UNIFIED_MAP_STYLE } from './mapStyles';
+import { THEME_HEX } from '../../theme/palette';
 
 export interface BoundaryPreviewMapProps {
   polygon: [number, number][];
@@ -49,7 +50,7 @@ export const BoundaryPreviewMap: React.FC<BoundaryPreviewMapProps> = ({
           type: 'fill',
           source: 'preview-polygon',
           paint: {
-            'fill-color': '#22c58b',
+            'fill-color': THEME_HEX.emerald,
             'fill-opacity': 0.28,
           },
         });
@@ -59,7 +60,7 @@ export const BoundaryPreviewMap: React.FC<BoundaryPreviewMapProps> = ({
           type: 'line',
           source: 'preview-polygon',
           paint: {
-            'line-color': '#22c58b',
+            'line-color': THEME_HEX.emerald,
             'line-width': 2.5,
           },
         });
@@ -69,7 +70,7 @@ export const BoundaryPreviewMap: React.FC<BoundaryPreviewMapProps> = ({
         polygon.forEach(coord => bounds.extend(coord));
         map.fitBounds(bounds, { padding: 40, maxZoom: 17 });
       } else if (point) {
-        new maplibregl.Marker({ color: '#22c58b' }).setLngLat(point).addTo(map);
+        new maplibregl.Marker({ color: THEME_HEX.markerDefault }).setLngLat(point).addTo(map);
         map.flyTo({ center: point, zoom: 15 });
       }
     });
@@ -82,30 +83,9 @@ export const BoundaryPreviewMap: React.FC<BoundaryPreviewMapProps> = ({
   }, [polygon, point]);
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height,
-        borderRadius: 'var(--r-md)',
-        overflow: 'hidden',
-        border: '1px solid var(--glass-border)',
-        position: 'relative',
-      }}
-    >
-      <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '8px',
-          right: '8px',
-          background: 'rgba(5, 9, 10, 0.75)',
-          padding: '2px 8px',
-          borderRadius: 'var(--r-xs)',
-          fontSize: '0.6875rem',
-          color: 'var(--ink-3)',
-          pointerEvents: 'none',
-        }}
-      >
+    <div className="boundary-preview-container" style={{ height }}>
+      <div ref={containerRef} className="boundary-preview-canvas" style={{ width: '100%', height: '100%' }} />
+      <div className="boundary-preview-badge">
         Verified Field Extent
       </div>
     </div>

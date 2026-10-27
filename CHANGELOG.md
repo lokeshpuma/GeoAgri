@@ -372,3 +372,26 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `PYTHONPATH=. venv/bin/python -m pytest -q`: 117 passed, 3009 warnings in 67.16s (PASSED).
 - Git tag: `phase-R4` created.
 
+## [PRD v3.1 - Phase R5 Tokenise and Restyle Everything] - 2026-10-27
+### Fixed & Verified (G-T1, G-T2, §5)
+- **Zero Raw Color Hex / RGBA Violations (Gate G-T1)**:
+  - Eliminated all 381 raw hardcoded hex and rgba color literals across `frontend/src/**/*.tsx`.
+  - Created centralized palette in `frontend/src/theme/palette.ts` for necessary canvas fills, marker pins, and recharts strokes.
+  - Gate G-T1 verified: `grep -rnE "#[0-9a-fA-F]{3,8}\b|rgba?\(" frontend/src --include="*.tsx" | grep -v "src/theme/palette.ts"` returned exactly **0** matches.
+- **Inline Style Elimination (Gate G-T2)**:
+  - Extracted 870 inline styles (`style={{`) into modular component stylesheets:
+    - `frontend/src/styles/components/uiKit.css` (Button, IconButton, Badge, Toggle, Slider, Popover, Tooltip, EmptyState, StatNumber, Toast, Tabs, GlassPanel)
+    - `frontend/src/styles/components/cropPrediction.css` (CropPredictionPage, CropRecommendationCard, CropSuitabilityRanking, MultiCroppingTable, YieldPredictionTable, CropTable, YieldChart, YieldComparisonChart)
+    - `frontend/src/styles/components/fieldAnalysis.css` (FieldAnalysisPage, MetricCard, SuitabilityBanner, IrrigationPanel, ClimateRiskReport, FieldSummaryCard)
+    - `frontend/src/styles/components/boundaryStudio.css` (BoundaryStudioPage, BoundaryMap, BoundaryPreviewMap, ToolDock, PlotSummaryPanel, CoachCard, SearchBar, BasemapSwitcher)
+    - `frontend/src/styles/components/workspace.css` (WorkspacePage, AgriChatBot, PageHeader, DiagnosticsPanel, IntercropPanel, ReportDownloadButton)
+  - Remaining inline styles across the entire application: **12** (all dynamic runtime values: track widths, progress percentages, popup coordinates, dynamic dimensions), well beneath the gate budget of ≤ 40.
+  - Gate G-T2 verified: `grep -rn "style={{" frontend/src --include="*.tsx" | wc -l` returned exactly **12**.
+- **Gate Execution (§8)**:
+  - `grep -rnE "#[0-9a-fA-F]{3,8}\b|rgba?\(" frontend/src --include="*.tsx" | grep -v "src/theme/palette.ts"`: 0 matches (PASSED).
+  - `grep -rn "style={{" frontend/src --include="*.tsx" | wc -l`: 12 matches (budget ≤ 40, PASSED).
+  - `npm test`: 11 passed across 3 test files in 885ms (PASSED).
+  - `npm run build`: built in 2.46s with 0 errors (PASSED).
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: 117 passed, 3009 warnings in 66.75s (PASSED).
+- Git tag: `phase-R5` created.
+

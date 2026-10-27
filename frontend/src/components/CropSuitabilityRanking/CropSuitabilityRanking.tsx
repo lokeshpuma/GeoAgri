@@ -1,5 +1,5 @@
 import React from "react";
-import { Award, CheckCircle2, ChevronRight, Leaf, Sprout, TrendingUp } from "lucide-react";
+import { Sprout, Leaf } from "lucide-react";
 import { FullReportResponse } from "../../api/client";
 
 interface CropSuitabilityRankingProps {
@@ -13,57 +13,30 @@ export const CropSuitabilityRanking: React.FC<CropSuitabilityRankingProps> = ({ 
   }
 
   const top3 = crops.slice(0, 3);
-
-  const rankClasses = ["pill-rank1", "pill-rank2", "pill-rank3"];
   const rankLabels = ["RANK #1", "RANK #2", "RANK #3"];
 
   return (
-    <div style={{ marginTop: 24, marginBottom: 24 }}>
+    <div className="suit-ranking-wrap">
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 12,
-          marginBottom: 16,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Sprout size={20} style={{ color: "#10b981" }} />
+      <div className="suit-ranking-header">
+        <div className="suit-ranking-title-group">
+          <Sprout size={20} className="suit-ranking-icon" />
           <div>
-            <h2 style={{ fontSize: "1.2rem", fontWeight: 700, margin: 0, color: "var(--text-main)" }}>
+            <h2 className="suit-ranking-title">
               Top Companion Intercrop Pairings
             </h2>
-            <p style={{ fontSize: "0.8rem", color: "#9ca3af", margin: 0 }}>
+            <p className="suit-ranking-subtitle">
               Optimized 75% Main Crop + 25% Companion Intercrop spatial land allocation
             </p>
           </div>
         </div>
-        <span
-          style={{
-            fontSize: "0.75rem",
-            padding: "4px 12px",
-            background: "rgba(16, 185, 129, 0.15)",
-            color: "#6ee7b7",
-            borderRadius: "20px",
-            border: "1px solid rgba(16, 185, 129, 0.3)",
-            fontWeight: 600
-          }}
-        >
+        <span className="suit-ranking-badge">
           Top 3 Agronomic Synergies
         </span>
       </div>
 
       {/* 3 Cards Grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: 16,
-        }}
-      >
+      <div className="suit-ranking-grid">
         {top3.map((crop, idx) => {
           const mainYieldPerHa = crop.expected_yield_t_ha?.p50 || 2.5;
           const hasIntercrop = Boolean(crop.intercrop_options && crop.intercrop_options.length > 0);
@@ -92,80 +65,37 @@ export const CropSuitabilityRanking: React.FC<CropSuitabilityRankingProps> = ({ 
           return (
             <div
               key={crop.crop_id || idx}
-              className="glass-card"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 14,
-                position: "relative",
-                borderTop: idx === 0 ? "3px solid #10b981" : idx === 1 ? "3px solid #3b82f6" : "3px solid #f59e0b"
-              }}
+              className={`glass-card suit-ranking-card rank-${idx}`}
             >
               {/* Card Header */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "space-between",
-                  gap: 8,
-                }}
-              >
+              <div className="suit-card-header">
                 <div>
-                  <span
-                    style={{
-                      fontSize: "0.7rem",
-                      fontWeight: 700,
-                      padding: "2px 8px",
-                      borderRadius: 4,
-                      background: idx === 0 ? "rgba(16, 185, 129, 0.2)" : idx === 1 ? "rgba(59, 130, 246, 0.2)" : "rgba(245, 158, 11, 0.2)",
-                      color: idx === 0 ? "#34d399" : idx === 1 ? "#60a5fa" : "#fbbf24",
-                      display: "inline-block",
-                      marginBottom: 4
-                    }}
-                  >
+                  <span className={`suit-rank-pill rank-${idx}`}>
                     {rankLabels[idx]}
                   </span>
-                  <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#ffffff", margin: 0 }}>
+                  <h3 className="suit-card-name">
                     {crop.crop_name}
                   </h3>
-                  <span style={{ fontSize: "0.75rem", color: "#9ca3af", textTransform: "capitalize" }}>
+                  <span className="suit-card-category">
                     {crop.category} • {crop.irrigation_mode}
                   </span>
                 </div>
 
-                <div
-                  style={{
-                    background: hasIntercrop ? "rgba(16, 185, 129, 0.1)" : "rgba(148, 163, 184, 0.1)",
-                    border: hasIntercrop ? "1px solid rgba(16, 185, 129, 0.25)" : "1px solid rgba(148, 163, 184, 0.25)",
-                    borderRadius: 8,
-                    padding: "4px 8px",
-                    textAlign: "right",
-                  }}
-                >
-                  <div style={{ fontSize: "0.65rem", color: "#9ca3af" }}>{hasIntercrop ? "Yield Boost" : "Strategy"}</div>
-                  <div style={{ fontSize: "0.95rem", fontWeight: 800, color: hasIntercrop ? "#34d399" : "#94a3b8" }}>
+                <div className={`suit-boost-box ${hasIntercrop ? 'active' : ''}`}>
+                  <div className="suit-boost-label">{hasIntercrop ? "Yield Boost" : "Strategy"}</div>
+                  <div className={`suit-boost-val ${hasIntercrop ? 'active' : ''}`}>
                     {hasIntercrop ? `+${yieldBoostPct}%` : "Sole Crop"}
                   </div>
                 </div>
               </div>
 
               {/* Companion Intercrop Tag */}
-              <div
-                style={{
-                  background: "rgba(255, 255, 255, 0.04)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  borderRadius: 8,
-                  padding: "8px 12px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <Leaf size={14} style={{ color: hasIntercrop ? "#34d399" : "#94a3b8" }} />
-                  <span style={{ fontSize: "0.8rem", color: "#9ca3af" }}>{hasIntercrop ? "Companion Partner:" : "Cropping System:"}</span>
+              <div className="suit-partner-box">
+                <div className="suit-partner-left">
+                  <Leaf size={14} className={`suit-partner-icon ${hasIntercrop ? '' : 'dim'}`} />
+                  <span className="suit-partner-label">{hasIntercrop ? "Companion Partner:" : "Cropping System:"}</span>
                 </div>
-                <span style={{ fontSize: "0.85rem", fontWeight: 700, color: hasIntercrop ? "#f3f4f6" : "#9ca3af" }}>
+                <span className="suit-partner-name">
                   {hasIntercrop
                     ? intercropName
                     : crop.intercrop_data_available === false
@@ -175,63 +105,41 @@ export const CropSuitabilityRanking: React.FC<CropSuitabilityRankingProps> = ({ 
               </div>
 
               {/* Production Metrics */}
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: 8,
-                  background: "rgba(0, 0, 0, 0.25)",
-                  padding: 10,
-                  borderRadius: 8,
-                }}
-              >
+              <div className="suit-metrics-grid">
                 <div>
-                  <div style={{ fontSize: "0.7rem", color: "#9ca3af" }}>
+                  <div className="suit-metric-label">
                     {hasIntercrop ? `Main Production (${Math.round(mainShare * 100)}%)` : "Total Primary Output"}
                   </div>
-                  <div style={{ fontSize: "0.9rem", fontWeight: 700, color: "#ffffff" }}>
-                    {mainTotalYield} <span style={{ fontSize: "0.7rem", color: "#9ca3af" }}>tonnes</span>
+                  <div className="suit-metric-val">
+                    {mainTotalYield} <span className="suit-metric-unit">tonnes</span>
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontSize: "0.7rem", color: "#9ca3af" }}>
+                  <div className="suit-metric-label">
                     {hasIntercrop ? `Intercrop Extra (${Math.round(companionShareFactor * 100)}%)` : "Target Median Yield"}
                   </div>
-                  <div style={{ fontSize: "0.9rem", fontWeight: 700, color: hasIntercrop ? "#a7f3d0" : "#60a5fa" }}>
+                  <div className={`suit-metric-val ${hasIntercrop ? 'emerald' : 'info'}`}>
                     {hasIntercrop ? `+${intercropTotalYield} tonnes` : `${mainYieldPerHa.toFixed(2)} t/ha`}
                   </div>
                 </div>
-                <div style={{ gridColumn: "span 2", paddingTop: 4, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: "0.75rem", color: "#9ca3af" }}>Total Parcel Output:</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 800, color: "#fbbf24" }}>
-                      {combinedYield} tonnes
-                    </span>
-                  </div>
+                <div className="suit-parcel-total-row">
+                  <span className="suit-metric-label">Total Parcel Output:</span>
+                  <span className="suit-parcel-total-val">
+                    {combinedYield} tonnes
+                  </span>
                 </div>
               </div>
 
               {/* Suitability Match Progress Bar */}
               <div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    fontSize: "0.75rem",
-                    marginBottom: 4,
-                  }}
-                >
-                  <span style={{ color: "#9ca3af" }}>Suitability Match</span>
-                  <span style={{ color: "#34d399", fontWeight: 700 }}>{matchPercent}%</span>
+                <div className="suit-progress-row">
+                  <span className="suit-progress-label">Suitability Match</span>
+                  <span className="suit-progress-pct">{matchPercent}%</span>
                 </div>
-                <div style={{ background: "rgba(255,255,255,0.08)", height: 6, borderRadius: 3, overflow: "hidden" }}>
+                <div className="suit-progress-track">
                   <div
-                    style={{
-                      width: `${matchPercent}%`,
-                      height: "100%",
-                      background: "linear-gradient(90deg, #10b981, #34d399)",
-                      borderRadius: 3,
-                    }}
+                    className="suit-progress-bar"
+                    style={{ width: `${matchPercent}%` }}
                   />
                 </div>
               </div>

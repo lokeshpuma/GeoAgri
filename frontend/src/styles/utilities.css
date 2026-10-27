@@ -61,3 +61,39 @@
   display: flex;
   flex-direction: column;
 }
+
+/* Token Color Utilities (PRD §5.3 G-T1) */
+.text-emerald { color: var(--emerald-500) !important; }
+.text-emerald-light { color: var(--emerald-300) !important; }
+.text-gold { color: var(--gold-500) !important; }
+.text-gold-light { color: var(--gold-300) !important; }
+.text-danger { color: var(--danger) !important; }
+.text-warn { color: var(--warn) !important; }
+.text-info { color: var(--info) !important; }
+.text-ink-1 { color: var(--ink-1) !important; }
+.text-ink-2 { color: var(--ink-2) !important; }
+.text-ink-3 { color: var(--ink-3) !important; }
+
+.bg-emerald-glow { background: var(--emerald-glow) !important; }
+.bg-gold-glow { background: var(--gold-glow) !important; }
+.bg-danger-subtle { background: rgba(255, 107, 107, 0.12) !important; }
+
+.border-emerald { border-color: var(--emerald-500) !important; }
+.border-gold { border-color: var(--gold-500) !important; }
+.border-danger { border-color: var(--danger) !important; }
+
+/* Micro layout helpers */
+.gap-4 { gap: 4px; }
+.gap-6 { gap: 6px; }
+.gap-8 { gap: 8px; }
+.gap-10 { gap: 10px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.align-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.flex-1 { flex: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.w-full { width: 100%; }
+

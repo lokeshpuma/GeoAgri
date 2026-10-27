@@ -19,60 +19,19 @@ export const BasemapSwitcher: React.FC<BasemapSwitcherProps> = ({
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        bottom: '24px',
-        left: '20px',
-        zIndex: 'var(--z-panel)',
-        pointerEvents: 'auto',
-      }}
-    >
-      <div
-        className="glass-panel"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          background: 'var(--glass-strong)',
-          borderRadius: 'var(--r-md)',
-          boxShadow: 'var(--elev-2)',
-          padding: '8px',
-          gap: '8px',
-        }}
-      >
+    <div className="basemap-switcher-container">
+      <div className="glass-panel basemap-switcher-panel">
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle basemap switcher"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'none',
-            border: 'none',
-            padding: '6px 10px',
-            cursor: 'pointer',
-            color: 'var(--ink-1)',
-            fontSize: '0.8125rem',
-            fontWeight: 600,
-            fontFamily: 'var(--font-ui)',
-          }}
+          className="basemap-toggle-btn"
         >
-          <Layers size={16} style={{ color: 'var(--emerald-500)' }} />
+          <Layers size={16} className="text-emerald" />
           <span>{BASEMAPS[activeBasemap].label}</span>
         </button>
 
         {isOpen && (
-          <div
-            className="animate-fade-rise"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '6px',
-              paddingTop: '6px',
-              borderTop: '1px solid var(--glass-border)',
-              minWidth: '160px',
-            }}
-          >
+          <div className="animate-fade-rise basemap-dropdown">
             {(Object.keys(BASEMAPS) as BasemapId[]).map(id => {
               const item = BASEMAPS[id];
               const isSelected = id === activeBasemap;
@@ -83,39 +42,18 @@ export const BasemapSwitcher: React.FC<BasemapSwitcherProps> = ({
                     onSelectBasemap(id);
                     setIsOpen(false);
                   }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '6px 10px',
-                    borderRadius: 'var(--r-xs)',
-                    background: isSelected ? 'var(--bg-2)' : 'transparent',
-                    border: 'none',
-                    color: isSelected ? 'var(--emerald-500)' : 'var(--ink-2)',
-                    fontSize: '0.75rem',
-                    fontWeight: isSelected ? 600 : 500,
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    transition: 'all var(--t-fast) var(--ease-out)',
-                  }}
+                  className={`basemap-option-btn ${isSelected ? 'selected' : ''}`}
                 >
                   <span>{item.label}</span>
                   {isSelected && (
-                    <span
-                      style={{
-                        width: '6px',
-                        height: '6px',
-                        borderRadius: '50%',
-                        background: 'var(--emerald-500)',
-                      }}
-                    />
+                    <span className="basemap-indicator-dot" />
                   )}
                 </button>
               );
             })}
 
-            <div style={{ marginTop: '6px', paddingTop: '6px', borderTop: '1px solid var(--glass-border)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.6875rem', color: 'var(--ink-3)', marginBottom: '4px' }}>
+            <div className="basemap-slider-row">
+              <div className="basemap-slider-labels">
                 <span>Labels</span>
                 <span>{Math.round(labelOpacity * 100)}%</span>
               </div>
@@ -126,7 +64,7 @@ export const BasemapSwitcher: React.FC<BasemapSwitcherProps> = ({
                 step={0.05}
                 value={labelOpacity}
                 onChange={e => onLabelOpacityChange(Number(e.target.value))}
-                style={{ width: '100%', height: '4px', accentColor: 'var(--emerald-500)' }}
+                className="basemap-slider-input"
               />
             </div>
           </div>

@@ -4,7 +4,6 @@ import {
   ArrowRight,
   ArrowLeft,
   BarChart3,
-  TrendingUp,
   Layers,
   Sparkles,
   Info,
@@ -36,6 +35,7 @@ import { CropRecommendationCard } from '../components/CropRecommendationCard/Cro
 import { YieldPredictionTable } from '../components/YieldPredictionTable/YieldPredictionTable';
 import { YieldComparisonChart } from '../components/YieldComparisonChart/YieldComparisonChart';
 import { generateAgronomicRecommendation } from '../utils/agronomicFormatters';
+import { YIELD_CHART_COLORS } from '../theme/palette';
 
 export const CropPredictionPage: React.FC = () => {
   const { report, formData, goToStep, detectedLocation, theme } = useWorkflow();
@@ -83,7 +83,7 @@ export const CropPredictionPage: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div className="crop-pred-actions-row">
           <button
             type="button"
             className="btn-secondary"
@@ -105,23 +105,14 @@ export const CropPredictionPage: React.FC = () => {
 
       {/* SHADOW MODE BANNER STRIP (PRD v2.1 §5A.7, §19.4, M23) */}
       {report?.gate_mode === 'shadow' && (
-        <div style={{
-          backgroundColor: isLight ? '#fef3c7' : 'rgba(245, 158, 11, 0.15)',
-          border: '1px solid #f59e0b',
-          borderRadius: '10px',
-          padding: '12px 20px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '12px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Eye size={18} style={{ color: '#f59e0b', flexShrink: 0 }} />
-            <span style={{ fontWeight: 700, color: '#f59e0b', fontSize: '0.88rem', letterSpacing: '0.04em' }}>
+        <div className="crop-pred-shadow-banner">
+          <div className="crop-pred-shadow-left">
+            <Eye size={18} className="crop-pred-shadow-icon" />
+            <span className="crop-pred-shadow-badge">
               SHADOW MODE — verdict not enforced
             </span>
           </div>
-          <span style={{ fontSize: '0.78rem', color: isLight ? '#92400e' : '#fcd34d' }}>
+          <span className="crop-pred-shadow-text">
             Land detection & irrigability verdict ({report?.irrigability?.verdict?.replace(/_/g, ' ') || 'SHADOW'}) are computed for telemetry; crop models are fully evaluated.
           </span>
         </div>
@@ -129,86 +120,46 @@ export const CropPredictionPage: React.FC = () => {
 
       {/* PARTLY CHECKED WARNING NOTICE (PRD v2.1 M23) */}
       {report?.detection?.warnings && report.detection.warnings.length > 0 && (
-        <div style={{
-          backgroundColor: isLight ? '#fffbeb' : 'rgba(245, 158, 11, 0.1)',
-          border: '1px dashed #f59e0b',
-          borderRadius: '8px',
-          padding: '8px 16px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          fontSize: '0.82rem',
-          color: isLight ? '#b45309' : '#fde68a'
-        }}>
-          <AlertTriangle size={15} style={{ flexShrink: 0 }} />
-          <span><strong>Partly checked:</strong> {report.detection.warnings.join('; ')}</span>
+        <div className="crop-pred-shadow-banner">
+          <AlertTriangle size={15} className="crop-pred-shadow-icon" />
+          <span className="crop-pred-shadow-text"><strong>Partly checked:</strong> {report.detection.warnings.join('; ')}</span>
         </div>
       )}
 
       {report?.irrigability && (report.irrigability.verdict === 'NOT_IRRIGABLE' || report.irrigability.verdict === 'NOT_IRRIGABLE_PROVISIONAL') && report?.gate_mode === 'enforce' ? (
-        <div className="glass-card" style={{
-          padding: '36px 28px',
-          border: '2px solid #ef4444',
-          backgroundColor: isLight ? '#fef2f2' : 'rgba(239, 68, 68, 0.1)',
-          borderRadius: '16px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{
-              backgroundColor: '#ef4444',
-              borderRadius: '50%',
-              padding: '12px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#ffffff'
-            }}>
+        <div className="glass-card gate-blocked-card">
+          <div className="flex-row-center gap-16">
+            <div className="gate-blocked-icon">
               <ShieldAlert size={32} />
             </div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{
-                  backgroundColor: '#ef4444',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  fontSize: '0.75rem',
-                  padding: '4px 10px',
-                  borderRadius: '9999px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em'
-                }}>
+              <div className="flex-row-center gap-10">
+                <span className="detection-badge-danger">
                   {report.irrigability.verdict.replace(/_/g, ' ')}
                 </span>
-                <span style={{ fontSize: '0.85rem', color: '#9ca3af' }}>
+                <span className="text-ink-2 text-sm">
                   Land Classification: <strong>{report.land_class?.dominant?.replace(/_/g, ' ') || 'NON-AGRICULTURAL'}</strong> {report.land_class?.subclass ? `(${report.land_class.subclass.replace(/_/g, ' ')})` : ''}
                 </span>
               </div>
-              <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#ef4444', marginTop: '6px' }}>
+              <h2 className="gate-blocked-title mt-1">
                 Cultivation & Irrigation Not Permitted On This Plot
               </h2>
             </div>
           </div>
 
-          <p style={{ fontSize: '0.95rem', color: isLight ? '#374151' : '#d1d5db', lineHeight: 1.6 }}>
+          <p className="gate-blocked-desc">
             {report.irrigability.reasons?.[0]?.reason ||
               'This parcel is classified under legal forest, water body, urban built-up, or severe terrain exclusion. In accordance with PRD compliance rules, agronomic crop recommendation models are bypassed.'}
           </p>
 
           {report.irrigability.reasons && report.irrigability.reasons.length > 0 && (
-            <div style={{
-              backgroundColor: isLight ? '#ffffff' : 'rgba(0, 0, 0, 0.25)',
-              padding: '16px',
-              borderRadius: '10px',
-              border: '1px solid rgba(239, 68, 68, 0.2)'
-            }}>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '8px', color: '#ef4444' }}>
+            <div className="detection-feature-card">
+              <h4 className="text-danger font-semibold mb-2">
                 Evidence & Regulatory Grounding:
               </h4>
-              <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '0.85rem', color: '#9ca3af' }}>
+              <ul className="text-ink-2 text-sm pl-4 m-0">
                 {report.irrigability.reasons.map((r, idx) => (
-                  <li key={idx} style={{ marginBottom: '4px' }}>
+                  <li key={idx} className="mb-1">
                     <strong>{r.rule_id}</strong>: {r.reason} (Layer: {r.layer})
                   </li>
                 ))}
@@ -216,7 +167,7 @@ export const CropPredictionPage: React.FC = () => {
             </div>
           )}
 
-          <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+          <div className="crop-pred-actions-row mt-2">
             <button
               type="button"
               className="btn-secondary"
@@ -236,17 +187,16 @@ export const CropPredictionPage: React.FC = () => {
           </div>
         </div>
       ) : crops.length === 0 ? (
-        <div className="glass-card" style={{ textAlign: 'center', padding: '48px 24px' }}>
-          <Sprout size={48} style={{ color: '#10b981', margin: '0 auto 16px auto' }} />
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 600 }}>No Crop Predictions Yet</h3>
-          <p style={{ color: '#9ca3af', fontSize: '0.85rem' }}>
+        <div className="glass-card text-center p-8">
+          <Sprout size={48} className="text-emerald mx-auto mb-4" />
+          <h3 className="text-lg font-semibold">No Crop Predictions Yet</h3>
+          <p className="text-ink-2 text-sm">
             Please return to Step 2 (Field Analysis) and click <strong>Predict Now</strong> to process your field.
           </p>
           <button
             type="button"
-            className="btn-primary"
+            className="btn-primary mt-4"
             onClick={() => goToStep(2)}
-            style={{ marginTop: '16px' }}
           >
             Go to Field Analysis
           </button>
@@ -256,10 +206,10 @@ export const CropPredictionPage: React.FC = () => {
           {/* SECTION 1 — ANALYSIS SUMMARY */}
           <section className="glass-card analysis-summary-bar">
             <div className="summary-pill-item">
-              <MapPin size={16} style={{ color: '#38bdf8' }} />
+              <MapPin size={16} className="text-info" />
               <div>
                 <span className="summary-pill-label">Selected Location</span>
-                <strong className="summary-pill-val">{centroidLat.toFixed(4)}°N, {centroidLon.toFixed(4)}°E</strong>
+                <strong className="summary-pill-val">{centroidLat?.toFixed(4)}°N, {centroidLon?.toFixed(4)}°E</strong>
               </div>
             </div>
 
@@ -267,20 +217,20 @@ export const CropPredictionPage: React.FC = () => {
               <div className="summary-pill-item">
                 {detectedLocation.isWater || detectedLocation.isArable === false ? (
                   <>
-                    <AlertTriangle size={16} style={{ color: '#ef4444' }} />
+                    <AlertTriangle size={16} className="text-danger" />
                     <div>
                       <span className="summary-pill-label">Detected Biome</span>
-                      <strong className="summary-pill-val" style={{ color: '#ef4444' }}>
+                      <strong className="summary-pill-val text-danger">
                         {detectedLocation.district}
                       </strong>
                     </div>
                   </>
                 ) : (
                   <>
-                    <Compass size={16} style={{ color: '#059669' }} />
+                    <Compass size={16} className="text-emerald" />
                     <div>
                       <span className="summary-pill-label">Regional Benchmark</span>
-                      <strong className="summary-pill-val" style={{ color: '#059669' }}>
+                      <strong className="summary-pill-val text-emerald">
                         {detectedLocation.district}, {detectedLocation.state}
                       </strong>
                     </div>
@@ -290,14 +240,14 @@ export const CropPredictionPage: React.FC = () => {
             )}
 
             <div className="summary-pill-item">
-              <Layers size={16} style={{ color: '#10b981' }} />
+              <Layers size={16} className="text-emerald" />
               <div>
                 <span className="summary-pill-label">Field Area</span>
                 <strong className="summary-pill-val">
                   {farmArea != null ? `${farmArea.toFixed(2)} ha` : 'Point Query'}
                 </strong>
                 {report?.irrigability?.irrigable_area_ha != null && farmArea != null && report.irrigability.irrigable_area_ha < farmArea && (
-                  <span style={{ fontSize: '0.75rem', color: '#10b981', display: 'block' }}>
+                  <span className="text-xs text-emerald block">
                     Usable: {report.irrigability.irrigable_area_ha.toFixed(2)} ha
                   </span>
                 )}
@@ -306,10 +256,10 @@ export const CropPredictionPage: React.FC = () => {
 
             {report?.irrigability && (
               <div className="summary-pill-item">
-                <ShieldAlert size={16} style={{ color: report.irrigability.verdict === 'IRRIGABLE' ? '#10b981' : '#f59e0b' }} />
+                <ShieldAlert size={16} className={report.irrigability.verdict === 'IRRIGABLE' ? 'text-emerald' : 'text-gold'} />
                 <div>
                   <span className="summary-pill-label">Irrigability Verdict</span>
-                  <strong className="summary-pill-val" style={{ color: report.irrigability.verdict === 'IRRIGABLE' ? '#10b981' : '#f59e0b' }}>
+                  <strong className={`summary-pill-val ${report.irrigability.verdict === 'IRRIGABLE' ? 'text-emerald' : 'text-gold'}`}>
                     {report.irrigability.verdict.replace(/_/g, ' ')}
                   </strong>
                 </div>
@@ -317,25 +267,25 @@ export const CropPredictionPage: React.FC = () => {
             )}
 
             <div className="summary-pill-item">
-              <Calendar size={16} style={{ color: '#f59e0b' }} />
+              <Calendar size={16} className="text-gold" />
               <div>
                 <span className="summary-pill-label">Target Season</span>
-                <strong className="summary-pill-val" style={{ textTransform: 'capitalize' }}>{formData.season}</strong>
+                <strong className="summary-pill-val text-capitalize">{formData.season}</strong>
               </div>
             </div>
 
             <div className="summary-pill-item">
-              <Award size={16} style={{ color: suit.score === 0 ? '#ef4444' : '#10b981' }} />
+              <Award size={16} className={suit.score === 0 ? 'text-danger' : 'text-emerald'} />
               <div>
                 <span className="summary-pill-label">Land Suitability</span>
-                <strong className="summary-pill-val" style={{ color: suit.score === 0 ? '#ef4444' : undefined }}>
+                <strong className={`summary-pill-val ${suit.score === 0 ? 'text-danger' : ''}`}>
                   {Math.round(suit.score * 100)}% ({suit.grade})
                 </strong>
               </div>
             </div>
 
             <div className="summary-pill-item">
-              <ShieldAlert size={16} style={{ color: '#fbbf24' }} />
+              <ShieldAlert size={16} className="text-gold" />
               <div>
                 <span className="summary-pill-label">Climate Risk</span>
                 <strong className="summary-pill-val">{risk.overall_risk_level} Risk</strong>
@@ -343,185 +293,113 @@ export const CropPredictionPage: React.FC = () => {
             </div>
 
             <div className="summary-pill-item">
-              <Droplets size={16} style={{ color: '#38bdf8' }} />
+              <Droplets size={16} className="text-info" />
               <div>
                 <span className="summary-pill-label">Irrigation Mode</span>
-                <strong className="summary-pill-val" style={{ textTransform: 'capitalize' }}>{irri.recommended_mode}</strong>
+                <strong className="summary-pill-val text-capitalize">{irri.recommended_mode}</strong>
               </div>
             </div>
           </section>
 
           {/* DETECTION PANEL (PRD v2.1 §5A, M16, M23) */}
           {report?.detection && (
-            <section className="glass-card" style={{ padding: '20px 24px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <Layers size={18} style={{ color: 'var(--accent-green)' }} />
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>
+            <section className="glass-card p-5">
+              <div className="flex-between mb-4">
+                <div className="flex-row-center gap-10">
+                  <Layers size={18} className="text-emerald" />
+                  <h3 className="text-base font-bold m-0">
                     Physical & Land Surface Detection
                   </h3>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{
-                    fontSize: '0.72rem',
-                    padding: '3px 8px',
-                    borderRadius: '6px',
-                    backgroundColor: report.gate_mode === 'enforce' ? '#ef4444' : (report.gate_mode === 'shadow' ? '#f59e0b' : '#6b7280'),
-                    color: '#ffffff',
-                    fontWeight: 600,
-                    textTransform: 'uppercase'
-                  }}>
+                <div className="flex-row-center gap-8">
+                  <span className={`detection-badge-${report.gate_mode === 'enforce' ? 'danger' : (report.gate_mode === 'shadow' ? 'info' : 'neutral')}`}>
                     Gate: {report.gate_mode || 'off'}
                   </span>
                 </div>
               </div>
 
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '12px'
-              }}>
+              <div className="detection-grid">
                 {/* 1. Forest */}
-                <div className="detection-feature-card" style={{
-                  padding: '14px',
-                  borderRadius: '10px',
-                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--border-color)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Forest Cover</span>
-                    <span style={{
-                      fontSize: '0.7rem',
-                      padding: '2px 6px',
-                      borderRadius: '4px',
-                      fontWeight: 700,
-                      backgroundColor: report.detection.forest?.state === 'detected' ? (report.detection.forest?.plantation_signature ? '#3b82f6' : '#ef4444') : (report.detection.forest?.state === 'not detected' ? '#10b981' : '#6b7280'),
-                      color: '#ffffff'
-                    }}>
+                <div className="detection-feature-card">
+                  <div className="flex-between mb-2">
+                    <span className="text-xs font-semibold text-ink-2">Forest Cover</span>
+                    <span className={`detection-badge-${report.detection.forest?.state === 'detected' ? (report.detection.forest?.plantation_signature ? 'info' : 'danger') : (report.detection.forest?.state === 'not detected' ? 'ok' : 'neutral')}`}>
                       {report.detection.forest?.plantation_signature ? 'PLANTATION' : (report.detection.forest?.state?.toUpperCase() || 'UNKNOWN')}
                     </span>
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
+                  <div className="text-base font-bold text-ink-1 mb-1">
                     {report.detection.forest?.share != null ? `${(report.detection.forest.share * 100).toFixed(1)}% share` : 'N/A'}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                  <div className="text-xs text-ink-3">
                     Source: {report.detection.forest?.source || 'ESA WorldCover / Hansen'}
                   </div>
                   {report.detection.forest?.plantation_signature && (
-                    <div style={{ fontSize: '0.7rem', color: '#3b82f6', marginTop: '2px', fontWeight: 600 }}>
+                    <div className="text-xs text-info mt-1 font-semibold">
                       Plantation guarded (not forest)
                     </div>
                   )}
                 </div>
 
                 {/* 2. Buildings */}
-                <div className="detection-feature-card" style={{
-                  padding: '14px',
-                  borderRadius: '10px',
-                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--border-color)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Buildings</span>
-                    <span style={{
-                      fontSize: '0.7rem',
-                      padding: '2px 6px',
-                      borderRadius: '4px',
-                      fontWeight: 700,
-                      backgroundColor: report.detection.buildings?.state === 'detected' ? '#ef4444' : (report.detection.buildings?.state === 'not detected' ? '#10b981' : '#6b7280'),
-                      color: '#ffffff'
-                    }}>
+                <div className="detection-feature-card">
+                  <div className="flex-between mb-2">
+                    <span className="text-xs font-semibold text-ink-2">Buildings</span>
+                    <span className={`detection-badge-${report.detection.buildings?.state === 'detected' ? 'danger' : (report.detection.buildings?.state === 'not detected' ? 'ok' : 'neutral')}`}>
                       {report.detection.buildings?.state?.toUpperCase() || 'UNKNOWN'}
                     </span>
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
+                  <div className="text-base font-bold text-ink-1 mb-1">
                     {report.detection.buildings?.share != null ? `${(report.detection.buildings.share * 100).toFixed(1)}% footprint` : (report.detection.buildings?.footprint_m2 != null ? `${report.detection.buildings.footprint_m2.toFixed(0)} m²` : 'None')}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                  <div className="text-xs text-ink-3">
                     Source: {report.detection.buildings?.source || 'OpenFreeMap / MS Buildings'}
                   </div>
                 </div>
 
                 {/* 3. Roads */}
-                <div className="detection-feature-card" style={{
-                  padding: '14px',
-                  borderRadius: '10px',
-                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--border-color)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Roads & Transit</span>
-                    <span style={{
-                      fontSize: '0.7rem',
-                      padding: '2px 6px',
-                      borderRadius: '4px',
-                      fontWeight: 700,
-                      backgroundColor: report.detection.roads?.state === 'detected' ? '#ef4444' : (report.detection.roads?.state === 'not detected' ? '#10b981' : '#6b7280'),
-                      color: '#ffffff'
-                    }}>
+                <div className="detection-feature-card">
+                  <div className="flex-between mb-2">
+                    <span className="text-xs font-semibold text-ink-2">Roads & Access</span>
+                    <span className={`detection-badge-${report.detection.roads?.state === 'detected' ? 'ok' : 'neutral'}`}>
                       {report.detection.roads?.state?.toUpperCase() || 'UNKNOWN'}
                     </span>
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
-                    {report.detection.roads?.state === 'detected' ? 'Road Traversing' : 'No Public Roads'}
+                  <div className="text-base font-bold text-ink-1 mb-1">
+                    {report.detection.roads?.distance_m != null ? `${report.detection.roads.distance_m.toFixed(0)} m to road` : 'Detected'}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
-                    Source: {report.detection.roads?.source || 'OpenFreeMap Vector Tiles'}
+                  <div className="text-xs text-ink-3">
+                    Source: OpenStreetMap Transport
                   </div>
                 </div>
 
                 {/* 4. Water */}
-                <div className="detection-feature-card" style={{
-                  padding: '14px',
-                  borderRadius: '10px',
-                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--border-color)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Water Bodies</span>
-                    <span style={{
-                      fontSize: '0.7rem',
-                      padding: '2px 6px',
-                      borderRadius: '4px',
-                      fontWeight: 700,
-                      backgroundColor: report.detection.water?.state === 'detected' ? '#ef4444' : (report.detection.water?.state === 'not detected' ? '#10b981' : '#6b7280'),
-                      color: '#ffffff'
-                    }}>
-                      {report.detection.water?.state?.toUpperCase() || 'UNKNOWN'}
+                <div className="detection-feature-card">
+                  <div className="flex-between mb-2">
+                    <span className="text-xs font-semibold text-ink-2">Surface Water</span>
+                    <span className={`detection-badge-${report.detection.water?.state === 'detected' ? 'danger' : 'ok'}`}>
+                      {report.detection.water?.state?.toUpperCase() || 'NOT DETECTED'}
                     </span>
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
-                    {report.detection.water?.share != null ? `${(report.detection.water.share * 100).toFixed(1)}% water` : 'None'}
+                  <div className="text-base font-bold text-ink-1 mb-1">
+                    {report.detection.water?.share != null ? `${(report.detection.water.share * 100).toFixed(1)}% water` : 'Dry land'}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
-                    Source: {report.detection.water?.source || 'HydroLAKES / ESA WorldCover'}
+                  <div className="text-xs text-ink-3">
+                    Source: JRC Global Surface Water
                   </div>
                 </div>
 
                 {/* 5. Terrain */}
-                <div className="detection-feature-card" style={{
-                  padding: '14px',
-                  borderRadius: '10px',
-                  backgroundColor: isLight ? '#f9fafb' : 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--border-color)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>Terrain & Relief</span>
-                    <span style={{
-                      fontSize: '0.7rem',
-                      padding: '2px 6px',
-                      borderRadius: '4px',
-                      fontWeight: 700,
-                      backgroundColor: report.detection.terrain?.state === 'detected' ? '#ef4444' : '#10b981',
-                      color: '#ffffff'
-                    }}>
+                <div className="detection-feature-card">
+                  <div className="flex-between mb-2">
+                    <span className="text-xs font-semibold text-ink-2">Terrain & Relief</span>
+                    <span className={`detection-badge-${report.detection.terrain?.state === 'detected' ? 'danger' : 'ok'}`}>
                       {report.detection.terrain?.state === 'detected' ? 'STEEP SLOPE' : 'SUITABLE'}
                     </span>
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '4px' }}>
+                  <div className="text-base font-bold text-ink-1 mb-1">
                     {report.detection.terrain?.slope_mean != null ? `${report.detection.terrain.slope_mean.toFixed(1)}° slope` : 'Gentle slope'}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                  <div className="text-xs text-ink-3">
                     {report.detection.terrain?.elevation_mean != null ? `Elev: ${report.detection.terrain.elevation_mean.toFixed(0)}m • ` : ''}
                     Source: Copernicus GLO-30
                   </div>
@@ -533,32 +411,16 @@ export const CropPredictionPage: React.FC = () => {
           {/* SECTION 2 — TOP 5 MULTI-CROP RECOMMENDATIONS OR NON-ARABLE NOTICE */}
           {top5Crops.length === 0 ? (
             <section className="crop-section">
-              <div className="glass-card" style={{
-                textAlign: 'center',
-                padding: '48px 24px',
-                border: '1px solid rgba(239, 68, 68, 0.35)',
-                background: 'rgba(239, 68, 68, 0.05)',
-                borderRadius: '16px'
-              }}>
-                <AlertTriangle size={52} style={{ color: '#ef4444', margin: '0 auto 16px auto' }} />
-                <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '8px' }}>
+              <div className="glass-card non-arable-card">
+                <AlertTriangle size={52} className="text-danger mx-auto mb-4" />
+                <h2 className="non-arable-title">
                   Cultivation Not Feasible: Non-Arable Zone Selected
                 </h2>
-                <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '680px', margin: '0 auto 16px auto', lineHeight: 1.6 }}>
-                  The selected coordinate (<strong>{centroidLat.toFixed(4)}°N, {centroidLon.toFixed(4)}°E</strong>) lies within an open water body or polar permafrost zone (<strong>{detectedLocation?.displayName || 'Non-Arable Terrestrial Zone'}</strong>).
+                <p className="non-arable-desc">
+                  The selected coordinate (<strong>{centroidLat?.toFixed(4)}°N, {centroidLon?.toFixed(4)}°E</strong>) lies within an open water body or polar permafrost zone (<strong>{detectedLocation?.displayName || 'Non-Arable Terrestrial Zone'}</strong>).
                   Because open water and ice shields lack soil lithology and experience sub-zero or aquatic environments, Land Suitability is <strong>0% (Not Suitable)</strong> and <strong>no crops can be planted here</strong>.
                 </p>
-                <div style={{
-                  display: 'inline-block',
-                  background: 'rgba(239, 68, 68, 0.12)',
-                  border: '1px solid rgba(239, 68, 68, 0.25)',
-                  borderRadius: '8px',
-                  padding: '10px 20px',
-                  fontSize: '0.88rem',
-                  color: '#ef4444',
-                  fontWeight: 600,
-                  marginBottom: '28px'
-                }}>
+                <div className="non-arable-factors">
                   ⚠️ Limiting Factors: {(suit as any).limiting_factors && (suit as any).limiting_factors.length > 0 ? (suit as any).limiting_factors.join('. ') : (detectedLocation?.warningMessage || 'Terrestrial crop cultivation impossible in open water / polar ice.')}
                 </div>
                 <div>
@@ -566,7 +428,6 @@ export const CropPredictionPage: React.FC = () => {
                     type="button"
                     className="btn-primary"
                     onClick={() => goToStep(2)}
-                    style={{ padding: '12px 28px', fontSize: '0.95rem' }}
                   >
                     <MapPin size={18} />
                     <span>Reposition Field onto Arable Land →</span>
@@ -578,8 +439,8 @@ export const CropPredictionPage: React.FC = () => {
             <>
               <section className="crop-section">
                 <div className="section-header">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Sparkles size={20} style={{ color: '#10b981' }} />
+                  <div className="flex-row-center gap-8">
+                    <Sparkles size={20} className="text-emerald" />
                     <h2 className="section-title">Top 5 Multi-Crop Recommendations</h2>
                   </div>
                   <span className="badge badge-high">
@@ -611,54 +472,53 @@ export const CropPredictionPage: React.FC = () => {
 
           {/* SECTION 5 — YIELD GRAPH */}
           <section className="crop-section">
-            <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+            <div className="glass-card yield-chart-container">
+              <div className="flex-between">
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <BarChart3 size={20} style={{ color: '#38bdf8' }} />
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+                  <div className="flex-row-center gap-8">
+                    <BarChart3 size={20} className="text-info" />
+                    <h3 className="yield-chart-title">
                       Top 10 Crops vs. Predicted Yield Potential
                     </h3>
                   </div>
-                  <p style={{ fontSize: '0.8rem', color: '#9ca3af', margin: '4px 0 0 0' }}>
+                  <p className="yield-chart-desc">
                     Comparing expected median yield (P50) alongside lower-bound (P10 pessimistic) and upper-bound (P90 optimistic) uncertainty bounds.
                   </p>
                 </div>
-                <span className="badge badge-moderate" style={{ fontSize: '0.75rem' }}>
+                <span className="badge badge-moderate text-xs">
                   Units: Tonnes per Hectare (t/ha)
                 </span>
               </div>
 
-              <div style={{ height: '440px', width: '100%', minWidth: 0, marginTop: '8px' }}>
+              <div className="yield-chart-body">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     layout="vertical"
                     data={chartData}
                     margin={{ top: 10, right: 30, left: 130, bottom: 20 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" stroke={isLight ? "#e2e8f0" : "rgba(255,255,255,0.05)"} />
-                    <XAxis type="number" stroke={isLight ? "#475569" : "#9ca3af"} unit=" t/ha" />
+                    <CartesianGrid strokeDasharray="3 3" stroke={isLight ? YIELD_CHART_COLORS.gridLight : YIELD_CHART_COLORS.grid} />
+                    <XAxis type="number" stroke={isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark} unit=" t/ha" />
                     <YAxis
                       type="category"
                       dataKey="name"
-                      stroke={isLight ? "#475569" : "#cbd5e1"}
+                      stroke={isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark}
                       width={120}
-                      tick={{ fontSize: 11, fill: isLight ? '#0f172a' : '#cbd5e1', fontWeight: 600 }}
+                      tick={{ fontSize: 11, fill: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight, fontWeight: 600 }}
                     />
                     <Tooltip
                       contentStyle={{
-                        background: isLight ? '#ffffff' : '#131a29',
-                        border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(255,255,255,0.12)',
+                        background: isLight ? YIELD_CHART_COLORS.tooltipBgLight : YIELD_CHART_COLORS.tooltipBgDark,
+                        border: isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark,
                         borderRadius: '10px',
-                        boxShadow: isLight ? '0 8px 24px rgba(0,0,0,0.12)' : '0 8px 32px rgba(0,0,0,0.5)',
-                        color: isLight ? '#0f172a' : '#ffffff'
+                        color: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight
                       }}
-                      labelStyle={{ color: isLight ? '#0f172a' : '#ffffff', fontWeight: 700 }}
+                      labelStyle={{ color: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight, fontWeight: 700 }}
                     />
                     <Legend wrapperStyle={{ paddingTop: '10px' }} />
-                    <Bar dataKey="p10" fill="#f87171" name="P10 (Pessimistic)" radius={[0, 4, 4, 0]} />
-                    <Bar dataKey="expectedYield" fill="#10b981" name="P50 (Median Expected)" radius={[0, 4, 4, 0]} />
-                    <Bar dataKey="p90" fill="#60a5fa" name="P90 (Optimistic)" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="p10" fill={YIELD_CHART_COLORS.p10} name="P10 (Pessimistic)" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="expectedYield" fill={YIELD_CHART_COLORS.p50} name="P50 (Median Expected)" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="p90" fill={YIELD_CHART_COLORS.p90} name="P90 (Optimistic)" radius={[0, 4, 4, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -668,8 +528,8 @@ export const CropPredictionPage: React.FC = () => {
           {/* SECTION 6 — ADDITIONAL CROP INSIGHTS */}
           <section className="crop-section">
             <div className="section-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Info size={20} style={{ color: '#38bdf8' }} />
+              <div className="flex-row-center gap-8">
+                <Info size={20} className="text-info" />
                 <h2 className="section-title">Additional Agronomic Crop Insights</h2>
               </div>
               <span className="badge badge-high">Deep Agronomic Profiling</span>
@@ -683,28 +543,28 @@ export const CropPredictionPage: React.FC = () => {
                 return (
                   <div key={crop.crop_id || idx} className="glass-card crop-insight-card">
                     <div
-                      style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+                      className="flex-between cursor-pointer"
                       onClick={() => setExpandedInsightCropId(isExpanded ? null : crop.crop_id)}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <div className="flex-row-center gap-10">
                         <span className="rank-badge-num">#{idx + 1}</span>
                         <div>
-                          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+                          <h3 className="text-base font-bold m-0 text-ink-1">
                             {crop.crop_name}
                           </h3>
-                          <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                          <span className="text-xs text-ink-2">
                             {crop.category} • Suitability Match: {(crop.recommendation_score * 100).toFixed(0)}%
                           </span>
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div className="flex-row-center gap-8">
                         {companion ? (
-                          <span className="badge badge-high" style={{ fontSize: '0.72rem' }}>
+                          <span className="badge badge-high text-xs">
                             +{(companion.yield_boost_pct * 100).toFixed(1)}% {companion.companion_crop_name}
                           </span>
                         ) : (
-                          <span className="badge badge-low" style={{ fontSize: '0.72rem', opacity: 0.7 }}>
+                          <span className="badge badge-low text-xs opacity-70">
                             Sole Cropping
                           </span>
                         )}
@@ -747,12 +607,12 @@ export const CropPredictionPage: React.FC = () => {
                     {/* Detailed Expandable Section */}
                     {isExpanded && (
                       <div className="insight-expanded-details">
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px' }}>
-                          <div className="tech-item"><span className="tech-name">Soil Compatibility</span><span className="tech-val" style={{ color: '#34d399' }}>High</span></div>
+                        <div className="detection-grid">
+                          <div className="tech-item"><span className="tech-name">Soil Compatibility</span><span className="tech-val text-emerald-light">High</span></div>
                           <div className="tech-item"><span className="tech-name">Thermal Regime</span><span className="tech-val">Optimal</span></div>
                           <div className="tech-item"><span className="tech-name">Moisture Index</span><span className="tech-val">Compatible</span></div>
                           <div className="tech-item"><span className="tech-name">P10 Pessimistic</span><span className="tech-val">{crop.expected_yield_t_ha.p10} t/ha</span></div>
-                          <div className="tech-item"><span className="tech-name">P50 Expected</span><span className="tech-val" style={{ color: '#fbbf24' }}>{crop.expected_yield_t_ha.p50} t/ha</span></div>
+                          <div className="tech-item"><span className="tech-name">P50 Expected</span><span className="tech-val text-gold">{crop.expected_yield_t_ha.p50} t/ha</span></div>
                           <div className="tech-item"><span className="tech-name">P90 Optimistic</span><span className="tech-val">{crop.expected_yield_t_ha.p90} t/ha</span></div>
                         </div>
                       </div>
@@ -765,11 +625,11 @@ export const CropPredictionPage: React.FC = () => {
 
           {/* SECTION 7 — AI AGRICULTURAL INSIGHT */}
           <section className="crop-section">
-            <div className="glass-card ai-insight-box" style={{ borderLeft: '4px solid #10b981', padding: '24px' }}>
-              <div className="section-header" style={{ marginBottom: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Sparkles size={20} style={{ color: '#10b981' }} />
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+            <div className="glass-card ai-insight-box">
+              <div className="section-header mb-4">
+                <div className="flex-row-center gap-8">
+                  <Sparkles size={20} className="text-emerald" />
+                  <h3 className="text-xl font-bold m-0 text-ink-1">
                     AI Agricultural Insight
                   </h3>
                 </div>
@@ -777,46 +637,27 @@ export const CropPredictionPage: React.FC = () => {
               </div>
 
               {/* 1. Executive Synthesis Paragraph */}
-              <p style={{ fontSize: '0.94rem', lineHeight: 1.7, color: 'var(--text-main)', marginBottom: '18px' }}>
-                Based on the selected location's satellite vegetation condition (<strong>NDVI: {sat.ndvi?.toFixed(2) || '0.59'}</strong>, <strong>NDMI: {sat.ndmi?.toFixed(2) || '0.23'}</strong>), soil characteristics (<strong>pH: {env.ph?.toFixed(2) || '5.92'}</strong>, <strong>SOC: {env.organic_carbon_g_kg?.toFixed(1) || '6.1'} g/kg</strong>), seasonal rainfall (<strong>{Math.round(env.rainfall_mm || 1053)} mm</strong>), and ambient temperature (<strong>{env.temp_mean_c?.toFixed(1) || '23.1'}°C</strong>), the following crops were ranked: <strong>{topNames || 'Finger Millet (Ragi), Maize, Groundnut'}</strong>.
+              <p className="text-sm leading-relaxed text-ink-1 mb-4">
+                {aiInsightNarrative || `Based on the selected location's satellite vegetation condition (NDVI: ${sat.ndvi?.toFixed(2) || '0.59'}, NDMI: ${sat.ndmi?.toFixed(2) || '0.23'}), soil characteristics (pH: ${env.ph?.toFixed(2) || '5.92'}, SOC: ${env.organic_carbon_g_kg?.toFixed(1) || '6.1'} g/kg), seasonal rainfall (${Math.round(env.rainfall_mm || 1053)} mm), and ambient temperature (${env.temp_mean_c?.toFixed(1) || '23.1'}°C), the following crops were ranked: ${topNames || 'Finger Millet (Ragi), Maize, Groundnut'}.`}
               </p>
 
               {/* 2. High Suitability & Diagnostic Confidence Banner */}
-              <div className="ai-suitability-highlight" style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '12px',
-                background: isLight ? 'rgba(16, 185, 129, 0.08)' : 'rgba(16, 185, 129, 0.12)',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
-                borderRadius: '12px',
-                padding: '14px 18px',
-                marginBottom: '20px'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <Award size={22} style={{ color: '#10b981', flexShrink: 0 }} />
+              <div className="ai-suitability-highlight">
+                <div className="flex-row-center gap-10">
+                  <Award size={22} className="text-emerald flex-shrink-0" />
                   <div>
-                    <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', fontWeight: 600 }}>
+                    <span className="text-xs uppercase tracking-wider text-ink-2 font-semibold">
                       Parcel Suitability Grade
                     </span>
-                    <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#10b981' }}>
+                    <div className="text-lg font-extrabold text-emerald">
                       {suit.grade || 'High'} Suitability ({Math.round((suit.score || 0.83) * 100)}%)
                     </div>
                   </div>
                 </div>
 
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  background: isLight ? '#ffffff' : 'rgba(0, 0, 0, 0.25)',
-                  border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(255, 255, 255, 0.12)',
-                  borderRadius: '8px',
-                  padding: '6px 14px'
-                }}>
-                  <CheckCircle size={15} style={{ color: '#10b981' }} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                <div className="ai-conf-badge">
+                  <CheckCircle size={15} className="text-emerald" />
+                  <span className="text-sm font-bold text-ink-1">
                     Diagnostic Confidence: {Math.round((suit.confidence || 0.90) * 100)}%
                   </span>
                 </div>
@@ -824,83 +665,63 @@ export const CropPredictionPage: React.FC = () => {
 
               {/* 3. Key Agronomic Action Plan — 4 Clean Cards */}
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Leaf size={16} style={{ color: '#10b981' }} />
+                <h4 className="text-base font-bold text-ink-1 mb-3 flex-row-center gap-8">
+                  <Leaf size={16} className="text-emerald" />
                   Key Agronomic Action Plan
                 </h4>
 
-                <div className="action-plan-grid" style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                  gap: '14px'
-                }}>
+                <div className="action-plan-grid">
                   {/* Card 1: Cultivar */}
-                  <div className="action-plan-card" style={{
-                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
-                    border: isLight ? '1px solid #e2e8f0' : '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '12px',
-                    padding: '14px 16px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '6px'
-                  }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#10b981' }}>
+                  <div className="action-plan-card">
+                    <div className="flex-between">
+                      <span className="text-xs font-bold uppercase text-emerald">
                         Primary Cultivar Allocation
                       </span>
-                      <span className="badge badge-high" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                      <span className="badge badge-high text-xs px-2 py-1">
                         Rank #1
                       </span>
                     </div>
-                    <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                    <div className="text-sm font-bold text-ink-1">
                       {topCrop?.crop_name || "Finger Millet (Ragi)"}
                     </div>
-                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                    <p className="text-xs text-ink-2 m-0 leading-normal">
                       Suitability match of <strong>{Math.round(((topCrop?.recommendation_score || 0.83) * 100))}%</strong> with expected median yield of <strong>{topCrop?.expected_yield_t_ha?.p50 || 1.56} t/ha</strong> (P10–P90: {topCrop?.expected_yield_t_ha?.p10 || 0.93}–{topCrop?.expected_yield_t_ha?.p90 || 2.56} t/ha).
                     </p>
                   </div>
 
                   {/* Card 2: Intercrop */}
-                  <div className="action-plan-card" style={{
-                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
-                    border: isLight ? '1px solid #e2e8f0' : '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '12px',
-                    padding: '14px 16px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '6px'
-                  }}>
+                  <div className="action-plan-card">
                     {companionOpt ? (
                       <>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#38bdf8' }}>
+                        <div className="flex-between">
+                          <span className="text-xs font-bold uppercase text-info">
                             Symbiotic Companion Pairing
                           </span>
-                          <span className="badge badge-high" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                          <span className="badge badge-high text-xs px-2 py-1">
                             +{boostPct}% Synergy
                           </span>
                         </div>
-                        <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                        <div className="text-sm font-bold text-ink-1">
                           Intercrop with {companionName}
                         </div>
-                        <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                        <p className="text-xs text-ink-2 m-0 leading-normal">
                           Recommended <strong>{Math.round((1 - companionOpt.companion_share_factor) * 100)}:{Math.round(companionOpt.companion_share_factor * 100)} spatial arrangement</strong> boosts total parcel harvest via atmospheric nitrogen fixation and canopy layering.
                         </p>
                       </>
                     ) : (
                       <>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#94a3b8' }}>
+                        <div className="flex-between">
+                          <span className="text-xs font-bold uppercase text-ink-2">
                             Cropping Pattern
                           </span>
-                          <span className="badge badge-low" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                          <span className="badge badge-low text-xs px-2 py-1">
                             Sole Crop
                           </span>
                         </div>
-                        <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                        <div className="text-sm font-bold text-ink-1">
                           Sole Cropping Optimized
                         </div>
-                        <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                        <p className="text-xs text-ink-2 m-0 leading-normal">
                           No verified intercrop pairing identified for this crop under current soil and climate regimes. Monoculture management recommended.
                         </p>
                       </>
@@ -908,53 +729,37 @@ export const CropPredictionPage: React.FC = () => {
                   </div>
 
                   {/* Card 3: Irrigation */}
-                  <div className="action-plan-card" style={{
-                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
-                    border: isLight ? '1px solid #e2e8f0' : '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '12px',
-                    padding: '14px 16px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '6px'
-                  }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#06b6d4' }}>
+                  <div className="action-plan-card">
+                    <div className="flex-between">
+                      <span className="text-xs font-bold uppercase text-info">
                         Irrigation Strategy
                       </span>
-                      <span className="badge badge-moderate" style={{ fontSize: '0.7rem', padding: '2px 8px', textTransform: 'capitalize' }}>
+                      <span className="badge badge-moderate text-xs px-2 py-1 text-capitalize">
                         {irri.recommended_mode || 'Rainfed'}
                       </span>
                     </div>
-                    <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                    <div className="text-sm font-bold text-ink-1">
                       Water Management Mode: {String(irri.recommended_mode || 'Rainfed').toUpperCase()}
                     </div>
-                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                    <p className="text-xs text-ink-2 m-0 leading-normal">
                       Seasonal water demand of <strong>{irri.total_water_demand_m3?.toLocaleString() || '11,400'} m³</strong> against <strong>{irri.effective_rainfall_mm || '789.8'} mm</strong> effective precipitation.
                     </p>
                   </div>
 
                   {/* Card 4: Climate Resilience */}
-                  <div className="action-plan-card" style={{
-                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
-                    border: isLight ? '1px solid #e2e8f0' : '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '12px',
-                    padding: '14px 16px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '6px'
-                  }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#f59e0b' }}>
+                  <div className="action-plan-card">
+                    <div className="flex-between">
+                      <span className="text-xs font-bold uppercase text-gold">
                         Climate Resilience
                       </span>
-                      <span className="badge badge-high" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
+                      <span className="badge badge-high text-xs px-2 py-1">
                         {risk.overall_risk_level || 'Low'} Risk
                       </span>
                     </div>
-                    <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                    <div className="text-sm font-bold text-ink-1">
                       Drought: {risk.drought_risk_score?.toFixed(0) || '6'}% • Heat: {risk.heat_risk_score?.toFixed(0) || '5'}%
                     </div>
-                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                    <p className="text-xs text-ink-2 m-0 leading-normal">
                       {risk.note || 'Low climatic risk profile during active vegetative and grain filling window.'}
                     </p>
                   </div>
@@ -980,7 +785,6 @@ export const CropPredictionPage: React.FC = () => {
               type="button"
               className="btn-primary"
               onClick={() => goToStep(4)}
-              style={{ padding: '12px 28px', fontSize: '1rem' }}
             >
               <span>Detailed Summary</span>
               <ArrowRight size={18} />

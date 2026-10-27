@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  FileText,
   MapPin,
   Activity,
   Award,
@@ -9,14 +8,10 @@ import {
   Sprout,
   TrendingUp,
   Leaf,
-  Compass,
   CheckCircle,
-  Download,
-  Printer,
   ArrowLeft,
   RotateCcw,
   Sparkles,
-  AlertTriangle
 } from 'lucide-react';
 import { useWorkflow } from '../context/WorkflowContext';
 import { ReportDownloadButton } from '../components/ReportDownloadButton/ReportDownloadButton';
@@ -116,29 +111,31 @@ export const SummaryReportPage: React.FC = () => {
     interpretRadar(sat.vv, sat.vh),
   ];
 
+  const aiSynthesis = generateAgronomicRecommendation(report);
+
   return (
     <div className="page-container printable-report-area">
       {/* Printable Header (Visible during Print / PDF Export) */}
       <div className="print-header">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div className="flex-between align-start">
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Sparkles size={20} style={{ color: '#059669' }} />
-              <h1 style={{ fontSize: '20pt', fontWeight: 800, margin: 0, color: '#0f172a', letterSpacing: '-0.02em' }}>
+            <div className="flex-row-center gap-8">
+              <Sparkles size={20} className="text-emerald" />
+              <h1 className="text-2xl font-extrabold m-0 text-ink-1">
                 GeoAgri AI — Agricultural Intelligence Dossier
               </h1>
             </div>
-            <p style={{ fontSize: '9pt', color: '#475569', margin: '3px 0 0 0', fontWeight: 500 }}>
+            <p className="text-xs text-ink-2 font-medium mt-1">
               Global Agronomic Decision Support System • Multi-Criteria Bioclimatic Evaluation
             </p>
           </div>
-          <div style={{ textAlign: 'right', fontSize: '8.5pt', color: '#64748b', lineHeight: 1.4 }}>
+          <div className="text-right text-xs text-ink-3 leading-normal">
             <div><strong>Generated:</strong> {new Date().toLocaleDateString('en-US', { dateStyle: 'long' })}</div>
-            <div><strong>Parcel ID:</strong> WGS84-{centroidLat.toFixed(3)}-{centroidLon.toFixed(3)}</div>
+            <div><strong>Parcel ID:</strong> WGS84-{centroidLat?.toFixed(3)}-{centroidLon?.toFixed(3)}</div>
             <div><strong>Status:</strong> Geodesic Spatial Verified</div>
           </div>
         </div>
-        <hr style={{ margin: '10px 0', borderColor: '#cbd5e1' }} />
+        <hr className="my-2 border-glass" />
       </div>
 
       {/* Screen Header */}
@@ -157,8 +154,8 @@ export const SummaryReportPage: React.FC = () => {
       {/* SECTION 1: FIELD OVERVIEW */}
       <section className="report-section glass-card">
         <div className="section-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <MapPin size={20} style={{ color: '#10b981' }} />
+          <div className="flex-row-center gap-8">
+            <MapPin size={20} className="text-emerald" />
             <h2 className="section-title">1. Field Overview & Spatial Geography</h2>
           </div>
           <span className="badge badge-high">Geodesic Verified</span>
@@ -167,66 +164,58 @@ export const SummaryReportPage: React.FC = () => {
         <div className="report-grid-3">
           <div className="summary-data-cell">
             <span className="cell-label">Location / Region</span>
-            <strong className="cell-val">{detectedLocation?.displayName || formData.selectedPresetName}</strong>
+            <strong className="cell-val">{detectedLocation?.displayName || formData.selectedPresetName || 'Custom Boundary'}</strong>
           </div>
           <div className="summary-data-cell">
             <span className="cell-label">Centroid Coordinates</span>
-            <strong className="cell-val">{centroidLat.toFixed(4)}°N, {centroidLon.toFixed(4)}°E</strong>
+            <strong className="cell-val">{centroidLat?.toFixed(4)}°N, {centroidLon?.toFixed(4)}°E</strong>
           </div>
           <div className="summary-data-cell">
             <span className="cell-label">Geodesic Parcel Area</span>
-            <strong className="cell-val" style={{ color: '#10b981' }}>
+            <strong className="cell-val text-emerald">
               {farmArea != null ? `${farmArea.toFixed(2)} Hectares` : 'N/A (Point Query)'}
             </strong>
           </div>
           <div className="summary-data-cell">
+            <span className="cell-label">Boundary Provenance</span>
+            <strong className="cell-val">
+              Boundary: {report?.field_summary?.boundary_source === 'drawn' ? 'drawn by user' : (report?.field_summary?.boundary_source || 'drawn by user')}
+            </strong>
+          </div>
+          <div className="summary-data-cell">
             <span className="cell-label">Land Classification</span>
-            <strong className="cell-val" style={{ color: report?.land_class?.dominant === 'AGRICULTURAL' ? '#10b981' : '#ef4444' }}>
+            <strong className={`cell-val ${report?.land_class?.dominant === 'AGRICULTURAL' ? 'text-emerald' : 'text-danger'}`}>
               {report?.land_class?.dominant?.replace(/_/g, ' ') || 'AGRICULTURAL'} {report?.land_class?.subclass ? `(${report.land_class.subclass.replace(/_/g, ' ')})` : ''}
             </strong>
           </div>
           <div className="summary-data-cell">
             <span className="cell-label">Irrigability Verdict</span>
-            <strong className="cell-val" style={{
-              color: report?.irrigability?.verdict === 'IRRIGABLE' ? '#10b981' : (report?.irrigability?.verdict === 'CONDITIONALLY_IRRIGABLE' ? '#f59e0b' : '#ef4444')
-            }}>
+            <strong className={`cell-val ${report?.irrigability?.verdict === 'IRRIGABLE' ? 'text-emerald' : (report?.irrigability?.verdict === 'CONDITIONALLY_IRRIGABLE' ? 'text-gold' : 'text-danger')}`}>
               {report?.irrigability?.verdict ? report.irrigability.verdict.replace(/_/g, ' ') : 'IRRIGABLE'}
             </strong>
           </div>
           <div className="summary-data-cell">
             <span className="cell-label">Usable Irrigable Area</span>
-            <strong className="cell-val" style={{ color: '#10b981' }}>
+            <strong className="cell-val text-emerald">
               {report?.irrigability?.irrigable_area_ha != null ? `${report.irrigability.irrigable_area_ha.toFixed(2)} Hectares` : (farmArea != null ? `${farmArea.toFixed(2)} Ha` : 'N/A')}
             </strong>
           </div>
           <div className="summary-data-cell">
             <span className="cell-label">Target Season</span>
-            <strong className="cell-val" style={{ textTransform: 'capitalize' }}>{formData.season}</strong>
+            <strong className="cell-val text-capitalize">{formData.season}</strong>
           </div>
           <div className="summary-data-cell">
             <span className="cell-label">Agro-Climatic Zone</span>
             <strong className="cell-val">{detectedLocation?.agroZone || "Global Agro-Ecological Zone"}</strong>
           </div>
-          <div className="summary-data-cell">
-            <span className="cell-label">Soil Texture Composition</span>
-            <strong className="cell-val">
-              {env.texture_clay_pct.toFixed(0)}% Clay • {env.texture_sand_pct.toFixed(0)}% Sand • {env.texture_silt_pct.toFixed(0)}% Silt
-            </strong>
-          </div>
         </div>
 
         {report?.irrigability && (report.irrigability.verdict === 'NOT_IRRIGABLE' || report.irrigability.verdict === 'NOT_IRRIGABLE_PROVISIONAL') && (
-          <div style={{
-            marginTop: '16px',
-            padding: '16px',
-            backgroundColor: 'rgba(239, 68, 68, 0.1)',
-            border: '1px solid #ef4444',
-            borderRadius: '10px'
-          }}>
-            <strong style={{ color: '#ef4444', display: 'block', marginBottom: '6px' }}>
+          <div className="non-arable-card mt-4 p-4 text-left">
+            <strong className="text-danger block mb-1">
               ⚠ Regulatory Notice: Cultivation Excluded ({report.irrigability.verdict.replace(/_/g, ' ')})
             </strong>
-            <p style={{ margin: 0, fontSize: '0.85rem', color: '#9ca3af' }}>
+            <p className="m-0 text-sm text-ink-2">
               {report.irrigability.reasons?.[0]?.reason || 'Plot falls within protected, water, urban, or wasteland boundaries.'}
             </p>
           </div>
@@ -236,8 +225,8 @@ export const SummaryReportPage: React.FC = () => {
       {/* SECTION 2: SATELLITE & ENVIRONMENTAL ANALYSIS */}
       <section className="report-section glass-card">
         <div className="section-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Activity size={20} style={{ color: '#38bdf8' }} />
+          <div className="flex-row-center gap-8">
+            <Activity size={20} className="text-info" />
             <h2 className="section-title">2. Satellite & Environmental Diagnostics</h2>
           </div>
           <span className="badge badge-moderate">Sentinel-1/2 + ISRIC 250m</span>
@@ -256,14 +245,14 @@ export const SummaryReportPage: React.FC = () => {
             <tbody>
               {metricsList.map((m, idx) => (
                 <tr key={idx}>
-                  <td style={{ fontWeight: 600, color: 'var(--text-main)' }}>{m.label}</td>
-                  <td style={{ fontWeight: 700, color: '#fbbf24', whiteSpace: 'nowrap' }}>{m.value}</td>
+                  <td className="font-semibold text-ink-1">{m.label}</td>
+                  <td className="font-bold text-gold whitespace-nowrap">{m.value}</td>
                   <td>
                     <span className={`badge ${m.rating === 'optimal' ? 'badge-high' : 'badge-moderate'}`}>
                       {m.interpretation}
                     </span>
                   </td>
-                  <td style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>{m.implication}</td>
+                  <td className="text-xs text-ink-2">{m.implication}</td>
                 </tr>
               ))}
             </tbody>
@@ -277,24 +266,24 @@ export const SummaryReportPage: React.FC = () => {
       {/* SECTION 3, 4, 5: TRIO DIAGNOSTIC CARDS (Suitability, Irrigation, Climate Risk) */}
       <div className="report-trio-grid">
         {/* 3. Land Suitability */}
-        <div className="report-section glass-card" style={{ height: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <Award size={18} style={{ color: '#10b981' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+        <div className="report-section glass-card h-full">
+          <div className="flex-row-center gap-8 mb-3">
+            <Award size={18} className="text-emerald" />
+            <h3 className="text-base font-bold m-0 text-ink-1">
               3. Land Suitability Assessment
             </h3>
           </div>
-          <div style={{ background: suit.score === 0 ? 'rgba(239, 68, 68, 0.12)' : 'rgba(16, 185, 129, 0.12)', border: suit.score === 0 ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '10px', padding: '14px', marginBottom: '12px' }}>
-            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: suit.score === 0 ? '#ef4444' : '#10b981' }}>
+          <div className="ai-suitability-highlight mb-3">
+            <div className={`text-xl font-extrabold ${suit.score === 0 ? 'text-danger' : 'text-emerald'}`}>
               {suit.grade} Suitability ({Math.round(suit.score * 100)}%)
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+            <div className="text-xs text-ink-2 mt-1">
               Diagnostic Confidence: <strong>{Math.round(suit.confidence * 100)}%</strong>
             </div>
           </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-main)' }}>
+          <div className="text-xs text-ink-1">
             <strong>Limiting Factors:</strong>
-            <ul style={{ paddingLeft: '18px', marginTop: '6px' }}>
+            <ul className="pl-4 mt-1">
               {suit.limiting_factors.map((f, i) => (
                 <li key={i}>{f}</li>
               ))}
@@ -303,61 +292,61 @@ export const SummaryReportPage: React.FC = () => {
         </div>
 
         {/* 4. Irrigation Analysis */}
-        <div className="report-section glass-card" style={{ height: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <Droplets size={18} style={{ color: '#38bdf8' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+        <div className="report-section glass-card h-full">
+          <div className="flex-row-center gap-8 mb-3">
+            <Droplets size={18} className="text-info" />
+            <h3 className="text-base font-bold m-0 text-ink-1">
               4. Irrigation & Water Balance
             </h3>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '12px' }}>
+          <div className="grid grid-cols-2 gap-2 mb-3">
             <div className="metric-box">
               <span className="metric-label">Recommended Mode</span>
-              <span className="metric-value" style={{ color: '#38bdf8', fontSize: '1.05rem', textTransform: 'capitalize' }}>
+              <span className="metric-value text-info text-capitalize">
                 {irri.recommended_mode}
               </span>
             </div>
             <div className="metric-box">
               <span className="metric-label">Total Water Demand</span>
-              <span className="metric-value" style={{ fontSize: '1.05rem' }}>
+              <span className="metric-value">
                 {irri.total_water_demand_m3.toLocaleString()} m³
               </span>
             </div>
           </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-main)' }}>
+          <div className="text-xs text-ink-1 leading-relaxed">
             Seasonal effective rainfall is estimated at <strong>{irri.effective_rainfall_mm} mm</strong>. Soil moisture levels are adequate with supplemental watering required during flowering and pod development.
           </div>
         </div>
 
         {/* 5. Climate Risk */}
-        <div className="report-section glass-card" style={{ height: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <ShieldAlert size={18} style={{ color: '#f59e0b' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+        <div className="report-section glass-card h-full">
+          <div className="flex-row-center gap-8 mb-3">
+            <ShieldAlert size={18} className="text-gold" />
+            <h3 className="text-base font-bold m-0 text-ink-1">
               5. Climate Risk Scorecard
             </h3>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span className="badge badge-high" style={{ fontSize: '0.85rem' }}>
+          <div className="flex-between mb-3">
+            <span className="badge badge-high text-sm">
               {risk.overall_risk_level} Climate Risk
             </span>
-            <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>30-Year Trend Calibration</span>
+            <span className="text-xs text-ink-2">30-Year Trend Calibration</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', marginBottom: '10px' }}>
-            <div className="metric-box" style={{ padding: '8px' }}>
-              <span className="metric-label" style={{ fontSize: '0.68rem' }}>Drought</span>
-              <span className="metric-value" style={{ fontSize: '0.95rem' }}>{risk.drought_risk_score.toFixed(0)}%</span>
+          <div className="grid grid-cols-3 gap-2 mb-2">
+            <div className="metric-box p-2">
+              <span className="metric-label text-xs">Drought</span>
+              <span className="metric-value text-sm">{risk.drought_risk_score.toFixed(0)}%</span>
             </div>
-            <div className="metric-box" style={{ padding: '8px' }}>
-              <span className="metric-label" style={{ fontSize: '0.68rem' }}>Heat Stress</span>
-              <span className="metric-value" style={{ fontSize: '0.95rem' }}>{risk.heat_risk_score.toFixed(0)}%</span>
+            <div className="metric-box p-2">
+              <span className="metric-label text-xs">Heat Stress</span>
+              <span className="metric-value text-sm">{risk.heat_risk_score.toFixed(0)}%</span>
             </div>
-            <div className="metric-box" style={{ padding: '8px' }}>
-              <span className="metric-label" style={{ fontSize: '0.68rem' }}>Excess Rain</span>
-              <span className="metric-value" style={{ fontSize: '0.95rem' }}>{risk.excess_rain_risk_score.toFixed(0)}%</span>
+            <div className="metric-box p-2">
+              <span className="metric-label text-xs">Excess Rain</span>
+              <span className="metric-value text-sm">{risk.excess_rain_risk_score.toFixed(0)}%</span>
             </div>
           </div>
-          <p style={{ fontSize: '0.78rem', color: '#9ca3af', margin: 0 }}>
+          <p className="text-xs text-ink-2 m-0">
             💬 <strong>Advisory:</strong> {risk.note}
           </p>
         </div>
@@ -366,8 +355,8 @@ export const SummaryReportPage: React.FC = () => {
       {/* SECTION 6: TOP 5 CROP RECOMMENDATIONS */}
       <section className="report-section glass-card">
         <div className="section-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sprout size={20} style={{ color: '#10b981' }} />
+          <div className="flex-row-center gap-8">
+            <Sprout size={20} className="text-emerald" />
             <h2 className="section-title">6. Top 5 Recommended Multi-Crop Combinations</h2>
           </div>
           <span className="badge badge-high">75% Main + 25% Companion Ratio</span>
@@ -380,52 +369,51 @@ export const SummaryReportPage: React.FC = () => {
                 <th>Rank</th>
                 <th>Primary Crop</th>
                 <th>Companion Intercrop</th>
-                <th style={{ textAlign: 'right' }}>Suitability</th>
-                <th style={{ textAlign: 'right' }}>Expected Yield</th>
-                <th style={{ textAlign: 'center' }}>Yield Boost</th>
-                <th style={{ textAlign: 'center' }}>Irrigation</th>
-                <th style={{ textAlign: 'center' }}>Risk Level</th>
+                <th className="text-right">Suitability</th>
+                <th className="text-right">Expected Yield</th>
+                <th className="text-center">Yield Boost</th>
+                <th className="text-center">Irrigation</th>
+                <th className="text-center">Risk Level</th>
               </tr>
             </thead>
             <tbody>
               {top5Crops.map((c, idx) => {
                 const companion = c.intercrop_options?.[0];
-                const boost = companion ? (companion.yield_boost_pct * 100).toFixed(1) : "14.5";
                 const totalYield = (c.expected_production_t?.p50 || (c.expected_yield_t_ha.p50 * farmArea)).toFixed(1);
 
                 return (
                   <tr key={idx}>
-                    <td style={{ fontWeight: 700, color: idx === 0 ? '#fbbf24' : '#9ca3af' }}>#{idx + 1}</td>
-                    <td style={{ fontWeight: 600, color: 'var(--text-main)' }}>{c.crop_name}</td>
+                    <td className={`font-bold ${idx === 0 ? 'text-gold' : 'text-ink-2'}`}>#{idx + 1}</td>
+                    <td className="font-semibold text-ink-1">{c.crop_name}</td>
                     <td>
                       {companion ? (
-                        <span style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <span className="text-emerald flex-row-center gap-1">
                           <Leaf size={12} /> {companion.companion_crop_name}
                         </span>
                       ) : (
-                        <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>None (Sole)</span>
+                        <span className="text-ink-3 text-sm">None (Sole)</span>
                       )}
                     </td>
-                    <td style={{ textAlign: 'right', fontWeight: 700, color: '#10b981' }}>
+                    <td className="text-right font-bold text-emerald">
                       {(c.recommendation_score * 100).toFixed(1)}%
                     </td>
-                    <td style={{ textAlign: 'right', fontWeight: 700, color: '#fbbf24' }}>
-                      {totalYield} t <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>({c.expected_yield_t_ha.p50} t/ha)</span>
+                    <td className="text-right font-bold text-gold">
+                      {totalYield} t <span className="text-xs text-ink-3">({c.expected_yield_t_ha.p50} t/ha)</span>
                     </td>
-                    <td style={{ textAlign: 'center' }}>
+                    <td className="text-center">
                       {companion ? (
-                        <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 8px', borderRadius: '4px', fontWeight: 700, fontSize: '0.75rem' }}>
+                        <span className="multi-crop-boost-tag">
                           +{(companion.yield_boost_pct * 100).toFixed(1)}%
                         </span>
                       ) : (
-                        <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>—</span>
+                        <span className="text-ink-3 text-xs">—</span>
                       )}
                     </td>
-                    <td style={{ textAlign: 'center', textTransform: 'capitalize' }}>
-                      <span className="badge badge-high" style={{ fontSize: '0.75rem' }}>{c.irrigation_mode}</span>
+                    <td className="text-center text-capitalize">
+                      <span className="badge badge-high text-xs">{c.irrigation_mode}</span>
                     </td>
-                    <td style={{ textAlign: 'center' }}>
-                      <span style={{ color: c.climate_risk_score < 35 ? '#10b981' : '#fbbf24', fontWeight: 600, fontSize: '0.8rem' }}>
+                    <td className="text-center">
+                      <span className={`font-semibold text-xs ${c.climate_risk_score < 35 ? 'text-emerald' : 'text-gold'}`}>
                         {c.climate_risk_score < 35 ? 'Low' : 'Moderate'}
                       </span>
                     </td>
@@ -440,8 +428,8 @@ export const SummaryReportPage: React.FC = () => {
       {/* SECTION 7: TOP 10 YIELD PREDICTIONS */}
       <section className="report-section glass-card">
         <div className="section-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <TrendingUp size={20} style={{ color: '#f59e0b' }} />
+          <div className="flex-row-center gap-8">
+            <TrendingUp size={20} className="text-gold" />
             <h2 className="section-title">7. Top 10 Yield Predictions Summary</h2>
           </div>
           <span className="badge badge-moderate">Uncertainty Bounds Included</span>
@@ -453,27 +441,27 @@ export const SummaryReportPage: React.FC = () => {
               <tr>
                 <th>Rank</th>
                 <th>Cultivar</th>
-                <th style={{ textAlign: 'right' }}>Total Harvest (P50)</th>
-                <th style={{ textAlign: 'right' }}>Median Yield (P50)</th>
-                <th style={{ textAlign: 'right' }}>P10–P90 Range</th>
-                <th style={{ textAlign: 'center' }}>Water Need</th>
-                <th style={{ textAlign: 'right' }}>Recommendation Score</th>
+                <th className="text-right">Total Harvest (P50)</th>
+                <th className="text-right">Median Yield (P50)</th>
+                <th className="text-right">P10–P90 Range</th>
+                <th className="text-center">Water Need</th>
+                <th className="text-right">Recommendation Score</th>
               </tr>
             </thead>
             <tbody>
               {top10Crops.map((c, idx) => (
                 <tr key={idx}>
-                  <td style={{ color: 'var(--text-muted)', fontWeight: 600 }}>{idx + 1}</td>
-                  <td style={{ fontWeight: 600, color: 'var(--text-main)' }}>{c.crop_name}</td>
-                  <td style={{ textAlign: 'right', fontWeight: 700, color: '#fbbf24' }}>
+                  <td className="text-ink-3 font-semibold">{idx + 1}</td>
+                  <td className="font-semibold text-ink-1">{c.crop_name}</td>
+                  <td className="text-right font-bold text-gold">
                     {(c.expected_production_t?.p50 || (c.expected_yield_t_ha.p50 * farmArea)).toFixed(1)} t
                   </td>
-                  <td style={{ textAlign: 'right' }}>{c.expected_yield_t_ha.p50.toFixed(2)} t/ha</td>
-                  <td style={{ textAlign: 'right', color: '#9ca3af', fontSize: '0.78rem' }}>
+                  <td className="text-right">{c.expected_yield_t_ha.p50.toFixed(2)} t/ha</td>
+                  <td className="text-right text-ink-2 text-xs">
                     {c.expected_yield_t_ha.p10.toFixed(2)} – {c.expected_yield_t_ha.p90.toFixed(2)} t/ha
                   </td>
-                  <td style={{ textAlign: 'center', color: '#38bdf8' }}>{c.water_need_mm} mm</td>
-                  <td style={{ textAlign: 'right', fontWeight: 700, color: '#34d399' }}>
+                  <td className="text-center text-info">{c.water_need_mm} mm</td>
+                  <td className="text-right font-bold text-emerald-light">
                     {(c.recommendation_score * 100).toFixed(1)}%
                   </td>
                 </tr>
@@ -487,10 +475,10 @@ export const SummaryReportPage: React.FC = () => {
       <div className="print-page-break" />
 
       {/* SECTION 8: SYNTHESIZED AGRONOMIC INTELLIGENCE & ACTION PLAN */}
-      <section className="report-section glass-card executive-recommendation-section" style={{ borderLeft: '4px solid #10b981' }}>
+      <section className="report-section glass-card executive-recommendation-section">
         <div className="section-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sparkles size={20} style={{ color: '#10b981' }} />
+          <div className="flex-row-center gap-8">
+            <Sparkles size={20} className="text-emerald" />
             <h2 className="section-title">8. Synthesized Agronomic Intelligence & Strategic Action Plan</h2>
           </div>
           <span className="badge badge-high">AI Decision Support Engine</span>
@@ -498,8 +486,8 @@ export const SummaryReportPage: React.FC = () => {
 
         {/* Executive Overview Synopsis */}
         <div className="executive-synopsis-banner">
-          <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: '1.65', color: 'var(--text-main)' }}>
-            Based on the selected location's satellite diagnostics (NDVI: <strong>{sat.ndvi.toFixed(2)}</strong>, NDMI: <strong>{sat.ndmi.toFixed(2)}</strong>), soil characteristics (pH: <strong>{env.ph.toFixed(2)}</strong>, SOC: <strong>{env.organic_carbon_g_kg.toFixed(1)} g/kg</strong>), seasonal rainfall (<strong>{env.rainfall_mm.toFixed(0)} mm</strong>), mean temperature (<strong>{env.temp_mean_c.toFixed(1)}°C</strong>), and climate vulnerability (<strong>{risk.overall_risk_level}</strong>), the parcel demonstrates <strong style={{ color: '#10b981' }}>{suit.grade} Suitability ({Math.round(suit.score * 100)}%)</strong> with <strong style={{ color: '#38bdf8' }}>{Math.round(suit.confidence * 100)}% Diagnostic Confidence</strong>.
+          <p className="m-0 text-sm leading-relaxed text-ink-1">
+            {aiSynthesis || `Based on the selected location's satellite diagnostics (NDVI: ${sat.ndvi?.toFixed(2)}, NDMI: ${sat.ndmi?.toFixed(2)}), soil characteristics (pH: ${env.ph?.toFixed(2)}, SOC: ${env.organic_carbon_g_kg?.toFixed(1)} g/kg), seasonal rainfall (${env.rainfall_mm?.toFixed(0)} mm), mean temperature (${env.temp_mean_c?.toFixed(1)}°C), and climate vulnerability (${risk.overall_risk_level}), the parcel demonstrates ${suit.grade} Suitability (${Math.round((suit.score || 0.8) * 100)}%) with ${Math.round((suit.confidence || 0.9) * 100)}% Diagnostic Confidence.`}
           </p>
         </div>
 
@@ -508,7 +496,7 @@ export const SummaryReportPage: React.FC = () => {
           {/* Action 1: Primary Cultivar Allocation */}
           <div className="action-card">
             <div className="action-card-header">
-              <div className="action-icon-pill" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981' }}>
+              <div className="action-icon-pill emerald">
                 <Sprout size={16} />
               </div>
               <span className="action-type-badge">Primary Cultivar Allocation</span>
@@ -517,11 +505,11 @@ export const SummaryReportPage: React.FC = () => {
               {topCrop?.crop_name || "Top Ranked Cultivar"}
             </div>
             <div className="action-meta-row">
-              <span className="badge badge-high" style={{ fontSize: '0.72rem' }}>
+              <span className="badge badge-high text-xs">
                 {Math.round((topCrop?.recommendation_score || 0.8) * 100)}% Suitability
               </span>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                Target Yield: <strong style={{ color: 'var(--text-main)' }}>{topCrop?.expected_yield_t_ha?.p50.toFixed(2) || "0.00"} t/ha</strong>
+              <span className="text-xs text-ink-2">
+                Target Yield: <strong className="text-ink-1">{topCrop?.expected_yield_t_ha?.p50.toFixed(2) || "0.00"} t/ha</strong>
               </span>
             </div>
             <p className="action-desc">
@@ -534,7 +522,7 @@ export const SummaryReportPage: React.FC = () => {
             {companionOpt ? (
               <>
                 <div className="action-card-header">
-                  <div className="action-icon-pill" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
+                  <div className="action-icon-pill info">
                     <Leaf size={16} />
                   </div>
                   <span className="action-type-badge">Symbiotic Companion Pairing</span>
@@ -543,10 +531,10 @@ export const SummaryReportPage: React.FC = () => {
                   {companionName}
                 </div>
                 <div className="action-meta-row">
-                  <span className="badge badge-high" style={{ fontSize: '0.72rem', background: 'rgba(56, 189, 248, 0.2)', color: '#38bdf8' }}>
+                  <span className="badge badge-high text-xs">
                     +{boostPct}% Yield Synergy
                   </span>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                  <span className="text-xs text-ink-2">
                     75:25 Spatial Intercrop
                   </span>
                 </div>
@@ -557,7 +545,7 @@ export const SummaryReportPage: React.FC = () => {
             ) : (
               <>
                 <div className="action-card-header">
-                  <div className="action-icon-pill" style={{ background: 'rgba(148, 163, 184, 0.15)', color: '#94a3b8' }}>
+                  <div className="action-icon-pill neutral">
                     <Leaf size={16} />
                   </div>
                   <span className="action-type-badge">Cropping Strategy</span>
@@ -566,10 +554,10 @@ export const SummaryReportPage: React.FC = () => {
                   Sole Cropping Optimized
                 </div>
                 <div className="action-meta-row">
-                  <span className="badge badge-low" style={{ fontSize: '0.72rem' }}>
+                  <span className="badge badge-low text-xs">
                     Monoculture
                   </span>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                  <span className="text-xs text-ink-2">
                     100% Primary Canopy
                   </span>
                 </div>
@@ -583,20 +571,20 @@ export const SummaryReportPage: React.FC = () => {
           {/* Action 3: Precision Irrigation Strategy */}
           <div className="action-card">
             <div className="action-card-header">
-              <div className="action-icon-pill" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8' }}>
+              <div className="action-icon-pill info">
                 <Droplets size={16} />
               </div>
               <span className="action-type-badge">Precision Irrigation Strategy</span>
             </div>
-            <div className="action-main-val" style={{ textTransform: 'capitalize' }}>
+            <div className="action-main-val text-capitalize">
               {irri.recommended_mode} Mode
             </div>
             <div className="action-meta-row">
-              <span className="badge badge-moderate" style={{ fontSize: '0.72rem' }}>
+              <span className="badge badge-moderate text-xs">
                 {irri.total_water_demand_m3.toLocaleString()} m³ Total Need
               </span>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                Rainfall: <strong style={{ color: 'var(--text-main)' }}>{irri.effective_rainfall_mm.toFixed(1)} mm</strong>
+              <span className="text-xs text-ink-2">
+                Rainfall: <strong className="text-ink-1">{irri.effective_rainfall_mm.toFixed(1)} mm</strong>
               </span>
             </div>
             <p className="action-desc">
@@ -607,7 +595,7 @@ export const SummaryReportPage: React.FC = () => {
           {/* Action 4: Climate Resilience & Advisory */}
           <div className="action-card">
             <div className="action-card-header">
-              <div className="action-icon-pill" style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b' }}>
+              <div className="action-icon-pill gold">
                 <ShieldAlert size={16} />
               </div>
               <span className="action-type-badge">Climate Resilience & Advisory</span>
@@ -616,8 +604,8 @@ export const SummaryReportPage: React.FC = () => {
               {risk.overall_risk_level} Climatic Vulnerability
             </div>
             <div className="action-meta-row">
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                Drought: <strong style={{ color: 'var(--text-main)' }}>{risk.drought_risk_score.toFixed(0)}%</strong> • Heat: <strong style={{ color: 'var(--text-main)' }}>{risk.heat_risk_score.toFixed(0)}%</strong>
+              <span className="text-xs text-ink-2">
+                Drought: <strong className="text-ink-1">{risk.drought_risk_score.toFixed(0)}%</strong> • Heat: <strong className="text-ink-1">{risk.heat_risk_score.toFixed(0)}%</strong>
               </span>
             </div>
             <p className="action-desc">
@@ -628,24 +616,24 @@ export const SummaryReportPage: React.FC = () => {
 
         {/* Dossier Certification Sign-off */}
         <div className="report-certification-footer">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <CheckCircle size={15} style={{ color: '#10b981' }} />
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)' }}>
+          <div className="flex-row-center gap-8">
+            <CheckCircle size={15} className="text-emerald" />
+            <span className="text-sm font-bold text-ink-1">
               Certified Global Agricultural Decision Support System (DSS)
             </span>
           </div>
-          <span style={{ fontSize: '0.73rem', color: 'var(--text-muted)' }}>
-            Bioclimatic Multi-Criteria Decision Engine • WGS84 Geodesic Verified • Report ID: WGS84-{centroidLat.toFixed(3)}-{centroidLon.toFixed(3)}
+          <span className="text-xs text-ink-2">
+            Bioclimatic Multi-Criteria Decision Engine • WGS84 Geodesic Verified • Report ID: WGS84-{centroidLat?.toFixed(3)}-{centroidLon?.toFixed(3)}
           </span>
         </div>
       </section>
 
       {/* SECTION 8B: OPEN DATA ATTRIBUTIONS & LICENCES (PRD v2.1 M30) */}
-      <section className="report-section glass-card" style={{ marginTop: '16px', padding: '16px 20px', fontSize: '0.74rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-        <h4 style={{ fontSize: '0.85rem', fontWeight: 700, margin: '0 0 6px 0', color: 'var(--text-main)' }}>
+      <section className="report-section glass-card mt-4 p-4 text-xs text-ink-2 leading-relaxed">
+        <h4 className="text-sm font-bold m-0 mb-2 text-ink-1">
           Data Sources, Licences & Open Data Attributions (PRD v2.1 M30)
         </h4>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '8px' }}>
+        <div className="report-attributions-grid">
           <div><strong>• OpenStreetMap (OSM) / OpenFreeMap:</strong> © OpenStreetMap contributors, ODbL 1.0. Vector tiles under CC BY-SA 2.0.</div>
           <div><strong>• ESA WorldCover 2021:</strong> © ESA WorldCover consortium 2021 / Contains modified Copernicus Sentinel data (2021), CC BY 4.0.</div>
           <div><strong>• Copernicus DEM GLO-30:</strong> European Space Agency (ESA) Copernicus Programme, Open Access.</div>
@@ -659,12 +647,12 @@ export const SummaryReportPage: React.FC = () => {
 
       {/* SECTION 9: REPORT DOWNLOAD & ACTION DOCK */}
       <section className="report-section glass-card no-print">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+        <div className="flex-between flex-wrap gap-16">
           <div>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+            <h3 className="text-lg font-bold m-0 text-ink-1">
               9. Export & Share Agricultural Intelligence Dossier
             </h3>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '4px 0 0 0' }}>
+            <p className="text-xs text-ink-2 mt-1">
               Download a high-resolution, branded PDF report containing all field data, satellite metrics, and crop forecasts.
             </p>
           </div>

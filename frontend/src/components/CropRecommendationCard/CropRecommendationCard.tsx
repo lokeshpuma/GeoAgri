@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Leaf, Droplet, ShieldAlert, TrendingUp } from 'lucide-react';
+import { Leaf, Droplet, ShieldAlert } from 'lucide-react';
 import { FullReportResponse } from '../../api/client';
 
 interface CropRecommendationCardProps {
@@ -8,21 +8,13 @@ interface CropRecommendationCardProps {
   farmArea: number;
 }
 
-const RANK_BADGE_COLORS: Record<number, { bg: string; text: string; border: string; glow: string }> = {
-  1: { bg: 'rgba(234, 179, 8, 0.2)', text: '#fbbf24', border: '#eab308', glow: 'rgba(234, 179, 8, 0.3)' },
-  2: { bg: 'rgba(148, 163, 184, 0.2)', text: '#cbd5e1', border: '#94a3b8', glow: 'rgba(148, 163, 184, 0.3)' },
-  3: { bg: 'rgba(217, 119, 6, 0.2)', text: '#f59e0b', border: '#d97706', glow: 'rgba(217, 119, 6, 0.3)' },
-  4: { bg: 'rgba(16, 185, 129, 0.15)', text: '#34d399', border: '#10b981', glow: 'rgba(16, 185, 129, 0.2)' },
-  5: { bg: 'rgba(59, 130, 246, 0.15)', text: '#60a5fa', border: '#3b82f6', glow: 'rgba(59, 130, 246, 0.2)' },
-};
-
 export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
   crop,
   rank,
   farmArea,
 }) => {
   const isTopTier = rank <= 3;
-  const colors = RANK_BADGE_COLORS[rank] || RANK_BADGE_COLORS[4];
+  const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : 'rank-default';
 
   // Companion logic
   const primaryIntercrop = crop.intercrop_options && crop.intercrop_options.length > 0
@@ -35,36 +27,23 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
   const suitabilityPct = Math.min(100, Math.round(crop.recommendation_score * 100));
 
   // Risk badge
-  const riskColor = crop.climate_risk_score < 35 ? '#34d399' : crop.climate_risk_score < 60 ? '#fbbf24' : '#f87171';
+  const riskColorClass = crop.climate_risk_score < 35 ? 'text-emerald-light' : crop.climate_risk_score < 60 ? 'text-gold' : 'text-danger';
   const riskLabel = crop.climate_risk_score < 35 ? 'Low Risk' : crop.climate_risk_score < 60 ? 'Moderate Risk' : 'Elevated Risk';
 
   return (
-    <div
-      className={`crop-rec-card ${isTopTier ? 'top-tier' : ''}`}
-      style={{
-        borderColor: isTopTier ? colors.border : 'var(--bg-card-border)',
-        boxShadow: isTopTier ? `0 8px 30px ${colors.glow}` : undefined,
-      }}
-    >
+    <div className={`crop-rec-card ${isTopTier ? 'top-tier' : ''} ${rankClass}`}>
       {/* Top Bar: Rank & Category */}
       <div className="crop-rec-top">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span
-            className="rank-pill"
-            style={{
-              background: colors.bg,
-              color: colors.text,
-              border: `1px solid ${colors.border}`,
-            }}
-          >
+        <div className="flex-row-center gap-8">
+          <span className={`rank-pill ${rankClass}`}>
             #{rank} RECOMMENDATION
           </span>
           <span className="crop-category-tag">{crop.category}</span>
         </div>
 
         <div className="suitability-score-pill">
-          <span style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Suitability</span>
-          <strong style={{ color: '#34d399', fontSize: '1rem' }}>{suitabilityPct}%</strong>
+          <span className="crop-rec-suit-label">Suitability</span>
+          <strong className="crop-rec-suit-val">{suitabilityPct}%</strong>
         </div>
       </div>
 
@@ -73,17 +52,17 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
         <h3 className="crop-main-name">{crop.crop_name}</h3>
         {primaryIntercrop ? (
           <div className="companion-intercrop-banner">
-            <Leaf size={15} style={{ color: '#10b981', flexShrink: 0 }} />
+            <Leaf size={15} className="text-emerald flex-shrink-0" />
             <span>
-              Companion: <strong className="companion-name-text" style={{ color: 'var(--text-main)' }}>+{primaryIntercrop.companion_crop_name}</strong>
+              Companion: <strong className="companion-name-text">+{primaryIntercrop.companion_crop_name}</strong>
             </span>
             <span className="yield-boost-pill">+{(primaryIntercrop.yield_boost_pct * 100).toFixed(1)}% Yield Boost</span>
           </div>
         ) : (
-          <div className="companion-intercrop-banner" style={{ opacity: 0.75 }}>
-            <Leaf size={15} style={{ color: '#9ca3af', flexShrink: 0 }} />
+          <div className="companion-intercrop-banner sole">
+            <Leaf size={15} className="text-ink-3 flex-shrink-0" />
             <span>
-              Management: <strong className="companion-name-text" style={{ color: 'var(--text-main)' }}>Sole Cropping</strong>
+              Management: <strong className="companion-name-text">Sole Cropping</strong>
             </span>
           </div>
         )}
@@ -103,7 +82,7 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
 
         <div className="crop-stat-cell">
           <span className="crop-stat-label">Total Production</span>
-          <div className="crop-stat-val" style={{ color: '#fbbf24' }}>
+          <div className="crop-stat-val text-gold">
             <strong>{totalProductionTonnes.toFixed(1)}</strong> <span className="stat-unit">Tonnes</span>
           </div>
           <span className="crop-stat-sub">Across {farmArea.toFixed(2)} Ha field</span>
@@ -111,9 +90,9 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
 
         <div className="crop-stat-cell">
           <span className="crop-stat-label">Irrigation Need</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
-            <Droplet size={14} style={{ color: '#38bdf8' }} />
-            <strong style={{ textTransform: 'capitalize', color: '#38bdf8', fontSize: '0.9rem' }}>
+          <div className="flex-row-center gap-6 mt-1">
+            <Droplet size={14} className="text-info" />
+            <strong className="text-info text-capitalize text-sm">
               {crop.irrigation_mode}
             </strong>
           </div>
@@ -122,9 +101,9 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
 
         <div className="crop-stat-cell">
           <span className="crop-stat-label">Climate Vulnerability</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
-            <ShieldAlert size={14} style={{ color: riskColor }} />
-            <strong style={{ color: riskColor, fontSize: '0.9rem' }}>{riskLabel}</strong>
+          <div className="flex-row-center gap-6 mt-1">
+            <ShieldAlert size={14} className={riskColorClass} />
+            <strong className={`${riskColorClass} text-sm`}>{riskLabel}</strong>
           </div>
           <span className="crop-stat-sub">{crop.climate_risk_score.toFixed(0)}% risk index</span>
         </div>

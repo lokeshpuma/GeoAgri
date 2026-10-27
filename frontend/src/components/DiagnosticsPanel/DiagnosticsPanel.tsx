@@ -34,20 +34,20 @@ interface DiagnosticsPanelProps {
 
 export const DiagnosticsPanel: React.FC<DiagnosticsPanelProps> = ({ environment, satellite }) => {
   return (
-    <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Activity style={{ color: '#14b8a6' }} size={20} />
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 600 }}>Environmental & Spectral Diagnostics (34 Base Layers)</h3>
+    <div className="glass-card diag-panel-container">
+      <div className="diag-panel-header">
+        <Activity className="text-emerald" size={20} />
+        <h3 className="diag-panel-title">Environmental & Spectral Diagnostics (34 Base Layers)</h3>
       </div>
 
       <div className="diagnostics-grid">
         <div className="metric-box">
           <span className="metric-label">NDVI (Vegetation)</span>
-          <span className="metric-value" style={{ color: '#34d399' }}>{satellite.ndvi.toFixed(2)}</span>
+          <span className="metric-value text-emerald">{satellite.ndvi.toFixed(2)}</span>
         </div>
         <div className="metric-box">
           <span className="metric-label">NDWI (Moisture)</span>
-          <span className="metric-value" style={{ color: '#38bdf8' }}>{satellite.ndwi.toFixed(2)}</span>
+          <span className="metric-value text-info">{satellite.ndwi.toFixed(2)}</span>
         </div>
         <div className="metric-box">
           <span className="metric-label">Seasonal Rainfall</span>

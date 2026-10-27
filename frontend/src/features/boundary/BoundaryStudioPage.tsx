@@ -260,32 +260,13 @@ export const BoundaryStudioPage: React.FC = () => {
     : 'No boundary placed';
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        height: 'calc(100vh - 120px)',
-        overflow: 'hidden',
-        background: 'var(--bg-0)',
-      }}
-    >
+    <div className="boundary-studio-page">
       {/* Live ARIA Region for Screen Readers (PRD §3.4 S10) */}
       <div
         aria-live="polite"
         aria-atomic="true"
         className="sr-only"
         id="boundary-status-announcer"
-        style={{
-          position: 'absolute',
-          width: '1px',
-          height: '1px',
-          padding: 0,
-          margin: '-1px',
-          overflow: 'hidden',
-          clip: 'rect(0, 0, 0, 0)',
-          whiteSpace: 'nowrap',
-          border: 0,
-        }}
       >
         {ariaAnnouncement}
       </div>

@@ -393,12 +393,6 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     if (!searchMarkerRef.current) {
       const el = document.createElement('div');
       el.className = 'search-pulse-marker';
-      el.style.width = '14px';
-      el.style.height = '14px';
-      el.style.background = '#22c58b';
-      el.style.borderRadius = '50%';
-      el.style.border = '2px solid #ffffff';
-      el.style.boxShadow = '0 0 12px #22c58b';
 
       searchMarkerRef.current = new maplibregl.Marker({ element: el })
         .setLngLat(center)
@@ -409,10 +403,10 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
   }, [searchTarget]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 'calc(100vh - 140px)' }}>
+    <div className="boundary-map-wrapper">
       <div
         ref={mapContainerRef}
-        style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+        className="boundary-map-canvas"
       />
     </div>
   );

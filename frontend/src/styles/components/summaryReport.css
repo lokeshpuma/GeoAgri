@@ -1,0 +1,206 @@
+/* Summary & Executive Report Styles using Terra Noir Design Tokens */
+
+.print-header {
+  display: none;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-header {
+    display: block !important;
+    margin-bottom: 20px;
+  }
+
+  .print-page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  .glass-card {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+}
+
+.report-section {
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.report-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.summary-data-cell {
+  background: var(--bg-1);
+  border: 1px solid var(--glass-border);
+  padding: 14px 16px;
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cell-label {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.cell-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-1);
+}
+
+.report-trio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.metric-box {
+  background: var(--bg-1);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.metric-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink-1);
+}
+
+.executive-recommendation-section {
+  border-left: 4px solid var(--emerald-500);
+}
+
+.executive-synopsis-banner {
+  background: var(--emerald-glow);
+  border: 1px solid var(--emerald-500);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.action-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.action-card {
+  background: var(--bg-1);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-icon-pill {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icon-pill.emerald {
+  background: var(--emerald-glow);
+  color: var(--emerald-500);
+}
+
+.action-icon-pill.info {
+  background: rgba(108, 182, 255, 0.15);
+  color: var(--info);
+}
+
+.action-icon-pill.gold {
+  background: var(--gold-glow);
+  color: var(--gold-500);
+}
+
+.action-icon-pill.neutral {
+  background: var(--bg-2);
+  color: var(--ink-2);
+}
+
+.action-type-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.action-main-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink-1);
+}
+
+.action-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.action-desc {
+  font-size: 0.82rem;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.report-certification-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.report-attributions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 8px;
+}

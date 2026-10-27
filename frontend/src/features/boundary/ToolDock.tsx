@@ -39,30 +39,8 @@ export const ToolDock: React.FC<ToolDockProps> = ({
   hasBoundary,
 }) => {
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: '80px',
-        left: '20px',
-        zIndex: 'var(--z-panel)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '6px',
-        pointerEvents: 'auto',
-      }}
-    >
-      <div
-        className="glass-panel"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '6px',
-          padding: '8px',
-          background: 'var(--glass-strong)',
-          borderRadius: 'var(--r-md)',
-          boxShadow: 'var(--elev-2)',
-        }}
-      >
+    <div className="tool-dock-container">
+      <div className="glass-panel tool-dock-panel">
         <Tooltip content="Pan Map (Space / Esc)" position="right">
           <IconButton
             icon={<Hand size={18} />}
@@ -72,7 +50,7 @@ export const ToolDock: React.FC<ToolDockProps> = ({
           />
         </Tooltip>
 
-        <div style={{ height: '1px', background: 'var(--glass-border)', margin: '2px 0' }} />
+        <div className="tool-dock-divider" />
 
         <Tooltip content="Draw Polygon (D)" position="right">
           <IconButton
@@ -129,7 +107,7 @@ export const ToolDock: React.FC<ToolDockProps> = ({
           />
         </Tooltip>
 
-        <div style={{ height: '1px', background: 'var(--glass-border)', margin: '2px 0' }} />
+        <div className="tool-dock-divider" />
 
         <Tooltip content="Undo (Ctrl+Z)" position="right">
           <IconButton
@@ -158,11 +136,11 @@ export const ToolDock: React.FC<ToolDockProps> = ({
             disabled={!hasBoundary}
             onClick={onClear}
             variant="ghost"
-            style={{ color: hasBoundary ? 'var(--danger)' : undefined }}
+            className={hasBoundary ? 'text-danger' : undefined}
           />
         </Tooltip>
 
-        <div style={{ height: '1px', background: 'var(--glass-border)', margin: '2px 0' }} />
+        <div className="tool-dock-divider" />
 
         <Popover
           align="start"
@@ -174,55 +152,53 @@ export const ToolDock: React.FC<ToolDockProps> = ({
             />
           }
         >
-          <div style={{ width: '220px', fontFamily: 'var(--font-ui)' }}>
-            <h5 style={{ margin: '0 0 10px 0', fontSize: '0.875rem', fontWeight: 600, color: 'var(--ink-1)' }}>
+          <div className="shortcuts-popover-content">
+            <h5 className="shortcuts-title">
               Keyboard Shortcuts
             </h5>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.75rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Polygon</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>D</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Rectangle</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>R</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Circle (64-pt)</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>C</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Freehand</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>F</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Edit Corners & Midpoints</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>E</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Drop Pin</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>P</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Finish Polygon</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Enter</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Delete Selected Vertex</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Del / Backspace</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Pan / Cancel</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Esc</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Undo</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Ctrl+Z</kbd>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Redo</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Ctrl+Y / ⇧⌘Z</kbd>
-              </div>
+            <div className="shortcut-row">
+              <span>Polygon</span>
+              <kbd className="shortcut-key">D</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Rectangle</span>
+              <kbd className="shortcut-key">R</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Circle (64-pt)</span>
+              <kbd className="shortcut-key">C</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Freehand</span>
+              <kbd className="shortcut-key">F</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Edit Corners & Midpoints</span>
+              <kbd className="shortcut-key">E</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Drop Pin</span>
+              <kbd className="shortcut-key">P</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Finish Polygon</span>
+              <kbd className="shortcut-key">Enter</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Delete Selected Vertex</span>
+              <kbd className="shortcut-key">Del / Backspace</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Pan / Cancel</span>
+              <kbd className="shortcut-key">Esc</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Undo</span>
+              <kbd className="shortcut-key">Ctrl+Z</kbd>
+            </div>
+            <div className="shortcut-row">
+              <span>Redo</span>
+              <kbd className="shortcut-key">Ctrl+Y / ⇧⌘Z</kbd>
             </div>
           </div>
         </Popover>

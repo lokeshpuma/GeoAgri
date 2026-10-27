@@ -14,18 +14,18 @@ export const ClimateRiskReport: React.FC<ClimateRiskReportProps> = ({ summary })
   };
 
   return (
-    <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <ShieldAlert style={{ color: '#f59e0b' }} size={20} />
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 600 }}>Climate Risk Scorecard (Model E)</h3>
+    <div className="glass-card climate-risk-wrap">
+      <div className="flex-between">
+        <div className="flex-row-center gap-8">
+          <ShieldAlert className="text-gold" size={20} />
+          <h3 className="text-lg font-semibold m-0 text-ink-1">Climate Risk Scorecard (Model E)</h3>
         </div>
         <span className={`badge ${getRiskBadge()}`}>
           {summary.overall_risk_level} Overall Risk
         </span>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+      <div className="climate-risk-grid">
         <div className="metric-box">
           <span className="metric-label">Drought Stress</span>
           <span className="metric-value">{summary.drought_risk_score.toFixed(0)}%</span>
@@ -40,9 +40,11 @@ export const ClimateRiskReport: React.FC<ClimateRiskReportProps> = ({ summary })
         </div>
       </div>
 
-      <p style={{ fontSize: '0.85rem', color: '#d1d5db', background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px' }}>
-        💬 <strong>Risk Advisory:</strong> {summary.note}
-      </p>
+      <div className="summary-data-cell">
+        <span className="text-sm text-ink-2">
+          💬 <strong className="text-ink-1">Risk Advisory:</strong> {summary.note}
+        </span>
+      </div>
     </div>
   );
 };

@@ -103,166 +103,76 @@ export const WorkspacePage: React.FC = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className="workspace-page-container" style={{ position: 'relative', overflow: 'hidden' }}>
+    <div className="workspace-page-container">
       {/* Background Topo Contours SVG (PRD §6.6) */}
       <div
         aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '600px',
-          opacity: 0.08,
-          pointerEvents: 'none',
-          backgroundImage: `radial-gradient(circle at 50% 30%, transparent 20%, var(--bg-0) 75%), url("data:image/svg+xml,%3Csvg width='800' height='800' viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,400 Q200,250 400,400 T800,400' fill='none' stroke='%2322c58b' stroke-width='1.5'/%3E%3Cpath d='M0,450 Q200,300 400,450 T800,450' fill='none' stroke='%2322c58b' stroke-width='1.5'/%3E%3Cpath d='M0,500 Q200,350 400,500 T800,500' fill='none' stroke='%2322c58b' stroke-width='1.5'/%3E%3Cpath d='M0,350 Q200,200 400,350 T800,350' fill='none' stroke='%23d9ad4f' stroke-width='1.2'/%3E%3Cpath d='M0,300 Q200,150 400,300 T800,300' fill='none' stroke='%23d9ad4f' stroke-width='1.2'/%3E%3C/svg%3E")`,
-          backgroundRepeat: 'repeat',
-        }}
+        className="workspace-topo-bg"
       />
 
       {/* 1. IMMERSIVE HERO SECTION (ABOVE THE FOLD) */}
-      <section
-        className="workspace-hero"
-        style={{
-          minHeight: '75vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          padding: '60px 24px',
-          position: 'relative',
-          zIndex: 2,
-        }}
-      >
-        <div
-          className="glass-panel"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '6px 16px',
-            borderRadius: 'var(--r-pill)',
-            marginBottom: '24px',
-            boxShadow: 'var(--elev-1)',
-          }}
-        >
+      <section className="workspace-hero">
+        <div className="glass-panel workspace-hero-badge">
           <GeoAgriLogo size={18} />
-          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--ink-2)' }}>
+          <span className="workspace-hero-badge-text">
             GeoAgri AI • Planetary Agricultural Intelligence
           </span>
         </div>
 
-        <h1
-          className="type-display-hero"
-          style={{
-            maxWidth: '900px',
-            margin: '0 auto 20px auto',
-            color: 'var(--ink-1)',
-          }}
-        >
+        <h1 className="type-display-hero workspace-hero-title">
           Turn Your Field Location Into{' '}
-          <span
-            style={{
-              background: 'var(--grad-brand)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
+          <span className="workspace-hero-gradient-text">
             Agricultural Intelligence
           </span>
         </h1>
 
-        <p
-          className="type-body"
-          style={{
-            maxWidth: '680px',
-            margin: '0 auto 36px auto',
-            color: 'var(--ink-2)',
-            fontSize: '1.125rem',
-            lineHeight: 1.6,
-          }}
-        >
+        <p className="type-body workspace-hero-desc">
           Calibrated satellite observations, soil physics, and machine learning models for verified field-level crop suitability and yield forecasting.
         </p>
 
         {/* Primary Call To Action (PRD §6.6: "Draw your land →" CTA to Step 2) */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+        <div className="workspace-cta-col">
           <Button
             variant="primary"
             size="lg"
             onClick={() => goToStep(2)}
             icon={<ArrowRight size={20} />}
             iconPosition="right"
-            style={{
-              padding: '16px 40px',
-              fontSize: '1.0625rem',
-              boxShadow: '0 0 28px var(--emerald-glow), var(--elev-2)',
-            }}
+            className="workspace-cta-button"
           >
             Draw your land →
           </Button>
 
-          <span style={{ fontSize: '0.8125rem', color: 'var(--ink-3)' }}>
+          <span className="workspace-cta-note">
             No fake defaults • Real WGS84 geodesic coordinates • Interactive satellite studio
           </span>
         </div>
 
         {/* Value Proposition Highlights */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '16px',
-            maxWidth: '780px',
-            width: '100%',
-            marginTop: '56px',
-          }}
-        >
-          <div
-            className="glass-panel"
-            style={{
-              padding: '16px',
-              textAlign: 'center',
-              background: 'var(--glass)',
-            }}
-          >
-            <div style={{ color: 'var(--emerald-500)', fontSize: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+        <div className="workspace-features-grid">
+          <div className="glass-panel workspace-feature-card">
+            <div className="workspace-feature-card-val text-emerald">
               100% Geodesic
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--ink-3)', marginTop: '4px' }}>
+            <div className="workspace-feature-card-sub">
               Real parcel boundary calculation on WGS84 ellipsoid
             </div>
           </div>
 
-          <div
-            className="glass-panel"
-            style={{
-              padding: '16px',
-              textAlign: 'center',
-              background: 'var(--glass)',
-            }}
-          >
-            <div style={{ color: 'var(--gold-500)', fontSize: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+          <div className="glass-panel workspace-feature-card">
+            <div className="workspace-feature-card-val text-gold">
               Sentinel-2 & Radar
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--ink-3)', marginTop: '4px' }}>
+            <div className="workspace-feature-card-sub">
               Live Google Earth Engine multispectral index extraction
             </div>
           </div>
 
-          <div
-            className="glass-panel"
-            style={{
-              padding: '16px',
-              textAlign: 'center',
-              background: 'var(--glass)',
-            }}
-          >
-            <div style={{ color: 'var(--info)', fontSize: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+          <div className="glass-panel workspace-feature-card">
+            <div className="workspace-feature-card-val text-info">
               Quantile ML
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--ink-3)', marginTop: '4px' }}>
+            <div className="workspace-feature-card-sub">
               P10 / P50 / P90 harvest yield forecasts & companion systems
             </div>
           </div>
@@ -271,76 +181,45 @@ export const WorkspacePage: React.FC = () => {
         {/* Collapsible Accordion Trigger */}
         <button
           onClick={() => setShowDetails(!showDetails)}
-          style={{
-            marginTop: '48px',
-            background: 'none',
-            border: 'none',
-            color: 'var(--ink-2)',
-            fontSize: '0.875rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
+          className="workspace-details-toggle"
         >
           <span>{showDetails ? 'Hide details' : 'See how it works & intelligence architecture'}</span>
           <ChevronDown
             size={18}
-            style={{
-              transform: showDetails ? 'rotate(180deg)' : 'rotate(0deg)',
-              transition: 'transform var(--t-fast) var(--ease-out)',
-            }}
+            className={`workspace-chevron ${showDetails ? 'open' : ''}`}
           />
         </button>
       </section>
 
       {/* 2. COLLAPSIBLE ARCHITECTURE SECTIONS (LAZY-RENDERED) */}
       {showDetails && (
-        <div className="animate-fade-rise" style={{ maxWidth: '1100px', margin: '0 auto 80px auto', padding: '0 24px' }}>
+        <div className="animate-fade-rise workspace-details-container">
           {/* How It Works Grid */}
-          <section style={{ marginBottom: '60px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <h2 className="type-title-1" style={{ color: 'var(--ink-1)', margin: 0 }}>
+          <section className="workspace-details-section">
+            <div className="workspace-details-heading-group">
+              <h2 className="type-title-1 workspace-details-title">
                 Four-Stage Geospatial Workflow
               </h2>
-              <p style={{ fontSize: '0.875rem', color: 'var(--ink-3)', marginTop: '6px' }}>
+              <p className="workspace-details-sub">
                 How GeoAgri AI converts your polygon into comprehensive agronomic recommendations.
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
+            <div className="workspace-stages-grid">
               {HOW_IT_WORKS_STAGES.map(s => {
                 const Icon = s.icon;
                 return (
                   <div
                     key={s.stage}
-                    className="glass-panel"
-                    style={{
-                      padding: '24px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '12px',
-                    }}
+                    className="glass-panel workspace-stage-card"
                   >
-                    <div
-                      style={{
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: 'var(--r-sm)',
-                        background: 'var(--bg-2)',
-                        color: s.color,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Icon size={20} />
+                    <div className="workspace-stage-icon-box">
+                      <Icon size={20} className="text-emerald" />
                     </div>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--ink-1)', margin: 0 }}>
+                    <h3 className="workspace-stage-title">
                       {s.title}
                     </h3>
-                    <p style={{ fontSize: '0.8125rem', color: 'var(--ink-2)', lineHeight: 1.5, margin: 0 }}>
+                    <p className="workspace-stage-desc">
                       {s.description}
                     </p>
                   </div>
@@ -351,62 +230,36 @@ export const WorkspacePage: React.FC = () => {
 
           {/* Data Sources Grid */}
           <section>
-            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <h2 className="type-title-1" style={{ color: 'var(--ink-1)', margin: 0 }}>
+            <div className="workspace-details-heading-group">
+              <h2 className="type-title-1 workspace-details-title">
                 Connected Planetary Datasets
               </h2>
-              <p style={{ fontSize: '0.875rem', color: 'var(--ink-3)', marginTop: '6px' }}>
+              <p className="workspace-details-sub">
                 Integrated Earth observation satellites, digital soil chemistry, and climate time-series.
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
+            <div className="workspace-sources-grid">
               {DATA_SOURCES.map((ds, i) => {
                 const Icon = ds.icon;
                 return (
                   <div
                     key={i}
-                    className="glass-panel"
-                    style={{
-                      padding: '24px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '12px',
-                    }}
+                    className="glass-panel workspace-source-card"
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div
-                        style={{
-                          width: '36px',
-                          height: '36px',
-                          borderRadius: 'var(--r-xs)',
-                          background: 'var(--bg-2)',
-                          color: ds.color,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <Icon size={18} />
+                    <div className="workspace-source-top">
+                      <div className="workspace-source-icon-box">
+                        <Icon size={18} className="text-emerald" />
                       </div>
-                      <span
-                        style={{
-                          fontSize: '0.6875rem',
-                          padding: '2px 8px',
-                          borderRadius: 'var(--r-pill)',
-                          background: 'var(--bg-2)',
-                          color: 'var(--ink-2)',
-                          border: '1px solid var(--glass-border)',
-                        }}
-                      >
+                      <span className="workspace-source-badge">
                         {ds.badge}
                       </span>
                     </div>
 
-                    <h3 style={{ fontSize: '0.9375rem', fontWeight: 600, color: 'var(--ink-1)', margin: 0 }}>
+                    <h3 className="workspace-source-title">
                       {ds.title}
                     </h3>
-                    <p style={{ fontSize: '0.8125rem', color: 'var(--ink-3)', lineHeight: 1.5, margin: 0 }}>
+                    <p className="workspace-source-desc">
                       {ds.description}
                     </p>
                   </div>

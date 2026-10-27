@@ -16,19 +16,18 @@ export const ReportDownloadButton: React.FC<ReportDownloadButtonProps> = ({ onPr
 
   return (
     <div className="report-actions-panel">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <CheckCircle size={18} style={{ color: '#10b981' }} />
-        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-main)' }}>
+      <div className="report-actions-title-row">
+        <CheckCircle size={18} className="text-emerald" />
+        <span className="report-actions-title">
           Intelligence Dossier Ready
         </span>
       </div>
 
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+      <div className="report-buttons-group">
         <button
           type="button"
           onClick={handlePrint}
-          className="btn-primary"
-          style={{ padding: '10px 24px' }}
+          className="btn-primary btn-report-download"
         >
           <Download size={17} />
           <span>Download Full Report PDF</span>
@@ -37,8 +36,7 @@ export const ReportDownloadButton: React.FC<ReportDownloadButtonProps> = ({ onPr
         <button
           type="button"
           onClick={handlePrint}
-          className="btn-secondary"
-          style={{ padding: '10px 20px' }}
+          className="btn-secondary btn-report-print"
         >
           <Printer size={17} />
           <span>Print Report</span>

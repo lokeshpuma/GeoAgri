@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Layers, X, Download, ExternalLink, Leaf } from 'lucide-react';
+import { Table, Layers, X, Leaf } from 'lucide-react';
 import { FullReportResponse } from '../../api/client';
 import { MultiCroppingTable } from '../MultiCroppingTable/MultiCroppingTable';
 
@@ -16,16 +16,16 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
   const top10 = crops.slice(0, 10);
 
   return (
-    <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+    <div className="glass-card yield-pred-table-wrap">
+      <div className="yield-pred-header">
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Table size={20} style={{ color: '#10b981' }} />
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+          <div className="yield-pred-title-group">
+            <Table size={20} className="text-emerald" />
+            <h3 className="yield-pred-title">
               Top 10 Yield Predictions
             </h3>
           </div>
-          <p style={{ fontSize: '0.8rem', color: '#9ca3af', margin: '4px 0 0 0' }}>
+          <p className="yield-pred-subtitle">
             Prioritized by median yield potential (P50), intercrop synergy, and regional environmental compatibility.
           </p>
         </div>
@@ -42,17 +42,17 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
 
       {/* Clean Top 10 Table */}
       <div className="table-responsive">
-        <table className="report-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
+        <table className="report-table yield-pred-tbl">
           <thead>
             <tr>
-              <th style={{ padding: '12px 14px' }}>Rank</th>
-              <th style={{ padding: '12px 14px' }}>Crop</th>
-              <th style={{ padding: '12px 14px' }}>Companion Crop</th>
-              <th style={{ padding: '12px 14px', textAlign: 'right' }}>Expected Yield P50</th>
-              <th style={{ padding: '12px 14px', textAlign: 'right' }}>Yield Range P10–P90</th>
-              <th style={{ padding: '12px 14px', textAlign: 'center' }}>Yield Boost</th>
-              <th style={{ padding: '12px 14px', textAlign: 'center' }}>Irrigation</th>
-              <th style={{ padding: '12px 14px', textAlign: 'right' }}>Suitability</th>
+              <th className="yield-pred-th">Rank</th>
+              <th className="yield-pred-th">Crop</th>
+              <th className="yield-pred-th">Companion Crop</th>
+              <th className="yield-pred-th right">Expected Yield P50</th>
+              <th className="yield-pred-th right">Yield Range P10–P90</th>
+              <th className="yield-pred-th center">Yield Boost</th>
+              <th className="yield-pred-th center">Irrigation</th>
+              <th className="yield-pred-th right">Suitability</th>
             </tr>
           </thead>
           <tbody>
@@ -69,77 +69,55 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
               const suitability = (crop.recommendation_score * 100).toFixed(1);
 
               return (
-                <tr key={crop.crop_id || idx}>
-                  <td style={{ padding: '12px 14px' }}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: '24px',
-                        height: '24px',
-                        borderRadius: '6px',
-                        background: idx < 3 ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.05)',
-                        color: idx < 3 ? '#34d399' : 'var(--text-muted)',
-                        textAlign: 'center',
-                        lineHeight: '24px',
-                        fontWeight: 700,
-                        fontSize: '0.8rem',
-                      }}
-                    >
+                <tr key={crop.crop_id || idx} className="yield-pred-tr">
+                  <td className="yield-pred-td">
+                    <span className={`yield-pred-rank-badge ${idx < 3 ? 'top' : ''}`}>
                       {idx + 1}
                     </span>
                   </td>
 
-                  <td style={{ padding: '12px 14px' }}>
-                    <strong style={{ color: 'var(--text-main)', fontSize: '0.95rem' }}>{crop.crop_name}</strong>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                  <td className="yield-pred-td">
+                    <strong className="yield-pred-crop-name">{crop.crop_name}</strong>
+                    <div className="yield-pred-crop-cat">
                       {crop.category}
                     </div>
                   </td>
 
-                  <td style={{ padding: '12px 14px' }}>
+                  <td className="yield-pred-td">
                     {companion ? (
-                      <div style={{ fontSize: '0.85rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
-                        <Leaf size={13} style={{ color: '#34d399', flexShrink: 0 }} />
+                      <div className="yield-pred-companion-cell">
+                        <Leaf size={13} className="text-emerald flex-shrink-0" />
                         <span>{companion.companion_crop_name}</span>
                       </div>
                     ) : (
-                      <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                      <div className="text-ink-3">
                         None (Sole)
                       </div>
                     )}
                   </td>
 
-                  <td style={{ padding: '12px 14px', textAlign: 'right' }}>
-                    <div style={{ fontWeight: 700, color: '#fbbf24', fontSize: '0.95rem' }}>
+                  <td className="yield-pred-td right">
+                    <div className="yield-pred-total-tonnes">
                       {totalTonnes} t
                     </div>
-                    <span style={{ fontSize: '0.7rem', color: '#9ca3af' }}>{p50Yield.toFixed(2)} t/ha</span>
+                    <span className="yield-pred-rate">{p50Yield.toFixed(2)} t/ha</span>
                   </td>
 
-                  <td style={{ padding: '12px 14px', textAlign: 'right', color: '#9ca3af' }}>
+                  <td className="yield-pred-td right yield-pred-range">
                     {p10Yield.toFixed(2)} – {p90Yield.toFixed(2)} t/ha
                   </td>
 
-                  <td style={{ padding: '12px 14px', textAlign: 'center' }}>
+                  <td className="yield-pred-td center">
                     {boostPct !== null ? (
-                      <span
-                        style={{
-                          background: 'rgba(16, 185, 129, 0.15)',
-                          color: '#34d399',
-                          padding: '3px 8px',
-                          borderRadius: '6px',
-                          fontSize: '0.75rem',
-                          fontWeight: 700,
-                        }}
-                      >
+                      <span className="yield-pred-boost">
                         +{boostPct}%
                       </span>
                     ) : (
-                      <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>—</span>
+                      <span className="text-ink-3">—</span>
                     )}
                   </td>
 
-                  <td style={{ padding: '12px 14px', textAlign: 'center' }}>
+                  <td className="yield-pred-td center">
                     <span
                       className={`badge ${
                         crop.irrigation_mode === 'rainfed'
@@ -153,8 +131,8 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
                     </span>
                   </td>
 
-                  <td style={{ padding: '12px 14px', textAlign: 'right' }}>
-                    <strong style={{ color: '#34d399', fontSize: '0.95rem' }}>{suitability}%</strong>
+                  <td className="yield-pred-td right">
+                    <strong className="yield-pred-score">{suitability}%</strong>
                   </td>
                 </tr>
               );
@@ -169,10 +147,10 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
           <div className="matrix-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="matrix-modal-header">
               <div>
-                <h2 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', margin: 0 }}>
+                <h2 className="yield-pred-modal-title">
                   Master 100+ Crop Recommendation Matrix
                 </h2>
-                <p style={{ fontSize: '0.8rem', color: '#9ca3af', margin: '4px 0 0 0' }}>
+                <p className="yield-pred-modal-subtitle">
                   Full multi-attribute evaluation across all calibrated Indian cultivars and companion systems.
                 </p>
               </div>

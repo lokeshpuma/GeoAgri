@@ -8,17 +8,12 @@ import {
   ChevronUp,
   Cpu,
   Layers,
-  Sparkles,
-  Info,
   Droplet,
-  ShieldAlert,
   Compass,
   CheckCircle,
   Play,
-  RotateCcw,
   Check,
   RefreshCw,
-  Sliders,
   AlertTriangle
 } from 'lucide-react';
 import { useWorkflow, PIPELINE_STAGES } from '../context/WorkflowContext';
@@ -37,7 +32,6 @@ import {
   interpretPH,
   interpretOrganicCarbon,
   interpretTerrain,
-  interpretRadar
 } from '../utils/agronomicFormatters';
 
 export const FieldAnalysisPage: React.FC = () => {
@@ -63,7 +57,6 @@ export const FieldAnalysisPage: React.FC = () => {
   // Field coordinates
   const centroidLat = report?.field_summary?.centroid_lat || (formData.pointPt ? formData.pointPt[1] : formData.polygonPts[0]?.[1]);
   const centroidLon = report?.field_summary?.centroid_lon || (formData.pointPt ? formData.pointPt[0] : formData.polygonPts[0]?.[0]);
-  const areaHa = formData.areaHa || report?.field_summary?.area_ha || null;
 
   const env = report?.environment;
   const sat = report?.satellite_features;
@@ -80,7 +73,7 @@ export const FieldAnalysisPage: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div className="page-actions-row">
           <button
             type="button"
             className="btn-secondary"
@@ -106,11 +99,10 @@ export const FieldAnalysisPage: React.FC = () => {
       {error && (
         <div className="error-alert">
           ⚠️ <strong>Backend Processing Error:</strong> {error}
-          <div style={{ marginTop: '8px' }}>
+          <div className="retry-container">
             <button
               type="button"
-              className="btn-secondary"
-              style={{ fontSize: '0.8rem', padding: '6px 14px' }}
+              className="btn-secondary btn-retry"
               onClick={() => runPredictNow()}
             >
               Retry Field Analysis
@@ -121,14 +113,14 @@ export const FieldAnalysisPage: React.FC = () => {
 
       {/* 1. INTERACTIVE MAP & SELECTED FIELD SIDE PANEL */}
       <div className="top-grid">
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div className="field-map-column">
           <BoundaryPreviewMap
             polygon={formData.polygonPts}
             point={formData.pointPt}
             height="340px"
           />
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.8125rem', color: 'var(--ink-3)' }}>
+          <div className="field-map-footer">
+            <span className="field-map-footer-text">
               {formData.polygonPts.length >= 3 ? `${formData.polygonPts.length} corners · ${formData.areaHa} ha` : 'Pin coordinate location'}
             </span>
             <Button
@@ -142,35 +134,34 @@ export const FieldAnalysisPage: React.FC = () => {
         </div>
 
         {/* Map Side Panel: "Selected Field" & "Predict Now" CTA */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <MapPin size={20} style={{ color: '#10b981' }} />
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+        <div className="selected-field-col">
+          <div className="glass-card selected-field-card">
+            <div className="selected-field-header">
+              <div className="selected-field-title-group">
+                <MapPin size={20} className="text-emerald" />
+                <h3 className="selected-field-title">
                   Selected Field
                 </h3>
               </div>
-              <span className="badge badge-high" style={{ fontSize: '0.74rem' }}>
+              <span className="badge badge-high badge-status-pill">
                 ✓ Location Selected
               </span>
             </div>
 
             {/* Coordinates & Season */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div className="field-coords-grid">
               <div className="summary-data-cell">
                 <span className="cell-label">Latitude</span>
-                <strong className="cell-val" style={{ color: '#38bdf8' }}>{centroidLat.toFixed(4)}°N</strong>
+                <strong className="cell-val text-info">{centroidLat.toFixed(4)}°N</strong>
               </div>
               <div className="summary-data-cell">
                 <span className="cell-label">Longitude</span>
-                <strong className="cell-val" style={{ color: '#38bdf8' }}>{centroidLon.toFixed(4)}°E</strong>
+                <strong className="cell-val text-info">{centroidLon.toFixed(4)}°E</strong>
               </div>
-              <div className="summary-data-cell" style={{ gridColumn: 'span 2' }}>
+              <div className="summary-data-cell cell-season">
                 <span className="cell-label">Target Season</span>
                 <select
-                  className="form-control"
-                  style={{ padding: '6px 10px', fontSize: '0.85rem', marginTop: '4px' }}
+                  className="form-control season-select"
                   value={formData.season}
                   onChange={(e) => updateFormData({ season: e.target.value as any })}
                 >
@@ -183,16 +174,16 @@ export const FieldAnalysisPage: React.FC = () => {
             </div>
 
             {/* EDITABLE GEODESIC PARCEL AREA WITH HUMAN-CHANGEABLE CONTROLS & DEFAULT */}
-            <div className="summary-data-cell" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="cell-label" style={{ fontWeight: 600 }}>
+            <div className="summary-data-cell parcel-area-container">
+              <div className="parcel-area-header">
+                <span className="cell-label">
                   Geodesic Parcel Area
                 </span>
-                <span style={{ fontSize: '0.7rem', color: '#10b981', background: 'rgba(16, 185, 129, 0.12)', padding: '2px 8px', borderRadius: '10px', fontWeight: 600 }}>
+                <span className="parcel-area-editable-badge">
                   Human-Editable
                 </span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div className="parcel-area-input-row">
                 <input
                   type="number"
                   id="parcel-area-ha-input"
@@ -204,70 +195,59 @@ export const FieldAnalysisPage: React.FC = () => {
                     const val = parseFloat(e.target.value);
                     updateFormData({ areaHa: isNaN(val) || val <= 0 ? 1.0 : Number(val.toFixed(2)) });
                   }}
-                  className="form-control"
-                  style={{
-                    fontSize: '1.2rem',
-                    fontWeight: 700,
-                    color: 'var(--accent-green)',
-                    padding: '8px 12px',
-                    flex: 1
-                  }}
+                  className="form-control parcel-area-input-field"
                   title="Edit land parcel area in hectares"
                 />
-                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-muted)' }}>Hectares</span>
+                <span className="parcel-area-unit-text">Hectares</span>
               </div>
             </div>
 
             {/* DETECTED LOCATION / WATER BODY / NON-ARABLE ALERT */}
             {detectedLocation && (
               detectedLocation.isWater || detectedLocation.isArable === false ? (
-                <div className="detected-location-card non-arable-alert" style={{
-                  background: 'rgba(239, 68, 68, 0.08)',
-                  borderColor: 'rgba(239, 68, 68, 0.35)',
-                  borderLeft: '4px solid #ef4444'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <AlertTriangle size={16} style={{ color: '#ef4444' }} />
-                      <span style={{ fontSize: '0.74rem', fontWeight: 800, letterSpacing: '0.04em', color: '#ef4444', textTransform: 'uppercase' }}>
+                <div className="detected-location-card non-arable-alert">
+                  <div className="non-arable-header-row">
+                    <div className="non-arable-title-row">
+                      <AlertTriangle size={16} className="text-danger" />
+                      <span className="non-arable-title-text">
                         {detectedLocation.isWater ? 'Open Water Body (Non-Arable)' : 'Polar Glacial Zone (Non-Arable)'}
                       </span>
                     </div>
-                    <span className="badge badge-low" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>
+                    <span className="badge badge-low non-arable-badge">
                       Suitability: 0%
                     </span>
                   </div>
-                  <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                  <div className="non-arable-name">
                     {detectedLocation.displayName}
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                    Biome: <strong style={{ color: '#f59e0b' }}>{detectedLocation.agroZone}</strong>
+                  <div className="non-arable-biome-text">
+                    Biome: <strong className="text-gold">{detectedLocation.agroZone}</strong>
                   </div>
-                  <div style={{ fontSize: '0.74rem', color: '#ef4444', marginTop: '6px', lineHeight: 1.4 }}>
+                  <div className="non-arable-warning-msg">
                     ⚠️ {detectedLocation.warningMessage || 'Agricultural cultivation cannot take place in open water or polar ice. Please choose an inland agricultural parcel.'}
                   </div>
                 </div>
               ) : (
                 <div className="detected-location-card">
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <Compass size={15} style={{ color: '#059669' }} />
-                      <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em', color: '#059669', textTransform: 'uppercase' }}>
+                  <div className="detected-header-row">
+                    <div className="detected-title-group">
+                      <Compass size={15} className="text-emerald" />
+                      <span className="detected-title-text">
                         Detected Regional Agri Benchmark
                       </span>
                     </div>
-                    <span className="badge badge-high" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>
+                    <span className="badge badge-high detected-badge">
                       {detectedLocation.source === 'reverse_geocoded' ? 'Detected District' : 'Global Benchmark'}
                     </span>
                   </div>
-                  <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                  <div className="non-arable-name">
                     {detectedLocation.displayName}
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                    Agro-Climatic Zone: <strong style={{ color: '#0284c7' }}>{detectedLocation.agroZone}</strong>
+                  <div className="detected-zone-text">
+                    Agro-Climatic Zone: <strong className="text-info">{detectedLocation.agroZone}</strong>
                   </div>
                   {detectedLocation.dominantCrops && detectedLocation.dominantCrops.length > 0 && (
-                    <div style={{ fontSize: '0.73rem', color: 'var(--text-dim)', marginTop: '4px' }}>
+                    <div className="detected-dominant-crops">
                       Regional benchmarks: {detectedLocation.dominantCrops.slice(0, 4).join(', ')}
                     </div>
                   )}
@@ -275,19 +255,18 @@ export const FieldAnalysisPage: React.FC = () => {
               )
             )}
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-              <MapPin size={14} style={{ color: '#14b8a6', flexShrink: 0 }} />
+            <div className="field-selection-row">
+              <MapPin size={14} className="text-emerald shrink-0" />
               <span>
                 Selection: <strong>{formData.selectedPresetName}</strong>
               </span>
             </div>
 
             {/* PROMINENT "PREDICT NOW" BUTTON */}
-            <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '16px' }}>
+            <div className="predict-btn-container">
               <button
                 type="button"
-                className="btn-primary"
-                style={{ width: '100%', padding: '14px 20px', fontSize: '1.05rem', fontWeight: 700 }}
+                className="btn-primary btn-predict-now"
                 onClick={() => runPredictNow()}
                 disabled={loading}
               >
@@ -303,7 +282,7 @@ export const FieldAnalysisPage: React.FC = () => {
                   </>
                 )}
               </button>
-              <p style={{ fontSize: '0.74rem', color: '#9ca3af', textAlign: 'center', margin: '8px 0 0 0' }}>
+              <p className="predict-footnote">
                 💡 Triggers Google Earth Engine, Sentinel-1/2, SoilGrids & NASA POWER.
               </p>
             </div>
@@ -324,34 +303,34 @@ export const FieldAnalysisPage: React.FC = () => {
       {/* 2. PROCESSING STATE ("Analysing Your Field...") */}
       {loading && (
         <section className="glass-card processing-dock-panel">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <RefreshCw size={22} className="animate-spin" style={{ color: '#10b981' }} />
+          <div className="processing-header-row">
+            <div className="processing-title-group">
+              <RefreshCw size={22} className="animate-spin text-emerald" />
               <div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+                <h3 className="processing-title">
                   GeoAgri AI is Analysing Your Location...
                 </h3>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                <span className="processing-sub">
                   Executing cloud Earth Observation models across selected parcel
                 </span>
               </div>
             </div>
 
             {/* Dynamic Technology Status Pills */}
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              <span className={`badge ${pipelineStageIndex > 2 ? 'badge-high' : pipelineStageIndex === 2 ? 'badge-moderate' : 'badge-low'}`} style={{ fontSize: '0.72rem' }}>
+            <div className="processing-badges-row">
+              <span className={`badge badge-status-pill ${pipelineStageIndex > 2 ? 'badge-high' : pipelineStageIndex === 2 ? 'badge-moderate' : 'badge-low'}`}>
                 Google Earth Engine: {pipelineStageIndex > 2 ? 'Complete ✓' : pipelineStageIndex === 2 ? '● Processing' : 'Waiting'}
               </span>
-              <span className={`badge ${pipelineStageIndex > 3 ? 'badge-high' : pipelineStageIndex === 3 ? 'badge-moderate' : 'badge-low'}`} style={{ fontSize: '0.72rem' }}>
+              <span className={`badge badge-status-pill ${pipelineStageIndex > 3 ? 'badge-high' : pipelineStageIndex === 3 ? 'badge-moderate' : 'badge-low'}`}>
                 Sentinel-1/2: {pipelineStageIndex > 3 ? 'Complete ✓' : pipelineStageIndex === 3 ? '● Processing' : 'Waiting'}
               </span>
-              <span className={`badge ${pipelineStageIndex > 4 ? 'badge-high' : pipelineStageIndex === 4 ? 'badge-moderate' : 'badge-low'}`} style={{ fontSize: '0.72rem' }}>
+              <span className={`badge badge-status-pill ${pipelineStageIndex > 4 ? 'badge-high' : pipelineStageIndex === 4 ? 'badge-moderate' : 'badge-low'}`}>
                 SoilGrids: {pipelineStageIndex > 4 ? 'Complete ✓' : pipelineStageIndex === 4 ? '● Processing' : 'Waiting'}
               </span>
-              <span className={`badge ${pipelineStageIndex > 5 ? 'badge-high' : pipelineStageIndex === 5 ? 'badge-moderate' : 'badge-low'}`} style={{ fontSize: '0.72rem' }}>
+              <span className={`badge badge-status-pill ${pipelineStageIndex > 5 ? 'badge-high' : pipelineStageIndex === 5 ? 'badge-moderate' : 'badge-low'}`}>
                 NASA POWER: {pipelineStageIndex > 5 ? 'Complete ✓' : pipelineStageIndex === 5 ? '● Processing' : 'Waiting'}
               </span>
-              <span className={`badge ${pipelineStageIndex > 7 ? 'badge-high' : pipelineStageIndex >= 6 ? 'badge-moderate' : 'badge-low'}`} style={{ fontSize: '0.72rem' }}>
+              <span className={`badge badge-status-pill ${pipelineStageIndex > 7 ? 'badge-high' : pipelineStageIndex >= 6 ? 'badge-moderate' : 'badge-low'}`}>
                 Agronomic Models: {pipelineStageIndex > 7 ? 'Complete ✓' : pipelineStageIndex >= 6 ? '● Processing' : 'Waiting'}
               </span>
             </div>
@@ -369,21 +348,21 @@ export const FieldAnalysisPage: React.FC = () => {
                 >
                   <div className="stage-status-icon">
                     {isDone ? (
-                      <Check size={14} style={{ color: '#10b981' }} />
+                      <Check size={14} className="text-emerald" />
                     ) : isCurrent ? (
-                      <RefreshCw size={14} className="animate-spin" style={{ color: '#f59e0b' }} />
+                      <RefreshCw size={14} className="animate-spin text-gold" />
                     ) : (
                       <span className="stage-num-dot">{st.id}</span>
                     )}
                   </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <strong className="stage-title" style={{ fontSize: '0.85rem' }}>
+                  <div className="processing-stage-content">
+                    <div className="processing-stage-top">
+                      <strong className="stage-title processing-stage-title">
                         {st.title}
                       </strong>
-                      <span className="stage-source" style={{ fontSize: '0.72rem' }}>{st.source}</span>
+                      <span className="stage-source processing-stage-source">{st.source}</span>
                     </div>
-                    <span className={`stage-status ${isDone ? 'done' : isCurrent ? 'current' : 'pending'}`} style={{ fontSize: '0.72rem' }}>
+                    <span className={`stage-status processing-stage-status-text ${isDone ? 'done' : isCurrent ? 'current' : 'pending'}`}>
                       {isDone ? "Completed ✓" : isCurrent ? `${st.description}...` : "Waiting"}
                     </span>
                   </div>
@@ -399,13 +378,13 @@ export const FieldAnalysisPage: React.FC = () => {
         <>
           {/* Completion Status Confirmation Bar */}
           <div className="analysis-complete-banner">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <CheckCircle size={22} style={{ color: '#10b981' }} />
+            <div className="analysis-banner-title-group">
+              <CheckCircle size={22} className="text-emerald" />
               <div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+                <h3 className="analysis-banner-title">
                   Location Analysis Complete
                 </h3>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                <span className="analysis-banner-sub">
                   All 34 satellite, soil, and meteorological layers successfully processed for {centroidLat.toFixed(4)}°N, {centroidLon.toFixed(4)}°E.
                 </span>
               </div>
@@ -413,9 +392,8 @@ export const FieldAnalysisPage: React.FC = () => {
 
             <button
               type="button"
-              className="btn-primary"
+              className="btn-primary btn-dossier-advance"
               onClick={() => startCropAnalysis()}
-              style={{ padding: '10px 22px' }}
             >
               <span>Analyse All Crops</span>
               <ArrowRight size={17} />
@@ -423,20 +401,20 @@ export const FieldAnalysisPage: React.FC = () => {
           </div>
 
           {/* Human-Understandable Environmental & Satellite Analysis */}
-          <section className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+          <section className="glass-card env-section-container">
+            <div className="env-section-header">
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Activity size={20} style={{ color: '#10b981' }} />
-                  <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>
+                <div className="env-section-title-group">
+                  <Activity size={20} className="text-emerald" />
+                  <h2 className="env-section-title">
                     Environmental & Satellite Analysis
                   </h2>
                 </div>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '4px 0 0 0' }}>
+                <p className="env-section-sub">
                   Raw Earth Observation numbers and SoilGrids layers converted into plain-language agronomic evaluations.
                 </p>
               </div>
-              <span className="badge badge-high" style={{ fontSize: '0.75rem' }}>
+              <span className="badge badge-high badge-status-pill">
                 ● GEE & SoilGrids Verified
               </span>
             </div>
@@ -460,9 +438,9 @@ export const FieldAnalysisPage: React.FC = () => {
                 className="accordion-toggle-btn"
                 onClick={() => setShowTechnicalData(!showTechnicalData)}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Layers size={16} style={{ color: '#38bdf8' }} />
-                  <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>
+                <div className="btn-accordion-title-group">
+                  <Layers size={16} className="text-info" />
+                  <span className="btn-accordion-title">
                     Satellite & GEE Data (Radar & Multispectral)
                   </span>
                 </div>
@@ -494,9 +472,9 @@ export const FieldAnalysisPage: React.FC = () => {
                 className="accordion-toggle-btn"
                 onClick={() => setShowSoilGridsData(!showSoilGridsData)}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Droplet size={16} style={{ color: '#10b981' }} />
-                  <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>
+                <div className="btn-accordion-title-group">
+                  <Droplet size={16} className="text-emerald" />
+                  <span className="btn-accordion-title">
                     Technical SoilGrids Data (3D Depth Chemistry)
                   </span>
                 </div>
@@ -526,9 +504,9 @@ export const FieldAnalysisPage: React.FC = () => {
                 className="accordion-toggle-btn"
                 onClick={() => setShowNasaData(!showNasaData)}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Activity size={16} style={{ color: '#f59e0b' }} />
-                  <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>
+                <div className="btn-accordion-title-group">
+                  <Activity size={16} className="text-gold" />
+                  <span className="btn-accordion-title">
                     NASA POWER Climate Data (30-Year Historical Regimes)
                   </span>
                 </div>
@@ -556,9 +534,9 @@ export const FieldAnalysisPage: React.FC = () => {
                 className="accordion-toggle-btn"
                 onClick={() => setShowAllTechnicalData(!showAllTechnicalData)}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Cpu size={16} style={{ color: '#a855f7' }} />
-                  <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>
+                <div className="btn-accordion-title-group">
+                  <Cpu size={16} className="text-info" />
+                  <span className="btn-accordion-title">
                     Technical Data (78-Layer Feature Vector & AI Model Engines)
                   </span>
                 </div>
@@ -570,11 +548,11 @@ export const FieldAnalysisPage: React.FC = () => {
                   <div className="tech-table-grid">
                     <div className="tech-item"><span className="tech-name">Feature Vector Length</span><span className="tech-val">78 Diagnostic Bands</span></div>
                     <div className="tech-item"><span className="tech-name">Coordinate Reference System</span><span className="tech-val">EPSG:4326 (WGS84 Geodesic)</span></div>
-                    <div className="tech-item"><span className="tech-name">Model A: Land Suitability</span><span className="tech-val" style={{ color: '#34d399' }}>Active (FAO Framework)</span></div>
-                    <div className="tech-item"><span className="tech-name">Model B: Quantile Yields</span><span className="tech-val" style={{ color: '#34d399' }}>Active (GBDT P10/P50/P90)</span></div>
-                    <div className="tech-item"><span className="tech-name">Model C: Irrigation Demand</span><span className="tech-val" style={{ color: '#34d399' }}>Active (FAO-56 Water Balance)</span></div>
-                    <div className="tech-item"><span className="tech-name">Model D: Intercrop Symbiosis</span><span className="tech-val" style={{ color: '#34d399' }}>Active (Synergy Boost Matrix)</span></div>
-                    <div className="tech-item"><span className="tech-name">Model E: Agro-Climatic Risk</span><span className="tech-val" style={{ color: '#34d399' }}>Active (30-Year Extremes)</span></div>
+                    <div className="tech-item"><span className="tech-name">Model A: Land Suitability</span><span className="tech-val text-emerald">Active (FAO Framework)</span></div>
+                    <div className="tech-item"><span className="tech-name">Model B: Quantile Yields</span><span className="tech-val text-emerald">Active (GBDT P10/P50/P90)</span></div>
+                    <div className="tech-item"><span className="tech-name">Model C: Irrigation Demand</span><span className="tech-val text-emerald">Active (FAO-56 Water Balance)</span></div>
+                    <div className="tech-item"><span className="tech-name">Model D: Intercrop Symbiosis</span><span className="tech-val text-emerald">Active (Synergy Boost Matrix)</span></div>
+                    <div className="tech-item"><span className="tech-name">Model E: Agro-Climatic Risk</span><span className="tech-val text-emerald">Active (30-Year Extremes)</span></div>
                     <div className="tech-item"><span className="tech-name">Satellite Ingestion Engine</span><span className="tech-val">Google Earth Engine API</span></div>
                   </div>
                 </div>
@@ -601,9 +579,8 @@ export const FieldAnalysisPage: React.FC = () => {
 
             <button
               type="button"
-              className="btn-primary"
+              className="btn-primary page-bottom-actions-btn"
               onClick={() => startCropAnalysis()}
-              style={{ padding: '12px 28px', fontSize: '1rem' }}
             >
               <span>Analyse All Crops</span>
               <ArrowRight size={18} />
@@ -614,19 +591,18 @@ export const FieldAnalysisPage: React.FC = () => {
 
       {/* Initial state before Predict Now is clicked */}
       {!isPredicted && !loading && (
-        <div className="glass-card" style={{ textAlign: 'center', padding: '36px 20px' }}>
-          <Compass size={36} style={{ color: '#10b981', margin: '0 auto 12px auto' }} />
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 6px 0' }}>
+        <div className="glass-card empty-field-box">
+          <Compass size={36} className="text-emerald empty-field-icon" />
+          <h3 className="empty-field-title">
             Location Selected: Ready for Analysis
           </h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', maxWidth: '600px', margin: '0 auto 18px auto' }}>
+          <p className="empty-field-desc">
             Adjust your parcel boundaries on the map above if needed, then click <strong>Predict Now</strong> to query Google Earth Engine, Sentinel radar, SoilGrids, and NASA POWER.
           </p>
           <button
             type="button"
-            className="btn-primary"
+            className="btn-primary empty-field-btn"
             onClick={() => runPredictNow()}
-            style={{ padding: '12px 28px', fontSize: '0.95rem' }}
           >
             <Play size={18} />
             <span>Predict Now →</span>

@@ -200,33 +200,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
   return (
     <div
       ref={containerRef}
-      style={{
-        position: 'absolute',
-        top: '16px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 'var(--z-panel)',
-        width: 'min(480px, 92vw)',
-        pointerEvents: 'auto',
-      }}
+      className="search-bar-container"
     >
-      <div
-        className="glass-panel"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '6px 12px',
-          background: 'var(--glass-strong)',
-          borderRadius: 'var(--r-pill)',
-          boxShadow: 'var(--elev-2)',
-          border: '1px solid var(--glass-border)',
-        }}
-      >
+      <div className="glass-panel search-bar-input-box">
         {isLoading ? (
-          <Loader2 size={18} className="animate-spin" style={{ color: 'var(--emerald-500)', flexShrink: 0 }} />
+          <Loader2 size={18} className="animate-spin text-emerald shrink-0" />
         ) : (
-          <Search size={18} style={{ color: 'var(--ink-3)', flexShrink: 0 }} />
+          <Search size={18} className="text-muted shrink-0" />
         )}
         <input
           type="text"
@@ -234,15 +214,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
           onChange={e => setQuery(e.target.value)}
           placeholder="Search place (e.g. California, Punjab) or lat, lng..."
           aria-label="Search map location"
-          style={{
-            flex: 1,
-            background: 'transparent',
-            border: 'none',
-            outline: 'none',
-            color: 'var(--ink-1)',
-            fontSize: '0.875rem',
-            fontFamily: 'var(--font-ui)',
-          }}
+          className="search-input-field"
           onKeyDown={e => {
             if (e.key === 'Enter') {
               const coords = parseCoordinates(query);
@@ -262,19 +234,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
               setShowDropdown(false);
             }}
             aria-label="Clear search"
-            style={{
-              background: 'none',
-              border: 'none',
-              padding: 0,
-              cursor: 'pointer',
-              color: 'var(--ink-3)',
-              display: 'flex',
-            }}
+            className="search-clear-btn"
           >
             <X size={16} />
           </button>
         )}
-        <div style={{ width: '1px', height: '18px', background: 'var(--glass-border)' }} />
+        <div className="search-divider" />
         <IconButton
           icon={<Navigation size={16} />}
           aria-label="Locate me"
@@ -282,29 +247,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
           size="sm"
           disabled={isLocating}
           onClick={handleLocateMe}
-          style={{
-            color: isLocating ? 'var(--emerald-500)' : 'var(--ink-2)',
-          }}
+          className={isLocating ? 'text-emerald' : 'text-muted'}
         />
       </div>
 
       {showDropdown && results.length > 0 && (
-        <div
-          className="glass-panel animate-fade-rise"
-          style={{
-            position: 'absolute',
-            top: 'calc(100% + 8px)',
-            left: 0,
-            right: 0,
-            background: 'var(--bg-1)',
-            border: '1px solid var(--glass-border)',
-            borderRadius: 'var(--r-md)',
-            boxShadow: 'var(--elev-3)',
-            maxHeight: '260px',
-            overflowY: 'auto',
-            padding: '6px',
-          }}
-        >
+        <div className="glass-panel animate-fade-rise search-results-dropdown">
           {results.map((r, i) => (
             <div
               key={i}
@@ -314,31 +262,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onFlyTo, onDropSearchMarke
               onKeyDown={e => {
                 if (e.key === 'Enter') handleSelect(r);
               }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '8px 12px',
-                borderRadius: 'var(--r-xs)',
-                cursor: 'pointer',
-                color: 'var(--ink-1)',
-                fontSize: '0.8125rem',
-                transition: 'background var(--t-fast) var(--ease-out)',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = 'var(--bg-2)';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = 'transparent';
-              }}
+              className="search-result-item"
             >
-              <MapPin size={16} style={{ color: 'var(--emerald-500)', flexShrink: 0 }} />
-              <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', textAlign: 'left' }}>
-                <span style={{ fontWeight: 600, color: 'var(--ink-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <MapPin size={16} className="text-emerald shrink-0" />
+              <div className="search-result-text-col">
+                <span className="search-result-title">
                   {r.name}
                 </span>
                 {r.detail && (
-                  <span style={{ fontSize: '0.75rem', color: 'var(--ink-3)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <span className="search-result-detail">
                     {r.detail}
                   </span>
                 )}

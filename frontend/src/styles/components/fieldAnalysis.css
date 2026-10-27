@@ -1,0 +1,611 @@
+/* Field Analysis & Soil/Satellite Diagnostics Component Styles */
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  .top-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink-1);
+}
+
+.field-coords-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.parcel-area-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.parcel-area-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.parcel-area-input {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--emerald-500);
+  padding: 8px 12px;
+  flex: 1;
+}
+
+.parcel-area-unit {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+
+/* Detected Location Card */
+.detected-location-card {
+  padding: 14px 16px;
+  border-radius: var(--r-sm);
+  background: var(--bg-1);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detected-location-card.non-arable-alert {
+  background: rgba(255, 107, 107, 0.08);
+  border-color: rgba(255, 107, 107, 0.35);
+  border-left: 4px solid var(--danger);
+}
+
+.detected-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink-1);
+}
+
+.detected-meta {
+  font-size: 0.78rem;
+  color: var(--ink-2);
+}
+
+/* Metric Card */
+.metric-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg-1);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-sm);
+  padding: 16px;
+  transition: transform var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+}
+
+.metric-card-container:hover {
+  transform: translateY(-2px);
+  border-color: var(--emerald-500);
+}
+
+.metric-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.metric-card-label {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.metric-card-value {
+  font-size: 1.35rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--ink-1);
+}
+
+.metric-card-unit {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  font-family: var(--font-ui);
+  margin-left: 4px;
+}
+
+.metric-card-sub {
+  font-size: 0.78rem;
+  color: var(--ink-2);
+}
+
+/* Diagnostics Panel */
+.diag-panel-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.diag-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* Suitability Banner */
+.suit-banner-container {
+  border-radius: var(--r-md);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+}
+
+.suit-banner-container.high {
+  border-left: 4px solid var(--emerald-500);
+}
+
+.suit-banner-container.moderate {
+  border-left: 4px solid var(--gold-500);
+}
+
+.suit-banner-container.low {
+  border-left: 4px solid var(--danger);
+}
+
+.suit-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.suit-banner-grade {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--ink-1);
+}
+
+.suit-banner-conf {
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}
+
+/* Irrigation Panel */
+.irrigation-panel-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.irrigation-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+/* Climate Risk Report */
+.climate-risk-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.climate-risk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+/* Field Analysis Page Layout */
+.page-actions-row {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-retry {
+  font-size: 0.8rem;
+  padding: 6px 14px;
+}
+
+.retry-container {
+  margin-top: 8px;
+}
+
+.field-map-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field-map-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-map-footer-text {
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+
+.selected-field-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.selected-field-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.selected-field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selected-field-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selected-field-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink-1);
+}
+
+.badge-status-pill {
+  font-size: 0.74rem;
+}
+
+.cell-season {
+  grid-column: span 2;
+}
+
+.season-select {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.parcel-area-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.parcel-area-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.parcel-area-editable-badge {
+  font-size: 0.7rem;
+  color: var(--emerald-500);
+  background: rgba(34, 197, 139, 0.12);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.parcel-area-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.parcel-area-input-field {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--emerald-500);
+  padding: 8px 12px;
+  flex: 1;
+}
+
+.parcel-area-unit-text {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+
+.non-arable-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.non-arable-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.non-arable-title-text {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--danger);
+  text-transform: uppercase;
+}
+
+.non-arable-badge {
+  font-size: 0.68rem;
+  padding: 1px 6px;
+}
+
+.non-arable-name {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink-1);
+}
+
+.non-arable-biome-text {
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+
+.non-arable-warning-msg {
+  font-size: 0.74rem;
+  color: var(--danger);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.detected-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.detected-title-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detected-title-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--emerald-500);
+  text-transform: uppercase;
+}
+
+.detected-badge {
+  font-size: 0.68rem;
+  padding: 1px 6px;
+}
+
+.detected-zone-text {
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+
+.detected-dominant-crops {
+  font-size: 0.73rem;
+  color: var(--ink-3);
+  margin-top: 4px;
+}
+
+.field-selection-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--ink-2);
+}
+
+.predict-btn-container {
+  border-top: 1px solid var(--glass-border);
+  padding-top: 16px;
+}
+
+.btn-predict-now {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.predict-footnote {
+  font-size: 0.74rem;
+  color: var(--ink-3);
+  text-align: center;
+  margin: 8px 0 0 0;
+}
+
+.processing-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.processing-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.processing-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink-1);
+}
+
+.processing-sub {
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}
+
+.processing-badges-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.processing-stage-content {
+  flex: 1;
+}
+
+.processing-stage-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.processing-stage-title {
+  font-size: 0.85rem;
+}
+
+.processing-stage-source {
+  font-size: 0.72rem;
+}
+
+.processing-stage-status-text {
+  font-size: 0.72rem;
+}
+
+.analysis-banner-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.analysis-banner-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink-1);
+}
+
+.analysis-banner-sub {
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}
+
+.btn-dossier-advance {
+  padding: 10px 22px;
+}
+
+.env-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.env-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.env-section-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.env-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink-1);
+}
+
+.env-section-sub {
+  font-size: 0.8rem;
+  color: var(--ink-2);
+  margin: 4px 0 0 0;
+}
+
+.btn-accordion-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-accordion-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.page-bottom-actions-btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+}
+
+.empty-field-box {
+  text-align: center;
+  padding: 36px 20px;
+}
+
+.empty-field-icon {
+  margin: 0 auto 12px auto;
+}
+
+.empty-field-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink-1);
+  margin: 0 0 6px 0;
+}
+
+.empty-field-desc {
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  max-width: 600px;
+  margin: 0 auto 18px auto;
+}
+
+.empty-field-btn {
+  padding: 12px 28px;
+  font-size: 0.95rem;
+}
+

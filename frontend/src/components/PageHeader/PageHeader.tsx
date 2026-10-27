@@ -17,23 +17,22 @@ export const PageHeader: React.FC = () => {
   return (
     <header className="app-header">
       <div
-        className="brand"
+        className="brand brand-link"
         onClick={() => goToStep(1)}
-        style={{ cursor: 'pointer', userSelect: 'none' }}
         title="Click to navigate to Workspace Overview"
       >
-        <div className="brand-icon" style={{ background: 'transparent', padding: 0, overflow: 'hidden' }}>
+        <div className="brand-icon brand-icon-box">
           <GeoAgriLogo size={32} />
         </div>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="brand-row">
             <h1 className="brand-title">GeoAgri AI</h1>
           </div>
           <span className="brand-subtitle">Global Geospatial Agricultural Intelligence</span>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+      <div className="header-actions-row">
         <div className="header-step-pill">
           <span className="pulse-dot" />
           <span>{STEP_TITLES[currentStep]}</span>
@@ -50,12 +49,12 @@ export const PageHeader: React.FC = () => {
         >
           {theme === 'dark' ? (
             <>
-              <Sun size={15} style={{ color: '#f59e0b' }} />
+              <Sun size={15} className="text-gold" />
               <span className="theme-toggle-label">Light Mode</span>
             </>
           ) : (
             <>
-              <Moon size={15} style={{ color: '#6366f1' }} />
+              <Moon size={15} className="text-info" />
               <span className="theme-toggle-label">Dark Mode</span>
             </>
           )}
@@ -84,7 +83,7 @@ export const PageHeader: React.FC = () => {
           aria-label="Toggle Explainable AI Advisor"
           id="ai-advisor-toggle-btn"
         >
-          <Bot size={17} style={{ color: '#10b981' }} />
+          <Bot size={17} className="text-emerald" />
           <span>AI Advisor</span>
           <span className="copilot-pulse-dot" />
         </button>

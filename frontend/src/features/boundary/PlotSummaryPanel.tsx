@@ -115,37 +115,15 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
   const canConfirm = (isPinMode ? pinCoords !== null : validation.valid) && !serverError;
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: '80px',
-        right: '20px',
-        zIndex: 'var(--z-panel)',
-        width: 'min(360px, 90vw)',
-        pointerEvents: 'auto',
-      }}
-    >
-      <div
-        className="glass-panel"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          padding: '20px',
-          background: 'var(--glass-strong)',
-          borderRadius: 'var(--r-md)',
-          boxShadow: 'var(--elev-3)',
-          maxHeight: 'calc(100vh - 120px)',
-          overflowY: 'auto',
-        }}
-      >
+    <div className="plot-summary-container">
+      <div className="glass-panel plot-summary-panel">
         {/* Header & Status */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="plot-summary-header">
           <div>
-            <h4 style={{ margin: 0, fontSize: '1.0625rem', fontWeight: 600, color: 'var(--ink-1)' }}>
+            <h4 className="plot-summary-title">
               Plot Summary
             </h4>
-            <span style={{ fontSize: '0.75rem', color: 'var(--ink-3)' }}>
+            <span className="plot-summary-subtitle">
               {isPinMode ? 'Point Location Mode' : 'Polygon Boundary'}
             </span>
           </div>
@@ -162,8 +140,8 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
         </div>
 
         {/* Plot Name Input */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <label style={{ fontSize: '0.8125rem', color: 'var(--ink-2)', fontWeight: 500 }}>
+        <div className="plot-name-field">
+          <label className="plot-name-label">
             Plot Name
           </label>
           <input
@@ -171,55 +149,25 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
             value={plotName}
             onChange={e => onPlotNameChange(e.target.value)}
             placeholder="e.g. North Acre Paddy"
-            style={{
-              padding: '8px 12px',
-              borderRadius: 'var(--r-xs)',
-              background: 'var(--bg-2)',
-              border: '1px solid var(--glass-border)',
-              color: 'var(--ink-1)',
-              fontSize: '0.875rem',
-              fontFamily: 'var(--font-ui)',
-              outline: 'none',
-            }}
+            className="plot-name-input"
           />
         </div>
 
         {/* Pin Warning Banner if Pin Mode */}
         {isPinMode && (
-          <div
-            style={{
-              padding: '10px 12px',
-              background: 'rgba(217, 173, 79, 0.12)',
-              border: '1px solid rgba(217, 173, 79, 0.3)',
-              borderRadius: 'var(--r-xs)',
-              fontSize: '0.8125rem',
-              color: 'var(--gold-300)',
-              lineHeight: 1.4,
-            }}
-          >
+          <div className="pin-warning-box">
             <strong>Pin only:</strong> Area unknown; environmental & regulatory models will use point coordinates without parcel perimeter.
           </div>
         )}
 
         {/* Server Area Error Banner (PRD §3.3 S5) */}
         {serverError && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '4px',
-              padding: '10px 12px',
-              background: 'rgba(255, 107, 107, 0.15)',
-              border: '1px solid rgba(255, 107, 107, 0.4)',
-              borderRadius: 'var(--r-xs)',
-              color: 'var(--danger)',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, fontSize: '0.8125rem' }}>
-              <AlertTriangle size={15} style={{ flexShrink: 0 }} />
+          <div className="server-error-box">
+            <div className="server-error-title-row">
+              <AlertTriangle size={15} className="shrink-0" />
               <span>{serverError.code || 'AREA_VALIDATION_ERROR'}</span>
             </div>
-            <div style={{ fontSize: '0.75rem', lineHeight: 1.4, paddingLeft: '23px' }}>
+            <div className="server-error-msg">
               {serverError.message}
             </div>
           </div>
@@ -227,20 +175,10 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
 
         {/* Validation Errors list */}
         {!isPinMode && validation.issues.length > 0 && validation.vertexCount > 0 && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '6px',
-              padding: '10px 12px',
-              background: 'rgba(255, 107, 107, 0.12)',
-              border: '1px solid rgba(255, 107, 107, 0.3)',
-              borderRadius: 'var(--r-xs)',
-            }}
-          >
+          <div className="validation-issues-box">
             {validation.issues.map((issue, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8125rem', color: 'var(--danger)' }}>
-                <AlertTriangle size={14} style={{ flexShrink: 0 }} />
+              <div key={i} className="validation-issue-item">
+                <AlertTriangle size={14} className="shrink-0" />
                 <span>{issue.message}</span>
               </div>
             ))}
@@ -249,47 +187,37 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
 
         {/* Live Metrics */}
         {!isPinMode ? (
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '12px',
-              padding: '12px',
-              background: 'var(--bg-2)',
-              borderRadius: 'var(--r-sm)',
-              border: '1px solid var(--glass-border)',
-            }}
-          >
+          <div className="plot-metrics-grid">
             <div>
-              <div style={{ fontSize: '0.6875rem', color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <div className="plot-metric-label">
                 Area
               </div>
               <StatNumber value={validation.areaHa} decimals={2} unit="ha" />
-              <div style={{ fontSize: '0.75rem', color: 'var(--ink-2)', marginTop: '2px' }}>
+              <div className="plot-metric-sub">
                 {validation.areaAcres.toFixed(2)} ac · {validation.areaGuntas.toFixed(1)} guntas
               </div>
             </div>
 
             <div>
-              <div style={{ fontSize: '0.6875rem', color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <div className="plot-metric-label">
                 Perimeter
               </div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 600, fontFamily: 'var(--font-mono)', color: 'var(--ink-1)' }}>
+              <div className="plot-perimeter-val">
                 {validation.perimeterM > 1000
                   ? `${(validation.perimeterM / 1000).toFixed(2)} km`
                   : `${Math.round(validation.perimeterM)} m`}
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--ink-2)', marginTop: '2px' }}>
+              <div className="plot-metric-sub">
                 {validation.vertexCount} vertices
               </div>
             </div>
 
             {validation.centroid && (
-              <div style={{ gridColumn: 'span 2', paddingTop: '8px', borderTop: '1px solid var(--glass-border)' }}>
-                <div style={{ fontSize: '0.6875rem', color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <div className="plot-coords-row">
+                <div className="plot-metric-label">
                   Center Coordinates
                 </div>
-                <div style={{ fontSize: '0.8125rem', fontFamily: 'var(--font-mono)', color: 'var(--ink-1)' }}>
+                <div className="plot-coords-val">
                   {validation.centroid[1].toFixed(5)}°N, {validation.centroid[0].toFixed(5)}°E
                 </div>
               </div>
@@ -297,18 +225,11 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
           </div>
         ) : (
           pinCoords && (
-            <div
-              style={{
-                padding: '12px',
-                background: 'var(--bg-2)',
-                borderRadius: 'var(--r-sm)',
-                border: '1px solid var(--glass-border)',
-              }}
-            >
-              <div style={{ fontSize: '0.6875rem', color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <div className="pin-coords-box">
+              <div className="plot-metric-label">
                 Pin Location
               </div>
-              <div style={{ fontSize: '0.875rem', fontFamily: 'var(--font-mono)', color: 'var(--ink-1)', marginTop: '4px' }}>
+              <div className="pin-coords-val">
                 {pinCoords[1].toFixed(5)}°N, {pinCoords[0].toFixed(5)}°E
               </div>
             </div>
@@ -317,7 +238,7 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
 
         {/* Server verification indicator */}
         {isConfirmed && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', color: 'var(--emerald-500)' }}>
+          <div className="server-verified-row">
             <ShieldCheck size={16} />
             <span>Server-verified boundary geometry ✓</span>
           </div>
@@ -332,20 +253,20 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
           onClick={onConfirm}
           icon={<ArrowRight size={18} />}
           iconPosition="right"
-          style={{ width: '100%' }}
+          className="btn-full-width"
         >
           {isConfirmed ? 'Update & Proceed →' : 'Confirm Boundary →'}
         </Button>
 
         {/* Geometry Export (GeoJSON Copy & Download) */}
         {(polygonCoords || pinCoords) && (
-          <div style={{ display: 'flex', gap: '8px', paddingTop: '8px', borderTop: '1px solid var(--glass-border)' }}>
+          <div className="geometry-export-row">
             <Button
               variant="glass"
               size="sm"
               icon={copied ? <Check size={14} /> : <Copy size={14} />}
               onClick={handleCopyGeoJSON}
-              style={{ flex: 1 }}
+              className="btn-flex-1"
             >
               {copied ? 'Copied' : 'Copy GeoJSON'}
             </Button>
@@ -354,7 +275,7 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
               size="sm"
               icon={<Download size={14} />}
               onClick={handleDownloadGeoJSON}
-              style={{ flex: 1 }}
+              className="btn-flex-1"
             >
               Download
             </Button>

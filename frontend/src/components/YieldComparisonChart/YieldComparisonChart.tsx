@@ -15,44 +15,27 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
   const top5 = crops.slice(0, 5);
 
   return (
-    <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: 18, marginBottom: 24 }}>
+    <div className="glass-card yield-comp-chart-wrap">
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 12,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <BarChart3 size={20} style={{ color: "#10b981" }} />
+      <div className="yield-comp-header">
+        <div className="flex-row-center gap-8">
+          <BarChart3 size={20} className="text-emerald" />
           <div>
-            <h3 style={{ fontSize: "1.15rem", fontWeight: 700, margin: 0, color: "var(--text-main)" }}>
+            <h3 className="yield-comp-title">
               Multi-Crop & Intercrop Compatibility
             </h3>
-            <p style={{ fontSize: "0.78rem", color: "#9ca3af", margin: 0 }}>
+            <p className="yield-comp-desc">
               Standalone vs. Companion Intercropped Production — Visualizing main crop baseline harvest with companion yield synergies
             </p>
           </div>
         </div>
-        <span
-          style={{
-            fontSize: "0.75rem",
-            padding: "3px 10px",
-            background: "rgba(255, 255, 255, 0.06)",
-            color: "#9ca3af",
-            borderRadius: 6,
-            fontWeight: 600,
-          }}
-        >
+        <span className="yield-comp-unit-tag">
           Units: Metric Tonnes (t)
         </span>
       </div>
 
       {/* Comparison Rows */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <div className="yield-comp-rows">
         {top5.map((crop, idx) => {
           const mainYieldPerHa = crop.expected_yield_t_ha?.p50 || 2.5;
           const hasIntercrop = Boolean(crop.intercrop_options && crop.intercrop_options.length > 0);
@@ -79,100 +62,62 @@ export const YieldComparisonChart: React.FC<YieldComparisonChartProps> = ({ crop
           const intercropPct = hasIntercrop ? Math.min(100, Math.round((intercropTotalYield / maxVal) * 100)) : 0;
 
           return (
-            <div
-              key={crop.crop_id || idx}
-              className="yield-comparison-row"
-              style={{
-                padding: 14,
-                borderRadius: 10,
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: 8,
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--text-main)" }}>
+            <div key={crop.crop_id || idx} className="yield-comp-row-card">
+              <div className="yield-comp-row-top">
+                <div className="flex-row-center gap-8">
+                  <span className="yield-comp-crop-title">
                     {crop.crop_name}
                   </span>
                   {hasIntercrop ? (
-                    <span style={{ fontSize: "0.8rem", color: "#10b981", fontWeight: 600 }}>
+                    <span className="yield-comp-companion-title">
                       + {intercropName}
                     </span>
                   ) : (
-                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontWeight: 500 }}>
+                    <span className="yield-comp-sole-title">
                       (Sole Cropping)
                     </span>
                   )}
                 </div>
-                <div style={{ textAlign: "right" }}>
-                  <span style={{ fontSize: "0.95rem", fontWeight: 800, color: "var(--accent-amber)" }}>
+                <div className="text-right">
+                  <span className="yield-comp-combined-output">
                     {combinedYield} t
                   </span>
-                  <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginLeft: 4 }}>
+                  <span className="yield-comp-combined-label">
                     combined output
                   </span>
                 </div>
               </div>
 
               {/* Stacked Bar */}
-              <div
-                style={{
-                  height: 12,
-                  background: "rgba(255, 255, 255, 0.06)",
-                  borderRadius: 6,
-                  overflow: "hidden",
-                  display: "flex",
-                  marginBottom: 6,
-                }}
-              >
+              <div className="yield-comp-bar-track">
                 <div
-                  style={{
-                    width: `${mainPct}%`,
-                    height: "100%",
-                    background: "#3b82f6",
-                    transition: "width 0.4s ease",
-                  }}
+                  className="yield-comp-bar-main"
+                  style={{ width: `${mainPct}%` }}
                   title={`Main Crop: ${mainTotalYield} t`}
                 />
                 <div
-                  style={{
-                    width: `${intercropPct}%`,
-                    height: "100%",
-                    background: "#10b981",
-                    transition: "width 0.4s ease",
-                  }}
+                  className="yield-comp-bar-companion"
+                  style={{ width: `${intercropPct}%` }}
                   title={`Intercrop Companion: +${intercropTotalYield} t`}
                 />
               </div>
 
               {/* Legend for this bar */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "0.75rem",
-                  color: "var(--text-muted)",
-                }}
-              >
-                <div style={{ display: "flex", gap: 16 }}>
-                  <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#3b82f6" }} />
-                    Main ({crop.crop_name}): <strong style={{ color: "var(--text-main)", marginLeft: 2 }}>{mainTotalYield} t</strong>
+              <div className="yield-comp-legend">
+                <div className="flex-row-center gap-16">
+                  <span className="flex-row-center gap-6">
+                    <span className="yield-comp-legend-dot-main" />
+                    Main ({crop.crop_name}): <strong className="text-ink-1 ml-2">{mainTotalYield} t</strong>
                   </span>
                   {hasIntercrop && (
-                    <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#10b981" }} />
-                      Companion ({intercropName}): <strong style={{ color: "#10b981", marginLeft: 2 }}>+{intercropTotalYield} t</strong>
+                    <span className="flex-row-center gap-6">
+                      <span className="yield-comp-legend-dot-companion" />
+                      Companion ({intercropName}): <strong className="text-emerald-light ml-2">+{intercropTotalYield} t</strong>
                     </span>
                   )}
                 </div>
                 {hasIntercrop && crop.intercrop_options?.[0]?.yield_boost_pct && (
-                  <span style={{ color: "#10b981", fontWeight: 600 }}>
+                  <span className="yield-comp-advantage-text">
                     +{(crop.intercrop_options[0].yield_boost_pct * 100).toFixed(1)}% Advantage
                   </span>
                 )}

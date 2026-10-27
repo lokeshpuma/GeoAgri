@@ -462,24 +462,24 @@ Would you like to explore one of these specific topics?
       <aside className="agri-chatbot-drawer" aria-label="GeoAgri Explainable AI Advisor">
         {/* Header */}
         <div className="agri-chatbot-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="chat-header-info">
             <div className="agri-chatbot-avatar">
-              <Bot size={22} style={{ color: '#10b981' }} />
+              <Bot size={22} className="chat-avatar-icon" />
             </div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: 'var(--text-main)' }}>
+              <div className="chat-header-title-row">
+                <h3 className="chat-header-title">
                   Explainable AI Advisor
                 </h3>
                 <span className="copilot-pulse-dot" />
               </div>
-              <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+              <span className="chat-header-sub">
                 Technical Terms • Satellite Indices • Agronomy
               </span>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div className="chat-header-actions">
             <button
               type="button"
               className="chatbot-header-btn"
@@ -502,10 +502,10 @@ Would you like to explore one of these specific topics?
 
         {/* Active Context Banner */}
         <div className="agri-chatbot-context-banner">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-main)' }}>
-            <MapPin size={13} style={{ color: '#10b981', flexShrink: 0 }} />
-            <span style={{ fontWeight: 600 }}>Active Field:</span>
-            <span style={{ color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <div className="chat-context-row">
+            <MapPin size={13} className="chat-pin-icon" />
+            <span className="chat-context-strong">Active Field:</span>
+            <span className="chat-context-details">
               {locName} ({centroidLat.toFixed(2)}°N, {centroidLon.toFixed(2)}°E • {areaHa.toFixed(2)} ha)
             </span>
           </div>
@@ -544,11 +544,11 @@ Would you like to explore one of these specific topics?
                           const parts = content.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
 
                           return (
-                            <span key={lIdx} style={{ display: isBullet ? 'block' : 'inline', marginLeft: isBullet ? '12px' : 0 }}>
-                              {isBullet && <span style={{ color: '#10b981', marginRight: '6px' }}>•</span>}
+                            <span key={lIdx} className={isBullet ? 'chat-bullet-line' : 'chat-inline-line'}>
+                              {isBullet && <span className="chat-bullet-symbol">•</span>}
                               {parts.map((part, idx) => {
                                 if (part.startsWith('**') && part.endsWith('**')) {
-                                  return <strong key={idx} style={{ color: 'var(--text-main)' }}>{part.slice(2, -2)}</strong>;
+                                  return <strong key={idx} className="chat-strong-text">{part.slice(2, -2)}</strong>;
                                 }
                                 if (part.startsWith('`') && part.endsWith('`')) {
                                   return <code key={idx} className="bot-code-pill">{part.slice(1, -1)}</code>;
@@ -574,7 +574,7 @@ Would you like to explore one of these specific topics?
                       onClick={() => handleCopy(msg.id, msg.text)}
                       title="Copy explanation"
                     >
-                      {copiedId === msg.id ? <Check size={12} style={{ color: '#10b981' }} /> : <Copy size={12} />}
+                      {copiedId === msg.id ? <Check size={12} className="chat-copy-icon" /> : <Copy size={12} />}
                       <span>{copiedId === msg.id ? 'Copied' : 'Copy'}</span>
                     </button>
                   )}

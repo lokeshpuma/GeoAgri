@@ -41,7 +41,7 @@ const WorkflowContainer: React.FC = () => {
       </div>
 
       <PageHeader />
-      <main style={{ flex: 1, width: '100%', position: 'relative', zIndex: 1 }}>
+      <main className="main-content">
         {renderActiveStepPage()}
       </main>
       <BottomWorkflowNav />
