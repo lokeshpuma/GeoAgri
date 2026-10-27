@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { WorkflowProvider, useWorkflow } from './context/WorkflowContext';
 import { PageHeader } from './components/PageHeader/PageHeader';
 import { BottomWorkflowNav } from './components/BottomWorkflowNav/BottomWorkflowNav';
-import { AgriChatBot } from './components/AgriChatBot/AgriChatBot';
-import { WorkspacePage } from './pages/WorkspacePage';
-import { BoundaryStudioPage } from './features/boundary/BoundaryStudioPage';
-import { FieldAnalysisPage } from './pages/FieldAnalysisPage';
-import { CropPredictionPage } from './pages/CropPredictionPage';
-import { SummaryReportPage } from './pages/SummaryReportPage';
 import { ToastProvider } from './ui/Toast';
+
+// Code-split pages and chatbot per PRD v3.1 §5.3 item 7 (AC-12, AC-13)
+const WorkspacePage = lazy(() => import('./pages/WorkspacePage').then(m => ({ default: m.WorkspacePage })));
+const BoundaryStudioPage = lazy(() => import('./features/boundary/BoundaryStudioPage').then(m => ({ default: m.BoundaryStudioPage })));
+const FieldAnalysisPage = lazy(() => import('./pages/FieldAnalysisPage').then(m => ({ default: m.FieldAnalysisPage })));
+const CropPredictionPage = lazy(() => import('./pages/CropPredictionPage').then(m => ({ default: m.CropPredictionPage })));
+const SummaryReportPage = lazy(() => import('./pages/SummaryReportPage').then(m => ({ default: m.SummaryReportPage })));
+const AgriChatBot = lazy(() => import('./components/AgriChatBot/AgriChatBot').then(m => ({ default: m.AgriChatBot })));
+
+const PageFallback: React.FC = () => (
+  <div className="page-loading-container" aria-label="Loading page">
+    <div className="page-loading-orb" />
+  </div>
+);
 
 const WorkflowContainer: React.FC = () => {
   const { currentStep } = useWorkflow();
@@ -42,12 +50,16 @@ const WorkflowContainer: React.FC = () => {
 
       <PageHeader />
       <main className="main-content">
-        {renderActiveStepPage()}
+        <Suspense fallback={<PageFallback />}>
+          {renderActiveStepPage()}
+        </Suspense>
       </main>
       <BottomWorkflowNav />
 
       {/* Explainable AI Agronomic Advisor Chatbot Tab / Drawer */}
-      <AgriChatBot />
+      <Suspense fallback={null}>
+        <AgriChatBot />
+      </Suspense>
     </div>
   );
 };

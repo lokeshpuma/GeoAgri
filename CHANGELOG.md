@@ -395,3 +395,24 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `PYTHONPATH=. venv/bin/python -m pytest -q`: 117 passed, 3009 warnings in 66.75s (PASSED).
 - Git tag: `phase-R5` created.
 
+## [PRD v3.1 - Phase R6 Performance and QA] - 2026-10-27
+### Fixed & Verified (AC-12, AC-13, §5.3 item 7)
+- **Code-Splitting with React.lazy and Suspense**:
+  - Code-split heavy routes in `App.tsx` (`BoundaryStudioPage`, `FieldAnalysisPage`, `CropPredictionPage`, `SummaryReportPage`, `AgriChatBot`).
+  - Added zero-inline-style animated loading fallback (`.page-loading-container`, `.page-loading-orb`).
+- **Rollup Manual Chunking Optimization (`vite.config.ts`)**:
+  - Structured manual vendor chunking:
+    - `vendor-maplibre`: MapLibre GL core engine (isolated chunk: 283.67 kB gzip)
+    - `vendor-terradraw`: TerraDraw drawing suite (isolated chunk: 37.22 kB gzip)
+    - `vendor-charts`: Recharts + D3 rendering engine (isolated chunk: 96.29 kB gzip)
+    - `vendor-turf`: Geospatial algorithms (isolated chunk: 9.74 kB gzip)
+    - `vendor-icons`: Lucide icon pack (isolated chunk: 4.81 kB gzip)
+    - `vendor-react`: React & React DOM (isolated chunk: 53.52 kB gzip)
+  - Initial entry JavaScript bundle size reduced to **64.91 kB gzip** (`index-CCH83Vhp.js`), well below the ≤ 350 kB gzip budget (PRD §5.3 item 7).
+  - Completely eliminated chunk size minification warning.
+- **Gate Execution (§8)**:
+  - `npm run build`: built in 2.34s with zero chunk size warnings (PASSED).
+  - `npm test`: 11 passed across 3 test files in 796ms (PASSED).
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: 117 passed, 3009 warnings in 57.51s (well under 3 minutes offline, PASSED).
+- Git tag: `phase-R6` created.
+

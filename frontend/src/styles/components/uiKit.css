@@ -536,4 +536,23 @@
 .glass-panel-glow-emerald { box-shadow: var(--elev-2), 0 0 24px var(--emerald-glow); }
 .glass-panel-glow-gold { box-shadow: var(--elev-2), 0 0 24px var(--gold-glow); }
 
+/* Page Loading Fallback */
+.page-loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  width: 100%;
+}
+
+.page-loading-orb {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--glass-border);
+  border-top-color: var(--emerald-500);
+  animation: spin 1s linear infinite;
+}
+
+
 
