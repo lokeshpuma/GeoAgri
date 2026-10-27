@@ -355,5 +355,20 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `grep -rn "@turf/centroid" frontend/src`: 2 matches (PASSED).
   - `npm test`: 11 passed in 1.52s (PASSED).
   - `npm run build`: built in 2.30s with zero errors (PASSED).
-  - `venv/bin/python -m pytest -q`: 117 passed in 64.92s (PASSED).
-- Git tag: `phase-R3` pending commit.
+- Git tag: `phase-R3` created at commit `dcaea91`.
+
+## [PRD v3.1 - Phase R4 Single Drawing Engine] - 2026-10-27
+### Fixed & Verified (S1–S3)
+- **Single Drawing Engine via TerraDraw (S1)**: Refactored `BoundaryMap.tsx` to adopt `TerraDraw` + `TerraDrawMapLibreGLAdapter`. Unified drawing modes (`TerraDrawPolygonMode`, `TerraDrawRectangleMode`, `TerraDrawCircleMode`, `TerraDrawFreehandMode`, `TerraDrawSelectMode`, `TerraDrawPointMode`). Deleted hand-rolled mouse event coordinate pushers.
+- **Snapping & Edge Midpoint Editing (S3)**: Enabled TerraDraw vertex snapping with `toCoordinate: true`, `toLine: true`, `showSnappingPoint: true`, and `pointerDistance: 10`. Enabled draggable vertices and midpoints for polygon editing.
+- **Updated Keyboard Shortcuts Popover**: Updated `ToolDock.tsx` with full shortcut documentation: Polygon (P), Rectangle (R), Freehand (F), Select (S), Delete (Del/Backspace), Undo (Z), Redo (Y), Cancel/Escape (Esc).
+- **Live ARIA Status Announcer**: Added `id="boundary-status-announcer"` in `BoundaryStudioPage.tsx` with `aria-live="polite"` for screen reader status announcements.
+- **Cowpea Registry Companion Grounding**: Updated `cowpea` entry in `crop_registry.json` with canonical companion pairings (`sorghum`, `maize`) matching `intercrop_matrix.json`, satisfying `test_intercrop_matrix_coverage_and_genuine_sole_crop_allowlist`.
+- **Gate Execution (§8)**:
+  - `grep -rn "TerraDraw" frontend/src`: matches (26 occurrences in `BoundaryMap.tsx`).
+  - `grep -rnE "onMouseMove.*polygonCoords" frontend/src`: 0 matches (PASSED).
+  - `npm test`: 11 passed across 3 test files in 2.13s (PASSED).
+  - `npm run build`: 0 TypeScript or build errors in 3.08s (PASSED).
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: 117 passed, 3009 warnings in 67.16s (PASSED).
+- Git tag: `phase-R4` created.
+

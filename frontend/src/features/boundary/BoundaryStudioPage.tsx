@@ -251,6 +251,14 @@ export const BoundaryStudioPage: React.FC = () => {
 
   const hasBoundary = Boolean((polygonCoords && polygonCoords.length > 0) || pinCoords);
 
+  const ariaAnnouncement = validation.valid
+    ? `Area ${validation.areaHa.toFixed(2)} ha, ${validation.vertexCount} vertices, boundary valid`
+    : validation.issues.length > 0
+    ? `Boundary issue: ${validation.issues[0].message}`
+    : pinCoords
+    ? `Pin location placed at ${pinCoords[1].toFixed(4)} N, ${pinCoords[0].toFixed(4)} E`
+    : 'No boundary placed';
+
   return (
     <div
       style={{
@@ -261,6 +269,26 @@ export const BoundaryStudioPage: React.FC = () => {
         background: 'var(--bg-0)',
       }}
     >
+      {/* Live ARIA Region for Screen Readers (PRD §3.4 S10) */}
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+        id="boundary-status-announcer"
+        style={{
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0, 0, 0, 0)',
+          whiteSpace: 'nowrap',
+          border: 0,
+        }}
+      >
+        {ariaAnnouncement}
+      </div>
       {/* Top Search Bar */}
       <SearchBar
         onFlyTo={(coords, zoom) => setSearchTarget({ coords, zoom })}

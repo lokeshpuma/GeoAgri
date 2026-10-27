@@ -188,7 +188,15 @@ export const ToolDock: React.FC<ToolDockProps> = ({
                 <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>R</kbd>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Edit Corners</span>
+                <span style={{ color: 'var(--ink-2)' }}>Circle (64-pt)</span>
+                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>C</kbd>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: 'var(--ink-2)' }}>Freehand</span>
+                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>F</kbd>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: 'var(--ink-2)' }}>Edit Corners & Midpoints</span>
                 <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>E</kbd>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -197,15 +205,23 @@ export const ToolDock: React.FC<ToolDockProps> = ({
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: 'var(--ink-2)' }}>Finish Polygon</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Enter / Double Click</kbd>
+                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Enter</kbd>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--ink-2)' }}>Cancel Shape</span>
+                <span style={{ color: 'var(--ink-2)' }}>Delete Selected Vertex</span>
+                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Del / Backspace</kbd>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: 'var(--ink-2)' }}>Pan / Cancel</span>
                 <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Esc</kbd>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: 'var(--ink-2)' }}>Undo</span>
-                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Ctrl + Z</kbd>
+                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Ctrl+Z</kbd>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: 'var(--ink-2)' }}>Redo</span>
+                <kbd style={{ background: 'var(--bg-2)', padding: '1px 5px', borderRadius: '4px' }}>Ctrl+Y / ⇧⌘Z</kbd>
               </div>
             </div>
           </div>

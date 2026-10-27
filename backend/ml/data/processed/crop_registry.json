@@ -530,11 +530,18 @@
     "data_confidence": "high",
     "intercrop_options": [
       {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
+        "companion_crop_id": "sorghum",
+        "companion_crop_name": "Sorghum (Jowar)",
+        "yield_boost_pct": 0.2,
+        "companion_share_factor": 0.3,
+        "rationale": "Cowpea + Sorghum (1:2 ratio) enables cowpea vine climbing on sorghum stalks, increasing total forage and grain biomass."
+      },
+      {
+        "companion_crop_id": "maize",
+        "companion_crop_name": "Maize",
+        "yield_boost_pct": 0.18,
         "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
+        "rationale": "Cowpea + Maize provides balanced nitrogen replenishment and complete soil surface shade."
       }
     ]
   },
