@@ -41,7 +41,7 @@ async def calculate_field_area(req: FieldAreaRequest):
                 "area_method": "point_none"
             }
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={"code": "TOO_FEW_VERTICES", "message": "Either a polygon or point must be provided."}
         )
 
@@ -50,14 +50,14 @@ async def calculate_field_area(req: FieldAreaRequest):
     # 2. Vertex count check (must be at least 3 distinct + 1 closing = 4 pts)
     if len(pts) < 4 and (len(pts) < 3 or pts[0] != pts[-1]):
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={"code": "TOO_FEW_VERTICES", "message": "Polygon must have at least 3 distinct vertices."}
         )
 
     # 3. Closed ring check
     if pts[0] != pts[-1]:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={"code": "NOT_CLOSED", "message": "Polygon ring is not closed (first vertex != last vertex)."}
         )
 
@@ -65,7 +65,7 @@ async def calculate_field_area(req: FieldAreaRequest):
     for lon, lat in pts:
         if not (-180.0 <= lon <= 180.0 and -90.0 <= lat <= 90.0):
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={"code": "OUT_OF_RANGE", "message": f"Coordinates ({lon}, {lat}) exceed WGS84 bounds."}
             )
 
@@ -74,13 +74,13 @@ async def calculate_field_area(req: FieldAreaRequest):
         poly_obj = Polygon(pts)
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={"code": "SELF_INTERSECTION", "message": f"Invalid polygon geometry: {str(e)}"}
         )
 
     if not poly_obj.is_valid:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={"code": "SELF_INTERSECTION", "message": "Polygon edges self-intersect (bow-tie shape)."}
         )
 
@@ -91,7 +91,7 @@ async def calculate_field_area(req: FieldAreaRequest):
 
     if area_ha < FIELD_MIN_HA:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={
                 "code": "TOO_SMALL",
                 "message": f"Area ({round(area_ha, 4)} ha) is below minimum of {FIELD_MIN_HA} ha."
@@ -100,7 +100,7 @@ async def calculate_field_area(req: FieldAreaRequest):
 
     if area_ha > FIELD_MAX_HA:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={
                 "code": "TOO_LARGE",
                 "message": f"Area ({round(area_ha, 1)} ha) exceeds maximum limit of {FIELD_MAX_HA} ha."
