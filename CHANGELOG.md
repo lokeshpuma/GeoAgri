@@ -559,3 +559,16 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `npx playwright test`: **2 passed in 10.7s** in Chromium browser (PASSED).
 - Git tag: `phase-Q6` created.
 
+## [PRD v3.2 - Phase Q7 External Data and Calibration] - 2026-10-28
+### Status: DID NOT FINISH (Network Access Blocked)
+- **External Dataset Probe (D1: FAOSTAT Ground Truth)**:
+  - Attempted automated retrieval of FAOSTAT bulk crop production and yield archive: `https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_NOFLAG.zip`.
+  - HTTP probe returned `403 Forbidden` from AmazonS3 / CloudFront CDN edge.
+  - Attempted secondary API endpoint `https://fenixservices.fao.org/faostat/api/v1/`, which returned `Cloudflare Error 521: Web server is down`.
+- **Halt Criteria Enforced (Rule 6)**:
+  - Per Rule 6: *"If any source cannot be reached, stop that phase, write DID NOT FINISH with the reason, and continue with the phases that do not depend on it... Never train on EcoCrop alone. Never invent crop, yield, climate or soil values."*
+  - Because authentic FAOSTAT country-year yield ground truth cannot be downloaded without synthetic data fabrication, envelope calibration (D4) was safely stopped.
+- **Gate Execution (AC-9)**:
+  - Gate AC-9: **NOT RUN** (due to unreachable FAOSTAT upstream repository).
+- Git tag: `phase-Q7` created.
+
