@@ -14,7 +14,7 @@ import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
 import { DrawTool, BasemapId, BoundaryValidationResult } from './boundaryTypes';
 import { UNIFIED_MAP_STYLE, BASEMAP_LAYER_IDS, BASEMAPS } from './mapStyles';
 import { evaluateBoundary, normalizeRing, simplifyFreehand } from './boundaryMath';
-import { extractBoundary, DrawStatus, SnapshotFeature } from './extractBoundary';
+import { extractBoundary, DrawStatus, SnapshotFeature, isGuidance, POLYGON_MODES } from './extractBoundary';
 import { useToast } from '../../ui/Toast';
 
 export interface SearchTargetObject {
@@ -38,6 +38,8 @@ export interface BoundaryMapProps {
   redoTrigger?: number;
   onHistoryStateChange?: (canUndo: boolean, canRedo: boolean) => void;
   onDrawStatusChange?: (status: DrawStatus) => void;
+  onDrawNoteChange?: (note?: 'multiple_polygons' | 'polygon_and_pin') => void;
+  onPendingReplaceChange?: (hasPending: boolean) => void;
   finishShapeTrigger?: number;
   isFrozen?: boolean;
 }
@@ -56,6 +58,8 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
   redoTrigger = 0,
   onHistoryStateChange,
   onDrawStatusChange,
+  onDrawNoteChange,
+  onPendingReplaceChange,
   finishShapeTrigger = 0,
   isFrozen = false,
 }) => {
@@ -63,6 +67,11 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
   const mapRef = useRef<maplibregl.Map | null>(null);
   const drawRef = useRef<TerraDraw | null>(null);
   const searchMarkerRef = useRef<maplibregl.Marker | null>(null);
+
+  const [pendingReplace, setPendingReplace] = useState<{
+    newFeature: any;
+    oldFeatureIds: string[];
+  } | null>(null);
 
   const [vertices, setVertices] = useState<[number, number][]>(() => initialPolygon || []);
   const [pinCoords, setPinCoords] = useState<[number, number] | null>(() => initialPin || null);
@@ -118,6 +127,9 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     if (onDrawStatusChange) {
       onDrawStatusChange(res.status); // 'none' | 'drawing' | 'ready'
     }
+    if (onDrawNoteChange) {
+      onDrawNoteChange(res.note);
+    }
     const next = sig(res.polygon) + '|' + (res.pin?.join(',') ?? '');
     if (res.status === 'drawing') return; // never treat an unfinished shape as a boundary
     if (next === lastCommittedSig.current) return; // selection or hover changes must not un-confirm
@@ -151,7 +163,7 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     }
   }, [onDrawStatusChange, onGeometryChange, onValidationChange, pushSnapshot]);
 
-  // Handle Finish Shape button trigger (PRD v3.2 §2)
+  // Handle Finish Shape button trigger (PRD v3.2 §2, v3.3 §3.4)
   const prevFinishTrigger = useRef(finishShapeTrigger);
   useEffect(() => {
     if (finishShapeTrigger > prevFinishTrigger.current) {
@@ -186,7 +198,34 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
         coords = deduped;
         if (coords.length >= 3) {
           const closedRing = [...coords, coords[0]];
+          const real = (snapshot ?? []).filter((f: any) => !isGuidance(f));
+          const existingFinished = real.filter(
+            (f: any) =>
+              f.geometry?.type === 'Polygon' &&
+              f.properties?.currentlyDrawing !== true &&
+              String(f.id) !== String(inProgress.id)
+          );
+
           draw.removeFeatures([String(inProgress.id)]);
+
+          if (existingFinished.length > 0) {
+            const candidateFeature = {
+              type: 'Feature',
+              id: crypto.randomUUID(),
+              properties: { mode: 'polygon' },
+              geometry: {
+                type: 'Polygon',
+                coordinates: [closedRing],
+              },
+            };
+            setPendingReplace({
+              newFeature: candidateFeature,
+              oldFeatureIds: existingFinished.map((f: any) => String(f.id)),
+            });
+            syncFromTerraDraw();
+            return;
+          }
+
           draw.addFeatures([
             {
               type: 'Feature',
@@ -205,6 +244,27 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
       }
     }
   }, [finishShapeTrigger, onToolChange, syncFromTerraDraw]);
+
+  useEffect(() => {
+    onPendingReplaceChange?.(pendingReplace !== null);
+  }, [pendingReplace, onPendingReplaceChange]);
+
+  const handleConfirmReplace = useCallback(() => {
+    const draw = drawRef.current;
+    if (!draw || !pendingReplace) return;
+
+    draw.removeFeatures(pendingReplace.oldFeatureIds);
+    draw.addFeatures([pendingReplace.newFeature]);
+    setPendingReplace(null);
+    syncFromTerraDraw();
+    onToolChange('select');
+  }, [pendingReplace, syncFromTerraDraw, onToolChange]);
+
+  const handleRejectReplace = useCallback(() => {
+    setPendingReplace(null);
+    syncFromTerraDraw();
+    onToolChange('select');
+  }, [syncFromTerraDraw, onToolChange]);
 
   // Freeze map on Confirm (PRD v3.2 §2)
   useEffect(() => {
@@ -397,12 +457,37 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
       }
 
       // Hook events
-      draw.on('finish', (_id: string | number, ctx: any) => {
-        syncFromTerraDraw();
-        // Switch to select mode ONLY when a shape was just completed, never after edits
+      draw.on('finish', (id: string | number, ctx: any) => {
         if (ctx && ctx.action === 'draw') {
+          const snapshot = draw.getSnapshot() as any[];
+          const real = (snapshot ?? []).filter((f: any) => !isGuidance(f));
+          const finishedPolygons = real.filter(
+            (f: any) =>
+              f.geometry?.type === 'Polygon' &&
+              POLYGON_MODES.has(String(f.properties?.mode)) &&
+              f.properties?.currentlyDrawing !== true
+          );
+
+          if (finishedPolygons.length > 1) {
+            const newFeature =
+              finishedPolygons.find((f: any) => String(f.id) === String(id)) ||
+              finishedPolygons[finishedPolygons.length - 1];
+            const oldFeatures = finishedPolygons.filter(
+              (f: any) => String(f.id) !== String(newFeature.id)
+            );
+
+            draw.removeFeatures([String(newFeature.id)]);
+            setPendingReplace({
+              newFeature,
+              oldFeatureIds: oldFeatures.map((f: any) => String(f.id)),
+            });
+            syncFromTerraDraw();
+            return;
+          }
+
           onToolChange('select');
         }
+        syncFromTerraDraw();
       });
 
       draw.on('change', () => {
@@ -481,6 +566,41 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
         ref={mapContainerRef}
         className="boundary-map-canvas"
       />
+      {pendingReplace && (
+        <div
+          className="replace-boundary-modal-backdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="replace-dialog-title"
+        >
+          <div className="replace-boundary-dialog glass-card">
+            <div className="replace-dialog-header">
+              <h3 id="replace-dialog-title" className="replace-dialog-title">
+                Replace current boundary with the new shape?
+              </h3>
+            </div>
+            <p className="replace-dialog-desc">
+              GeoAgri supports one parcel boundary at a time. Do you want to replace your existing boundary with the newly drawn shape?
+            </p>
+            <div className="replace-dialog-actions">
+              <button
+                type="button"
+                className="btn-secondary btn-replace-no"
+                onClick={handleRejectReplace}
+              >
+                No
+              </button>
+              <button
+                type="button"
+                className="btn-primary btn-replace-yes"
+                onClick={handleConfirmReplace}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

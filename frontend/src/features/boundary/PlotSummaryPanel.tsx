@@ -29,6 +29,7 @@ export interface PlotSummaryPanelProps {
   polygonCoords: [number, number][] | null;
   serverError?: { code?: string; message: string } | null;
   drawStatus?: DrawStatus;
+  hasMultipleShapes?: boolean;
   onFinishShape?: () => void;
   onEditBoundary?: () => void;
 }
@@ -45,6 +46,7 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
   polygonCoords,
   serverError,
   drawStatus = 'none',
+  hasMultipleShapes = false,
   onFinishShape,
   onEditBoundary,
 }) => {
@@ -121,7 +123,7 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
   };
 
   const canConfirm =
-    (isPinMode ? pinCoords !== null : (validation.valid && drawStatus !== 'drawing')) &&
+    (isPinMode ? pinCoords !== null : (validation.valid && drawStatus !== 'drawing' && !hasMultipleShapes)) &&
     !serverError;
 
   return (
@@ -179,6 +181,16 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
             </div>
             <div className="server-error-msg">
               {serverError.message}
+            </div>
+          </div>
+        )}
+
+        {/* Multiple Shapes Alert (PRD v3.3 §3.4, AC-11) */}
+        {hasMultipleShapes && (
+          <div className="validation-issues-box">
+            <div className="validation-issue-item">
+              <AlertTriangle size={14} className="shrink-0" />
+              <span>Multiple shapes detected: Only one boundary is allowed.</span>
             </div>
           </div>
         )}

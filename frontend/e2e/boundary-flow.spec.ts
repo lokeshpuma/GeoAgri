@@ -113,4 +113,177 @@ test.describe('Boundary Studio Drawing & Confirmation Flow (PRD v3.2 §2, §9 Q3
     // Self-intersecting polygon is invalid -> Confirm must remain disabled
     await expect(confirmBtn).toBeDisabled();
   });
+
+  test('drawing only 3 corners without finishing leaves Confirm disabled (PRD v3.3 §3.4)', async ({ page }) => {
+    await page.goto('/#boundary');
+
+    const drawPolygonBtn = page.getByLabel('Draw polygon');
+    await drawPolygonBtn.click();
+
+    const mapContainer = page.locator('.boundary-map-canvas');
+    const box = await mapContainer.boundingBox();
+    if (!box) throw new Error('Map container bounding box not found');
+
+    const cx = box.x + box.width / 2;
+    const cy = box.y + box.height / 2;
+
+    await page.waitForTimeout(500);
+
+    // Click only 3 corners without closing or finishing
+    await page.mouse.click(cx - 30, cy - 30);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 30, cy - 30);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx, cy + 30);
+    await page.waitForTimeout(300);
+
+    // Unfinished shape: Confirm button MUST remain disabled
+    const confirmBtn = page.getByRole('button', { name: /Confirm Boundary/i });
+    await expect(confirmBtn).toBeDisabled();
+
+    // Finish shape banner should be offered
+    const finishShapeBtn = page.getByRole('button', { name: /Finish shape/i });
+    await expect(finishShapeBtn).toBeVisible();
+  });
+
+  test('reload restores the draft with a banner and does not auto-confirm (AC-12)', async ({ page }) => {
+    await page.goto('/#boundary');
+
+    const drawPolygonBtn = page.getByLabel('Draw polygon');
+    await drawPolygonBtn.click();
+
+    const mapContainer = page.locator('.boundary-map-canvas');
+    const box = await mapContainer.boundingBox();
+    if (!box) throw new Error('Map container bounding box not found');
+
+    const cx = box.x + box.width / 2;
+    const cy = box.y + box.height / 2;
+
+    await page.waitForTimeout(500);
+    await page.mouse.click(cx - 25, cy - 25);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 25, cy - 25);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 25, cy + 25);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx - 25, cy + 25);
+    await page.waitForTimeout(200);
+
+    const finishShapeBtn = page.getByRole('button', { name: /Finish shape/i });
+    if (await finishShapeBtn.isVisible()) {
+      await finishShapeBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    const confirmBtn = page.getByRole('button', { name: /Confirm Boundary/i });
+    await expect(confirmBtn).toBeEnabled();
+
+    // Reload page without confirming
+    await page.reload();
+    await page.waitForTimeout(800);
+
+    // Assert on #boundary and restore banner is visible
+    expect(page.url()).toContain('#boundary');
+    const restoreBanner = page.locator('.draft-restore-banner');
+    await expect(restoreBanner).toBeVisible();
+    await expect(restoreBanner).toContainText(/restored/i);
+
+    // Assert shape is loaded and ready to confirm, but has NOT auto-confirmed
+    await expect(confirmBtn).toBeEnabled();
+    expect(page.url()).not.toContain('#analysis');
+  });
+
+  test('drawing a second shape shows replace prompt; Yes keeps new shape, No keeps first shape (AC-11)', async ({ page }) => {
+    await page.goto('/#boundary');
+
+    const drawPolygonBtn = page.getByLabel('Draw polygon');
+    await drawPolygonBtn.click();
+
+    const mapContainer = page.locator('.boundary-map-canvas');
+    const box = await mapContainer.boundingBox();
+    if (!box) throw new Error('Map container bounding box not found');
+
+    const cx = box.x + box.width / 2;
+    const cy = box.y + box.height / 2;
+
+    // Draw first shape (4 corners)
+    await page.waitForTimeout(500);
+    await page.mouse.click(cx - 50, cy - 50);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx - 10, cy - 50);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx - 10, cy - 10);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx - 50, cy - 10);
+    await page.waitForTimeout(200);
+
+    const finishShapeBtn = page.getByRole('button', { name: /Finish shape/i });
+    if (await finishShapeBtn.isVisible()) {
+      await finishShapeBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    const confirmBtn = page.getByRole('button', { name: /Confirm Boundary/i });
+    await expect(confirmBtn).toBeEnabled();
+
+    // Now start drawing a second shape
+    await drawPolygonBtn.click();
+    await page.waitForTimeout(300);
+
+    await page.mouse.click(cx + 20, cy + 20);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 60, cy + 20);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 60, cy + 60);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 20, cy + 60);
+    await page.waitForTimeout(200);
+
+    if (await finishShapeBtn.isVisible()) {
+      await finishShapeBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    // Verify replace prompt appears with exact text
+    const promptTitle = page.getByText('Replace current boundary with the new shape?');
+    await expect(promptTitle).toBeVisible();
+
+    // Click "No" to reject replacement
+    const noBtn = page.getByRole('button', { name: /^no/i });
+    await noBtn.click();
+    await page.waitForTimeout(300);
+
+    // Assert prompt dismissed and exactly one shape remains (first shape kept)
+    await expect(promptTitle).not.toBeVisible();
+    await expect(confirmBtn).toBeEnabled();
+
+    // Now draw a second shape again and click "Yes"
+    await drawPolygonBtn.click();
+    await page.waitForTimeout(300);
+
+    await page.mouse.click(cx + 20, cy + 20);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 60, cy + 20);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 60, cy + 60);
+    await page.waitForTimeout(150);
+    await page.mouse.click(cx + 20, cy + 60);
+    await page.waitForTimeout(200);
+
+    if (await finishShapeBtn.isVisible()) {
+      await finishShapeBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await expect(promptTitle).toBeVisible();
+
+    // Click "Yes" to accept replacement
+    const yesBtn = page.getByRole('button', { name: /^yes/i });
+    await yesBtn.click();
+    await page.waitForTimeout(300);
+
+    // Assert prompt dismissed and one shape remains
+    await expect(promptTitle).not.toBeVisible();
+    await expect(confirmBtn).toBeEnabled();
+  });
 });

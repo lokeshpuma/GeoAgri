@@ -601,3 +601,98 @@
   color: var(--ink-3);
   pointer-events: none;
 }
+
+/* Replace Boundary Dialog (PRD v3.3 §3.4 D-10, AC-11) */
+.replace-boundary-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 9, 10, 0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: var(--z-modal, 1000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.replace-boundary-dialog {
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg, 12px);
+  padding: 24px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.replace-dialog-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.replace-dialog-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.replace-dialog-desc {
+  font-size: 0.875rem;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.replace-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Draft Restore Banner (PRD v3.3 §3.4, AC-12) */
+.draft-restore-banner {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: calc(var(--z-panel, 50) + 10);
+  background: var(--glass-strong);
+  border: 1px solid var(--info);
+  border-radius: var(--r-md, 8px);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--elev-2);
+  max-width: 540px;
+  width: calc(100% - 32px);
+}
+
+.draft-restore-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  color: var(--ink-1);
+  flex: 1;
+}
+
+.btn-dismiss-draft-banner {
+  background: transparent;
+  border: none;
+  color: var(--ink-2);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.btn-dismiss-draft-banner:hover {
+  color: var(--ink-1);
+}
+

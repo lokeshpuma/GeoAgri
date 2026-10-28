@@ -13,6 +13,8 @@ import { saveBoundaryDraft, loadBoundaryDraft, clearBoundaryDraft } from './boun
 import { fetchFieldArea } from '../../api/client';
 import { useToast } from '../../ui/Toast';
 import centroid from '@turf/centroid';
+import { Info } from 'lucide-react';
+import { evaluateBoundary } from './boundaryMath';
 
 const getBoundarySig = (poly: [number, number][] | null, pin: [number, number] | null): string => {
   const polyStr = poly ? poly.map(p => `${p[0].toFixed(6)},${p[1].toFixed(6)}`).join(';') : '';
@@ -63,6 +65,9 @@ export const BoundaryStudioPage: React.FC = () => {
   const [serverError, setServerError] = useState<{ code?: string; message: string } | null>(null);
   const [searchTarget, setSearchTarget] = useState<SearchTargetValue>(null);
   const [isCoachDismissed, setIsCoachDismissed] = useState(false);
+  const [drawNote, setDrawNote] = useState<'multiple_polygons' | 'polygon_and_pin' | undefined>(undefined);
+  const [hasPendingReplace, setHasPendingReplace] = useState(false);
+  const [isDraftRestored, setIsDraftRestored] = useState(false);
 
   // Undo & Redo state management
   const [canUndo, setCanUndo] = useState(false);
@@ -73,12 +78,15 @@ export const BoundaryStudioPage: React.FC = () => {
   const handleUndo = useCallback(() => setUndoTrigger(prev => prev + 1), []);
   const handleRedo = useCallback(() => setRedoTrigger(prev => prev + 1), []);
 
-  // Restore draft from storage on mount
+  // Restore draft from storage on mount (PRD v3.3 §3.4, AC-12)
   useEffect(() => {
     const draft = loadBoundaryDraft();
     if (draft && (!polygonCoords || polygonCoords.length === 0) && !pinCoords) {
-      if (draft.polygon) {
+      if (draft.polygon && draft.polygon.length >= 3) {
         setPolygonCoords(draft.polygon);
+        setValidation(evaluateBoundary(draft.polygon));
+        setDrawStatus('ready');
+        setIsDraftRestored(true);
         showToast({
           type: 'info',
           title: 'Draft Restored',
@@ -86,6 +94,18 @@ export const BoundaryStudioPage: React.FC = () => {
         });
       } else if (draft.pin) {
         setPinCoords(draft.pin);
+        setDrawStatus('ready');
+        setValidation({
+          valid: true,
+          issues: [],
+          areaHa: 0,
+          areaAcres: 0,
+          areaGuntas: 0,
+          perimeterM: 0,
+          vertexCount: 1,
+          centroid: draft.pin,
+        });
+        setIsDraftRestored(true);
       }
       if (draft.name) setPlotName(draft.name);
     }
@@ -310,6 +330,24 @@ export const BoundaryStudioPage: React.FC = () => {
         onDropSearchMarker={(coords) => setSearchTarget({ coords, zoom: 16 })}
       />
 
+      {/* Draft Restored Banner (PRD v3.3 §3.4, AC-12) */}
+      {isDraftRestored && (
+        <div className="draft-restore-banner" role="status">
+          <div className="draft-restore-content">
+            <Info size={16} className="text-info shrink-0" />
+            <span>Draft boundary restored from previous session. Review and confirm when ready.</span>
+          </div>
+          <button
+            type="button"
+            className="btn-dismiss-draft-banner"
+            onClick={() => setIsDraftRestored(false)}
+            aria-label="Dismiss draft banner"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
       {/* Left Tool Dock */}
       <ToolDock
         activeTool={activeTool}
@@ -340,6 +378,8 @@ export const BoundaryStudioPage: React.FC = () => {
           setCanRedo(r);
         }}
         onDrawStatusChange={setDrawStatus}
+        onDrawNoteChange={setDrawNote}
+        onPendingReplaceChange={setHasPendingReplace}
         finishShapeTrigger={finishShapeTrigger}
         isFrozen={isFrozen}
       />
@@ -357,6 +397,7 @@ export const BoundaryStudioPage: React.FC = () => {
         polygonCoords={polygonCoords}
         serverError={serverError}
         drawStatus={drawStatus}
+        hasMultipleShapes={drawNote === 'multiple_polygons' || hasPendingReplace}
         onFinishShape={handleFinishShape}
         onEditBoundary={handleEditBoundary}
       />

@@ -26,8 +26,8 @@ export interface ExtractResult {
   note?: 'multiple_polygons' | 'polygon_and_pin';
 }
 
-const GUIDANCE_KEYS = ['closingPoint', 'midPoint', 'selectionPoint', 'snappingPoint', 'coordinatePoint'] as const;
-const POLYGON_MODES = new Set(['polygon', 'rectangle', 'circle', 'freehand']);
+export const GUIDANCE_KEYS = ['closingPoint', 'midPoint', 'selectionPoint', 'snappingPoint', 'coordinatePoint'] as const;
+export const POLYGON_MODES = new Set(['polygon', 'rectangle', 'circle', 'freehand']);
 
 export function isGuidance(f: SnapshotFeature): boolean {
   const p = f.properties ?? {};

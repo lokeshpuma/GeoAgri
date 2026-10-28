@@ -676,3 +676,28 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `npm run build`: **Built in 2.23s with 0 errors** (PASSED).
   - `npx playwright test e2e/crop-cards.spec.ts`: **1 passed in 5.8s** (PASSED).
 - Git tag: `phase-V4` created.
+
+## [PRD v3.3 - Phase V5 One-Shape Rule & Drawing Tests] - 2026-10-28
+### Added & Verified (D-10, D-11, AC-11, AC-12)
+- **One-Shape Rule & Boundary Replacement (AC-11, D-10)**:
+  - In `BoundaryMap.tsx`, when a draw `finish` with `action === 'draw'` produces a second polygon, the new feature is immediately removed from the store and user is shown the confirmation dialog: `"Replace current boundary with the new shape?"`.
+  - On "Yes", the old boundary features are removed and replaced with the new shape.
+  - On "No", the new shape remains discarded and the original boundary is preserved.
+  - Exactly one shape remains after answering.
+- **Multiple Polygons Gating**:
+  - `extractBoundary` reporting `note: 'multiple_polygons'` is treated as an active invalid state.
+  - Confirm Boundary button is disabled while more than one shape exists or while replacement is pending.
+- **Reload & Restore Draft State (AC-12)**:
+  - On reload, boundary draft is restored from `localStorage` without auto-confirming (`confirmed: false`, step remains 2 `#boundary`).
+  - Added visible in-app `.draft-restore-banner` notifying the user that their draft boundary was restored from the previous session.
+- **Drawing Scenarios Suite (D-11, AC-11, AC-12)**:
+  - Added 3 new Playwright test scenarios in `e2e/boundary-flow.spec.ts`:
+    1. Drawing only 3 corners without finishing leaves Confirm disabled.
+    2. Reload restores the draft with a banner and does not auto-confirm.
+    3. Drawing a second shape shows replace prompt; Yes keeps new shape, No keeps first shape.
+- **Gate Execution (AC-11, AC-12)**:
+  - `npm test`: **6 test files passed, 23 passed in 1.10s** (PASSED).
+  - `npm run build`: **Built in 2.62s with 0 errors** (PASSED).
+  - `npx playwright test e2e/boundary-flow.spec.ts`: **5 passed in 17.8s** in real Chromium browser (PASSED).
+  - `npx playwright test`: **6 passed in 18.5s** across all E2E specs (PASSED).
+- Git tag: `phase-V5` created.
