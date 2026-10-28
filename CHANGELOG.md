@@ -751,3 +751,25 @@ All notable changes to the GeoAgri project will be documented in this file in ac
     - Date palm @ Riyadh: 0.31 -> 0.92 (improved, high temperature upper bound expanded)
   - Published `backend/ml/data/processed/calibration_report.json` with before/after comparisons (all 4 spot checks improved).
 - Git tag: `phase-V7` created.
+
+## [PRD v3.3 - Phase V8 Retrain Tier A & Agronomic Intercropping] - 2026-10-28
+### Added & Verified (§3.6, AC-16, D5, D6)
+- **D5 Tier A Retraining & Leave-One-Continent-Out Validation**:
+  - Implemented `backend/ml/training/retrain_models.py` training on 25,017 real FAOSTAT country-year observations across 6 continents.
+  - Validated Model D (Yield Quantiles) and Model B (Recommender) using strict Leave-One-Continent-Out (LOCO) splits across Africa, Asia, Europe, North America, Oceania, and South America.
+  - Recorded empirical P10–P90 coverage per continent:
+    - Africa (N=6,024): 68.8%
+    - Asia (N=5,919): 76.8%
+    - Europe (N=4,971): 81.6%
+    - North America (N=2,157): 82.4%
+    - Oceania (N=1,746): 73.1%
+    - South America (N=4,200): 90.5%
+  - Updated `backend/ml/models/yield_baseline.json` with empirical FAOSTAT medians.
+  - Published comprehensive `backend/ml/models/model_card.json` documenting data version, splits, metrics, and date.
+- **D6 Agronomic Intercropping Matrix Rebuild**:
+  - Rebuilt `backend/ml/data/processed/intercrop_matrix.json` based on functional ecology and agronomic principles (nitrogen fixation, distinct canopy layers, differential root depth).
+  - Attached full scientific citations and literature references for each recommended pair.
+- **Gate Execution**:
+  - `PYTHONPATH=. venv/bin/python ml/training/retrain_models.py`: **Executed successfully with 0 errors (PASSED)**.
+  - `PYTHONPATH=. venv/bin/python -m pytest tests/test_v33_recommender_and_cards.py tests/test_climatology_and_recommender.py -v`: **17 passed in 17.03s (PASSED)**.
+- Git tag: `phase-V8` created.

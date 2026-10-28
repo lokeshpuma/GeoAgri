@@ -1,0 +1,87 @@
+{
+  "model_name": "GeoAgri Tier A Yield Quantiles (Model D) & Recommender (Model B)",
+  "version": "v3.3.0",
+  "date": "2026-10-28 09:13:59 UTC",
+  "training_data": {
+    "source": "FAOSTAT QCL Normalized Dataset (1990\u20132022)",
+    "raw_samples": 25017,
+    "elements": [
+      "Yield",
+      "Area harvested",
+      "Production"
+    ],
+    "unit": "kg/ha converted to t/ha",
+    "geographic_coverage": "Global (6 continents)"
+  },
+  "validation_strategy": {
+    "protocol": "Leave-One-Continent-Out (LOCO) Cross-Validation",
+    "continents_evaluated": [
+      "Africa",
+      "Asia",
+      "Europe",
+      "North America",
+      "Oceania",
+      "South America"
+    ]
+  },
+  "performance_metrics": {
+    "mean_pinball_loss_p10": 1.0014,
+    "mean_pinball_loss_p50": 3.017,
+    "mean_pinball_loss_p90": 1.6597,
+    "empirical_coverage_p10_p90_pct": 78.86,
+    "per_continent_evaluation": {
+      "Africa": {
+        "n_test_samples": 6024,
+        "pinball_loss_p10": 0.8774,
+        "pinball_loss_p50": 2.6029,
+        "pinball_loss_p90": 1.5437,
+        "coverage_p10_p90_pct": 68.82,
+        "top5_hit_rate_pct": 88.32
+      },
+      "Asia": {
+        "n_test_samples": 5919,
+        "pinball_loss_p10": 0.8676,
+        "pinball_loss_p50": 1.9698,
+        "pinball_loss_p90": 1.3772,
+        "coverage_p10_p90_pct": 76.77,
+        "top5_hit_rate_pct": 89.52
+      },
+      "Europe": {
+        "n_test_samples": 4971,
+        "pinball_loss_p10": 0.9286,
+        "pinball_loss_p50": 3.0603,
+        "pinball_loss_p90": 1.5602,
+        "coverage_p10_p90_pct": 81.55,
+        "top5_hit_rate_pct": 90.23
+      },
+      "North America": {
+        "n_test_samples": 2157,
+        "pinball_loss_p10": 1.1383,
+        "pinball_loss_p50": 3.5045,
+        "pinball_loss_p90": 1.537,
+        "coverage_p10_p90_pct": 82.38,
+        "top5_hit_rate_pct": 90.36
+      },
+      "Oceania": {
+        "n_test_samples": 1746,
+        "pinball_loss_p10": 1.2082,
+        "pinball_loss_p50": 4.1396,
+        "pinball_loss_p90": 2.7128,
+        "coverage_p10_p90_pct": 73.14,
+        "top5_hit_rate_pct": 88.97
+      },
+      "South America": {
+        "n_test_samples": 4200,
+        "pinball_loss_p10": 0.9885,
+        "pinball_loss_p50": 2.825,
+        "pinball_loss_p90": 1.2271,
+        "coverage_p10_p90_pct": 90.5,
+        "top5_hit_rate_pct": 91.58
+      }
+    }
+  },
+  "bias_and_fairness": {
+    "held_out_validation": "Strict continental holdouts ensure models generalize to novel geographic zones without spatial data leakage.",
+    "synthetic_data": "Zero synthetic or invented values used in training."
+  }
+}
