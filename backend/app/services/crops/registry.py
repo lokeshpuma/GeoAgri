@@ -307,6 +307,7 @@ class CropRegistry:
 # Default global registry instance
 _registry_instance: CropRegistry | None = None
 _global_registry_dict: dict[str, dict[str, Any]] | None = None
+_legacy_crosswalk_dict: dict[str, str] | None = None
 
 def get_crop_registry() -> CropRegistry:
     global _registry_instance
@@ -334,3 +335,23 @@ def get_global_registry() -> dict[str, dict[str, Any]]:
         else:
             _global_registry_dict = {}
     return _global_registry_dict
+
+
+def get_legacy_crosswalk() -> dict[str, str]:
+    """PRD v3.3 §3.2 item 1: Load legacy_crosswalk.json mapping legacy crop IDs to EcoCrop species slugs."""
+    global _legacy_crosswalk_dict
+    if _legacy_crosswalk_dict is None:
+        from pathlib import Path
+        candidate_paths = [
+            Path(__file__).resolve().parents[3] / "ml" / "data" / "processed" / "legacy_crosswalk.json",
+            Path("backend/ml/data/processed/legacy_crosswalk.json"),
+            Path("ml/data/processed/legacy_crosswalk.json"),
+        ]
+        target_path = next((p for p in candidate_paths if p.exists()), None)
+        if target_path:
+            with open(target_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                _legacy_crosswalk_dict = data.get("mapping", {})
+        else:
+            _legacy_crosswalk_dict = {}
+    return _legacy_crosswalk_dict

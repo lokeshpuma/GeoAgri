@@ -632,6 +632,26 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `PYTHONPATH=. venv/bin/python -m pytest -q`: **141 passed, 3009 warnings in 45.14s** (100% clean-checkout offline pass, 0 failures, PASSED).
 - Git tag: `phase-V2` created.
 
+## [PRD v3.3 - Phase V3 Crosswalk & Tier A Envelope Integration] - 2026-10-28
+### Added & Verified (D-3, D-4, D-5, AC-4, AC-5)
+- **Legacy Crop Crosswalk (`backend/ml/data/processed/legacy_crosswalk.json`)**:
+  - Integrated 114 crosswalk links mapping legacy crop IDs to EcoCrop species slugs.
+  - Implemented `get_legacy_crosswalk()` accessor in `backend/app/services/crops/registry.py`.
+- **Real Bioclimatic Envelopes for Tier A Crops**:
+  - In `backend/app/api/v1/predict.py`, directly score every Tier A crop with `score_crop(global_crop, site)` using the crosswalk.
+  - Completely eliminated all fabricated fallbacks (`"climatic_envelope"`, default month 6, 4 months, `"Moderate"` grade). Unmapped crops cleanly report `null` with `"No climate envelope on file"`.
+- **Tier A Bioclimatic Gating**:
+  - Evaluated site conditions with DEM elevation, soil texture, pH, and monthly precipitation/temperature.
+  - Crops where both rainfed and irrigated envelope suitability scores fall below 0.30 are excluded from recommendations and recorded in `excluded_crops` with their active limiting factors.
+- **Envelope Margin & Tie-Break Ordering**:
+  - Implemented multi-dimensional envelope margin calculation in `envelope_suitability.py`.
+  - Added deterministic tie-break ordering in `rank_crops`: score -> Tier A priority -> Category priority (cereal, pulse, root/tuber, vegetable, fruit/nut, others) -> Margin -> Name.
+- **Gate Execution (AC-4, AC-5)**:
+  - `PYTHONPATH=. venv/bin/python -m pytest tests/test_legacy_crosswalk.py -v`: **4 passed in 0.02s** (PASSED).
+  - `PYTHONPATH=. venv/bin/python -m pytest tests/test_v33_recommender_and_cards.py -k "ac4 or ac5 or 30_tied"`: **3 passed in 2.65s** (PASSED).
+- Git tag: `phase-V3` created.
+
+
 
 
 

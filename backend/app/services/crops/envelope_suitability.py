@@ -173,6 +173,28 @@ def score_crop(crop: dict[str, Any], site: Site) -> CropScore:
         notes.append("Much better with irrigation: rainfall alone limits this crop here")
 
     limiting = min(factors, key=lambda k: factors[k])
+
+    # Envelope margin: average normalized distance from envelope edges (temp, rain, pH)
+    margins: list[float] = []
+    if t["max"] > t["min"]:
+        t_span = t["max"] - t["min"]
+        d_lo = max(0.0, min(temps) - t["min"])
+        d_hi = max(0.0, t["max"] - max(temps))
+        margins.append(min(d_lo, d_hi) / t_span)
+    if r["max"] > r["min"]:
+        r_span = (r["max"] - r["min"]) * scale
+        if r_span > 0:
+            d_lo = max(0.0, rain_total - r["min"] * scale)
+            d_hi = max(0.0, r["max"] * scale - rain_total)
+            margins.append(min(d_lo, d_hi) / r_span)
+    if site.ph is not None and h["max"] > h["min"]:
+        h_span = h["max"] - h["min"]
+        d_lo = max(0.0, site.ph - h["min"])
+        d_hi = max(0.0, h["max"] - site.ph)
+        margins.append(min(d_lo, d_hi) / h_span)
+    margin_val = round(sum(margins) / len(margins), 4) if margins else 0.0
+    factors["margin"] = margin_val
+
     return CropScore(
         crop_id=crop["crop_id"],
         common_name=crop["common_name"],
@@ -183,13 +205,44 @@ def score_crop(crop: dict[str, Any], site: Site) -> CropScore:
         score_rainfed=round(rainfed_score, 3),
         score_irrigated=round(irrigated_score, 3),
         limiting_factor=(limiting if not site.irrigated or limiting != "rainfall" else
-                         min((k for k in factors if k != "rainfall"), key=lambda k: factors[k])) if score < 0.999 else "none",
+                         min((k for k in factors if k != "rainfall" and k != "margin"), key=lambda k: factors[k])) if score < 0.999 else "none",
         best_planting_month=start + 1,
         season_months=length,
         confidence_tier=crop["confidence_tier"],
-        factors={k: round(v, 3) for k, v in factors.items()},
+        factors={k: round(v, 4) for k, v in factors.items()},
         notes=notes,
     )
+
+
+CATEGORY_PRIORITY: dict[str, int] = {
+    "cereal": 0,
+    "cereals": 0,
+    "pulse": 1,
+    "pulses": 1,
+    "root_tuber": 2,
+    "roots_tubers": 2,
+    "roots and tubers": 2,
+    "vegetable": 3,
+    "vegetables": 3,
+    "fruit_nut": 4,
+    "fruits_nuts": 4,
+    "fruits and nuts": 4,
+}
+
+
+def crop_tiebreak_key(c: CropScore) -> tuple:
+    """
+    Tie-break hierarchy (PRD v3.2 §7.1.5, PRD v3.3 §3.2 item 6):
+    1. Score (higher first)
+    2. Tier A first (Tier A=0, Tier B=1)
+    3. Category priority: cereal, pulse, root_tuber, vegetable, fruit_nut, others
+    4. Envelope margin (average normalized distance from edges, higher first)
+    5. Crop common name (alphabetical)
+    """
+    tier_order = 0 if c.confidence_tier == "A" else 1
+    cat_order = CATEGORY_PRIORITY.get(c.category.lower(), 5)
+    margin = c.factors.get("margin", 0.0)
+    return (-c.score, tier_order, cat_order, -margin, c.common_name.lower())
 
 
 def rank_crops(
@@ -213,7 +266,7 @@ def rank_crops(
         s = score_crop(crop, site)
         if s.score >= min_grade_score:
             out.append(s)
-    out.sort(key=lambda c: (-c.score, c.confidence_tier, c.common_name))
+    out.sort(key=crop_tiebreak_key)
     return out[:top_n]
 
 

@@ -58,17 +58,19 @@ class RecommendedCrop(BaseModel):
     category: str = "general"
     recommendation_score: float = 0.0
     canonical_id: str | None = None
-    suitability_score: float
-    suitability_grade: str = "Moderate"
+    suitability_score: float | None = None
+    suitability_grade: str | None = None
     expected_yield_t_ha: QuantileValue | None = None
     expected_production_t: QuantileValue | None = None
-    irrigation_mode: Literal["rainfed", "supplemental", "full"]
-    water_need_mm: float
-    climate_risk_score: float
-    climate_risk_note: str
+    irrigation_mode: Literal["rainfed", "supplemental", "full"] = "rainfed"
+    water_need_mm: float | None = None
+    climate_risk_score: float | None = None
+    climate_risk_note: str | None = None
+    yield_note: str | None = None
+    score_source: str | None = None
     intercrop_options: list[IntercropOption] = []
-    rationale: str
-    data_confidence: Literal["high", "medium", "low"]
+    rationale: str = ""
+    data_confidence: Literal["high", "medium", "low"] = "medium"
     regional_agronomic_prior: float = 1.0
     intercrop_data_available: bool = True
     confidence_tier: Literal["A", "B"] = "A"
@@ -216,6 +218,7 @@ class FullReportResponse(BaseModel):
     environment: EnvironmentSummary
     satellite_features: SatelliteFeatures
     recommended_crops: list[RecommendedCrop]
+    excluded_crops: list[dict[str, Any]] = []
     yield_summary: YieldSummary
     production_summary: ProductionSummary
     irrigation_summary: IrrigationSummary
