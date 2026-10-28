@@ -76,3 +76,4 @@ License terms: Unless otherwise indicated, FAO statistics are made available und
 
 if __name__ == "__main__":
     process_faostat()
+
