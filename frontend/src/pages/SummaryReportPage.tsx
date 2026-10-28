@@ -381,7 +381,10 @@ export const SummaryReportPage: React.FC = () => {
             <tbody>
               {top5Crops.map((c, idx) => {
                 const companion = c.intercrop_options?.[0];
-                const totalYield = (c.expected_production_t?.p50 || (c.expected_yield_t_ha.p50 * farmArea)).toFixed(1);
+                const p50 = c.expected_yield_t_ha?.p50;
+                const totalYield = c.expected_production_t?.p50 != null
+                  ? c.expected_production_t.p50.toFixed(1)
+                  : (p50 != null ? (p50 * farmArea).toFixed(1) : null);
 
                 return (
                   <tr key={idx}>
@@ -400,7 +403,13 @@ export const SummaryReportPage: React.FC = () => {
                       {(c.recommendation_score * 100).toFixed(1)}%
                     </td>
                     <td className="text-right font-bold text-gold">
-                      {totalYield} t <span className="text-xs text-ink-3">({c.expected_yield_t_ha.p50} t/ha)</span>
+                      {totalYield != null ? (
+                        <>
+                          {totalYield} t <span className="text-xs text-ink-3">({p50!.toFixed(2)} t/ha)</span>
+                        </>
+                      ) : (
+                        <span className="text-ink-3 text-xs">No yield data (Tier B)</span>
+                      )}
                     </td>
                     <td className="text-center">
                       {companion ? (
@@ -456,11 +465,23 @@ export const SummaryReportPage: React.FC = () => {
                   <td className="text-ink-3 font-semibold">{idx + 1}</td>
                   <td className="font-semibold text-ink-1">{c.crop_name}</td>
                   <td className="text-right font-bold text-gold">
-                    {(c.expected_production_t?.p50 || (c.expected_yield_t_ha.p50 * farmArea)).toFixed(1)} t
+                    {c.expected_production_t?.p50 != null ? (
+                      `${c.expected_production_t.p50.toFixed(1)} t`
+                    ) : (c.expected_yield_t_ha ? (
+                      `${(c.expected_yield_t_ha.p50 * farmArea).toFixed(1)} t`
+                    ) : (
+                      <span className="text-ink-3 text-xs">—</span>
+                    ))}
                   </td>
-                  <td className="text-right">{c.expected_yield_t_ha.p50.toFixed(2)} t/ha</td>
+                  <td className="text-right">
+                    {c.expected_yield_t_ha ? `${c.expected_yield_t_ha.p50.toFixed(2)} t/ha` : <span className="text-ink-3 text-xs">No yield data</span>}
+                  </td>
                   <td className="text-right text-ink-2 text-xs">
-                    {c.expected_yield_t_ha.p10.toFixed(2)} – {c.expected_yield_t_ha.p90.toFixed(2)} t/ha
+                    {c.expected_yield_t_ha ? (
+                      `${c.expected_yield_t_ha.p10.toFixed(2)} – ${c.expected_yield_t_ha.p90.toFixed(2)} t/ha`
+                    ) : (
+                      <span className="text-ink-3 text-xs">Envelope match</span>
+                    )}
                   </td>
                   <td className="text-center text-info">{c.water_need_mm} mm</td>
                   <td className="text-right font-bold text-emerald-light">

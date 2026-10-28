@@ -1,6 +1,11 @@
 import React from 'react';
-import { Leaf, Droplet, ShieldAlert } from 'lucide-react';
+import { Leaf, Droplet, ShieldAlert, Award, Calendar, AlertCircle } from 'lucide-react';
 import { FullReportResponse } from '../../api/client';
+
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
 
 interface CropRecommendationCardProps {
   crop: FullReportResponse['recommended_crops'][0];
@@ -15,29 +20,53 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
 }) => {
   const isTopTier = rank <= 3;
   const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : 'rank-default';
+  const isTierA = crop.confidence_tier === 'A' || Boolean(crop.expected_yield_t_ha);
 
   // Companion logic
   const primaryIntercrop = crop.intercrop_options && crop.intercrop_options.length > 0
     ? crop.intercrop_options[0]
     : null;
 
-  // Production calculation
-  const p50YieldHa = crop.expected_yield_t_ha?.p50 || 2.5;
-  const totalProductionTonnes = crop.expected_production_t?.p50 || (p50YieldHa * farmArea);
-  const suitabilityPct = Math.min(100, Math.round(crop.recommendation_score * 100));
+  // Production calculation for Tier A
+  const p50YieldHa = crop.expected_yield_t_ha?.p50;
+  const totalProductionTonnes = crop.expected_production_t?.p50 || (p50YieldHa != null ? p50YieldHa * farmArea : null);
+  const suitabilityPct = Math.min(100, Math.round(crop.recommendation_score > 1 ? crop.recommendation_score : crop.recommendation_score * 100));
 
   // Risk badge
   const riskColorClass = crop.climate_risk_score < 35 ? 'text-emerald-light' : crop.climate_risk_score < 60 ? 'text-gold' : 'text-danger';
   const riskLabel = crop.climate_risk_score < 35 ? 'Low Risk' : crop.climate_risk_score < 60 ? 'Moderate Risk' : 'Elevated Risk';
 
+  const plantingMonthName = crop.best_planting_month && crop.best_planting_month >= 1 && crop.best_planting_month <= 12
+    ? MONTH_NAMES[crop.best_planting_month - 1]
+    : null;
+
   return (
     <div className={`crop-rec-card ${isTopTier ? 'top-tier' : ''} ${rankClass}`}>
-      {/* Top Bar: Rank & Category */}
+      {/* Top Bar: Rank, Badges & Category */}
       <div className="crop-rec-top">
-        <div className="flex-row-center gap-8">
+        <div className="flex-row-center gap-8 flex-wrap">
           <span className={`rank-pill ${rankClass}`}>
             #{rank} RECOMMENDATION
           </span>
+
+          {isTierA ? (
+            <span
+              className="tier-badge tier-a"
+              title="ML-verified crop: Calibrated with regional agronomic training data and probabilistic quantile yield forecasts (P10–P90)."
+            >
+              <Award size={12} />
+              ML-verified (Tier A)
+            </span>
+          ) : (
+            <span
+              className="tier-badge tier-b"
+              title="Climate-envelope match: Validated against FAO EcoCrop global bioclimatic envelope (temperature, rainfall, soil pH). No empirical yield model."
+            >
+              <Leaf size={12} />
+              Climate-envelope match (Tier B)
+            </span>
+          )}
+
           <span className="crop-category-tag">{crop.category}</span>
         </div>
 
@@ -47,9 +76,13 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
         </div>
       </div>
 
-      {/* Main Title & Companion Crop */}
+      {/* Main Title & Scientific Name */}
       <div className="crop-rec-title-block">
         <h3 className="crop-main-name">{crop.crop_name}</h3>
+        {crop.scientific_name && (
+          <span className="crop-sci-name">{crop.scientific_name}</span>
+        )}
+
         {primaryIntercrop ? (
           <div className="companion-intercrop-banner">
             <Leaf size={15} className="text-emerald flex-shrink-0" />
@@ -66,26 +99,61 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
             </span>
           </div>
         )}
+
+        {/* Limiting Factor and Best Planting Month */}
+        {crop.limiting_factor && (
+          <div className="crop-limiting-tag">
+            <AlertCircle size={13} className="text-warn flex-shrink-0" />
+            <span>
+              Limited by: <strong>{crop.limiting_factor}</strong>
+              {plantingMonthName ? ` • Best planting: ${plantingMonthName}` : ''}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Key Metric Grid */}
       <div className="crop-rec-stats-grid">
         <div className="crop-stat-cell">
           <span className="crop-stat-label">Expected Yield</span>
-          <div className="crop-stat-val">
-            <strong>{p50YieldHa.toFixed(2)}</strong> <span className="stat-unit">t/ha</span>
-          </div>
-          <span className="crop-stat-sub">
-            P10: {crop.expected_yield_t_ha.p10} | P90: {crop.expected_yield_t_ha.p90}
-          </span>
+          {isTierA && p50YieldHa != null ? (
+            <>
+              <div className="crop-stat-val">
+                <strong>{p50YieldHa.toFixed(2)}</strong> <span className="stat-unit">t/ha</span>
+              </div>
+              <span className="crop-stat-sub">
+                P10: {crop.expected_yield_t_ha?.p10.toFixed(2)} | P90: {crop.expected_yield_t_ha?.p90.toFixed(2)}
+              </span>
+            </>
+          ) : (
+            <>
+              <div className="crop-stat-val text-ink-3">
+                <span className="stat-unit">No yield data</span>
+              </div>
+              <span className="crop-stat-sub">
+                Envelope grade: {crop.suitability_grade || 'Moderate'}
+              </span>
+            </>
+          )}
         </div>
 
         <div className="crop-stat-cell">
           <span className="crop-stat-label">Total Production</span>
-          <div className="crop-stat-val text-gold">
-            <strong>{totalProductionTonnes.toFixed(1)}</strong> <span className="stat-unit">Tonnes</span>
-          </div>
-          <span className="crop-stat-sub">Across {farmArea.toFixed(2)} Ha field</span>
+          {isTierA && totalProductionTonnes != null ? (
+            <>
+              <div className="crop-stat-val text-gold">
+                <strong>{totalProductionTonnes.toFixed(1)}</strong> <span className="stat-unit">Tonnes</span>
+              </div>
+              <span className="crop-stat-sub">Across {farmArea.toFixed(2)} Ha field</span>
+            </>
+          ) : (
+            <>
+              <div className="crop-stat-val text-ink-3">
+                <span className="stat-unit">No ML yield model</span>
+              </div>
+              <span className="crop-stat-sub">Tier B envelope match</span>
+            </>
+          )}
         </div>
 
         <div className="crop-stat-cell">

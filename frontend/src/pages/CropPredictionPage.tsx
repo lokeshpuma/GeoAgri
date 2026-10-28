@@ -18,7 +18,8 @@ import {
   Leaf,
   Compass,
   AlertTriangle,
-  Eye
+  Eye,
+  Search
 } from 'lucide-react';
 import {
   BarChart,
@@ -38,9 +39,25 @@ import { generateAgronomicRecommendation } from '../utils/agronomicFormatters';
 import { YIELD_CHART_COLORS } from '../theme/palette';
 import { getCoordinatesCentroid } from '../features/boundary/boundaryMath';
 
+const CATEGORY_TABS = [
+  { id: 'ALL', label: 'All Crops' },
+  { id: 'cereals', label: 'Cereals' },
+  { id: 'pulses', label: 'Pulses' },
+  { id: 'vegetables', label: 'Vegetables' },
+  { id: 'fruits_nuts', label: 'Fruits & Nuts' },
+  { id: 'oilseeds', label: 'Oilseeds' },
+  { id: 'roots_tubers', label: 'Roots & Tubers' },
+  { id: 'spices', label: 'Spices' },
+  { id: 'fodder', label: 'Fodder' },
+  { id: 'cash_industrial', label: 'Cash / Industrial' },
+];
+
 export const CropPredictionPage: React.FC = () => {
   const { report, formData, goToStep, detectedLocation, theme } = useWorkflow();
   const [expandedInsightCropId, setExpandedInsightCropId] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [visibleCount, setVisibleCount] = useState<number>(6);
   const isLight = theme === 'light';
 
   const crops = report?.recommended_crops || [];
@@ -55,6 +72,28 @@ export const CropPredictionPage: React.FC = () => {
   const env = report?.environment || { ph: 5.92, organic_carbon_g_kg: 6.1, rainfall_mm: 1053, temp_mean_c: 23.1 };
   const sat = report?.satellite_features || { ndvi: 0.59, ndmi: 0.23 };
 
+  // Filter crops by category tab and search input
+  const filteredCrops = crops.filter(c => {
+    if (selectedCategory !== 'ALL') {
+      const cat = (c.category || '').toLowerCase().replace(/[^a-z]/g, '');
+      const matchCat = selectedCategory.toLowerCase().replace(/[^a-z]/g, '');
+      if (!cat.includes(matchCat) && !matchCat.includes(cat)) {
+        return false;
+      }
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      const nameMatch = c.crop_name.toLowerCase().includes(q);
+      const sciMatch = c.scientific_name ? c.scientific_name.toLowerCase().includes(q) : false;
+      if (!nameMatch && !sciMatch) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  const displayedCrops = filteredCrops.slice(0, visibleCount);
+
   const top5Crops = crops.slice(0, 5);
   const top10Crops = crops.slice(0, 10);
   const topCrop = top5Crops[0];
@@ -63,13 +102,15 @@ export const CropPredictionPage: React.FC = () => {
   const boostPct = companionOpt ? (companionOpt.yield_boost_pct * 100).toFixed(1) : "0.0";
   const topNames = top5Crops.map(c => c.crop_name).join(", ");
 
-  // Chart data for Top 10 crops
-  const chartData = top10Crops.map((c) => ({
-    name: c.crop_name,
-    expectedYield: Number(c.expected_yield_t_ha.p50.toFixed(2)),
-    p10: Number(c.expected_yield_t_ha.p10.toFixed(2)),
-    p90: Number(c.expected_yield_t_ha.p90.toFixed(2)),
-  }));
+  // Chart data for Top 10 crops with yield data
+  const chartData = top10Crops
+    .filter(c => c.expected_yield_t_ha != null)
+    .map((c) => ({
+      name: c.crop_name,
+      expectedYield: Number(c.expected_yield_t_ha!.p50.toFixed(2)),
+      p10: Number(c.expected_yield_t_ha!.p10.toFixed(2)),
+      p90: Number(c.expected_yield_t_ha!.p90.toFixed(2)),
+    }));
 
   const aiInsightNarrative = generateAgronomicRecommendation(report);
 
@@ -443,23 +484,78 @@ export const CropPredictionPage: React.FC = () => {
                 <div className="section-header">
                   <div className="flex-row-center gap-8">
                     <Sparkles size={20} className="text-emerald" />
-                    <h2 className="section-title">Top 5 Multi-Crop Recommendations</h2>
+                    <h2 className="section-title">Global Crop Recommendations & Suitability</h2>
                   </div>
                   <span className="badge badge-high">
-                    Spatial Land Allocation: 75% Main + 25% Companion
+                    {filteredCrops.length} Crops Available • Spatial Allocation: 75% Main + 25% Companion
                   </span>
                 </div>
 
-                <div className="top5-cards-grid">
-                  {top5Crops.map((crop, index) => (
-                    <CropRecommendationCard
-                      key={crop.crop_id || index}
-                      crop={crop}
-                      rank={index + 1}
-                      farmArea={farmArea}
+                {/* PRD v3.2 §7.2: Search Bar & Category Tabs */}
+                <div className="crop-filter-bar">
+                  <div className="crop-search-wrap">
+                    <Search size={16} className="crop-search-icon" />
+                    <input
+                      type="text"
+                      className="crop-search-input"
+                      placeholder="Search crops by common or scientific name (e.g. Quinoa, Cassava, Maize)..."
+                      value={searchQuery}
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                        setVisibleCount(6);
+                      }}
                     />
-                  ))}
+                  </div>
+
+                  <div className="crop-category-tabs">
+                    {CATEGORY_TABS.map((tab) => (
+                      <button
+                        key={tab.id}
+                        type="button"
+                        className={`crop-category-tab ${selectedCategory === tab.id ? 'active' : ''}`}
+                        onClick={() => {
+                          setSelectedCategory(tab.id);
+                          setVisibleCount(6);
+                        }}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
+
+                {displayedCrops.length === 0 ? (
+                  <div className="glass-card text-center p-6">
+                    <p className="text-ink-2 text-sm m-0">
+                      No crops matched your filter <strong>"{searchQuery}"</strong> in category <strong>{CATEGORY_TABS.find(t => t.id === selectedCategory)?.label}</strong>.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="top5-cards-grid">
+                    {displayedCrops.map((crop, index) => (
+                      <CropRecommendationCard
+                        key={crop.crop_id || index}
+                        crop={crop}
+                        rank={index + 1}
+                        farmArea={farmArea}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Show More Button */}
+                {filteredCrops.length > visibleCount && (
+                  <div className="crop-show-more-wrap">
+                    <button
+                      type="button"
+                      className="show-more-btn"
+                      onClick={() => setVisibleCount((prev) => prev + 12)}
+                    >
+                      <ChevronDown size={16} />
+                      <span>Show More Crops ({filteredCrops.length - visibleCount} more available)</span>
+                    </button>
+                  </div>
+                )}
               </section>
 
           {/* SECTION 3 — TOP 10 YIELD PREDICTIONS */}
@@ -599,7 +695,11 @@ export const CropPredictionPage: React.FC = () => {
                         )}
                       </div>
                       <div className="insight-bullet-item">
-                        <strong>Yield Expectation:</strong> Median P50 forecast of {crop.expected_yield_t_ha.p50} t/ha (Total: {(crop.expected_yield_t_ha.p50 * farmArea).toFixed(1)} tonnes across {farmArea.toFixed(2)} ha).
+                        <strong>Yield Expectation:</strong> {crop.expected_yield_t_ha ? (
+                          `Median P50 forecast of ${crop.expected_yield_t_ha.p50} t/ha (Total: ${(crop.expected_yield_t_ha.p50 * farmArea).toFixed(1)} tonnes across ${farmArea.toFixed(2)} ha).`
+                        ) : (
+                          `EcoCrop climatic envelope match with suitability score ${(crop.suitability_score * 100).toFixed(0)}% (no empirical ML yield model for Tier B).`
+                        )}
                       </div>
                       <div className="insight-bullet-item">
                         <strong>Risk Consideration:</strong> {crop.climate_risk_note || 'Low vulnerability to seasonal climatic anomalies.'}
@@ -613,9 +713,19 @@ export const CropPredictionPage: React.FC = () => {
                           <div className="tech-item"><span className="tech-name">Soil Compatibility</span><span className="tech-val text-emerald-light">High</span></div>
                           <div className="tech-item"><span className="tech-name">Thermal Regime</span><span className="tech-val">Optimal</span></div>
                           <div className="tech-item"><span className="tech-name">Moisture Index</span><span className="tech-val">Compatible</span></div>
-                          <div className="tech-item"><span className="tech-name">P10 Pessimistic</span><span className="tech-val">{crop.expected_yield_t_ha.p10} t/ha</span></div>
-                          <div className="tech-item"><span className="tech-name">P50 Expected</span><span className="tech-val text-gold">{crop.expected_yield_t_ha.p50} t/ha</span></div>
-                          <div className="tech-item"><span className="tech-name">P90 Optimistic</span><span className="tech-val">{crop.expected_yield_t_ha.p90} t/ha</span></div>
+                          {crop.expected_yield_t_ha ? (
+                            <>
+                              <div className="tech-item"><span className="tech-name">P10 Pessimistic</span><span className="tech-val">{crop.expected_yield_t_ha.p10} t/ha</span></div>
+                              <div className="tech-item"><span className="tech-name">P50 Expected</span><span className="tech-val text-gold">{crop.expected_yield_t_ha.p50} t/ha</span></div>
+                              <div className="tech-item"><span className="tech-name">P90 Optimistic</span><span className="tech-val">{crop.expected_yield_t_ha.p90} t/ha</span></div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="tech-item"><span className="tech-name">Limiting Factor</span><span className="tech-val text-warn">{crop.limiting_factor || 'Climatic envelope'}</span></div>
+                              <div className="tech-item"><span className="tech-name">Best Planting Month</span><span className="tech-val text-gold">Month {crop.best_planting_month || 6}</span></div>
+                              <div className="tech-item"><span className="tech-name">Confidence Tier</span><span className="tech-val">Tier B</span></div>
+                            </>
+                          )}
                         </div>
                       </div>
                     )}

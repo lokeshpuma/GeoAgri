@@ -140,11 +140,13 @@ export interface FullReportResponse {
   recommended_crops: Array<{
     crop_id: string;
     crop_name: string;
+    scientific_name?: string | null;
     category: string;
     recommendation_score: number;
     suitability_score: number;
-    expected_yield_t_ha: { p10: number; p50: number; p90: number };
-    expected_production_t: { p10: number; p50: number; p90: number };
+    suitability_grade?: string;
+    expected_yield_t_ha?: { p10: number; p50: number; p90: number } | null;
+    expected_production_t?: { p10: number; p50: number; p90: number } | null;
     irrigation_mode: "rainfed" | "supplemental" | "full";
     water_need_mm: number;
     climate_risk_score: number;
@@ -159,6 +161,15 @@ export interface FullReportResponse {
     rationale: string;
     data_confidence: "high" | "medium" | "low";
     intercrop_data_available?: boolean;
+    confidence_tier?: "A" | "B";
+    method?: string;
+    score?: number;
+    score_rainfed?: number;
+    score_irrigated?: number;
+    season_months?: number;
+    limiting_factor?: string | null;
+    best_planting_month?: number | null;
+    notes?: string[];
   }>;
   yield_summary: {
     top_recommended_crop: string;

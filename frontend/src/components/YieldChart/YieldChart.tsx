@@ -9,12 +9,15 @@ interface YieldChartProps {
 }
 
 export const YieldChart: React.FC<YieldChartProps> = ({ crops }) => {
-  const chartData = crops.slice(0, 7).map(c => ({
-    name: c.crop_name,
-    P10: c.expected_yield_t_ha.p10,
-    P50: c.expected_yield_t_ha.p50,
-    P90: c.expected_yield_t_ha.p90,
-  }));
+  const chartData = crops
+    .filter(c => c.expected_yield_t_ha != null)
+    .slice(0, 7)
+    .map(c => ({
+      name: c.crop_name,
+      P10: c.expected_yield_t_ha!.p10,
+      P50: c.expected_yield_t_ha!.p50,
+      P90: c.expected_yield_t_ha!.p90,
+    }));
 
   return (
     <div className="glass-card yield-chart-container">

@@ -23,8 +23,8 @@ export const CropTable: React.FC<CropTableProps> = ({ crops }) => {
       valA = a.recommendation_score;
       valB = b.recommendation_score;
     } else if (sortField === 'p50_yield') {
-      valA = a.expected_yield_t_ha.p50;
-      valB = b.expected_yield_t_ha.p50;
+      valA = a.expected_yield_t_ha?.p50 ?? 0;
+      valB = b.expected_yield_t_ha?.p50 ?? 0;
     } else if (sortField === 'water_need') {
       valA = a.water_need_mm;
       valB = b.water_need_mm;
@@ -103,13 +103,19 @@ export const CropTable: React.FC<CropTableProps> = ({ crops }) => {
                     {(crop.recommendation_score * 100).toFixed(1)}%
                   </td>
                   <td className="crop-tbl-td">
-                    <strong>{crop.expected_yield_t_ha.p50}</strong> t/ha
-                    <span className="crop-tbl-range">
-                      P10: {crop.expected_yield_t_ha.p10} | P90: {crop.expected_yield_t_ha.p90}
-                    </span>
+                    {crop.expected_yield_t_ha ? (
+                      <>
+                        <strong>{crop.expected_yield_t_ha.p50}</strong> t/ha
+                        <span className="crop-tbl-range">
+                          P10: {crop.expected_yield_t_ha.p10} | P90: {crop.expected_yield_t_ha.p90}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-ink-3">No yield data</span>
+                    )}
                   </td>
                   <td className="crop-tbl-td font-semibold text-gold">
-                    {crop.expected_production_t.p50} Tonnes
+                    {crop.expected_production_t ? `${crop.expected_production_t.p50} Tonnes` : '—'}
                   </td>
                   <td className="crop-tbl-td">
                     <span className={`badge ${crop.irrigation_mode === 'rainfed' ? 'badge-high' : (crop.irrigation_mode === 'supplemental' ? 'badge-moderate' : 'badge-low')}`}>

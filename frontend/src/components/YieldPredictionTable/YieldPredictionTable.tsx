@@ -57,11 +57,13 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
           </thead>
           <tbody>
             {top10.map((crop, idx) => {
-              const p50Yield = crop.expected_yield_t_ha.p50;
-              const p10Yield = crop.expected_yield_t_ha.p10;
-              const p90Yield = crop.expected_yield_t_ha.p90;
+              const p50Yield = crop.expected_yield_t_ha?.p50;
+              const p10Yield = crop.expected_yield_t_ha?.p10;
+              const p90Yield = crop.expected_yield_t_ha?.p90;
 
-              const totalTonnes = (crop.expected_production_t?.p50 || (p50Yield * farmArea)).toFixed(1);
+              const totalTonnes = crop.expected_production_t?.p50 != null
+                ? crop.expected_production_t.p50.toFixed(1)
+                : (p50Yield != null ? (p50Yield * farmArea).toFixed(1) : null);
 
               const companion = crop.intercrop_options?.[0];
               const boostPct = companion ? (companion.yield_boost_pct * 100).toFixed(1) : null;
@@ -79,7 +81,7 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
                   <td className="yield-pred-td">
                     <strong className="yield-pred-crop-name">{crop.crop_name}</strong>
                     <div className="yield-pred-crop-cat">
-                      {crop.category}
+                      {crop.category} {crop.confidence_tier ? `• Tier ${crop.confidence_tier}` : ''}
                     </div>
                   </td>
 
@@ -97,14 +99,24 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
                   </td>
 
                   <td className="yield-pred-td right">
-                    <div className="yield-pred-total-tonnes">
-                      {totalTonnes} t
-                    </div>
-                    <span className="yield-pred-rate">{p50Yield.toFixed(2)} t/ha</span>
+                    {totalTonnes != null ? (
+                      <>
+                        <div className="yield-pred-total-tonnes">
+                          {totalTonnes} t
+                        </div>
+                        <span className="yield-pred-rate">{p50Yield!.toFixed(2)} t/ha</span>
+                      </>
+                    ) : (
+                      <span className="text-ink-3">No yield data</span>
+                    )}
                   </td>
 
                   <td className="yield-pred-td right yield-pred-range">
-                    {p10Yield.toFixed(2)} – {p90Yield.toFixed(2)} t/ha
+                    {p10Yield != null && p90Yield != null ? (
+                      `${p10Yield.toFixed(2)} – ${p90Yield.toFixed(2)} t/ha`
+                    ) : (
+                      <span className="text-ink-3">Envelope match</span>
+                    )}
                   </td>
 
                   <td className="yield-pred-td center">

@@ -537,3 +537,25 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Frontend `npm run build`: built in 7.75s with zero errors (PASSED).
 - Git tag: `phase-Q5` created.
 
+## [PRD v3.2 - Phase Q6 Results UI for 1,600 Crops] - 2026-10-28
+### Added & Verified (PRD v3.2 §7.2)
+- **Category Tabs & Instant Search**:
+  - Added horizontal scrollable Category Tabs (`All Crops`, `Cereals`, `Pulses`, `Vegetables`, `Fruits & Nuts`, `Oilseeds`, `Roots & Tubers`, `Spices`, `Fodder`, `Cash / Industrial`) in `CropPredictionPage.tsx`.
+  - Added real-time search input filtering across common crop names and scientific taxa names.
+- **Show More Pagination**:
+  - Implemented progressive reveal with "Show More Crops" button, initially presenting 6 crops and incrementing by 12 on each click up to the full filtered set.
+- **Tier A vs Tier B Badges with Explanatory Tooltips**:
+  - **ML-verified (Tier A)**: Displays emerald badge with tooltip explaining regional empirical training and P10–P90 probabilistic quantile yield forecasts.
+  - **Climate-envelope match (Tier B)**: Displays blue info badge with tooltip explaining FAO EcoCrop bioclimatic envelope validation without empirical yield models.
+- **Limiting Factor & Best Planting Month**:
+  - Displays limiting climatic factor (e.g., rainfall, temperature) and optimal planting calendar month on each recommendation card.
+- **Strict Yield Suppression for Tier B**:
+  - Suppressed yield ranges (`t/ha`) and harvest production numbers (`Tonnes`) for Tier B crops across `CropRecommendationCard.tsx`, `YieldPredictionTable.tsx`, `CropTable.tsx`, `YieldChart.tsx`, and `SummaryReportPage.tsx`, displaying "No yield data for this crop" and "Envelope match".
+- **Theme Token Strictness**:
+  - Pure CSS variable usage (`var(--emerald-500)`, `var(--glass-strong)`, `var(--ink-1)`, etc.) with zero raw hex or rgba color additions in TSX files.
+- **Gate Execution**:
+  - `npm test`: **20 passed** across 5 test files in 957ms (PASSED).
+  - `npm run build`: Built production bundle in 3.19s with 0 errors (PASSED).
+  - `npx playwright test`: **2 passed in 10.7s** in Chromium browser (PASSED).
+- Git tag: `phase-Q6` created.
+
