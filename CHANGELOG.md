@@ -572,3 +572,14 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Gate AC-9: **NOT RUN** (due to unreachable FAOSTAT upstream repository).
 - Git tag: `phase-Q7` created.
 
+## [PRD v3.2 - Phase Q8 Retrain Tier A and Intercropping] - 2026-10-28
+### Status: DID NOT FINISH (Upstream Dependency Unreachable)
+- **Model Retraining Halt (D5, D6)**:
+  - Model D (probabilistic yield quantiles with leave-one-continent-out splits) and Model B (recommender area-share classifier) depend directly on the unadulterated FAOSTAT country-year harvest data from Phase Q7.
+  - Per Rule 6: *"Never train on EcoCrop alone. Never invent crop, yield, climate or soil values."* Retraining was not executed with fabricated data.
+  - Existing calibrated baseline models are retained without altering model cards with invented numbers.
+- **Gate Execution (AC-10, AC-11)**:
+  - Gate AC-10 (Model D pinball loss & P10-P90 coverage on held-out continents): **NOT RUN**.
+  - Gate AC-11 (Region test set hit rate per continent): **NOT RUN**.
+- Git tag: `phase-Q8` created.
+
