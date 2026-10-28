@@ -622,5 +622,16 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Pytest verification: `PYTHONPATH=. venv/bin/python -m pytest tests/test_climatology_and_recommender.py -v`: **10 passed in 14.81s** (covering AC-3 transient 503 retry, timeout retry, 30-day ocean caching, 7-day success caching, and empty cache reset).
 - Git tag: `phase-V1` created.
 
+## [PRD v3.3 - Phase V2 Clean-Clone Tests] - 2026-10-28
+### Fixed & Verified (T-1, AC-2)
+- **Injected Climatology Test Fixtures**:
+  - Injected explicit `TEST_FIXTURE` climatology in `backend/tests/test_land_inquiry_and_gating.py` across `test_prediction_gating_shadow_mode_returns_crops` and non-irrigable gating tests, resolving the clean-checkout socket block.
+  - Eliminated any reliance on leftover in-memory cache or environment files.
+- **Gate Execution (AC-2)**:
+  - Clean state: `rm -rf backend/.cache && rm -f backend/.env`
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: **141 passed, 3009 warnings in 45.14s** (100% clean-checkout offline pass, 0 failures, PASSED).
+- Git tag: `phase-V2` created.
+
+
 
 

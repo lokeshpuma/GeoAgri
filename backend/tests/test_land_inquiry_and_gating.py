@@ -6,6 +6,7 @@ import pytest
 from unittest.mock import patch, AsyncMock
 from fastapi.testclient import TestClient
 from app.main import app
+from app.services.weather.climatology import MonthlyClimatologyResult
 
 client = TestClient(app)
 
@@ -115,7 +116,14 @@ def test_prediction_gating_bypasses_models_for_non_irrigable_plot(monkeypatch):
             "texture_clay_pct": 20.0,
             "texture_sand_pct": 40.0,
             "texture_silt_pct": 40.0
-        }
+        },
+        "climatology": MonthlyClimatologyResult(
+            available=True,
+            monthly_temp_c=[25.0] * 12,
+            monthly_rain_mm=[100.0] * 12,
+            status_message="ok",
+            source="TEST_FIXTURE"
+        )
     }
 
     from app.core.config import get_settings
@@ -200,7 +208,14 @@ def test_prediction_gating_shadow_mode_returns_crops(monkeypatch):
             "texture_clay_pct": 20.0,
             "texture_sand_pct": 40.0,
             "texture_silt_pct": 40.0
-        }
+        },
+        "climatology": MonthlyClimatologyResult(
+            available=True,
+            monthly_temp_c=[25.0] * 12,
+            monthly_rain_mm=[100.0] * 12,
+            status_message="ok",
+            source="TEST_FIXTURE"
+        )
     }
 
     with patch("app.api.v1.predict.build_environmental_profile", new_callable=AsyncMock, return_value=water_profile):
