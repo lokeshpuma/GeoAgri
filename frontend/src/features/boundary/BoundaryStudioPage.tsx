@@ -14,7 +14,7 @@ import { useToast } from '../../ui/Toast';
 import centroid from '@turf/centroid';
 
 export const BoundaryStudioPage: React.FC = () => {
-  const { formData, updateFormData, goToStep } = useWorkflow();
+  const { formData, updateFormData, goToStep, confirmBoundary } = useWorkflow();
   const { showToast } = useToast();
 
   const [activeBasemap, setActiveBasemap] = useState<BasemapId>('satellite');
@@ -154,13 +154,14 @@ export const BoundaryStudioPage: React.FC = () => {
     setIsVerifying(true);
     setServerError(null);
     let finalAreaHa = validation.areaHa;
-    let areaSource: 'calculated' | 'manual' = 'calculated';
+    let areaSource: 'server' | 'client-estimate' = 'client-estimate';
 
     if (polygonCoords && polygonCoords.length >= 3) {
       try {
         const serverArea = await fetchFieldArea(polygonCoords);
         if (serverArea && serverArea.area_ha != null) {
           finalAreaHa = serverArea.area_ha;
+          areaSource = 'server';
         }
       } catch (err: any) {
         setIsVerifying(false);
@@ -214,16 +215,14 @@ export const BoundaryStudioPage: React.FC = () => {
       areaHa: finalAreaHa,
     });
 
-    // Update global workflow context (PRD §3.3 S7, S8)
-    updateFormData({
+    // Atomically confirm boundary in global workflow context (PRD v3.2 §2)
+    confirmBoundary({
       polygonPts: polygonCoords || [],
       pointPt: computedCentroid,
       areaHa: Number(finalAreaHa.toFixed(2)),
       plotName: plotName || (polygonCoords ? 'Custom Drawn Field' : 'Field Pin'),
       boundarySource: polygonCoords ? 'drawn' : 'point',
       areaSource: areaSource,
-      confirmed: true,
-      selectedPresetName: plotName || (polygonCoords ? 'Custom Drawn Field' : 'Field Pin'),
     });
 
     showToast({
@@ -232,11 +231,6 @@ export const BoundaryStudioPage: React.FC = () => {
       message: `${finalAreaHa.toFixed(2)} Ha verified. Advancing to Field Analysis.`,
       durationMs: 2500,
     });
-
-    // Navigate to Step 3: Field Analysis
-    setTimeout(() => {
-      goToStep(3);
-    }, 400);
   };
 
   const handleClear = () => {

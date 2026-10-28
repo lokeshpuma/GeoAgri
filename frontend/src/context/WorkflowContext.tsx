@@ -47,6 +47,15 @@ export interface AnalysisStatus {
   cropAnalysisComplete: boolean;
 }
 
+export interface BoundaryPayload {
+  polygonPts: [number, number][];
+  pointPt?: [number, number];
+  areaHa: number;
+  plotName: string;
+  boundarySource: 'drawn' | 'point' | 'demo';
+  areaSource: 'server' | 'client-estimate';
+}
+
 interface WorkflowContextType {
   currentStep: StepNumber;
   maxUnlockedStep: number;
@@ -60,6 +69,7 @@ interface WorkflowContextType {
   pipelineStageIndex: number;
   error: string | null;
   goToStep: (step: StepNumber) => void;
+  confirmBoundary: (p: BoundaryPayload) => void;
   runPredictNow: () => Promise<boolean>;
   startCropAnalysis: () => void;
   runAnalysis: () => Promise<boolean>;
@@ -106,8 +116,12 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [detectedLocation, setDetectedLocation] = useState<DetectedLocationResult | null>(null);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('geoagri_theme');
-      if (saved === 'light' || saved === 'dark') return saved;
+      try {
+        const saved = typeof localStorage !== 'undefined' ? localStorage.getItem('geoagri_theme') : null;
+        if (saved === 'light' || saved === 'dark') return saved;
+      } catch {
+        // ignore localStorage access issues in test environments
+      }
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
         return 'light';
       }
@@ -118,7 +132,13 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('geoagri_theme', theme);
+      try {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('geoagri_theme', theme);
+        }
+      } catch {
+        // ignore
+      }
     }
   }, [theme]);
 
@@ -185,6 +205,21 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       window.location.hash = STEP_HASHES[step];
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  const confirmBoundary = (p: BoundaryPayload) => {
+    setFormData(prev => ({
+      ...prev,
+      ...p,
+      selectedPresetName: p.plotName,
+      confirmed: true,
+    }));
+    setAnalysisStatus(s => ({ ...s, locationSelected: true }));
+    setIsPredicted(false);
+    setReport(null); // a new boundary invalidates old results
+    setCurrentStep(3);
+    setMaxUnlockedStep(m => Math.max(m, 3));
+    if (typeof window !== 'undefined') window.location.hash = STEP_HASHES[3];
   };
 
   // Dynamically detect location from coordinates using Kaggle/ICAR dataset + reverse geocoding
@@ -309,6 +344,7 @@ export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         pipelineStageIndex,
         error,
         goToStep,
+        confirmBoundary,
         runPredictNow,
         startCropAnalysis,
         runAnalysis: runPredictNow,

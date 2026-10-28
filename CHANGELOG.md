@@ -463,3 +463,13 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `rm -f backend/.env && pytest -q`: **127 passed, 3009 warnings in 47.83s** (100% offline, 0 failures, clean checkout with no `.env` PASSED).
 - Git tag: `phase-Q1` created.
 
+## [PRD v3.2 - Phase Q2 Confirm Fix] - 2026-10-28
+### Fixed & Verified (C1, AC-1 Unit Part)
+- **Atomic Navigation in WorkflowContext**: Added `BoundaryPayload` interface and `confirmBoundary(payload)` method to `WorkflowContext.tsx`. The method atomically sets `confirmed: true`, updates form data, invalidates stale prediction reports, sets `currentStep` to 3, and updates window hash to `#analysis` without relying on asynchronous timeouts or re-render cycles.
+- **Removed Stale Closure Navigation in BoundaryStudioPage**: Deleted `setTimeout(() => goToStep(3), 400)` from `BoundaryStudioPage.handleConfirm` and replaced manual multi-step `updateFormData` with direct `confirmBoundary(...)` invocation.
+- **Regression Test Suite**: Added `frontend/src/context/stale.repro.test.tsx` verifying that invoking `confirmBoundary` from Step 2 immediately transitions the workflow to Step 3 with `confirmed: true`, even when invoked from a handler captured before confirmation.
+- **Gate Execution (AC-1 Unit Part)**:
+  - `npm test`: **20 passed** across 5 test files in 982ms (PASSED).
+  - `npm run build`: built in 3.31s with zero warnings (PASSED).
+- Git tag: `phase-Q2` created.
+
