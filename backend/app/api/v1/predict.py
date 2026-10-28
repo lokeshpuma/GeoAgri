@@ -602,7 +602,7 @@ async def generate_full_report(req: PredictRequest):
             area_check=area_check_alias,
             imputed_features=imputed_features,
             climatology_status="available",
-            climatology_message="NASA POWER 12-month long-term climatology verified."
+            climatology_message="NASA POWER 12-month long-term climatology."
         )
     except HTTPException:
         raise

@@ -596,3 +596,31 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Browser E2E suite: `npx playwright test` -> **2 passed in 7.6s in real Chromium browser** (PASSED).
 - Git tag: `v3.2.0` created.
 
+## [PRD v3.3 - Phase V0 Truth Baseline] - 2026-10-28
+### Recorded Baseline from Clean State (no backend/.env, no backend/.cache)
+- `npm ci`: Added 435 packages in 4s.
+- `npm run build`: Entry bundle 65.95 kB gzip (`index-CgTg_s0f.js`), built in 2.54s with 0 errors.
+- `npm test`: 5 passed (5 test files), 20 passed (20 tests) in 971ms.
+- `npx playwright test`: 2 passed in 8.7s in real Chromium browser.
+- `pytest -q`: Tested on clean checkout without `.env` or `.cache`. Isolated execution of `test_land_inquiry_and_gating.py::test_prediction_gating_shadow_mode_returns_crops` FAILED (`assert len(data["recommended_crops"]) > 0: 0 > 0`) due to socket block on NASA POWER API for coordinate `(12.966, 77.586)` missing from hardcoded cache. Full run with legacy crosswalk tests in suite: 135/136 tests depending on in-memory state leakage.
+- Git tag: `pre-v3.3` created.
+
+## [PRD v3.3 - Phase V1 Remove Fabricated Data] - 2026-10-28
+### Fixed & Verified (D-1, D-2, AC-1, AC-3)
+- **Deleted Hardcoded Climatology Cell**: Completely removed the hard-coded `13.3_75.8` cell from `backend/app/services/weather/climatology.py`. The cache starts empty on startup.
+- **Removed VERIFIED Label**: Removed `NASA_POWER_CLIMATOLOGY_VERIFIED` and the standalone word `VERIFIED` from `backend/app/`. Climatology results strictly return `source="NASA_POWER_CLIMATOLOGY"` when retrieved from NASA.
+- **TTL, LRU Cap & Transient Failure Handling**:
+  - Implemented 7-day TTL for successful climatology results.
+  - Implemented 30-day TTL for open ocean / no-land cells.
+  - Implemented LRU cap of 5,000 cells (`OrderedDict`).
+  - Enforced that transient HTTP errors (429, 500, 503) and timeouts/exceptions are NEVER cached, allowing immediate subsequent retries.
+  - File-backed persistent cache saved to `backend/.cache/climatology.json` (git-ignored) with ISO timestamp `fetched_at` and `expires_at`.
+- **Gate Execution (AC-1, AC-3)**:
+  - `grep -rnw "13.3_75.8\|VERIFIED" backend/app`: **0 matches** (exit code 1, PASSED).
+  - `grep -rn "13.3_75.8" backend/app`: **0 matches** (exit code 1, PASSED).
+  - `grep -rn "NASA_POWER_CLIMATOLOGY_VERIFIED" backend/app`: **0 matches** (exit code 1, PASSED).
+  - Pytest verification: `PYTHONPATH=. venv/bin/python -m pytest tests/test_climatology_and_recommender.py -v`: **10 passed in 14.81s** (covering AC-3 transient 503 retry, timeout retry, 30-day ocean caching, 7-day success caching, and empty cache reset).
+- Git tag: `phase-V1` created.
+
+
+
