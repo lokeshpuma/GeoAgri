@@ -424,8 +424,8 @@ export const SummaryReportPage: React.FC = () => {
                       <span className="badge badge-high text-xs">{c.irrigation_mode}</span>
                     </td>
                     <td className="text-center">
-                      <span className={`font-semibold text-xs ${c.climate_risk_score < 35 ? 'text-emerald' : 'text-gold'}`}>
-                        {c.climate_risk_score < 35 ? 'Low' : 'Moderate'}
+                      <span className={`font-semibold text-xs ${c.climate_risk_score == null ? 'text-ink-3' : c.climate_risk_score < 35 ? 'text-emerald' : 'text-gold'}`}>
+                        {c.climate_risk_score == null ? '—' : c.climate_risk_score < 35 ? 'Low' : 'Moderate'}
                       </span>
                     </td>
                   </tr>

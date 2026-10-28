@@ -651,7 +651,28 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `PYTHONPATH=. venv/bin/python -m pytest tests/test_v33_recommender_and_cards.py -k "ac4 or ac5 or 30_tied"`: **3 passed in 2.65s** (PASSED).
 - Git tag: `phase-V3` created.
 
-
-
-
-
+## [PRD v3.3 - Phase V4 Card Truthfulness] - 2026-10-28
+### Added & Verified (D-6, D-7, D-8, D-8b, D-8c, AC-6 to AC-10)
+- **Position & Rank Synchronization (AC-6)**:
+  - Enforced that card position matches `#N` in any recommendation text. `rationale` string explicitly formats as `{crop_name} ranks #{rank}. ...`.
+- **Unified Irrigation Rationale (AC-7)**:
+  - Single rule driving irrigation label, narrative sentence, and water figure.
+  - Invariant verified: A card marked as `rainfed` never contains the word "irrigation" in its rationale, while `supplemental` or `full` cards never describe themselves as "rainfed".
+- **Suppression of Tier B Fields (AC-8)**:
+  - Tier B cards show `null` for `expected_yield_t_ha`, `expected_production_t`, `water_need_mm`, `climate_risk_score`, and `climate_risk_note`.
+  - No synthetic water-need figures or invented climate risk numbers are displayed.
+- **Yield Ceilings & Retraining Guards (AC-9)**:
+  - Added `backend/app/rules/yield_ceilings.yaml` with agronomic ceilings (rice: 8.0, maize: 10.0, coffee: 2.5, cotton: 3.0, etc.).
+  - Plausibility suppression: Yields exceeding ceilings are suppressed to `null` with `yield_note: "Baseline failed plausibility check"`.
+  - Retraining guard: Rice, maize, coffee, and cotton unconditionally show `null` yield with `yield_note: "Awaiting Model B retraining"` until retrained with FAOSTAT data.
+- **UI Typography & Layout Robustness (AC-10)**:
+  - Added `frontend/src/utils/labels.ts` (`formatCropCategory`, `formatLimitingFactor`) to prevent raw `snake_case` from ever reaching user-facing cards.
+  - Wrapped card header title row with `flex-wrap: wrap`, `gap: 8px`, `min-width: 0`, and flexible badges so category badges and Suitability grade text are never clipped or overflowed.
+  - Added unit test suite `labels.test.ts` (3 passed).
+  - Added Playwright end-to-end test `e2e/crop-cards.spec.ts` asserting no `snake_case` tokens exist in card text across `#crops`.
+- **Gate Execution (AC-6 to AC-10)**:
+  - `PYTHONPATH=. venv/bin/python -m pytest tests/test_v33_recommender_and_cards.py -v`: **7 passed in 13.42s** (covering AC-4 through AC-9).
+  - `npm test`: **6 test files passed, 23 passed in 1.25s** (PASSED).
+  - `npm run build`: **Built in 2.23s with 0 errors** (PASSED).
+  - `npx playwright test e2e/crop-cards.spec.ts`: **1 passed in 5.8s** (PASSED).
+- Git tag: `phase-V4` created.

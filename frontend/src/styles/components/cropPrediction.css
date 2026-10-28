@@ -962,6 +962,12 @@
 }
 
 /* Crop Recommendation Card */
+.top5-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
 .crop-rec-card {
   background: var(--glass-strong);
   border: 1px solid var(--glass-border);
@@ -971,11 +977,37 @@
   flex-direction: column;
   gap: 14px;
   transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+  min-width: 0;
 }
 
 .crop-rec-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--elev-2);
+}
+
+.crop-rec-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.crop-rec-top-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.suitability-score-pill {
+  flex-shrink: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .crop-rec-card.top-tier.rank-1 {

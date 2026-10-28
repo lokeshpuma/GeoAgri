@@ -1,6 +1,7 @@
 import React from 'react';
-import { Leaf, Droplet, ShieldAlert, Award, Calendar, AlertCircle } from 'lucide-react';
+import { Leaf, Droplet, ShieldAlert, Award, AlertCircle } from 'lucide-react';
 import { FullReportResponse } from '../../api/client';
+import { formatCropCategory, formatLimitingFactor } from '../../utils/labels';
 
 const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -20,7 +21,7 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
 }) => {
   const isTopTier = rank <= 3;
   const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : 'rank-default';
-  const isTierA = crop.confidence_tier === 'A' || Boolean(crop.expected_yield_t_ha);
+  const isTierA = crop.confidence_tier === 'A';
 
   // Companion logic
   const primaryIntercrop = crop.intercrop_options && crop.intercrop_options.length > 0
@@ -29,12 +30,18 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
 
   // Production calculation for Tier A
   const p50YieldHa = crop.expected_yield_t_ha?.p50;
-  const totalProductionTonnes = crop.expected_production_t?.p50 || (p50YieldHa != null ? p50YieldHa * farmArea : null);
-  const suitabilityPct = Math.min(100, Math.round(crop.recommendation_score > 1 ? crop.recommendation_score : crop.recommendation_score * 100));
+  const totalProductionTonnes = crop.expected_production_t?.p50 ?? (p50YieldHa != null ? p50YieldHa * farmArea : null);
+  const rawScore = crop.suitability_score ?? crop.score ?? (crop.recommendation_score > 1 ? crop.recommendation_score / 100 : crop.recommendation_score);
+  const suitabilityPct = Math.min(100, Math.max(0, Math.round(rawScore * 100)));
 
   // Risk badge
-  const riskColorClass = crop.climate_risk_score < 35 ? 'text-emerald-light' : crop.climate_risk_score < 60 ? 'text-gold' : 'text-danger';
-  const riskLabel = crop.climate_risk_score < 35 ? 'Low Risk' : crop.climate_risk_score < 60 ? 'Moderate Risk' : 'Elevated Risk';
+  const riskScore = crop.climate_risk_score;
+  const riskColorClass = riskScore != null
+    ? (riskScore < 35 ? 'text-emerald-light' : riskScore < 60 ? 'text-gold' : 'text-danger')
+    : 'text-ink-3';
+  const riskLabel = riskScore != null
+    ? (riskScore < 35 ? 'Low Risk' : riskScore < 60 ? 'Moderate Risk' : 'Elevated Risk')
+    : 'Not assessed';
 
   const plantingMonthName = crop.best_planting_month && crop.best_planting_month >= 1 && crop.best_planting_month <= 12
     ? MONTH_NAMES[crop.best_planting_month - 1]
@@ -44,7 +51,7 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
     <div className={`crop-rec-card ${isTopTier ? 'top-tier' : ''} ${rankClass}`}>
       {/* Top Bar: Rank, Badges & Category */}
       <div className="crop-rec-top">
-        <div className="flex-row-center gap-8 flex-wrap">
+        <div className="crop-rec-top-badges">
           <span className={`rank-pill ${rankClass}`}>
             #{rank} RECOMMENDATION
           </span>
@@ -67,7 +74,7 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
             </span>
           )}
 
-          <span className="crop-category-tag">{crop.category}</span>
+          <span className="crop-category-tag">{formatCropCategory(crop.category)}</span>
         </div>
 
         <div className="suitability-score-pill">
@@ -105,7 +112,7 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
           <div className="crop-limiting-tag">
             <AlertCircle size={13} className="text-warn flex-shrink-0" />
             <span>
-              Limited by: <strong>{crop.limiting_factor}</strong>
+              Limited by: <strong>{formatLimitingFactor(crop.limiting_factor)}</strong>
               {plantingMonthName ? ` • Best planting: ${plantingMonthName}` : ''}
             </span>
           </div>
@@ -131,7 +138,7 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
                 <span className="stat-unit">No yield data</span>
               </div>
               <span className="crop-stat-sub">
-                Envelope grade: {crop.suitability_grade || 'Moderate'}
+                {crop.yield_note || (crop.suitability_grade ? `Envelope: ${crop.suitability_grade}` : 'Envelope match')}
               </span>
             </>
           )}
@@ -164,16 +171,34 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
               {crop.irrigation_mode}
             </strong>
           </div>
-          <span className="crop-stat-sub">{crop.water_need_mm} mm total</span>
+          <span className="crop-stat-sub">
+            {crop.water_need_mm != null
+              ? `${Math.round(crop.water_need_mm)} mm total`
+              : (crop.score_rainfed != null && crop.score_irrigated != null
+                  ? `Rainfed ${Math.round(crop.score_rainfed * 100)}% · Irrig ${Math.round(crop.score_irrigated * 100)}%`
+                  : 'Precipitation matched')}
+          </span>
         </div>
 
         <div className="crop-stat-cell">
           <span className="crop-stat-label">Climate Vulnerability</span>
-          <div className="flex-row-center gap-6 mt-1">
-            <ShieldAlert size={14} className={riskColorClass} />
-            <strong className={`${riskColorClass} text-sm`}>{riskLabel}</strong>
-          </div>
-          <span className="crop-stat-sub">{crop.climate_risk_score.toFixed(0)}% risk index</span>
+          {riskScore != null ? (
+            <>
+              <div className="flex-row-center gap-6 mt-1">
+                <ShieldAlert size={14} className={riskColorClass} />
+                <strong className={`${riskColorClass} text-sm`}>{riskLabel}</strong>
+              </div>
+              <span className="crop-stat-sub">{riskScore.toFixed(0)}% risk index</span>
+            </>
+          ) : (
+            <>
+              <div className="flex-row-center gap-6 mt-1">
+                <ShieldAlert size={14} className="text-ink-3" />
+                <strong className="text-sm text-ink-3">Not assessed</strong>
+              </div>
+              <span className="crop-stat-sub">Envelope suitability</span>
+            </>
+          )}
         </div>
       </div>
 

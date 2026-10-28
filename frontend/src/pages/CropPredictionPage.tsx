@@ -698,7 +698,7 @@ export const CropPredictionPage: React.FC = () => {
                         <strong>Yield Expectation:</strong> {crop.expected_yield_t_ha ? (
                           `Median P50 forecast of ${crop.expected_yield_t_ha.p50} t/ha (Total: ${(crop.expected_yield_t_ha.p50 * farmArea).toFixed(1)} tonnes across ${farmArea.toFixed(2)} ha).`
                         ) : (
-                          `EcoCrop climatic envelope match with suitability score ${(crop.suitability_score * 100).toFixed(0)}% (no empirical ML yield model for Tier B).`
+                          `EcoCrop climatic envelope match with suitability score ${Math.round((crop.suitability_score ?? crop.score ?? crop.recommendation_score) * 100)}% (no empirical ML yield model for Tier B).`
                         )}
                       </div>
                       <div className="insight-bullet-item">

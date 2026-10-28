@@ -143,14 +143,16 @@ export interface FullReportResponse {
     scientific_name?: string | null;
     category: string;
     recommendation_score: number;
-    suitability_score: number;
-    suitability_grade?: string;
+    suitability_score?: number | null;
+    suitability_grade?: string | null;
     expected_yield_t_ha?: { p10: number; p50: number; p90: number } | null;
     expected_production_t?: { p10: number; p50: number; p90: number } | null;
     irrigation_mode: "rainfed" | "supplemental" | "full";
-    water_need_mm: number;
-    climate_risk_score: number;
-    climate_risk_note: string;
+    water_need_mm?: number | null;
+    climate_risk_score?: number | null;
+    climate_risk_note?: string | null;
+    yield_note?: string | null;
+    score_source?: string | null;
     intercrop_options: Array<{
       companion_crop_id: string;
       companion_crop_name: string;
@@ -163,13 +165,22 @@ export interface FullReportResponse {
     intercrop_data_available?: boolean;
     confidence_tier?: "A" | "B";
     method?: string;
-    score?: number;
-    score_rainfed?: number;
-    score_irrigated?: number;
-    season_months?: number;
+    score?: number | null;
+    score_rainfed?: number | null;
+    score_irrigated?: number | null;
+    season_months?: number | null;
     limiting_factor?: string | null;
     best_planting_month?: number | null;
     notes?: string[];
+  }>;
+  excluded_crops?: Array<{
+    crop_id: string;
+    crop_name: string;
+    scientific_name?: string | null;
+    limiting_factor?: string | null;
+    score_rainfed?: number | null;
+    score_irrigated?: number | null;
+    reason?: string;
   }>;
   yield_summary: {
     top_recommended_crop: string;

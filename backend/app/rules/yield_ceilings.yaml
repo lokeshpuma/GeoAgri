@@ -1,0 +1,39 @@
+# Upper P50 yield ceilings (t/ha) for agronomic plausibility checking (PRD v3.2 §7.1.8, PRD v3.3 §3.3).
+# If a crop's predicted or baseline P50 yield exceeds its ceiling, expected_yield_t_ha is suppressed (set to null)
+# and labeled with yield_note: "Baseline failed plausibility check".
+# Sources: FAOSTAT global crop production statistics, ICAR handbook of agriculture, USDA-NASS maximum averages.
+
+ceilings_t_ha:
+  # Cereals
+  rice: 8.0               # FAO / ICAR national average ~3.5-4.0 t/ha, high-yielding irrigated max ~8.0 t/ha. Baseline 13.02 t/ha fails.
+  maize: 10.0             # FAO global average ~6.0 t/ha, US Corn Belt ~11.0 t/ha. Baseline 13.04 t/ha fails.
+  wheat: 6.0              # FAO average ~3.5 t/ha, Punjab/UK intensive high-input ~5.5-6.0 t/ha.
+  sorghum: 4.5            # ICAR rainfed sorghum average ~1.2-2.5 t/ha, irrigated high-input ~4.0 t/ha.
+  finger_millet: 3.5      # ICAR / Karnataka ragi average ~1.8-2.5 t/ha, max potential ~3.5 t/ha.
+  pearl_millet: 3.5       # Semi-arid bajra average ~1.5-2.8 t/ha.
+  barley: 5.5             # FAO world average ~3.0 t/ha.
+
+  # Pulses
+  pulses: 2.5             # Global pulse average ~1.0-1.8 t/ha.
+  chickpea: 2.5           # ICAR gram / chana average ~1.0-1.8 t/ha, irrigated ~2.2 t/ha.
+  pigeonpea: 2.5          # Arhar / tur average ~1.0-2.0 t/ha.
+  black_gram: 2.0         # Urad dal average ~0.8-1.5 t/ha.
+  green_gram: 2.0         # Moong dal average ~0.8-1.5 t/ha.
+  cowpea: 2.2             # Grain cowpea average ~1.0-1.8 t/ha.
+  lentil: 2.2             # Masoor average ~1.0-1.8 t/ha.
+
+  # Oilseeds
+  groundnut: 4.0          # Pod yield average ~1.8-3.0 t/ha, high-yielding irrigated ~3.8 t/ha.
+  soybean: 3.5            # Global average ~2.8 t/ha, top country yields ~3.5 t/ha.
+  mustard: 2.5            # Rapeseed-mustard average ~1.2-2.0 t/ha.
+  sunflower: 2.8          # Seed yield average ~1.2-2.2 t/ha.
+  sesame: 1.2             # Til seed average ~0.5-0.9 t/ha.
+
+  # Cash / Commercial / Industrial
+  cotton: 3.0             # Seed cotton average ~1.5-2.5 t/ha. Baseline 13.19 t/ha fails.
+  coffee: 2.5             # Clean bean yield ~0.8-2.0 t/ha. Baseline 13.18 t/ha fails.
+  tea: 3.5                # Made black tea yield ~1.8-2.8 t/ha.
+  sugarcane: 120.0        # Cane stalk biomass fresh weight ~70-110 t/ha.
+  potato: 40.0            # Fresh tuber yield ~20-35 t/ha.
+  tobacco: 3.0            # Cured leaf yield ~1.5-2.5 t/ha.
+

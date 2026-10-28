@@ -26,8 +26,8 @@ export const CropTable: React.FC<CropTableProps> = ({ crops }) => {
       valA = a.expected_yield_t_ha?.p50 ?? 0;
       valB = b.expected_yield_t_ha?.p50 ?? 0;
     } else if (sortField === 'water_need') {
-      valA = a.water_need_mm;
-      valB = b.water_need_mm;
+      valA = a.water_need_mm ?? 0;
+      valB = b.water_need_mm ?? 0;
     }
     return sortDirection === 'desc' ? valB - valA : valA - valB;
   });
@@ -88,7 +88,15 @@ export const CropTable: React.FC<CropTableProps> = ({ crops }) => {
           </thead>
           <tbody>
             {sortedCrops.map((crop, idx) => {
-              const riskColorClass = crop.climate_risk_score < 35 ? 'text-emerald-light' : crop.climate_risk_score < 60 ? 'text-gold' : 'text-danger';
+              const hasRisk = crop.climate_risk_score != null;
+              const riskScore = crop.climate_risk_score ?? 0;
+              const riskColorClass = !hasRisk
+                ? 'text-ink-3'
+                : riskScore < 35
+                ? 'text-emerald-light'
+                : riskScore < 60
+                ? 'text-gold'
+                : 'text-danger';
 
               return (
                 <tr key={crop.crop_id} className="crop-tbl-tr">
@@ -122,12 +130,12 @@ export const CropTable: React.FC<CropTableProps> = ({ crops }) => {
                       {crop.irrigation_mode}
                     </span>
                     <span className="crop-tbl-water">
-                      {crop.water_need_mm} mm
+                      {crop.water_need_mm != null ? `${Math.round(crop.water_need_mm)} mm` : 'Rainfall match'}
                     </span>
                   </td>
                   <td className="crop-tbl-td">
                     <span className={`${riskColorClass} font-semibold`}>
-                      {crop.climate_risk_score.toFixed(0)}%
+                      {hasRisk ? `${riskScore.toFixed(0)}%` : 'Not assessed'}
                     </span>
                   </td>
                   <td className="crop-tbl-td crop-tbl-rationale">

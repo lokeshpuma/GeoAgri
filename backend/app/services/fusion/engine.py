@@ -215,22 +215,15 @@ def run_decision_fusion(
             else:
                 prior_note = ""
 
-            water_note = (
-                f"requires {mode} irrigation ({round(water_need)}mm water need)"
-                if mode != "rainfed"
-                else "minimal supplementary water overhead"
-            )
-
             rationale = (
-                f"{item['crop_name']} ranks #{rank} driven primarily by {top1_name} (+{top1_val:.3f}) "
-                f"and {top2_name} (+{top2_val:.3f}){prior_note}; {water_note} with {risk_score:.0f}/100 climate risk."
+                f"{item['crop_name']} driven primarily by {top1_name} (+{top1_val:.3f}) "
+                f"and {top2_name} (+{top2_val:.3f}){prior_note}."
             )
 
             # Clean temporary keys
             rec = {k: v for k, v in item.items() if not k.startswith("_")}
             rec["rationale"] = rationale
             distinct_recs.append(rec)
-            rank += 1
 
         if len(distinct_recs) >= limit:
             break
