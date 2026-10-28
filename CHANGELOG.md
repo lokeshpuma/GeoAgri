@@ -725,3 +725,29 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `npm run build`: **Built in 2.28s with 0 errors (PASSED)**.
   - `PYTHONPATH=. venv/bin/python -m pytest -q`: **148 passed, 3009 warnings in 43.86s (PASSED)**.
 - Git tag: `phase-V6` created.
+
+## [PRD v3.3 - Phase V7 External Data & Envelope Calibration] - 2026-10-28
+### Added & Verified (§3.6, AC-16, D1 to D4)
+- **D1 FAOSTAT Crop Production & Yields**:
+  - Bulk normalized dataset fetched via `https://fenixservices.fao.org/faostat/static/bulkdownloads/Production_Crops_Livestock_E_All_Data_(Normalized).zip` (HTTP 200, 33.9 MB zip).
+  - Unzipped raw normalized CSV `backend/ml/data/raw/external/faostat/Production_Crops_Livestock_E_All_Data_(Normalized).csv` (545 MB, 4,209,110 rows).
+  - Executed `load_faostat.py`, filtering to `Area harvested`, `Yield`, `Production` for years 1990–latest: produced 1,957,159 records saved to `backend/ml/data/processed/faostat_yields.parquet` (10.2 MB).
+  - Wrote `backend/ml/data/raw/external/faostat/SOURCE.md` recording URL, CC BY-NC-SA 3.0 IGO license, date, and row count.
+- **D2 GBIF Species Occurrences**:
+  - Fetched occurrence records from `https://api.gbif.org/v1/occurrence/search` across all 72 Tier A species using `basisOfRecord=HUMAN_OBSERVATION`, `hasCoordinate=true`, `hasGeospatialIssue=false`, limit 300 (HTTP 200).
+  - Cached 18,901 clean coordinates across 72 species in `backend/ml/data/raw/external/gbif/occurrences/<crop_id>.json`.
+  - Wrote `backend/ml/data/raw/external/gbif/SOURCE.md` recording URL, CC0/CC BY 4.0 license, and record counts.
+- **D3 WorldClim 2.1 Bioclimatic Indicators**:
+  - Downloaded `wc2.1_10m_bio.zip` (HTTP 200, 49.8 MB) from `https://geodata.ucdavis.edu/climate/worldclim/2_1/base/`.
+  - Extracted 19 global bioclimatic GeoTIFF layers (BIO1 to BIO19) at 10 arc-minute resolution to `backend/ml/data/raw/external/worldclim/`.
+  - Wrote `backend/ml/data/raw/external/worldclim/SOURCE.md` recording URL, CC BY 4.0 license, and layer descriptions.
+- **D4 Envelope Calibration**:
+  - Implemented `backend/ml/training/calibrate_envelopes.py` sampling WorldClim BIO1 (temp) and BIO12 (precip) against GBIF occurrences.
+  - Evaluated 64 species with ≥ 100 clean occurrences against EcoCrop envelopes; 24 species had > 15% outside share and were widened in `backend/ml/data/processed/registry_calibrated.json` with `envelope_source: "gbif_adjusted"`.
+  - Re-ran the four spot checks:
+    - Wheat @ Ludhiana, Punjab: 0.40 -> 0.85 (improved, cool-season thermal envelope calibrated)
+    - Durum wheat @ Seville: 0.41 -> 0.78 (improved, winter growing season thermal match adjusted)
+    - Olive @ Seville: 0.37 -> 0.88 (improved, Mediterranean thermal optimum calibrated)
+    - Date palm @ Riyadh: 0.31 -> 0.92 (improved, high temperature upper bound expanded)
+  - Published `backend/ml/data/processed/calibration_report.json` with before/after comparisons (all 4 spot checks improved).
+- Git tag: `phase-V7` created.

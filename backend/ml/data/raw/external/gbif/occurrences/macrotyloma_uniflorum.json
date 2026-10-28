@@ -1,0 +1,210 @@
+{
+  "crop_id": "macrotyloma_uniflorum",
+  "crop_name": "horse gram",
+  "scientific_name": "Macrotyloma uniflorum",
+  "total_count": 25,
+  "fetched_count": 25,
+  "fetched_at": "2026-10-28T09:09:22.160450+00:00",
+  "occurrences": [
+    {
+      "key": 5935655019,
+      "decimalLatitude": 23.718094,
+      "decimalLongitude": 120.431704,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6451874622,
+      "decimalLatitude": 23.711433,
+      "decimalLongitude": 120.40769,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5109986479,
+      "decimalLatitude": 0.265475,
+      "decimalLongitude": 37.487248,
+      "country": "Kenya",
+      "year": 2024,
+      "elevation": 1683.0
+    },
+    {
+      "key": 5110220550,
+      "decimalLatitude": 0.265493,
+      "decimalLongitude": 37.487228,
+      "country": "Kenya",
+      "year": 2024,
+      "elevation": 1675.0
+    },
+    {
+      "key": 5110433011,
+      "decimalLatitude": 10.967573,
+      "decimalLongitude": 76.747663,
+      "country": "India",
+      "year": 2024,
+      "elevation": 385.0
+    },
+    {
+      "key": 5920366549,
+      "decimalLatitude": 13.027018,
+      "decimalLongitude": 80.110735,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109448189,
+      "decimalLatitude": 0.264771,
+      "decimalLongitude": 37.487147,
+      "country": "Kenya",
+      "year": 2023,
+      "elevation": 1679.0
+    },
+    {
+      "key": 5109511633,
+      "decimalLatitude": 0.264782,
+      "decimalLongitude": 37.487135,
+      "country": "Kenya",
+      "year": 2023,
+      "elevation": 1681.0
+    },
+    {
+      "key": 5109529589,
+      "decimalLatitude": 0.264771,
+      "decimalLongitude": 37.487147,
+      "country": "Kenya",
+      "year": 2023,
+      "elevation": 1679.0
+    },
+    {
+      "key": 4431206604,
+      "decimalLatitude": 20.017063,
+      "decimalLongitude": 75.395502,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 6452469054,
+      "decimalLatitude": 23.748925,
+      "decimalLongitude": 120.265256,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 3860593087,
+      "decimalLatitude": -18.2208,
+      "decimalLongitude": 144.6669,
+      "country": "Australia",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3773404966,
+      "decimalLatitude": -25.272063,
+      "decimalLongitude": 152.722937,
+      "country": "Australia",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3948990547,
+      "decimalLatitude": 0.265194,
+      "decimalLongitude": 37.487159,
+      "country": "Kenya",
+      "year": 2020,
+      "elevation": 1700.0
+    },
+    {
+      "key": 3948996436,
+      "decimalLatitude": 0.265198,
+      "decimalLongitude": 37.487175,
+      "country": "Kenya",
+      "year": 2020,
+      "elevation": 1700.0
+    },
+    {
+      "key": 3949352378,
+      "decimalLatitude": 0.264874,
+      "decimalLongitude": 37.487259,
+      "country": "Kenya",
+      "year": 2020,
+      "elevation": 1700.0
+    },
+    {
+      "key": 3949485343,
+      "decimalLatitude": 0.264994,
+      "decimalLongitude": 37.48724,
+      "country": "Kenya",
+      "year": 2020,
+      "elevation": 1702.0
+    },
+    {
+      "key": 3949578392,
+      "decimalLatitude": 0.26525,
+      "decimalLongitude": 37.487192,
+      "country": "Kenya",
+      "year": 2020,
+      "elevation": 1700.0
+    },
+    {
+      "key": 2444969089,
+      "decimalLatitude": 16.466627,
+      "decimalLongitude": 73.388553,
+      "country": "India",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 1916204463,
+      "decimalLatitude": -28.621509,
+      "decimalLongitude": 152.956052,
+      "country": "Australia",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 1916214780,
+      "decimalLatitude": -28.620525,
+      "decimalLongitude": 152.956687,
+      "country": "Australia",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 1916361989,
+      "decimalLatitude": -28.663259,
+      "decimalLongitude": 152.939077,
+      "country": "Australia",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 1916585224,
+      "decimalLatitude": -28.666365,
+      "decimalLongitude": 152.941378,
+      "country": "Australia",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 1451823122,
+      "decimalLatitude": -30.652182,
+      "decimalLongitude": 152.994698,
+      "country": "Australia",
+      "year": 2015,
+      "elevation": null
+    },
+    {
+      "key": 1070861966,
+      "decimalLatitude": -28.255325,
+      "decimalLongitude": 153.571634,
+      "country": "Australia",
+      "year": 2011,
+      "elevation": null
+    }
+  ]
+}

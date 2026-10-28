@@ -1,0 +1,778 @@
+{
+  "crop_id": "triticum_durum",
+  "crop_name": "durum wheat",
+  "scientific_name": "Triticum durum",
+  "total_count": 96,
+  "fetched_count": 96,
+  "fetched_at": "2026-10-28T09:09:18.084775+00:00",
+  "occurrences": [
+    {
+      "key": 6341715595,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 5.1,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6342512349,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 5.1,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6343446011,
+      "decimalLatitude": 51.6,
+      "decimalLongitude": 5.4,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6344094819,
+      "decimalLatitude": 51.95,
+      "decimalLongitude": 5.6,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6344538479,
+      "decimalLatitude": 51.6,
+      "decimalLongitude": 5.4,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6410533472,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 4.3,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6411367409,
+      "decimalLatitude": 52.3,
+      "decimalLongitude": 5.6,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6411685887,
+      "decimalLatitude": 52.0,
+      "decimalLongitude": 5.0,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6423935405,
+      "decimalLatitude": 52.25,
+      "decimalLongitude": 4.45,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6448666939,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 6.1,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6449194541,
+      "decimalLatitude": 52.5,
+      "decimalLongitude": 6.05,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6604786731,
+      "decimalLatitude": 53.15,
+      "decimalLongitude": 6.1,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6602492495,
+      "decimalLatitude": 51.85,
+      "decimalLongitude": 5.8,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6603945934,
+      "decimalLatitude": 51.85,
+      "decimalLongitude": 5.8,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5197591056,
+      "decimalLatitude": 52.6,
+      "decimalLongitude": 4.65,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5204805728,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 5.1,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5205276570,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 4.45,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5281648631,
+      "decimalLatitude": 52.485102,
+      "decimalLongitude": 13.443644,
+      "country": "Germany",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5827163729,
+      "decimalLatitude": 47.042383,
+      "decimalLongitude": 15.232304,
+      "country": "Austria",
+      "year": 2025,
+      "elevation": 379.0
+    },
+    {
+      "key": 5901484332,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 4.65,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5918444818,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 4.65,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 4881977072,
+      "decimalLatitude": 52.2,
+      "decimalLongitude": 4.45,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4882232929,
+      "decimalLatitude": 51.1,
+      "decimalLongitude": 5.85,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4884476324,
+      "decimalLatitude": 52.2,
+      "decimalLongitude": 4.45,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4884877985,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 4.25,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4887394248,
+      "decimalLatitude": 52.2,
+      "decimalLongitude": 4.45,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4888420039,
+      "decimalLatitude": 51.1,
+      "decimalLongitude": 5.85,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008722895,
+      "decimalLatitude": 52.2,
+      "decimalLongitude": 4.45,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008785622,
+      "decimalLatitude": 52.2,
+      "decimalLongitude": 4.45,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5052640690,
+      "decimalLatitude": 52.6,
+      "decimalLongitude": 4.75,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4933042069,
+      "decimalLatitude": 53.05,
+      "decimalLongitude": 6.7,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4935135408,
+      "decimalLatitude": 52.25,
+      "decimalLongitude": 5.15,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008833471,
+      "decimalLatitude": 51.9,
+      "decimalLongitude": 5.2,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5027092070,
+      "decimalLatitude": 49.940361,
+      "decimalLongitude": 8.461679,
+      "country": "Germany",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5052528272,
+      "decimalLatitude": 52.45,
+      "decimalLongitude": 6.4,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5052531264,
+      "decimalLatitude": 52.0,
+      "decimalLongitude": 4.85,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4934567695,
+      "decimalLatitude": 51.95,
+      "decimalLongitude": 5.65,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4934957469,
+      "decimalLatitude": 52.3,
+      "decimalLongitude": 4.6,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008740421,
+      "decimalLatitude": 50.85,
+      "decimalLongitude": 6.05,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008768804,
+      "decimalLatitude": 52.4,
+      "decimalLongitude": 4.9,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008804619,
+      "decimalLatitude": 52.0,
+      "decimalLongitude": 5.7,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5052640788,
+      "decimalLatitude": 51.8,
+      "decimalLongitude": 4.85,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4160414939,
+      "decimalLatitude": 52.1,
+      "decimalLongitude": 5.1,
+      "country": "Netherlands",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4160922269,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4409024215,
+      "decimalLatitude": 53.25,
+      "decimalLongitude": 6.7,
+      "country": "Netherlands",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4409246303,
+      "decimalLatitude": 53.25,
+      "decimalLongitude": 6.7,
+      "country": "Netherlands",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4409645333,
+      "decimalLatitude": 53.1,
+      "decimalLongitude": 6.85,
+      "country": "Netherlands",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4460341391,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 5.1,
+      "country": "Netherlands",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 3904461199,
+      "decimalLatitude": 50.85,
+      "decimalLongitude": 5.65,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3906420494,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 5.15,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3904490938,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 5.15,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3905119084,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 5.15,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3905752582,
+      "decimalLatitude": 53.15,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3905978666,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3906777419,
+      "decimalLatitude": 51.8,
+      "decimalLongitude": 4.95,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3906919612,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3907246014,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.5,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3907436647,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3904798351,
+      "decimalLatitude": 53.25,
+      "decimalLongitude": 6.7,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3905087525,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3906770197,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.6,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3907061400,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3907079761,
+      "decimalLatitude": 53.05,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3907263683,
+      "decimalLatitude": 53.3,
+      "decimalLongitude": 6.75,
+      "country": "Netherlands",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5022496919,
+      "decimalLatitude": 56.13419,
+      "decimalLongitude": 8.195139,
+      "country": "Denmark",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3359190485,
+      "decimalLatitude": 45.496773,
+      "decimalLongitude": 37.718005,
+      "country": "Russian Federation",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3359197920,
+      "decimalLatitude": 44.360969,
+      "decimalLongitude": 42.954032,
+      "country": "Russian Federation",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3720858833,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.6,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3720998884,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.6,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3721224544,
+      "decimalLatitude": 50.85,
+      "decimalLongitude": 5.65,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3731121452,
+      "decimalLatitude": 52.75,
+      "decimalLongitude": 4.65,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3721352916,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3721625094,
+      "decimalLatitude": 53.4,
+      "decimalLongitude": 6.75,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3721801249,
+      "decimalLatitude": 53.4,
+      "decimalLongitude": 6.75,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3722292727,
+      "decimalLatitude": 53.3,
+      "decimalLongitude": 6.75,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3730935921,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3731513159,
+      "decimalLatitude": 53.15,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3722678760,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3723677888,
+      "decimalLatitude": 53.3,
+      "decimalLongitude": 6.6,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3723787004,
+      "decimalLatitude": 53.3,
+      "decimalLongitude": 6.4,
+      "country": "Netherlands",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3727771830,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3717018371,
+      "decimalLatitude": 53.15,
+      "decimalLongitude": 6.5,
+      "country": "Netherlands",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3717068835,
+      "decimalLatitude": 52.7,
+      "decimalLongitude": 5.1,
+      "country": "Netherlands",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3717666902,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.5,
+      "country": "Netherlands",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3726847736,
+      "decimalLatitude": 53.2,
+      "decimalLongitude": 6.5,
+      "country": "Netherlands",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3725108701,
+      "decimalLatitude": 53.1,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2840602606,
+      "decimalLatitude": 51.2,
+      "decimalLongitude": 3.75,
+      "country": "Netherlands",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 5015997526,
+      "decimalLatitude": 37.585941,
+      "decimalLongitude": 12.838898,
+      "country": "Italy",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 5015912791,
+      "decimalLatitude": 52.004898,
+      "decimalLongitude": 9.867001,
+      "country": "Germany",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 5016792990,
+      "decimalLatitude": 52.000362,
+      "decimalLongitude": 9.859912,
+      "country": "Germany",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 2839443721,
+      "decimalLatitude": 51.45,
+      "decimalLongitude": 4.85,
+      "country": "Netherlands",
+      "year": 2015,
+      "elevation": null
+    },
+    {
+      "key": 3714928703,
+      "decimalLatitude": 53.15,
+      "decimalLongitude": 6.55,
+      "country": "Netherlands",
+      "year": 2014,
+      "elevation": null
+    },
+    {
+      "key": 5015989776,
+      "decimalLatitude": 48.841446,
+      "decimalLongitude": 9.08535,
+      "country": "Germany",
+      "year": 2011,
+      "elevation": null
+    },
+    {
+      "key": 3496989437,
+      "decimalLatitude": 65.5776,
+      "decimalLongitude": -171.4918,
+      "country": "Russian Federation",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6116155428,
+      "decimalLatitude": 53.2124,
+      "decimalLongitude": 43.0357,
+      "country": "Russian Federation",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6134184986,
+      "decimalLatitude": 54.6292,
+      "decimalLongitude": 39.7371,
+      "country": "Russian Federation",
+      "year": null,
+      "elevation": null
+    }
+  ]
+}

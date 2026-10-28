@@ -1,0 +1,2410 @@
+{
+  "crop_id": "brachiaria_ramosa",
+  "crop_name": "browntop millet",
+  "scientific_name": "Brachiaria ramosa",
+  "total_count": 728,
+  "fetched_count": 300,
+  "fetched_at": "2026-10-28T09:09:12.296506+00:00",
+  "occurrences": [
+    {
+      "key": 6480364324,
+      "decimalLatitude": 33.645002,
+      "decimalLongitude": -84.448603,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5104345623,
+      "decimalLatitude": 21.356725,
+      "decimalLongitude": -158.022383,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5167993211,
+      "decimalLatitude": 12.577712,
+      "decimalLongitude": 10.166084,
+      "country": "Nigeria",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5903902950,
+      "decimalLatitude": 25.231961,
+      "decimalLongitude": 75.837982,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110438390,
+      "decimalLatitude": 31.505067,
+      "decimalLongitude": 74.309512,
+      "country": "Pakistan",
+      "year": 2024,
+      "elevation": 136.8
+    },
+    {
+      "key": 4028681133,
+      "decimalLatitude": 21.446737,
+      "decimalLongitude": -158.150701,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4028837254,
+      "decimalLatitude": 21.440685,
+      "decimalLongitude": -158.151943,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4028902328,
+      "decimalLatitude": 21.44653,
+      "decimalLongitude": -158.150643,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4029055289,
+      "decimalLatitude": 21.443634,
+      "decimalLongitude": -158.149956,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4029171308,
+      "decimalLatitude": 21.446452,
+      "decimalLongitude": -158.150683,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4067278872,
+      "decimalLatitude": -20.956828,
+      "decimalLongitude": 55.28941,
+      "country": "R\u00e9union",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4465743785,
+      "decimalLatitude": -20.991514,
+      "decimalLongitude": 55.282742,
+      "country": "R\u00e9union",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4171562291,
+      "decimalLatitude": 29.78785,
+      "decimalLongitude": -95.623292,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4424158866,
+      "decimalLatitude": 35.684638,
+      "decimalLongitude": -79.979352,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080354,
+      "decimalLatitude": 23.1413,
+      "decimalLongitude": 72.64083,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080386,
+      "decimalLatitude": 23.17606,
+      "decimalLongitude": 72.64767,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080425,
+      "decimalLatitude": 23.23066,
+      "decimalLongitude": 72.65651,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080723,
+      "decimalLatitude": 23.20993,
+      "decimalLongitude": 72.64861,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080774,
+      "decimalLatitude": 23.15442,
+      "decimalLongitude": 72.65347,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080788,
+      "decimalLatitude": 23.20442,
+      "decimalLongitude": 72.64324,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080809,
+      "decimalLatitude": 23.2034,
+      "decimalLongitude": 72.64514,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080810,
+      "decimalLatitude": 23.15392,
+      "decimalLongitude": 72.66355,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080905,
+      "decimalLatitude": 23.17712,
+      "decimalLongitude": 72.65044,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081005,
+      "decimalLatitude": 23.17168,
+      "decimalLongitude": 72.64655,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081240,
+      "decimalLatitude": 23.22637,
+      "decimalLongitude": 72.66456,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081326,
+      "decimalLatitude": 23.20081,
+      "decimalLongitude": 72.64068,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081483,
+      "decimalLatitude": 23.20131,
+      "decimalLongitude": 72.63869,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081517,
+      "decimalLatitude": 23.1314,
+      "decimalLongitude": 72.62496,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081789,
+      "decimalLatitude": 23.23675,
+      "decimalLongitude": 72.63605,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082011,
+      "decimalLatitude": 23.18722,
+      "decimalLongitude": 72.64172,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082112,
+      "decimalLatitude": 23.18717,
+      "decimalLongitude": 72.63928,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082158,
+      "decimalLatitude": 23.19183,
+      "decimalLongitude": 72.63944,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082392,
+      "decimalLatitude": 23.12031,
+      "decimalLongitude": 72.6163,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082411,
+      "decimalLatitude": 23.1568,
+      "decimalLongitude": 72.65306,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082577,
+      "decimalLatitude": 23.18544,
+      "decimalLongitude": 72.61813,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082658,
+      "decimalLatitude": 23.21049,
+      "decimalLongitude": 72.65224,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082706,
+      "decimalLatitude": 23.21225,
+      "decimalLongitude": 72.6485,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082745,
+      "decimalLatitude": 23.14561,
+      "decimalLongitude": 72.6411,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082808,
+      "decimalLatitude": 23.21206,
+      "decimalLongitude": 72.65377,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4524740580,
+      "decimalLatitude": 21.12729,
+      "decimalLongitude": 72.79365,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4524740785,
+      "decimalLatitude": 21.12987,
+      "decimalLongitude": 72.80025,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4524740947,
+      "decimalLatitude": 21.13844,
+      "decimalLongitude": 72.80394,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4524741471,
+      "decimalLatitude": 21.10531,
+      "decimalLongitude": 72.7936,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4524741490,
+      "decimalLatitude": 21.09991,
+      "decimalLongitude": 72.7933,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4524741866,
+      "decimalLatitude": 21.11909,
+      "decimalLongitude": 72.79284,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 3456218679,
+      "decimalLatitude": -20.965897,
+      "decimalLongitude": 55.320218,
+      "country": "R\u00e9union",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3747050271,
+      "decimalLatitude": -20.888285,
+      "decimalLongitude": 55.500585,
+      "country": "R\u00e9union",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3961230445,
+      "decimalLatitude": -21.069463,
+      "decimalLongitude": 55.230036,
+      "country": "R\u00e9union",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3873634697,
+      "decimalLatitude": 31.472867,
+      "decimalLongitude": -96.82487,
+      "country": "United States of America",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3902820842,
+      "decimalLatitude": 31.79547,
+      "decimalLongitude": -85.962756,
+      "country": "United States of America",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3333395583,
+      "decimalLatitude": 36.083089,
+      "decimalLongitude": -87.256851,
+      "country": "United States of America",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3398751741,
+      "decimalLatitude": 29.7665,
+      "decimalLongitude": -95.431725,
+      "country": "United States of America",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4062788397,
+      "decimalLatitude": -21.032661,
+      "decimalLongitude": 55.221505,
+      "country": "R\u00e9union",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 2803153551,
+      "decimalLatitude": 29.768225,
+      "decimalLongitude": -95.430612,
+      "country": "United States of America",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2851041534,
+      "decimalLatitude": 34.741874,
+      "decimalLongitude": -85.582098,
+      "country": "United States of America",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3455646176,
+      "decimalLatitude": 34.596104,
+      "decimalLongitude": -91.095592,
+      "country": "United States of America",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 1918153672,
+      "decimalLatitude": -20.208804,
+      "decimalLongitude": 57.431867,
+      "country": "Mauritius",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 1918153652,
+      "decimalLatitude": -20.208804,
+      "decimalLongitude": 57.431867,
+      "country": "Mauritius",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 1931476607,
+      "decimalLatitude": 29.015825,
+      "decimalLongitude": -95.483551,
+      "country": "United States of America",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 1931479776,
+      "decimalLatitude": 29.349752,
+      "decimalLongitude": -95.584473,
+      "country": "United States of America",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 1931514003,
+      "decimalLatitude": 31.134979,
+      "decimalLongitude": -93.799741,
+      "country": "United States of America",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 1586168375,
+      "decimalLatitude": 12.58385,
+      "decimalLongitude": -16.26816,
+      "country": "Senegal",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 2963920304,
+      "decimalLatitude": 32.586489,
+      "decimalLongitude": -97.101903,
+      "country": "United States of America",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 1898924782,
+      "decimalLatitude": 13.510238,
+      "decimalLongitude": 2.095539,
+      "country": "Niger",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3830997872,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 22.0
+    },
+    {
+      "key": 3830998768,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 24.0
+    },
+    {
+      "key": 3830999358,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 20.0
+    },
+    {
+      "key": 3831000539,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 12.5
+    },
+    {
+      "key": 3831002430,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 8.0
+    },
+    {
+      "key": 3831004877,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 16.5
+    },
+    {
+      "key": 3831005682,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 15.0
+    },
+    {
+      "key": 3831006174,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 13.0
+    },
+    {
+      "key": 3831009758,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 7.5
+    },
+    {
+      "key": 3830997324,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 4.0
+    },
+    {
+      "key": 3830999792,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 7.0
+    },
+    {
+      "key": 3830999816,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 2.5
+    },
+    {
+      "key": 3831000026,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 6.5
+    },
+    {
+      "key": 3831001051,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 3.5
+    },
+    {
+      "key": 3831004566,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 5.5
+    },
+    {
+      "key": 3831004760,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 2.5
+    },
+    {
+      "key": 3831005114,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 4.5
+    },
+    {
+      "key": 3831005694,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 6.5
+    },
+    {
+      "key": 3831008113,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 6.0
+    },
+    {
+      "key": 3831008925,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 1.5
+    },
+    {
+      "key": 3831009620,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 9.0
+    },
+    {
+      "key": 3831011177,
+      "decimalLatitude": -21.11012,
+      "decimalLongitude": 55.32963,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 2.5
+    },
+    {
+      "key": 3831000033,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 17.0
+    },
+    {
+      "key": 3831004923,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 12.5
+    },
+    {
+      "key": 3831005382,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 30.0
+    },
+    {
+      "key": 3831005867,
+      "decimalLatitude": -21.16607,
+      "decimalLongitude": 55.33328,
+      "country": "R\u00e9union",
+      "year": 2013,
+      "elevation": 23.0
+    },
+    {
+      "key": 3830851722,
+      "decimalLatitude": -20.94676,
+      "decimalLongitude": 55.53067,
+      "country": "R\u00e9union",
+      "year": 2011,
+      "elevation": 76.5
+    },
+    {
+      "key": 2236920095,
+      "decimalLatitude": 31.802622,
+      "decimalLongitude": -86.524867,
+      "country": "United States of America",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949109663,
+      "decimalLatitude": 8.916667,
+      "decimalLongitude": 17.6,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949109334,
+      "decimalLatitude": 11.533333,
+      "decimalLongitude": 18.2,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949109635,
+      "decimalLatitude": 9.233333,
+      "decimalLongitude": 18.116667,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949109744,
+      "decimalLatitude": 9.233333,
+      "decimalLongitude": 18.1,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949109862,
+      "decimalLatitude": 9.066667,
+      "decimalLongitude": 18.05,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949109867,
+      "decimalLatitude": 9.116667,
+      "decimalLongitude": 18.083333,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949112078,
+      "decimalLatitude": 8.933333,
+      "decimalLongitude": 17.6,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949112296,
+      "decimalLatitude": 9.233333,
+      "decimalLongitude": 18.116667,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949112305,
+      "decimalLatitude": 9.2,
+      "decimalLongitude": 18.2,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949112508,
+      "decimalLatitude": 9.233333,
+      "decimalLongitude": 18.1,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949112560,
+      "decimalLatitude": 9.116667,
+      "decimalLongitude": 18.083333,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1949112570,
+      "decimalLatitude": 9.066667,
+      "decimalLongitude": 18.05,
+      "country": "Chad",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 1913355363,
+      "decimalLatitude": 13.664656,
+      "decimalLongitude": -16.455867,
+      "country": "Senegal",
+      "year": 2009,
+      "elevation": null
+    },
+    {
+      "key": 1913355365,
+      "decimalLatitude": 13.664656,
+      "decimalLongitude": -16.455867,
+      "country": "Senegal",
+      "year": 2009,
+      "elevation": null
+    },
+    {
+      "key": 1913355378,
+      "decimalLatitude": 13.664656,
+      "decimalLongitude": -16.455867,
+      "country": "Senegal",
+      "year": 2009,
+      "elevation": null
+    },
+    {
+      "key": 1948953712,
+      "decimalLatitude": 13.95,
+      "decimalLongitude": -3.766667,
+      "country": "Mali",
+      "year": 2006,
+      "elevation": null
+    },
+    {
+      "key": 2465001860,
+      "decimalLatitude": 12.22,
+      "decimalLongitude": 78.5,
+      "country": "India",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949105836,
+      "decimalLatitude": 14.216667,
+      "decimalLongitude": 20.783333,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949106020,
+      "decimalLatitude": 14.033333,
+      "decimalLongitude": 20.75,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949106155,
+      "decimalLatitude": 13.616667,
+      "decimalLongitude": 20.75,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949106791,
+      "decimalLatitude": 13.033333,
+      "decimalLongitude": 21.166667,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949106990,
+      "decimalLatitude": 14.1,
+      "decimalLongitude": 20.716667,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107059,
+      "decimalLatitude": 14.75,
+      "decimalLongitude": 20.85,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107080,
+      "decimalLatitude": 14.1,
+      "decimalLongitude": 20.716667,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107127,
+      "decimalLatitude": 13.8,
+      "decimalLongitude": 20.583333,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107156,
+      "decimalLatitude": 13.25,
+      "decimalLongitude": 21.05,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107329,
+      "decimalLatitude": 13.216667,
+      "decimalLongitude": 21.15,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107343,
+      "decimalLatitude": 12.833333,
+      "decimalLongitude": 21.716667,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107427,
+      "decimalLatitude": 14.65,
+      "decimalLongitude": 21.033333,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107571,
+      "decimalLatitude": 13.616667,
+      "decimalLongitude": 21.733333,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107826,
+      "decimalLatitude": 14.416667,
+      "decimalLongitude": 21.066667,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949107827,
+      "decimalLatitude": 14.25,
+      "decimalLongitude": 21.316667,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949108363,
+      "decimalLatitude": 12.933333,
+      "decimalLongitude": 20.533333,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949108461,
+      "decimalLatitude": 13.9,
+      "decimalLongitude": 20.8,
+      "country": "Chad",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1949025161,
+      "decimalLatitude": 12.833333,
+      "decimalLongitude": 2.333333,
+      "country": "Niger",
+      "year": 2004,
+      "elevation": null
+    },
+    {
+      "key": 1948993539,
+      "decimalLatitude": 11.983333,
+      "decimalLongitude": 2.433333,
+      "country": "Niger",
+      "year": 2003,
+      "elevation": null
+    },
+    {
+      "key": 1949012172,
+      "decimalLatitude": 13.6,
+      "decimalLongitude": 1.85,
+      "country": "Niger",
+      "year": 2003,
+      "elevation": null
+    },
+    {
+      "key": 1949012212,
+      "decimalLatitude": 13.1,
+      "decimalLongitude": 2.283333,
+      "country": "Niger",
+      "year": 2003,
+      "elevation": null
+    },
+    {
+      "key": 1949012321,
+      "decimalLatitude": 13.7,
+      "decimalLongitude": 1.566667,
+      "country": "Niger",
+      "year": 2003,
+      "elevation": null
+    },
+    {
+      "key": 1949012403,
+      "decimalLatitude": 13.233333,
+      "decimalLongitude": 1.833333,
+      "country": "Niger",
+      "year": 2003,
+      "elevation": null
+    },
+    {
+      "key": 1949012571,
+      "decimalLatitude": 13.233333,
+      "decimalLongitude": 2.233333,
+      "country": "Niger",
+      "year": 2003,
+      "elevation": null
+    },
+    {
+      "key": 1948988876,
+      "decimalLatitude": 12.416667,
+      "decimalLongitude": 2.35,
+      "country": "Niger",
+      "year": 2002,
+      "elevation": null
+    },
+    {
+      "key": 1948988895,
+      "decimalLatitude": 12.433333,
+      "decimalLongitude": 2.366667,
+      "country": "Niger",
+      "year": 2002,
+      "elevation": null
+    },
+    {
+      "key": 1948989030,
+      "decimalLatitude": 12.383333,
+      "decimalLongitude": 2.666667,
+      "country": "Niger",
+      "year": 2002,
+      "elevation": null
+    },
+    {
+      "key": 1948989173,
+      "decimalLatitude": 12.433333,
+      "decimalLongitude": 2.316667,
+      "country": "Niger",
+      "year": 2002,
+      "elevation": null
+    },
+    {
+      "key": 1948989378,
+      "decimalLatitude": 12.433333,
+      "decimalLongitude": 2.383333,
+      "country": "Niger",
+      "year": 2002,
+      "elevation": null
+    },
+    {
+      "key": 1949062235,
+      "decimalLatitude": 15.6,
+      "decimalLongitude": -15.283333,
+      "country": "Senegal",
+      "year": 2002,
+      "elevation": null
+    },
+    {
+      "key": 1948866544,
+      "decimalLatitude": 14.333333,
+      "decimalLongitude": -0.4,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948987769,
+      "decimalLatitude": 13.25,
+      "decimalLongitude": 1.816667,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948988096,
+      "decimalLatitude": 13.183333,
+      "decimalLongitude": 1.816667,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948988523,
+      "decimalLatitude": 13.233333,
+      "decimalLongitude": 1.816667,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948866537,
+      "decimalLatitude": 14.4,
+      "decimalLongitude": -0.433333,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948866852,
+      "decimalLatitude": 14.566667,
+      "decimalLongitude": -0.45,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948866873,
+      "decimalLatitude": 14.55,
+      "decimalLongitude": -0.433333,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948866914,
+      "decimalLatitude": 14.633333,
+      "decimalLongitude": -0.133333,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948866944,
+      "decimalLatitude": 14.55,
+      "decimalLongitude": -0.45,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948987596,
+      "decimalLatitude": 13.2,
+      "decimalLongitude": 1.783333,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948987860,
+      "decimalLatitude": 13.233333,
+      "decimalLongitude": 1.8,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948987781,
+      "decimalLatitude": 13.233333,
+      "decimalLongitude": 1.833333,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948988061,
+      "decimalLatitude": 13.266667,
+      "decimalLongitude": 1.8,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948988575,
+      "decimalLatitude": 13.266667,
+      "decimalLongitude": 1.8,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1949062178,
+      "decimalLatitude": 14.6,
+      "decimalLongitude": -15.283333,
+      "country": "Senegal",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1949105562,
+      "decimalLatitude": 14.716667,
+      "decimalLongitude": 16.833333,
+      "country": "Chad",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1949105622,
+      "decimalLatitude": 14.55,
+      "decimalLongitude": 16.25,
+      "country": "Chad",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1949105646,
+      "decimalLatitude": 14.683333,
+      "decimalLongitude": 15.85,
+      "country": "Chad",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948844222,
+      "decimalLatitude": 12.116667,
+      "decimalLongitude": 2.05,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948844237,
+      "decimalLatitude": 12.1,
+      "decimalLongitude": 2.033333,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948844244,
+      "decimalLatitude": 12.116667,
+      "decimalLongitude": 2.05,
+      "country": "Burkina Faso",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948988821,
+      "decimalLatitude": 12.2,
+      "decimalLongitude": 2.366667,
+      "country": "Niger",
+      "year": 2001,
+      "elevation": null
+    },
+    {
+      "key": 1948986746,
+      "decimalLatitude": 14.483333,
+      "decimalLongitude": 3.266667,
+      "country": "Niger",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864451,
+      "decimalLatitude": 14.95,
+      "decimalLongitude": -0.75,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864537,
+      "decimalLatitude": 14.95,
+      "decimalLongitude": -0.75,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864548,
+      "decimalLatitude": 14.816667,
+      "decimalLongitude": -0.716667,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864553,
+      "decimalLatitude": 14.8,
+      "decimalLongitude": -0.75,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864632,
+      "decimalLatitude": 14.716667,
+      "decimalLongitude": -0.033333,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864647,
+      "decimalLatitude": 14.716667,
+      "decimalLongitude": -0.1,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864715,
+      "decimalLatitude": 14.95,
+      "decimalLongitude": -0.75,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864139,
+      "decimalLatitude": 14.633333,
+      "decimalLongitude": -0.133333,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864144,
+      "decimalLatitude": 14.633333,
+      "decimalLongitude": -0.133333,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864851,
+      "decimalLatitude": 14.65,
+      "decimalLongitude": -0.116667,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948864869,
+      "decimalLatitude": 14.65,
+      "decimalLongitude": -0.116667,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948865320,
+      "decimalLatitude": 14.65,
+      "decimalLongitude": -0.133333,
+      "country": "Burkina Faso",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1949061975,
+      "decimalLatitude": 15.25,
+      "decimalLongitude": -14.583333,
+      "country": "Senegal",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1948990801,
+      "decimalLatitude": 12.5,
+      "decimalLongitude": 2.483333,
+      "country": "Niger",
+      "year": 1998,
+      "elevation": null
+    },
+    {
+      "key": 1948991039,
+      "decimalLatitude": 12.433333,
+      "decimalLongitude": 2.4,
+      "country": "Niger",
+      "year": 1998,
+      "elevation": null
+    },
+    {
+      "key": 1948914109,
+      "decimalLatitude": 14.966667,
+      "decimalLongitude": -23.5,
+      "country": "Cabo Verde",
+      "year": 1996,
+      "elevation": null
+    },
+    {
+      "key": 1948912239,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948912431,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948912561,
+      "decimalLatitude": 15.266667,
+      "decimalLongitude": -23.75,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948912575,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948912648,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948912742,
+      "decimalLatitude": 15.3,
+      "decimalLongitude": -23.783333,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948912754,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913485,
+      "decimalLatitude": 15.0,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913507,
+      "decimalLatitude": 15.0,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913561,
+      "decimalLatitude": 15.0,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913700,
+      "decimalLatitude": 14.983333,
+      "decimalLongitude": -23.716667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913737,
+      "decimalLatitude": 14.983333,
+      "decimalLongitude": -23.716667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913804,
+      "decimalLatitude": 15.15,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913808,
+      "decimalLatitude": 14.95,
+      "decimalLongitude": -23.7,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913843,
+      "decimalLatitude": 15.166667,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948913908,
+      "decimalLatitude": 14.966667,
+      "decimalLongitude": -23.716667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948914107,
+      "decimalLatitude": 15.15,
+      "decimalLongitude": -23.566667,
+      "country": "Cabo Verde",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948948678,
+      "decimalLatitude": 15.15,
+      "decimalLongitude": -1.566667,
+      "country": "Mali",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 1948974138,
+      "decimalLatitude": 16.85,
+      "decimalLongitude": -16.283333,
+      "country": "Mauritania",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948975094,
+      "decimalLatitude": 17.4,
+      "decimalLongitude": -16.066667,
+      "country": "Mauritania",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948909784,
+      "decimalLatitude": 14.983333,
+      "decimalLongitude": -23.55,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948910056,
+      "decimalLatitude": 15.083333,
+      "decimalLongitude": -23.65,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948910365,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948910400,
+      "decimalLatitude": 15.233333,
+      "decimalLongitude": -23.733333,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948910468,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948910516,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948910557,
+      "decimalLatitude": 15.283333,
+      "decimalLongitude": -23.766667,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948911249,
+      "decimalLatitude": 15.016667,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948911556,
+      "decimalLatitude": 15.166667,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948911595,
+      "decimalLatitude": 15.166667,
+      "decimalLongitude": -23.6,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948911662,
+      "decimalLatitude": 15.166667,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948911699,
+      "decimalLatitude": 15.166667,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948911743,
+      "decimalLatitude": 15.166667,
+      "decimalLongitude": -23.583333,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948911882,
+      "decimalLatitude": 14.95,
+      "decimalLongitude": -23.566667,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948911897,
+      "decimalLatitude": 15.15,
+      "decimalLongitude": -23.566667,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948980756,
+      "decimalLatitude": 12.083333,
+      "decimalLongitude": 13.25,
+      "country": "Nigeria",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948912123,
+      "decimalLatitude": 15.05,
+      "decimalLongitude": -23.633333,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948912164,
+      "decimalLatitude": 15.016667,
+      "decimalLongitude": -23.7,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948912212,
+      "decimalLatitude": 15.016667,
+      "decimalLongitude": -23.7,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948912270,
+      "decimalLatitude": 15.033333,
+      "decimalLongitude": -23.7,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948912520,
+      "decimalLatitude": 15.033333,
+      "decimalLongitude": -23.7,
+      "country": "Cabo Verde",
+      "year": 1994,
+      "elevation": null
+    },
+    {
+      "key": 1948973767,
+      "decimalLatitude": 19.55,
+      "decimalLongitude": -16.4,
+      "country": "Mauritania",
+      "year": 1993,
+      "elevation": null
+    },
+    {
+      "key": 1948980762,
+      "decimalLatitude": 12.25,
+      "decimalLongitude": 11.733333,
+      "country": "Nigeria",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948980897,
+      "decimalLatitude": 12.233333,
+      "decimalLongitude": 13.216667,
+      "country": "Nigeria",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948908592,
+      "decimalLatitude": 15.1,
+      "decimalLongitude": -23.55,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948908649,
+      "decimalLatitude": 15.1,
+      "decimalLongitude": -23.55,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948908658,
+      "decimalLatitude": 15.083333,
+      "decimalLongitude": -23.55,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948909053,
+      "decimalLatitude": 14.916667,
+      "decimalLongitude": -23.616667,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948909102,
+      "decimalLatitude": 14.933333,
+      "decimalLongitude": -23.566667,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948914123,
+      "decimalLatitude": 15.116667,
+      "decimalLongitude": -23.55,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948914236,
+      "decimalLatitude": 15.116667,
+      "decimalLongitude": -23.566667,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948914269,
+      "decimalLatitude": 15.116667,
+      "decimalLongitude": -23.566667,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1948914397,
+      "decimalLatitude": 15.1,
+      "decimalLongitude": -23.55,
+      "country": "Cabo Verde",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 3861600429,
+      "decimalLatitude": 13.0,
+      "decimalLongitude": 80.229,
+      "country": "India",
+      "year": 1992,
+      "elevation": null
+    },
+    {
+      "key": 1949061888,
+      "decimalLatitude": 16.316667,
+      "decimalLongitude": -15.366667,
+      "country": "Senegal",
+      "year": 1991,
+      "elevation": null
+    },
+    {
+      "key": 1948879700,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948881557,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948881691,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948881751,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948881792,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948881897,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948882121,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948882159,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948882218,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948882388,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948882394,
+      "decimalLatitude": 10.366667,
+      "decimalLongitude": 14.216667,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948885570,
+      "decimalLatitude": 10.45,
+      "decimalLongitude": 14.25,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948886006,
+      "decimalLatitude": 10.45,
+      "decimalLongitude": 14.25,
+      "country": "Cameroon",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1949061707,
+      "decimalLatitude": 15.6,
+      "decimalLongitude": -15.283333,
+      "country": "Senegal",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1948945425,
+      "decimalLatitude": 15.15,
+      "decimalLongitude": -1.566667,
+      "country": "Mali",
+      "year": 1989,
+      "elevation": null
+    },
+    {
+      "key": 1948985965,
+      "decimalLatitude": 15.683333,
+      "decimalLongitude": 4.8,
+      "country": "Niger",
+      "year": 1989,
+      "elevation": null
+    },
+    {
+      "key": 1948998769,
+      "decimalLatitude": 13.666667,
+      "decimalLongitude": 9.833333,
+      "country": "Niger",
+      "year": 1989,
+      "elevation": null
+    },
+    {
+      "key": 1948999225,
+      "decimalLatitude": 13.766667,
+      "decimalLongitude": 4.483333,
+      "country": "Niger",
+      "year": 1989,
+      "elevation": null
+    },
+    {
+      "key": 1948999243,
+      "decimalLatitude": 13.983333,
+      "decimalLongitude": 10.25,
+      "country": "Niger",
+      "year": 1989,
+      "elevation": null
+    },
+    {
+      "key": 1948999993,
+      "decimalLatitude": 13.166667,
+      "decimalLongitude": 12.25,
+      "country": "Niger",
+      "year": 1989,
+      "elevation": null
+    },
+    {
+      "key": 1949000029,
+      "decimalLatitude": 13.716667,
+      "decimalLongitude": 11.183333,
+      "country": "Niger",
+      "year": 1989,
+      "elevation": null
+    },
+    {
+      "key": 1949091185,
+      "decimalLatitude": 12.833333,
+      "decimalLongitude": -14.9,
+      "country": "Senegal",
+      "year": 1989,
+      "elevation": null
+    },
+    {
+      "key": 1948986998,
+      "decimalLatitude": 15.45,
+      "decimalLongitude": 3.816667,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987040,
+      "decimalLatitude": 15.3,
+      "decimalLongitude": 3.533333,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1949000247,
+      "decimalLatitude": 13.55,
+      "decimalLongitude": 11.533333,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948986996,
+      "decimalLatitude": 15.366667,
+      "decimalLongitude": 3.65,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987114,
+      "decimalLatitude": 15.633333,
+      "decimalLongitude": 4.683333,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987129,
+      "decimalLatitude": 15.533333,
+      "decimalLongitude": 4.233333,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987337,
+      "decimalLatitude": 15.95,
+      "decimalLongitude": 4.833333,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987423,
+      "decimalLatitude": 15.683333,
+      "decimalLongitude": 4.783333,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987440,
+      "decimalLatitude": 15.433333,
+      "decimalLongitude": 4.733333,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987456,
+      "decimalLatitude": 15.8,
+      "decimalLongitude": 4.816667,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987483,
+      "decimalLatitude": 16.233333,
+      "decimalLongitude": 4.75,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948999794,
+      "decimalLatitude": 13.983333,
+      "decimalLongitude": 10.25,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948999925,
+      "decimalLatitude": 13.983333,
+      "decimalLongitude": 10.25,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1949000109,
+      "decimalLatitude": 13.983333,
+      "decimalLongitude": 10.25,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1949000773,
+      "decimalLatitude": 13.983333,
+      "decimalLongitude": 10.266667,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1949011531,
+      "decimalLatitude": 15.25,
+      "decimalLongitude": 7.1,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1949011634,
+      "decimalLatitude": 13.383333,
+      "decimalLongitude": 11.066667,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1949011835,
+      "decimalLatitude": 13.55,
+      "decimalLongitude": 12.583333,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948987173,
+      "decimalLatitude": 15.516667,
+      "decimalLongitude": 4.75,
+      "country": "Niger",
+      "year": 1988,
+      "elevation": null
+    },
+    {
+      "key": 1948943741,
+      "decimalLatitude": 16.5,
+      "decimalLongitude": -1.8,
+      "country": "Mali",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094369,
+      "decimalLatitude": 15.4,
+      "decimalLongitude": -15.416667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094419,
+      "decimalLatitude": 15.4,
+      "decimalLongitude": -15.416667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094473,
+      "decimalLatitude": 15.75,
+      "decimalLongitude": -15.266667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094476,
+      "decimalLatitude": 15.4,
+      "decimalLongitude": -15.416667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094528,
+      "decimalLatitude": 15.883333,
+      "decimalLongitude": -15.3,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094535,
+      "decimalLatitude": 15.816667,
+      "decimalLongitude": -15.283333,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094570,
+      "decimalLatitude": 16.183333,
+      "decimalLongitude": -15.3,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094625,
+      "decimalLatitude": 16.166667,
+      "decimalLongitude": -15.25,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094650,
+      "decimalLatitude": 16.0,
+      "decimalLongitude": -15.266667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094695,
+      "decimalLatitude": 15.9,
+      "decimalLongitude": -15.3,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1948944025,
+      "decimalLatitude": 16.316667,
+      "decimalLongitude": -1.866667,
+      "country": "Mali",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949045772,
+      "decimalLatitude": 15.35,
+      "decimalLongitude": -15.433333,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949094740,
+      "decimalLatitude": 15.35,
+      "decimalLongitude": -13.933333,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949096560,
+      "decimalLatitude": 15.833333,
+      "decimalLongitude": -16.1,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949096567,
+      "decimalLatitude": 15.8,
+      "decimalLongitude": -15.133333,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949096570,
+      "decimalLatitude": 15.833333,
+      "decimalLongitude": -15.066667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949096854,
+      "decimalLatitude": 15.9,
+      "decimalLongitude": -15.15,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949096876,
+      "decimalLatitude": 15.833333,
+      "decimalLongitude": -15.016667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949096880,
+      "decimalLatitude": 15.883333,
+      "decimalLongitude": -15.116667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949045553,
+      "decimalLatitude": 15.183333,
+      "decimalLongitude": -15.416667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949045716,
+      "decimalLatitude": 15.333333,
+      "decimalLongitude": -15.45,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949045720,
+      "decimalLatitude": 15.35,
+      "decimalLongitude": -15.433333,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949045764,
+      "decimalLatitude": 15.35,
+      "decimalLongitude": -15.433333,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949045897,
+      "decimalLatitude": 15.35,
+      "decimalLongitude": -15.416667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    },
+    {
+      "key": 1949045967,
+      "decimalLatitude": 15.366667,
+      "decimalLongitude": -15.416667,
+      "country": "Senegal",
+      "year": 1987,
+      "elevation": null
+    }
+  ]
+}

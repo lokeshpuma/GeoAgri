@@ -1,0 +1,434 @@
+{
+  "crop_id": "brassica_oleracea_var_botrytis",
+  "crop_name": "cauliflower",
+  "scientific_name": "Brassica oleracea var. botrytis",
+  "total_count": 53,
+  "fetched_count": 53,
+  "fetched_at": "2026-10-28T09:09:13.520819+00:00",
+  "occurrences": [
+    {
+      "key": 6159476891,
+      "decimalLatitude": -43.955529,
+      "decimalLongitude": -176.553308,
+      "country": "New Zealand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6234764089,
+      "decimalLatitude": 35.20341,
+      "decimalLongitude": 24.562879,
+      "country": "Greece",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6235892570,
+      "decimalLatitude": 35.430422,
+      "decimalLongitude": 23.730736,
+      "country": "Greece",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5063444203,
+      "decimalLatitude": -36.725989,
+      "decimalLongitude": 174.707703,
+      "country": "New Zealand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6334707473,
+      "decimalLatitude": 35.317178,
+      "decimalLongitude": 23.841872,
+      "country": "Greece",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6234258280,
+      "decimalLatitude": 35.026292,
+      "decimalLongitude": 26.050858,
+      "country": "Greece",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920074271,
+      "decimalLatitude": 35.22328,
+      "decimalLongitude": 24.40011,
+      "country": "Greece",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920117094,
+      "decimalLatitude": 35.222837,
+      "decimalLongitude": 24.400405,
+      "country": "Greece",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920124090,
+      "decimalLatitude": 35.220415,
+      "decimalLongitude": 24.400121,
+      "country": "Greece",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6236426423,
+      "decimalLatitude": 35.204501,
+      "decimalLongitude": 24.470629,
+      "country": "Greece",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6334694952,
+      "decimalLatitude": 35.317064,
+      "decimalLongitude": 23.841986,
+      "country": "Greece",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4855446993,
+      "decimalLatitude": 37.716238,
+      "decimalLongitude": -122.412942,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6234836812,
+      "decimalLatitude": 35.317151,
+      "decimalLongitude": 23.841669,
+      "country": "Greece",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5086928841,
+      "decimalLatitude": 30.510797,
+      "decimalLongitude": -84.359463,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4601813326,
+      "decimalLatitude": 4.668333,
+      "decimalLongitude": -74.1,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 2600.0
+    },
+    {
+      "key": 6131611236,
+      "decimalLatitude": 26.914606,
+      "decimalLongitude": 75.731901,
+      "country": "India",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958629288,
+      "decimalLatitude": 23.156334,
+      "decimalLongitude": 121.195324,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3034563348,
+      "decimalLatitude": 9.851561,
+      "decimalLongitude": 76.382912,
+      "country": "India",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064843249,
+      "decimalLatitude": 35.826111,
+      "decimalLongitude": 127.109722,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064843250,
+      "decimalLatitude": 35.318172,
+      "decimalLongitude": 128.802698,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4405171371,
+      "decimalLatitude": 53.55194,
+      "decimalLongitude": -2.888506,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6313941800,
+      "decimalLatitude": 57.894435,
+      "decimalLongitude": -4.095989,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5051641870,
+      "decimalLatitude": 35.103611,
+      "decimalLongitude": 126.333056,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2843209326,
+      "decimalLatitude": 52.5,
+      "decimalLongitude": 6.05,
+      "country": "Netherlands",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2845202263,
+      "decimalLatitude": 52.1,
+      "decimalLongitude": 5.35,
+      "country": "Netherlands",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3343730407,
+      "decimalLatitude": 42.51847,
+      "decimalLongitude": -114.464768,
+      "country": "United States of America",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3728799131,
+      "decimalLatitude": 52.05,
+      "decimalLongitude": 4.25,
+      "country": "Netherlands",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2837664749,
+      "decimalLatitude": 35.204461,
+      "decimalLongitude": 24.469228,
+      "country": "Greece",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 6305608543,
+      "decimalLatitude": 51.397629,
+      "decimalLongitude": -0.633633,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2563476138,
+      "decimalLatitude": 35.42516,
+      "decimalLongitude": 23.98981,
+      "country": "Greece",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 6333967000,
+      "decimalLatitude": 35.232925,
+      "decimalLongitude": 24.163498,
+      "country": "Greece",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2563476145,
+      "decimalLatitude": 35.202696,
+      "decimalLongitude": 24.46657,
+      "country": "Greece",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 6302245604,
+      "decimalLatitude": 53.321174,
+      "decimalLongitude": -0.935591,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 6309680550,
+      "decimalLatitude": 51.410228,
+      "decimalLongitude": -0.643064,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2540764817,
+      "decimalLatitude": -36.879559,
+      "decimalLongitude": 174.705528,
+      "country": "New Zealand",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 6310689629,
+      "decimalLatitude": 53.08802,
+      "decimalLongitude": -1.001077,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 3940581191,
+      "decimalLatitude": 45.88022,
+      "decimalLongitude": 4.64398,
+      "country": "France",
+      "year": 2016,
+      "elevation": 300.0
+    },
+    {
+      "key": 3940592096,
+      "decimalLatitude": 45.88022,
+      "decimalLongitude": 4.64398,
+      "country": "France",
+      "year": 2016,
+      "elevation": 285.0
+    },
+    {
+      "key": 6234218658,
+      "decimalLatitude": 35.316927,
+      "decimalLongitude": 23.841504,
+      "country": "Greece",
+      "year": 2015,
+      "elevation": null
+    },
+    {
+      "key": 6075212202,
+      "decimalLatitude": 52.103326,
+      "decimalLongitude": -1.957615,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2009,
+      "elevation": null
+    },
+    {
+      "key": 6292830333,
+      "decimalLatitude": 52.111868,
+      "decimalLongitude": -1.959797,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2009,
+      "elevation": null
+    },
+    {
+      "key": 2540796089,
+      "decimalLatitude": -43.944062,
+      "decimalLongitude": -176.564968,
+      "country": "New Zealand",
+      "year": 2008,
+      "elevation": null
+    },
+    {
+      "key": 6058035058,
+      "decimalLatitude": 54.454088,
+      "decimalLongitude": -1.295877,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2007,
+      "elevation": null
+    },
+    {
+      "key": 6335017417,
+      "decimalLatitude": 35.44459,
+      "decimalLongitude": 23.996344,
+      "country": "Greece",
+      "year": 1999,
+      "elevation": null
+    },
+    {
+      "key": 6076122550,
+      "decimalLatitude": 52.498903,
+      "decimalLongitude": -1.986699,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 1997,
+      "elevation": null
+    },
+    {
+      "key": 6298480951,
+      "decimalLatitude": 52.502051,
+      "decimalLongitude": -1.997747,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 1997,
+      "elevation": null
+    },
+    {
+      "key": 6005495856,
+      "decimalLatitude": 53.184929,
+      "decimalLongitude": -2.537932,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 1980,
+      "elevation": null
+    },
+    {
+      "key": 3846923066,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3847048527,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3934999741,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3935017568,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 4547696031,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 4548445349,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    }
+  ]
+}

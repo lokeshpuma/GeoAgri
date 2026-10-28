@@ -1,0 +1,2410 @@
+{
+  "crop_id": "allium_cepa",
+  "crop_name": "onion",
+  "scientific_name": "Allium cepa",
+  "total_count": 2481,
+  "fetched_count": 300,
+  "fetched_at": "2026-10-28T09:09:26.575853+00:00",
+  "occurrences": [
+    {
+      "key": 6131005582,
+      "decimalLatitude": -31.201728,
+      "decimalLongitude": 23.475309,
+      "country": "South Africa",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6261355541,
+      "decimalLatitude": 52.111406,
+      "decimalLongitude": 26.102473,
+      "country": "Belarus",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147463439,
+      "decimalLatitude": 18.693958,
+      "decimalLongitude": 79.036171,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163400709,
+      "decimalLatitude": 10.194425,
+      "decimalLongitude": 1.394653,
+      "country": "Benin",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6170848456,
+      "decimalLatitude": 11.664311,
+      "decimalLongitude": 78.146014,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6179088015,
+      "decimalLatitude": 24.826423,
+      "decimalLongitude": 85.030212,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6181594683,
+      "decimalLatitude": 50.88292,
+      "decimalLongitude": 4.34969,
+      "country": "Belgium",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6181726087,
+      "decimalLatitude": 50.990841,
+      "decimalLongitude": 6.616997,
+      "country": "Germany",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185601817,
+      "decimalLatitude": -6.833832,
+      "decimalLongitude": 108.809105,
+      "country": "Indonesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185996261,
+      "decimalLatitude": 19.736336,
+      "decimalLongitude": 73.635256,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6188007292,
+      "decimalLatitude": 48.025101,
+      "decimalLongitude": -122.780534,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6430802427,
+      "decimalLatitude": 21.208647,
+      "decimalLongitude": 81.141432,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6193338991,
+      "decimalLatitude": 52.45,
+      "decimalLongitude": 5.65,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6195101688,
+      "decimalLatitude": 50.704868,
+      "decimalLongitude": 6.627252,
+      "country": "Germany",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6195869087,
+      "decimalLatitude": 50.06744,
+      "decimalLongitude": 8.705383,
+      "country": "Germany",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6213780022,
+      "decimalLatitude": 50.83708,
+      "decimalLongitude": 5.25933,
+      "country": "Belgium",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6234888057,
+      "decimalLatitude": 41.735297,
+      "decimalLongitude": -70.192593,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6235123256,
+      "decimalLatitude": 55.484846,
+      "decimalLongitude": 37.691419,
+      "country": "Russian Federation",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6235824557,
+      "decimalLatitude": 25.41177,
+      "decimalLongitude": 81.844231,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6236193017,
+      "decimalLatitude": 55.484531,
+      "decimalLongitude": 37.692391,
+      "country": "Russian Federation",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6236316372,
+      "decimalLatitude": 55.484496,
+      "decimalLongitude": 37.692289,
+      "country": "Russian Federation",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6253144037,
+      "decimalLatitude": 4.476282,
+      "decimalLongitude": 101.365305,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441789662,
+      "decimalLatitude": 37.414312,
+      "decimalLongitude": -78.31479,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6251486275,
+      "decimalLatitude": 26.053345,
+      "decimalLongitude": 76.158317,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6320513310,
+      "decimalLatitude": 32.671668,
+      "decimalLongitude": -96.995816,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6320699647,
+      "decimalLatitude": 42.795847,
+      "decimalLongitude": -81.17674,
+      "country": "Canada",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6333890662,
+      "decimalLatitude": -36.544211,
+      "decimalLongitude": -56.689047,
+      "country": "Argentina",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6334077097,
+      "decimalLatitude": 31.449438,
+      "decimalLongitude": -5.968447,
+      "country": "Morocco",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353069440,
+      "decimalLatitude": 56.4515,
+      "decimalLongitude": 9.407242,
+      "country": "Denmark",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353423612,
+      "decimalLatitude": 33.681852,
+      "decimalLongitude": -117.761719,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6355473364,
+      "decimalLatitude": 56.68674,
+      "decimalLongitude": 12.92183,
+      "country": "Sweden",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6398794906,
+      "decimalLatitude": 50.402176,
+      "decimalLongitude": -104.635305,
+      "country": "Canada",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6431684769,
+      "decimalLatitude": 45.446621,
+      "decimalLongitude": 40.902915,
+      "country": "Russian Federation",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6603814018,
+      "decimalLatitude": 52.35,
+      "decimalLongitude": 5.1,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6392302308,
+      "decimalLatitude": 51.20456,
+      "decimalLongitude": 3.87631,
+      "country": "Belgium",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6398578548,
+      "decimalLatitude": 40.252215,
+      "decimalLongitude": -111.639864,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399913210,
+      "decimalLatitude": 44.158613,
+      "decimalLongitude": -77.30412,
+      "country": "Canada",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399981531,
+      "decimalLatitude": 33.432186,
+      "decimalLongitude": -7.647197,
+      "country": "Morocco",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6411180465,
+      "decimalLatitude": 51.95,
+      "decimalLongitude": 4.65,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6411493264,
+      "decimalLatitude": 51.95,
+      "decimalLongitude": 5.95,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6411580597,
+      "decimalLatitude": 51.35,
+      "decimalLongitude": 5.15,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6412009830,
+      "decimalLatitude": 52.6,
+      "decimalLongitude": 4.6,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6415211335,
+      "decimalLatitude": 51.16291,
+      "decimalLongitude": 4.04696,
+      "country": "Belgium",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6419673494,
+      "decimalLatitude": 58.070837,
+      "decimalLongitude": 6.681094,
+      "country": "Norway",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6423186710,
+      "decimalLatitude": 45.816653,
+      "decimalLongitude": 25.038198,
+      "country": "Romania",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6424345411,
+      "decimalLatitude": 52.45,
+      "decimalLongitude": 5.45,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6431908565,
+      "decimalLatitude": 41.806797,
+      "decimalLongitude": -71.42309,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441214649,
+      "decimalLatitude": 51.11745,
+      "decimalLongitude": 23.48186,
+      "country": "Poland",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6451613805,
+      "decimalLatitude": 49.049011,
+      "decimalLongitude": 19.761866,
+      "country": "Slovakia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6604572298,
+      "decimalLatitude": 52.35,
+      "decimalLongitude": 4.95,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441066125,
+      "decimalLatitude": 51.332818,
+      "decimalLongitude": 1.359576,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6442046553,
+      "decimalLatitude": 48.062158,
+      "decimalLongitude": 16.739017,
+      "country": "Austria",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6447541337,
+      "decimalLatitude": 50.85,
+      "decimalLongitude": 5.75,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6449738128,
+      "decimalLatitude": 51.5,
+      "decimalLongitude": 3.65,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6452484337,
+      "decimalLatitude": 48.197669,
+      "decimalLongitude": 11.235584,
+      "country": "Germany",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6452530670,
+      "decimalLatitude": 52.061772,
+      "decimalLongitude": 8.653981,
+      "country": "Germany",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6454457475,
+      "decimalLatitude": 59.936249,
+      "decimalLongitude": 10.748405,
+      "country": "Norway",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6469631032,
+      "decimalLatitude": 40.391918,
+      "decimalLongitude": 17.455814,
+      "country": "Italy",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6469687806,
+      "decimalLatitude": 41.406612,
+      "decimalLongitude": 1.118096,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6469887414,
+      "decimalLatitude": 47.4678,
+      "decimalLongitude": -64.8754,
+      "country": "Canada",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6470729066,
+      "decimalLatitude": 49.418126,
+      "decimalLongitude": 24.990619,
+      "country": "Ukraine",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6476654340,
+      "decimalLatitude": 51.06258,
+      "decimalLongitude": 5.53659,
+      "country": "Belgium",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6479593183,
+      "decimalLatitude": 53.266994,
+      "decimalLongitude": 34.29873,
+      "country": "Russian Federation",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6481009911,
+      "decimalLatitude": 46.273745,
+      "decimalLongitude": 25.758253,
+      "country": "Romania",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6495251314,
+      "decimalLatitude": 58.070244,
+      "decimalLongitude": 6.680223,
+      "country": "Norway",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499269985,
+      "decimalLatitude": 47.852264,
+      "decimalLongitude": -59.263911,
+      "country": "Canada",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499655803,
+      "decimalLatitude": 52.205022,
+      "decimalLongitude": 4.64444,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499911867,
+      "decimalLatitude": 34.470266,
+      "decimalLongitude": 74.265703,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6527756558,
+      "decimalLatitude": 47.14769,
+      "decimalLongitude": 8.59231,
+      "country": "Switzerland",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6535639351,
+      "decimalLatitude": 56.89455,
+      "decimalLongitude": 12.46933,
+      "country": "Sweden",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6536386401,
+      "decimalLatitude": 56.89454,
+      "decimalLongitude": 12.46932,
+      "country": "Sweden",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6603122673,
+      "decimalLatitude": 51.85,
+      "decimalLongitude": 5.75,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6604487668,
+      "decimalLatitude": 51.85,
+      "decimalLongitude": 5.75,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6604507558,
+      "decimalLatitude": 52.3,
+      "decimalLongitude": 4.9,
+      "country": "Netherlands",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5007699812,
+      "decimalLatitude": 36.45378,
+      "decimalLongitude": -5.277812,
+      "country": "Spain",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5069812894,
+      "decimalLatitude": 47.759043,
+      "decimalLongitude": -122.29152,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5069957403,
+      "decimalLatitude": 27.643163,
+      "decimalLongitude": -97.26768,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110314689,
+      "decimalLatitude": 30.585415,
+      "decimalLongitude": -90.244556,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": 8.43
+    },
+    {
+      "key": 5282461904,
+      "decimalLatitude": 18.536574,
+      "decimalLongitude": 73.783121,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110360584,
+      "decimalLatitude": 42.445542,
+      "decimalLongitude": -8.836075,
+      "country": "Spain",
+      "year": 2025,
+      "elevation": 24.92
+    },
+    {
+      "key": 5110489236,
+      "decimalLatitude": 30.376878,
+      "decimalLongitude": -93.439331,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": 22.03
+    },
+    {
+      "key": 5110530076,
+      "decimalLatitude": 43.531813,
+      "decimalLongitude": 6.357177,
+      "country": "France",
+      "year": 2025,
+      "elevation": 361.25
+    },
+    {
+      "key": 5166752919,
+      "decimalLatitude": 33.712487,
+      "decimalLongitude": -117.756767,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110357016,
+      "decimalLatitude": 31.891314,
+      "decimalLongitude": -93.120819,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": 22.9
+    },
+    {
+      "key": 5132001605,
+      "decimalLatitude": 50.9,
+      "decimalLongitude": 5.85,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5167888330,
+      "decimalLatitude": 24.152719,
+      "decimalLongitude": 92.034106,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5237468448,
+      "decimalLatitude": 28.948631,
+      "decimalLongitude": 79.798114,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5281893904,
+      "decimalLatitude": 36.641433,
+      "decimalLongitude": 49.507372,
+      "country": "Iran (Islamic Republic of)",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6400460639,
+      "decimalLatitude": 5.553536,
+      "decimalLongitude": -72.886699,
+      "country": "Colombia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5154397879,
+      "decimalLatitude": -7.406348,
+      "decimalLongitude": -35.109886,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5154931901,
+      "decimalLatitude": 32.492094,
+      "decimalLongitude": 21.355897,
+      "country": "Libya",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5166950934,
+      "decimalLatitude": 31.742404,
+      "decimalLongitude": -95.031131,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5177074123,
+      "decimalLatitude": 36.729336,
+      "decimalLongitude": 5.03629,
+      "country": "Algeria",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5238257418,
+      "decimalLatitude": 25.990473,
+      "decimalLongitude": 76.382654,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6481062910,
+      "decimalLatitude": 37.148075,
+      "decimalLongitude": -7.944398,
+      "country": "Portugal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5180949400,
+      "decimalLatitude": 51.95,
+      "decimalLongitude": 4.65,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5188687565,
+      "decimalLatitude": 50.87097,
+      "decimalLongitude": 3.59281,
+      "country": "Belgium",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5188697547,
+      "decimalLatitude": 50.87096,
+      "decimalLongitude": 3.5929,
+      "country": "Belgium",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5198504937,
+      "decimalLatitude": 33.71252,
+      "decimalLongitude": -117.756758,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5198747000,
+      "decimalLatitude": 35.139222,
+      "decimalLongitude": -97.394753,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5205103998,
+      "decimalLatitude": 51.75,
+      "decimalLongitude": 4.4,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5205353710,
+      "decimalLatitude": 52.35,
+      "decimalLongitude": 4.9,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5206573828,
+      "decimalLatitude": 49.877656,
+      "decimalLongitude": 31.259848,
+      "country": "Ukraine",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5215154524,
+      "decimalLatitude": 52.273624,
+      "decimalLongitude": 13.789871,
+      "country": "Germany",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5217312265,
+      "decimalLatitude": 40.905597,
+      "decimalLongitude": -74.093314,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5231041757,
+      "decimalLatitude": 31.296053,
+      "decimalLongitude": -6.834506,
+      "country": "Morocco",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292824576,
+      "decimalLatitude": 41.977364,
+      "decimalLongitude": -87.689333,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5827585565,
+      "decimalLatitude": 31.163002,
+      "decimalLongitude": -3.833737,
+      "country": "Morocco",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5212271008,
+      "decimalLatitude": 52.35,
+      "decimalLongitude": 4.65,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5212469206,
+      "decimalLatitude": 51.4,
+      "decimalLongitude": 4.35,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5212775518,
+      "decimalLatitude": 56.37211,
+      "decimalLongitude": 16.5429,
+      "country": "Sweden",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5213213189,
+      "decimalLatitude": 55.72758,
+      "decimalLongitude": 13.07395,
+      "country": "Sweden",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5216513919,
+      "decimalLatitude": 55.701953,
+      "decimalLongitude": 52.045462,
+      "country": "Russian Federation",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5225200339,
+      "decimalLatitude": 50.94056,
+      "decimalLongitude": 4.23698,
+      "country": "Belgium",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5229565411,
+      "decimalLatitude": 56.28659,
+      "decimalLongitude": 16.40974,
+      "country": "Sweden",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5230300922,
+      "decimalLatitude": 47.487121,
+      "decimalLongitude": 19.086157,
+      "country": "Hungary",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5230618982,
+      "decimalLatitude": 40.56515,
+      "decimalLongitude": -8.763338,
+      "country": "Portugal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5238187809,
+      "decimalLatitude": 53.208576,
+      "decimalLongitude": 34.383193,
+      "country": "Russian Federation",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5281386594,
+      "decimalLatitude": 55.60487,
+      "decimalLongitude": 13.04009,
+      "country": "Sweden",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5281397718,
+      "decimalLatitude": 55.73837,
+      "decimalLongitude": 13.01488,
+      "country": "Sweden",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5281480948,
+      "decimalLatitude": 56.28556,
+      "decimalLongitude": 16.41037,
+      "country": "Sweden",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5763257030,
+      "decimalLatitude": 55.58193,
+      "decimalLongitude": 13.02256,
+      "country": "Sweden",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6046626113,
+      "decimalLatitude": 53.53251,
+      "decimalLongitude": -2.210146,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6129876463,
+      "decimalLatitude": -29.942761,
+      "decimalLongitude": 29.905851,
+      "country": "South Africa",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6602238130,
+      "decimalLatitude": 32.813387,
+      "decimalLongitude": -17.24908,
+      "country": "Portugal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5281447996,
+      "decimalLatitude": 58.61237,
+      "decimalLongitude": 15.85438,
+      "country": "Sweden",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5283641116,
+      "decimalLatitude": 50.80945,
+      "decimalLongitude": 4.29536,
+      "country": "Belgium",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5291496968,
+      "decimalLatitude": 53.767502,
+      "decimalLongitude": 11.092071,
+      "country": "Germany",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292129043,
+      "decimalLatitude": 52.975566,
+      "decimalLongitude": -6.034961,
+      "country": "Ireland",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292738553,
+      "decimalLatitude": 53.891963,
+      "decimalLongitude": 27.55254,
+      "country": "Belarus",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5293301140,
+      "decimalLatitude": 60.353985,
+      "decimalLongitude": 19.977386,
+      "country": "\u00c5land Islands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5294023006,
+      "decimalLatitude": 46.90873,
+      "decimalLongitude": 9.57183,
+      "country": "Switzerland",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5828813826,
+      "decimalLatitude": 57.184063,
+      "decimalLongitude": 65.506058,
+      "country": "Russian Federation",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6119041971,
+      "decimalLatitude": 47.37625,
+      "decimalLongitude": 8.13379,
+      "country": "Switzerland",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6304896984,
+      "decimalLatitude": 53.640239,
+      "decimalLongitude": -0.662703,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889947618,
+      "decimalLatitude": 44.5907,
+      "decimalLongitude": -123.2675,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6298973814,
+      "decimalLatitude": 53.009475,
+      "decimalLongitude": -1.747044,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 4510104601,
+      "decimalLatitude": 20.377077,
+      "decimalLongitude": -102.926758,
+      "country": "Mexico",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4516743302,
+      "decimalLatitude": -0.759115,
+      "decimalLongitude": -78.632026,
+      "country": "Ecuador",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4522603579,
+      "decimalLatitude": 27.248992,
+      "decimalLongitude": -80.192847,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4524983682,
+      "decimalLatitude": 43.94358,
+      "decimalLongitude": 4.82501,
+      "country": "France",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4846780057,
+      "decimalLatitude": 26.461838,
+      "decimalLongitude": -80.07235,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007736069,
+      "decimalLatitude": 26.517192,
+      "decimalLongitude": -78.674702,
+      "country": "Bahamas",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5231706191,
+      "decimalLatitude": 21.070131,
+      "decimalLongitude": 96.725512,
+      "country": "Myanmar",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4945720440,
+      "decimalLatitude": 49.57219,
+      "decimalLongitude": 17.2751,
+      "country": "Czechia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5016636488,
+      "decimalLatitude": 25.700048,
+      "decimalLongitude": 32.63549,
+      "country": "Egypt",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5018137373,
+      "decimalLatitude": 25.306316,
+      "decimalLongitude": 32.557495,
+      "country": "Egypt",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5020870107,
+      "decimalLatitude": 25.700048,
+      "decimalLongitude": 32.63549,
+      "country": "Egypt",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5020905265,
+      "decimalLatitude": 25.306316,
+      "decimalLongitude": 32.557495,
+      "country": "Egypt",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109949013,
+      "decimalLatitude": 41.606103,
+      "decimalLongitude": -4.793087,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": 685.59
+    },
+    {
+      "key": 4535701797,
+      "decimalLatitude": 10.655803,
+      "decimalLongitude": -61.036347,
+      "country": "Trinidad and Tobago",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4539083725,
+      "decimalLatitude": 56.57738,
+      "decimalLongitude": 16.4239,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4597450273,
+      "decimalLatitude": 23.107747,
+      "decimalLongitude": -102.552784,
+      "country": "Mexico",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4597488694,
+      "decimalLatitude": 18.819189,
+      "decimalLongitude": -98.930914,
+      "country": "Mexico",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4599802351,
+      "decimalLatitude": 26.51723,
+      "decimalLongitude": -78.674708,
+      "country": "Bahamas",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4600160781,
+      "decimalLatitude": 21.754668,
+      "decimalLongitude": 88.221785,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4601378534,
+      "decimalLatitude": 50.73585,
+      "decimalLongitude": 4.26906,
+      "country": "Belgium",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4945500855,
+      "decimalLatitude": 30.057907,
+      "decimalLongitude": -81.900658,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5006856035,
+      "decimalLatitude": 29.788605,
+      "decimalLongitude": -95.33687,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109823553,
+      "decimalLatitude": 42.837872,
+      "decimalLongitude": -74.471003,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": 286.83
+    },
+    {
+      "key": 5109827734,
+      "decimalLatitude": 48.843995,
+      "decimalLongitude": 2.363247,
+      "country": "France",
+      "year": 2024,
+      "elevation": 81.47
+    },
+    {
+      "key": 5109943078,
+      "decimalLatitude": 18.819189,
+      "decimalLongitude": -98.930914,
+      "country": "Mexico",
+      "year": 2024,
+      "elevation": 1319.0
+    },
+    {
+      "key": 5110041472,
+      "decimalLatitude": 42.625961,
+      "decimalLongitude": 2.751912,
+      "country": "France",
+      "year": 2024,
+      "elevation": 169.15
+    },
+    {
+      "key": 4607058921,
+      "decimalLatitude": 30.265422,
+      "decimalLongitude": 71.507133,
+      "country": "Pakistan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4852927911,
+      "decimalLatitude": 46.819828,
+      "decimalLongitude": 12.816678,
+      "country": "Austria",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4853108011,
+      "decimalLatitude": 55.855561,
+      "decimalLongitude": 47.468222,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4901074880,
+      "decimalLatitude": 51.116032,
+      "decimalLongitude": 23.513397,
+      "country": "Poland",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4935842805,
+      "decimalLatitude": 48.737145,
+      "decimalLongitude": -122.495806,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4952474324,
+      "decimalLatitude": 48.386127,
+      "decimalLongitude": 15.630625,
+      "country": "Austria",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4980281319,
+      "decimalLatitude": 29.55795,
+      "decimalLongitude": -94.392022,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4981896178,
+      "decimalLatitude": 28.540327,
+      "decimalLongitude": 77.254379,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4982030705,
+      "decimalLatitude": 21.390948,
+      "decimalLongitude": 71.772311,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5006772134,
+      "decimalLatitude": 29.689261,
+      "decimalLongitude": -95.497878,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007815326,
+      "decimalLatitude": 44.074756,
+      "decimalLongitude": -91.679847,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007904531,
+      "decimalLatitude": 44.929215,
+      "decimalLongitude": -78.447425,
+      "country": "Canada",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109870403,
+      "decimalLatitude": 50.639166,
+      "decimalLongitude": 13.802496,
+      "country": "Czechia",
+      "year": 2024,
+      "elevation": 270.0
+    },
+    {
+      "key": 5109899701,
+      "decimalLatitude": 34.406796,
+      "decimalLongitude": -2.925035,
+      "country": "Morocco",
+      "year": 2024,
+      "elevation": 421.0
+    },
+    {
+      "key": 5109947729,
+      "decimalLatitude": 43.666737,
+      "decimalLongitude": 7.138258,
+      "country": "France",
+      "year": 2024,
+      "elevation": 105.22
+    },
+    {
+      "key": 5109983668,
+      "decimalLatitude": 43.748272,
+      "decimalLongitude": 3.321224,
+      "country": "France",
+      "year": 2024,
+      "elevation": 286.45
+    },
+    {
+      "key": 5110011454,
+      "decimalLatitude": 46.331805,
+      "decimalLongitude": 11.024632,
+      "country": "Italy",
+      "year": 2024,
+      "elevation": 731.5
+    },
+    {
+      "key": 5110058409,
+      "decimalLatitude": 37.772622,
+      "decimalLongitude": -3.899087,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": 729.6
+    },
+    {
+      "key": 5110086426,
+      "decimalLatitude": 43.457886,
+      "decimalLongitude": 5.85977,
+      "country": "France",
+      "year": 2024,
+      "elevation": 309.79
+    },
+    {
+      "key": 5224074124,
+      "decimalLatitude": 47.59438,
+      "decimalLongitude": 8.86796,
+      "country": "Switzerland",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5224765012,
+      "decimalLatitude": 47.59438,
+      "decimalLongitude": 8.86796,
+      "country": "Switzerland",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5224917955,
+      "decimalLatitude": 47.59438,
+      "decimalLongitude": 8.86796,
+      "country": "Switzerland",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6129919897,
+      "decimalLatitude": 51.570227,
+      "decimalLongitude": 36.085268,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4863371492,
+      "decimalLatitude": 33.805691,
+      "decimalLongitude": -84.34225,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4867834858,
+      "decimalLatitude": 54.110797,
+      "decimalLongitude": 37.527463,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4873352094,
+      "decimalLatitude": 51.04358,
+      "decimalLongitude": 3.71869,
+      "country": "Belgium",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4892030834,
+      "decimalLatitude": 44.653355,
+      "decimalLongitude": 37.700742,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4901549553,
+      "decimalLatitude": 39.01976,
+      "decimalLongitude": -122.661973,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4932097353,
+      "decimalLatitude": 51.9,
+      "decimalLongitude": 4.5,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4946060523,
+      "decimalLatitude": 32.47269,
+      "decimalLongitude": 21.365178,
+      "country": "Libya",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4988470178,
+      "decimalLatitude": 39.5,
+      "decimalLongitude": -0.42,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4988481700,
+      "decimalLatitude": 39.43,
+      "decimalLongitude": -0.36,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4988501535,
+      "decimalLatitude": 39.44,
+      "decimalLongitude": -0.34,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4988509859,
+      "decimalLatitude": 39.5,
+      "decimalLongitude": -0.42,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5006696420,
+      "decimalLatitude": 41.563486,
+      "decimalLongitude": 2.193545,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007089346,
+      "decimalLatitude": 34.061386,
+      "decimalLongitude": -81.153205,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007955492,
+      "decimalLatitude": 39.731506,
+      "decimalLongitude": -104.961525,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109976457,
+      "decimalLatitude": 37.015917,
+      "decimalLongitude": -4.578738,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": 574.9
+    },
+    {
+      "key": 5110081024,
+      "decimalLatitude": 44.072255,
+      "decimalLongitude": -123.071974,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": 128.79
+    },
+    {
+      "key": 5110087427,
+      "decimalLatitude": 49.419075,
+      "decimalLongitude": 2.834306,
+      "country": "France",
+      "year": 2024,
+      "elevation": 45.59
+    },
+    {
+      "key": 5110149970,
+      "decimalLatitude": 48.408227,
+      "decimalLongitude": 25.512571,
+      "country": "Ukraine",
+      "year": 2024,
+      "elevation": 215.84
+    },
+    {
+      "key": 5110191965,
+      "decimalLatitude": 43.00358,
+      "decimalLongitude": -74.368385,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": 230.79
+    },
+    {
+      "key": 5110202507,
+      "decimalLatitude": 49.000484,
+      "decimalLongitude": 2.155851,
+      "country": "France",
+      "year": 2024,
+      "elevation": 118.62
+    },
+    {
+      "key": 5224414123,
+      "decimalLatitude": 47.13473,
+      "decimalLongitude": 9.51491,
+      "country": "Liechtenstein",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5225093262,
+      "decimalLatitude": 47.13473,
+      "decimalLongitude": 9.51491,
+      "country": "Liechtenstein",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5292365568,
+      "decimalLatitude": 36.781845,
+      "decimalLongitude": -3.110173,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6401579353,
+      "decimalLatitude": 51.05738,
+      "decimalLongitude": 3.75056,
+      "country": "Belgium",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4903341550,
+      "decimalLatitude": 56.40267,
+      "decimalLongitude": 16.41848,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4903991053,
+      "decimalLatitude": 49.227678,
+      "decimalLongitude": 31.905427,
+      "country": "Ukraine",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4904115201,
+      "decimalLatitude": 54.260329,
+      "decimalLongitude": 46.161759,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4906720605,
+      "decimalLatitude": 51.24007,
+      "decimalLongitude": 4.49027,
+      "country": "Belgium",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4908730636,
+      "decimalLatitude": 48.436472,
+      "decimalLongitude": 16.308267,
+      "country": "Austria",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4927406279,
+      "decimalLatitude": 59.104589,
+      "decimalLongitude": 24.309644,
+      "country": "Estonia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4945717652,
+      "decimalLatitude": 37.757539,
+      "decimalLongitude": -122.509208,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4945782520,
+      "decimalLatitude": 43.533315,
+      "decimalLongitude": -80.227054,
+      "country": "Canada",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4956844019,
+      "decimalLatitude": 46.834148,
+      "decimalLongitude": 10.381295,
+      "country": "Switzerland",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5006754609,
+      "decimalLatitude": 41.192216,
+      "decimalLongitude": -96.126412,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5018733490,
+      "decimalLatitude": 51.00835,
+      "decimalLongitude": 6.597033,
+      "country": "Germany",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110027933,
+      "decimalLatitude": 44.324103,
+      "decimalLongitude": 11.16215,
+      "country": "Italy",
+      "year": 2024,
+      "elevation": 509.19
+    },
+    {
+      "key": 5110091061,
+      "decimalLatitude": 37.99575,
+      "decimalLongitude": -87.537003,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": 87.59
+    },
+    {
+      "key": 5110194314,
+      "decimalLatitude": 34.142872,
+      "decimalLongitude": -118.40907,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": 237.11
+    },
+    {
+      "key": 5110266103,
+      "decimalLatitude": 46.046624,
+      "decimalLongitude": -1.41019,
+      "country": "France",
+      "year": 2024,
+      "elevation": 60.0
+    },
+    {
+      "key": 5110268643,
+      "decimalLatitude": 47.03287,
+      "decimalLongitude": 5.779456,
+      "country": "France",
+      "year": 2024,
+      "elevation": 283.78
+    },
+    {
+      "key": 5110299099,
+      "decimalLatitude": 43.156046,
+      "decimalLongitude": 12.534139,
+      "country": "Italy",
+      "year": 2024,
+      "elevation": 437.0
+    },
+    {
+      "key": 5110316141,
+      "decimalLatitude": 44.139581,
+      "decimalLongitude": 4.487548,
+      "country": "France",
+      "year": 2024,
+      "elevation": 241.74
+    },
+    {
+      "key": 5216779449,
+      "decimalLatitude": 45.786656,
+      "decimalLongitude": 4.928006,
+      "country": "France",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5938277170,
+      "decimalLatitude": 35.2075,
+      "decimalLongitude": -83.456183,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4903871095,
+      "decimalLatitude": 56.167984,
+      "decimalLongitude": 47.3836,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4903951501,
+      "decimalLatitude": 56.171245,
+      "decimalLongitude": 47.425589,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4904224701,
+      "decimalLatitude": 50.058575,
+      "decimalLongitude": 15.470222,
+      "country": "Czechia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4908071494,
+      "decimalLatitude": 48.25673,
+      "decimalLongitude": 16.793176,
+      "country": "Austria",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4909276579,
+      "decimalLatitude": 55.091156,
+      "decimalLongitude": 47.857088,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4911092769,
+      "decimalLatitude": 56.705133,
+      "decimalLongitude": 38.938811,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4921570889,
+      "decimalLatitude": 47.914832,
+      "decimalLongitude": 106.993822,
+      "country": "Mongolia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4921583562,
+      "decimalLatitude": -0.895845,
+      "decimalLongitude": -89.608672,
+      "country": "Ecuador",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4946067531,
+      "decimalLatitude": 39.766341,
+      "decimalLongitude": -86.176347,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4995649100,
+      "decimalLatitude": 46.532015,
+      "decimalLongitude": 6.682589,
+      "country": "Switzerland",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007881382,
+      "decimalLatitude": 53.213495,
+      "decimalLongitude": 34.465911,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5015706800,
+      "decimalLatitude": 49.889149,
+      "decimalLongitude": 8.5177,
+      "country": "Germany",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5019125293,
+      "decimalLatitude": 51.00835,
+      "decimalLongitude": 6.597033,
+      "country": "Germany",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5019248533,
+      "decimalLatitude": 49.93676,
+      "decimalLongitude": 8.437078,
+      "country": "Germany",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5022556400,
+      "decimalLatitude": 50.704868,
+      "decimalLongitude": 6.627252,
+      "country": "Germany",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110074253,
+      "decimalLatitude": 48.570265,
+      "decimalLongitude": -1.766969,
+      "country": "France",
+      "year": 2024,
+      "elevation": 21.83
+    },
+    {
+      "key": 5110119537,
+      "decimalLatitude": 49.230347,
+      "decimalLongitude": -1.557736,
+      "country": "France",
+      "year": 2024,
+      "elevation": 79.05
+    },
+    {
+      "key": 5110140097,
+      "decimalLatitude": 47.294595,
+      "decimalLongitude": -3.082224,
+      "country": "France",
+      "year": 2024,
+      "elevation": 53.15
+    },
+    {
+      "key": 5110324300,
+      "decimalLatitude": 37.771963,
+      "decimalLongitude": -121.990082,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": 171.84
+    },
+    {
+      "key": 5110370987,
+      "decimalLatitude": 42.771683,
+      "decimalLongitude": -3.313608,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": 584.94
+    },
+    {
+      "key": 5230387501,
+      "decimalLatitude": 57.549269,
+      "decimalLongitude": 41.078564,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4920510591,
+      "decimalLatitude": 56.52184,
+      "decimalLongitude": 16.58496,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4921459794,
+      "decimalLatitude": 47.790695,
+      "decimalLongitude": 106.696867,
+      "country": "Mongolia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4921472844,
+      "decimalLatitude": 47.790486,
+      "decimalLongitude": 106.697044,
+      "country": "Mongolia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4926377980,
+      "decimalLatitude": 55.246496,
+      "decimalLongitude": 47.662868,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4929484293,
+      "decimalLatitude": 55.60499,
+      "decimalLongitude": 13.04306,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4930925178,
+      "decimalLatitude": 50.95,
+      "decimalLongitude": 5.75,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4939313632,
+      "decimalLatitude": 55.60456,
+      "decimalLongitude": 13.04386,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976487125,
+      "decimalLatitude": 48.160939,
+      "decimalLongitude": 25.7207,
+      "country": "Ukraine",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4994181529,
+      "decimalLatitude": 48.746807,
+      "decimalLongitude": -122.715161,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5005992470,
+      "decimalLatitude": 52.3,
+      "decimalLongitude": 5.5,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110433262,
+      "decimalLatitude": 42.411756,
+      "decimalLongitude": -8.02604,
+      "country": "Spain",
+      "year": 2024,
+      "elevation": 439.2
+    },
+    {
+      "key": 4946182732,
+      "decimalLatitude": 60.052074,
+      "decimalLongitude": 30.190974,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4946184498,
+      "decimalLatitude": 60.052014,
+      "decimalLongitude": 30.19097,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4947208252,
+      "decimalLatitude": 63.225922,
+      "decimalLongitude": 10.040209,
+      "country": "Norway",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4947911161,
+      "decimalLatitude": 57.47828,
+      "decimalLongitude": 15.85019,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4947935783,
+      "decimalLatitude": 56.63088,
+      "decimalLongitude": 12.9546,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4950018231,
+      "decimalLatitude": 44.46,
+      "decimalLongitude": 15.6,
+      "country": "Croatia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4955022919,
+      "decimalLatitude": 55.72062,
+      "decimalLongitude": 13.24092,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6351771373,
+      "decimalLatitude": 4.644303,
+      "decimalLongitude": -74.106308,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 2551.0
+    },
+    {
+      "key": 6351771582,
+      "decimalLatitude": 4.644303,
+      "decimalLongitude": -74.106308,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 2551.0
+    },
+    {
+      "key": 6351775616,
+      "decimalLatitude": 4.644303,
+      "decimalLongitude": -74.106308,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 2551.0
+    },
+    {
+      "key": 4954423815,
+      "decimalLatitude": 38.989803,
+      "decimalLongitude": -77.007141,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976797001,
+      "decimalLatitude": 56.66425,
+      "decimalLongitude": 12.90531,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4977987394,
+      "decimalLatitude": 56.66426,
+      "decimalLongitude": 12.9053,
+      "country": "Sweden",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007086707,
+      "decimalLatitude": 38.427762,
+      "decimalLongitude": -78.859628,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007104571,
+      "decimalLatitude": 20.635425,
+      "decimalLongitude": -103.348538,
+      "country": "Mexico",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007232137,
+      "decimalLatitude": 41.455311,
+      "decimalLongitude": -106.824965,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007850898,
+      "decimalLatitude": 37.931288,
+      "decimalLongitude": -122.364986,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008008218,
+      "decimalLatitude": 13.126228,
+      "decimalLongitude": -61.187298,
+      "country": "Saint Vincent and the Grenadines",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5167365717,
+      "decimalLatitude": 33.712192,
+      "decimalLongitude": -117.75634,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5909375448,
+      "decimalLatitude": 20.038708,
+      "decimalLongitude": -103.829895,
+      "country": "Mexico",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6351772558,
+      "decimalLatitude": 4.758153,
+      "decimalLongitude": -74.082419,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 2551.5
+    },
+    {
+      "key": 6351774604,
+      "decimalLatitude": 4.758153,
+      "decimalLongitude": -74.082419,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 2551.5
+    },
+    {
+      "key": 6351776412,
+      "decimalLatitude": 4.758153,
+      "decimalLongitude": -74.082419,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 2551.5
+    },
+    {
+      "key": 5007117650,
+      "decimalLatitude": 8.671378,
+      "decimalLongitude": -82.628743,
+      "country": "Panama",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007255769,
+      "decimalLatitude": -25.359722,
+      "decimalLongitude": -49.174942,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007952635,
+      "decimalLatitude": -35.195766,
+      "decimalLongitude": 173.903048,
+      "country": "New Zealand",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008071649,
+      "decimalLatitude": 20.66342,
+      "decimalLongitude": -105.239498,
+      "country": "Mexico",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008291521,
+      "decimalLatitude": 9.919599,
+      "decimalLongitude": -84.099357,
+      "country": "Costa Rica",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5063972856,
+      "decimalLatitude": -36.379273,
+      "decimalLongitude": -72.498852,
+      "country": "Chile",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5064005041,
+      "decimalLatitude": -36.371984,
+      "decimalLongitude": -72.48803,
+      "country": "Chile",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110343383,
+      "decimalLatitude": 43.531765,
+      "decimalLongitude": 6.357061,
+      "country": "France",
+      "year": 2024,
+      "elevation": 352.63
+    },
+    {
+      "key": 5110513714,
+      "decimalLatitude": 37.314094,
+      "decimalLongitude": -122.061919,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": 70.15
+    },
+    {
+      "key": 5838196800,
+      "decimalLatitude": -0.180333,
+      "decimalLongitude": -78.540431,
+      "country": "Ecuador",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110344110,
+      "decimalLatitude": 48.843463,
+      "decimalLongitude": 2.35841,
+      "country": "France",
+      "year": 2024,
+      "elevation": 82.61
+    },
+    {
+      "key": 5110498139,
+      "decimalLatitude": 43.358326,
+      "decimalLongitude": 5.106206,
+      "country": "France",
+      "year": 2024,
+      "elevation": 39.98
+    },
+    {
+      "key": 4015800487,
+      "decimalLatitude": 51.21375,
+      "decimalLongitude": 4.47447,
+      "country": "Belgium",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5109463426,
+      "decimalLatitude": 45.917101,
+      "decimalLongitude": 4.542459,
+      "country": "France",
+      "year": 2023,
+      "elevation": 369.28
+    },
+    {
+      "key": 4058280766,
+      "decimalLatitude": 52.35,
+      "decimalLongitude": 6.65,
+      "country": "Netherlands",
+      "year": 2023,
+      "elevation": null
+    }
+  ]
+}

@@ -1,0 +1,2410 @@
+{
+  "crop_id": "saccharum_officinarum",
+  "crop_name": "sugarcane",
+  "scientific_name": "Saccharum officinarum",
+  "total_count": 1078,
+  "fetched_count": 300,
+  "fetched_at": "2026-10-28T09:09:34.430571+00:00",
+  "occurrences": [
+    {
+      "key": 6131014326,
+      "decimalLatitude": 27.431095,
+      "decimalLongitude": 85.911767,
+      "country": "Nepal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133060823,
+      "decimalLatitude": -18.965792,
+      "decimalLongitude": 48.64935,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147577625,
+      "decimalLatitude": 18.233063,
+      "decimalLongitude": -66.035386,
+      "country": "Puerto Rico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163249689,
+      "decimalLatitude": -41.376769,
+      "decimalLongitude": 172.076765,
+      "country": "New Zealand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352712578,
+      "decimalLatitude": 24.749482,
+      "decimalLongitude": 94.041292,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498576397,
+      "decimalLatitude": -23.453366,
+      "decimalLongitude": -46.406485,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499117744,
+      "decimalLatitude": 28.452007,
+      "decimalLongitude": -16.257551,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499500335,
+      "decimalLatitude": -2.103442,
+      "decimalLongitude": -79.99194,
+      "country": "Ecuador",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499868729,
+      "decimalLatitude": 15.864113,
+      "decimalLongitude": 100.051967,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499879679,
+      "decimalLatitude": 3.096387,
+      "decimalLongitude": 103.086238,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6500452444,
+      "decimalLatitude": 11.515131,
+      "decimalLongitude": 107.763477,
+      "country": "Viet Nam",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133460557,
+      "decimalLatitude": 11.576914,
+      "decimalLongitude": 77.950981,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6137484361,
+      "decimalLatitude": 14.664052,
+      "decimalLongitude": 99.371628,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147588634,
+      "decimalLatitude": -7.745988,
+      "decimalLongitude": 112.664746,
+      "country": "Indonesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6158749292,
+      "decimalLatitude": 14.41638,
+      "decimalLongitude": 99.507881,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161817762,
+      "decimalLatitude": 14.089167,
+      "decimalLongitude": 99.320938,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161819848,
+      "decimalLatitude": 13.850835,
+      "decimalLongitude": 99.531273,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6170939579,
+      "decimalLatitude": 17.722579,
+      "decimalLongitude": -64.88553,
+      "country": "Virgin Islands (U.S.)",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6170984817,
+      "decimalLatitude": 8.134578,
+      "decimalLongitude": -76.666077,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6171366638,
+      "decimalLatitude": 7.673822,
+      "decimalLongitude": -76.689217,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6178518483,
+      "decimalLatitude": 20.01134,
+      "decimalLongitude": -97.520487,
+      "country": "Mexico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352312683,
+      "decimalLatitude": 5.96284,
+      "decimalLongitude": -75.102098,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352954356,
+      "decimalLatitude": 7.885882,
+      "decimalLongitude": -76.557744,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6400740543,
+      "decimalLatitude": -6.657708,
+      "decimalLongitude": 108.540483,
+      "country": "Indonesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498462326,
+      "decimalLatitude": 7.839428,
+      "decimalLongitude": -76.735329,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498994781,
+      "decimalLatitude": -20.308617,
+      "decimalLongitude": -40.319023,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499368445,
+      "decimalLatitude": 5.79801,
+      "decimalLongitude": -74.84827,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499999737,
+      "decimalLatitude": 8.476542,
+      "decimalLongitude": -76.770516,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6178955181,
+      "decimalLatitude": -2.339702,
+      "decimalLongitude": -79.383234,
+      "country": "Ecuador",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6184914811,
+      "decimalLatitude": -6.92632,
+      "decimalLongitude": 108.717726,
+      "country": "Indonesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185312651,
+      "decimalLatitude": -6.35648,
+      "decimalLongitude": 108.004425,
+      "country": "Indonesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185833901,
+      "decimalLatitude": -22.862446,
+      "decimalLongitude": 45.783945,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6186092733,
+      "decimalLatitude": -35.714708,
+      "decimalLongitude": 173.954697,
+      "country": "New Zealand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6186154818,
+      "decimalLatitude": -22.674038,
+      "decimalLongitude": -64.496882,
+      "country": "Argentina",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352263490,
+      "decimalLatitude": -8.309549,
+      "decimalLongitude": 113.46359,
+      "country": "Indonesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352391732,
+      "decimalLatitude": 9.675901,
+      "decimalLongitude": -84.017385,
+      "country": "Costa Rica",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352551660,
+      "decimalLatitude": -6.633355,
+      "decimalLongitude": -76.205655,
+      "country": "Peru",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352556795,
+      "decimalLatitude": 24.693128,
+      "decimalLongitude": 120.892272,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352635706,
+      "decimalLatitude": 10.464797,
+      "decimalLongitude": -84.660238,
+      "country": "Costa Rica",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353156076,
+      "decimalLatitude": 20.804862,
+      "decimalLongitude": -87.475992,
+      "country": "Mexico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353205894,
+      "decimalLatitude": 8.427174,
+      "decimalLongitude": -76.787678,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353346533,
+      "decimalLatitude": -8.171949,
+      "decimalLongitude": 112.704898,
+      "country": "Indonesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498192822,
+      "decimalLatitude": 6.124623,
+      "decimalLongitude": -75.133007,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499598446,
+      "decimalLatitude": 7.996614,
+      "decimalLongitude": -76.624141,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6234411701,
+      "decimalLatitude": 32.303578,
+      "decimalLongitude": -64.758217,
+      "country": "Bermuda",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6234809453,
+      "decimalLatitude": 18.371074,
+      "decimalLongitude": -66.144635,
+      "country": "Puerto Rico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6234994368,
+      "decimalLatitude": 4.927243,
+      "decimalLongitude": -52.31711,
+      "country": "French Guiana",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6236169487,
+      "decimalLatitude": 4.900896,
+      "decimalLongitude": -52.271037,
+      "country": "French Guiana",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6236207948,
+      "decimalLatitude": 4.84549,
+      "decimalLongitude": -52.325207,
+      "country": "French Guiana",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6251564713,
+      "decimalLatitude": -14.845139,
+      "decimalLongitude": -64.913724,
+      "country": "Bolivia (Plurinational State of)",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6252361819,
+      "decimalLatitude": 4.31356,
+      "decimalLongitude": -52.130461,
+      "country": "French Guiana",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6253375945,
+      "decimalLatitude": 4.860476,
+      "decimalLongitude": -52.269587,
+      "country": "French Guiana",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6273830973,
+      "decimalLatitude": 3.28399,
+      "decimalLongitude": -54.118315,
+      "country": "Suriname",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6333966510,
+      "decimalLatitude": 18.311244,
+      "decimalLongitude": -65.704764,
+      "country": "Puerto Rico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352383061,
+      "decimalLatitude": 23.032078,
+      "decimalLongitude": 79.815667,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352425991,
+      "decimalLatitude": -25.427684,
+      "decimalLongitude": -49.17201,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352531709,
+      "decimalLatitude": -31.075842,
+      "decimalLongitude": 30.165244,
+      "country": "South Africa",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352810529,
+      "decimalLatitude": 1.654695,
+      "decimalLongitude": -76.109139,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352861414,
+      "decimalLatitude": 7.374307,
+      "decimalLongitude": 125.817088,
+      "country": "Philippines",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352915093,
+      "decimalLatitude": 3.47471,
+      "decimalLongitude": 102.618647,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353066919,
+      "decimalLatitude": 7.936038,
+      "decimalLongitude": -76.720402,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353121024,
+      "decimalLatitude": -35.260103,
+      "decimalLongitude": 174.121619,
+      "country": "New Zealand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353147699,
+      "decimalLatitude": 6.405282,
+      "decimalLongitude": -75.983548,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353151964,
+      "decimalLatitude": 16.622824,
+      "decimalLongitude": 80.945655,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353239622,
+      "decimalLatitude": 16.747891,
+      "decimalLongitude": 81.114608,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353273426,
+      "decimalLatitude": 16.700668,
+      "decimalLongitude": 81.056322,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498285918,
+      "decimalLatitude": -21.837182,
+      "decimalLongitude": -46.559701,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498464614,
+      "decimalLatitude": 2.389066,
+      "decimalLongitude": -75.532617,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499428686,
+      "decimalLatitude": 3.589281,
+      "decimalLongitude": 102.777911,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6500258620,
+      "decimalLatitude": -14.805952,
+      "decimalLongitude": -64.88722,
+      "country": "Bolivia (Plurinational State of)",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6251504797,
+      "decimalLatitude": 8.11985,
+      "decimalLongitude": 98.623572,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6251830187,
+      "decimalLatitude": -22.69838,
+      "decimalLongitude": -64.559098,
+      "country": "Argentina",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6252308101,
+      "decimalLatitude": 5.535452,
+      "decimalLongitude": 73.505009,
+      "country": "Maldives",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6252678138,
+      "decimalLatitude": 1.81815,
+      "decimalLongitude": 73.403129,
+      "country": "Maldives",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6253332529,
+      "decimalLatitude": 26.050121,
+      "decimalLongitude": 76.157149,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6273664857,
+      "decimalLatitude": 8.11975,
+      "decimalLongitude": 98.62352,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6333946749,
+      "decimalLatitude": 1.818021,
+      "decimalLongitude": 73.403223,
+      "country": "Maldives",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6333997909,
+      "decimalLatitude": -0.696111,
+      "decimalLongitude": -90.324092,
+      "country": "Ecuador",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6334098034,
+      "decimalLatitude": 5.535524,
+      "decimalLongitude": 73.505121,
+      "country": "Maldives",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6334244882,
+      "decimalLatitude": -6.243909,
+      "decimalLongitude": 39.378985,
+      "country": "Tanzania, United Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6334653907,
+      "decimalLatitude": 5.535577,
+      "decimalLongitude": 73.505005,
+      "country": "Maldives",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6334740571,
+      "decimalLatitude": 1.818218,
+      "decimalLongitude": 73.403146,
+      "country": "Maldives",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6334930536,
+      "decimalLatitude": 1.81797,
+      "decimalLongitude": 73.403192,
+      "country": "Maldives",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352568813,
+      "decimalLatitude": -0.414486,
+      "decimalLongitude": -78.799326,
+      "country": "Ecuador",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352609609,
+      "decimalLatitude": 18.058386,
+      "decimalLongitude": -65.901596,
+      "country": "Puerto Rico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352699721,
+      "decimalLatitude": -6.304802,
+      "decimalLongitude": -79.077745,
+      "country": "Peru",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6352780848,
+      "decimalLatitude": 18.059205,
+      "decimalLongitude": -65.901354,
+      "country": "Puerto Rico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353003920,
+      "decimalLatitude": 8.119751,
+      "decimalLongitude": 98.623463,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353025039,
+      "decimalLatitude": 8.061464,
+      "decimalLongitude": -76.698002,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353045347,
+      "decimalLatitude": 3.657411,
+      "decimalLongitude": 102.691071,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353051610,
+      "decimalLatitude": 18.059522,
+      "decimalLongitude": -65.901417,
+      "country": "Puerto Rico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353253354,
+      "decimalLatitude": 18.083984,
+      "decimalLongitude": -66.654151,
+      "country": "Puerto Rico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353256884,
+      "decimalLatitude": -21.6506,
+      "decimalLongitude": -45.156678,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353267955,
+      "decimalLatitude": 18.084022,
+      "decimalLongitude": -66.654181,
+      "country": "Puerto Rico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6353338445,
+      "decimalLatitude": 4.587799,
+      "decimalLongitude": 9.650825,
+      "country": "Cameroon",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399929530,
+      "decimalLatitude": 10.463817,
+      "decimalLongitude": -84.659637,
+      "country": "Costa Rica",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498314062,
+      "decimalLatitude": 6.395918,
+      "decimalLongitude": 1.861522,
+      "country": "Benin",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498796919,
+      "decimalLatitude": 17.140379,
+      "decimalLongitude": -62.622963,
+      "country": "Saint Kitts and Nevis",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499819321,
+      "decimalLatitude": -21.650715,
+      "decimalLongitude": -45.156448,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399827676,
+      "decimalLatitude": 2.900428,
+      "decimalLongitude": -76.44062,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6423133734,
+      "decimalLatitude": 22.311203,
+      "decimalLongitude": 88.056326,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498798911,
+      "decimalLatitude": 24.502659,
+      "decimalLongitude": 118.440051,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499624458,
+      "decimalLatitude": -22.362437,
+      "decimalLongitude": -41.716242,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6518745528,
+      "decimalLatitude": -0.904646,
+      "decimalLongitude": -89.43941,
+      "country": "Ecuador",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441051730,
+      "decimalLatitude": -13.04255,
+      "decimalLongitude": 49.017588,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441518126,
+      "decimalLatitude": 18.8422,
+      "decimalLongitude": 98.90542,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6452621615,
+      "decimalLatitude": 14.981955,
+      "decimalLongitude": -87.286255,
+      "country": "Honduras",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6469655507,
+      "decimalLatitude": -3.905311,
+      "decimalLongitude": -40.801411,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6469994312,
+      "decimalLatitude": 5.581479,
+      "decimalLongitude": -75.845446,
+      "country": "Colombia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498792901,
+      "decimalLatitude": 3.319933,
+      "decimalLongitude": 101.577334,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499741829,
+      "decimalLatitude": -7.837242,
+      "decimalLongitude": 110.641791,
+      "country": "Indonesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499757310,
+      "decimalLatitude": 15.604964,
+      "decimalLongitude": 103.337817,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6500123304,
+      "decimalLatitude": 18.697767,
+      "decimalLongitude": 98.594795,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498310015,
+      "decimalLatitude": 26.457156,
+      "decimalLongitude": -80.15516,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498323461,
+      "decimalLatitude": 5.609231,
+      "decimalLongitude": -53.662336,
+      "country": "French Guiana",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498492651,
+      "decimalLatitude": 9.590355,
+      "decimalLongitude": -82.994753,
+      "country": "Costa Rica",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6498855325,
+      "decimalLatitude": -27.398083,
+      "decimalLongitude": 152.869141,
+      "country": "Australia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499059862,
+      "decimalLatitude": 9.61032,
+      "decimalLongitude": -83.001197,
+      "country": "Costa Rica",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499483715,
+      "decimalLatitude": -18.885127,
+      "decimalLongitude": 48.020748,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499529873,
+      "decimalLatitude": 9.976408,
+      "decimalLongitude": -83.847228,
+      "country": "Costa Rica",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499650658,
+      "decimalLatitude": 22.525983,
+      "decimalLongitude": 114.260289,
+      "country": "Hong Kong",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499957625,
+      "decimalLatitude": 9.638745,
+      "decimalLongitude": -82.768959,
+      "country": "Costa Rica",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6500211401,
+      "decimalLatitude": 9.61038,
+      "decimalLongitude": -83.001189,
+      "country": "Costa Rica",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6520722633,
+      "decimalLatitude": 25.070278,
+      "decimalLongitude": 71.629686,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6552459767,
+      "decimalLatitude": 6.898088,
+      "decimalLongitude": 79.929105,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6567319863,
+      "decimalLatitude": -17.760008,
+      "decimalLongitude": -149.388601,
+      "country": "French Polynesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6567459050,
+      "decimalLatitude": 24.89349,
+      "decimalLongitude": 125.271773,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6519413786,
+      "decimalLatitude": 1.296814,
+      "decimalLongitude": 103.771653,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6550979961,
+      "decimalLatitude": 19.818905,
+      "decimalLongitude": -104.219667,
+      "country": "Mexico",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566397482,
+      "decimalLatitude": -17.489546,
+      "decimalLongitude": -149.829048,
+      "country": "French Polynesia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5063023133,
+      "decimalLatitude": 32.74237,
+      "decimalLongitude": -16.771917,
+      "country": "Portugal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5063234860,
+      "decimalLatitude": -1.054091,
+      "decimalLongitude": -80.452644,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5063281895,
+      "decimalLatitude": 11.861949,
+      "decimalLongitude": 79.792115,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5063484335,
+      "decimalLatitude": 16.390762,
+      "decimalLongitude": 100.038108,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110328026,
+      "decimalLatitude": 11.990208,
+      "decimalLongitude": 92.954943,
+      "country": "India",
+      "year": 2025,
+      "elevation": 69.02
+    },
+    {
+      "key": 5110509622,
+      "decimalLatitude": 13.068675,
+      "decimalLongitude": 100.96136,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": -1.0
+    },
+    {
+      "key": 5110531618,
+      "decimalLatitude": -8.174885,
+      "decimalLongitude": 112.984417,
+      "country": "Indonesia",
+      "year": 2025,
+      "elevation": 878.0
+    },
+    {
+      "key": 5187673456,
+      "decimalLatitude": -13.904443,
+      "decimalLongitude": 167.452307,
+      "country": "Vanuatu",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844341435,
+      "decimalLatitude": -13.904092,
+      "decimalLongitude": 167.452189,
+      "country": "Vanuatu",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5932808362,
+      "decimalLatitude": -4.213811,
+      "decimalLongitude": 152.186566,
+      "country": "Papua New Guinea",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5935271329,
+      "decimalLatitude": -4.221446,
+      "decimalLongitude": 152.18851,
+      "country": "Papua New Guinea",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5936271817,
+      "decimalLatitude": -4.191298,
+      "decimalLongitude": 152.163453,
+      "country": "Papua New Guinea",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499509597,
+      "decimalLatitude": 12.310625,
+      "decimalLongitude": 77.990287,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6500345179,
+      "decimalLatitude": 12.946858,
+      "decimalLongitude": 80.139756,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6552817524,
+      "decimalLatitude": 14.33238,
+      "decimalLongitude": -87.479758,
+      "country": "Honduras",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5064024107,
+      "decimalLatitude": -1.56669,
+      "decimalLongitude": -77.836419,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5070025561,
+      "decimalLatitude": -2.295593,
+      "decimalLongitude": -78.116268,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5076864882,
+      "decimalLatitude": -17.489509,
+      "decimalLongitude": -149.82921,
+      "country": "French Polynesia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5076881970,
+      "decimalLatitude": -2.344856,
+      "decimalLongitude": -78.143842,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5087201341,
+      "decimalLatitude": 18.372933,
+      "decimalLongitude": -77.0914,
+      "country": "Jamaica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110464063,
+      "decimalLatitude": 16.477059,
+      "decimalLongitude": -61.454663,
+      "country": "Guadeloupe",
+      "year": 2025,
+      "elevation": -12.6
+    },
+    {
+      "key": 5110469639,
+      "decimalLatitude": -15.934911,
+      "decimalLongitude": -49.665818,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": 721.32
+    },
+    {
+      "key": 5110517882,
+      "decimalLatitude": 30.327029,
+      "decimalLongitude": -87.404748,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": 21.0
+    },
+    {
+      "key": 5135617670,
+      "decimalLatitude": 28.807659,
+      "decimalLongitude": -17.761438,
+      "country": "Spain",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5167404827,
+      "decimalLatitude": 4.825411,
+      "decimalLongitude": -52.335659,
+      "country": "French Guiana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897313188,
+      "decimalLatitude": 24.863216,
+      "decimalLongitude": 75.895027,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498610697,
+      "decimalLatitude": 4.623665,
+      "decimalLongitude": -74.429876,
+      "country": "Colombia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6602886353,
+      "decimalLatitude": 32.691143,
+      "decimalLongitude": -17.090054,
+      "country": "Portugal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6603994883,
+      "decimalLatitude": 32.691183,
+      "decimalLongitude": -17.090037,
+      "country": "Portugal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5104562173,
+      "decimalLatitude": 16.622669,
+      "decimalLongitude": -24.333794,
+      "country": "Cabo Verde",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5108322088,
+      "decimalLatitude": -19.825335,
+      "decimalLongitude": -44.004523,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5188292529,
+      "decimalLatitude": -16.643955,
+      "decimalLongitude": 168.23188,
+      "country": "Vanuatu",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5108562499,
+      "decimalLatitude": 32.662104,
+      "decimalLongitude": -16.896164,
+      "country": "Portugal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110365423,
+      "decimalLatitude": -8.163394,
+      "decimalLongitude": 114.587239,
+      "country": "Indonesia",
+      "year": 2025,
+      "elevation": 124.0
+    },
+    {
+      "key": 5133980907,
+      "decimalLatitude": 18.369341,
+      "decimalLongitude": -66.143066,
+      "country": "Puerto Rico",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5134071236,
+      "decimalLatitude": 4.838812,
+      "decimalLongitude": 100.746556,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5140076882,
+      "decimalLatitude": -3.943869,
+      "decimalLongitude": -38.382248,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5140798191,
+      "decimalLatitude": 22.51682,
+      "decimalLongitude": 88.1939,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5140993590,
+      "decimalLatitude": 4.888034,
+      "decimalLongitude": -52.262427,
+      "country": "French Guiana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5141002394,
+      "decimalLatitude": 4.947981,
+      "decimalLongitude": -52.30194,
+      "country": "French Guiana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5153503389,
+      "decimalLatitude": 4.94642,
+      "decimalLongitude": -52.303212,
+      "country": "French Guiana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5153877213,
+      "decimalLatitude": 4.906748,
+      "decimalLongitude": -52.29779,
+      "country": "French Guiana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5153982157,
+      "decimalLatitude": -29.931702,
+      "decimalLongitude": 30.495041,
+      "country": "South Africa",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5154495335,
+      "decimalLatitude": -29.629788,
+      "decimalLongitude": 30.959847,
+      "country": "South Africa",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5154909540,
+      "decimalLatitude": 4.57065,
+      "decimalLongitude": -52.467884,
+      "country": "French Guiana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6450505469,
+      "decimalLatitude": 9.480031,
+      "decimalLongitude": -75.368513,
+      "country": "Colombia",
+      "year": 2025,
+      "elevation": 128.0
+    },
+    {
+      "key": 6498405414,
+      "decimalLatitude": -5.856702,
+      "decimalLongitude": -76.140857,
+      "country": "Peru",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498591906,
+      "decimalLatitude": 16.781581,
+      "decimalLongitude": 81.235869,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498638328,
+      "decimalLatitude": -1.297455,
+      "decimalLongitude": 36.806452,
+      "country": "Kenya",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498719407,
+      "decimalLatitude": 6.429098,
+      "decimalLongitude": -75.967394,
+      "country": "Colombia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498777652,
+      "decimalLatitude": 11.068354,
+      "decimalLongitude": 76.930038,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498892582,
+      "decimalLatitude": -19.872805,
+      "decimalLongitude": -43.973651,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499232198,
+      "decimalLatitude": 22.200778,
+      "decimalLongitude": 113.540327,
+      "country": "Macao",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499281448,
+      "decimalLatitude": 16.788088,
+      "decimalLongitude": 81.12326,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499576844,
+      "decimalLatitude": 15.40308,
+      "decimalLongitude": 74.751034,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499611254,
+      "decimalLatitude": -17.854007,
+      "decimalLongitude": 36.90917,
+      "country": "Mozambique",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499625884,
+      "decimalLatitude": 3.107425,
+      "decimalLongitude": 101.406767,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6500041147,
+      "decimalLatitude": 16.62569,
+      "decimalLongitude": 81.071409,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6500221430,
+      "decimalLatitude": -17.87627,
+      "decimalLongitude": 36.894693,
+      "country": "Mozambique",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6500451679,
+      "decimalLatitude": 4.659,
+      "decimalLongitude": -52.415462,
+      "country": "French Guiana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5153402635,
+      "decimalLatitude": 30.340398,
+      "decimalLongitude": 78.085913,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5153861870,
+      "decimalLatitude": 30.345105,
+      "decimalLongitude": 78.029175,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5154802251,
+      "decimalLatitude": 30.356551,
+      "decimalLongitude": 78.042438,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5166812108,
+      "decimalLatitude": 8.11977,
+      "decimalLongitude": 98.62362,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5167495265,
+      "decimalLatitude": 8.119651,
+      "decimalLongitude": 98.623462,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5168318551,
+      "decimalLatitude": 8.119689,
+      "decimalLongitude": 98.623452,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5176403503,
+      "decimalLatitude": -0.90465,
+      "decimalLongitude": -89.439489,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5176701207,
+      "decimalLatitude": 18.059053,
+      "decimalLongitude": -65.901305,
+      "country": "Puerto Rico",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5176833813,
+      "decimalLatitude": 18.058876,
+      "decimalLongitude": -65.901311,
+      "country": "Puerto Rico",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5187580511,
+      "decimalLatitude": -3.827172,
+      "decimalLongitude": -38.641815,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5188146573,
+      "decimalLatitude": 13.340571,
+      "decimalLongitude": 103.826798,
+      "country": "Cambodia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5206020508,
+      "decimalLatitude": 12.357986,
+      "decimalLongitude": 109.277505,
+      "country": "Viet Nam",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5230985684,
+      "decimalLatitude": 8.11985,
+      "decimalLongitude": 98.62354,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838242523,
+      "decimalLatitude": 5.535787,
+      "decimalLongitude": 73.505214,
+      "country": "Maldives",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6147277551,
+      "decimalLatitude": 5.535614,
+      "decimalLongitude": 73.505256,
+      "country": "Maldives",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6349258328,
+      "decimalLatitude": -33.647649,
+      "decimalLongitude": 151.02986,
+      "country": "Australia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498768147,
+      "decimalLatitude": -0.44385,
+      "decimalLongitude": -76.996625,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498832317,
+      "decimalLatitude": -27.479289,
+      "decimalLongitude": 32.593367,
+      "country": "South Africa",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498869798,
+      "decimalLatitude": 8.700399,
+      "decimalLongitude": 106.631903,
+      "country": "Viet Nam",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499132419,
+      "decimalLatitude": 8.119639,
+      "decimalLongitude": 98.623417,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499592043,
+      "decimalLatitude": 8.119864,
+      "decimalLongitude": 98.623603,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499671344,
+      "decimalLatitude": 8.119678,
+      "decimalLongitude": 98.623403,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499907409,
+      "decimalLatitude": 8.119771,
+      "decimalLongitude": 98.62355,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6500036498,
+      "decimalLatitude": 8.119844,
+      "decimalLongitude": 98.623597,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5187905927,
+      "decimalLatitude": -0.90385,
+      "decimalLongitude": -89.440688,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5205864796,
+      "decimalLatitude": 15.236352,
+      "decimalLongitude": -61.361829,
+      "country": "Dominica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5217262861,
+      "decimalLatitude": 3.995235,
+      "decimalLongitude": -58.775886,
+      "country": "Guyana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897322476,
+      "decimalLatitude": -28.230498,
+      "decimalLongitude": 31.941456,
+      "country": "South Africa",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6131577181,
+      "decimalLatitude": 15.237023,
+      "decimalLongitude": -61.359885,
+      "country": "Dominica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498696422,
+      "decimalLatitude": 9.921558,
+      "decimalLongitude": -84.127075,
+      "country": "Costa Rica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6500278398,
+      "decimalLatitude": -22.665169,
+      "decimalLongitude": -44.055829,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5216317410,
+      "decimalLatitude": -3.323012,
+      "decimalLongitude": -79.798618,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5230049530,
+      "decimalLatitude": -9.583416,
+      "decimalLongitude": -35.797899,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5230556155,
+      "decimalLatitude": 32.684794,
+      "decimalLongitude": -17.080528,
+      "country": "Portugal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5230720996,
+      "decimalLatitude": -7.534216,
+      "decimalLongitude": 110.750507,
+      "country": "Indonesia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5231620194,
+      "decimalLatitude": 3.640206,
+      "decimalLongitude": -76.331141,
+      "country": "Colombia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5231783870,
+      "decimalLatitude": 0.417737,
+      "decimalLongitude": -78.124265,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5238074612,
+      "decimalLatitude": 18.458003,
+      "decimalLongitude": -66.140664,
+      "country": "Puerto Rico",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5291762241,
+      "decimalLatitude": 10.036265,
+      "decimalLongitude": -85.738942,
+      "country": "Costa Rica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5291905213,
+      "decimalLatitude": 10.032856,
+      "decimalLongitude": -85.739944,
+      "country": "Costa Rica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292909252,
+      "decimalLatitude": 10.032869,
+      "decimalLongitude": -85.740491,
+      "country": "Costa Rica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889361000,
+      "decimalLatitude": -16.738574,
+      "decimalLongitude": 168.246384,
+      "country": "Vanuatu",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498126367,
+      "decimalLatitude": 13.669847,
+      "decimalLongitude": -89.245796,
+      "country": "El Salvador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498696960,
+      "decimalLatitude": -3.471315,
+      "decimalLongitude": -79.735503,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5281956785,
+      "decimalLatitude": 9.329097,
+      "decimalLongitude": 80.684976,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292755938,
+      "decimalLatitude": 21.977259,
+      "decimalLongitude": 96.110468,
+      "country": "Myanmar",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760720404,
+      "decimalLatitude": -30.280058,
+      "decimalLongitude": 30.727489,
+      "country": "South Africa",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5828206453,
+      "decimalLatitude": -20.505767,
+      "decimalLongitude": 57.517288,
+      "country": "Mauritius",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889408621,
+      "decimalLatitude": -8.698697,
+      "decimalLongitude": -35.08973,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897854913,
+      "decimalLatitude": 0.082661,
+      "decimalLongitude": -79.003669,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498149205,
+      "decimalLatitude": -2.922662,
+      "decimalLongitude": -79.063622,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498368314,
+      "decimalLatitude": 20.958047,
+      "decimalLongitude": -97.425924,
+      "country": "Mexico",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499008796,
+      "decimalLatitude": 11.511067,
+      "decimalLongitude": 77.72075,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5759754972,
+      "decimalLatitude": 0.505037,
+      "decimalLongitude": -78.178812,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837740116,
+      "decimalLatitude": 8.119853,
+      "decimalLongitude": 98.623588,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837791266,
+      "decimalLatitude": 8.119872,
+      "decimalLongitude": 98.623597,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837967387,
+      "decimalLatitude": -23.712028,
+      "decimalLongitude": -46.39028,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838027222,
+      "decimalLatitude": 8.119681,
+      "decimalLongitude": 98.623356,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838040902,
+      "decimalLatitude": 8.119956,
+      "decimalLongitude": 98.624142,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838101398,
+      "decimalLatitude": 8.119702,
+      "decimalLongitude": 98.62354,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838155621,
+      "decimalLatitude": 8.119857,
+      "decimalLongitude": 98.623543,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5840253795,
+      "decimalLatitude": 18.076099,
+      "decimalLongitude": -65.894989,
+      "country": "Puerto Rico",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5840427651,
+      "decimalLatitude": 11.945252,
+      "decimalLongitude": 79.794016,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844558565,
+      "decimalLatitude": -3.784971,
+      "decimalLongitude": -79.518264,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6133405980,
+      "decimalLatitude": 10.752304,
+      "decimalLongitude": -61.434816,
+      "country": "Trinidad and Tobago",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6195265330,
+      "decimalLatitude": -0.341911,
+      "decimalLongitude": -77.813383,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498780217,
+      "decimalLatitude": 20.66048,
+      "decimalLongitude": 105.069192,
+      "country": "Viet Nam",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499002398,
+      "decimalLatitude": 27.884935,
+      "decimalLongitude": -82.809763,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499007162,
+      "decimalLatitude": -6.347298,
+      "decimalLongitude": 39.560113,
+      "country": "Tanzania, United Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6500349317,
+      "decimalLatitude": -20.441452,
+      "decimalLongitude": -50.820159,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5840044782,
+      "decimalLatitude": -3.966421,
+      "decimalLongitude": -79.207046,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844490425,
+      "decimalLatitude": -10.051793,
+      "decimalLongitude": -36.265843,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844525963,
+      "decimalLatitude": -20.501767,
+      "decimalLongitude": 57.414272,
+      "country": "Mauritius",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868190448,
+      "decimalLatitude": 13.28937,
+      "decimalLongitude": -59.60413,
+      "country": "Barbados",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868366367,
+      "decimalLatitude": 9.933263,
+      "decimalLongitude": -84.049167,
+      "country": "Costa Rica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889216078,
+      "decimalLatitude": 7.122086,
+      "decimalLongitude": 125.638305,
+      "country": "Philippines",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889242331,
+      "decimalLatitude": 18.099371,
+      "decimalLongitude": -95.896976,
+      "country": "Mexico",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889994929,
+      "decimalLatitude": 13.290856,
+      "decimalLongitude": -59.611776,
+      "country": "Barbados",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6195965152,
+      "decimalLatitude": -0.313628,
+      "decimalLongitude": -77.787478,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498179098,
+      "decimalLatitude": 9.889378,
+      "decimalLongitude": -84.11097,
+      "country": "Costa Rica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498290840,
+      "decimalLatitude": -1.562378,
+      "decimalLongitude": 29.543576,
+      "country": "Rwanda",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498292890,
+      "decimalLatitude": 4.659562,
+      "decimalLongitude": 101.164956,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498467948,
+      "decimalLatitude": 4.659675,
+      "decimalLongitude": 101.164756,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498498666,
+      "decimalLatitude": 7.902934,
+      "decimalLongitude": -76.707298,
+      "country": "Colombia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498599332,
+      "decimalLatitude": 25.232958,
+      "decimalLongitude": -100.041507,
+      "country": "Mexico",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499590407,
+      "decimalLatitude": 13.227585,
+      "decimalLongitude": 99.670716,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499844784,
+      "decimalLatitude": 22.2115,
+      "decimalLongitude": 113.545916,
+      "country": "Macao",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499948584,
+      "decimalLatitude": 18.273511,
+      "decimalLongitude": 74.798206,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6500111212,
+      "decimalLatitude": -1.82993,
+      "decimalLongitude": 29.893312,
+      "country": "Rwanda",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5892640672,
+      "decimalLatitude": 9.099067,
+      "decimalLongitude": -79.579762,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5903724306,
+      "decimalLatitude": 7.410708,
+      "decimalLongitude": -80.439436,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5903883597,
+      "decimalLatitude": 9.329153,
+      "decimalLongitude": -79.869645,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5903946940,
+      "decimalLatitude": 5.812468,
+      "decimalLongitude": -75.192193,
+      "country": "Colombia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5908729864,
+      "decimalLatitude": -15.808256,
+      "decimalLongitude": -48.10909,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5909292092,
+      "decimalLatitude": 18.201069,
+      "decimalLongitude": 76.450703,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920410710,
+      "decimalLatitude": 15.759143,
+      "decimalLongitude": -86.820888,
+      "country": "Honduras",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6129929310,
+      "decimalLatitude": -0.886458,
+      "decimalLongitude": -89.540795,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6133458832,
+      "decimalLatitude": 6.808207,
+      "decimalLongitude": -59.497718,
+      "country": "Guyana",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6320733540,
+      "decimalLatitude": -4.842499,
+      "decimalLongitude": -37.269764,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498202635,
+      "decimalLatitude": 8.023075,
+      "decimalLongitude": -81.251023,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498295218,
+      "decimalLatitude": 9.161936,
+      "decimalLongitude": -79.616511,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498582262,
+      "decimalLatitude": 8.319076,
+      "decimalLongitude": -81.195966,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498624017,
+      "decimalLatitude": 1.660003,
+      "decimalLongitude": 103.602213,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6498898383,
+      "decimalLatitude": 9.205533,
+      "decimalLongitude": -79.537957,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499056902,
+      "decimalLatitude": 9.1752,
+      "decimalLongitude": -79.60633,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499178650,
+      "decimalLatitude": 8.218688,
+      "decimalLongitude": -81.331368,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499301883,
+      "decimalLatitude": -1.492881,
+      "decimalLongitude": -77.999804,
+      "country": "Ecuador",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499363355,
+      "decimalLatitude": 22.322547,
+      "decimalLongitude": 39.093057,
+      "country": "Saudi Arabia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499405540,
+      "decimalLatitude": 7.882017,
+      "decimalLongitude": -81.309167,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499625877,
+      "decimalLatitude": 9.494674,
+      "decimalLongitude": -82.611518,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    }
+  ]
+}

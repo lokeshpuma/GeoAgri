@@ -1,0 +1,2410 @@
+{
+  "crop_id": "hevea_brasiliensis",
+  "crop_name": "rubber",
+  "scientific_name": "Hevea brasiliensis",
+  "total_count": 3552,
+  "fetched_count": 300,
+  "fetched_at": "2026-10-28T09:09:32.344104+00:00",
+  "occurrences": [
+    {
+      "key": 6130109555,
+      "decimalLatitude": 1.362137,
+      "decimalLongitude": 103.776615,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131079567,
+      "decimalLatitude": 1.259869,
+      "decimalLongitude": 103.809318,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131534856,
+      "decimalLatitude": -3.099408,
+      "decimalLongitude": -59.984678,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133339996,
+      "decimalLatitude": 6.816602,
+      "decimalLongitude": 100.568205,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147190232,
+      "decimalLatitude": 7.243163,
+      "decimalLongitude": 80.331302,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6158739711,
+      "decimalLatitude": 14.612801,
+      "decimalLongitude": 98.745712,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6171161784,
+      "decimalLatitude": 1.347366,
+      "decimalLongitude": 103.761291,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6179484090,
+      "decimalLatitude": 11.0513,
+      "decimalLongitude": 76.435426,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6184998988,
+      "decimalLatitude": 1.422838,
+      "decimalLongitude": 103.843855,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185087446,
+      "decimalLatitude": 1.348972,
+      "decimalLongitude": 103.829012,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185454269,
+      "decimalLatitude": -22.905742,
+      "decimalLongitude": -47.019959,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185710563,
+      "decimalLatitude": 1.347758,
+      "decimalLongitude": 103.763618,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6186109891,
+      "decimalLatitude": 1.483667,
+      "decimalLongitude": 103.745323,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6234248097,
+      "decimalLatitude": 1.384387,
+      "decimalLongitude": 103.821648,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6234911657,
+      "decimalLatitude": 7.328064,
+      "decimalLongitude": 80.648891,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6235328116,
+      "decimalLatitude": 7.007947,
+      "decimalLongitude": 100.508837,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6235565913,
+      "decimalLatitude": 1.347366,
+      "decimalLongitude": 103.761291,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6251650600,
+      "decimalLatitude": 1.375758,
+      "decimalLongitude": 103.843159,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6252037360,
+      "decimalLatitude": 7.045162,
+      "decimalLongitude": 100.50771,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6252091277,
+      "decimalLatitude": 12.12795,
+      "decimalLongitude": 75.517036,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6273791878,
+      "decimalLatitude": 7.246275,
+      "decimalLongitude": 80.613265,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6251588771,
+      "decimalLatitude": 8.119703,
+      "decimalLongitude": 98.62348,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6253091568,
+      "decimalLatitude": 1.817554,
+      "decimalLongitude": 73.405152,
+      "country": "Maldives",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6273282973,
+      "decimalLatitude": 8.119712,
+      "decimalLongitude": 98.623406,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6273593566,
+      "decimalLatitude": 8.12029,
+      "decimalLongitude": 98.623908,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6274039454,
+      "decimalLatitude": 8.117808,
+      "decimalLongitude": 98.621125,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6274173673,
+      "decimalLatitude": 1.436381,
+      "decimalLongitude": 103.778023,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399053327,
+      "decimalLatitude": 23.482047,
+      "decimalLongitude": 120.469772,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399223637,
+      "decimalLatitude": 23.482861,
+      "decimalLongitude": 120.467964,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399792491,
+      "decimalLatitude": -9.554488,
+      "decimalLongitude": -35.769573,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6452551722,
+      "decimalLatitude": 2.91434,
+      "decimalLongitude": 101.589277,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6479316262,
+      "decimalLatitude": 5.842725,
+      "decimalLongitude": 7.146707,
+      "country": "Nigeria",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6479492468,
+      "decimalLatitude": 1.354168,
+      "decimalLongitude": 103.818366,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566380407,
+      "decimalLatitude": 23.392125,
+      "decimalLongitude": 120.534408,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6479740595,
+      "decimalLatitude": 1.618346,
+      "decimalLongitude": 103.61765,
+      "country": "Malaysia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6480708404,
+      "decimalLatitude": 1.383113,
+      "decimalLongitude": 103.776272,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499019681,
+      "decimalLatitude": 1.294948,
+      "decimalLongitude": 103.777669,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499387727,
+      "decimalLatitude": 1.436725,
+      "decimalLongitude": 103.78018,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499745400,
+      "decimalLatitude": 21.455841,
+      "decimalLongitude": 92.101542,
+      "country": "Bangladesh",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6500333853,
+      "decimalLatitude": 1.436238,
+      "decimalLongitude": 103.778238,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6518483939,
+      "decimalLatitude": 1.407728,
+      "decimalLongitude": 103.967522,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6518581322,
+      "decimalLatitude": 1.297287,
+      "decimalLongitude": 103.77668,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6518872540,
+      "decimalLatitude": 1.35927,
+      "decimalLongitude": 103.82425,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6519842808,
+      "decimalLatitude": 1.406813,
+      "decimalLongitude": 103.969878,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6520318110,
+      "decimalLatitude": 1.414819,
+      "decimalLongitude": 103.978772,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6551260010,
+      "decimalLatitude": 12.828358,
+      "decimalLongitude": 101.24444,
+      "country": "Thailand",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6518420650,
+      "decimalLatitude": 1.321886,
+      "decimalLongitude": 103.815022,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6518988901,
+      "decimalLatitude": 1.349278,
+      "decimalLongitude": 103.832663,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6551418035,
+      "decimalLatitude": 1.293794,
+      "decimalLongitude": 103.7808,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6551856631,
+      "decimalLatitude": 1.278725,
+      "decimalLongitude": 103.809097,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566417520,
+      "decimalLatitude": 1.279281,
+      "decimalLongitude": 103.806694,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566570763,
+      "decimalLatitude": 1.27925,
+      "decimalLongitude": 103.806849,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566918318,
+      "decimalLatitude": 1.280596,
+      "decimalLongitude": 103.793555,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6567530360,
+      "decimalLatitude": 1.278708,
+      "decimalLongitude": 103.809059,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6578861752,
+      "decimalLatitude": 1.29466,
+      "decimalLongitude": 103.78,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6579133378,
+      "decimalLatitude": 10.676086,
+      "decimalLongitude": -61.068466,
+      "country": "Trinidad and Tobago",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6579073391,
+      "decimalLatitude": 1.410319,
+      "decimalLongitude": 103.982511,
+      "country": "Singapore",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5036969078,
+      "decimalLatitude": 1.436252,
+      "decimalLongitude": 103.779582,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5063135772,
+      "decimalLatitude": 8.580617,
+      "decimalLongitude": 77.105377,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5063598835,
+      "decimalLatitude": 1.337501,
+      "decimalLongitude": 103.817978,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110465286,
+      "decimalLatitude": 10.860628,
+      "decimalLongitude": 76.711136,
+      "country": "India",
+      "year": 2025,
+      "elevation": 37.0
+    },
+    {
+      "key": 5133533137,
+      "decimalLatitude": 1.347403,
+      "decimalLongitude": 103.834501,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5069834571,
+      "decimalLatitude": 3.53696,
+      "decimalLongitude": 98.125159,
+      "country": "Indonesia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5087183138,
+      "decimalLatitude": 3.150425,
+      "decimalLongitude": 101.634789,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5087183946,
+      "decimalLatitude": 1.277529,
+      "decimalLongitude": 103.811338,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5087258642,
+      "decimalLatitude": 1.352873,
+      "decimalLongitude": 103.819823,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5087261541,
+      "decimalLatitude": 1.346689,
+      "decimalLongitude": 103.83513,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5108207783,
+      "decimalLatitude": 1.276748,
+      "decimalLongitude": 103.81457,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5108397526,
+      "decimalLatitude": 1.280193,
+      "decimalLongitude": 103.811496,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110458280,
+      "decimalLatitude": 12.264715,
+      "decimalLongitude": 102.414184,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": 38.0
+    },
+    {
+      "key": 5837661264,
+      "decimalLatitude": 8.007671,
+      "decimalLongitude": 98.837043,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5087521855,
+      "decimalLatitude": 7.774199,
+      "decimalLongitude": 98.313694,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5088135518,
+      "decimalLatitude": 10.438033,
+      "decimalLongitude": -84.011033,
+      "country": "Costa Rica",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5932520004,
+      "decimalLatitude": -1.940278,
+      "decimalLongitude": 29.873888,
+      "country": "Rwanda",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5133936522,
+      "decimalLatitude": 19.319017,
+      "decimalLongitude": 98.895538,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5140300794,
+      "decimalLatitude": -11.835538,
+      "decimalLongitude": -55.499429,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5140485441,
+      "decimalLatitude": 5.479278,
+      "decimalLongitude": 7.537788,
+      "country": "Nigeria",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5153184516,
+      "decimalLatitude": 1.277019,
+      "decimalLongitude": 103.811436,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5167433223,
+      "decimalLatitude": 8.119282,
+      "decimalLongitude": 98.624624,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5168019940,
+      "decimalLatitude": 8.11943,
+      "decimalLongitude": 98.62363,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5168069660,
+      "decimalLatitude": 9.971473,
+      "decimalLongitude": 76.369517,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5217507521,
+      "decimalLatitude": 23.901318,
+      "decimalLongitude": 91.831558,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838080589,
+      "decimalLatitude": 8.117679,
+      "decimalLongitude": 98.62153,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5188095090,
+      "decimalLatitude": 1.284837,
+      "decimalLongitude": 103.787672,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5198463244,
+      "decimalLatitude": 24.099068,
+      "decimalLongitude": 91.962135,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5282610040,
+      "decimalLatitude": 2.271647,
+      "decimalLongitude": 111.831054,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760076526,
+      "decimalLatitude": 2.724133,
+      "decimalLongitude": 101.886853,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5938422584,
+      "decimalLatitude": 1.359213,
+      "decimalLongitude": 103.824225,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6578935822,
+      "decimalLatitude": 1.379742,
+      "decimalLongitude": 103.825897,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5237546253,
+      "decimalLatitude": 1.436366,
+      "decimalLongitude": 103.778055,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5237636219,
+      "decimalLatitude": 1.436365,
+      "decimalLongitude": 103.778068,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5237834197,
+      "decimalLatitude": 1.436351,
+      "decimalLongitude": 103.778027,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5238104207,
+      "decimalLatitude": 1.436853,
+      "decimalLongitude": 103.777919,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5759714141,
+      "decimalLatitude": 1.485156,
+      "decimalLongitude": 103.745025,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5759953025,
+      "decimalLatitude": -8.526617,
+      "decimalLongitude": -70.978042,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760421947,
+      "decimalLatitude": 1.359881,
+      "decimalLongitude": 103.820991,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760584060,
+      "decimalLatitude": 1.357097,
+      "decimalLongitude": 103.819067,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5282010826,
+      "decimalLatitude": 2.9389,
+      "decimalLongitude": 101.721116,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292425723,
+      "decimalLatitude": 1.387599,
+      "decimalLongitude": 103.81671,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292458455,
+      "decimalLatitude": 1.332775,
+      "decimalLongitude": 103.834945,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5759547003,
+      "decimalLatitude": 1.436429,
+      "decimalLongitude": 103.777893,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5759799326,
+      "decimalLatitude": -11.746352,
+      "decimalLongitude": -49.048945,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760228144,
+      "decimalLatitude": 1.336708,
+      "decimalLongitude": 103.818747,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760404398,
+      "decimalLatitude": 1.436284,
+      "decimalLongitude": 103.77802,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760593090,
+      "decimalLatitude": -11.746109,
+      "decimalLongitude": -49.048912,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760670798,
+      "decimalLatitude": 1.436295,
+      "decimalLongitude": 103.778004,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760743814,
+      "decimalLatitude": 1.436265,
+      "decimalLongitude": 103.778044,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5761193101,
+      "decimalLatitude": 1.436407,
+      "decimalLongitude": 103.777978,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5825535651,
+      "decimalLatitude": 5.976222,
+      "decimalLongitude": 116.301933,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6084207521,
+      "decimalLatitude": 6.109794,
+      "decimalLongitude": 116.117485,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5827907332,
+      "decimalLatitude": 1.346558,
+      "decimalLongitude": 103.835105,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5828914457,
+      "decimalLatitude": 1.346653,
+      "decimalLongitude": 103.835052,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5830366629,
+      "decimalLatitude": -9.956987,
+      "decimalLongitude": -67.873797,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5830367154,
+      "decimalLatitude": 7.592273,
+      "decimalLongitude": -80.961964,
+      "country": "Panama",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5830690526,
+      "decimalLatitude": 1.347366,
+      "decimalLongitude": 103.761291,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837748008,
+      "decimalLatitude": 8.117719,
+      "decimalLongitude": 98.621363,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837773450,
+      "decimalLatitude": 8.117777,
+      "decimalLongitude": 98.621158,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837788957,
+      "decimalLatitude": 8.119165,
+      "decimalLongitude": 98.624042,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837846057,
+      "decimalLatitude": 1.334947,
+      "decimalLongitude": 103.734803,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837920622,
+      "decimalLatitude": 8.119714,
+      "decimalLongitude": 98.625072,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837926427,
+      "decimalLatitude": 8.120267,
+      "decimalLongitude": 98.623825,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837965558,
+      "decimalLatitude": 8.119095,
+      "decimalLongitude": 98.623911,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838030835,
+      "decimalLatitude": 8.117661,
+      "decimalLongitude": 98.621172,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838077500,
+      "decimalLatitude": -21.227337,
+      "decimalLongitude": -44.981803,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838191147,
+      "decimalLatitude": 8.120292,
+      "decimalLongitude": 98.623733,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838206600,
+      "decimalLatitude": 8.11978,
+      "decimalLongitude": 98.623847,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5838385893,
+      "decimalLatitude": 8.12108,
+      "decimalLongitude": 98.624485,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844192471,
+      "decimalLatitude": -3.111599,
+      "decimalLongitude": -59.908377,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6084208459,
+      "decimalLatitude": 3.326406,
+      "decimalLongitude": 101.754845,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844207038,
+      "decimalLatitude": -3.099728,
+      "decimalLongitude": -60.025253,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844604831,
+      "decimalLatitude": 1.339756,
+      "decimalLongitude": 103.816391,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5867875025,
+      "decimalLatitude": 1.363858,
+      "decimalLongitude": 103.774755,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868045516,
+      "decimalLatitude": 1.337399,
+      "decimalLongitude": 103.819119,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868206557,
+      "decimalLatitude": 1.36385,
+      "decimalLongitude": 103.771819,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868236358,
+      "decimalLatitude": 1.337353,
+      "decimalLongitude": 103.819205,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868373918,
+      "decimalLatitude": 1.347036,
+      "decimalLongitude": 103.833333,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889913192,
+      "decimalLatitude": -9.947198,
+      "decimalLongitude": -67.825805,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5890163334,
+      "decimalLatitude": 1.4369,
+      "decimalLongitude": 103.780139,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5892360136,
+      "decimalLatitude": 6.443,
+      "decimalLongitude": 80.417,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5903794154,
+      "decimalLatitude": 1.347439,
+      "decimalLongitude": 103.764022,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6178893856,
+      "decimalLatitude": 1.273475,
+      "decimalLongitude": 103.814607,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897829066,
+      "decimalLatitude": 10.69301,
+      "decimalLongitude": -61.289147,
+      "country": "Trinidad and Tobago",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5908626282,
+      "decimalLatitude": 1.379611,
+      "decimalLongitude": 103.810608,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5909069263,
+      "decimalLatitude": 0.768622,
+      "decimalLongitude": 15.258888,
+      "country": "Congo",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920059214,
+      "decimalLatitude": 4.458137,
+      "decimalLongitude": 101.20854,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6131225413,
+      "decimalLatitude": 9.735872,
+      "decimalLongitude": 98.405897,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6131486492,
+      "decimalLatitude": 9.725858,
+      "decimalLongitude": 98.407058,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6147438686,
+      "decimalLatitude": -15.767363,
+      "decimalLongitude": -47.861694,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6399103151,
+      "decimalLatitude": 24.702363,
+      "decimalLongitude": 121.132039,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920058648,
+      "decimalLatitude": 2.717358,
+      "decimalLongitude": 101.884289,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920097833,
+      "decimalLatitude": 2.721394,
+      "decimalLongitude": 101.886853,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920458730,
+      "decimalLatitude": 2.717169,
+      "decimalLongitude": 101.884319,
+      "country": "Malaysia",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5935290857,
+      "decimalLatitude": -22.967656,
+      "decimalLongitude": -43.223269,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5935858278,
+      "decimalLatitude": 7.801787,
+      "decimalLongitude": 98.980378,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5936052274,
+      "decimalLatitude": 1.358539,
+      "decimalLongitude": 103.823763,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5938035486,
+      "decimalLatitude": 1.27947,
+      "decimalLongitude": 103.810188,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5938126676,
+      "decimalLatitude": 1.344762,
+      "decimalLongitude": 103.82235,
+      "country": "Singapore",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6130776341,
+      "decimalLatitude": -2.618922,
+      "decimalLongitude": -60.949225,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 4516299928,
+      "decimalLatitude": 1.422046,
+      "decimalLongitude": 103.792819,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4516885862,
+      "decimalLatitude": 1.422046,
+      "decimalLongitude": 103.792819,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4519103432,
+      "decimalLatitude": 1.455567,
+      "decimalLongitude": 103.660926,
+      "country": "Malaysia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4950563399,
+      "decimalLatitude": -22.905768,
+      "decimalLongitude": -47.019955,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4978206131,
+      "decimalLatitude": 3.829551,
+      "decimalLongitude": -73.359583,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4998326460,
+      "decimalLatitude": 4.268827,
+      "decimalLongitude": -72.500306,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 199.0
+    },
+    {
+      "key": 5109825565,
+      "decimalLatitude": 8.040547,
+      "decimalLongitude": 98.4019,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": 17.54
+    },
+    {
+      "key": 4522583670,
+      "decimalLatitude": -3.219396,
+      "decimalLongitude": -60.672969,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4527979512,
+      "decimalLatitude": 18.919087,
+      "decimalLongitude": 102.422178,
+      "country": "Lao People\u2019s Democratic Republic",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4527984431,
+      "decimalLatitude": 1.372712,
+      "decimalLongitude": 103.824115,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4528252334,
+      "decimalLatitude": 9.459972,
+      "decimalLongitude": 100.002844,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4528334044,
+      "decimalLatitude": 1.363418,
+      "decimalLongitude": 103.776987,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4597071633,
+      "decimalLatitude": 1.279311,
+      "decimalLongitude": 103.806823,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4597101915,
+      "decimalLatitude": 1.419954,
+      "decimalLongitude": 103.912875,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4597550633,
+      "decimalLatitude": 1.2795,
+      "decimalLongitude": 103.806512,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4846838387,
+      "decimalLatitude": 5.32697,
+      "decimalLongitude": -1.394828,
+      "country": "Ghana",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4908987517,
+      "decimalLatitude": 5.980008,
+      "decimalLongitude": 116.07817,
+      "country": "Malaysia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4919530899,
+      "decimalLatitude": -22.905742,
+      "decimalLongitude": -47.019955,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4852409894,
+      "decimalLatitude": 1.379069,
+      "decimalLongitude": 103.827764,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4855445820,
+      "decimalLatitude": 9.732021,
+      "decimalLongitude": 76.352453,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4867745678,
+      "decimalLatitude": -11.86241,
+      "decimalLongitude": -55.54438,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110076671,
+      "decimalLatitude": 9.417305,
+      "decimalLongitude": 99.968917,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": 13.27
+    },
+    {
+      "key": 4868018027,
+      "decimalLatitude": 1.281361,
+      "decimalLongitude": 103.862674,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4872493333,
+      "decimalLatitude": 15.152961,
+      "decimalLongitude": 98.540497,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109968773,
+      "decimalLatitude": -4.26807,
+      "decimalLongitude": 15.247823,
+      "country": "Congo",
+      "year": 2024,
+      "elevation": 310.0
+    },
+    {
+      "key": 4892004024,
+      "decimalLatitude": 1.384791,
+      "decimalLongitude": 103.819332,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4901328953,
+      "decimalLatitude": 1.358843,
+      "decimalLongitude": 103.693885,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4910634567,
+      "decimalLatitude": 1.276146,
+      "decimalLongitude": 103.815523,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4911152669,
+      "decimalLatitude": 1.278764,
+      "decimalLongitude": 103.808121,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4908256847,
+      "decimalLatitude": 3.54647,
+      "decimalLongitude": 98.122495,
+      "country": "Indonesia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4936628962,
+      "decimalLatitude": 6.994708,
+      "decimalLongitude": 80.4206,
+      "country": "Sri Lanka",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4921444685,
+      "decimalLatitude": 1.284516,
+      "decimalLongitude": 103.79043,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4921998150,
+      "decimalLatitude": -22.905693,
+      "decimalLongitude": -47.019944,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4925846955,
+      "decimalLatitude": 7.043862,
+      "decimalLongitude": 100.504829,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4925890929,
+      "decimalLatitude": 1.746,
+      "decimalLongitude": 109.877,
+      "country": "Malaysia",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110361999,
+      "decimalLatitude": 9.413487,
+      "decimalLongitude": 99.965172,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": 10.92
+    },
+    {
+      "key": 4946263140,
+      "decimalLatitude": 1.418387,
+      "decimalLongitude": 103.722822,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4950199204,
+      "decimalLatitude": -22.905733,
+      "decimalLongitude": -47.019967,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4950523765,
+      "decimalLatitude": -11.026373,
+      "decimalLongitude": -66.099856,
+      "country": "Bolivia (Plurinational State of)",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110449010,
+      "decimalLatitude": 8.896103,
+      "decimalLongitude": 98.660664,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": 60.0
+    },
+    {
+      "key": 4982131067,
+      "decimalLatitude": 20.212675,
+      "decimalLongitude": 99.648628,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4987499079,
+      "decimalLatitude": -7.769325,
+      "decimalLongitude": -60.430691,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5159718413,
+      "decimalLatitude": 6.992405,
+      "decimalLongitude": -73.391109,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 345.0
+    },
+    {
+      "key": 5007760627,
+      "decimalLatitude": 9.627827,
+      "decimalLongitude": 76.426393,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007948129,
+      "decimalLatitude": 1.422046,
+      "decimalLongitude": 103.792819,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5016654305,
+      "decimalLatitude": 12.426294,
+      "decimalLongitude": 102.470505,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5020767757,
+      "decimalLatitude": 14.050628,
+      "decimalLongitude": 101.975876,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110344017,
+      "decimalLatitude": 9.343356,
+      "decimalLongitude": 76.826284,
+      "country": "India",
+      "year": 2024,
+      "elevation": -70.93
+    },
+    {
+      "key": 5110511226,
+      "decimalLatitude": 7.811204,
+      "decimalLongitude": 98.969564,
+      "country": "Thailand",
+      "year": 2024,
+      "elevation": 12.0
+    },
+    {
+      "key": 5159719154,
+      "decimalLatitude": 7.161296,
+      "decimalLongitude": -73.470267,
+      "country": "Colombia",
+      "year": 2024,
+      "elevation": 158.0
+    },
+    {
+      "key": 5216523499,
+      "decimalLatitude": -2.992622,
+      "decimalLongitude": -59.918567,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4116078831,
+      "decimalLatitude": 21.386738,
+      "decimalLongitude": -157.808351,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4998322907,
+      "decimalLatitude": 4.163413,
+      "decimalLongitude": -72.36596,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 182.0
+    },
+    {
+      "key": 4998323669,
+      "decimalLatitude": 4.29608,
+      "decimalLongitude": -72.443891,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 187.0
+    },
+    {
+      "key": 4998324648,
+      "decimalLatitude": 4.414119,
+      "decimalLongitude": -72.148297,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 258.0
+    },
+    {
+      "key": 4998324904,
+      "decimalLatitude": 4.416163,
+      "decimalLongitude": -72.197485,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 258.0
+    },
+    {
+      "key": 4998324905,
+      "decimalLatitude": 4.416163,
+      "decimalLongitude": -72.197485,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 258.0
+    },
+    {
+      "key": 4998325668,
+      "decimalLatitude": 4.425081,
+      "decimalLongitude": -72.139713,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 231.0
+    },
+    {
+      "key": 4998326606,
+      "decimalLatitude": 4.41951,
+      "decimalLongitude": -72.155678,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 200.0
+    },
+    {
+      "key": 4998328307,
+      "decimalLatitude": 4.197035,
+      "decimalLongitude": -72.459884,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 198.0
+    },
+    {
+      "key": 4998330338,
+      "decimalLatitude": 4.414119,
+      "decimalLongitude": -72.148297,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 173.0
+    },
+    {
+      "key": 6353044354,
+      "decimalLatitude": -20.238167,
+      "decimalLongitude": -50.95612,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4028891088,
+      "decimalLatitude": 1.414742,
+      "decimalLongitude": 103.788294,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4028980178,
+      "decimalLatitude": 1.415371,
+      "decimalLongitude": 103.78871,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4948124802,
+      "decimalLatitude": 7.90951,
+      "decimalLongitude": -9.80681,
+      "country": "Liberia",
+      "year": 2023,
+      "elevation": 415.0
+    },
+    {
+      "key": 4948124805,
+      "decimalLatitude": 7.90951,
+      "decimalLongitude": -9.80681,
+      "country": "Liberia",
+      "year": 2023,
+      "elevation": 415.0
+    },
+    {
+      "key": 4948124813,
+      "decimalLatitude": 7.90951,
+      "decimalLongitude": -9.80681,
+      "country": "Liberia",
+      "year": 2023,
+      "elevation": 415.0
+    },
+    {
+      "key": 4948124825,
+      "decimalLatitude": 7.90951,
+      "decimalLongitude": -9.80681,
+      "country": "Liberia",
+      "year": 2023,
+      "elevation": 415.0
+    },
+    {
+      "key": 4948124852,
+      "decimalLatitude": 7.90951,
+      "decimalLongitude": -9.80681,
+      "country": "Liberia",
+      "year": 2023,
+      "elevation": 415.0
+    },
+    {
+      "key": 4948132329,
+      "decimalLatitude": 8.35,
+      "decimalLongitude": -9.2336,
+      "country": "Guinea",
+      "year": 2023,
+      "elevation": 552.0
+    },
+    {
+      "key": 4977382666,
+      "decimalLatitude": 7.161296,
+      "decimalLongitude": -73.470267,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 151.0
+    },
+    {
+      "key": 6520543364,
+      "decimalLatitude": -16.556397,
+      "decimalLongitude": -39.105417,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4067716623,
+      "decimalLatitude": -3.092461,
+      "decimalLongitude": -60.504128,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4075794470,
+      "decimalLatitude": 1.358811,
+      "decimalLongitude": 103.820119,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4075963402,
+      "decimalLatitude": 1.359757,
+      "decimalLongitude": 103.821019,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4096859680,
+      "decimalLatitude": -1.93848,
+      "decimalLongitude": -61.354569,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4516517655,
+      "decimalLatitude": 11.593305,
+      "decimalLongitude": 107.338468,
+      "country": "Viet Nam",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4080860479,
+      "decimalLatitude": 1.340237,
+      "decimalLongitude": 103.821429,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4096667526,
+      "decimalLatitude": 1.371853,
+      "decimalLongitude": 103.824622,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4102707851,
+      "decimalLatitude": -4.333725,
+      "decimalLongitude": 55.72312,
+      "country": "Seychelles",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4103238665,
+      "decimalLatitude": 1.407759,
+      "decimalLongitude": 103.980425,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4126691127,
+      "decimalLatitude": 6.335491,
+      "decimalLongitude": 100.45565,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4126770828,
+      "decimalLatitude": 2.928405,
+      "decimalLongitude": 101.70238,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4126870231,
+      "decimalLatitude": 2.925635,
+      "decimalLongitude": 101.701489,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4126994997,
+      "decimalLatitude": 2.962115,
+      "decimalLongitude": 101.695739,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4127080767,
+      "decimalLatitude": 1.370908,
+      "decimalLongitude": 103.777878,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4127094445,
+      "decimalLatitude": 2.925139,
+      "decimalLongitude": 101.691419,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4127379749,
+      "decimalLatitude": 2.928387,
+      "decimalLongitude": 101.702095,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4127397798,
+      "decimalLatitude": 2.928266,
+      "decimalLongitude": 101.702464,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4129694978,
+      "decimalLatitude": 2.930278,
+      "decimalLongitude": 101.692597,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4129891861,
+      "decimalLatitude": 1.354339,
+      "decimalLongitude": 103.818282,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097405,
+      "decimalLatitude": 5.458878,
+      "decimalLongitude": -69.938925,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097490,
+      "decimalLatitude": 5.458878,
+      "decimalLongitude": -69.938925,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097503,
+      "decimalLatitude": 5.458878,
+      "decimalLongitude": -69.938925,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097506,
+      "decimalLatitude": 5.458878,
+      "decimalLongitude": -69.938925,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097520,
+      "decimalLatitude": 5.458878,
+      "decimalLongitude": -69.938925,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097537,
+      "decimalLatitude": 5.458878,
+      "decimalLongitude": -69.938925,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097549,
+      "decimalLatitude": 5.458878,
+      "decimalLongitude": -69.938925,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097804,
+      "decimalLatitude": 5.459026,
+      "decimalLongitude": -69.938244,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097823,
+      "decimalLatitude": 5.459026,
+      "decimalLongitude": -69.938244,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097825,
+      "decimalLatitude": 5.459026,
+      "decimalLongitude": -69.938244,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097826,
+      "decimalLatitude": 5.459026,
+      "decimalLongitude": -69.938244,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097846,
+      "decimalLatitude": 5.459826,
+      "decimalLongitude": -69.938369,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097854,
+      "decimalLatitude": 5.459826,
+      "decimalLongitude": -69.938369,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106097935,
+      "decimalLatitude": 5.459026,
+      "decimalLongitude": -69.938244,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106099808,
+      "decimalLatitude": 5.862383,
+      "decimalLongitude": -68.262822,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5106099819,
+      "decimalLatitude": 5.862383,
+      "decimalLongitude": -68.262822,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4133722962,
+      "decimalLatitude": 1.410199,
+      "decimalLongitude": 103.77284,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4134012874,
+      "decimalLatitude": 1.356747,
+      "decimalLongitude": 103.816764,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4137672144,
+      "decimalLatitude": 23.482936,
+      "decimalLongitude": 120.467881,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4138416630,
+      "decimalLatitude": 1.355633,
+      "decimalLongitude": 103.818501,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4145722286,
+      "decimalLatitude": 7.066975,
+      "decimalLongitude": 80.064903,
+      "country": "Sri Lanka",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4145736670,
+      "decimalLatitude": 7.062697,
+      "decimalLongitude": 80.065889,
+      "country": "Sri Lanka",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4171977439,
+      "decimalLatitude": 1.339866,
+      "decimalLongitude": 103.820628,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4416771565,
+      "decimalLatitude": 9.064275,
+      "decimalLongitude": -79.64654,
+      "country": "Panama",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4954251548,
+      "decimalLatitude": 21.904334,
+      "decimalLongitude": 101.280684,
+      "country": "China",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4954442111,
+      "decimalLatitude": 21.904334,
+      "decimalLongitude": 101.280684,
+      "country": "China",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4950078090,
+      "decimalLatitude": -22.905764,
+      "decimalLongitude": -47.019944,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4407404758,
+      "decimalLatitude": 2.94161,
+      "decimalLongitude": 101.725926,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4413676811,
+      "decimalLatitude": 1.37924,
+      "decimalLongitude": 103.827321,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4414052320,
+      "decimalLatitude": 2.925317,
+      "decimalLongitude": 101.69034,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4414288531,
+      "decimalLatitude": 1.378567,
+      "decimalLongitude": 103.82805,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4417013929,
+      "decimalLatitude": 1.359498,
+      "decimalLongitude": 103.826798,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4420860427,
+      "decimalLatitude": 1.363114,
+      "decimalLongitude": 103.77259,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4421029025,
+      "decimalLatitude": 1.352268,
+      "decimalLongitude": 103.828638,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4453941959,
+      "decimalLatitude": 2.943001,
+      "decimalLongitude": 101.717754,
+      "country": "Malaysia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4424321397,
+      "decimalLatitude": 1.345963,
+      "decimalLongitude": 103.835242,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4430578967,
+      "decimalLatitude": -7.594073,
+      "decimalLongitude": -72.694188,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4430638395,
+      "decimalLatitude": 1.345964,
+      "decimalLongitude": 103.835242,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4458321287,
+      "decimalLatitude": -7.313558,
+      "decimalLongitude": -73.029126,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4458612224,
+      "decimalLatitude": -7.627001,
+      "decimalLongitude": -72.667375,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4458748202,
+      "decimalLatitude": -7.628141,
+      "decimalLongitude": -72.678334,
+      "country": "Brazil",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4977385727,
+      "decimalLatitude": 6.992405,
+      "decimalLongitude": -73.391109,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 343.0
+    },
+    {
+      "key": 4977379455,
+      "decimalLatitude": 7.161296,
+      "decimalLongitude": -73.470267,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 151.0
+    },
+    {
+      "key": 4507645609,
+      "decimalLatitude": 1.34311,
+      "decimalLongitude": 103.827684,
+      "country": "Singapore",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4507733651,
+      "decimalLatitude": 6.420946,
+      "decimalLongitude": 80.453852,
+      "country": "Sri Lanka",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5844264630,
+      "decimalLatitude": 23.401133,
+      "decimalLongitude": 90.172378,
+      "country": "Bangladesh",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 3466197732,
+      "decimalLatitude": 1.278823,
+      "decimalLongitude": 103.810668,
+      "country": "Singapore",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3466241216,
+      "decimalLatitude": 3.179408,
+      "decimalLongitude": 101.655181,
+      "country": "Malaysia",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3466396590,
+      "decimalLatitude": -13.238669,
+      "decimalLongitude": -63.651986,
+      "country": "Bolivia (Plurinational State of)",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3902095019,
+      "decimalLatitude": 15.6261,
+      "decimalLongitude": 102.958335,
+      "country": "Thailand",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3902193644,
+      "decimalLatitude": -9.961189,
+      "decimalLongitude": -67.870718,
+      "country": "Brazil",
+      "year": 2022,
+      "elevation": null
+    }
+  ]
+}

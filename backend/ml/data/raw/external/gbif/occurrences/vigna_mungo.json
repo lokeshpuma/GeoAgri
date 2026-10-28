@@ -1,0 +1,194 @@
+{
+  "crop_id": "vigna_mungo",
+  "crop_name": "black gram",
+  "scientific_name": "Vigna mungo",
+  "total_count": 23,
+  "fetched_count": 23,
+  "fetched_at": "2026-10-28T09:09:11.215281+00:00",
+  "occurrences": [
+    {
+      "key": 5007008439,
+      "decimalLatitude": 23.800241,
+      "decimalLongitude": 120.28571,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 2873920963,
+      "decimalLatitude": 18.383238,
+      "decimalLongitude": 73.267865,
+      "country": "India",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3384645564,
+      "decimalLatitude": 19.140745,
+      "decimalLongitude": 72.962495,
+      "country": "India",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2465003661,
+      "decimalLatitude": 22.823037,
+      "decimalLongitude": 108.373351,
+      "country": "China",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 1937374036,
+      "decimalLatitude": -14.668014,
+      "decimalLongitude": 145.458659,
+      "country": "Australia",
+      "year": 1977,
+      "elevation": null
+    },
+    {
+      "key": 4867473229,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1955,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867423095,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1948,
+      "elevation": 77.0
+    },
+    {
+      "key": 1890143387,
+      "decimalLatitude": 5.616667,
+      "decimalLongitude": -0.233333,
+      "country": "Ghana",
+      "year": 1938,
+      "elevation": null
+    },
+    {
+      "key": 4867399056,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1932,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867450767,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1931,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867447024,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1930,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867500503,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1929,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867524496,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1928,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867429399,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1927,
+      "elevation": 77.0
+    },
+    {
+      "key": 2465003339,
+      "decimalLatitude": 10.5,
+      "decimalLongitude": 79.5,
+      "country": "India",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 2465005844,
+      "decimalLatitude": 30.559627,
+      "decimalLongitude": 114.322539,
+      "country": "China",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 2465007203,
+      "decimalLatitude": 10.6,
+      "decimalLongitude": -61.0,
+      "country": "Trinidad and Tobago",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3846939481,
+      "decimalLatitude": 16.19759,
+      "decimalLongitude": -61.53977,
+      "country": "Guadeloupe",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3847008870,
+      "decimalLatitude": 14.65485,
+      "decimalLongitude": -61.01929,
+      "country": "Martinique",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3935017950,
+      "decimalLatitude": 16.19759,
+      "decimalLongitude": -61.53977,
+      "country": "Guadeloupe",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3935045144,
+      "decimalLatitude": 14.65485,
+      "decimalLongitude": -61.01929,
+      "country": "Martinique",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 4547763433,
+      "decimalLatitude": 16.19761,
+      "decimalLongitude": -61.5398,
+      "country": "Guadeloupe",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 4548049259,
+      "decimalLatitude": 14.65485,
+      "decimalLongitude": -61.01929,
+      "country": "Martinique",
+      "year": null,
+      "elevation": null
+    }
+  ]
+}

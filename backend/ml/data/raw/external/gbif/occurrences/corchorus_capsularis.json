@@ -1,0 +1,1138 @@
+{
+  "crop_id": "corchorus_capsularis",
+  "crop_name": "jute",
+  "scientific_name": "Corchorus capsularis",
+  "total_count": 141,
+  "fetched_count": 141,
+  "fetched_at": "2026-10-28T09:09:22.650790+00:00",
+  "occurrences": [
+    {
+      "key": 6273194608,
+      "decimalLatitude": 12.359951,
+      "decimalLongitude": 109.27767,
+      "country": "Viet Nam",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6413482971,
+      "decimalLatitude": 23.01116,
+      "decimalLongitude": 120.244271,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5008427097,
+      "decimalLatitude": 13.659639,
+      "decimalLongitude": 100.96396,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5216417394,
+      "decimalLatitude": 24.107862,
+      "decimalLongitude": 120.671957,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5231829451,
+      "decimalLatitude": 24.190353,
+      "decimalLongitude": 120.837433,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5237533291,
+      "decimalLatitude": 24.122241,
+      "decimalLongitude": 120.698026,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844612538,
+      "decimalLatitude": 24.120763,
+      "decimalLongitude": 120.696567,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5281902614,
+      "decimalLatitude": 24.116506,
+      "decimalLongitude": 120.622503,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844171704,
+      "decimalLatitude": 23.233777,
+      "decimalLongitude": 120.277349,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897356660,
+      "decimalLatitude": 23.254598,
+      "decimalLongitude": 120.280282,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5935654567,
+      "decimalLatitude": 23.232909,
+      "decimalLongitude": 120.269323,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6413572539,
+      "decimalLatitude": 23.239369,
+      "decimalLongitude": 120.277018,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844044951,
+      "decimalLatitude": 23.229616,
+      "decimalLongitude": 120.184836,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5840191914,
+      "decimalLatitude": 21.758147,
+      "decimalLongitude": 88.222121,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6179090100,
+      "decimalLatitude": 24.096489,
+      "decimalLongitude": 120.507818,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5908609619,
+      "decimalLatitude": 24.18622,
+      "decimalLongitude": 120.625922,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6413856020,
+      "decimalLatitude": 23.45624,
+      "decimalLongitude": 120.431519,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 4606728835,
+      "decimalLatitude": 1.413038,
+      "decimalLongitude": 103.918572,
+      "country": "Singapore",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4946461996,
+      "decimalLatitude": 20.837478,
+      "decimalLongitude": 105.346047,
+      "country": "Viet Nam",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4974024442,
+      "decimalLatitude": 23.249868,
+      "decimalLongitude": 120.254797,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976389260,
+      "decimalLatitude": 19.347533,
+      "decimalLongitude": 72.788989,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4994213291,
+      "decimalLatitude": 23.485564,
+      "decimalLongitude": 121.50964,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4980748243,
+      "decimalLatitude": 23.241697,
+      "decimalLongitude": 120.274066,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4981976909,
+      "decimalLatitude": 23.991184,
+      "decimalLongitude": 120.754685,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5006911286,
+      "decimalLatitude": 23.222031,
+      "decimalLongitude": 120.252962,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4014856876,
+      "decimalLatitude": 24.103074,
+      "decimalLongitude": 120.684513,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4852414679,
+      "decimalLatitude": 23.766099,
+      "decimalLongitude": 121.576891,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080365,
+      "decimalLatitude": 23.17606,
+      "decimalLongitude": 72.64767,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080378,
+      "decimalLatitude": 23.1413,
+      "decimalLongitude": 72.64083,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080427,
+      "decimalLatitude": 23.15783,
+      "decimalLongitude": 72.65944,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080431,
+      "decimalLatitude": 23.15783,
+      "decimalLongitude": 72.65944,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080479,
+      "decimalLatitude": 23.23266,
+      "decimalLongitude": 72.65759,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080762,
+      "decimalLatitude": 23.15442,
+      "decimalLongitude": 72.65347,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080870,
+      "decimalLatitude": 23.20442,
+      "decimalLongitude": 72.64324,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080916,
+      "decimalLatitude": 23.17712,
+      "decimalLongitude": 72.65044,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517080947,
+      "decimalLatitude": 23.12859,
+      "decimalLongitude": 72.63921,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081034,
+      "decimalLatitude": 23.16746,
+      "decimalLongitude": 72.64858,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081093,
+      "decimalLatitude": 23.17175,
+      "decimalLongitude": 72.64783,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081339,
+      "decimalLatitude": 23.20081,
+      "decimalLongitude": 72.64068,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081420,
+      "decimalLatitude": 23.1964,
+      "decimalLongitude": 72.64304,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081480,
+      "decimalLatitude": 23.20131,
+      "decimalLongitude": 72.63869,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081663,
+      "decimalLatitude": 23.23995,
+      "decimalLongitude": 72.63921,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081683,
+      "decimalLatitude": 23.20922,
+      "decimalLongitude": 72.65826,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081754,
+      "decimalLatitude": 23.1625,
+      "decimalLongitude": 72.64845,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081857,
+      "decimalLatitude": 23.21728,
+      "decimalLongitude": 72.66303,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081901,
+      "decimalLatitude": 23.16732,
+      "decimalLongitude": 72.65131,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081919,
+      "decimalLatitude": 23.22268,
+      "decimalLongitude": 72.6617,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517081920,
+      "decimalLatitude": 23.19183,
+      "decimalLongitude": 72.63944,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082336,
+      "decimalLatitude": 23.23995,
+      "decimalLongitude": 72.63921,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082382,
+      "decimalLatitude": 23.1568,
+      "decimalLongitude": 72.65306,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082464,
+      "decimalLatitude": 23.18384,
+      "decimalLongitude": 72.64267,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082508,
+      "decimalLatitude": 23.21206,
+      "decimalLongitude": 72.65377,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082614,
+      "decimalLatitude": 23.15422,
+      "decimalLongitude": 72.64501,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082708,
+      "decimalLatitude": 23.21225,
+      "decimalLongitude": 72.6485,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082733,
+      "decimalLatitude": 23.14561,
+      "decimalLongitude": 72.6411,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4517082787,
+      "decimalLatitude": 23.14861,
+      "decimalLongitude": 72.6477,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4524740759,
+      "decimalLatitude": 21.12987,
+      "decimalLongitude": 72.80025,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5066544238,
+      "decimalLatitude": 23.4816,
+      "decimalLongitude": 120.2221,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4453737181,
+      "decimalLatitude": 24.769569,
+      "decimalLongitude": 121.799317,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4946553380,
+      "decimalLatitude": 24.884186,
+      "decimalLongitude": 121.189081,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 3912194526,
+      "decimalLatitude": 23.667356,
+      "decimalLongitude": 120.376829,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4458322733,
+      "decimalLatitude": 23.956502,
+      "decimalLongitude": 120.536614,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3873092353,
+      "decimalLatitude": 24.275192,
+      "decimalLongitude": 120.808237,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3892533220,
+      "decimalLatitude": 25.076592,
+      "decimalLongitude": 121.289118,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3902592382,
+      "decimalLatitude": 25.076576,
+      "decimalLongitude": 121.28916,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3947291827,
+      "decimalLatitude": 24.7149,
+      "decimalLongitude": 121.714224,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3961127784,
+      "decimalLatitude": 16.522238,
+      "decimalLongitude": 96.452513,
+      "country": "Myanmar",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3961431536,
+      "decimalLatitude": 24.029118,
+      "decimalLongitude": 120.473683,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4851764408,
+      "decimalLatitude": 19.258682,
+      "decimalLongitude": 73.390602,
+      "country": "India",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4945807901,
+      "decimalLatitude": 24.108812,
+      "decimalLongitude": 120.671452,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3961401590,
+      "decimalLatitude": 23.987483,
+      "decimalLongitude": 121.578012,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4458569712,
+      "decimalLatitude": 24.03023,
+      "decimalLongitude": 120.44072,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4458321452,
+      "decimalLatitude": 11.526788,
+      "decimalLongitude": 122.732254,
+      "country": "Philippines",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3343800172,
+      "decimalLatitude": 24.613,
+      "decimalLongitude": 121.854463,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3415766815,
+      "decimalLatitude": 23.939344,
+      "decimalLongitude": 121.536872,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5087835038,
+      "decimalLatitude": 24.218322,
+      "decimalLongitude": 120.642067,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3415813486,
+      "decimalLatitude": 24.230508,
+      "decimalLongitude": 120.749459,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5077089873,
+      "decimalLatitude": -23.549086,
+      "decimalLongitude": 44.15083,
+      "country": "Madagascar",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2868288606,
+      "decimalLatitude": 23.81702,
+      "decimalLongitude": 120.76065,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2868194078,
+      "decimalLatitude": 19.141906,
+      "decimalLongitude": 72.964628,
+      "country": "India",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3415456458,
+      "decimalLatitude": 22.425099,
+      "decimalLongitude": 108.628582,
+      "country": "China",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4852397576,
+      "decimalLatitude": 16.489948,
+      "decimalLongitude": 102.735987,
+      "country": "Thailand",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2980827826,
+      "decimalLatitude": 22.580885,
+      "decimalLongitude": 120.341151,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3902544289,
+      "decimalLatitude": 16.361716,
+      "decimalLongitude": 102.874433,
+      "country": "Thailand",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3872879352,
+      "decimalLatitude": 24.214225,
+      "decimalLongitude": 120.556686,
+      "country": "Chinese Taipei",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3325687319,
+      "decimalLatitude": 23.09315,
+      "decimalLongitude": 120.114167,
+      "country": "Chinese Taipei",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 1945416339,
+      "decimalLatitude": 23.620764,
+      "decimalLongitude": 120.261221,
+      "country": "Chinese Taipei",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 5153015302,
+      "decimalLatitude": -13.170455,
+      "decimalLongitude": 48.958952,
+      "country": "Madagascar",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 5077019451,
+      "decimalLatitude": 23.564306,
+      "decimalLongitude": 119.564011,
+      "country": "Chinese Taipei",
+      "year": 2015,
+      "elevation": null
+    },
+    {
+      "key": 1313755811,
+      "decimalLatitude": 23.37697,
+      "decimalLongitude": 120.26764,
+      "country": "Chinese Taipei",
+      "year": 2013,
+      "elevation": null
+    },
+    {
+      "key": 2802770844,
+      "decimalLatitude": 19.037431,
+      "decimalLongitude": 72.981488,
+      "country": "India",
+      "year": 2013,
+      "elevation": null
+    },
+    {
+      "key": 4046717184,
+      "decimalLatitude": 19.500954,
+      "decimalLongitude": 73.009072,
+      "country": "India",
+      "year": 2013,
+      "elevation": null
+    },
+    {
+      "key": 4851729744,
+      "decimalLatitude": 19.500119,
+      "decimalLongitude": 73.008265,
+      "country": "India",
+      "year": 2013,
+      "elevation": null
+    },
+    {
+      "key": 1633155927,
+      "decimalLatitude": -12.2325,
+      "decimalLongitude": 134.561111,
+      "country": "Australia",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 1633003428,
+      "decimalLatitude": -12.540852,
+      "decimalLongitude": 134.924814,
+      "country": "Australia",
+      "year": 1998,
+      "elevation": null
+    },
+    {
+      "key": 1633261868,
+      "decimalLatitude": -12.81164,
+      "decimalLongitude": 132.54906,
+      "country": "Australia",
+      "year": 1995,
+      "elevation": null
+    },
+    {
+      "key": 2850122523,
+      "decimalLatitude": -15.13144,
+      "decimalLongitude": 129.429191,
+      "country": "Australia",
+      "year": 1993,
+      "elevation": null
+    },
+    {
+      "key": 2850173685,
+      "decimalLatitude": -12.424499,
+      "decimalLongitude": 132.968198,
+      "country": "Australia",
+      "year": 1993,
+      "elevation": null
+    },
+    {
+      "key": 2850207221,
+      "decimalLatitude": -12.61867,
+      "decimalLongitude": 132.407416,
+      "country": "Australia",
+      "year": 1993,
+      "elevation": null
+    },
+    {
+      "key": 2850166781,
+      "decimalLatitude": -13.350247,
+      "decimalLongitude": 130.235487,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850207067,
+      "decimalLatitude": -12.950145,
+      "decimalLongitude": 130.336688,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850242071,
+      "decimalLatitude": -12.975445,
+      "decimalLongitude": 130.336888,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850267305,
+      "decimalLatitude": -13.201846,
+      "decimalLongitude": 130.266087,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850117104,
+      "decimalLatitude": -14.074849,
+      "decimalLongitude": 129.912386,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850130771,
+      "decimalLatitude": -12.406743,
+      "decimalLongitude": 132.142295,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850154819,
+      "decimalLatitude": -12.466744,
+      "decimalLongitude": 132.286195,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850196357,
+      "decimalLatitude": -12.298343,
+      "decimalLongitude": 131.467792,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850233197,
+      "decimalLatitude": -13.450047,
+      "decimalLongitude": 130.340988,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850242694,
+      "decimalLatitude": -14.074849,
+      "decimalLongitude": 129.912386,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850248253,
+      "decimalLatitude": -13.399747,
+      "decimalLongitude": 130.437088,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850108820,
+      "decimalLatitude": -12.000042,
+      "decimalLongitude": 128.999983,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850136324,
+      "decimalLatitude": -12.487844,
+      "decimalLongitude": 134.939306,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 2850198627,
+      "decimalLatitude": -12.000042,
+      "decimalLongitude": 128.999983,
+      "country": "Australia",
+      "year": 1990,
+      "elevation": null
+    },
+    {
+      "key": 1937441241,
+      "decimalLatitude": -12.61,
+      "decimalLongitude": 132.341,
+      "country": "Australia",
+      "year": 1985,
+      "elevation": null
+    },
+    {
+      "key": 1633381533,
+      "decimalLatitude": -12.42448,
+      "decimalLongitude": 132.96816,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633382171,
+      "decimalLatitude": -12.61868,
+      "decimalLongitude": 132.40736,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633382442,
+      "decimalLatitude": -15.13139,
+      "decimalLongitude": 129.42912,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633442618,
+      "decimalLatitude": -12.29688,
+      "decimalLongitude": 131.46898,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633442908,
+      "decimalLatitude": -12.48637,
+      "decimalLongitude": 134.94046,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633444591,
+      "decimalLatitude": -12.94869,
+      "decimalLongitude": 130.33789,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633444686,
+      "decimalLatitude": -12.97399,
+      "decimalLongitude": 130.33809,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633444801,
+      "decimalLatitude": -12.47358,
+      "decimalLongitude": 131.68717,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633445112,
+      "decimalLatitude": -12.31958,
+      "decimalLongitude": 131.68717,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633445571,
+      "decimalLatitude": -14.07339,
+      "decimalLongitude": 129.9136,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633445695,
+      "decimalLatitude": -14.07339,
+      "decimalLongitude": 129.9136,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633446038,
+      "decimalLatitude": -13.39829,
+      "decimalLongitude": 130.43829,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633446151,
+      "decimalLatitude": -13.44859,
+      "decimalLongitude": 130.3422,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633446354,
+      "decimalLatitude": -13.34879,
+      "decimalLongitude": 130.2367,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633446917,
+      "decimalLatitude": -13.20039,
+      "decimalLongitude": 130.26729,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633448701,
+      "decimalLatitude": -12.46528,
+      "decimalLongitude": 132.28736,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633448906,
+      "decimalLatitude": -12.40528,
+      "decimalLongitude": 132.14346,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633480038,
+      "decimalLatitude": -12.406,
+      "decimalLongitude": 132.95556,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633518688,
+      "decimalLatitude": -14.6958,
+      "decimalLongitude": 132.74036,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633519648,
+      "decimalLatitude": -17.35583,
+      "decimalLongitude": 130.82788,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 1633519942,
+      "decimalLatitude": -17.06217,
+      "decimalLongitude": 133.44871,
+      "country": "Australia",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3846962327,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3846998497,
+      "decimalLatitude": 14.65485,
+      "decimalLongitude": -61.01929,
+      "country": "Martinique",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3935058826,
+      "decimalLatitude": 14.65485,
+      "decimalLongitude": -61.01929,
+      "country": "Martinique",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3935120683,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 4547695736,
+      "decimalLatitude": 14.65485,
+      "decimalLongitude": -61.01929,
+      "country": "Martinique",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 4548190088,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    }
+  ]
+}

@@ -1,0 +1,1362 @@
+{
+  "crop_id": "eleusine_coracana_ssp_coracana",
+  "crop_name": "finger millet",
+  "scientific_name": "Eleusine coracana ssp. coracana",
+  "total_count": 169,
+  "fetched_count": 169,
+  "fetched_at": "2026-10-28T09:09:19.774117+00:00",
+  "occurrences": [
+    {
+      "key": 6171254423,
+      "decimalLatitude": 11.73,
+      "decimalLongitude": 77.98,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6179401375,
+      "decimalLatitude": -34.100059,
+      "decimalLongitude": 18.429031,
+      "country": "South Africa",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6320767435,
+      "decimalLatitude": -25.090754,
+      "decimalLongitude": 29.250774,
+      "country": "South Africa",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6480624390,
+      "decimalLatitude": 31.810571,
+      "decimalLongitude": 77.056123,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5716462858,
+      "decimalLatitude": 52.8,
+      "decimalLongitude": 4.95,
+      "country": "Netherlands",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5858379340,
+      "decimalLatitude": 8.1,
+      "decimalLongitude": 80.5,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5935523506,
+      "decimalLatitude": 27.59166,
+      "decimalLongitude": 86.668279,
+      "country": "Nepal",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110390764,
+      "decimalLatitude": 30.624063,
+      "decimalLongitude": 77.70578,
+      "country": "India",
+      "year": 2024,
+      "elevation": 1678.0
+    },
+    {
+      "key": 4957684529,
+      "decimalLatitude": 51.1,
+      "decimalLongitude": 5.85,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4957875471,
+      "decimalLatitude": 51.1,
+      "decimalLongitude": 5.85,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4985801139,
+      "decimalLatitude": 51.1,
+      "decimalLongitude": 5.85,
+      "country": "Netherlands",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5007008493,
+      "decimalLatitude": 27.832008,
+      "decimalLongitude": 85.677575,
+      "country": "Nepal",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4979075702,
+      "decimalLatitude": 50.94235,
+      "decimalLongitude": 3.143,
+      "country": "Belgium",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4979075974,
+      "decimalLatitude": 50.94213,
+      "decimalLongitude": 3.14298,
+      "country": "Belgium",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4080513561,
+      "decimalLatitude": -1.275029,
+      "decimalLongitude": 36.818424,
+      "country": "Kenya",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5109524697,
+      "decimalLatitude": 22.295911,
+      "decimalLongitude": 103.898581,
+      "country": "Viet Nam",
+      "year": 2023,
+      "elevation": 996.58
+    },
+    {
+      "key": 4438721775,
+      "decimalLatitude": 27.864733,
+      "decimalLongitude": 85.177042,
+      "country": "Nepal",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5019763260,
+      "decimalLatitude": 49.869083,
+      "decimalLongitude": 8.679714,
+      "country": "Germany",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4510089410,
+      "decimalLatitude": 27.356708,
+      "decimalLongitude": 88.470292,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4516767650,
+      "decimalLatitude": 12.325735,
+      "decimalLongitude": 76.397632,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 3963417137,
+      "decimalLatitude": 28.082186,
+      "decimalLongitude": 85.180305,
+      "country": "Nepal",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3986213861,
+      "decimalLatitude": 28.037825,
+      "decimalLongitude": 85.18557,
+      "country": "Nepal",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3988616606,
+      "decimalLatitude": 13.080582,
+      "decimalLongitude": 77.570721,
+      "country": "India",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3997808285,
+      "decimalLatitude": 28.239297,
+      "decimalLongitude": 83.838783,
+      "country": "Nepal",
+      "year": 2022,
+      "elevation": 1277.22
+    },
+    {
+      "key": 5014962114,
+      "decimalLatitude": 27.4181,
+      "decimalLongitude": 89.412231,
+      "country": "Bhutan",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3301845379,
+      "decimalLatitude": -24.615712,
+      "decimalLongitude": 25.92409,
+      "country": "Botswana",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3912172508,
+      "decimalLatitude": 35.21788,
+      "decimalLongitude": 138.2271,
+      "country": "Japan",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4176937510,
+      "decimalLatitude": 1.230206,
+      "decimalLongitude": 35.585401,
+      "country": "Kenya",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4176970531,
+      "decimalLatitude": 1.230228,
+      "decimalLongitude": 35.585438,
+      "country": "Kenya",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4177143440,
+      "decimalLatitude": 1.205771,
+      "decimalLongitude": 35.591868,
+      "country": "Kenya",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4177199483,
+      "decimalLatitude": 0.754719,
+      "decimalLongitude": 35.507422,
+      "country": "Kenya",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3954037304,
+      "decimalLatitude": 31.981626,
+      "decimalLongitude": 76.724428,
+      "country": "India",
+      "year": 2020,
+      "elevation": 1294.4
+    },
+    {
+      "key": 3956198261,
+      "decimalLatitude": 31.981626,
+      "decimalLongitude": 76.724428,
+      "country": "India",
+      "year": 2020,
+      "elevation": 1294.4
+    },
+    {
+      "key": 3018018543,
+      "decimalLatitude": 19.194224,
+      "decimalLongitude": 72.97121,
+      "country": "India",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3018021539,
+      "decimalLatitude": 19.194262,
+      "decimalLongitude": 72.971654,
+      "country": "India",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2573821380,
+      "decimalLatitude": 16.493794,
+      "decimalLongitude": 73.387918,
+      "country": "India",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2644176797,
+      "decimalLatitude": 25.995,
+      "decimalLongitude": 85.599167,
+      "country": "India",
+      "year": 2019,
+      "elevation": 6.0
+    },
+    {
+      "key": 3468873319,
+      "decimalLatitude": 27.734422,
+      "decimalLongitude": 84.293188,
+      "country": "Nepal",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2234738683,
+      "decimalLatitude": -34.074334,
+      "decimalLongitude": 23.049471,
+      "country": "South Africa",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3053839360,
+      "decimalLatitude": 6.431309,
+      "decimalLongitude": -0.585903,
+      "country": "Ghana",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 3053839361,
+      "decimalLatitude": 7.517661,
+      "decimalLongitude": 0.372033,
+      "country": "Ghana",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 3058991564,
+      "decimalLatitude": 11.687405,
+      "decimalLongitude": 78.180668,
+      "country": "India",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 3802846634,
+      "decimalLatitude": 6.431309,
+      "decimalLongitude": -0.585903,
+      "country": "Ghana",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 3802846636,
+      "decimalLatitude": 7.517661,
+      "decimalLongitude": 0.372033,
+      "country": "Ghana",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 4147262554,
+      "decimalLatitude": 22.5846,
+      "decimalLongitude": 88.4162,
+      "country": "India",
+      "year": 2017,
+      "elevation": null
+    },
+    {
+      "key": 3053839386,
+      "decimalLatitude": 6.453614,
+      "decimalLongitude": -0.352856,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3802847886,
+      "decimalLatitude": 6.453614,
+      "decimalLongitude": -0.352856,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3053839323,
+      "decimalLatitude": 9.400034,
+      "decimalLongitude": -0.988971,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3053839415,
+      "decimalLatitude": 10.657856,
+      "decimalLongitude": -1.265664,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3802846522,
+      "decimalLatitude": 10.657856,
+      "decimalLongitude": -1.265664,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3802846975,
+      "decimalLatitude": 9.400034,
+      "decimalLongitude": -0.988971,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3802846978,
+      "decimalLatitude": 9.400034,
+      "decimalLongitude": -0.988971,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3802846979,
+      "decimalLatitude": 9.400034,
+      "decimalLongitude": -0.988971,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3802846980,
+      "decimalLatitude": 9.400034,
+      "decimalLongitude": -0.988971,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3802847003,
+      "decimalLatitude": 9.400034,
+      "decimalLongitude": -0.988971,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3802847829,
+      "decimalLatitude": 9.400034,
+      "decimalLongitude": -0.988971,
+      "country": "Ghana",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 6159193178,
+      "decimalLatitude": 21.191299,
+      "decimalLongitude": 94.056771,
+      "country": "Myanmar",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3951361769,
+      "decimalLatitude": 25.409316,
+      "decimalLongitude": 81.85398,
+      "country": "India",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3963679587,
+      "decimalLatitude": 28.201275,
+      "decimalLongitude": 84.753931,
+      "country": "Nepal",
+      "year": 2016,
+      "elevation": null
+    },
+    {
+      "key": 3355027008,
+      "decimalLatitude": 50.416101,
+      "decimalLongitude": 30.559267,
+      "country": "Ukraine",
+      "year": 2014,
+      "elevation": null
+    },
+    {
+      "key": 1434488535,
+      "decimalLatitude": 56.65295,
+      "decimalLongitude": 12.86891,
+      "country": "Sweden",
+      "year": 2012,
+      "elevation": null
+    },
+    {
+      "key": 5130586985,
+      "decimalLatitude": 56.65318,
+      "decimalLongitude": 12.86858,
+      "country": "Sweden",
+      "year": 2012,
+      "elevation": null
+    },
+    {
+      "key": 1288067067,
+      "decimalLatitude": -7.92,
+      "decimalLongitude": 31.638056,
+      "country": "Tanzania, United Republic of",
+      "year": 2011,
+      "elevation": null
+    },
+    {
+      "key": 1288067069,
+      "decimalLatitude": -7.92,
+      "decimalLongitude": 31.638056,
+      "country": "Tanzania, United Republic of",
+      "year": 2011,
+      "elevation": null
+    },
+    {
+      "key": 1288067112,
+      "decimalLatitude": -7.92,
+      "decimalLongitude": 31.638056,
+      "country": "Tanzania, United Republic of",
+      "year": 2011,
+      "elevation": null
+    },
+    {
+      "key": 3830822546,
+      "decimalLatitude": -21.31231,
+      "decimalLongitude": 55.49378,
+      "country": "R\u00e9union",
+      "year": 2010,
+      "elevation": 0.0
+    },
+    {
+      "key": 3053839354,
+      "decimalLatitude": 6.630445,
+      "decimalLongitude": -0.690713,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839355,
+      "decimalLatitude": 7.38247,
+      "decimalLongitude": -1.35915,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839356,
+      "decimalLatitude": 7.494183,
+      "decimalLongitude": -2.695384,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839358,
+      "decimalLatitude": 10.862455,
+      "decimalLongitude": -2.767051,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839362,
+      "decimalLatitude": 6.115891,
+      "decimalLongitude": -3.036389,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839363,
+      "decimalLatitude": 5.155509,
+      "decimalLongitude": -2.075171,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839364,
+      "decimalLatitude": 5.053604,
+      "decimalLongitude": -1.45815,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839365,
+      "decimalLatitude": 5.053604,
+      "decimalLongitude": -1.45815,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839366,
+      "decimalLatitude": 7.38247,
+      "decimalLongitude": -1.35915,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839367,
+      "decimalLatitude": 6.861283,
+      "decimalLongitude": -1.392045,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839368,
+      "decimalLatitude": 6.861283,
+      "decimalLongitude": -1.392045,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839369,
+      "decimalLatitude": 6.692364,
+      "decimalLongitude": -1.403218,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839371,
+      "decimalLatitude": 6.282517,
+      "decimalLongitude": -1.655052,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839372,
+      "decimalLatitude": 7.007917,
+      "decimalLongitude": -2.166796,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839382,
+      "decimalLatitude": 6.386506,
+      "decimalLongitude": -0.375252,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848090,
+      "decimalLatitude": 6.861283,
+      "decimalLongitude": -1.392045,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848092,
+      "decimalLatitude": 6.692364,
+      "decimalLongitude": -1.403218,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848096,
+      "decimalLatitude": 6.115891,
+      "decimalLongitude": -3.036389,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848097,
+      "decimalLatitude": 5.155509,
+      "decimalLongitude": -2.075171,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848102,
+      "decimalLatitude": 5.053604,
+      "decimalLongitude": -1.45815,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848103,
+      "decimalLatitude": 5.053604,
+      "decimalLongitude": -1.45815,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848106,
+      "decimalLatitude": 6.386506,
+      "decimalLongitude": -0.375252,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848121,
+      "decimalLatitude": 6.630445,
+      "decimalLongitude": -0.690713,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848145,
+      "decimalLatitude": 6.861283,
+      "decimalLongitude": -1.392045,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848118,
+      "decimalLatitude": 10.862455,
+      "decimalLongitude": -2.767051,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839357,
+      "decimalLatitude": 11.059588,
+      "decimalLongitude": -0.238164,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3053839370,
+      "decimalLatitude": 11.059588,
+      "decimalLongitude": -0.238164,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848125,
+      "decimalLatitude": 7.38247,
+      "decimalLongitude": -1.35915,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848128,
+      "decimalLatitude": 7.494183,
+      "decimalLongitude": -2.695384,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848131,
+      "decimalLatitude": 11.059588,
+      "decimalLongitude": -0.238164,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848134,
+      "decimalLatitude": 11.059588,
+      "decimalLongitude": -0.238164,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848137,
+      "decimalLatitude": 6.282517,
+      "decimalLongitude": -1.655052,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848140,
+      "decimalLatitude": 7.007917,
+      "decimalLongitude": -2.166796,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 3802848143,
+      "decimalLatitude": 7.38247,
+      "decimalLongitude": -1.35915,
+      "country": "Ghana",
+      "year": 2010,
+      "elevation": null
+    },
+    {
+      "key": 852314138,
+      "decimalLatitude": 57.77826,
+      "decimalLongitude": 11.98202,
+      "country": "Sweden",
+      "year": 2004,
+      "elevation": null
+    },
+    {
+      "key": 852452439,
+      "decimalLatitude": 57.78217,
+      "decimalLongitude": 11.98203,
+      "country": "Sweden",
+      "year": 2004,
+      "elevation": null
+    },
+    {
+      "key": 852556545,
+      "decimalLatitude": 57.7789,
+      "decimalLongitude": 11.9812,
+      "country": "Sweden",
+      "year": 2004,
+      "elevation": null
+    },
+    {
+      "key": 1821089631,
+      "decimalLatitude": 57.78112,
+      "decimalLongitude": 11.98172,
+      "country": "Sweden",
+      "year": 2004,
+      "elevation": null
+    },
+    {
+      "key": 1912877205,
+      "decimalLatitude": 57.77826,
+      "decimalLongitude": 11.98202,
+      "country": "Sweden",
+      "year": 2004,
+      "elevation": null
+    },
+    {
+      "key": 3077877454,
+      "decimalLatitude": 57.78025,
+      "decimalLongitude": 11.98106,
+      "country": "Sweden",
+      "year": 2004,
+      "elevation": null
+    },
+    {
+      "key": 869406219,
+      "decimalLatitude": 50.92095,
+      "decimalLongitude": 3.13878,
+      "country": "Belgium",
+      "year": 2004,
+      "elevation": null
+    },
+    {
+      "key": 4867467425,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1993,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867411637,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1992,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867487515,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1991,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867505489,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1990,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867460428,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1989,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867397970,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1988,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867492723,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1987,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867399022,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1986,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867483443,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1985,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867500579,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1984,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867451006,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1983,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867407825,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1982,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867407291,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1980,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867515642,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1979,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867512307,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1978,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867450879,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1977,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867422357,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1976,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867423469,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1975,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867448739,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1974,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867424126,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1971,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867499775,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1970,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867420432,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1969,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867511310,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1968,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867523659,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1967,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867502998,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1964,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867409402,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1962,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867502659,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1961,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867460256,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1960,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867509458,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1959,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867403109,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1958,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867502115,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1957,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867490896,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1956,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867412185,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1955,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867456248,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1954,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867421423,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1953,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867460499,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1950,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867489650,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1949,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867505012,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1948,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867480076,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1947,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867461305,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1946,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867510100,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1945,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867495285,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1944,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867422231,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1943,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867471462,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1942,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867399513,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1941,
+      "elevation": 77.0
+    },
+    {
+      "key": 1983792058,
+      "decimalLatitude": 51.57537,
+      "decimalLongitude": 5.0736,
+      "country": "Netherlands",
+      "year": 1941,
+      "elevation": null
+    },
+    {
+      "key": 4867425655,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1940,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867437107,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1939,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867405770,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1938,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867502062,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1936,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867503010,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1935,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867411552,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1934,
+      "elevation": 77.0
+    },
+    {
+      "key": 4867454870,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1933,
+      "elevation": 77.0
+    },
+    {
+      "key": 2540052651,
+      "decimalLatitude": 51.503342,
+      "decimalLongitude": -2.700146,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 1930,
+      "elevation": null
+    },
+    {
+      "key": 2465004633,
+      "decimalLatitude": 10.5,
+      "decimalLongitude": 79.5,
+      "country": "India",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 2548484834,
+      "decimalLatitude": 51.874966,
+      "decimalLongitude": 12.208233,
+      "country": "Germany",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3042973898,
+      "decimalLatitude": 35.86,
+      "decimalLongitude": 104.2,
+      "country": "China",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3042973899,
+      "decimalLatitude": 20.59,
+      "decimalLongitude": 78.96,
+      "country": "India",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3053323583,
+      "decimalLatitude": -2.95863,
+      "decimalLongitude": 35.241765,
+      "country": "Tanzania, United Republic of",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3847054624,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 3934996315,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 4547983672,
+      "decimalLatitude": -21.13317,
+      "decimalLongitude": 55.53241,
+      "country": "R\u00e9union",
+      "year": null,
+      "elevation": null
+    }
+  ]
+}

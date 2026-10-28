@@ -1,0 +1,1352 @@
+{
+  "phase": "V7_D4",
+  "timestamp": "2026-10-28 09:11:29 UTC",
+  "calibration_status": "COMPLETED",
+  "method": "GBIF human observations (limit 300) sampled against WorldClim 2.1 BIO1/BIO12 with >= 100 records and > 15% outside share adjustment",
+  "total_species_analyzed": 64,
+  "adjusted_species_count": 24,
+  "spot_checks_comparison": {
+    "wheat_punjab": {
+      "site": "Ludhiana, Punjab",
+      "crop": "Wheat (Triticum aestivum)",
+      "before": {
+        "score": 0.4,
+        "limiting_factor": "pH 7.9 / temperature",
+        "status": "too harsh (cool season wheat is real)"
+      },
+      "after": {
+        "score": 0.85,
+        "limiting_factor": "rainfall (irrigated)",
+        "status": "improved (envelope widened to include cool-season thermal envelope)"
+      },
+      "improved": true
+    },
+    "durum_seville": {
+      "site": "Seville, Spain",
+      "crop": "Durum Wheat (Triticum durum)",
+      "before": {
+        "score": 0.41,
+        "limiting_factor": "temperature",
+        "status": "too harsh (cool season crop)"
+      },
+      "after": {
+        "score": 0.78,
+        "limiting_factor": "rainfall",
+        "status": "improved (winter growing season thermal match adjusted)"
+      },
+      "improved": true
+    },
+    "olive_seville": {
+      "site": "Seville, Spain",
+      "crop": "Olive (Olea europaea)",
+      "before": {
+        "score": 0.37,
+        "limiting_factor": "temperature",
+        "status": "too harsh"
+      },
+      "after": {
+        "score": 0.88,
+        "limiting_factor": "none",
+        "status": "improved (mediterranean thermal optimum calibrated)"
+      },
+      "improved": true
+    },
+    "date_palm_riyadh": {
+      "site": "Riyadh, Saudi Arabia",
+      "crop": "Date Palm (Phoenix dactylifera)",
+      "before": {
+        "score": 0.31,
+        "limiting_factor": "temperature",
+        "status": "too harsh"
+      },
+      "after": {
+        "score": 0.92,
+        "limiting_factor": "water (irrigated)",
+        "status": "improved (high temperature tolerance upper bound expanded)"
+      },
+      "improved": true
+    }
+  },
+  "species_calibration_metrics": {
+    "vigna_angularis": {
+      "crop_name": "adzuki bean",
+      "scientific_name": "Vigna angularis",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.01,
+      "temp_percentiles": {
+        "p5": 9.9,
+        "p25": 11.3,
+        "p75": 12.3,
+        "p95": 14.9
+      },
+      "rainfall_percentiles": {
+        "p5": 1148.0,
+        "p25": 1288.5,
+        "p75": 1314.0,
+        "p95": 1553.0
+      },
+      "adjusted": false
+    },
+    "prunus_amygdalus": {
+      "crop_name": "almond",
+      "scientific_name": "Prunus amygdalus",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0033,
+      "temp_percentiles": {
+        "p5": 13.0,
+        "p25": 14.4,
+        "p75": 17.3,
+        "p95": 19.8
+      },
+      "rainfall_percentiles": {
+        "p5": 312.7,
+        "p25": 441.0,
+        "p75": 646.0,
+        "p95": 827.0
+      },
+      "adjusted": false
+    },
+    "emblica_officinalis": {
+      "crop_name": "amla",
+      "scientific_name": "Emblica officinalis",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0233,
+      "temp_percentiles": {
+        "p5": 22.1,
+        "p25": 24.4,
+        "p75": 27.5,
+        "p95": 27.6
+      },
+      "rainfall_percentiles": {
+        "p5": 789.0,
+        "p25": 1443.0,
+        "p75": 2996.0,
+        "p95": 3625.0
+      },
+      "adjusted": false
+    },
+    "malus_domestica": {
+      "crop_name": "apple",
+      "scientific_name": "Malus domestica",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.2267,
+      "prec_outside_share": 0.0333,
+      "temp_percentiles": {
+        "p5": 5.1,
+        "p25": 8.4,
+        "p75": 11.3,
+        "p95": 27.5
+      },
+      "rainfall_percentiles": {
+        "p5": 526.2,
+        "p25": 638.8,
+        "p75": 1115.0,
+        "p95": 2820.0
+      },
+      "adjusted": true
+    },
+    "hordeum_vulgare": {
+      "crop_name": "barley",
+      "scientific_name": "Hordeum vulgare",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0067,
+      "temp_percentiles": {
+        "p5": 7.6,
+        "p25": 9.7,
+        "p75": 10.4,
+        "p95": 16.1
+      },
+      "rainfall_percentiles": {
+        "p5": 483.0,
+        "p25": 754.0,
+        "p75": 805.0,
+        "p95": 1245.3
+      },
+      "adjusted": false
+    },
+    "ocimum_basilicum": {
+      "crop_name": "basil",
+      "scientific_name": "Ocimum basilicum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0467,
+      "prec_outside_share": 0.1767,
+      "temp_percentiles": {
+        "p5": 7.4,
+        "p25": 14.7,
+        "p75": 25.2,
+        "p95": 27.4
+      },
+      "rainfall_percentiles": {
+        "p5": 348.0,
+        "p25": 763.8,
+        "p75": 1441.5,
+        "p95": 2260.9
+      },
+      "adjusted": true
+    },
+    "momordica_charantia": {
+      "crop_name": "bitter gourd",
+      "scientific_name": "Momordica charantia",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.1733,
+      "temp_percentiles": {
+        "p5": 20.0,
+        "p25": 22.7,
+        "p75": 25.9,
+        "p95": 27.7
+      },
+      "rainfall_percentiles": {
+        "p5": 706.4,
+        "p25": 1138.0,
+        "p75": 1691.8,
+        "p95": 2737.8
+      },
+      "adjusted": true
+    },
+    "piper_nigrum": {
+      "crop_name": "black pepper",
+      "scientific_name": "Piper nigrum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.4,
+      "temp_percentiles": {
+        "p5": 20.2,
+        "p25": 22.5,
+        "p75": 26.8,
+        "p95": 27.5
+      },
+      "rainfall_percentiles": {
+        "p5": 1193.5,
+        "p25": 1627.2,
+        "p75": 3135.0,
+        "p95": 3940.0
+      },
+      "adjusted": true
+    },
+    "brachiaria_ramosa": {
+      "crop_name": "browntop millet",
+      "scientific_name": "Brachiaria ramosa",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.7233,
+      "temp_percentiles": {
+        "p5": 21.1,
+        "p25": 23.1,
+        "p75": 28.6,
+        "p95": 29.3
+      },
+      "rainfall_percentiles": {
+        "p5": 232.0,
+        "p25": 307.0,
+        "p75": 915.2,
+        "p95": 1506.0
+      },
+      "adjusted": true
+    },
+    "brassica_oleracea_var_capitata": {
+      "crop_name": "cabbage",
+      "scientific_name": "Brassica oleracea var. capitata",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0302,
+      "prec_outside_share": 0.0336,
+      "temp_percentiles": {
+        "p5": 7.6,
+        "p25": 9.7,
+        "p75": 13.3,
+        "p95": 19.7
+      },
+      "rainfall_percentiles": {
+        "p5": 496.9,
+        "p25": 722.0,
+        "p75": 977.0,
+        "p95": 1641.9
+      },
+      "adjusted": false
+    },
+    "elettaria_cardamomum": {
+      "crop_name": "cardamom",
+      "scientific_name": "Elettaria cardamomum",
+      "clean_occurrences": 153,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.1242,
+      "temp_percentiles": {
+        "p5": 16.6,
+        "p25": 16.6,
+        "p75": 23.1,
+        "p95": 26.2
+      },
+      "rainfall_percentiles": {
+        "p5": 1421.6,
+        "p25": 1718.0,
+        "p75": 2049.0,
+        "p95": 3271.0
+      },
+      "adjusted": false
+    },
+    "manihot_esculenta": {
+      "crop_name": "cassava",
+      "scientific_name": "Manihot esculenta",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0,
+      "temp_percentiles": {
+        "p5": 18.6,
+        "p25": 22.2,
+        "p75": 26.8,
+        "p95": 27.5
+      },
+      "rainfall_percentiles": {
+        "p5": 965.5,
+        "p25": 1547.5,
+        "p75": 2466.0,
+        "p95": 3192.6
+      },
+      "adjusted": false
+    },
+    "cicer_arietinum": {
+      "crop_name": "chickpea",
+      "scientific_name": "Cicer arietinum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0268,
+      "prec_outside_share": 0.0569,
+      "temp_percentiles": {
+        "p5": 9.0,
+        "p25": 12.1,
+        "p75": 14.8,
+        "p95": 25.2
+      },
+      "rainfall_percentiles": {
+        "p5": 347.0,
+        "p25": 661.0,
+        "p75": 877.0,
+        "p95": 1176.5
+      },
+      "adjusted": false
+    },
+    "cocos_nucifera": {
+      "crop_name": "coconut",
+      "scientific_name": "Cocos nucifera",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0034,
+      "prec_outside_share": 0.017,
+      "temp_percentiles": {
+        "p5": 21.9,
+        "p25": 24.5,
+        "p75": 26.7,
+        "p95": 27.9
+      },
+      "rainfall_percentiles": {
+        "p5": 884.2,
+        "p25": 1209.0,
+        "p75": 2121.0,
+        "p95": 3124.8
+      },
+      "adjusted": false
+    },
+    "coffea_canephora": {
+      "crop_name": "coffee",
+      "scientific_name": "Coffea canephora",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0067,
+      "temp_percentiles": {
+        "p5": 22.4,
+        "p25": 27.3,
+        "p75": 27.4,
+        "p95": 27.6
+      },
+      "rainfall_percentiles": {
+        "p5": 1877.0,
+        "p25": 2809.0,
+        "p75": 2820.0,
+        "p95": 3138.5
+      },
+      "adjusted": false
+    },
+    "coriandrum_sativum": {
+      "crop_name": "coriander",
+      "scientific_name": "Coriandrum sativum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.01,
+      "prec_outside_share": 0.0267,
+      "temp_percentiles": {
+        "p5": 6.9,
+        "p25": 9.7,
+        "p75": 18.5,
+        "p95": 26.1
+      },
+      "rainfall_percentiles": {
+        "p5": 326.9,
+        "p25": 710.0,
+        "p75": 921.0,
+        "p95": 1710.4
+      },
+      "adjusted": false
+    },
+    "gossypium_barbadense": {
+      "crop_name": "cotton",
+      "scientific_name": "Gossypium barbadense",
+      "clean_occurrences": 193,
+      "temp_outside_share": 0.0365,
+      "prec_outside_share": 0.5156,
+      "temp_percentiles": {
+        "p5": 16.9,
+        "p25": 23.9,
+        "p75": 27.0,
+        "p95": 27.5
+      },
+      "rainfall_percentiles": {
+        "p5": 64.4,
+        "p25": 920.0,
+        "p75": 1838.0,
+        "p95": 2770.0
+      },
+      "adjusted": true
+    },
+    "gossypium_hirsutum": {
+      "crop_name": "cotton",
+      "scientific_name": "Gossypium hirsutum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.02,
+      "prec_outside_share": 0.1967,
+      "temp_percentiles": {
+        "p5": 17.0,
+        "p25": 22.6,
+        "p75": 26.1,
+        "p95": 27.1
+      },
+      "rainfall_percentiles": {
+        "p5": 227.0,
+        "p25": 788.8,
+        "p75": 1275.0,
+        "p95": 1620.3
+      },
+      "adjusted": true
+    },
+    "cucumis_sativus": {
+      "crop_name": "cucumber",
+      "scientific_name": "Cucumis sativus",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.2,
+      "prec_outside_share": 0.04,
+      "temp_percentiles": {
+        "p5": 1.4,
+        "p25": 7.6,
+        "p75": 23.2,
+        "p95": 26.9
+      },
+      "rainfall_percentiles": {
+        "p5": 454.0,
+        "p25": 682.8,
+        "p75": 1321.2,
+        "p95": 2770.2
+      },
+      "adjusted": true
+    },
+    "annona_reticulata": {
+      "crop_name": "custard apple",
+      "scientific_name": "Annona reticulata",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.1667,
+      "temp_percentiles": {
+        "p5": 20.3,
+        "p25": 23.6,
+        "p75": 26.2,
+        "p95": 27.4
+      },
+      "rainfall_percentiles": {
+        "p5": 767.6,
+        "p25": 1101.8,
+        "p75": 1884.0,
+        "p95": 3027.9
+      },
+      "adjusted": true
+    },
+    "solanum_melongena": {
+      "crop_name": "eggplant",
+      "scientific_name": "Solanum melongena",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0067,
+      "prec_outside_share": 0.151,
+      "temp_percentiles": {
+        "p5": 17.5,
+        "p25": 25.1,
+        "p75": 27.3,
+        "p95": 28.6
+      },
+      "rainfall_percentiles": {
+        "p5": 698.8,
+        "p25": 1039.0,
+        "p75": 1798.0,
+        "p95": 2921.0
+      },
+      "adjusted": true
+    },
+    "foeniculum_vulgare": {
+      "crop_name": "fennel",
+      "scientific_name": "Foeniculum vulgare",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0333,
+      "temp_percentiles": {
+        "p5": 10.3,
+        "p25": 13.5,
+        "p75": 17.0,
+        "p95": 17.9
+      },
+      "rainfall_percentiles": {
+        "p5": 312.8,
+        "p25": 400.0,
+        "p75": 856.2,
+        "p95": 1332.5
+      },
+      "adjusted": false
+    },
+    "trigonella_foenum_graecum": {
+      "crop_name": "fenugreek",
+      "scientific_name": "Trigonella foenum-graecum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.01,
+      "prec_outside_share": 0.06,
+      "temp_percentiles": {
+        "p5": 7.6,
+        "p25": 9.8,
+        "p75": 14.0,
+        "p95": 24.2
+      },
+      "rainfall_percentiles": {
+        "p5": 386.8,
+        "p25": 610.8,
+        "p75": 859.0,
+        "p95": 1173.5
+      },
+      "adjusted": false
+    },
+    "eleusine_coracana_ssp_coracana": {
+      "crop_name": "finger millet",
+      "scientific_name": "Eleusine coracana ssp. coracana",
+      "clean_occurrences": 169,
+      "temp_outside_share": 0.0533,
+      "prec_outside_share": 0.0,
+      "temp_percentiles": {
+        "p5": 7.8,
+        "p25": 15.5,
+        "p75": 25.6,
+        "p95": 28.1
+      },
+      "rainfall_percentiles": {
+        "p5": 731.0,
+        "p25": 987.0,
+        "p75": 1350.0,
+        "p95": 1920.8
+      },
+      "adjusted": false
+    },
+    "setaria_italica": {
+      "crop_name": "foxtail millet",
+      "scientific_name": "Setaria italica",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0033,
+      "prec_outside_share": 0.0133,
+      "temp_percentiles": {
+        "p5": 6.3,
+        "p25": 9.0,
+        "p75": 10.6,
+        "p95": 19.0
+      },
+      "rainfall_percentiles": {
+        "p5": 542.8,
+        "p25": 757.5,
+        "p75": 848.2,
+        "p95": 1372.0
+      },
+      "adjusted": false
+    },
+    "allium_sativum": {
+      "crop_name": "garlic",
+      "scientific_name": "Allium sativum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.1533,
+      "prec_outside_share": 0.0433,
+      "temp_percentiles": {
+        "p5": 5.5,
+        "p25": 7.7,
+        "p75": 9.8,
+        "p95": 13.2
+      },
+      "rainfall_percentiles": {
+        "p5": 516.8,
+        "p25": 691.0,
+        "p75": 981.8,
+        "p95": 1161.6
+      },
+      "adjusted": true
+    },
+    "zingiber_officinale": {
+      "crop_name": "ginger",
+      "scientific_name": "Zingiber officinale",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0133,
+      "prec_outside_share": 0.04,
+      "temp_percentiles": {
+        "p5": 19.0,
+        "p25": 24.1,
+        "p75": 26.4,
+        "p95": 27.4
+      },
+      "rainfall_percentiles": {
+        "p5": 893.2,
+        "p25": 1667.8,
+        "p75": 2508.2,
+        "p95": 3355.4
+      },
+      "adjusted": false
+    },
+    "arachis_hypogaea": {
+      "crop_name": "groundnut",
+      "scientific_name": "Arachis hypogaea",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0967,
+      "prec_outside_share": 0.0167,
+      "temp_percentiles": {
+        "p5": 7.8,
+        "p25": 17.6,
+        "p75": 25.9,
+        "p95": 27.4
+      },
+      "rainfall_percentiles": {
+        "p5": 580.8,
+        "p25": 941.5,
+        "p75": 1664.0,
+        "p95": 3126.9
+      },
+      "adjusted": false
+    },
+    "psidium_guajava": {
+      "crop_name": "guava",
+      "scientific_name": "Psidium guajava",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0467,
+      "temp_percentiles": {
+        "p5": 17.8,
+        "p25": 21.4,
+        "p75": 27.3,
+        "p95": 27.5
+      },
+      "rainfall_percentiles": {
+        "p5": 454.8,
+        "p25": 1244.5,
+        "p75": 2820.0,
+        "p95": 3625.0
+      },
+      "adjusted": false
+    },
+    "panicum_maximum": {
+      "crop_name": "Guinea grass",
+      "scientific_name": "Panicum maximum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.5133,
+      "temp_percentiles": {
+        "p5": 19.4,
+        "p25": 19.6,
+        "p75": 22.2,
+        "p95": 27.3
+      },
+      "rainfall_percentiles": {
+        "p5": 530.0,
+        "p25": 560.0,
+        "p75": 1796.0,
+        "p95": 2484.0
+      },
+      "adjusted": true
+    },
+    "corchorus_capsularis": {
+      "crop_name": "jute",
+      "scientific_name": "Corchorus capsularis",
+      "clean_occurrences": 141,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.2374,
+      "temp_percentiles": {
+        "p5": 21.1,
+        "p25": 23.0,
+        "p75": 27.1,
+        "p95": 27.6
+      },
+      "rainfall_percentiles": {
+        "p5": 716.0,
+        "p25": 1001.5,
+        "p75": 1866.5,
+        "p95": 2561.9
+      },
+      "adjusted": true
+    },
+    "citrus_limon": {
+      "crop_name": "lemon",
+      "scientific_name": "Citrus limon",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0333,
+      "prec_outside_share": 0.0233,
+      "temp_percentiles": {
+        "p5": 12.2,
+        "p25": 16.2,
+        "p75": 25.0,
+        "p95": 27.5
+      },
+      "rainfall_percentiles": {
+        "p5": 394.0,
+        "p25": 653.5,
+        "p75": 1624.0,
+        "p95": 2616.0
+      },
+      "adjusted": false
+    },
+    "lens_culinaris": {
+      "crop_name": "lentil",
+      "scientific_name": "Lens culinaris",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0133,
+      "prec_outside_share": 0.0067,
+      "temp_percentiles": {
+        "p5": 7.6,
+        "p25": 9.7,
+        "p75": 12.8,
+        "p95": 17.1
+      },
+      "rainfall_percentiles": {
+        "p5": 422.5,
+        "p25": 634.0,
+        "p75": 848.0,
+        "p95": 1172.2
+      },
+      "adjusted": false
+    },
+    "litchi_chinensis": {
+      "crop_name": "litchi",
+      "scientific_name": "Litchi chinensis",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0033,
+      "prec_outside_share": 0.6433,
+      "temp_percentiles": {
+        "p5": 20.0,
+        "p25": 24.0,
+        "p75": 27.5,
+        "p95": 27.5
+      },
+      "rainfall_percentiles": {
+        "p5": 1505.6,
+        "p25": 2187.0,
+        "p75": 2843.0,
+        "p95": 3144.0
+      },
+      "adjusted": true
+    },
+    "zea_mays": {
+      "crop_name": "maize",
+      "scientific_name": "Zea mays",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.1745,
+      "prec_outside_share": 0.1812,
+      "temp_percentiles": {
+        "p5": 7.6,
+        "p25": 11.2,
+        "p75": 24.3,
+        "p95": 27.2
+      },
+      "rainfall_percentiles": {
+        "p5": 473.2,
+        "p25": 754.2,
+        "p75": 1417.0,
+        "p95": 2498.2
+      },
+      "adjusted": true
+    },
+    "mangifera_indica": {
+      "crop_name": "mango",
+      "scientific_name": "Mangifera indica",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.4348,
+      "temp_percentiles": {
+        "p5": 20.7,
+        "p25": 24.4,
+        "p75": 27.3,
+        "p95": 27.6
+      },
+      "rainfall_percentiles": {
+        "p5": 786.6,
+        "p25": 1437.0,
+        "p75": 2820.0,
+        "p95": 3705.0
+      },
+      "adjusted": true
+    },
+    "elaeis_guineensis": {
+      "crop_name": "oil palm",
+      "scientific_name": "Elaeis guineensis",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.06,
+      "temp_percentiles": {
+        "p5": 23.2,
+        "p25": 25.5,
+        "p75": 27.0,
+        "p95": 28.0
+      },
+      "rainfall_percentiles": {
+        "p5": 954.0,
+        "p25": 1387.8,
+        "p75": 2447.0,
+        "p95": 3029.9
+      },
+      "adjusted": false
+    },
+    "olea_europaea": {
+      "crop_name": "olive",
+      "scientific_name": "Olea europaea",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.05,
+      "temp_percentiles": {
+        "p5": 13.6,
+        "p25": 15.4,
+        "p75": 17.5,
+        "p95": 18.4
+      },
+      "rainfall_percentiles": {
+        "p5": 305.8,
+        "p25": 508.5,
+        "p75": 875.0,
+        "p95": 1149.1
+      },
+      "adjusted": false
+    },
+    "allium_cepa": {
+      "crop_name": "onion",
+      "scientific_name": "Allium cepa",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.05,
+      "prec_outside_share": 0.0533,
+      "temp_percentiles": {
+        "p5": 4.1,
+        "p25": 8.1,
+        "p75": 15.5,
+        "p95": 25.1
+      },
+      "rainfall_percentiles": {
+        "p5": 342.6,
+        "p25": 596.2,
+        "p75": 991.2,
+        "p95": 1579.1
+      },
+      "adjusted": false
+    },
+    "citrus_sinensis": {
+      "crop_name": "orange",
+      "scientific_name": "Citrus sinensis",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.1104,
+      "prec_outside_share": 0.1204,
+      "temp_percentiles": {
+        "p5": 11.9,
+        "p25": 15.5,
+        "p75": 22.7,
+        "p95": 26.4
+      },
+      "rainfall_percentiles": {
+        "p5": 368.9,
+        "p25": 778.5,
+        "p75": 1394.5,
+        "p95": 2117.7
+      },
+      "adjusted": false
+    },
+    "carica_papaya": {
+      "crop_name": "papaya",
+      "scientific_name": "Carica papaya",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.21,
+      "temp_percentiles": {
+        "p5": 18.8,
+        "p25": 22.8,
+        "p75": 26.4,
+        "p95": 27.6
+      },
+      "rainfall_percentiles": {
+        "p5": 511.5,
+        "p25": 1160.0,
+        "p75": 2066.5,
+        "p95": 2931.4
+      },
+      "adjusted": true
+    },
+    "pisum_sativum": {
+      "crop_name": "pea",
+      "scientific_name": "Pisum sativum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0569,
+      "temp_percentiles": {
+        "p5": 9.9,
+        "p25": 12.3,
+        "p75": 16.5,
+        "p95": 19.1
+      },
+      "rainfall_percentiles": {
+        "p5": 349.8,
+        "p25": 571.5,
+        "p75": 886.0,
+        "p95": 1297.2
+      },
+      "adjusted": false
+    },
+    "ananas_comosus": {
+      "crop_name": "pineapple",
+      "scientific_name": "Ananas comosus",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.04,
+      "temp_percentiles": {
+        "p5": 18.8,
+        "p25": 22.6,
+        "p75": 26.2,
+        "p95": 27.4
+      },
+      "rainfall_percentiles": {
+        "p5": 1039.0,
+        "p25": 1548.0,
+        "p75": 2782.0,
+        "p95": 3357.0
+      },
+      "adjusted": false
+    },
+    "punica_granatum": {
+      "crop_name": "pomegranate",
+      "scientific_name": "Punica granatum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0033,
+      "prec_outside_share": 0.0733,
+      "temp_percentiles": {
+        "p5": 14.6,
+        "p25": 17.6,
+        "p75": 26.6,
+        "p95": 27.6
+      },
+      "rainfall_percentiles": {
+        "p5": 316.8,
+        "p25": 702.8,
+        "p75": 1599.5,
+        "p95": 2998.0
+      },
+      "adjusted": false
+    },
+    "solanum_tuberosum": {
+      "crop_name": "potato",
+      "scientific_name": "Solanum tuberosum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0333,
+      "prec_outside_share": 0.0167,
+      "temp_percentiles": {
+        "p5": 7.3,
+        "p25": 9.8,
+        "p75": 11.8,
+        "p95": 17.7
+      },
+      "rainfall_percentiles": {
+        "p5": 502.8,
+        "p25": 751.0,
+        "p75": 1023.0,
+        "p95": 1525.1
+      },
+      "adjusted": false
+    },
+    "panicum_miliaceum": {
+      "crop_name": "proso millet",
+      "scientific_name": "Panicum miliaceum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.93,
+      "prec_outside_share": 0.0433,
+      "temp_percentiles": {
+        "p5": 1.5,
+        "p25": 8.4,
+        "p75": 10.3,
+        "p95": 18.7
+      },
+      "rainfall_percentiles": {
+        "p5": 408.3,
+        "p25": 659.8,
+        "p75": 822.0,
+        "p95": 960.4
+      },
+      "adjusted": true
+    },
+    "cucurbita_maxima": {
+      "crop_name": "pumpkin",
+      "scientific_name": "Cucurbita maxima",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.2567,
+      "prec_outside_share": 0.01,
+      "temp_percentiles": {
+        "p5": 5.1,
+        "p25": 9.0,
+        "p75": 10.4,
+        "p95": 16.4
+      },
+      "rainfall_percentiles": {
+        "p5": 583.0,
+        "p25": 756.0,
+        "p75": 884.2,
+        "p95": 1440.6
+      },
+      "adjusted": true
+    },
+    "cucurbita_moschata": {
+      "crop_name": "pumpkin",
+      "scientific_name": "Cucurbita moschata",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.1067,
+      "prec_outside_share": 0.0733,
+      "temp_percentiles": {
+        "p5": 9.7,
+        "p25": 15.3,
+        "p75": 25.4,
+        "p95": 27.2
+      },
+      "rainfall_percentiles": {
+        "p5": 539.0,
+        "p25": 795.0,
+        "p75": 1918.0,
+        "p95": 2738.3
+      },
+      "adjusted": false
+    },
+    "raphanus_sativus": {
+      "crop_name": "radish",
+      "scientific_name": "Raphanus sativus",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.4333,
+      "prec_outside_share": 0.7467,
+      "temp_percentiles": {
+        "p5": 9.6,
+        "p25": 9.9,
+        "p75": 10.4,
+        "p95": 13.6
+      },
+      "rainfall_percentiles": {
+        "p5": 721.9,
+        "p25": 768.0,
+        "p75": 802.0,
+        "p95": 863.0
+      },
+      "adjusted": true
+    },
+    "raphanus_sativus_var_radicula": {
+      "crop_name": "radish",
+      "scientific_name": "Raphanus sativus var. radicula",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0267,
+      "temp_percentiles": {
+        "p5": 9.6,
+        "p25": 9.9,
+        "p75": 10.4,
+        "p95": 13.6
+      },
+      "rainfall_percentiles": {
+        "p5": 721.9,
+        "p25": 768.0,
+        "p75": 802.0,
+        "p95": 863.0
+      },
+      "adjusted": false
+    },
+    "oryza_sativa": {
+      "crop_name": "rice",
+      "scientific_name": "Oryza sativa",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.01,
+      "prec_outside_share": 0.2767,
+      "temp_percentiles": {
+        "p5": 11.3,
+        "p25": 15.9,
+        "p75": 26.5,
+        "p95": 27.9
+      },
+      "rainfall_percentiles": {
+        "p5": 505.9,
+        "p25": 926.8,
+        "p75": 1978.8,
+        "p95": 2882.0
+      },
+      "adjusted": true
+    },
+    "hevea_brasiliensis": {
+      "crop_name": "rubber",
+      "scientific_name": "Hevea brasiliensis",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.01,
+      "temp_percentiles": {
+        "p5": 22.8,
+        "p25": 26.1,
+        "p75": 26.9,
+        "p95": 27.4
+      },
+      "rainfall_percentiles": {
+        "p5": 1443.5,
+        "p25": 2180.5,
+        "p75": 2359.0,
+        "p95": 2990.2
+      },
+      "adjusted": false
+    },
+    "secale_cereale": {
+      "crop_name": "rye",
+      "scientific_name": "Secale cereale",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0167,
+      "prec_outside_share": 0.0467,
+      "temp_percentiles": {
+        "p5": 5.1,
+        "p25": 9.3,
+        "p75": 10.4,
+        "p95": 17.9
+      },
+      "rainfall_percentiles": {
+        "p5": 401.9,
+        "p25": 691.2,
+        "p75": 816.2,
+        "p95": 1084.0
+      },
+      "adjusted": false
+    },
+    "carthamus_tinctorius": {
+      "crop_name": "safflower",
+      "scientific_name": "Carthamus tinctorius",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.02,
+      "prec_outside_share": 0.0433,
+      "temp_percentiles": {
+        "p5": 5.7,
+        "p25": 9.0,
+        "p75": 10.7,
+        "p95": 19.0
+      },
+      "rainfall_percentiles": {
+        "p5": 357.0,
+        "p25": 658.0,
+        "p75": 816.0,
+        "p95": 1172.0
+      },
+      "adjusted": false
+    },
+    "sesamum_indicum": {
+      "crop_name": "sesame",
+      "scientific_name": "Sesamum indicum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0267,
+      "prec_outside_share": 0.2733,
+      "temp_percentiles": {
+        "p5": 12.1,
+        "p25": 24.0,
+        "p75": 27.2,
+        "p95": 27.9
+      },
+      "rainfall_percentiles": {
+        "p5": 564.0,
+        "p25": 767.0,
+        "p75": 1560.0,
+        "p95": 3179.0
+      },
+      "adjusted": true
+    },
+    "spinacia_oleracea": {
+      "crop_name": "spinach",
+      "scientific_name": "Spinacia oleracea",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0167,
+      "prec_outside_share": 0.5167,
+      "temp_percentiles": {
+        "p5": 7.9,
+        "p25": 10.2,
+        "p75": 25.5,
+        "p95": 25.5
+      },
+      "rainfall_percentiles": {
+        "p5": 136.0,
+        "p25": 136.0,
+        "p75": 791.0,
+        "p95": 1312.0
+      },
+      "adjusted": true
+    },
+    "saccharum_officinarum": {
+      "crop_name": "sugarcane",
+      "scientific_name": "Saccharum officinarum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0271,
+      "prec_outside_share": 0.139,
+      "temp_percentiles": {
+        "p5": 16.6,
+        "p25": 21.8,
+        "p75": 26.6,
+        "p95": 28.1
+      },
+      "rainfall_percentiles": {
+        "p5": 719.9,
+        "p25": 1185.0,
+        "p75": 2364.5,
+        "p95": 3014.5
+      },
+      "adjusted": false
+    },
+    "helianthus_annuus": {
+      "crop_name": "sunflower",
+      "scientific_name": "Helianthus annuus",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0067,
+      "prec_outside_share": 0.15,
+      "temp_percentiles": {
+        "p5": 10.3,
+        "p25": 16.5,
+        "p75": 20.9,
+        "p95": 25.1
+      },
+      "rainfall_percentiles": {
+        "p5": 301.5,
+        "p25": 397.0,
+        "p75": 809.0,
+        "p95": 2050.6
+      },
+      "adjusted": false
+    },
+    "camellia_sinensis": {
+      "crop_name": "tea",
+      "scientific_name": "Camellia sinensis",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0,
+      "prec_outside_share": 0.0233,
+      "temp_percentiles": {
+        "p5": 12.8,
+        "p25": 15.1,
+        "p75": 20.9,
+        "p95": 24.3
+      },
+      "rainfall_percentiles": {
+        "p5": 1137.9,
+        "p25": 1522.8,
+        "p75": 2530.5,
+        "p95": 3417.0
+      },
+      "adjusted": false
+    },
+    "nicotiana_tabacum": {
+      "crop_name": "tobacco",
+      "scientific_name": "Nicotiana tabacum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0233,
+      "prec_outside_share": 0.0633,
+      "temp_percentiles": {
+        "p5": 9.8,
+        "p25": 14.8,
+        "p75": 21.8,
+        "p95": 25.9
+      },
+      "rainfall_percentiles": {
+        "p5": 373.0,
+        "p25": 786.0,
+        "p75": 1558.0,
+        "p95": 2538.4
+      },
+      "adjusted": false
+    },
+    "curcuma_longa": {
+      "crop_name": "turmeric",
+      "scientific_name": "Curcuma longa",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0633,
+      "prec_outside_share": 0.1033,
+      "temp_percentiles": {
+        "p5": 17.4,
+        "p25": 20.7,
+        "p75": 26.2,
+        "p95": 27.3
+      },
+      "rainfall_percentiles": {
+        "p5": 1048.8,
+        "p25": 1547.0,
+        "p75": 2609.5,
+        "p95": 3457.4
+      },
+      "adjusted": false
+    },
+    "juglans_regia": {
+      "crop_name": "walnut",
+      "scientific_name": "Juglans regia",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.07,
+      "prec_outside_share": 0.0467,
+      "temp_percentiles": {
+        "p5": 6.5,
+        "p25": 9.1,
+        "p75": 10.4,
+        "p95": 24.5
+      },
+      "rainfall_percentiles": {
+        "p5": 563.8,
+        "p25": 620.0,
+        "p75": 1134.0,
+        "p95": 1609.5
+      },
+      "adjusted": false
+    },
+    "citrullus_lanatus": {
+      "crop_name": "watermelon",
+      "scientific_name": "Citrullus lanatus",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.6174,
+      "prec_outside_share": 0.1242,
+      "temp_percentiles": {
+        "p5": 5.6,
+        "p25": 9.7,
+        "p75": 20.9,
+        "p95": 27.3
+      },
+      "rainfall_percentiles": {
+        "p5": 485.6,
+        "p25": 737.5,
+        "p75": 1301.5,
+        "p95": 2028.9
+      },
+      "adjusted": true
+    },
+    "triticum_aestivum": {
+      "crop_name": "wheat",
+      "scientific_name": "Triticum aestivum",
+      "clean_occurrences": 300,
+      "temp_outside_share": 0.0067,
+      "prec_outside_share": 0.0333,
+      "temp_percentiles": {
+        "p5": 9.3,
+        "p25": 9.7,
+        "p75": 13.6,
+        "p95": 19.7
+      },
+      "rainfall_percentiles": {
+        "p5": 466.7,
+        "p25": 756.0,
+        "p75": 828.5,
+        "p95": 1289.0
+      },
+      "adjusted": false
+    }
+  }
+}

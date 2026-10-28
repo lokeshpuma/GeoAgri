@@ -1,0 +1,2410 @@
+{
+  "crop_id": "prunus_amygdalus",
+  "crop_name": "almond",
+  "scientific_name": "Prunus amygdalus",
+  "total_count": 18529,
+  "fetched_count": 300,
+  "fetched_at": "2026-10-28T09:09:09.881433+00:00",
+  "occurrences": [
+    {
+      "key": 5938406436,
+      "decimalLatitude": 36.778622,
+      "decimalLongitude": -3.109232,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5938570254,
+      "decimalLatitude": 38.472728,
+      "decimalLongitude": -1.604278,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5938639759,
+      "decimalLatitude": 37.096869,
+      "decimalLongitude": -7.94757,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5938647096,
+      "decimalLatitude": 48.17613,
+      "decimalLongitude": 7.776113,
+      "country": "Germany",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6129939811,
+      "decimalLatitude": 40.828711,
+      "decimalLongitude": 0.501803,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130014765,
+      "decimalLatitude": 42.35209,
+      "decimalLongitude": 3.141452,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130025987,
+      "decimalLatitude": 32.993928,
+      "decimalLongitude": 35.220392,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130053112,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130097318,
+      "decimalLatitude": 41.58518,
+      "decimalLongitude": 1.670572,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130126615,
+      "decimalLatitude": 37.048613,
+      "decimalLongitude": -8.872328,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130165848,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130227882,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130261497,
+      "decimalLatitude": 41.429418,
+      "decimalLongitude": 1.781701,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130275221,
+      "decimalLatitude": 43.134185,
+      "decimalLongitude": 17.297991,
+      "country": "Croatia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130290591,
+      "decimalLatitude": 41.429429,
+      "decimalLongitude": 1.781674,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130393541,
+      "decimalLatitude": 40.832633,
+      "decimalLongitude": 0.504281,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130414174,
+      "decimalLatitude": 37.139283,
+      "decimalLongitude": -8.63277,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130469720,
+      "decimalLatitude": 41.429453,
+      "decimalLongitude": 1.781024,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130666382,
+      "decimalLatitude": 36.262625,
+      "decimalLongitude": 4.454057,
+      "country": "Algeria",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130814620,
+      "decimalLatitude": 43.994308,
+      "decimalLongitude": 4.818516,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130826940,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130857264,
+      "decimalLatitude": 41.429255,
+      "decimalLongitude": 1.781078,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130895914,
+      "decimalLatitude": 40.83264,
+      "decimalLongitude": 0.504287,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130901834,
+      "decimalLatitude": 36.817978,
+      "decimalLongitude": -2.674668,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130984742,
+      "decimalLatitude": 41.393583,
+      "decimalLongitude": 2.049514,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131290991,
+      "decimalLatitude": 41.42081,
+      "decimalLongitude": 1.789211,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131322840,
+      "decimalLatitude": 37.250248,
+      "decimalLongitude": -8.098551,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131349281,
+      "decimalLatitude": 42.859043,
+      "decimalLongitude": 2.95812,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131351083,
+      "decimalLatitude": 38.328749,
+      "decimalLongitude": -1.096244,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131352723,
+      "decimalLatitude": 40.828591,
+      "decimalLongitude": 0.501809,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131382586,
+      "decimalLatitude": 36.816777,
+      "decimalLongitude": -2.671787,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131400337,
+      "decimalLatitude": 28.017905,
+      "decimalLongitude": -15.552928,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131468803,
+      "decimalLatitude": 28.017157,
+      "decimalLongitude": -15.553785,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131591997,
+      "decimalLatitude": 41.583005,
+      "decimalLongitude": 1.668437,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131641551,
+      "decimalLatitude": 40.832801,
+      "decimalLongitude": 0.504395,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131695490,
+      "decimalLatitude": 41.986708,
+      "decimalLongitude": -1.673293,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133063560,
+      "decimalLatitude": 41.393583,
+      "decimalLongitude": 2.049514,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133085338,
+      "decimalLatitude": 28.292647,
+      "decimalLongitude": -16.812267,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133113582,
+      "decimalLatitude": 41.533298,
+      "decimalLongitude": 1.880045,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133121050,
+      "decimalLatitude": 37.139453,
+      "decimalLongitude": -8.632522,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133124499,
+      "decimalLatitude": 37.102367,
+      "decimalLongitude": -7.958585,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133130271,
+      "decimalLatitude": 41.582216,
+      "decimalLongitude": 1.633665,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133161076,
+      "decimalLatitude": 40.058032,
+      "decimalLongitude": 0.101024,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133162145,
+      "decimalLatitude": 40.832635,
+      "decimalLongitude": 0.504282,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133173361,
+      "decimalLatitude": 37.529143,
+      "decimalLongitude": -1.46358,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133220054,
+      "decimalLatitude": 28.487195,
+      "decimalLongitude": -17.847405,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133226677,
+      "decimalLatitude": 36.764727,
+      "decimalLongitude": -4.427273,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133245963,
+      "decimalLatitude": 40.599862,
+      "decimalLongitude": -3.729355,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133257484,
+      "decimalLatitude": 38.669788,
+      "decimalLongitude": -9.191917,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133284129,
+      "decimalLatitude": 40.59967,
+      "decimalLongitude": -3.727382,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133289940,
+      "decimalLatitude": 37.102485,
+      "decimalLongitude": -7.95831,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133304688,
+      "decimalLatitude": 43.516797,
+      "decimalLongitude": 16.434001,
+      "country": "Croatia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133305856,
+      "decimalLatitude": 36.816734,
+      "decimalLongitude": -2.671838,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133334708,
+      "decimalLatitude": 37.96178,
+      "decimalLongitude": -121.862612,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133363558,
+      "decimalLatitude": 36.980994,
+      "decimalLongitude": -4.913999,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133379976,
+      "decimalLatitude": 37.012877,
+      "decimalLongitude": -4.55525,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133383449,
+      "decimalLatitude": 40.832889,
+      "decimalLongitude": 0.504449,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133387676,
+      "decimalLatitude": 40.598206,
+      "decimalLongitude": -3.735082,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133401716,
+      "decimalLatitude": 36.818619,
+      "decimalLongitude": -2.674752,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133438536,
+      "decimalLatitude": 43.167648,
+      "decimalLongitude": 2.795895,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133446216,
+      "decimalLatitude": 41.420085,
+      "decimalLongitude": 1.787628,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133462551,
+      "decimalLatitude": 40.832911,
+      "decimalLongitude": 0.504475,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133472590,
+      "decimalLatitude": 32.823675,
+      "decimalLongitude": 35.503366,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133473196,
+      "decimalLatitude": 37.468009,
+      "decimalLongitude": -7.4607,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133481163,
+      "decimalLatitude": 43.167913,
+      "decimalLongitude": 2.79584,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133489675,
+      "decimalLatitude": 32.732532,
+      "decimalLongitude": 35.651618,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133538556,
+      "decimalLatitude": 40.595595,
+      "decimalLongitude": -3.735085,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133556358,
+      "decimalLatitude": 38.542933,
+      "decimalLongitude": -121.705422,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133581616,
+      "decimalLatitude": 40.426896,
+      "decimalLongitude": -3.292202,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133606339,
+      "decimalLatitude": 32.824439,
+      "decimalLongitude": 35.501668,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147233144,
+      "decimalLatitude": 41.258628,
+      "decimalLongitude": 1.760915,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147266934,
+      "decimalLatitude": 36.435038,
+      "decimalLongitude": 4.558571,
+      "country": "Algeria",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147346812,
+      "decimalLatitude": 36.477398,
+      "decimalLongitude": 4.769397,
+      "country": "Algeria",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147442949,
+      "decimalLatitude": 41.563486,
+      "decimalLongitude": 2.193545,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147534023,
+      "decimalLatitude": 41.642843,
+      "decimalLongitude": 2.29374,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159727799,
+      "decimalLatitude": 31.487809,
+      "decimalLongitude": 34.536524,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159727991,
+      "decimalLatitude": 31.681873,
+      "decimalLongitude": 34.669686,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159733555,
+      "decimalLatitude": 32.527514,
+      "decimalLongitude": 35.108396,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159733606,
+      "decimalLatitude": 31.688192,
+      "decimalLongitude": 34.688803,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159734319,
+      "decimalLatitude": 31.493198,
+      "decimalLongitude": 34.542621,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159734801,
+      "decimalLatitude": 31.671453,
+      "decimalLongitude": 34.668933,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159735130,
+      "decimalLatitude": 31.709118,
+      "decimalLongitude": 34.685058,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159737085,
+      "decimalLatitude": 33.09863,
+      "decimalLongitude": 35.663835,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159737218,
+      "decimalLatitude": 33.152702,
+      "decimalLongitude": 35.685168,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159737377,
+      "decimalLatitude": 31.689976,
+      "decimalLongitude": 34.683909,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159738098,
+      "decimalLatitude": 31.835012,
+      "decimalLongitude": 35.063802,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159738718,
+      "decimalLatitude": 32.499975,
+      "decimalLongitude": 34.975522,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159739423,
+      "decimalLatitude": 31.676919,
+      "decimalLongitude": 34.667014,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159739570,
+      "decimalLatitude": 31.687339,
+      "decimalLongitude": 34.700936,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159740633,
+      "decimalLatitude": 31.68733,
+      "decimalLongitude": 34.665583,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159742014,
+      "decimalLatitude": 31.488491,
+      "decimalLongitude": 34.648961,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159749365,
+      "decimalLatitude": 31.667998,
+      "decimalLongitude": 34.670725,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159749367,
+      "decimalLatitude": 31.672069,
+      "decimalLongitude": 34.665239,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159749947,
+      "decimalLatitude": 32.541239,
+      "decimalLongitude": 34.930919,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159749966,
+      "decimalLatitude": 31.76028,
+      "decimalLongitude": 35.181733,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159753089,
+      "decimalLatitude": 31.472529,
+      "decimalLongitude": 34.517218,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159753603,
+      "decimalLatitude": 31.690118,
+      "decimalLongitude": 34.655389,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159753898,
+      "decimalLatitude": 31.784597,
+      "decimalLongitude": 35.140593,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159754299,
+      "decimalLatitude": 32.499965,
+      "decimalLongitude": 34.975097,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6170942987,
+      "decimalLatitude": 32.870511,
+      "decimalLongitude": 35.502454,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6188670603,
+      "decimalLatitude": 34.84376,
+      "decimalLongitude": 32.421533,
+      "country": "Cyprus",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6360298667,
+      "decimalLatitude": 40.43,
+      "decimalLongitude": 0.41,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6360356677,
+      "decimalLatitude": 40.44,
+      "decimalLongitude": 0.41,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6493170981,
+      "decimalLatitude": 41.12954,
+      "decimalLongitude": -7.03428,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133288401,
+      "decimalLatitude": 36.766982,
+      "decimalLongitude": -4.430182,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133309617,
+      "decimalLatitude": 40.832743,
+      "decimalLongitude": 0.504351,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133461419,
+      "decimalLatitude": 41.66897,
+      "decimalLongitude": 2.728916,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133461897,
+      "decimalLatitude": 43.299859,
+      "decimalLongitude": 17.03252,
+      "country": "Croatia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6133542694,
+      "decimalLatitude": 40.832647,
+      "decimalLongitude": 0.504281,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147164802,
+      "decimalLatitude": 41.81824,
+      "decimalLongitude": 1.977351,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147179600,
+      "decimalLatitude": 41.555958,
+      "decimalLongitude": 2.199275,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147183292,
+      "decimalLatitude": 37.255238,
+      "decimalLongitude": -7.579018,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147204489,
+      "decimalLatitude": 36.929772,
+      "decimalLongitude": -3.317428,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147208726,
+      "decimalLatitude": 41.429461,
+      "decimalLongitude": 1.781688,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147220093,
+      "decimalLatitude": 43.382659,
+      "decimalLongitude": 16.480581,
+      "country": "Croatia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147222543,
+      "decimalLatitude": 43.651027,
+      "decimalLongitude": 5.263545,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147238565,
+      "decimalLatitude": 43.633988,
+      "decimalLongitude": 3.861038,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147239203,
+      "decimalLatitude": 41.562522,
+      "decimalLongitude": 1.990312,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147239553,
+      "decimalLatitude": 42.584197,
+      "decimalLongitude": 2.867088,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147250449,
+      "decimalLatitude": 42.286904,
+      "decimalLongitude": 3.287102,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147265183,
+      "decimalLatitude": 41.348653,
+      "decimalLongitude": 1.738673,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147270775,
+      "decimalLatitude": 43.352518,
+      "decimalLongitude": 2.582412,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147279316,
+      "decimalLatitude": 41.42946,
+      "decimalLongitude": 1.781115,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147291614,
+      "decimalLatitude": 42.575847,
+      "decimalLongitude": 2.840228,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147292103,
+      "decimalLatitude": 43.633976,
+      "decimalLongitude": 3.861086,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147311623,
+      "decimalLatitude": 39.485038,
+      "decimalLongitude": -0.439056,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147313547,
+      "decimalLatitude": 43.588327,
+      "decimalLongitude": 3.83934,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147326505,
+      "decimalLatitude": 32.095152,
+      "decimalLongitude": 34.806217,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147340271,
+      "decimalLatitude": 43.334643,
+      "decimalLongitude": 2.377338,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147343784,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147345491,
+      "decimalLatitude": 43.124845,
+      "decimalLongitude": 3.093764,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147345715,
+      "decimalLatitude": 37.14537,
+      "decimalLongitude": -2.036153,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147357958,
+      "decimalLatitude": 32.488872,
+      "decimalLongitude": 35.411755,
+      "country": "Palestine, State of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147358382,
+      "decimalLatitude": 27.978268,
+      "decimalLongitude": -15.531453,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147360866,
+      "decimalLatitude": 40.832944,
+      "decimalLongitude": 0.504486,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147366413,
+      "decimalLatitude": 41.559396,
+      "decimalLongitude": 2.020201,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147371428,
+      "decimalLatitude": 41.934794,
+      "decimalLongitude": 1.94906,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147390017,
+      "decimalLatitude": 40.415255,
+      "decimalLongitude": -3.635847,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147415779,
+      "decimalLatitude": 41.896872,
+      "decimalLongitude": 1.989126,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147421207,
+      "decimalLatitude": 39.826496,
+      "decimalLongitude": -0.254999,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147425280,
+      "decimalLatitude": 42.291191,
+      "decimalLongitude": 3.283363,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147448198,
+      "decimalLatitude": 28.52015,
+      "decimalLongitude": -16.260394,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147455470,
+      "decimalLatitude": 28.219818,
+      "decimalLongitude": -16.488393,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147456078,
+      "decimalLatitude": 40.832762,
+      "decimalLongitude": 0.504364,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147459072,
+      "decimalLatitude": 42.561058,
+      "decimalLongitude": 2.830465,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147463371,
+      "decimalLatitude": 31.867095,
+      "decimalLongitude": 34.746285,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147482470,
+      "decimalLatitude": 28.606185,
+      "decimalLongitude": -17.867725,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147485649,
+      "decimalLatitude": 39.830597,
+      "decimalLongitude": -0.268846,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147494630,
+      "decimalLatitude": 37.217388,
+      "decimalLongitude": -7.594456,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147499364,
+      "decimalLatitude": 36.976207,
+      "decimalLongitude": -2.523378,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147505323,
+      "decimalLatitude": 37.147358,
+      "decimalLongitude": -2.536219,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147513663,
+      "decimalLatitude": 31.78057,
+      "decimalLongitude": 35.057544,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147517638,
+      "decimalLatitude": 43.359587,
+      "decimalLongitude": 5.414205,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147522301,
+      "decimalLatitude": 43.492961,
+      "decimalLongitude": 3.674213,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147523767,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147567291,
+      "decimalLatitude": 27.97069,
+      "decimalLongitude": -15.534949,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147575723,
+      "decimalLatitude": 28.342367,
+      "decimalLongitude": -16.856629,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147602046,
+      "decimalLatitude": 35.686208,
+      "decimalLongitude": 0.473907,
+      "country": "Algeria",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147630654,
+      "decimalLatitude": 41.429467,
+      "decimalLongitude": 1.781133,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147631972,
+      "decimalLatitude": 43.633597,
+      "decimalLongitude": 3.861142,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147636734,
+      "decimalLatitude": 34.773519,
+      "decimalLongitude": 32.437683,
+      "country": "Cyprus",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147638894,
+      "decimalLatitude": 41.429346,
+      "decimalLongitude": 1.781723,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147639377,
+      "decimalLatitude": 27.988153,
+      "decimalLongitude": -15.611059,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147644735,
+      "decimalLatitude": 40.628479,
+      "decimalLongitude": 0.29753,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147676719,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147683607,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147692856,
+      "decimalLatitude": 41.898079,
+      "decimalLongitude": 1.817296,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147694155,
+      "decimalLatitude": 38.722029,
+      "decimalLongitude": 0.110114,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147697745,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147707352,
+      "decimalLatitude": 27.934975,
+      "decimalLongitude": -15.483355,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147724061,
+      "decimalLatitude": 41.3833,
+      "decimalLongitude": 1.6167,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159133797,
+      "decimalLatitude": 43.496175,
+      "decimalLongitude": 3.435196,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159135652,
+      "decimalLatitude": 32.461053,
+      "decimalLongitude": 35.037053,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159142555,
+      "decimalLatitude": 41.943417,
+      "decimalLongitude": 1.839209,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159142728,
+      "decimalLatitude": 38.5846,
+      "decimalLongitude": -121.331948,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159165816,
+      "decimalLatitude": 41.428766,
+      "decimalLongitude": 1.779256,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159217419,
+      "decimalLatitude": 38.339193,
+      "decimalLongitude": -121.97815,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159221269,
+      "decimalLatitude": 40.449424,
+      "decimalLongitude": -3.379362,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159239852,
+      "decimalLatitude": 32.666545,
+      "decimalLongitude": 35.229815,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159240239,
+      "decimalLatitude": 41.137495,
+      "decimalLongitude": -7.336601,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159248399,
+      "decimalLatitude": 27.961175,
+      "decimalLongitude": -15.792748,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159266740,
+      "decimalLatitude": 30.615821,
+      "decimalLongitude": -9.497608,
+      "country": "Morocco",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159270087,
+      "decimalLatitude": 41.429494,
+      "decimalLongitude": 1.781127,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159270891,
+      "decimalLatitude": 32.461045,
+      "decimalLongitude": 35.037109,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159275803,
+      "decimalLatitude": 32.461023,
+      "decimalLongitude": 35.037094,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159294851,
+      "decimalLatitude": 41.429174,
+      "decimalLongitude": 1.782072,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159310581,
+      "decimalLatitude": 42.626255,
+      "decimalLongitude": 2.808482,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159311428,
+      "decimalLatitude": 41.350241,
+      "decimalLongitude": 1.848957,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159315663,
+      "decimalLatitude": 43.496175,
+      "decimalLongitude": 3.435196,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159317912,
+      "decimalLatitude": 41.298184,
+      "decimalLongitude": 1.970758,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159338343,
+      "decimalLatitude": 43.632432,
+      "decimalLongitude": 3.861205,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159345085,
+      "decimalLatitude": 37.667308,
+      "decimalLongitude": -121.838342,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159348983,
+      "decimalLatitude": 41.401365,
+      "decimalLongitude": 2.104976,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159352729,
+      "decimalLatitude": 43.496175,
+      "decimalLongitude": 3.435196,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159356255,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159362206,
+      "decimalLatitude": 41.386409,
+      "decimalLongitude": 1.654787,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159370003,
+      "decimalLatitude": 40.451817,
+      "decimalLongitude": -3.364364,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159370647,
+      "decimalLatitude": 34.798358,
+      "decimalLongitude": -3.743136,
+      "country": "Morocco",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159370899,
+      "decimalLatitude": 37.044697,
+      "decimalLongitude": -2.187188,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159381314,
+      "decimalLatitude": 41.386638,
+      "decimalLongitude": 1.654682,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159431490,
+      "decimalLatitude": 31.936747,
+      "decimalLongitude": 34.785018,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159436430,
+      "decimalLatitude": 43.496319,
+      "decimalLongitude": 3.434329,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159444562,
+      "decimalLatitude": 33.245042,
+      "decimalLongitude": 35.6935,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159445663,
+      "decimalLatitude": 32.772475,
+      "decimalLongitude": 35.688429,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159455667,
+      "decimalLatitude": 37.628596,
+      "decimalLongitude": -122.028949,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159458162,
+      "decimalLatitude": 28.302538,
+      "decimalLongitude": -16.804725,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159469489,
+      "decimalLatitude": 37.667038,
+      "decimalLongitude": -121.836075,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159476492,
+      "decimalLatitude": 40.437513,
+      "decimalLongitude": -3.346327,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159478357,
+      "decimalLatitude": 36.313422,
+      "decimalLongitude": 28.095991,
+      "country": "Greece",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159482465,
+      "decimalLatitude": 31.759808,
+      "decimalLongitude": 35.196597,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159508660,
+      "decimalLatitude": 32.772495,
+      "decimalLongitude": 35.688503,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159510025,
+      "decimalLatitude": 41.655079,
+      "decimalLongitude": 1.844712,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159514535,
+      "decimalLatitude": 37.615353,
+      "decimalLongitude": -1.043338,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159529212,
+      "decimalLatitude": 43.642566,
+      "decimalLongitude": 3.376218,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159555793,
+      "decimalLatitude": 31.770672,
+      "decimalLongitude": 35.123062,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159563593,
+      "decimalLatitude": 35.014461,
+      "decimalLongitude": 33.181767,
+      "country": "Cyprus",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159590693,
+      "decimalLatitude": 41.562734,
+      "decimalLongitude": 1.696922,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159598307,
+      "decimalLatitude": 41.83842,
+      "decimalLongitude": 1.840057,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159606451,
+      "decimalLatitude": 43.486513,
+      "decimalLongitude": 3.435425,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159618174,
+      "decimalLatitude": 32.786937,
+      "decimalLongitude": 34.989983,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159625427,
+      "decimalLatitude": 44.100868,
+      "decimalLongitude": 4.862181,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159635545,
+      "decimalLatitude": 36.981358,
+      "decimalLongitude": -4.914158,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159637643,
+      "decimalLatitude": 37.181468,
+      "decimalLongitude": -3.58113,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159642570,
+      "decimalLatitude": 41.138152,
+      "decimalLongitude": -7.336957,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159643737,
+      "decimalLatitude": 41.42946,
+      "decimalLongitude": 1.78111,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159656472,
+      "decimalLatitude": 41.429339,
+      "decimalLongitude": 1.781116,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159695790,
+      "decimalLatitude": 40.437828,
+      "decimalLongitude": -3.347814,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159730003,
+      "decimalLatitude": 33.039508,
+      "decimalLongitude": 35.361108,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159731467,
+      "decimalLatitude": 33.035602,
+      "decimalLongitude": 35.18822,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159733056,
+      "decimalLatitude": 31.768445,
+      "decimalLongitude": 35.110445,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159733509,
+      "decimalLatitude": 31.618133,
+      "decimalLongitude": 34.789215,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159735727,
+      "decimalLatitude": 32.633036,
+      "decimalLongitude": 35.079288,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159736381,
+      "decimalLatitude": 33.066019,
+      "decimalLongitude": 35.245269,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159736400,
+      "decimalLatitude": 33.042908,
+      "decimalLongitude": 35.360996,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159738673,
+      "decimalLatitude": 33.067431,
+      "decimalLongitude": 35.253387,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159739611,
+      "decimalLatitude": 31.797829,
+      "decimalLongitude": 35.126582,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159745411,
+      "decimalLatitude": 33.035117,
+      "decimalLongitude": 35.353832,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159750599,
+      "decimalLatitude": 32.772478,
+      "decimalLongitude": 35.688429,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159753193,
+      "decimalLatitude": 31.784156,
+      "decimalLongitude": 35.126086,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159754112,
+      "decimalLatitude": 33.037327,
+      "decimalLongitude": 35.360794,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159756291,
+      "decimalLatitude": 32.632009,
+      "decimalLongitude": 35.080397,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159757925,
+      "decimalLatitude": 32.631907,
+      "decimalLongitude": 35.077446,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161268921,
+      "decimalLatitude": 32.969772,
+      "decimalLongitude": 35.33927,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161270092,
+      "decimalLatitude": 31.797862,
+      "decimalLongitude": 35.158957,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161272216,
+      "decimalLatitude": 31.798672,
+      "decimalLongitude": 35.152611,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161272453,
+      "decimalLatitude": 33.075241,
+      "decimalLongitude": 35.270837,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161272601,
+      "decimalLatitude": 31.740548,
+      "decimalLongitude": 35.186339,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161273371,
+      "decimalLatitude": 31.798141,
+      "decimalLongitude": 35.156032,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6161273680,
+      "decimalLatitude": 31.797312,
+      "decimalLongitude": 35.158335,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162774486,
+      "decimalLatitude": 43.509628,
+      "decimalLongitude": 12.711037,
+      "country": "Italy",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162779569,
+      "decimalLatitude": 40.832887,
+      "decimalLongitude": 0.504445,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162785314,
+      "decimalLatitude": 34.808098,
+      "decimalLongitude": 32.953823,
+      "country": "Cyprus",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162792242,
+      "decimalLatitude": 32.673275,
+      "decimalLongitude": 35.508997,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162797990,
+      "decimalLatitude": 41.352722,
+      "decimalLongitude": 2.023417,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162818033,
+      "decimalLatitude": 36.743125,
+      "decimalLongitude": -4.864522,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162820228,
+      "decimalLatitude": 43.401831,
+      "decimalLongitude": 3.666516,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162823864,
+      "decimalLatitude": 40.832652,
+      "decimalLongitude": 0.504294,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162830120,
+      "decimalLatitude": 40.444597,
+      "decimalLongitude": -3.618356,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162830229,
+      "decimalLatitude": 36.979446,
+      "decimalLongitude": -4.335432,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162835013,
+      "decimalLatitude": 32.09508,
+      "decimalLongitude": 34.805685,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162842551,
+      "decimalLatitude": 37.016418,
+      "decimalLongitude": -7.935198,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162846375,
+      "decimalLatitude": 43.6293,
+      "decimalLongitude": 3.832836,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162847441,
+      "decimalLatitude": 42.234638,
+      "decimalLongitude": -1.756987,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162848767,
+      "decimalLatitude": 43.512845,
+      "decimalLongitude": 12.716578,
+      "country": "Italy",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162853297,
+      "decimalLatitude": 32.092536,
+      "decimalLongitude": 34.806563,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162864332,
+      "decimalLatitude": 41.428742,
+      "decimalLongitude": 1.783867,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162877786,
+      "decimalLatitude": 31.839133,
+      "decimalLongitude": 34.989262,
+      "country": "Palestine, State of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162886378,
+      "decimalLatitude": 28.464475,
+      "decimalLongitude": -16.449172,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162886492,
+      "decimalLatitude": 41.639096,
+      "decimalLongitude": 2.235575,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162899079,
+      "decimalLatitude": 43.634036,
+      "decimalLongitude": 3.861024,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162900487,
+      "decimalLatitude": 32.099505,
+      "decimalLongitude": 34.977689,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162903050,
+      "decimalLatitude": 41.806527,
+      "decimalLongitude": 1.878625,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162908078,
+      "decimalLatitude": 42.676408,
+      "decimalLongitude": 2.827258,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162920849,
+      "decimalLatitude": 41.912477,
+      "decimalLongitude": 1.895929,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162930175,
+      "decimalLatitude": 37.106578,
+      "decimalLongitude": -8.359339,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162930733,
+      "decimalLatitude": 38.510629,
+      "decimalLongitude": -122.097365,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162938723,
+      "decimalLatitude": 41.839355,
+      "decimalLongitude": 1.845904,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162938990,
+      "decimalLatitude": 42.671097,
+      "decimalLongitude": 2.81935,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162944261,
+      "decimalLatitude": 41.853608,
+      "decimalLongitude": 1.366267,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162955044,
+      "decimalLatitude": 38.879805,
+      "decimalLongitude": -0.0863,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162978982,
+      "decimalLatitude": 34.808094,
+      "decimalLongitude": 32.953838,
+      "country": "Cyprus",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162979171,
+      "decimalLatitude": 32.672485,
+      "decimalLongitude": 35.510973,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162983386,
+      "decimalLatitude": 43.630524,
+      "decimalLongitude": 3.866572,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162998414,
+      "decimalLatitude": 43.484455,
+      "decimalLongitude": 6.310072,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6162998590,
+      "decimalLatitude": 41.848617,
+      "decimalLongitude": 1.941648,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163001282,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163037355,
+      "decimalLatitude": 31.800548,
+      "decimalLongitude": 35.126596,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163052865,
+      "decimalLatitude": 41.910027,
+      "decimalLongitude": 1.834977,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163056259,
+      "decimalLatitude": 41.896245,
+      "decimalLongitude": 1.925735,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163080075,
+      "decimalLatitude": 37.095361,
+      "decimalLongitude": -8.738005,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163090783,
+      "decimalLatitude": 37.799343,
+      "decimalLongitude": -3.83188,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163094115,
+      "decimalLatitude": 41.54517,
+      "decimalLongitude": 1.891337,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163103642,
+      "decimalLatitude": 42.674747,
+      "decimalLongitude": 2.837322,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163104331,
+      "decimalLatitude": 41.995851,
+      "decimalLongitude": 1.999672,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163107341,
+      "decimalLatitude": 36.765457,
+      "decimalLongitude": -3.120497,
+      "country": "Spain",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163115312,
+      "decimalLatitude": 42.559745,
+      "decimalLongitude": 2.75145,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163136813,
+      "decimalLatitude": 31.772043,
+      "decimalLongitude": 35.166451,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163157933,
+      "decimalLatitude": 32.092954,
+      "decimalLongitude": 34.806513,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163165245,
+      "decimalLatitude": 43.706525,
+      "decimalLongitude": 6.971581,
+      "country": "France",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6163187451,
+      "decimalLatitude": 37.085694,
+      "decimalLongitude": -8.672722,
+      "country": "Portugal",
+      "year": 2026,
+      "elevation": null
+    }
+  ]
+}

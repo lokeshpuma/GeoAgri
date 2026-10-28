@@ -1,0 +1,314 @@
+{
+  "crop_id": "cuminum_cyminum",
+  "crop_name": "cumin",
+  "scientific_name": "Cuminum cyminum",
+  "total_count": 38,
+  "fetched_count": 38,
+  "fetched_at": "2026-10-28T09:09:17.064280+00:00",
+  "occurrences": [
+    {
+      "key": 5110305509,
+      "decimalLatitude": 29.220612,
+      "decimalLongitude": 51.244146,
+      "country": "Iran (Islamic Republic of)",
+      "year": 2025,
+      "elevation": 82.36
+    },
+    {
+      "key": 5110314677,
+      "decimalLatitude": 29.220623,
+      "decimalLongitude": 51.244115,
+      "country": "Iran (Islamic Republic of)",
+      "year": 2025,
+      "elevation": 92.23
+    },
+    {
+      "key": 5109808453,
+      "decimalLatitude": 29.218291,
+      "decimalLongitude": 51.24058,
+      "country": "Iran (Islamic Republic of)",
+      "year": 2024,
+      "elevation": 77.48
+    },
+    {
+      "key": 5109923775,
+      "decimalLatitude": 29.218278,
+      "decimalLongitude": 51.240586,
+      "country": "Iran (Islamic Republic of)",
+      "year": 2024,
+      "elevation": 79.07
+    },
+    {
+      "key": 5109991491,
+      "decimalLatitude": 29.218264,
+      "decimalLongitude": 51.240571,
+      "country": "Iran (Islamic Republic of)",
+      "year": 2024,
+      "elevation": 77.55
+    },
+    {
+      "key": 5109397765,
+      "decimalLatitude": 29.221674,
+      "decimalLongitude": 51.241344,
+      "country": "Iran (Islamic Republic of)",
+      "year": 2023,
+      "elevation": 89.0
+    },
+    {
+      "key": 5109450825,
+      "decimalLatitude": 29.221693,
+      "decimalLongitude": 51.241435,
+      "country": "Iran (Islamic Republic of)",
+      "year": 2023,
+      "elevation": 90.0
+    },
+    {
+      "key": 4443966656,
+      "decimalLatitude": 57.004866,
+      "decimalLongitude": 9.859755,
+      "country": "Denmark",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4011798428,
+      "decimalLatitude": -36.8865,
+      "decimalLongitude": 174.712325,
+      "country": "New Zealand",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3841730276,
+      "decimalLatitude": 46.99205,
+      "decimalLongitude": 2.14469,
+      "country": "France",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 6299003277,
+      "decimalLatitude": 52.945971,
+      "decimalLongitude": -1.242468,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 2005,
+      "elevation": null
+    },
+    {
+      "key": 2477409061,
+      "decimalLatitude": 48.48356,
+      "decimalLongitude": 7.73045,
+      "country": "France",
+      "year": 2000,
+      "elevation": null
+    },
+    {
+      "key": 6296631866,
+      "decimalLatitude": 51.472873,
+      "decimalLongitude": -2.505309,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 1981,
+      "elevation": null
+    },
+    {
+      "key": 6059342221,
+      "decimalLatitude": 51.913643,
+      "decimalLongitude": -0.47486,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 1962,
+      "elevation": null
+    },
+    {
+      "key": 2540042762,
+      "decimalLatitude": 51.440813,
+      "decimalLongitude": -2.62725,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 1937,
+      "elevation": null
+    },
+    {
+      "key": 4867508082,
+      "decimalLatitude": 40.205091,
+      "decimalLongitude": -8.42248,
+      "country": "Portugal",
+      "year": 1926,
+      "elevation": 77.0
+    },
+    {
+      "key": 6006574961,
+      "decimalLatitude": 51.547751,
+      "decimalLongitude": -0.054443,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": 1918,
+      "elevation": null
+    },
+    {
+      "key": 3804276951,
+      "decimalLatitude": 39.46,
+      "decimalLongitude": -3.52,
+      "country": "Spain",
+      "year": 1575,
+      "elevation": null
+    },
+    {
+      "key": 3804278405,
+      "decimalLatitude": 39.59,
+      "decimalLongitude": -3.11,
+      "country": "Spain",
+      "year": 1575,
+      "elevation": null
+    },
+    {
+      "key": 217982762,
+      "decimalLatitude": 38.9787863,
+      "decimalLongitude": -3.9811882,
+      "country": "Spain",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 217983510,
+      "decimalLatitude": 42.5588973,
+      "decimalLongitude": -0.5011846,
+      "country": "Spain",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6057946261,
+      "decimalLatitude": 51.913643,
+      "decimalLongitude": -0.47486,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6265441151,
+      "decimalLatitude": 51.472164,
+      "decimalLongitude": -2.649276,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6266163703,
+      "decimalLatitude": 52.909623,
+      "decimalLongitude": -1.183623,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6266360885,
+      "decimalLatitude": 53.811075,
+      "decimalLongitude": -1.773684,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6266717372,
+      "decimalLatitude": 51.545272,
+      "decimalLongitude": 0.089675,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6268689905,
+      "decimalLatitude": 51.449947,
+      "decimalLongitude": 0.373176,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6269788391,
+      "decimalLatitude": 51.472873,
+      "decimalLongitude": -2.505309,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6270724801,
+      "decimalLatitude": 51.913643,
+      "decimalLongitude": -0.47486,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6271255647,
+      "decimalLatitude": 50.932701,
+      "decimalLongitude": -1.36101,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6271291598,
+      "decimalLatitude": 51.545272,
+      "decimalLongitude": 0.089675,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6300602355,
+      "decimalLatitude": 51.547751,
+      "decimalLongitude": -0.054443,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6311342534,
+      "decimalLatitude": 51.472164,
+      "decimalLongitude": -2.649276,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6370137832,
+      "decimalLatitude": 52.945971,
+      "decimalLongitude": -1.242468,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6377451957,
+      "decimalLatitude": 51.432558,
+      "decimalLongitude": 0.343499,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6379309379,
+      "decimalLatitude": 50.968342,
+      "decimalLongitude": -1.303557,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6381845869,
+      "decimalLatitude": 51.451097,
+      "decimalLongitude": 0.315662,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    },
+    {
+      "key": 6384027884,
+      "decimalLatitude": 53.793099,
+      "decimalLongitude": -1.773781,
+      "country": "United Kingdom of Great Britain and Northern Ireland",
+      "year": null,
+      "elevation": null
+    }
+  ]
+}

@@ -1,0 +1,2410 @@
+{
+  "crop_id": "vigna_angularis",
+  "crop_name": "adzuki bean",
+  "scientific_name": "Vigna angularis",
+  "total_count": 964,
+  "fetched_count": 300,
+  "fetched_at": "2026-10-28T09:09:09.599756+00:00",
+  "occurrences": [
+    {
+      "key": 6498426992,
+      "decimalLatitude": 36.679477,
+      "decimalLongitude": 127.543649,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499643683,
+      "decimalLatitude": 36.497865,
+      "decimalLongitude": 127.247043,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6519950851,
+      "decimalLatitude": 36.674929,
+      "decimalLongitude": 127.544373,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6552928583,
+      "decimalLatitude": 36.962431,
+      "decimalLongitude": 127.921867,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6518358749,
+      "decimalLatitude": 37.980453,
+      "decimalLongitude": 127.001114,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6520258514,
+      "decimalLatitude": 37.258907,
+      "decimalLongitude": 127.049207,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6550855512,
+      "decimalLatitude": 35.649471,
+      "decimalLongitude": 139.462626,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6550934477,
+      "decimalLatitude": 37.977927,
+      "decimalLongitude": 127.276932,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6551313650,
+      "decimalLatitude": 35.649404,
+      "decimalLongitude": 139.462531,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6551874524,
+      "decimalLatitude": 35.636704,
+      "decimalLongitude": 139.391188,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6552772596,
+      "decimalLatitude": 37.976504,
+      "decimalLongitude": 127.273322,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6552836621,
+      "decimalLatitude": 37.654771,
+      "decimalLongitude": 126.95051,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6553074647,
+      "decimalLatitude": 35.649376,
+      "decimalLongitude": 139.462458,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566466808,
+      "decimalLatitude": 34.916417,
+      "decimalLongitude": 135.169286,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566730542,
+      "decimalLatitude": 34.918748,
+      "decimalLongitude": 135.170637,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566896348,
+      "decimalLatitude": 34.915594,
+      "decimalLongitude": 135.169035,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6567190690,
+      "decimalLatitude": 37.975951,
+      "decimalLongitude": 127.278166,
+      "country": "Korea, Republic of",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5168145633,
+      "decimalLatitude": -3.97437,
+      "decimalLongitude": -38.279152,
+      "country": "Brazil",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5839797935,
+      "decimalLatitude": 37.380686,
+      "decimalLongitude": 127.152578,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6326786345,
+      "decimalLatitude": 36.7951,
+      "decimalLongitude": 126.1452,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6422260894,
+      "decimalLatitude": 37.493548,
+      "decimalLongitude": 127.072093,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5837969403,
+      "decimalLatitude": 35.649073,
+      "decimalLongitude": 139.459649,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5994261377,
+      "decimalLatitude": 37.392704,
+      "decimalLongitude": 127.090451,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5994261392,
+      "decimalLatitude": 37.393562,
+      "decimalLongitude": 127.091836,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5994998203,
+      "decimalLatitude": 37.384466,
+      "decimalLongitude": 127.157143,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5994998254,
+      "decimalLatitude": 37.384041,
+      "decimalLongitude": 127.159718,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5994998595,
+      "decimalLatitude": 37.384473,
+      "decimalLongitude": 127.157166,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995004682,
+      "decimalLatitude": 37.454085,
+      "decimalLongitude": 127.097825,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995005963,
+      "decimalLatitude": 37.426322,
+      "decimalLongitude": 127.066938,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995005964,
+      "decimalLatitude": 37.42627,
+      "decimalLongitude": 127.067045,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995006569,
+      "decimalLatitude": 37.423045,
+      "decimalLongitude": 127.073927,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995008279,
+      "decimalLatitude": 37.426107,
+      "decimalLongitude": 127.071205,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995008385,
+      "decimalLatitude": 37.425963,
+      "decimalLongitude": 127.071408,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995009284,
+      "decimalLatitude": 37.372902,
+      "decimalLongitude": 127.028672,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995009311,
+      "decimalLatitude": 37.416589,
+      "decimalLongitude": 127.140057,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995009691,
+      "decimalLatitude": 37.458594,
+      "decimalLongitude": 127.172399,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995009736,
+      "decimalLatitude": 37.344001,
+      "decimalLongitude": 127.12824,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995009825,
+      "decimalLatitude": 37.388572,
+      "decimalLongitude": 127.157242,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995010103,
+      "decimalLatitude": 37.410368,
+      "decimalLongitude": 127.175006,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995010222,
+      "decimalLatitude": 37.388572,
+      "decimalLongitude": 127.157242,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995010453,
+      "decimalLatitude": 37.377466,
+      "decimalLongitude": 127.057652,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995010461,
+      "decimalLatitude": 37.401171,
+      "decimalLongitude": 127.072596,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995010522,
+      "decimalLatitude": 37.37282,
+      "decimalLongitude": 127.030139,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995010924,
+      "decimalLatitude": 37.458675,
+      "decimalLongitude": 127.172689,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995010949,
+      "decimalLatitude": 37.384749,
+      "decimalLongitude": 127.161623,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995011014,
+      "decimalLatitude": 37.424026,
+      "decimalLongitude": 127.06542,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995011134,
+      "decimalLatitude": 37.388593,
+      "decimalLongitude": 127.157254,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995011445,
+      "decimalLatitude": 37.464903,
+      "decimalLongitude": 127.164945,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995011776,
+      "decimalLatitude": 37.372971,
+      "decimalLongitude": 127.028867,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995012643,
+      "decimalLatitude": 37.402426,
+      "decimalLongitude": 127.073344,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995012685,
+      "decimalLatitude": 37.401946,
+      "decimalLongitude": 127.073184,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5995013078,
+      "decimalLatitude": 37.446756,
+      "decimalLongitude": 127.18551,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6137328337,
+      "decimalLatitude": 36.683482,
+      "decimalLongitude": 126.157447,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6137328457,
+      "decimalLatitude": 36.302653,
+      "decimalLongitude": 127.38137,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6137329080,
+      "decimalLatitude": 37.376476,
+      "decimalLongitude": 126.651796,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6137330096,
+      "decimalLatitude": 36.297295,
+      "decimalLongitude": 127.399398,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6137330768,
+      "decimalLatitude": 36.294334,
+      "decimalLongitude": 127.380176,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6137331042,
+      "decimalLatitude": 36.302492,
+      "decimalLongitude": 127.381268,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6430934866,
+      "decimalLatitude": 37.894713,
+      "decimalLongitude": 127.203853,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5994996973,
+      "decimalLatitude": 37.423743,
+      "decimalLongitude": 127.136032,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5386528875,
+      "decimalLatitude": 37.373588,
+      "decimalLongitude": 128.642405,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4935635653,
+      "decimalLatitude": 35.649289,
+      "decimalLongitude": 139.461284,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4936015166,
+      "decimalLatitude": 35.64933,
+      "decimalLongitude": 139.461609,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4936191015,
+      "decimalLatitude": 36.08319,
+      "decimalLongitude": 127.460981,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4936722764,
+      "decimalLatitude": 36.975453,
+      "decimalLongitude": 126.912467,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4936979903,
+      "decimalLatitude": 35.649343,
+      "decimalLongitude": 139.46173,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6422497955,
+      "decimalLatitude": 37.362663,
+      "decimalLongitude": 128.636144,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6423147974,
+      "decimalLatitude": 37.013497,
+      "decimalLongitude": 126.98571,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4946123835,
+      "decimalLatitude": 35.734318,
+      "decimalLongitude": 128.10771,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4949926505,
+      "decimalLatitude": 35.649243,
+      "decimalLongitude": 139.461015,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5187680384,
+      "decimalLatitude": 35.616288,
+      "decimalLongitude": 139.440485,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5188052404,
+      "decimalLatitude": 35.6109,
+      "decimalLongitude": 139.397861,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283792085,
+      "decimalLatitude": 37.446359,
+      "decimalLongitude": 127.184512,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283796188,
+      "decimalLatitude": 37.383768,
+      "decimalLongitude": 127.158231,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283796407,
+      "decimalLatitude": 37.384621,
+      "decimalLongitude": 127.160265,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283796482,
+      "decimalLatitude": 37.388645,
+      "decimalLongitude": 127.157411,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283796729,
+      "decimalLatitude": 37.404715,
+      "decimalLongitude": 127.148257,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283798255,
+      "decimalLatitude": 37.384836,
+      "decimalLongitude": 127.16129,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5843213232,
+      "decimalLatitude": 36.450166,
+      "decimalLongitude": 127.189095,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4987561122,
+      "decimalLatitude": 38.279869,
+      "decimalLongitude": 140.852308,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283782505,
+      "decimalLatitude": 37.425197,
+      "decimalLongitude": 127.07182,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283784460,
+      "decimalLatitude": 37.426266,
+      "decimalLongitude": 127.066914,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283794008,
+      "decimalLatitude": 37.425646,
+      "decimalLongitude": 127.071595,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283796717,
+      "decimalLatitude": 37.426402,
+      "decimalLongitude": 127.06711,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283798782,
+      "decimalLatitude": 37.425347,
+      "decimalLongitude": 127.071695,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5283799875,
+      "decimalLatitude": 37.422994,
+      "decimalLongitude": 127.073702,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4162605700,
+      "decimalLatitude": 40.047939,
+      "decimalLongitude": 116.373044,
+      "country": "China",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4424213464,
+      "decimalLatitude": 36.758724,
+      "decimalLongitude": 128.076497,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 6593420141,
+      "decimalLatitude": 36.688167,
+      "decimalLongitude": 127.985417,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 6593422218,
+      "decimalLatitude": 36.688194,
+      "decimalLongitude": 127.985389,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 6594244269,
+      "decimalLatitude": 36.688167,
+      "decimalLongitude": 127.985417,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 6594288346,
+      "decimalLatitude": 36.688194,
+      "decimalLongitude": 127.985389,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 6597411162,
+      "decimalLatitude": 36.688194,
+      "decimalLongitude": 127.985389,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 6597419418,
+      "decimalLatitude": 36.688167,
+      "decimalLongitude": 127.985417,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4413845954,
+      "decimalLatitude": 35.649335,
+      "decimalLongitude": 139.461605,
+      "country": "Japan",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4500536739,
+      "decimalLatitude": 35.609333,
+      "decimalLongitude": 139.390867,
+      "country": "Japan",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878271977,
+      "decimalLatitude": 37.389043,
+      "decimalLongitude": 127.159578,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878272097,
+      "decimalLatitude": 37.402647,
+      "decimalLongitude": 127.067118,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878282451,
+      "decimalLatitude": 37.419199,
+      "decimalLongitude": 127.144608,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878283424,
+      "decimalLatitude": 37.356396,
+      "decimalLongitude": 127.125834,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878284034,
+      "decimalLatitude": 37.425954,
+      "decimalLongitude": 127.071442,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878284800,
+      "decimalLatitude": 37.426273,
+      "decimalLongitude": 127.071487,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878285346,
+      "decimalLatitude": 37.384892,
+      "decimalLongitude": 127.160627,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878285637,
+      "decimalLatitude": 37.406035,
+      "decimalLongitude": 127.149267,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878285697,
+      "decimalLatitude": 37.451122,
+      "decimalLongitude": 127.100498,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878285995,
+      "decimalLatitude": 37.384815,
+      "decimalLongitude": 127.161097,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878286034,
+      "decimalLatitude": 37.384876,
+      "decimalLongitude": 127.161211,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878286773,
+      "decimalLatitude": 37.423983,
+      "decimalLongitude": 127.065483,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878287015,
+      "decimalLatitude": 37.38394,
+      "decimalLongitude": 127.163746,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878287516,
+      "decimalLatitude": 37.383705,
+      "decimalLongitude": 127.159252,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878288006,
+      "decimalLatitude": 37.384602,
+      "decimalLongitude": 127.160332,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878288014,
+      "decimalLatitude": 37.384598,
+      "decimalLongitude": 127.160301,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878288370,
+      "decimalLatitude": 37.427593,
+      "decimalLongitude": 127.060143,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878288408,
+      "decimalLatitude": 37.399975,
+      "decimalLongitude": 127.071831,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4998247179,
+      "decimalLatitude": 37.195486,
+      "decimalLongitude": 127.253776,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166217294,
+      "decimalLatitude": 37.419199,
+      "decimalLongitude": 127.144608,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166219171,
+      "decimalLatitude": 37.356396,
+      "decimalLongitude": 127.125834,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166219453,
+      "decimalLatitude": 37.425954,
+      "decimalLongitude": 127.071442,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166220684,
+      "decimalLatitude": 37.426273,
+      "decimalLongitude": 127.071487,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166220988,
+      "decimalLatitude": 37.389043,
+      "decimalLongitude": 127.159578,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166221384,
+      "decimalLatitude": 37.406035,
+      "decimalLongitude": 127.149267,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166221458,
+      "decimalLatitude": 37.451122,
+      "decimalLongitude": 127.100498,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166233600,
+      "decimalLatitude": 37.384598,
+      "decimalLongitude": 127.160301,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166233603,
+      "decimalLatitude": 37.384602,
+      "decimalLongitude": 127.160332,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166233667,
+      "decimalLatitude": 37.383705,
+      "decimalLongitude": 127.159252,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166234340,
+      "decimalLatitude": 37.423983,
+      "decimalLongitude": 127.065483,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166236082,
+      "decimalLatitude": 37.402647,
+      "decimalLongitude": 127.067118,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166236376,
+      "decimalLatitude": 37.427593,
+      "decimalLongitude": 127.060143,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166236661,
+      "decimalLatitude": 37.399975,
+      "decimalLongitude": 127.071831,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166238400,
+      "decimalLatitude": 37.384892,
+      "decimalLongitude": 127.160627,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166239493,
+      "decimalLatitude": 37.384815,
+      "decimalLongitude": 127.161097,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166239501,
+      "decimalLatitude": 37.384876,
+      "decimalLongitude": 127.161211,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166240028,
+      "decimalLatitude": 37.38394,
+      "decimalLongitude": 127.163746,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4878278265,
+      "decimalLatitude": 37.444303,
+      "decimalLongitude": 127.105182,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5166241559,
+      "decimalLatitude": 37.444303,
+      "decimalLongitude": 127.105182,
+      "country": "Korea, Republic of",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4399538258,
+      "decimalLatitude": 37.442423,
+      "decimalLongitude": 127.101766,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166225513,
+      "decimalLatitude": 37.442423,
+      "decimalLongitude": 127.101766,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949624,
+      "decimalLatitude": 37.79083,
+      "decimalLongitude": 128.8956,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949632,
+      "decimalLatitude": 37.34306,
+      "decimalLongitude": 127.1007,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949633,
+      "decimalLatitude": 35.78759,
+      "decimalLongitude": 127.2142,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949640,
+      "decimalLatitude": 35.20015,
+      "decimalLongitude": 128.5776,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949641,
+      "decimalLatitude": 35.55288,
+      "decimalLongitude": 129.2822,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949642,
+      "decimalLatitude": 37.79389,
+      "decimalLongitude": 128.8942,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949643,
+      "decimalLatitude": 35.2434,
+      "decimalLongitude": 128.6764,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949644,
+      "decimalLatitude": 37.81944,
+      "decimalLongitude": 128.8847,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949646,
+      "decimalLatitude": 35.72229,
+      "decimalLongitude": 127.0551,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949648,
+      "decimalLatitude": 35.59821,
+      "decimalLongitude": 128.4633,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949650,
+      "decimalLatitude": 35.55894,
+      "decimalLongitude": 129.2205,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 6498556887,
+      "decimalLatitude": 35.10342,
+      "decimalLongitude": 136.545958,
+      "country": "Japan",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4029064305,
+      "decimalLatitude": 38.117774,
+      "decimalLongitude": 140.829524,
+      "country": "Japan",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4054858496,
+      "decimalLatitude": 36.275851,
+      "decimalLongitude": 137.921645,
+      "country": "Japan",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532416,
+      "decimalLatitude": 37.411289,
+      "decimalLongitude": 127.169053,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532418,
+      "decimalLatitude": 37.426635,
+      "decimalLongitude": 127.066685,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532420,
+      "decimalLatitude": 37.410032,
+      "decimalLongitude": 127.176913,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532429,
+      "decimalLatitude": 37.417872,
+      "decimalLongitude": 127.142514,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532432,
+      "decimalLatitude": 37.446842,
+      "decimalLongitude": 127.185467,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532435,
+      "decimalLatitude": 37.383618,
+      "decimalLongitude": 127.158255,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532444,
+      "decimalLatitude": 37.419169,
+      "decimalLongitude": 127.14474,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532449,
+      "decimalLatitude": 37.384864,
+      "decimalLongitude": 127.160757,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532450,
+      "decimalLatitude": 37.384721,
+      "decimalLongitude": 127.160923,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532458,
+      "decimalLatitude": 37.451357,
+      "decimalLongitude": 127.10037,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399532476,
+      "decimalLatitude": 37.450862,
+      "decimalLongitude": 127.098443,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535102,
+      "decimalLatitude": 37.424472,
+      "decimalLongitude": 127.066158,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535109,
+      "decimalLatitude": 37.388611,
+      "decimalLongitude": 127.1575,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535123,
+      "decimalLatitude": 37.42281,
+      "decimalLongitude": 127.072243,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535125,
+      "decimalLatitude": 37.423285,
+      "decimalLongitude": 127.071855,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535131,
+      "decimalLatitude": 37.458708,
+      "decimalLongitude": 127.172537,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535133,
+      "decimalLatitude": 37.425822,
+      "decimalLongitude": 127.071535,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535136,
+      "decimalLatitude": 37.399665,
+      "decimalLongitude": 127.071678,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535143,
+      "decimalLatitude": 37.458883,
+      "decimalLongitude": 127.172531,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535147,
+      "decimalLatitude": 37.427742,
+      "decimalLongitude": 127.062665,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535148,
+      "decimalLatitude": 37.405438,
+      "decimalLongitude": 127.08034,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535154,
+      "decimalLatitude": 37.426133,
+      "decimalLongitude": 127.066993,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399535156,
+      "decimalLatitude": 37.404722,
+      "decimalLongitude": 127.148161,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4413575554,
+      "decimalLatitude": 34.958778,
+      "decimalLongitude": 138.435683,
+      "country": "Japan",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4936739519,
+      "decimalLatitude": 35.665092,
+      "decimalLongitude": 139.412755,
+      "country": "Japan",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949645,
+      "decimalLatitude": 35.57475,
+      "decimalLongitude": 129.2169,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949655,
+      "decimalLatitude": 38.01068,
+      "decimalLongitude": 128.0987,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949657,
+      "decimalLatitude": 35.79176,
+      "decimalLongitude": 127.1399,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949658,
+      "decimalLatitude": 35.55215,
+      "decimalLongitude": 129.1925,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949665,
+      "decimalLatitude": 35.57851,
+      "decimalLongitude": 129.2811,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064949666,
+      "decimalLatitude": 35.76639,
+      "decimalLongitude": 127.0228,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233345,
+      "decimalLatitude": 37.405438,
+      "decimalLongitude": 127.08034,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233346,
+      "decimalLatitude": 37.427742,
+      "decimalLongitude": 127.062665,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233347,
+      "decimalLatitude": 37.458883,
+      "decimalLongitude": 127.172531,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233349,
+      "decimalLatitude": 37.399665,
+      "decimalLongitude": 127.071678,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233351,
+      "decimalLatitude": 37.425822,
+      "decimalLongitude": 127.071535,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233352,
+      "decimalLatitude": 37.458708,
+      "decimalLongitude": 127.172537,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233353,
+      "decimalLatitude": 37.423285,
+      "decimalLongitude": 127.071855,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233354,
+      "decimalLatitude": 37.42281,
+      "decimalLongitude": 127.072243,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233355,
+      "decimalLatitude": 37.424472,
+      "decimalLongitude": 127.066158,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233359,
+      "decimalLatitude": 37.388611,
+      "decimalLongitude": 127.1575,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233441,
+      "decimalLatitude": 37.450862,
+      "decimalLongitude": 127.098443,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233449,
+      "decimalLatitude": 37.384864,
+      "decimalLongitude": 127.160757,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233453,
+      "decimalLatitude": 37.451357,
+      "decimalLongitude": 127.10037,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233480,
+      "decimalLatitude": 37.384721,
+      "decimalLongitude": 127.160923,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233483,
+      "decimalLatitude": 37.419169,
+      "decimalLongitude": 127.14474,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233486,
+      "decimalLatitude": 37.383618,
+      "decimalLongitude": 127.158255,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233487,
+      "decimalLatitude": 37.446842,
+      "decimalLongitude": 127.185467,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233488,
+      "decimalLatitude": 37.417872,
+      "decimalLongitude": 127.142514,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233489,
+      "decimalLatitude": 37.410032,
+      "decimalLongitude": 127.176913,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233491,
+      "decimalLatitude": 37.426635,
+      "decimalLongitude": 127.066685,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233493,
+      "decimalLatitude": 37.426133,
+      "decimalLongitude": 127.066993,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233495,
+      "decimalLatitude": 37.411289,
+      "decimalLongitude": 127.169053,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166233499,
+      "decimalLatitude": 37.404722,
+      "decimalLongitude": 127.148161,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4399545026,
+      "decimalLatitude": 37.377361,
+      "decimalLongitude": 127.154682,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5166235708,
+      "decimalLatitude": 37.377361,
+      "decimalLongitude": 127.154682,
+      "country": "Korea, Republic of",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5064923645,
+      "decimalLatitude": 35.839167,
+      "decimalLongitude": 127.066667,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923635,
+      "decimalLatitude": 35.766238,
+      "decimalLongitude": 127.040206,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923642,
+      "decimalLatitude": 35.557379,
+      "decimalLongitude": 126.868739,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923643,
+      "decimalLatitude": 35.620857,
+      "decimalLongitude": 127.559738,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923646,
+      "decimalLatitude": 35.792737,
+      "decimalLongitude": 127.138767,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923648,
+      "decimalLatitude": 37.474722,
+      "decimalLongitude": 127.198056,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923650,
+      "decimalLatitude": 35.414167,
+      "decimalLongitude": 127.375556,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923651,
+      "decimalLatitude": 35.724424,
+      "decimalLongitude": 127.058102,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6185170202,
+      "decimalLatitude": 38.266425,
+      "decimalLongitude": 140.843903,
+      "country": "Japan",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971325733,
+      "decimalLatitude": 34.744225,
+      "decimalLongitude": 126.112644,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971325876,
+      "decimalLatitude": 34.905192,
+      "decimalLongitude": 126.063975,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971325878,
+      "decimalLatitude": 34.905211,
+      "decimalLongitude": 126.063972,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971326088,
+      "decimalLatitude": 35.048547,
+      "decimalLongitude": 126.141,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971326106,
+      "decimalLatitude": 35.011806,
+      "decimalLongitude": 126.15235,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971326107,
+      "decimalLatitude": 35.011806,
+      "decimalLongitude": 126.15235,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971326494,
+      "decimalLatitude": 34.845092,
+      "decimalLongitude": 126.265389,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971326504,
+      "decimalLatitude": 34.8451,
+      "decimalLongitude": 126.265461,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 3971326510,
+      "decimalLatitude": 34.8451,
+      "decimalLongitude": 126.265442,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064849426,
+      "decimalLatitude": 35.123675,
+      "decimalLongitude": 128.932959,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923624,
+      "decimalLatitude": 35.615003,
+      "decimalLongitude": 129.365158,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923638,
+      "decimalLatitude": 35.522568,
+      "decimalLongitude": 126.889923,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923669,
+      "decimalLatitude": 35.804579,
+      "decimalLongitude": 127.109711,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923670,
+      "decimalLatitude": 35.617638,
+      "decimalLongitude": 129.040222,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5828736936,
+      "decimalLatitude": 35.608683,
+      "decimalLongitude": 139.390167,
+      "country": "Japan",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6593394100,
+      "decimalLatitude": 34.807944,
+      "decimalLongitude": 126.899222,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6593405265,
+      "decimalLatitude": 34.356528,
+      "decimalLongitude": 126.7145,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6593420335,
+      "decimalLatitude": 34.804111,
+      "decimalLongitude": 127.089333,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6594247983,
+      "decimalLatitude": 34.804111,
+      "decimalLongitude": 127.089333,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6594248576,
+      "decimalLatitude": 34.356528,
+      "decimalLongitude": 126.7145,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6594281081,
+      "decimalLatitude": 34.807944,
+      "decimalLongitude": 126.899222,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6597362526,
+      "decimalLatitude": 34.807944,
+      "decimalLongitude": 126.899222,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6597417116,
+      "decimalLatitude": 34.804111,
+      "decimalLongitude": 127.089333,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 6597419604,
+      "decimalLatitude": 34.356528,
+      "decimalLongitude": 126.7145,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5064923667,
+      "decimalLatitude": 35.125301,
+      "decimalLongitude": 128.933143,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4420085214,
+      "decimalLatitude": 38.341667,
+      "decimalLongitude": 127.275,
+      "country": "Korea, Republic of",
+      "year": 2021,
+      "elevation": 210.0
+    },
+    {
+      "key": 5051650754,
+      "decimalLatitude": 37.49035,
+      "decimalLongitude": 127.067919,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650753,
+      "decimalLatitude": 35.725199,
+      "decimalLongitude": 127.019806,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650755,
+      "decimalLatitude": 35.522318,
+      "decimalLongitude": 127.236721,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650756,
+      "decimalLatitude": 36.04,
+      "decimalLongitude": 126.717222,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650797,
+      "decimalLatitude": 35.859866,
+      "decimalLongitude": 127.13686,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2981002549,
+      "decimalLatitude": 35.669168,
+      "decimalLongitude": 139.272566,
+      "country": "Japan",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3498759456,
+      "decimalLatitude": 38.465061,
+      "decimalLongitude": 128.426007,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3498761066,
+      "decimalLatitude": 38.417767,
+      "decimalLongitude": 128.465517,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 3925318402,
+      "decimalLatitude": 35.598507,
+      "decimalLongitude": 139.424148,
+      "country": "Japan",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650300,
+      "decimalLatitude": 35.178382,
+      "decimalLongitude": 126.812525,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650780,
+      "decimalLatitude": 37.488573,
+      "decimalLongitude": 127.059194,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650783,
+      "decimalLatitude": 35.849721,
+      "decimalLongitude": 127.397912,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650785,
+      "decimalLatitude": 37.500556,
+      "decimalLongitude": 127.074444,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650795,
+      "decimalLatitude": 35.274786,
+      "decimalLongitude": 128.463141,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650796,
+      "decimalLatitude": 35.860081,
+      "decimalLongitude": 127.136439,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650798,
+      "decimalLatitude": 37.495228,
+      "decimalLongitude": 127.073908,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650799,
+      "decimalLatitude": 35.858979,
+      "decimalLongitude": 127.594888,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650800,
+      "decimalLatitude": 37.487222,
+      "decimalLongitude": 127.054444,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5051650801,
+      "decimalLatitude": 35.170199,
+      "decimalLongitude": 128.571168,
+      "country": "Korea, Republic of",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5293250004,
+      "decimalLatitude": 38.210133,
+      "decimalLongitude": 140.908449,
+      "country": "Japan",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5828829188,
+      "decimalLatitude": 35.57248,
+      "decimalLongitude": 139.501495,
+      "country": "Japan",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4028652868,
+      "decimalLatitude": 35.132441,
+      "decimalLongitude": 136.528397,
+      "country": "Japan",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 5068218517,
+      "decimalLatitude": 35.191612,
+      "decimalLongitude": 129.119858,
+      "country": "Korea, Republic of",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 5068218518,
+      "decimalLatitude": 35.191612,
+      "decimalLongitude": 129.119858,
+      "country": "Korea, Republic of",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3001663947,
+      "decimalLatitude": 36.655071,
+      "decimalLongitude": 128.089203,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002176580,
+      "decimalLatitude": 37.609028,
+      "decimalLongitude": 125.711044,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002214715,
+      "decimalLatitude": 37.655156,
+      "decimalLongitude": 125.694947,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001628808,
+      "decimalLatitude": 37.236822,
+      "decimalLongitude": 128.161247,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002123188,
+      "decimalLatitude": 34.522086,
+      "decimalLongitude": 126.464375,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001637203,
+      "decimalLatitude": 35.325,
+      "decimalLongitude": 126.887778,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001639795,
+      "decimalLatitude": 36.456361,
+      "decimalLongitude": 127.589056,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001677629,
+      "decimalLatitude": 37.119625,
+      "decimalLongitude": 128.3591,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001710507,
+      "decimalLatitude": 37.100756,
+      "decimalLongitude": 128.567636,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001722106,
+      "decimalLatitude": 37.319008,
+      "decimalLongitude": 128.316325,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002171156,
+      "decimalLatitude": 37.233014,
+      "decimalLongitude": 128.533042,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002181061,
+      "decimalLatitude": 36.836464,
+      "decimalLongitude": 127.552311,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002182867,
+      "decimalLatitude": 37.765167,
+      "decimalLongitude": 128.162222,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002186343,
+      "decimalLatitude": 36.508778,
+      "decimalLongitude": 128.766167,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002189588,
+      "decimalLatitude": 37.374428,
+      "decimalLongitude": 128.305039,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002190200,
+      "decimalLatitude": 36.838469,
+      "decimalLongitude": 127.704997,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001624223,
+      "decimalLatitude": 35.178389,
+      "decimalLongitude": 127.264778,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001627373,
+      "decimalLatitude": 34.445267,
+      "decimalLongitude": 127.066086,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001637733,
+      "decimalLatitude": 35.176417,
+      "decimalLongitude": 127.183417,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001654443,
+      "decimalLatitude": 38.145361,
+      "decimalLongitude": 127.322472,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001654880,
+      "decimalLatitude": 37.102306,
+      "decimalLongitude": 129.060917,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001682765,
+      "decimalLatitude": 37.611322,
+      "decimalLongitude": 125.708928,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001711786,
+      "decimalLatitude": 34.783083,
+      "decimalLongitude": 126.157861,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001715933,
+      "decimalLatitude": 37.070972,
+      "decimalLongitude": 128.367742,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002145877,
+      "decimalLatitude": 36.733806,
+      "decimalLongitude": 129.201486,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002148737,
+      "decimalLatitude": 37.667301,
+      "decimalLongitude": 126.200912,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002177330,
+      "decimalLatitude": 35.389422,
+      "decimalLongitude": 126.410956,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002191140,
+      "decimalLatitude": 35.278611,
+      "decimalLongitude": 128.230833,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002212076,
+      "decimalLatitude": 37.038961,
+      "decimalLongitude": 128.402978,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3002212454,
+      "decimalLatitude": 36.7379,
+      "decimalLongitude": 128.161865,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001591741,
+      "decimalLatitude": 35.024528,
+      "decimalLongitude": 126.453444,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001634096,
+      "decimalLatitude": 38.244639,
+      "decimalLongitude": 127.248278,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001665937,
+      "decimalLatitude": 36.661327,
+      "decimalLongitude": 128.122925,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    },
+    {
+      "key": 3001671528,
+      "decimalLatitude": 37.394361,
+      "decimalLongitude": 128.314294,
+      "country": "Korea, Republic of",
+      "year": 2018,
+      "elevation": null
+    }
+  ]
+}

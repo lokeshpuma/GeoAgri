@@ -1,0 +1,2410 @@
+{
+  "crop_id": "camellia_sinensis",
+  "crop_name": "tea",
+  "scientific_name": "Camellia sinensis",
+  "total_count": 1366,
+  "fetched_count": 300,
+  "fetched_at": "2026-10-28T09:09:35.806242+00:00",
+  "occurrences": [
+    {
+      "key": 5938679836,
+      "decimalLatitude": 29.941719,
+      "decimalLongitude": 118.013054,
+      "country": "China",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5938695416,
+      "decimalLatitude": -20.521527,
+      "decimalLongitude": 47.241323,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6129952954,
+      "decimalLatitude": 25.1637,
+      "decimalLongitude": 121.50318,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6129997186,
+      "decimalLatitude": 24.805763,
+      "decimalLongitude": 121.741242,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130250376,
+      "decimalLatitude": 23.564246,
+      "decimalLongitude": 120.603078,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130303405,
+      "decimalLatitude": 11.539204,
+      "decimalLongitude": 76.10848,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6130613986,
+      "decimalLatitude": 24.90008,
+      "decimalLongitude": 121.570472,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6131325330,
+      "decimalLatitude": 6.858987,
+      "decimalLongitude": 81.044597,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147375024,
+      "decimalLatitude": -18.934869,
+      "decimalLongitude": 48.41779,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6147199349,
+      "decimalLatitude": 23.421033,
+      "decimalLongitude": 120.650688,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159315775,
+      "decimalLatitude": 35.072211,
+      "decimalLongitude": 136.547928,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159398282,
+      "decimalLatitude": 24.704932,
+      "decimalLongitude": 121.11706,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6170925724,
+      "decimalLatitude": -4.637608,
+      "decimalLongitude": 55.445554,
+      "country": "Seychelles",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6195126793,
+      "decimalLatitude": -1.831263,
+      "decimalLongitude": 29.354467,
+      "country": "Rwanda",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6469948773,
+      "decimalLatitude": 24.982822,
+      "decimalLongitude": 121.361803,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6470116712,
+      "decimalLatitude": 24.984564,
+      "decimalLongitude": 121.355369,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6178456641,
+      "decimalLatitude": 34.920329,
+      "decimalLongitude": 138.327559,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6179419586,
+      "decimalLatitude": 35.714615,
+      "decimalLongitude": 140.331192,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6184888837,
+      "decimalLatitude": -18.937668,
+      "decimalLongitude": 48.420667,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185028052,
+      "decimalLatitude": -18.937717,
+      "decimalLongitude": 48.413811,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185091477,
+      "decimalLatitude": 24.469458,
+      "decimalLongitude": 120.913011,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6185339574,
+      "decimalLatitude": 29.621447,
+      "decimalLongitude": 121.091653,
+      "country": "China",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6335031390,
+      "decimalLatitude": -20.51806,
+      "decimalLongitude": 47.231113,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6188248491,
+      "decimalLatitude": 33.859433,
+      "decimalLongitude": 135.749987,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6195319119,
+      "decimalLatitude": 7.16255,
+      "decimalLongitude": 80.695411,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6195594069,
+      "decimalLatitude": 24.306395,
+      "decimalLongitude": 91.729644,
+      "country": "Bangladesh",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6235242122,
+      "decimalLatitude": 7.250304,
+      "decimalLongitude": 80.631269,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6235740672,
+      "decimalLatitude": 33.779895,
+      "decimalLongitude": -84.290576,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6235936372,
+      "decimalLatitude": 33.968811,
+      "decimalLongitude": 131.271003,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6236406986,
+      "decimalLatitude": 23.923351,
+      "decimalLongitude": 120.936265,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6236500383,
+      "decimalLatitude": 24.846179,
+      "decimalLongitude": 121.335183,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6252515582,
+      "decimalLatitude": 33.776581,
+      "decimalLongitude": -84.322764,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6273320328,
+      "decimalLatitude": 7.252367,
+      "decimalLongitude": 80.631233,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6273401385,
+      "decimalLatitude": 25.172383,
+      "decimalLongitude": 121.498848,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6274325067,
+      "decimalLatitude": 6.866136,
+      "decimalLongitude": 81.061928,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6334961948,
+      "decimalLatitude": 34.999919,
+      "decimalLongitude": 135.773906,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6320362684,
+      "decimalLatitude": -20.433433,
+      "decimalLongitude": -43.502495,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6320672884,
+      "decimalLatitude": -20.426947,
+      "decimalLongitude": -43.506889,
+      "country": "Brazil",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6320962722,
+      "decimalLatitude": -18.938232,
+      "decimalLongitude": 48.417854,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6335018845,
+      "decimalLatitude": 11.375382,
+      "decimalLongitude": 76.89992,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441525048,
+      "decimalLatitude": 34.576262,
+      "decimalLongitude": 135.981095,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6451623078,
+      "decimalLatitude": 27.04801,
+      "decimalLongitude": 88.376832,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499249930,
+      "decimalLatitude": 27.110226,
+      "decimalLongitude": 88.3388,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399419782,
+      "decimalLatitude": 35.556163,
+      "decimalLongitude": 139.35933,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399626597,
+      "decimalLatitude": 34.992735,
+      "decimalLongitude": 138.406045,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6399962422,
+      "decimalLatitude": -18.933233,
+      "decimalLongitude": 48.414458,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6400545037,
+      "decimalLatitude": -27.352558,
+      "decimalLongitude": -55.601802,
+      "country": "Argentina",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441959786,
+      "decimalLatitude": -18.932656,
+      "decimalLongitude": 48.414808,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6452255801,
+      "decimalLatitude": -18.935261,
+      "decimalLongitude": 48.416261,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441042939,
+      "decimalLatitude": 35.38237,
+      "decimalLongitude": 119.331207,
+      "country": "China",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441441829,
+      "decimalLatitude": 30.345483,
+      "decimalLongitude": 119.453033,
+      "country": "China",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6441740309,
+      "decimalLatitude": 35.810608,
+      "decimalLongitude": 139.187897,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6499626442,
+      "decimalLatitude": 7.317687,
+      "decimalLongitude": 80.578301,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6500179696,
+      "decimalLatitude": 45.504972,
+      "decimalLongitude": -122.61525,
+      "country": "United States of America",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6500339469,
+      "decimalLatitude": 41.716654,
+      "decimalLongitude": 41.733029,
+      "country": "Georgia",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6519170463,
+      "decimalLatitude": 29.857617,
+      "decimalLongitude": 122.38545,
+      "country": "China",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6519298080,
+      "decimalLatitude": 11.354559,
+      "decimalLongitude": 76.809904,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6552772737,
+      "decimalLatitude": 6.999383,
+      "decimalLongitude": 80.416036,
+      "country": "Sri Lanka",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6550812797,
+      "decimalLatitude": 23.42018,
+      "decimalLongitude": 120.650262,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6551809235,
+      "decimalLatitude": -18.942252,
+      "decimalLongitude": 48.414924,
+      "country": "Madagascar",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6551884485,
+      "decimalLatitude": 10.378503,
+      "decimalLongitude": 77.033394,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6552419041,
+      "decimalLatitude": 24.817878,
+      "decimalLongitude": 121.134688,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6552849798,
+      "decimalLatitude": 24.785656,
+      "decimalLongitude": 121.171792,
+      "country": "Chinese Taipei",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6566927531,
+      "decimalLatitude": 36.692362,
+      "decimalLongitude": 137.147167,
+      "country": "Japan",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5007828645,
+      "decimalLatitude": 24.372847,
+      "decimalLongitude": 120.846444,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5063119178,
+      "decimalLatitude": 24.824337,
+      "decimalLongitude": 121.287497,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5087122865,
+      "decimalLatitude": 23.994688,
+      "decimalLongitude": 121.120181,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5176496311,
+      "decimalLatitude": 18.585231,
+      "decimalLongitude": 98.513212,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5844014084,
+      "decimalLatitude": 22.702952,
+      "decimalLongitude": 91.686215,
+      "country": "Bangladesh",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6499976808,
+      "decimalLatitude": 7.043347,
+      "decimalLongitude": 80.698512,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5063650200,
+      "decimalLatitude": 25.124194,
+      "decimalLongitude": 121.555017,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5063844173,
+      "decimalLatitude": 24.912228,
+      "decimalLongitude": 121.541388,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5077145322,
+      "decimalLatitude": 6.860533,
+      "decimalLongitude": 80.562767,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5087291739,
+      "decimalLatitude": 7.031658,
+      "decimalLongitude": 80.41075,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5110403918,
+      "decimalLatitude": 21.930788,
+      "decimalLongitude": 105.133614,
+      "country": "Viet Nam",
+      "year": 2025,
+      "elevation": 61.77
+    },
+    {
+      "key": 5110403947,
+      "decimalLatitude": 26.819019,
+      "decimalLongitude": 88.300155,
+      "country": "India",
+      "year": 2025,
+      "elevation": 253.0
+    },
+    {
+      "key": 5110486843,
+      "decimalLatitude": 21.930758,
+      "decimalLongitude": 105.133622,
+      "country": "Viet Nam",
+      "year": 2025,
+      "elevation": 61.45
+    },
+    {
+      "key": 5206411393,
+      "decimalLatitude": 6.339814,
+      "decimalLongitude": 80.533458,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5134106799,
+      "decimalLatitude": 35.64451,
+      "decimalLongitude": 139.440499,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5140558662,
+      "decimalLatitude": 24.570308,
+      "decimalLongitude": 120.778542,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6137329858,
+      "decimalLatitude": 35.151489,
+      "decimalLongitude": 128.72504,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6170895488,
+      "decimalLatitude": 35.715594,
+      "decimalLongitude": 139.302553,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5153127901,
+      "decimalLatitude": 6.972928,
+      "decimalLongitude": 80.787483,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5154810511,
+      "decimalLatitude": 34.990134,
+      "decimalLongitude": 138.373861,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5167339723,
+      "decimalLatitude": 24.444961,
+      "decimalLongitude": 120.844506,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5168043749,
+      "decimalLatitude": 23.463411,
+      "decimalLongitude": 120.698517,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5168302680,
+      "decimalLatitude": -18.927863,
+      "decimalLongitude": 48.414851,
+      "country": "Madagascar",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5176574699,
+      "decimalLatitude": 24.39771,
+      "decimalLongitude": 120.778182,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5216441803,
+      "decimalLatitude": 24.763655,
+      "decimalLongitude": 121.585305,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5282178182,
+      "decimalLatitude": 7.589497,
+      "decimalLongitude": 80.575997,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760561175,
+      "decimalLatitude": 33.76987,
+      "decimalLongitude": -84.33023,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6159687903,
+      "decimalLatitude": 24.839103,
+      "decimalLongitude": 121.175724,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6479245259,
+      "decimalLatitude": 26.792483,
+      "decimalLongitude": 91.892982,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292637816,
+      "decimalLatitude": 23.808157,
+      "decimalLongitude": 120.733904,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5292876544,
+      "decimalLatitude": 25.090642,
+      "decimalLongitude": 121.359895,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5760505091,
+      "decimalLatitude": 24.12941,
+      "decimalLongitude": 120.805439,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5830979354,
+      "decimalLatitude": 6.873133,
+      "decimalLongitude": 81.049107,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5839852150,
+      "decimalLatitude": 23.494172,
+      "decimalLongitude": 120.690033,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5840080731,
+      "decimalLatitude": 23.560954,
+      "decimalLongitude": 120.659524,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5840534483,
+      "decimalLatitude": 23.627378,
+      "decimalLongitude": 120.710703,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5867878480,
+      "decimalLatitude": -18.937772,
+      "decimalLongitude": 48.413998,
+      "country": "Madagascar",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868087408,
+      "decimalLatitude": 35.505147,
+      "decimalLongitude": 135.332275,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868161369,
+      "decimalLatitude": 35.639549,
+      "decimalLongitude": 139.460956,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5868398082,
+      "decimalLatitude": 33.802017,
+      "decimalLongitude": -84.303185,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889580144,
+      "decimalLatitude": 34.965267,
+      "decimalLongitude": 135.781103,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5889611320,
+      "decimalLatitude": 33.798338,
+      "decimalLongitude": -84.314095,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5890303298,
+      "decimalLatitude": 37.224601,
+      "decimalLongitude": 126.647177,
+      "country": "Korea, Republic of",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5892526173,
+      "decimalLatitude": 27.292471,
+      "decimalLongitude": 88.346473,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5908980518,
+      "decimalLatitude": 6.991,
+      "decimalLongitude": 80.405,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6333868336,
+      "decimalLatitude": 27.652366,
+      "decimalLongitude": 117.948158,
+      "country": "China",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6551910805,
+      "decimalLatitude": 35.841653,
+      "decimalLongitude": -78.671763,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897381746,
+      "decimalLatitude": 6.851416,
+      "decimalLongitude": 80.522138,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897597554,
+      "decimalLatitude": 6.829122,
+      "decimalLongitude": 80.567715,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897648483,
+      "decimalLatitude": 35.784317,
+      "decimalLongitude": 119.540642,
+      "country": "China",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897676795,
+      "decimalLatitude": 35.016789,
+      "decimalLongitude": 135.672347,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5897755232,
+      "decimalLatitude": 33.780727,
+      "decimalLongitude": -84.290478,
+      "country": "United States of America",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5903927089,
+      "decimalLatitude": 33.566897,
+      "decimalLongitude": 131.561888,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5904057979,
+      "decimalLatitude": 35.639556,
+      "decimalLongitude": 139.460908,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5908868880,
+      "decimalLatitude": 6.441278,
+      "decimalLongitude": 80.418122,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5932551775,
+      "decimalLatitude": 24.471418,
+      "decimalLongitude": 92.346847,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5932653800,
+      "decimalLatitude": 24.471418,
+      "decimalLongitude": 92.346847,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5932666906,
+      "decimalLatitude": 24.942928,
+      "decimalLongitude": 121.496077,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6131578094,
+      "decimalLatitude": 7.012242,
+      "decimalLongitude": 80.656678,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6400630639,
+      "decimalLatitude": 35.443589,
+      "decimalLongitude": 139.637964,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5908877120,
+      "decimalLatitude": 6.866071,
+      "decimalLongitude": 81.062027,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920225199,
+      "decimalLatitude": 23.341234,
+      "decimalLongitude": 121.305732,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5920328073,
+      "decimalLatitude": 33.859908,
+      "decimalLongitude": 135.752595,
+      "country": "Japan",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5932645006,
+      "decimalLatitude": 15.1743,
+      "decimalLongitude": 106.074248,
+      "country": "Lao People\u2019s Democratic Republic",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5935382449,
+      "decimalLatitude": 19.320079,
+      "decimalLongitude": 98.596198,
+      "country": "Thailand",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5935636275,
+      "decimalLatitude": 6.364203,
+      "decimalLongitude": 80.522216,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5935833420,
+      "decimalLatitude": 23.468048,
+      "decimalLongitude": 120.690651,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5936109119,
+      "decimalLatitude": 24.939972,
+      "decimalLongitude": 121.632672,
+      "country": "Chinese Taipei",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6130237761,
+      "decimalLatitude": 6.876242,
+      "decimalLongitude": 81.046158,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6171058438,
+      "decimalLatitude": 6.013959,
+      "decimalLongitude": 80.362817,
+      "country": "Sri Lanka",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 6252375092,
+      "decimalLatitude": 25.902109,
+      "decimalLongitude": 119.172485,
+      "country": "China",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 4510379185,
+      "decimalLatitude": 25.160178,
+      "decimalLongitude": 121.501185,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4516396074,
+      "decimalLatitude": 23.67237,
+      "decimalLongitude": 120.796946,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4522542340,
+      "decimalLatitude": -2.44472,
+      "decimalLongitude": 29.099318,
+      "country": "Rwanda",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4522618188,
+      "decimalLatitude": 24.967622,
+      "decimalLongitude": 121.260292,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4522696114,
+      "decimalLatitude": 6.989459,
+      "decimalLongitude": 80.401351,
+      "country": "Sri Lanka",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4527916257,
+      "decimalLatitude": 35.020221,
+      "decimalLongitude": 135.715661,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4952433620,
+      "decimalLatitude": 22.773926,
+      "decimalLongitude": 120.732609,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4952551459,
+      "decimalLatitude": 22.694929,
+      "decimalLongitude": 120.761679,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4952912336,
+      "decimalLatitude": 22.607399,
+      "decimalLongitude": 120.694485,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4954610849,
+      "decimalLatitude": 43.696673,
+      "decimalLongitude": 39.699952,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4527957221,
+      "decimalLatitude": 25.364456,
+      "decimalLongitude": 104.767258,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4535939675,
+      "decimalLatitude": 23.487836,
+      "decimalLongitude": 120.637794,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5028075226,
+      "decimalLatitude": -4.659547,
+      "decimalLongitude": 55.437241,
+      "country": "Seychelles",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109937679,
+      "decimalLatitude": 10.628012,
+      "decimalLongitude": 104.057006,
+      "country": "Cambodia",
+      "year": 2024,
+      "elevation": 997.68
+    },
+    {
+      "key": 5109971602,
+      "decimalLatitude": 41.008869,
+      "decimalLongitude": 28.916588,
+      "country": "T\u00fcrkiye",
+      "year": 2024,
+      "elevation": 34.67
+    },
+    {
+      "key": 5109980952,
+      "decimalLatitude": -21.29627,
+      "decimalLongitude": 55.629253,
+      "country": "R\u00e9union",
+      "year": 2024,
+      "elevation": 1118.07
+    },
+    {
+      "key": 4596928027,
+      "decimalLatitude": 34.794112,
+      "decimalLongitude": 133.811165,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4597086304,
+      "decimalLatitude": 23.984536,
+      "decimalLongitude": 120.950352,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4597100639,
+      "decimalLatitude": 35.026792,
+      "decimalLongitude": 135.787292,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4607251274,
+      "decimalLatitude": 6.989785,
+      "decimalLongitude": 80.427089,
+      "country": "Sri Lanka",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4866473820,
+      "decimalLatitude": 26.5394,
+      "decimalLongitude": 94.2154,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4872460925,
+      "decimalLatitude": 25.163558,
+      "decimalLongitude": 121.554496,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5037144461,
+      "decimalLatitude": 24.976713,
+      "decimalLongitude": 121.368697,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109846431,
+      "decimalLatitude": 7.09462,
+      "decimalLongitude": 80.647805,
+      "country": "Sri Lanka",
+      "year": 2024,
+      "elevation": 1009.22
+    },
+    {
+      "key": 5109862671,
+      "decimalLatitude": 7.118111,
+      "decimalLongitude": 80.620128,
+      "country": "Sri Lanka",
+      "year": 2024,
+      "elevation": 808.95
+    },
+    {
+      "key": 5109991937,
+      "decimalLatitude": 34.040235,
+      "decimalLongitude": 133.802787,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": 365.12
+    },
+    {
+      "key": 6579809460,
+      "decimalLatitude": 33.9346,
+      "decimalLongitude": -83.458388,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4851814470,
+      "decimalLatitude": 24.007264,
+      "decimalLongitude": 120.930772,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4851928596,
+      "decimalLatitude": 23.67501,
+      "decimalLongitude": 120.797154,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4851987265,
+      "decimalLatitude": -18.935594,
+      "decimalLongitude": 48.417589,
+      "country": "Madagascar",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4852404374,
+      "decimalLatitude": 35.732392,
+      "decimalLongitude": 139.668348,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4852466574,
+      "decimalLatitude": 24.007011,
+      "decimalLongitude": 120.93138,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4853160756,
+      "decimalLatitude": 23.584572,
+      "decimalLongitude": 120.617685,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4891724711,
+      "decimalLatitude": 34.673466,
+      "decimalLongitude": 135.134352,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5036836557,
+      "decimalLatitude": 36.115592,
+      "decimalLongitude": 140.09708,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5188090403,
+      "decimalLatitude": 7.39261,
+      "decimalLongitude": 80.771809,
+      "country": "Sri Lanka",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4866467182,
+      "decimalLatitude": 27.5741,
+      "decimalLongitude": 95.3268,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4872383268,
+      "decimalLatitude": 25.131753,
+      "decimalLongitude": 121.508981,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4952675917,
+      "decimalLatitude": -40.414538,
+      "decimalLongitude": 175.663935,
+      "country": "New Zealand",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5109926280,
+      "decimalLatitude": 26.384918,
+      "decimalLongitude": 106.52357,
+      "country": "China",
+      "year": 2024,
+      "elevation": 1174.22
+    },
+    {
+      "key": 5110006512,
+      "decimalLatitude": 40.943542,
+      "decimalLongitude": 39.189465,
+      "country": "T\u00fcrkiye",
+      "year": 2024,
+      "elevation": 452.8
+    },
+    {
+      "key": 5110133336,
+      "decimalLatitude": 26.384923,
+      "decimalLongitude": 106.52356,
+      "country": "China",
+      "year": 2024,
+      "elevation": 1171.23
+    },
+    {
+      "key": 4902112697,
+      "decimalLatitude": 24.824978,
+      "decimalLongitude": 121.417686,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110155938,
+      "decimalLatitude": -21.296861,
+      "decimalLongitude": 55.629091,
+      "country": "R\u00e9union",
+      "year": 2024,
+      "elevation": 1115.0
+    },
+    {
+      "key": 4908509254,
+      "decimalLatitude": 23.419871,
+      "decimalLongitude": 120.650344,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4908856824,
+      "decimalLatitude": -18.93199,
+      "decimalLongitude": 48.413272,
+      "country": "Madagascar",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4921726574,
+      "decimalLatitude": 35.603949,
+      "decimalLongitude": 139.330615,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4921739065,
+      "decimalLatitude": 35.691842,
+      "decimalLongitude": 139.354963,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4946479258,
+      "decimalLatitude": 24.547261,
+      "decimalLongitude": 120.955794,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110393032,
+      "decimalLatitude": 34.400244,
+      "decimalLongitude": 132.468853,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": 30.72
+    },
+    {
+      "key": 4945750877,
+      "decimalLatitude": 26.849185,
+      "decimalLongitude": 88.360358,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4945843641,
+      "decimalLatitude": 26.849185,
+      "decimalLongitude": 88.360358,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4946276180,
+      "decimalLatitude": 24.944211,
+      "decimalLongitude": 121.593572,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4950022931,
+      "decimalLatitude": 24.612218,
+      "decimalLongitude": 121.80434,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110198702,
+      "decimalLatitude": 34.717497,
+      "decimalLongitude": 127.07768,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": 341.32
+    },
+    {
+      "key": 5868023136,
+      "decimalLatitude": 43.643453,
+      "decimalLongitude": 39.84046,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4945522329,
+      "decimalLatitude": 30.030172,
+      "decimalLongitude": 122.102492,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4945538598,
+      "decimalLatitude": 30.007923,
+      "decimalLongitude": 122.215073,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4950113803,
+      "decimalLatitude": -18.938255,
+      "decimalLongitude": 48.417683,
+      "country": "Madagascar",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4952329638,
+      "decimalLatitude": 30.032349,
+      "decimalLongitude": 122.110706,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4952979984,
+      "decimalLatitude": 0.111032,
+      "decimalLongitude": -79.228251,
+      "country": "Ecuador",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4952988908,
+      "decimalLatitude": 35.631648,
+      "decimalLongitude": 139.468063,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4993930091,
+      "decimalLatitude": 33.117031,
+      "decimalLongitude": -83.187697,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5087070922,
+      "decimalLatitude": 34.714962,
+      "decimalLongitude": 135.187605,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110228306,
+      "decimalLatitude": 22.627228,
+      "decimalLongitude": 104.738426,
+      "country": "Viet Nam",
+      "year": 2024,
+      "elevation": 794.5
+    },
+    {
+      "key": 4954304950,
+      "decimalLatitude": 24.763618,
+      "decimalLongitude": 121.114879,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4954328140,
+      "decimalLatitude": 24.644319,
+      "decimalLongitude": 121.008736,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4954407852,
+      "decimalLatitude": 25.135704,
+      "decimalLongitude": 121.424035,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4973782633,
+      "decimalLatitude": 23.85649,
+      "decimalLongitude": 120.96011,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4973783949,
+      "decimalLatitude": 34.989137,
+      "decimalLongitude": 138.406845,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4973865275,
+      "decimalLatitude": 23.729314,
+      "decimalLongitude": 120.790051,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4973985604,
+      "decimalLatitude": 30.041738,
+      "decimalLongitude": 122.130494,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4974151472,
+      "decimalLatitude": 24.498342,
+      "decimalLongitude": 120.877747,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4974286924,
+      "decimalLatitude": 24.499436,
+      "decimalLongitude": 120.878464,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976228846,
+      "decimalLatitude": 25.123531,
+      "decimalLongitude": 121.601212,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976276033,
+      "decimalLatitude": 38.371563,
+      "decimalLongitude": 141.059203,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976370599,
+      "decimalLatitude": 33.995045,
+      "decimalLongitude": 134.315262,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976374647,
+      "decimalLatitude": 35.626661,
+      "decimalLongitude": 139.439936,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976376727,
+      "decimalLatitude": 35.639967,
+      "decimalLongitude": 139.448625,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976482731,
+      "decimalLatitude": 35.672564,
+      "decimalLongitude": 139.700674,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4976654233,
+      "decimalLatitude": 35.63259,
+      "decimalLongitude": 139.468121,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4978584942,
+      "decimalLatitude": 34.981945,
+      "decimalLongitude": 138.398987,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4978659758,
+      "decimalLatitude": 29.830008,
+      "decimalLongitude": 121.86572,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4981938736,
+      "decimalLatitude": 35.914367,
+      "decimalLongitude": 139.41026,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5104305819,
+      "decimalLatitude": 43.635702,
+      "decimalLongitude": 39.83039,
+      "country": "Russian Federation",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110238123,
+      "decimalLatitude": 35.434168,
+      "decimalLongitude": 137.276078,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": 478.1
+    },
+    {
+      "key": 5110262404,
+      "decimalLatitude": 40.916675,
+      "decimalLongitude": 39.008972,
+      "country": "T\u00fcrkiye",
+      "year": 2024,
+      "elevation": 205.0
+    },
+    {
+      "key": 5110423568,
+      "decimalLatitude": 30.243578,
+      "decimalLongitude": 120.098853,
+      "country": "China",
+      "year": 2024,
+      "elevation": 46.91
+    },
+    {
+      "key": 5110474158,
+      "decimalLatitude": 35.658753,
+      "decimalLongitude": 139.680367,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": 65.92
+    },
+    {
+      "key": 5217249509,
+      "decimalLatitude": 30.00605,
+      "decimalLongitude": 122.219162,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5837866177,
+      "decimalLatitude": 39.116394,
+      "decimalLongitude": -75.529724,
+      "country": "United States of America",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6130101809,
+      "decimalLatitude": 35.504372,
+      "decimalLongitude": 135.464278,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6479287192,
+      "decimalLatitude": -20.434247,
+      "decimalLongitude": -43.510887,
+      "country": "Brazil",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4978164457,
+      "decimalLatitude": 6.867715,
+      "decimalLongitude": 81.060678,
+      "country": "Sri Lanka",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4978272593,
+      "decimalLatitude": 35.607887,
+      "decimalLongitude": 139.434986,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4980378209,
+      "decimalLatitude": 23.84987,
+      "decimalLongitude": 120.934355,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4980405307,
+      "decimalLatitude": 33.285647,
+      "decimalLongitude": 131.470997,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4980405707,
+      "decimalLatitude": 35.628851,
+      "decimalLongitude": 139.452852,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4980645654,
+      "decimalLatitude": 34.854153,
+      "decimalLongitude": 135.473555,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4980717810,
+      "decimalLatitude": 33.263014,
+      "decimalLongitude": 131.369574,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4980732623,
+      "decimalLatitude": 34.911189,
+      "decimalLongitude": 139.122314,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4982048547,
+      "decimalLatitude": 33.887663,
+      "decimalLongitude": 134.034829,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4982156618,
+      "decimalLatitude": 35.755485,
+      "decimalLongitude": 139.30249,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4982220474,
+      "decimalLatitude": 35.63959,
+      "decimalLongitude": 139.460924,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4987741716,
+      "decimalLatitude": 30.253518,
+      "decimalLongitude": 120.119968,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4993979132,
+      "decimalLatitude": 35.632072,
+      "decimalLongitude": 139.468495,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4994492806,
+      "decimalLatitude": 24.985419,
+      "decimalLongitude": 121.592329,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5037064187,
+      "decimalLatitude": 24.870713,
+      "decimalLongitude": 121.32843,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5037066294,
+      "decimalLatitude": 24.869513,
+      "decimalLongitude": 121.326212,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5037177021,
+      "decimalLatitude": 23.919064,
+      "decimalLongitude": 120.882435,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5062893785,
+      "decimalLatitude": 24.946876,
+      "decimalLongitude": 121.492715,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5087125473,
+      "decimalLatitude": 23.992707,
+      "decimalLongitude": 120.97547,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5087152372,
+      "decimalLatitude": 29.752143,
+      "decimalLongitude": 121.263616,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110440051,
+      "decimalLatitude": -21.211179,
+      "decimalLongitude": 55.410456,
+      "country": "R\u00e9union",
+      "year": 2024,
+      "elevation": 946.63
+    },
+    {
+      "key": 5110489734,
+      "decimalLatitude": 34.718472,
+      "decimalLongitude": 127.074958,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": 362.5
+    },
+    {
+      "key": 5110514168,
+      "decimalLatitude": 29.466828,
+      "decimalLongitude": 117.418679,
+      "country": "China",
+      "year": 2024,
+      "elevation": 96.67
+    },
+    {
+      "key": 5167502883,
+      "decimalLatitude": 35.488379,
+      "decimalLongitude": 129.066523,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6137330533,
+      "decimalLatitude": 36.45379,
+      "decimalLongitude": 127.123856,
+      "country": "Korea, Republic of",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4993858882,
+      "decimalLatitude": 24.565364,
+      "decimalLongitude": 120.914694,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4993953117,
+      "decimalLatitude": 24.561642,
+      "decimalLongitude": 120.914633,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4993980615,
+      "decimalLatitude": 24.561583,
+      "decimalLongitude": 120.914694,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4994063185,
+      "decimalLatitude": 27.133819,
+      "decimalLongitude": 88.082784,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4994340783,
+      "decimalLatitude": 35.011531,
+      "decimalLongitude": 135.786972,
+      "country": "Japan",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5008374489,
+      "decimalLatitude": 28.46305,
+      "decimalLongitude": 119.542838,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5036885379,
+      "decimalLatitude": 22.688547,
+      "decimalLongitude": 120.668932,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5062987366,
+      "decimalLatitude": 25.126418,
+      "decimalLongitude": 121.514372,
+      "country": "Chinese Taipei",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5110353635,
+      "decimalLatitude": -21.289863,
+      "decimalLongitude": 55.62898,
+      "country": "R\u00e9union",
+      "year": 2024,
+      "elevation": 1179.8
+    },
+    {
+      "key": 5110519001,
+      "decimalLatitude": 31.936108,
+      "decimalLongitude": 114.249523,
+      "country": "China",
+      "year": 2024,
+      "elevation": 199.0
+    },
+    {
+      "key": 5139992352,
+      "decimalLatitude": 28.452162,
+      "decimalLongitude": 119.569947,
+      "country": "China",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 6177269916,
+      "decimalLatitude": 11.256048,
+      "decimalLongitude": 76.744938,
+      "country": "India",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 4015248193,
+      "decimalLatitude": 24.965939,
+      "decimalLongitude": 121.614906,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4028981296,
+      "decimalLatitude": 35.48723,
+      "decimalLongitude": 135.418163,
+      "country": "Japan",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4029024089,
+      "decimalLatitude": 24.689269,
+      "decimalLongitude": 121.126678,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4029039426,
+      "decimalLatitude": 25.041253,
+      "decimalLongitude": 121.68058,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4029126617,
+      "decimalLatitude": 24.882245,
+      "decimalLongitude": 121.376883,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4076141771,
+      "decimalLatitude": 6.451327,
+      "decimalLongitude": 80.403959,
+      "country": "Sri Lanka",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5109467820,
+      "decimalLatitude": -34.583252,
+      "decimalLongitude": -58.417006,
+      "country": "Argentina",
+      "year": 2023,
+      "elevation": 17.09
+    },
+    {
+      "key": 4028969190,
+      "decimalLatitude": 24.85138,
+      "decimalLongitude": 121.532662,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4029252441,
+      "decimalLatitude": 32.786235,
+      "decimalLongitude": -80.190176,
+      "country": "United States of America",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4062663622,
+      "decimalLatitude": -18.938839,
+      "decimalLongitude": 48.433764,
+      "country": "Madagascar",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4062780704,
+      "decimalLatitude": -18.938839,
+      "decimalLongitude": 48.433764,
+      "country": "Madagascar",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4096433572,
+      "decimalLatitude": -18.94035,
+      "decimalLongitude": 48.417514,
+      "country": "Madagascar",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4133896502,
+      "decimalLatitude": -0.620311,
+      "decimalLongitude": 36.860183,
+      "country": "Kenya",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5109390595,
+      "decimalLatitude": -21.027247,
+      "decimalLongitude": 55.626646,
+      "country": "R\u00e9union",
+      "year": 2023,
+      "elevation": 727.53
+    },
+    {
+      "key": 4054814956,
+      "decimalLatitude": 24.971886,
+      "decimalLongitude": 121.608406,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4063053598,
+      "decimalLatitude": -18.937393,
+      "decimalLongitude": 48.419914,
+      "country": "Madagascar",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4067578418,
+      "decimalLatitude": 25.208972,
+      "decimalLongitude": 121.465492,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4075609245,
+      "decimalLatitude": 25.164098,
+      "decimalLongitude": 121.503662,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4140916618,
+      "decimalLatitude": 37.7699,
+      "decimalLongitude": -25.31358,
+      "country": "Portugal",
+      "year": 2023,
+      "elevation": 207.0
+    },
+    {
+      "key": 4076121622,
+      "decimalLatitude": 23.951126,
+      "decimalLongitude": 120.90832,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4080602614,
+      "decimalLatitude": 6.859989,
+      "decimalLongitude": 81.044792,
+      "country": "Sri Lanka",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4103337884,
+      "decimalLatitude": 25.163742,
+      "decimalLongitude": 121.503205,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4111646254,
+      "decimalLatitude": 24.695496,
+      "decimalLongitude": 121.120984,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4112198490,
+      "decimalLatitude": 24.6899,
+      "decimalLongitude": 121.127417,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4458614857,
+      "decimalLatitude": 24.571375,
+      "decimalLongitude": 121.303349,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5037251209,
+      "decimalLatitude": 24.925253,
+      "decimalLongitude": 121.44854,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5109487230,
+      "decimalLatitude": 41.008809,
+      "decimalLongitude": 28.916916,
+      "country": "T\u00fcrkiye",
+      "year": 2023,
+      "elevation": 75.84
+    },
+    {
+      "key": 4102808218,
+      "decimalLatitude": 35.729619,
+      "decimalLongitude": 139.666497,
+      "country": "Japan",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4116356686,
+      "decimalLatitude": 24.966932,
+      "decimalLongitude": 121.623578,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4116672541,
+      "decimalLatitude": 24.803156,
+      "decimalLongitude": 121.070236,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4129678019,
+      "decimalLatitude": -16.195242,
+      "decimalLongitude": 145.413239,
+      "country": "Australia",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4133871415,
+      "decimalLatitude": -1.726742,
+      "decimalLongitude": 29.310326,
+      "country": "Rwanda",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4138178452,
+      "decimalLatitude": -18.935922,
+      "decimalLongitude": 48.416672,
+      "country": "Madagascar",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4138200908,
+      "decimalLatitude": 25.602275,
+      "decimalLongitude": 115.783212,
+      "country": "China",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4145317456,
+      "decimalLatitude": 24.832092,
+      "decimalLongitude": 121.451195,
+      "country": "Chinese Taipei",
+      "year": 2023,
+      "elevation": null
+    }
+  ]
+}

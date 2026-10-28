@@ -1,0 +1,2410 @@
+{
+  "crop_id": "panicum_maximum",
+  "crop_name": "Guinea grass",
+  "scientific_name": "Panicum maximum",
+  "total_count": 501,
+  "fetched_count": 300,
+  "fetched_at": "2026-10-28T09:09:22.088235+00:00",
+  "occurrences": [
+    {
+      "key": 6159729802,
+      "decimalLatitude": 31.946994,
+      "decimalLongitude": 34.765057,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159730813,
+      "decimalLatitude": 31.934256,
+      "decimalLongitude": 34.753527,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159731897,
+      "decimalLatitude": 31.93089,
+      "decimalLongitude": 34.750139,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159734969,
+      "decimalLatitude": 31.941615,
+      "decimalLongitude": 34.761201,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159735153,
+      "decimalLatitude": 31.924927,
+      "decimalLongitude": 34.749692,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159743901,
+      "decimalLatitude": 32.491242,
+      "decimalLongitude": 34.973449,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159745835,
+      "decimalLatitude": 31.931524,
+      "decimalLongitude": 34.751087,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159749073,
+      "decimalLatitude": 31.946676,
+      "decimalLongitude": 34.764265,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159752520,
+      "decimalLatitude": 31.944652,
+      "decimalLongitude": 34.763281,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159753142,
+      "decimalLatitude": 31.942624,
+      "decimalLongitude": 34.75833,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159748479,
+      "decimalLatitude": 31.829726,
+      "decimalLongitude": 34.740547,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6159754723,
+      "decimalLatitude": 31.831802,
+      "decimalLongitude": 34.741213,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6239588314,
+      "decimalLatitude": 31.765707,
+      "decimalLongitude": 34.75365,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6257949306,
+      "decimalLatitude": 31.859098,
+      "decimalLongitude": 34.809927,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6257970306,
+      "decimalLatitude": 32.171442,
+      "decimalLongitude": 34.824013,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6258077302,
+      "decimalLatitude": 31.9403,
+      "decimalLongitude": 34.751383,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6258082320,
+      "decimalLatitude": 31.937346,
+      "decimalLongitude": 34.749991,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6258102312,
+      "decimalLatitude": 31.937318,
+      "decimalLongitude": 34.752307,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6258117305,
+      "decimalLatitude": 31.870426,
+      "decimalLongitude": 34.796299,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6258228306,
+      "decimalLatitude": 31.938028,
+      "decimalLongitude": 34.751542,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6350648346,
+      "decimalLatitude": 32.547867,
+      "decimalLongitude": 34.918752,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6350666305,
+      "decimalLatitude": 32.609914,
+      "decimalLongitude": 34.930466,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6350745326,
+      "decimalLatitude": 32.548874,
+      "decimalLongitude": 34.917407,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6350827335,
+      "decimalLatitude": 32.483502,
+      "decimalLongitude": 34.97167,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6437261343,
+      "decimalLatitude": 32.458695,
+      "decimalLongitude": 34.991634,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6437268380,
+      "decimalLatitude": 32.470026,
+      "decimalLongitude": 35.011531,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6437297352,
+      "decimalLatitude": 32.098996,
+      "decimalLongitude": 34.96069,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6437300389,
+      "decimalLatitude": 32.100494,
+      "decimalLongitude": 34.956671,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6437305306,
+      "decimalLatitude": 31.945058,
+      "decimalLongitude": 34.798318,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6437307331,
+      "decimalLatitude": 32.4697,
+      "decimalLongitude": 35.005383,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6437308310,
+      "decimalLatitude": 32.100879,
+      "decimalLongitude": 34.955261,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6599683342,
+      "decimalLatitude": 32.471958,
+      "decimalLongitude": 35.038886,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 6599749482,
+      "decimalLatitude": 31.882178,
+      "decimalLongitude": 34.774708,
+      "country": "Israel",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5157141175,
+      "decimalLatitude": 32.119991,
+      "decimalLongitude": 34.788125,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157050943,
+      "decimalLatitude": 32.289114,
+      "decimalLongitude": 34.900659,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157068491,
+      "decimalLatitude": 32.291456,
+      "decimalLongitude": 34.891967,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157123496,
+      "decimalLatitude": 32.295987,
+      "decimalLongitude": 34.897398,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157123523,
+      "decimalLatitude": 32.286238,
+      "decimalLongitude": 34.88966,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157146639,
+      "decimalLatitude": 32.280105,
+      "decimalLongitude": 34.896506,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157150955,
+      "decimalLatitude": 32.290338,
+      "decimalLongitude": 34.906939,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157154178,
+      "decimalLatitude": 32.279475,
+      "decimalLongitude": 34.912303,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157057369,
+      "decimalLatitude": 32.290637,
+      "decimalLongitude": 34.944615,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157099383,
+      "decimalLatitude": 32.277716,
+      "decimalLongitude": 34.896843,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157125890,
+      "decimalLatitude": 32.121588,
+      "decimalLongitude": 34.85726,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157127477,
+      "decimalLatitude": 32.276768,
+      "decimalLongitude": 34.911601,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157134577,
+      "decimalLatitude": 32.281474,
+      "decimalLongitude": 34.914951,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157162381,
+      "decimalLatitude": 32.339663,
+      "decimalLongitude": 34.926397,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157162633,
+      "decimalLatitude": 32.277726,
+      "decimalLongitude": 34.908891,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157095931,
+      "decimalLatitude": 32.285092,
+      "decimalLongitude": 34.928113,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157133951,
+      "decimalLatitude": 32.271777,
+      "decimalLongitude": 34.921626,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5157157040,
+      "decimalLatitude": 32.110846,
+      "decimalLongitude": 34.856612,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5232849952,
+      "decimalLatitude": 32.434513,
+      "decimalLongitude": 34.893346,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5232867924,
+      "decimalLatitude": 32.434588,
+      "decimalLongitude": 34.89443,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5895385311,
+      "decimalLatitude": 31.880457,
+      "decimalLongitude": 34.783181,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5895325330,
+      "decimalLatitude": 31.888319,
+      "decimalLongitude": 34.825573,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5895378249,
+      "decimalLatitude": 31.906177,
+      "decimalLongitude": 34.805667,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5895454857,
+      "decimalLatitude": 31.886163,
+      "decimalLongitude": 34.828382,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5905117179,
+      "decimalLatitude": 32.440886,
+      "decimalLongitude": 34.91122,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5936629445,
+      "decimalLatitude": 32.469971,
+      "decimalLongitude": 35.010957,
+      "country": "Israel",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5002890790,
+      "decimalLatitude": 31.940895,
+      "decimalLongitude": 34.903195,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002803984,
+      "decimalLatitude": 32.084686,
+      "decimalLongitude": 34.952148,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002881680,
+      "decimalLatitude": 32.182635,
+      "decimalLongitude": 34.824666,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002951527,
+      "decimalLatitude": 32.47322,
+      "decimalLongitude": 34.980228,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002830847,
+      "decimalLatitude": 32.127115,
+      "decimalLongitude": 34.887865,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002839898,
+      "decimalLatitude": 32.216397,
+      "decimalLongitude": 34.950427,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002952967,
+      "decimalLatitude": 32.216416,
+      "decimalLongitude": 34.950586,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002960710,
+      "decimalLatitude": 32.222047,
+      "decimalLongitude": 34.888502,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002842080,
+      "decimalLatitude": 32.025946,
+      "decimalLongitude": 34.874823,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002859571,
+      "decimalLatitude": 32.136364,
+      "decimalLongitude": 34.812649,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002930288,
+      "decimalLatitude": 32.137523,
+      "decimalLongitude": 34.816947,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002937496,
+      "decimalLatitude": 32.059396,
+      "decimalLongitude": 34.882613,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002972380,
+      "decimalLatitude": 32.029904,
+      "decimalLongitude": 34.87466,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002975009,
+      "decimalLatitude": 32.13036,
+      "decimalLongitude": 34.804504,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5003284403,
+      "decimalLatitude": 32.030768,
+      "decimalLongitude": 34.873969,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5003287722,
+      "decimalLatitude": 32.028758,
+      "decimalLongitude": 34.874135,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002860226,
+      "decimalLatitude": 32.184738,
+      "decimalLongitude": 34.825251,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002867909,
+      "decimalLatitude": 32.297672,
+      "decimalLongitude": 34.936494,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002905880,
+      "decimalLatitude": 32.094312,
+      "decimalLongitude": 34.908244,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002938136,
+      "decimalLatitude": 32.291017,
+      "decimalLongitude": 34.923934,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002993175,
+      "decimalLatitude": 32.287196,
+      "decimalLongitude": 34.921111,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002873897,
+      "decimalLatitude": 32.178264,
+      "decimalLongitude": 34.822511,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5003286695,
+      "decimalLatitude": 32.107102,
+      "decimalLongitude": 34.849602,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002998251,
+      "decimalLatitude": 31.910539,
+      "decimalLongitude": 34.745862,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5003002785,
+      "decimalLatitude": 32.27768,
+      "decimalLongitude": 34.908286,
+      "country": "Israel",
+      "year": 2024,
+      "elevation": null
+    },
+    {
+      "key": 5002766482,
+      "decimalLatitude": 32.290779,
+      "decimalLongitude": 34.895377,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002824829,
+      "decimalLatitude": 32.133379,
+      "decimalLongitude": 34.872434,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002864243,
+      "decimalLatitude": 32.323545,
+      "decimalLongitude": 34.883191,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002737158,
+      "decimalLatitude": 32.10783,
+      "decimalLongitude": 34.84534,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002737200,
+      "decimalLatitude": 32.096568,
+      "decimalLongitude": 34.781705,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002757754,
+      "decimalLatitude": 32.225452,
+      "decimalLongitude": 34.856293,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002758103,
+      "decimalLatitude": 32.127223,
+      "decimalLongitude": 34.887886,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002762747,
+      "decimalLatitude": 32.105984,
+      "decimalLongitude": 34.830875,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002763521,
+      "decimalLatitude": 32.123433,
+      "decimalLongitude": 34.890368,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002797537,
+      "decimalLatitude": 32.125001,
+      "decimalLongitude": 34.878971,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002797582,
+      "decimalLatitude": 32.108471,
+      "decimalLongitude": 34.842625,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002827710,
+      "decimalLatitude": 32.104595,
+      "decimalLongitude": 34.824439,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002827859,
+      "decimalLatitude": 32.123445,
+      "decimalLongitude": 34.888069,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002845348,
+      "decimalLatitude": 32.096592,
+      "decimalLongitude": 34.820076,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002878479,
+      "decimalLatitude": 32.126938,
+      "decimalLongitude": 34.881984,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002885441,
+      "decimalLatitude": 32.106761,
+      "decimalLongitude": 34.846806,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002885474,
+      "decimalLatitude": 32.103787,
+      "decimalLongitude": 34.8228,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002885621,
+      "decimalLatitude": 32.122935,
+      "decimalLongitude": 34.889353,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002907654,
+      "decimalLatitude": 32.09651,
+      "decimalLongitude": 34.780371,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5003263609,
+      "decimalLatitude": 32.096691,
+      "decimalLongitude": 34.814302,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5003264798,
+      "decimalLatitude": 32.125572,
+      "decimalLongitude": 34.883812,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5003264818,
+      "decimalLatitude": 32.106374,
+      "decimalLongitude": 34.853599,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5236512303,
+      "decimalLatitude": 8.58762,
+      "decimalLongitude": -73.606649,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 122.0
+    },
+    {
+      "key": 5236512377,
+      "decimalLatitude": 8.592072,
+      "decimalLongitude": -73.610087,
+      "country": "Colombia",
+      "year": 2023,
+      "elevation": 116.0
+    },
+    {
+      "key": 5003265395,
+      "decimalLatitude": 32.175424,
+      "decimalLongitude": 34.825661,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002774846,
+      "decimalLatitude": 32.223977,
+      "decimalLongitude": 34.8884,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002793643,
+      "decimalLatitude": 32.221497,
+      "decimalLongitude": 34.888472,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5002870363,
+      "decimalLatitude": 32.223411,
+      "decimalLongitude": 34.88924,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5003270163,
+      "decimalLatitude": 32.22643,
+      "decimalLongitude": 34.888752,
+      "country": "Israel",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 4958612837,
+      "decimalLatitude": 24.0978,
+      "decimalLongitude": 120.62405,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958615800,
+      "decimalLatitude": 24.23648,
+      "decimalLongitude": 120.73537,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958615808,
+      "decimalLatitude": 24.15906,
+      "decimalLongitude": 120.74418,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958624225,
+      "decimalLatitude": 24.15906,
+      "decimalLongitude": 120.74418,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958628442,
+      "decimalLatitude": 24.16927,
+      "decimalLongitude": 120.70554,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958628452,
+      "decimalLatitude": 24.13414,
+      "decimalLongitude": 120.73938,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958629307,
+      "decimalLatitude": 24.23648,
+      "decimalLongitude": 120.73537,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958636957,
+      "decimalLatitude": 24.16927,
+      "decimalLongitude": 120.70554,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958637701,
+      "decimalLatitude": 24.13414,
+      "decimalLongitude": 120.73938,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958648446,
+      "decimalLatitude": 24.11051,
+      "decimalLongitude": 120.6987,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958656462,
+      "decimalLatitude": 24.11051,
+      "decimalLongitude": 120.6987,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958662810,
+      "decimalLatitude": 24.0978,
+      "decimalLongitude": 120.62405,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958663412,
+      "decimalLatitude": 24.08147,
+      "decimalLongitude": 120.70879,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958663413,
+      "decimalLatitude": 24.19867,
+      "decimalLongitude": 120.63522,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958666934,
+      "decimalLatitude": 24.08147,
+      "decimalLongitude": 120.70879,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4958666935,
+      "decimalLatitude": 24.19867,
+      "decimalLongitude": 120.63522,
+      "country": "Chinese Taipei",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4148145481,
+      "decimalLatitude": -2.13524,
+      "decimalLongitude": -80.08752,
+      "country": "Ecuador",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 4148145905,
+      "decimalLatitude": -2.13578,
+      "decimalLongitude": -80.0881,
+      "country": "Ecuador",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002622603,
+      "decimalLatitude": 32.100324,
+      "decimalLongitude": 34.952614,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5003228691,
+      "decimalLatitude": 32.196736,
+      "decimalLongitude": 34.940333,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002598502,
+      "decimalLatitude": 32.457064,
+      "decimalLongitude": 34.927504,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002652976,
+      "decimalLatitude": 32.147379,
+      "decimalLongitude": 34.877344,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002676968,
+      "decimalLatitude": 32.901519,
+      "decimalLongitude": 35.101571,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002608440,
+      "decimalLatitude": 32.116606,
+      "decimalLongitude": 34.912834,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002686461,
+      "decimalLatitude": 32.122786,
+      "decimalLongitude": 34.89108,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002686523,
+      "decimalLatitude": 32.112255,
+      "decimalLongitude": 34.91466,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002729583,
+      "decimalLatitude": 32.112227,
+      "decimalLongitude": 34.914554,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5003233678,
+      "decimalLatitude": 32.132982,
+      "decimalLongitude": 34.889784,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5003233692,
+      "decimalLatitude": 32.126374,
+      "decimalLongitude": 34.887052,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5003233721,
+      "decimalLatitude": 32.126812,
+      "decimalLongitude": 34.911678,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 3987753318,
+      "decimalLatitude": 5.297537,
+      "decimalLongitude": -72.325437,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 3987753364,
+      "decimalLatitude": 5.29956,
+      "decimalLongitude": -72.331953,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 3987753410,
+      "decimalLatitude": 5.297785,
+      "decimalLongitude": -72.32434,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 3987753418,
+      "decimalLatitude": 5.297337,
+      "decimalLongitude": -72.324452,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 3987762328,
+      "decimalLatitude": 5.298046,
+      "decimalLongitude": -72.32755,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 3987762377,
+      "decimalLatitude": 5.298169,
+      "decimalLongitude": -72.325922,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 5233005331,
+      "decimalLatitude": 5.298046,
+      "decimalLongitude": -72.32755,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 5233005942,
+      "decimalLatitude": 5.298169,
+      "decimalLongitude": -72.325922,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 5233006043,
+      "decimalLatitude": 5.297537,
+      "decimalLongitude": -72.325437,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 5233006098,
+      "decimalLatitude": 5.29956,
+      "decimalLongitude": -72.331953,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 5233006182,
+      "decimalLatitude": 5.297337,
+      "decimalLongitude": -72.324452,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 5233006185,
+      "decimalLatitude": 5.297785,
+      "decimalLongitude": -72.32434,
+      "country": "Colombia",
+      "year": 2022,
+      "elevation": 262.0
+    },
+    {
+      "key": 5002780330,
+      "decimalLatitude": 33.040503,
+      "decimalLongitude": 35.114503,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5003245303,
+      "decimalLatitude": 33.061109,
+      "decimalLongitude": 35.1072,
+      "country": "Israel",
+      "year": 2022,
+      "elevation": null
+    },
+    {
+      "key": 5002443797,
+      "decimalLatitude": 32.126181,
+      "decimalLongitude": 34.907823,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5002445389,
+      "decimalLatitude": 32.370468,
+      "decimalLongitude": 34.943611,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5002551401,
+      "decimalLatitude": 32.12897,
+      "decimalLongitude": 34.818446,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4126422462,
+      "decimalLatitude": 10.53907,
+      "decimalLongitude": -74.324052,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 20.0
+    },
+    {
+      "key": 4958602568,
+      "decimalLatitude": 23.98135,
+      "decimalLongitude": 120.91831,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958602584,
+      "decimalLatitude": 24.00696,
+      "decimalLongitude": 120.69564,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958602627,
+      "decimalLatitude": 24.02271,
+      "decimalLongitude": 120.63682,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958613070,
+      "decimalLatitude": 24.06317,
+      "decimalLongitude": 120.95486,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958613075,
+      "decimalLatitude": 24.11387,
+      "decimalLongitude": 120.55732,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958613081,
+      "decimalLatitude": 24.19869,
+      "decimalLongitude": 120.49596,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958613096,
+      "decimalLatitude": 23.9721,
+      "decimalLongitude": 120.64729,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958616599,
+      "decimalLatitude": 23.98135,
+      "decimalLongitude": 120.91831,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958616615,
+      "decimalLatitude": 24.00696,
+      "decimalLongitude": 120.69564,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958616658,
+      "decimalLatitude": 24.02271,
+      "decimalLongitude": 120.63682,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958621706,
+      "decimalLatitude": 24.00696,
+      "decimalLongitude": 120.69564,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958621710,
+      "decimalLatitude": 24.06317,
+      "decimalLongitude": 120.95486,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958621741,
+      "decimalLatitude": 24.02271,
+      "decimalLongitude": 120.63682,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958623103,
+      "decimalLatitude": 24.06317,
+      "decimalLongitude": 120.95486,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958623108,
+      "decimalLatitude": 24.11387,
+      "decimalLongitude": 120.55732,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958623114,
+      "decimalLatitude": 24.19869,
+      "decimalLongitude": 120.49596,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958623129,
+      "decimalLatitude": 23.9721,
+      "decimalLongitude": 120.64729,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958636761,
+      "decimalLatitude": 24.00696,
+      "decimalLongitude": 120.69564,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958636765,
+      "decimalLatitude": 24.06317,
+      "decimalLongitude": 120.95486,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958636796,
+      "decimalLatitude": 24.02271,
+      "decimalLongitude": 120.63682,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958656707,
+      "decimalLatitude": 24.11387,
+      "decimalLongitude": 120.55732,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958656716,
+      "decimalLatitude": 24.19869,
+      "decimalLongitude": 120.49596,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958656723,
+      "decimalLatitude": 23.93656,
+      "decimalLongitude": 120.68072,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958656728,
+      "decimalLatitude": 23.9721,
+      "decimalLongitude": 120.64729,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958666741,
+      "decimalLatitude": 24.11387,
+      "decimalLongitude": 120.55732,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958666750,
+      "decimalLatitude": 24.19869,
+      "decimalLongitude": 120.49596,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958666757,
+      "decimalLatitude": 23.93656,
+      "decimalLongitude": 120.68072,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958666762,
+      "decimalLatitude": 23.9721,
+      "decimalLongitude": 120.64729,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5002487420,
+      "decimalLatitude": 32.256492,
+      "decimalLongitude": 34.856493,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4126415583,
+      "decimalLatitude": 10.436834,
+      "decimalLongitude": -74.39604,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 37.0
+    },
+    {
+      "key": 4126416034,
+      "decimalLatitude": 10.507116,
+      "decimalLongitude": -74.230141,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 40.3
+    },
+    {
+      "key": 4126416086,
+      "decimalLatitude": 10.47586,
+      "decimalLongitude": -74.45077,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 14.3
+    },
+    {
+      "key": 4126422389,
+      "decimalLatitude": 10.395739,
+      "decimalLongitude": -74.368493,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 74.8
+    },
+    {
+      "key": 4126422394,
+      "decimalLatitude": 10.479686,
+      "decimalLongitude": -74.436034,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 14.8
+    },
+    {
+      "key": 4126422464,
+      "decimalLatitude": 10.454653,
+      "decimalLongitude": -74.419915,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 27.8
+    },
+    {
+      "key": 4126422467,
+      "decimalLatitude": 10.507293,
+      "decimalLongitude": -74.472771,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 1.0
+    },
+    {
+      "key": 4126422473,
+      "decimalLatitude": 10.530961,
+      "decimalLongitude": -74.332883,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 29.0
+    },
+    {
+      "key": 4126422490,
+      "decimalLatitude": 10.450656,
+      "decimalLongitude": -74.392437,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 32.7
+    },
+    {
+      "key": 4126422877,
+      "decimalLatitude": 10.398493,
+      "decimalLongitude": -74.411467,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 53.1
+    },
+    {
+      "key": 4958603201,
+      "decimalLatitude": 24.16927,
+      "decimalLongitude": 120.70553,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958612603,
+      "decimalLatitude": 24.11051,
+      "decimalLongitude": 120.69869,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958612605,
+      "decimalLatitude": 24.0978,
+      "decimalLongitude": 120.62405,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958612610,
+      "decimalLatitude": 24.19867,
+      "decimalLongitude": 120.63522,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958612620,
+      "decimalLatitude": 24.08147,
+      "decimalLongitude": 120.70878,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958612622,
+      "decimalLatitude": 24.08147,
+      "decimalLongitude": 120.70878,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958615240,
+      "decimalLatitude": 24.11051,
+      "decimalLongitude": 120.69869,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958615250,
+      "decimalLatitude": 24.23647,
+      "decimalLongitude": 120.73536,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958615670,
+      "decimalLatitude": 24.16927,
+      "decimalLongitude": 120.70553,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958616673,
+      "decimalLatitude": 24.0978,
+      "decimalLongitude": 120.62405,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958616676,
+      "decimalLatitude": 24.19867,
+      "decimalLongitude": 120.63522,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958616685,
+      "decimalLatitude": 24.23647,
+      "decimalLongitude": 120.73536,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958616686,
+      "decimalLatitude": 24.08147,
+      "decimalLongitude": 120.70878,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958616701,
+      "decimalLatitude": 24.16927,
+      "decimalLongitude": 120.70553,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958623160,
+      "decimalLatitude": 24.08147,
+      "decimalLongitude": 120.70878,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958623174,
+      "decimalLatitude": 24.16927,
+      "decimalLongitude": 120.70553,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958623185,
+      "decimalLatitude": 24.15905,
+      "decimalLongitude": 120.74417,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958628305,
+      "decimalLatitude": 24.08134,
+      "decimalLongitude": 120.99071,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958628324,
+      "decimalLatitude": 24.15905,
+      "decimalLongitude": 120.74417,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958636810,
+      "decimalLatitude": 24.11051,
+      "decimalLongitude": 120.69869,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958636812,
+      "decimalLatitude": 24.0978,
+      "decimalLongitude": 120.62405,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958636816,
+      "decimalLatitude": 24.19867,
+      "decimalLongitude": 120.63522,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958636835,
+      "decimalLatitude": 24.08134,
+      "decimalLongitude": 120.99071,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958649230,
+      "decimalLatitude": 24.19867,
+      "decimalLongitude": 120.63522,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958662797,
+      "decimalLatitude": 24.0978,
+      "decimalLongitude": 120.62405,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958662807,
+      "decimalLatitude": 24.23647,
+      "decimalLongitude": 120.73536,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958666776,
+      "decimalLatitude": 24.11051,
+      "decimalLongitude": 120.69869,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4958666787,
+      "decimalLatitude": 24.23647,
+      "decimalLongitude": 120.73536,
+      "country": "Chinese Taipei",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5002508030,
+      "decimalLatitude": 31.928602,
+      "decimalLongitude": 34.768983,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5002531929,
+      "decimalLatitude": 32.371492,
+      "decimalLongitude": 34.978907,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5002572659,
+      "decimalLatitude": 32.366538,
+      "decimalLongitude": 34.944558,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 4538371776,
+      "decimalLatitude": 10.383746,
+      "decimalLongitude": -74.11407,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 132.4
+    },
+    {
+      "key": 4538375553,
+      "decimalLatitude": 10.389556,
+      "decimalLongitude": -74.11123,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 123.0
+    },
+    {
+      "key": 4538375765,
+      "decimalLatitude": 10.387824,
+      "decimalLongitude": -74.11433,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 133.1
+    },
+    {
+      "key": 4538375775,
+      "decimalLatitude": 10.384724,
+      "decimalLongitude": -74.1147,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 135.2
+    },
+    {
+      "key": 4538378549,
+      "decimalLatitude": 10.389556,
+      "decimalLongitude": -74.11123,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 123.0
+    },
+    {
+      "key": 4538378770,
+      "decimalLatitude": 10.384724,
+      "decimalLongitude": -74.1147,
+      "country": "Colombia",
+      "year": 2021,
+      "elevation": 135.2
+    },
+    {
+      "key": 5002517711,
+      "decimalLatitude": 32.489834,
+      "decimalLongitude": 34.958365,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5002521170,
+      "decimalLatitude": 32.303824,
+      "decimalLongitude": 34.925083,
+      "country": "Israel",
+      "year": 2021,
+      "elevation": null
+    },
+    {
+      "key": 5002527266,
+      "decimalLatitude": 32.46269,
+      "decimalLongitude": 34.926998,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5003175227,
+      "decimalLatitude": 32.462582,
+      "decimalLongitude": 34.927349,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002454219,
+      "decimalLatitude": 32.462957,
+      "decimalLongitude": 34.92938,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002482832,
+      "decimalLatitude": 32.462509,
+      "decimalLongitude": 34.926924,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002399228,
+      "decimalLatitude": 32.433549,
+      "decimalLongitude": 34.954669,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958615123,
+      "decimalLatitude": 24.00853,
+      "decimalLongitude": 120.69697,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958621459,
+      "decimalLatitude": 24.00853,
+      "decimalLongitude": 120.69697,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958602339,
+      "decimalLatitude": 24.06526,
+      "decimalLongitude": 120.63035,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958602491,
+      "decimalLatitude": 23.99946,
+      "decimalLongitude": 120.91616,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958612920,
+      "decimalLatitude": 23.98055,
+      "decimalLongitude": 121.00001,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958612954,
+      "decimalLatitude": 23.98742,
+      "decimalLongitude": 120.7051,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958616410,
+      "decimalLatitude": 23.99946,
+      "decimalLongitude": 120.91616,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958621554,
+      "decimalLatitude": 24.19687,
+      "decimalLongitude": 120.50412,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958621579,
+      "decimalLatitude": 23.93657,
+      "decimalLongitude": 120.68072,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958621607,
+      "decimalLatitude": 23.8898,
+      "decimalLongitude": 120.73866,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958622844,
+      "decimalLatitude": 23.98055,
+      "decimalLongitude": 121.00001,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958622878,
+      "decimalLatitude": 23.98742,
+      "decimalLongitude": 120.7051,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958636495,
+      "decimalLatitude": 24.19687,
+      "decimalLongitude": 120.50412,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958636520,
+      "decimalLatitude": 23.93657,
+      "decimalLongitude": 120.68072,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958636548,
+      "decimalLatitude": 23.8898,
+      "decimalLongitude": 120.73866,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958656554,
+      "decimalLatitude": 23.98406,
+      "decimalLongitude": 120.9113,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958656571,
+      "decimalLatitude": 23.97211,
+      "decimalLongitude": 120.6473,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958662684,
+      "decimalLatitude": 24.06526,
+      "decimalLongitude": 120.63035,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958666470,
+      "decimalLatitude": 23.98406,
+      "decimalLongitude": 120.9113,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 4958666487,
+      "decimalLatitude": 23.97211,
+      "decimalLongitude": 120.6473,
+      "country": "Chinese Taipei",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5003189087,
+      "decimalLatitude": 32.434639,
+      "decimalLongitude": 34.963045,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002448763,
+      "decimalLatitude": 32.126044,
+      "decimalLongitude": 34.870914,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002409483,
+      "decimalLatitude": 32.251389,
+      "decimalLongitude": 34.857107,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002433803,
+      "decimalLatitude": 32.537797,
+      "decimalLongitude": 34.915909,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002431946,
+      "decimalLatitude": 32.500487,
+      "decimalLongitude": 34.898343,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002432193,
+      "decimalLatitude": 32.461811,
+      "decimalLongitude": 34.929085,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002443565,
+      "decimalLatitude": 32.461805,
+      "decimalLongitude": 34.926288,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002519510,
+      "decimalLatitude": 32.462637,
+      "decimalLongitude": 34.927498,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002536791,
+      "decimalLatitude": 32.462494,
+      "decimalLongitude": 34.928094,
+      "country": "Israel",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 5002261133,
+      "decimalLatitude": 32.416086,
+      "decimalLongitude": 34.943087,
+      "country": "Israel",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 5002374156,
+      "decimalLatitude": 32.286239,
+      "decimalLongitude": 34.890254,
+      "country": "Israel",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 5003170531,
+      "decimalLatitude": 32.286994,
+      "decimalLongitude": 34.889381,
+      "country": "Israel",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 5002297664,
+      "decimalLatitude": 32.220909,
+      "decimalLongitude": 34.856851,
+      "country": "Israel",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2332609978,
+      "decimalLatitude": -1.94062,
+      "decimalLongitude": 30.10007,
+      "country": "Rwanda",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2332610028,
+      "decimalLatitude": -1.95541,
+      "decimalLongitude": 30.13479,
+      "country": "Rwanda",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 5002314494,
+      "decimalLatitude": 32.457926,
+      "decimalLongitude": 34.938467,
+      "country": "Israel",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 5003164817,
+      "decimalLatitude": 32.460391,
+      "decimalLongitude": 34.940077,
+      "country": "Israel",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2989660380,
+      "decimalLatitude": 8.519165,
+      "decimalLongitude": 2.19602,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2989660381,
+      "decimalLatitude": 8.574323,
+      "decimalLongitude": 2.192511,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2989660383,
+      "decimalLatitude": 8.533365,
+      "decimalLongitude": 2.19722,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2989660387,
+      "decimalLatitude": 8.533365,
+      "decimalLongitude": 2.19722,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2989660388,
+      "decimalLatitude": 8.533365,
+      "decimalLongitude": 2.19722,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2989660393,
+      "decimalLatitude": 8.537865,
+      "decimalLongitude": 2.16942,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 2989660394,
+      "decimalLatitude": 8.538905,
+      "decimalLongitude": 2.18522,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957081,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957082,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957083,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957088,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957091,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957092,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957093,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957094,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957097,
+      "decimalLatitude": 7.551695,
+      "decimalLongitude": 1.925016,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957703,
+      "decimalLatitude": 7.595204,
+      "decimalLongitude": 1.952008,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957704,
+      "decimalLatitude": 7.595204,
+      "decimalLongitude": 1.952008,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    },
+    {
+      "key": 3000957706,
+      "decimalLatitude": 7.595204,
+      "decimalLongitude": 1.952008,
+      "country": "Benin",
+      "year": 2019,
+      "elevation": null
+    }
+  ]
+}

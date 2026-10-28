@@ -1,0 +1,90 @@
+{
+  "crop_id": "vigna_aconitifolia",
+  "crop_name": "moth bean",
+  "scientific_name": "Vigna aconitifolia",
+  "total_count": 10,
+  "fetched_count": 10,
+  "fetched_at": "2026-10-28T09:09:24.281195+00:00",
+  "occurrences": [
+    {
+      "key": 6352898972,
+      "decimalLatitude": 21.020388,
+      "decimalLongitude": 75.568692,
+      "country": "India",
+      "year": 2026,
+      "elevation": null
+    },
+    {
+      "key": 5230030981,
+      "decimalLatitude": 21.020388,
+      "decimalLongitude": 75.568692,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5230951940,
+      "decimalLatitude": 21.021245,
+      "decimalLongitude": 75.566129,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5231277865,
+      "decimalLatitude": 21.027562,
+      "decimalLongitude": 75.565717,
+      "country": "India",
+      "year": 2025,
+      "elevation": null
+    },
+    {
+      "key": 5177019412,
+      "decimalLatitude": 18.517807,
+      "decimalLongitude": 73.79035,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 5177147348,
+      "decimalLatitude": 18.518793,
+      "decimalLongitude": 73.780472,
+      "country": "India",
+      "year": 2023,
+      "elevation": null
+    },
+    {
+      "key": 3327786330,
+      "decimalLatitude": 9.635,
+      "decimalLongitude": 79.936111,
+      "country": "Sri Lanka",
+      "year": 2020,
+      "elevation": null
+    },
+    {
+      "key": 2598665363,
+      "decimalLatitude": 14.681888,
+      "decimalLongitude": 77.600594,
+      "country": "India",
+      "year": 2015,
+      "elevation": null
+    },
+    {
+      "key": 2598670363,
+      "decimalLatitude": 12.883147,
+      "decimalLongitude": 79.1483,
+      "country": "India",
+      "year": 2015,
+      "elevation": null
+    },
+    {
+      "key": 3859942617,
+      "decimalLatitude": 14.231811,
+      "decimalLongitude": 77.62059,
+      "country": "India",
+      "year": 2015,
+      "elevation": null
+    }
+  ]
+}
