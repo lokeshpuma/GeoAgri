@@ -473,3 +473,24 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `npm run build`: built in 3.31s with zero warnings (PASSED).
 - Git tag: `phase-Q2` created.
 
+## [PRD v3.2 - Phase Q3 Drawing Hygiene] - 2026-10-28
+### Fixed & Verified (C2, AC-2, AC-3)
+- **Single Snapshot Reader**: `extractBoundary` is the sole parser of Terra Draw snapshots across `BoundaryMap.tsx`, separating guidance helper features (`closingPoint`, `snappingPoint`, `midPoint`, `selectionPoint`, `coordinatePoint`) from true polygon/pin geometries.
+- **In-Progress Drawing Containment**: Shapes in progress (`status === 'drawing'`) are strictly prevented from enabling confirmation. `PlotSummaryPanel` blocks confirm when `drawStatus === 'drawing'`.
+- **Signature Change Detection**: Geometry changes are tracked via signature (`sig(polygon)|pin`). Pure selection, hover, or coordinate drag changes that do not alter the shape signature do not fire `onGeometryChange` and never un-confirm a verified boundary.
+- **Finish Shape & Edit Boundary Controls**:
+  - Added drawing-in-progress banner with an explicit "Finish shape" button that closes the polygon ring, removes provisional vertices, adds the closed feature to Terra Draw, and switches to select mode.
+  - Added "Edit boundary" button when confirmed that unfreezes the map, un-confirms the boundary, and sets the tool to select mode for deliberate adjustments.
+- **Freeze Map on Confirm**: Once confirmed, `isFrozen: true` forces Terra Draw into static mode, preventing accidental map clicks or drags from changing the verified parcel until "Edit boundary" is clicked.
+- **Eliminated Conflicting Legacy Hook**: Removed `useBoundaryDraw` from `BoundaryStudioPage.tsx` which had an uncoordinated `useEffect` overwriting validation and clearing polygon coords on tool mode switches.
+- **Prevented Accidental Clear**: Removed faulty `useEffect` in `BoundaryMap.tsx` that wiped Terra Draw features whenever `initialPolygon` was null.
+- **E2E Playwright Browser Verification**:
+  - Implemented `frontend/e2e/boundary-flow.spec.ts` running against a real Chromium browser.
+  - Verified: cannot confirm when empty; in-progress polygon cannot be confirmed; "Finish shape" completes the ring; Confirm advances to `#analysis`; self-intersecting bow-tie shape blocks confirmation.
+- **Gate Execution (AC-2, AC-3)**:
+  - `npm test`: **20 passed** across 5 test files in 928ms (PASSED).
+  - `npx playwright test`: **2 passed in 6.6s** in real Chromium browser (PASSED).
+  - `npm run build`: built in 2.33s with zero warnings (PASSED).
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: **127 passed, 3009 warnings in 48.81s** (PASSED).
+- Git tag: `phase-Q3` created.
+

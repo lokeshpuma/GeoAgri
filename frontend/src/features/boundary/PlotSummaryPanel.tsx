@@ -8,8 +8,10 @@ import {
   ArrowRight,
   ShieldCheck,
   Check,
+  Info,
 } from 'lucide-react';
 import { BoundaryValidationResult } from './boundaryTypes';
+import { DrawStatus } from './extractBoundary';
 import { Button } from '../../ui/Button';
 import { Badge } from '../../ui/Badge';
 import { StatNumber } from '../../ui/StatNumber';
@@ -26,6 +28,9 @@ export interface PlotSummaryPanelProps {
   onConfirm: () => void;
   polygonCoords: [number, number][] | null;
   serverError?: { code?: string; message: string } | null;
+  drawStatus?: DrawStatus;
+  onFinishShape?: () => void;
+  onEditBoundary?: () => void;
 }
 
 export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
@@ -39,6 +44,9 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
   onConfirm,
   polygonCoords,
   serverError,
+  drawStatus = 'none',
+  onFinishShape,
+  onEditBoundary,
 }) => {
   const [copied, setCopied] = useState(false);
   const { showToast } = useToast();
@@ -112,7 +120,9 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
     URL.revokeObjectURL(url);
   };
 
-  const canConfirm = (isPinMode ? pinCoords !== null : validation.valid) && !serverError;
+  const canConfirm =
+    (isPinMode ? pinCoords !== null : (validation.valid && drawStatus !== 'drawing')) &&
+    !serverError;
 
   return (
     <div className="plot-summary-container">
@@ -236,12 +246,44 @@ export const PlotSummaryPanel: React.FC<PlotSummaryPanelProps> = ({
           )
         )}
 
+        {/* Drawing in-progress banner with Finish shape button (PRD v3.2 §2) */}
+        {drawStatus === 'drawing' && (
+          <div className="drawing-help-banner">
+            <div className="drawing-help-content">
+              <Info size={16} />
+              <span>Finish the shape: double-click, click the first corner, or press Enter.</span>
+            </div>
+            {onFinishShape && (
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={onFinishShape}
+                className="btn-full-width btn-finish-shape"
+              >
+                Finish shape
+              </Button>
+            )}
+          </div>
+        )}
+
         {/* Server verification indicator */}
         {isConfirmed && (
           <div className="server-verified-row">
             <ShieldCheck size={16} />
             <span>Server-verified boundary geometry ✓</span>
           </div>
+        )}
+
+        {/* Edit boundary button when confirmed (PRD v3.2 §2) */}
+        {isConfirmed && onEditBoundary && (
+          <Button
+            variant="glass"
+            size="md"
+            onClick={onEditBoundary}
+            className="btn-full-width btn-edit-boundary"
+          >
+            Edit boundary
+          </Button>
         )}
 
         {/* Action: Confirm boundary */}

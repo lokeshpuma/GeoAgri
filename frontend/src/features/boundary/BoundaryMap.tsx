@@ -14,6 +14,7 @@ import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
 import { DrawTool, BasemapId, BoundaryValidationResult } from './boundaryTypes';
 import { UNIFIED_MAP_STYLE, BASEMAP_LAYER_IDS, BASEMAPS } from './mapStyles';
 import { evaluateBoundary, normalizeRing, simplifyFreehand } from './boundaryMath';
+import { extractBoundary, DrawStatus, SnapshotFeature } from './extractBoundary';
 import { useToast } from '../../ui/Toast';
 
 export interface SearchTargetObject {
@@ -36,6 +37,9 @@ export interface BoundaryMapProps {
   undoTrigger?: number;
   redoTrigger?: number;
   onHistoryStateChange?: (canUndo: boolean, canRedo: boolean) => void;
+  onDrawStatusChange?: (status: DrawStatus) => void;
+  finishShapeTrigger?: number;
+  isFrozen?: boolean;
 }
 
 export const BoundaryMap: React.FC<BoundaryMapProps> = ({
@@ -51,6 +55,9 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
   undoTrigger = 0,
   redoTrigger = 0,
   onHistoryStateChange,
+  onDrawStatusChange,
+  finishShapeTrigger = 0,
+  isFrozen = false,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -100,39 +107,32 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     []
   );
 
+  const lastCommittedSig = useRef<string>('');
+  const sig = (r: [number, number][] | null) => (r ? r.map(c => c.join(',')).join(';') : '');
+
   const syncFromTerraDraw = useCallback(() => {
     const draw = drawRef.current;
     if (!draw) return;
 
-    const snapshot = draw.getSnapshot();
-    const features = snapshot || [];
-    if (!Array.isArray(features) || features.length === 0) {
-      setVertices([]);
-      setPinCoords(null);
-      onGeometryChange(null, null);
-      onValidationChange(evaluateBoundary([]));
-      return;
+    const res = extractBoundary(draw.getSnapshot() as any);
+    if (onDrawStatusChange) {
+      onDrawStatusChange(res.status); // 'none' | 'drawing' | 'ready'
     }
+    const next = sig(res.polygon) + '|' + (res.pin?.join(',') ?? '');
+    if (res.status === 'drawing') return; // never treat an unfinished shape as a boundary
+    if (next === lastCommittedSig.current) return; // selection or hover changes must not un-confirm
+    lastCommittedSig.current = next;
 
-    const polyFeat = features.find((f: any) => f.geometry?.type === 'Polygon');
-    const ptFeat = features.find((f: any) => f.geometry?.type === 'Point');
-
-    if (polyFeat && polyFeat.geometry?.type === 'Polygon') {
-      let rawCoords = polyFeat.geometry.coordinates[0] as [number, number][];
-      if (rawCoords.length > 200) {
-        rawCoords = simplifyFreehand(rawCoords);
-      }
-      const closed = normalizeRing(rawCoords);
-      setVertices(closed);
+    if (res.polygon) {
+      setVertices(res.polygon);
       setPinCoords(null);
-      pushSnapshot(closed);
-      onGeometryChange(closed, null);
-      onValidationChange(evaluateBoundary(closed));
-    } else if (ptFeat && ptFeat.geometry?.type === 'Point') {
-      const pt = ptFeat.geometry.coordinates as [number, number];
-      setPinCoords(pt);
+      pushSnapshot(res.polygon);
+      onGeometryChange(res.polygon, null);
+      onValidationChange(evaluateBoundary(res.polygon));
+    } else if (res.pin) {
+      setPinCoords(res.pin);
       setVertices([]);
-      onGeometryChange(null, pt);
+      onGeometryChange(null, res.pin);
       onValidationChange({
         valid: true,
         issues: [],
@@ -141,10 +141,79 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
         areaGuntas: 0,
         perimeterM: 0,
         vertexCount: 1,
-        centroid: pt,
+        centroid: res.pin,
       });
+    } else {
+      setVertices([]);
+      setPinCoords(null);
+      onGeometryChange(null, null);
+      onValidationChange(evaluateBoundary([]));
     }
-  }, [onGeometryChange, onValidationChange, pushSnapshot]);
+  }, [onDrawStatusChange, onGeometryChange, onValidationChange, pushSnapshot]);
+
+  // Handle Finish Shape button trigger (PRD v3.2 §2)
+  const prevFinishTrigger = useRef(finishShapeTrigger);
+  useEffect(() => {
+    if (finishShapeTrigger > prevFinishTrigger.current) {
+      prevFinishTrigger.current = finishShapeTrigger;
+      const draw = drawRef.current;
+      if (!draw) return;
+      const snapshot = draw.getSnapshot() as any[];
+      const inProgress = snapshot.find(
+        (f: any) => f.geometry?.type === 'Polygon' && f.properties?.currentlyDrawing === true
+      );
+      if (inProgress && inProgress.id) {
+        const rawCoords = (inProgress.geometry.coordinates as [number, number][][])[0];
+        let coords = rawCoords.slice(0, -1); // drop cursor coordinate
+        if (
+          coords.length > 1 &&
+          coords[0][0] === coords[coords.length - 1][0] &&
+          coords[0][1] === coords[coords.length - 1][1]
+        ) {
+          coords = coords.slice(0, -1);
+        }
+        // Deduplicate consecutive identical points
+        const deduped: [number, number][] = [];
+        for (const pt of coords) {
+          if (
+            deduped.length === 0 ||
+            pt[0] !== deduped[deduped.length - 1][0] ||
+            pt[1] !== deduped[deduped.length - 1][1]
+          ) {
+            deduped.push(pt);
+          }
+        }
+        coords = deduped;
+        if (coords.length >= 3) {
+          const closedRing = [...coords, coords[0]];
+          draw.removeFeatures([String(inProgress.id)]);
+          draw.addFeatures([
+            {
+              type: 'Feature',
+              id: crypto.randomUUID(),
+              properties: { mode: 'polygon' },
+              geometry: {
+                type: 'Polygon',
+                coordinates: [closedRing],
+              },
+            },
+          ]);
+          draw.setMode('select');
+          onToolChange('select');
+          syncFromTerraDraw();
+        }
+      }
+    }
+  }, [finishShapeTrigger, onToolChange, syncFromTerraDraw]);
+
+  // Freeze map on Confirm (PRD v3.2 §2)
+  useEffect(() => {
+    const draw = drawRef.current;
+    if (!draw) return;
+    if (isFrozen) {
+      draw.setMode('static');
+    }
+  }, [isFrozen]);
 
   // Handle external Undo trigger
   const prevUndoTrigger = useRef(undoTrigger);
@@ -186,16 +255,7 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     }
   }, [redoTrigger, future, vertices, syncFromTerraDraw, onGeometryChange, showToast]);
 
-  // Sync external clear
-  useEffect(() => {
-    if ((!initialPolygon || initialPolygon.length === 0) && !initialPin) {
-      if (drawRef.current) {
-        drawRef.current.clear();
-      }
-      setVertices([]);
-      setPinCoords(null);
-    }
-  }, [initialPolygon, initialPin]);
+
 
   // Initialize Map and TerraDraw
   useEffect(() => {
@@ -297,7 +357,7 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
       draw.start();
       drawRef.current = draw;
 
-      // Load initial geometry if provided
+      // Load initial geometry if provided without auto-confirming (PRD v3.2 §2)
       if (initialPolygon && initialPolygon.length >= 3) {
         const ring = normalizeRing(initialPolygon);
         draw.addFeatures([
@@ -310,7 +370,7 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
             },
           },
         ]);
-        onGeometryChange(ring, null);
+        lastCommittedSig.current = sig(ring) + '|';
         onValidationChange(evaluateBoundary(ring));
       } else if (initialPin) {
         draw.addFeatures([
@@ -323,13 +383,26 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
             },
           },
         ]);
-        onGeometryChange(null, initialPin);
+        lastCommittedSig.current = '|' + initialPin.join(',');
+        onValidationChange({
+          valid: true,
+          issues: [],
+          areaHa: 0,
+          areaAcres: 0,
+          areaGuntas: 0,
+          perimeterM: 0,
+          vertexCount: 1,
+          centroid: initialPin,
+        });
       }
 
       // Hook events
-      draw.on('finish', () => {
+      draw.on('finish', (_id: string | number, ctx: any) => {
         syncFromTerraDraw();
-        onToolChange('select');
+        // Switch to select mode ONLY when a shape was just completed, never after edits
+        if (ctx && ctx.action === 'draw') {
+          onToolChange('select');
+        }
       });
 
       draw.on('change', () => {
@@ -337,7 +410,7 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
       });
 
       // Set initial mode
-      const targetMode = activeTool === 'pin' ? 'point' : activeTool === 'pan' ? 'static' : activeTool;
+      const targetMode = isFrozen ? 'static' : (activeTool === 'pin' ? 'point' : activeTool === 'pan' ? 'static' : activeTool);
       try {
         draw.setMode(targetMode);
       } catch {
@@ -370,7 +443,7 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
   // Sync TerraDraw Mode with activeTool
   useEffect(() => {
     const draw = drawRef.current;
-    if (!draw) return;
+    if (!draw || isFrozen) return;
 
     const targetMode = activeTool === 'pin' ? 'point' : activeTool === 'pan' ? 'static' : activeTool;
     try {
@@ -380,7 +453,7 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     } catch (e) {
       console.warn('TerraDraw setMode error:', e);
     }
-  }, [activeTool]);
+  }, [activeTool, isFrozen]);
 
   // Search target fly-to with context-aware zoom
   useEffect(() => {

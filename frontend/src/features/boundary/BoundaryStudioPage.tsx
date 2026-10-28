@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useWorkflow } from '../../context/WorkflowContext';
 import { BoundaryMap, SearchTargetValue } from './BoundaryMap';
 import { ToolDock } from './ToolDock';
@@ -7,11 +7,18 @@ import { SearchBar } from './SearchBar';
 import { BasemapSwitcher } from './BasemapSwitcher';
 import { CoachCard } from './CoachCard';
 import { DrawTool, BasemapId, BoundaryValidationResult } from './boundaryTypes';
+import { DrawStatus } from './extractBoundary';
 import { useBoundaryDraw } from './useBoundaryDraw';
 import { saveBoundaryDraft, loadBoundaryDraft, clearBoundaryDraft } from './boundaryStorage';
 import { fetchFieldArea } from '../../api/client';
 import { useToast } from '../../ui/Toast';
 import centroid from '@turf/centroid';
+
+const getBoundarySig = (poly: [number, number][] | null, pin: [number, number] | null): string => {
+  const polyStr = poly ? poly.map(p => `${p[0].toFixed(6)},${p[1].toFixed(6)}`).join(';') : '';
+  const pinStr = pin ? `${pin[0].toFixed(6)},${pin[1].toFixed(6)}` : '';
+  return `${polyStr}|${pinStr}`;
+};
 
 export const BoundaryStudioPage: React.FC = () => {
   const { formData, updateFormData, goToStep, confirmBoundary } = useWorkflow();
@@ -28,6 +35,16 @@ export const BoundaryStudioPage: React.FC = () => {
   });
   const [plotName, setPlotName] = useState<string>(formData.selectedPresetName || '');
 
+  const [drawStatus, setDrawStatus] = useState<DrawStatus>('none');
+  const [finishShapeTrigger, setFinishShapeTrigger] = useState(0);
+  const [isFrozen, setIsFrozen] = useState(false);
+  const lastCommittedSig = useRef<string>(
+    getBoundarySig(
+      formData.polygonPts && formData.polygonPts.length > 0 ? formData.polygonPts : null,
+      formData.pointPt || null
+    )
+  );
+
   const [validation, setValidation] = useState<BoundaryValidationResult>({
     valid: false,
     issues: [],
@@ -39,17 +56,7 @@ export const BoundaryStudioPage: React.FC = () => {
     centroid: null,
   });
 
-  const boundaryDraw = useBoundaryDraw({
-    initialPolygon: formData.polygonPts && formData.polygonPts.length > 0 ? formData.polygonPts : null,
-    initialPin: formData.pointPt || null,
-    onGeometryChange: (coords, pin) => {
-      setPolygonCoords(coords);
-      setPinCoords(pin);
-    },
-    onValidationChange: setValidation,
-  });
-
-  const { activeTool, setActiveTool } = boundaryDraw;
+  const [activeTool, setActiveTool] = useState<DrawTool>('polygon');
 
   const [isVerifying, setIsVerifying] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -133,22 +140,39 @@ export const BoundaryStudioPage: React.FC = () => {
 
   const handleGeometryChange = useCallback(
     (poly: [number, number][] | null, pin: [number, number] | null) => {
+      const nextSig = getBoundarySig(poly, pin);
       setPolygonCoords(poly);
       setPinCoords(pin);
-      setIsConfirmed(false);
-      setServerError(null);
-      updateFormData({ confirmed: false });
+
+      // Only un-confirm if geometry actually changed signature (PRD v3.2 §2)
+      if (nextSig !== lastCommittedSig.current) {
+        setIsConfirmed(false);
+        setServerError(null);
+        updateFormData({ confirmed: false });
+      }
+
       // Save draft
       saveBoundaryDraft({
         mode: poly ? 'polygon' : pin ? 'pin' : 'none',
         polygon: poly,
         pin: pin,
         name: plotName,
-        confirmed: false,
+        confirmed: nextSig === lastCommittedSig.current && isConfirmed,
       });
     },
-    [plotName, updateFormData]
+    [plotName, updateFormData, isConfirmed]
   );
+
+  const handleFinishShape = useCallback(() => {
+    setFinishShapeTrigger(prev => prev + 1);
+  }, []);
+
+  const handleEditBoundary = useCallback(() => {
+    setIsFrozen(false);
+    setIsConfirmed(false);
+    updateFormData({ confirmed: false });
+    setActiveTool('select');
+  }, [updateFormData, setActiveTool]);
 
   const handleConfirm = async () => {
     setIsVerifying(true);
@@ -202,8 +226,10 @@ export const BoundaryStudioPage: React.FC = () => {
       }
     }
 
+    lastCommittedSig.current = getBoundarySig(polygonCoords, pinCoords);
     setIsVerifying(false);
     setIsConfirmed(true);
+    setIsFrozen(true);
 
     // Save final confirmed draft
     saveBoundaryDraft({
@@ -234,6 +260,8 @@ export const BoundaryStudioPage: React.FC = () => {
   };
 
   const handleClear = () => {
+    lastCommittedSig.current = '';
+    setIsFrozen(false);
     setPolygonCoords(null);
     setPinCoords(null);
     setIsConfirmed(false);
@@ -311,6 +339,9 @@ export const BoundaryStudioPage: React.FC = () => {
           setCanUndo(u);
           setCanRedo(r);
         }}
+        onDrawStatusChange={setDrawStatus}
+        finishShapeTrigger={finishShapeTrigger}
+        isFrozen={isFrozen}
       />
 
       {/* Right Plot Summary Panel */}
@@ -325,6 +356,9 @@ export const BoundaryStudioPage: React.FC = () => {
         onConfirm={handleConfirm}
         polygonCoords={polygonCoords}
         serverError={serverError}
+        drawStatus={drawStatus}
+        onFinishShape={handleFinishShape}
+        onEditBoundary={handleEditBoundary}
       />
 
       {/* Bottom-left Basemap Switcher */}

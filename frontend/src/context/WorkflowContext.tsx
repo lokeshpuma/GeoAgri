@@ -103,7 +103,13 @@ const HASH_TO_STEP: Record<string, StepNumber> = {
 };
 
 export const WorkflowProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentStep, setCurrentStep] = useState<StepNumber>(1);
+  const [currentStep, setCurrentStep] = useState<StepNumber>(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const s = HASH_TO_STEP[window.location.hash];
+      if (s && s <= 2) return s;
+    }
+    return 1;
+  });
   const [maxUnlockedStep, setMaxUnlockedStep] = useState<number>(2); // Steps 1 and 2 are unlocked by default
   const [report, setReport] = useState<FullReportResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
