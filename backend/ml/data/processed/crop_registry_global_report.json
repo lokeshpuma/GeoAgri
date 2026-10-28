@@ -1,0 +1,31 @@
+{
+  "source_rows": 2568,
+  "kept": 2033,
+  "rejected": {
+    "missing_envelope": 512,
+    "inconsistent_order": 22,
+    "implausible_range": 1,
+    "duplicate": 0
+  },
+  "tier_counts": {
+    "A": 72,
+    "B": 1961
+  },
+  "category_counts": {
+    "fodder": 450,
+    "agroforestry": 339,
+    "fruit_nut": 334,
+    "medicinal_aromatic": 278,
+    "vegetable": 223,
+    "materials": 207,
+    "root_tuber": 54,
+    "pulse": 50,
+    "cereal": 47,
+    "environmental": 27,
+    "other": 11,
+    "ornamental": 10,
+    "cover_crop": 3
+  },
+  "nitrogen_fixers": 391,
+  "recommendable": 1646
+}

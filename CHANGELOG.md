@@ -494,3 +494,24 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `PYTHONPATH=. venv/bin/python -m pytest -q`: **127 passed, 3009 warnings in 48.81s** (PASSED).
 - Git tag: `phase-Q3` created.
 
+## [PRD v3.2 - Phase Q4 Import Global Crop Data Pack] - 2026-10-28
+### Added & Verified (AC-5, AC-6)
+- **Global Crop Registry (`backend/ml/data/processed/crop_registry_global.json`)**:
+  - Imported and validated global crop registry with **2,033 plant taxa** (meeting the >= 2,000 crop gate in AC-5).
+  - Tiers categorized into **72 Tier A crops** (ML-modeled / calibrated yield quantiles) and **1,961 Tier B crops** (expert climate-envelope suitability matches without yield numbers).
+  - **1,646 recommendable crops** (meeting the >= 1,500 gate).
+  - Envelopes verified for all recommendable crops: temperature (`temp_c`), rainfall (`rainfall_mm`), and soil pH (`ph`) with strict monotonicity (`min <= opt_min <= opt_max <= max`).
+- **EcoCrop Dataset Provenance (`backend/ml/data/raw/external/ecocrop/SOURCE.md`)**:
+  - Full export of FAO EcoCrop database (2,568 source rows).
+  - Complete attribution, license terms, retrieval date, and agronomic limitations documented.
+- **Envelope Suitability Engine (`backend/app/services/crops/envelope_suitability.py`)**:
+  - Trapezoidal fuzzy membership scoring for temperature, rainfall, and pH.
+  - Crop ranking with separate rainfed and irrigated score computations.
+  - Season length constraint solver and frost sensitivity enforcement.
+- **Gate Execution (AC-5, AC-6)**:
+  - `PYTHONPATH=. venv/bin/python -m pytest tests/test_global_registry_and_suitability.py -v`: **10 passed in 0.49s** (PASSED).
+  - Climatology spot checks verified: Cassava in Kisumu score >= 0.8; Quinoa in Cusco score >= 0.6; Maize in Iowa Corn Belt score >= 0.8; Rainfed rice in Riyadh desert score < 0.3.
+  - Irrigated score monotonicity verified: `score_irrigated >= score_rainfed` for all test climates.
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: **127 passed, 3009 warnings in 43.38s** (100% offline, PASSED).
+- Git tag: `phase-Q4` created.
+
