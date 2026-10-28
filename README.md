@@ -80,13 +80,21 @@ Unlike traditional agricultural tools that query static rule tables for a single
 ### 2. 🗺️ Global Precision Land Sensing & Safety Guardrails
 - **Worldwide Coordinates Support:** Pinpoint fields anywhere across the globe—from the California Central Valley and Argentine Pampas to the Nile Delta and Indo-Gangetic Plains.
 - **Non-Arable Terrestrial & Aquatic Guardrails:** Automatically identifies open oceans, lakes, and polar permafrost regions (e.g. Greenland, Antarctica), locking suitability to 0% with clear limiting factors and repositioning guidance.
-- **Multi-Layer Base Maps:** Toggle smoothly between OpenStreetMap, high-resolution satellite orthophotos, and topographic terrain.
+- **Multi-Layer Base Maps & Drawing Studio:** Terra Draw polygon engine with atomic `confirmBoundary` navigation, in-progress draw locks, Finish shape closing, Edit boundary toggles, and freeze-on-confirm canvas isolation.
 
-### 3. 🌾 Multi-Crop Decision Synthesis & Companion Intercropping (+15%)
+### 3. 🌾 Global Crop Registry (2,033 Taxa) & Bioclimatic Envelopes
+- **Comprehensive Global Taxa:** 2,033 plant taxa covering 1,646 recommendable species across Cereals, Pulses, Vegetables, Fruits & Nuts, Oilseeds, Roots & Tubers, Spices, and Fodder.
+- **Bioclimatic Envelope Suitability Engine:** Transparent Liebig limiting factor evaluation (temperature, precipitation, and soil pH) for rainfed and irrigated regimes.
+- **Confidence Tiers:**
+  - **ML-verified (Tier A):** Calibrated with regional empirical training data, quantile yield models (P10–P90), and companion intercrop synergy.
+  - **Climate-envelope match (Tier B):** Bioclimatic envelope validation based on FAO EcoCrop parameters with safe yield suppression (no uncalibrated guesses).
+- **12-Month Climatology:** Grid-cell caching (0.1°) from NASA POWER long-term monthly agro-meteorology.
+
+### 4. 🌿 Multi-Crop Decision Synthesis & Companion Intercropping (+15%)
 - Evaluates commercial crops across cereals, pulses, oilseeds, cash crops, vegetables, and agroforestry.
 - **75:25 Symbiotic Intercrop Optimization:** Ranks companion legume combinations (e.g. Finger Millet + Cowpea, Maize + Black Gram) that deliver **+12% to +18% yield synergy** through atmospheric nitrogen fixation and canopy stratification.
 
-### 4. 📊 Probabilistic Quantile Yield Modeling (P10 / P50 / P90)
+### 5. 📊 Probabilistic Quantile Yield Modeling (P10 / P50 / P90)
 - Quantifies agricultural uncertainty instead of giving a single deterministic guess:
   - **P10 (10th Percentile / Pessimistic):** Downside safety floor under severe drought, heat, or delayed precipitation (90% chance actual yield will exceed this).
   - **P50 (50th Percentile / Median Expected):** Most probable harvest potential under standard management.

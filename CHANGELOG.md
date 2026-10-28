@@ -583,3 +583,16 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - Gate AC-11 (Region test set hit rate per continent): **NOT RUN**.
 - Git tag: `phase-Q8` created.
 
+## [PRD v3.2 - Phase Q9 Documentation & Release] - 2026-10-28
+### Added & Verified (AC-12)
+- **Comprehensive Documentation**:
+  - Updated `README.md`: Documented Global Crop Registry (2,033 taxa), Liebig bioclimatic envelope evaluation, confidence tiers (Tier A vs Tier B), 12-month NASA POWER agroclimatology, and Drawing Studio polygon controls.
+  - Updated `documentation/api_reference.md`: Added API contract specifications for `POST /api/v1/predict/full-report` including `climatology_status`, `climatology_message`, `confidence_tier`, `method`, `limiting_factor`, `best_planting_month`, and Tier B yield suppression.
+  - Updated `frontend/src/pages/WorkspacePage.tsx`: Integrated FAO EcoCrop Database entry into the agronomic and climate data sources catalog with attribution and license information.
+- **Final Full Test Suite Verification (AC-12)**:
+  - Frontend unit tests: `npm test` -> **5 test files passed, 20 passed (20 tests) in 1.57s** (PASSED).
+  - Frontend production build: `npm run build` -> **Entry bundle 65.95 kB gzip (`index-CgTg_s0f.js`), built in 2.55s with 0 errors** (PASSED).
+  - Backend test suite: `PYTHONPATH=. venv/bin/python -m pytest -q` -> **132 passed, 3009 warnings in 63.52s** (PASSED).
+  - Browser E2E suite: `npx playwright test` -> **2 passed in 7.6s in real Chromium browser** (PASSED).
+- Git tag: `v3.2.0` created.
+

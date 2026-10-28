@@ -15,6 +15,7 @@ import {
   ChevronDown,
   ChevronRight,
   Award,
+  Sprout,
 } from 'lucide-react';
 import { useWorkflow } from '../context/WorkflowContext';
 import { GeoAgriLogo } from '../components/GeoAgriLogo/GeoAgriLogo';
@@ -83,10 +84,18 @@ const DATA_SOURCES = [
   {
     title: 'NASA POWER Meteorology',
     subtitle: 'Agroclimatology Time-Series',
-    description: 'Daily meteorological records providing precipitation, thermal extremes (Tmin/Tmax), solar irradiance, and relative humidity for agro-climatic matching.',
+    description: 'Daily and long-term 12-month climatology records providing precipitation, thermal extremes, solar irradiance, and relative humidity for agro-climatic matching.',
     badge: 'Climate & Weather',
     icon: CloudSun,
     color: 'var(--gold-500)',
+  },
+  {
+    title: 'FAO EcoCrop Database',
+    subtitle: 'Global Crop Environmental Envelopes',
+    description: 'Expert bioclimatic envelopes covering 2,033 global crop taxa: absolute and optimal thresholds for temperature, precipitation, and soil pH. Public FAO data used with attribution.',
+    badge: 'FAO Data',
+    icon: Sprout,
+    color: 'var(--emerald-500)',
   },
   {
     title: 'Agronomic Models',

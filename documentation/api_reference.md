@@ -39,7 +39,23 @@ Primary agronomic decision-support and land analysis endpoint.
 - `land_suitability`: FAO land suitability grade, score, and limiting factors.
 - `environment`: Weather and soil physical/chemical parameters. If data is unavailable or when the request is gated, missing values are returned as `null` (strictly never fabricated as `0.0` or `7.0`).
 - `satellite_features`: Spectral indices (NDVI, NDWI, EVI, SAVI, NDMI), elevation, slope, TWI, SAR VV/VH.
-- `recommended_crops`: Ranked crop species with quantile yield (P10/P50/P90), production, water needs, and companion intercrop options. If land is gated as `NOT_IRRIGABLE` (e.g. water bodies, dense urban, rock, reserved forest), ML models are skipped and `recommended_crops` is `[]`.
+- `climatology_status`: `available` or `unavailable` (NASA POWER 12-month long-term climatology verified).
+- `climatology_message`: Description of climatology status or reason for unreachability.
+- `recommended_crops`: Ranked crop species from the global 2,033-crop registry:
+  - `confidence_tier`: `"A"` (ML-modeled probabilistic yield quantiles) or `"B"` (EcoCrop bioclimatic envelope match).
+  - `method`: `"ml_model"` or `"ecocrop_envelope"`.
+  - `scientific_name`: Botanical taxonomic name.
+  - `limiting_factor`: Active Liebig limiting factor (e.g., rainfall, temperature, pH).
+  - `best_planting_month`: Recommended month (1–12) for optimum bioclimatic envelope match.
+  - `expected_yield_t_ha`: Probabilistic yield bounds (`p10`, `p50`, `p90`) for Tier A crops (`null` for Tier B crops).
+  - `expected_production_t`: Field-scale production bounds (`p10`, `p50`, `p90`) for Tier A crops (`null` for Tier B crops).
+  - `suitability_score`: Normalized envelope suitability score (0.0 to 1.0).
+  - `suitability_grade`: FAO suitability grade (`Excellent`, `Good`, `Moderate`, `Unsuitable`).
+  - `irrigation_mode`: Permitted irrigation regime (`rainfed`, `supplemental`, `full`).
+  - `water_need_mm`: Annual or growing-season water requirement.
+  - `climate_risk_score`: Climatic risk index (0–100%).
+  - `intercrop_options`: Companion crop pairing options with estimated boost (for Tier A crops).
+  - Gating: If land is gated as `NOT_IRRIGABLE` or site is over open ocean / missing climatology, crop models are bypassed and `recommended_crops` is `[]`.
 - `land_class`: Dominant land class (`AGRICULTURAL`, `FOREST_LEGAL`, `FOREST_COVER`, `WASTELAND`, `URBAN_BUILT`, `WATER_BODY`, `UNKNOWN`), class shares, subclass, confidence.
 - `irrigability`: Verdict (`IRRIGABLE`, `CONDITIONALLY_IRRIGABLE`, `NOT_IRRIGABLE`, `NOT_IRRIGABLE_PROVISIONAL`, `UNVERIFIED`), reasons, usable area, irrigation options.
 - `detection`: Physical surface detector output for forest, buildings, roads, water, and terrain, plus query sources telemetry.
