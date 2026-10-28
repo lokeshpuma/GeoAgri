@@ -445,3 +445,21 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `grep -rnE "MAX_SLOPE_DEG|MAX_ELEVATION_M|FOREST_MAX_FRACTION" app`: 0 matches (PASSED).
 - Git tag: `v3.1.0` created.
 
+## [PRD v3.2 - Phase Q0 Truth Baseline] - 2026-10-28
+### Recorded Real Output (§1)
+- `npm ci`: Added 432 packages in 5s.
+- `npm run build`: Entry bundle 65.93 kB gzip (`index-DUTdPhva.js`), 0 chunk warnings, built in 2.89s.
+- `npm test`: 4 passed (4 test files), 19 passed (19 tests) in 1.19s (including 8 tests in `extractBoundary.test.ts`).
+- `pytest -q` on a **clean checkout** (without `backend/.env`): **8 failed, 119 passed, 3009 warnings in 36.44s**. The 8 failed tests failed due to: `RuntimeError: Live GEE satellite extraction failed: GEE credentials not configured or key file missing (mock fallback disabled)`. Setting `GEE_MOCK_FALLBACK=true` and `ALLOW_SYNTHETIC_DATA=true` (which previously only existed in local `.env`) is required for clean offline test execution without credentials.
+- Real browser run of drawing screen: **NOT RUN** (`playwright` not yet installed in devDependencies; will be set up in Q3).
+- Git tag: `pre-v3.2` created.
+
+## [PRD v3.2 - Phase Q1 Test Hygiene] - 2026-10-28
+### Fixed & Verified (T1–T3, AC-4)
+- **T1: Requirements Pinning**: Added `pytest-socket>=0.7.0` to `backend/requirements.txt`.
+- **T2: Clean Environment Test Fixture**: Added autouse `test_environment_settings` fixture in `backend/tests/conftest.py` setting `GEE_MOCK_FALLBACK=true` and `ALLOW_SYNTHETIC_DATA=true` via monkeypatch and clearing `get_settings.cache_clear()`. These settings apply strictly within test execution and never affect production defaults.
+- **T3: Continuous Integration**: Added `.github/workflows/ci.yml` running tests from clean clone without `.env` across backend pytest and frontend vitest/build.
+- **Gate Execution (AC-4)**:
+  - `rm -f backend/.env && pytest -q`: **127 passed, 3009 warnings in 47.83s** (100% offline, 0 failures, clean checkout with no `.env` PASSED).
+- Git tag: `phase-Q1` created.
+

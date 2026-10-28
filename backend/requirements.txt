@@ -34,3 +34,4 @@ requests>=2.31.0
 pypdf>=3.17.0
 pytesseract>=0.3.10
 python-multipart>=0.0.9
+pytest-socket>=0.7.0
