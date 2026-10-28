@@ -554,5 +554,230 @@
   animation: spin 1s linear infinite;
 }
 
+/* Page Container Layout (PRD v3.3 §3.5) */
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px calc(var(--step-bar-h) + 24px) 24px;
+}
+
+/* Floating Bottom Workflow Nav Dock */
+.bottom-workflow-container {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+  pointer-events: none;
+  padding: 0 16px;
+}
+
+.bottom-workflow-nav {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 1180px;
+  background: rgba(13, 19, 32, 0.90);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 16px 48px -4px rgba(0, 0, 0, 0.7), 0 0 24px rgba(16, 185, 129, 0.1);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .bottom-workflow-nav {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(20, 40, 30, 0.12);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+}
+
+.nav-step-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  padding: 8px 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+  position: relative;
+  min-width: 0;
+}
+
+.nav-step-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"] .nav-step-button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-step-button.active {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+.nav-step-button.completed:not(.active) {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.nav-step-button.disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.step-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-2);
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.nav-step-button.active .step-icon-wrapper {
+  background: var(--grad-brand);
+  color: #ffffff;
+  box-shadow: 0 0 14px var(--emerald-glow);
+}
+
+.nav-step-button.completed:not(.active) .step-icon-wrapper {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--emerald-500);
+}
+
+.step-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.62rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f1f5f9;
+}
+
+.nav-step-button.active .step-badge {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #ffffff;
+}
+
+.step-check-icon {
+  color: var(--emerald-500);
+}
+
+.step-text-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.step-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step-number-label {
+  font-size: 0.68rem;
+  color: var(--ink-3);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.step-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-step-button.active .step-name {
+  color: var(--ink-1);
+}
+
+.step-subtitle-desc {
+  font-size: 0.72rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.step-active-glow-bar {
+  position: absolute;
+  bottom: 0;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: var(--emerald-500);
+  border-radius: 2px;
+}
+
+.step-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .bottom-workflow-container {
+    bottom: 8px;
+    padding: 0 8px;
+  }
+  .bottom-workflow-nav {
+    padding: 6px 10px;
+    border-radius: 16px;
+  }
+  .step-subtitle-desc,
+  .step-number-label {
+    display: none;
+  }
+  .nav-step-button {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  .step-icon-wrapper {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
 
 

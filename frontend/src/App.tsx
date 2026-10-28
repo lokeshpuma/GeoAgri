@@ -21,6 +21,43 @@ const PageFallback: React.FC = () => (
 const WorkflowContainer: React.FC = () => {
   const { currentStep } = useWorkflow();
 
+  React.useEffect(() => {
+    const updateDimensions = () => {
+      const headerEl = document.querySelector('.app-header');
+      const stepBarEl = document.querySelector('.bottom-workflow-container');
+
+      if (headerEl) {
+        const headerH = headerEl.getBoundingClientRect().height;
+        if (headerH > 0) {
+          document.documentElement.style.setProperty('--app-header-h', `${Math.round(headerH)}px`);
+        }
+      }
+      if (stepBarEl) {
+        const stepBarH = stepBarEl.getBoundingClientRect().height;
+        if (stepBarH > 0) {
+          document.documentElement.style.setProperty('--step-bar-h', `${Math.round(stepBarH)}px`);
+        }
+      }
+    };
+
+    updateDimensions();
+
+    const observer = new ResizeObserver(() => {
+      updateDimensions();
+    });
+
+    const headerEl = document.querySelector('.app-header');
+    const stepBarEl = document.querySelector('.bottom-workflow-container');
+    if (headerEl) observer.observe(headerEl);
+    if (stepBarEl) observer.observe(stepBarEl);
+    window.addEventListener('resize', updateDimensions);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, []);
+
   const renderActiveStepPage = () => {
     switch (currentStep) {
       case 1:

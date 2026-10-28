@@ -2,8 +2,9 @@
 
 .top-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 20px;
+  align-items: stretch;
   margin-bottom: 24px;
 }
 
@@ -248,6 +249,25 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-height: 0;
+  position: sticky;
+  top: calc(var(--app-header-h) + 12px);
+  align-self: start;
+  height: calc(100dvh - var(--app-header-h) - var(--step-bar-h) - 48px);
+  min-height: 420px;
+}
+
+.field-map-column .boundary-preview-container {
+  flex: 1 1 auto;
+  height: auto !important;
+  min-height: 320px;
+}
+
+@media (max-width: 900px) {
+  .field-map-column {
+    position: static;
+    height: 60dvh;
+  }
 }
 
 .field-map-footer {

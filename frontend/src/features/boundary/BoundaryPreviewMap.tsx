@@ -77,13 +77,19 @@ export const BoundaryPreviewMap: React.FC<BoundaryPreviewMapProps> = ({
 
     mapRef.current = map;
 
+    const handleResize = () => {
+      map.resize();
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       map.remove();
     };
   }, [polygon, point]);
 
   return (
-    <div className="boundary-preview-container" style={{ height }}>
+    <div className="boundary-preview-container" style={height ? { height } : undefined}>
       <div ref={containerRef} className="boundary-preview-canvas" style={{ width: '100%', height: '100%' }} />
       <div className="boundary-preview-badge">
         Verified Field Extent

@@ -701,3 +701,27 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `npx playwright test e2e/boundary-flow.spec.ts`: **5 passed in 17.8s** in real Chromium browser (PASSED).
   - `npx playwright test`: **6 passed in 18.5s** across all E2E specs (PASSED).
 - Git tag: `phase-V5` created.
+
+## [PRD v3.3 - Phase V6 Screen Fit & Stylesheet Cleanup] - 2026-10-28
+### Added & Verified (§3.5, AC-13, AC-14)
+- **Dynamic Viewport Measurement & CSS Variables (AC-13, §3.5)**:
+  - Added CSS variables `--app-header-h`, `--step-bar-h`, and `--vh: 100dvh` in `tokens.css`.
+  - Added dynamic `ResizeObserver` in `App.tsx` observing `.app-header` and `.bottom-workflow-container`, updating `--app-header-h` and `--step-bar-h` on layout and resize events.
+  - Set `BoundaryStudioPage` map canvas to `position: absolute; inset: 0; width: 100%; height: 100%`, filling the viewport area with no blank strip above the step bar.
+  - Set `FieldAnalysisPage` map column to `position: sticky; top: calc(var(--app-header-h) + 12px); height: calc(100dvh - var(--app-header-h) - var(--step-bar-h) - 48px); min-height: 420px;`, filling visible screen height without empty space underneath.
+  - Replaced fixed `height="340px"` in `FieldAnalysisPage.tsx` with responsive container and added MapLibre resize listeners to `BoundaryMap.tsx` and `BoundaryPreviewMap.tsx`.
+- **CSS Deduplication & index.css Pruning (AC-14)**:
+  - Pruned dead duplicate v1/v2 definitions from `index.css`, reducing it from 3,816 lines to **321 lines** (76.68 kB production CSS asset).
+  - Resolved duplicate selectors across stylesheets (0 selector collisions).
+  - Added automated validator `scripts/check_css_duplicates.py` asserting `index.css < 1000` lines and 0 duplicate selectors across all CSS files.
+- **Multi-Viewport Visual Verification & Playwright Suite (AC-13)**:
+  - Added `frontend/e2e/layout-fit.spec.ts` testing across 4 standard viewports: 1280x720, 1440x900, 1920x1080, and 390x844.
+  - Saved 12 full-screen capture screenshots across `#boundary`, `#analysis`, and `#crops` to `documentation/screens/`.
+  - Verified no horizontal scroll (`scrollWidth <= window.innerWidth`) and verified sticky map fit with < 8px empty space under desktop map.
+- **Gate Execution (AC-13, AC-14)**:
+  - `python3 scripts/check_css_duplicates.py`: **index.css line count: 321 (< 1000), 0 collisions, PASSED**.
+  - `npx playwright test e2e/layout-fit.spec.ts`: **4 passed in 24.1s in real Chromium browser (PASSED)**.
+  - `npm test`: **6 test files passed, 23 passed in 1.19s (PASSED)**.
+  - `npm run build`: **Built in 2.28s with 0 errors (PASSED)**.
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: **148 passed, 3009 warnings in 43.86s (PASSED)**.
+- Git tag: `phase-V6` created.

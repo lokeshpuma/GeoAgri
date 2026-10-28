@@ -506,7 +506,15 @@ export const BoundaryMap: React.FC<BoundaryMapProps> = ({
     map.on('load', handleMapLoad);
     map.on('styledata', () => applyBasemap(activeBasemap));
 
+    const handleResize = () => {
+      if (mapRef.current) {
+        mapRef.current.resize();
+      }
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       if (drawRef.current) {
         try {
           drawRef.current.stop();

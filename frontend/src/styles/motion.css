@@ -67,24 +67,3 @@
 .interactive-scale:active {
   transform: translateY(0px) scale(0.985);
 }
-
-/* Reduced Motion Override (PRD §6.5 & AC-11) */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .ambient-aurora-bg {
-    animation: none !important;
-  }
-
-  .interactive-scale:hover,
-  .interactive-scale:active {
-    transform: none !important;
-  }
-}

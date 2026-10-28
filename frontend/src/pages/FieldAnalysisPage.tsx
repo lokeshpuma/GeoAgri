@@ -119,7 +119,6 @@ export const FieldAnalysisPage: React.FC = () => {
           <BoundaryPreviewMap
             polygon={formData.polygonPts}
             point={formData.pointPt}
-            height="340px"
           />
           <div className="field-map-footer">
             <span className="field-map-footer-text">

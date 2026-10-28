@@ -180,18 +180,23 @@ def test_ac7_tier_b_crop_contains_no_yield_numbers(monkeypatch):
 
 
 def test_tier_a_crops_have_yield_and_correct_tier(monkeypatch):
-    """Verify Tier A crops have ML yield quantiles and confidence_tier='A'."""
+    """Verify Tier A crops have confidence_tier='A', and valid ML yield quantiles when within ceilings (D-8)."""
     monkeypatch.setattr("app.api.v1.predict.fetch_monthly_climatology", fake_climatology_provider())
     resp = client.post("/api/v1/predict/full-report", json=TEST_PAYLOAD)
     assert resp.status_code == 200
     data = resp.json()
     tier_a_crops = [c for c in data["recommended_crops"] if c.get("confidence_tier") == "A"]
     assert len(tier_a_crops) > 0
-    for crop in tier_a_crops:
-        assert crop.get("expected_yield_t_ha") is not None
+    tier_a_with_yield = [c for c in tier_a_crops if c.get("expected_yield_t_ha") is not None]
+    assert len(tier_a_with_yield) > 0
+    for crop in tier_a_with_yield:
         assert "p10" in crop["expected_yield_t_ha"]
         assert "p50" in crop["expected_yield_t_ha"]
         assert "p90" in crop["expected_yield_t_ha"]
+    # Per PRD v3.3 D-8, crops exceeding yield ceiling must show None
+    for crop in tier_a_crops:
+        if crop.get("crop_id") in {"maize", "rice", "coffee", "cotton"}:
+            assert crop.get("expected_yield_t_ha") is None
 
 
 def test_ac8_climatology_failure_returns_unavailable_no_ranking():

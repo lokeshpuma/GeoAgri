@@ -144,4 +144,9 @@
   --z-header: 40;
   --z-modal: 80;
   --z-toast: 100;
+
+  /* Layout Dimensions (PRD v3.3 §3.5) */
+  --app-header-h: 88px;
+  --step-bar-h: 64px;
+  --vh: 100dvh;
 }
