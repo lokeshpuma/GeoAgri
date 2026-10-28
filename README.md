@@ -529,11 +529,11 @@ GeoAgri AI is production-optimized for seamless cloud deployment:
 
 ---
 
-## 🧪 Testing & Quality Assurance (PRD v3.1)
+## 🧪 Testing & Quality Assurance (PRD v3.3)
 
 GeoAgri AI maintains an uncompromising standard of testing rigour, data honesty, and offline reliability:
 
-### 1. Offline Backend Test Suite (117 Tests, < 60s)
+### 1. Offline Backend Test Suite (148 Tests, < 45s)
 All backend tests execute with socket-level network blocking enforced at the pytest fixture level (`backend/tests/conftest.py`). Tests run 100% offline without network dependencies:
 
 ```bash
@@ -543,17 +543,29 @@ PYTHONPATH=. pytest -q
 ```
 
 Coverage encompasses:
+- `tests/test_v33_recommender_and_cards.py`: Card rank `#N` synchronization, irrigation mode text logic, Tier B suppression, yield ceiling guards (`yield_ceilings.yaml`), and 30-crop deterministic tiebreak rules.
+- `tests/test_legacy_crosswalk.py`: Crosswalk mapping for 114 crops ensuring real climatic envelope limiting factors and planting months.
+- `tests/test_climatology_and_recommender.py`: Climatology caching (7-day success, 30-day ocean, never caching 429/500/503), offline mock injection, and zero fabricated cells.
 - `tests/test_landclass_irrigability.py`: Land classification and irrigability verdict rules across diverse terrains.
 - `tests/test_field_area_validation.py`: HTTP-level validation for geodesic polygon area, self-intersections, and limits.
 - `tests/test_offline_detection_gating.py`: Detection gating for water, dense urban, forest cover, and bedrock with null environment summaries.
 - `tests/test_phase2_data.py` - `tests/test_phase7_api.py`: Comprehensive coverage of ML pipelines, feature transformations, and decision fusion.
 
-### 2. Frontend Unit Tests & Bundle Verification (Vitest)
+### 2. Frontend Unit & Regression Suite (Vitest)
 ```bash
 cd frontend
-npm test          # 11 tests covering boundaryMath, useBoundaryDraw, and payload builders
-npm run build     # Optimized rollup chunks: initial JS < 65 kB gzip, 0 chunk warnings
+npm test          # 23 tests across 6 files covering boundary extraction, atomic confirm, labels, math
+npm run build     # Clean production build with index.css < 77 kB, zero duplication
 ```
+
+### 3. Playwright End-to-End Browser Automation Suite
+```bash
+cd frontend
+npx playwright test
+```
+- Multi-viewport responsive verification (1280×720, 1440×900, 1920×1080, 390×844) with automated screenshots in `documentation/screens/`.
+- Boundary drawing scenarios: 3-corner unclosed prevention, atomic confirm without timers, replace-shape prompt with single-shape rule, and draft recovery without auto-confirm.
+- Crop cards inspection ensuring no `snake_case` tokens reach the screen.
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "model_name": "GeoAgri Tier A Yield Quantiles (Model D) & Recommender (Model B)",
   "version": "v3.3.0",
-  "date": "2026-10-28 09:13:59 UTC",
+  "date": "2026-10-28 09:18:02 UTC",
   "training_data": {
     "source": "FAOSTAT QCL Normalized Dataset (1990\u20132022)",
     "raw_samples": 25017,

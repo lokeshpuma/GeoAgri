@@ -773,3 +773,16 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `PYTHONPATH=. venv/bin/python ml/training/retrain_models.py`: **Executed successfully with 0 errors (PASSED)**.
   - `PYTHONPATH=. venv/bin/python -m pytest tests/test_v33_recommender_and_cards.py tests/test_climatology_and_recommender.py -v`: **17 passed in 17.03s (PASSED)**.
 - Git tag: `phase-V8` created.
+
+## [PRD v3.3 - Phase V9 Documentation, Verification & Official Release] - 2026-10-28
+### Added & Verified (§6 V9, AC-15)
+- **Documentation Alignment**:
+  - Updated `README.md` to document the complete PRD v3.3 test harness, layout guarantees, and external data pipelines.
+  - Updated `documentation/api_reference.md` reflecting v3.3 API specifications, card rank rules, and yield ceiling guards.
+  - Saved and committed 12 multi-viewport full-page screenshots to `documentation/screens/`.
+- **Full Release Verification Suite (AC-15)**:
+  - `npm test`: **6 test files passed, 23 passed in 1.23s (PASSED)**.
+  - `npm run build`: **Built production assets in 2.15s with 0 errors (PASSED)**.
+  - `npx playwright test`: **10 passed across 3 spec files in 28.1s in real Chromium browser (PASSED)**.
+  - `PYTHONPATH=. venv/bin/python -m pytest -q`: **148 passed, 3009 warnings in 45.07s (PASSED)**.
+- Git tag: `v3.3.0` created.

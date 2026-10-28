@@ -1,4 +1,4 @@
-# GeoAgri AI API Reference (v3.1)
+# GeoAgri AI API Reference (v3.3)
 
 Base URL: `/api/v1`
 
