@@ -26,6 +26,8 @@ from app.services.irrigability.engine import get_irrigability_engine
 from app.services.landrecords.manager import get_land_record_manager
 from app.services.landclass.evidence import collect_evidence
 from app.services.landclass.detection import to_legacy_area_check
+from app.services.weather.climatology import fetch_monthly_climatology
+from app.services.crops.envelope_suitability import Site, rank_crops
 from app.api.errors import handle_internal_error
 
 logger = logging.getLogger(__name__)
@@ -271,17 +273,130 @@ async def generate_full_report(req: PredictRequest):
                 detection=detection_dict,
                 gate_mode=gate_mode,
                 area_check=area_check_alias,
-                imputed_features=imputed_features
+                imputed_features=imputed_features,
+                climatology_status="unavailable" if land_class.dominant == "WATER_BODY" else "available",
+                climatology_message="Site is over water body." if land_class.dominant == "WATER_BODY" else None
             )
 
-        # 5. Parallel Models A-E execution (For Irrigable, Conditionally Irrigable, or Shadow-mode plots)
+        # 5. Climatology Evaluation (PRD v3.2 §3, AC-7, AC-8)
+        c_lon, c_lat = profile["centroid"]
+        climatology = profile.get("climatology") or await fetch_monthly_climatology(c_lat, c_lon)
+
+        # Climatology failure handling: open ocean or unreachable service (AC-8)
+        if not climatology.available or (land_class.dominant == "WATER_BODY" and gate_mode == "enforce"):
+            unavail_msg = (
+                "Site is over open water / water body."
+                if land_class.dominant == "WATER_BODY"
+                else (climatology.status_message or "Climatology service unavailable.")
+            )
+            return FullReportResponse(
+                field_summary=FieldSummary(**profile["field_summary"]),
+                land_suitability=LandSuitability(
+                    grade="Unavailable",
+                    score=0.0,
+                    confidence=0.0,
+                    limiting_factors=[unavail_msg]
+                ),
+                environment=EnvironmentSummary(
+                    rainfall_mm=w.get("rainfall_mm"),
+                    temp_max_c=w.get("temp_max_c"),
+                    temp_min_c=w.get("temp_min_c"),
+                    temp_mean_c=w.get("temp_mean_c"),
+                    humidity_pct=w.get("humidity_pct"),
+                    solar_radiation_mj_m2=w.get("solar_radiation_mj_m2"),
+                    ph=s.get("ph"),
+                    organic_carbon_g_kg=s.get("organic_carbon_g_kg"),
+                    nitrogen_g_kg=s.get("nitrogen_g_kg"),
+                    phosphorus_ppm=s.get("phosphorus_ppm"),
+                    potassium_ppm=s.get("potassium_ppm"),
+                    texture_clay_pct=s.get("texture_clay_pct"),
+                    texture_sand_pct=s.get("texture_sand_pct"),
+                    texture_silt_pct=s.get("texture_silt_pct")
+                ),
+                satellite_features=SatelliteFeatures(
+                    ndvi=sat.get("ndvi", 0.0),
+                    ndwi=sat.get("ndwi", 0.0),
+                    evi=sat.get("evi", 0.0),
+                    savi=sat.get("savi", 0.0),
+                    ndmi=sat.get("ndmi", 0.0),
+                    elevation=sat.get("elevation", 0.0),
+                    slope=sat.get("slope", 0.0),
+                    twi=sat.get("twi", 0.0),
+                    vv=sat.get("vv", 0.0),
+                    vh=sat.get("vh", 0.0)
+                ),
+                recommended_crops=[],
+                yield_summary=YieldSummary(
+                    top_recommended_crop="None (Climatology Unavailable)",
+                    p10_t_ha=0.0,
+                    p50_t_ha=0.0,
+                    p90_t_ha=0.0
+                ),
+                production_summary=ProductionSummary(
+                    top_recommended_crop="None (Climatology Unavailable)",
+                    p10_t=0.0,
+                    p50_t=0.0,
+                    p90_t=0.0,
+                    area_ha=gross_area
+                ),
+                irrigation_summary=IrrigationSummary(
+                    recommended_mode="Not Applicable",
+                    total_water_demand_m3=0.0,
+                    effective_rainfall_mm=round((w.get("rainfall_mm") or 0.0) * 0.75, 1)
+                ),
+                climate_risk_summary=ClimateRiskSummary(
+                    overall_risk_level="Unknown",
+                    drought_risk_score=0.0,
+                    heat_risk_score=0.0,
+                    excess_rain_risk_score=0.0,
+                    note=unavail_msg
+                ),
+                intercrop_summary=IntercropSummary(top_pair="N/A", estimated_production_boost_t=0.0),
+                model_status=ModelStatus(
+                    model_a="skipped_unavailable",
+                    model_b="skipped_unavailable",
+                    model_c="skipped_unavailable",
+                    model_d="skipped_unavailable",
+                    model_e="skipped_unavailable"
+                ),
+                land_class=land_class,
+                irrigability=irrigability,
+                land_records=record_summary,
+                detection=detection_dict,
+                gate_mode=gate_mode,
+                area_check=area_check_alias,
+                imputed_features=imputed_features,
+                climatology_status="unavailable",
+                climatology_message=unavail_msg
+            )
+
+        # 6. Water Mode Enforcement & Site Initialization (PRD v3.2 AC-7)
+        is_irrigated = (
+            irrigability.verdict != "NOT_IRRIGABLE"
+            and req.irrigation_preference in ["supplemental", "full"]
+        )
+        effective_mode = (
+            "full" if (is_irrigated and req.irrigation_preference == "full")
+            else ("supplemental" if is_irrigated else "rainfed")
+        )
+
+        site = Site(
+            monthly_temp_c=climatology.monthly_temp_c,
+            monthly_rain_mm=climatology.monthly_rain_mm,
+            ph=s.get("ph"),
+            irrigated=is_irrigated
+        )
+        envelope_rankings = rank_crops(site, top_n=max(req.limit or 20, 100))
+        envelope_by_id = {c.crop_id: c for c in envelope_rankings}
+
+        # 7. Parallel Models A-E execution (For Irrigable, Conditionally Irrigable, or Shadow-mode plots)
         model_reg = get_model_registry()
         model_outputs = await model_reg.run_models_parallel(vector, season=req.season)
 
-        # 6. Decision Fusion & Crop Ranking
+        # 8. Decision Fusion & Crop Ranking
         recs = run_decision_fusion(
             model_outputs=model_outputs,
-            irrigation_preference=req.irrigation_preference or "rainfed",
+            irrigation_preference=effective_mode,
             limit=req.limit
         )
 
@@ -289,9 +404,20 @@ async def generate_full_report(req: PredictRequest):
         effective_area_ha = irrigability.irrigable_area_ha if irrigability.irrigable_area_ha is not None else gross_area
         calc_area = effective_area_ha if effective_area_ha is not None else 0.0
 
-        # 7. Production & Intercrop Math
+        # 9. Format Tier A & Merge Tier B crops (PRD v3.2 §3, AC-7)
         formatted_recs = []
+        tier_a_crop_ids = set()
+
         for r in recs:
+            cid = r["crop_id"]
+            tier_a_crop_ids.add(cid)
+            env_c = envelope_by_id.get(cid)
+
+            suit_score = round(env_c.score, 3) if env_c else r["suitability_score"]
+            lim_factor = env_c.limiting_factor if env_c else "climatic_envelope"
+            best_month = env_c.best_planting_month if env_c else 6
+            sci_name = env_c.scientific_name if env_c else None
+
             p10_yield = r["expected_yield_t_ha"]["p10"]
             p50_yield = r["expected_yield_t_ha"]["p50"]
             p90_yield = r["expected_yield_t_ha"]["p90"]
@@ -305,14 +431,16 @@ async def generate_full_report(req: PredictRequest):
             ]
 
             rec_crop = RecommendedCrop(
-                crop_id=r["crop_id"],
+                crop_id=cid,
                 crop_name=r["crop_name"],
+                scientific_name=sci_name,
                 category=r["category"],
                 recommendation_score=r["recommendation_score"],
-                suitability_score=r["suitability_score"],
+                suitability_score=suit_score,
+                suitability_grade=env_c.grade.capitalize() if env_c else "Moderate",
                 expected_yield_t_ha=QuantileValue(p10=p10_yield, p50=p50_yield, p90=p90_yield),
                 expected_production_t=QuantileValue(p10=prod_p10, p50=prod_p50, p90=prod_p90),
-                irrigation_mode=r["irrigation_mode"],
+                irrigation_mode=effective_mode,
                 water_need_mm=r["water_need_mm"],
                 climate_risk_score=r["climate_risk_score"],
                 climate_risk_note=r["climate_risk_note"],
@@ -320,16 +448,78 @@ async def generate_full_report(req: PredictRequest):
                 rationale=r["rationale"],
                 data_confidence=r["data_confidence"],
                 regional_agronomic_prior=r.get("regional_agronomic_prior", 1.0),
-                intercrop_data_available=r.get("intercrop_data_available", True)
+                intercrop_data_available=r.get("intercrop_data_available", True),
+                confidence_tier="A",
+                method="ml_model",
+                score=round(env_c.score, 3) if env_c else suit_score,
+                score_rainfed=round(env_c.score_rainfed, 3) if env_c else suit_score,
+                score_irrigated=round(env_c.score_irrigated, 3) if env_c else suit_score,
+                season_months=env_c.season_months if env_c else 4,
+                limiting_factor=lim_factor,
+                best_planting_month=best_month,
+                notes=env_c.notes if env_c else [],
             )
             formatted_recs.append(rec_crop)
+
+        tier_b_crops = []
+        # Merge Tier B crops (EcoCrop global registry without yield numbers per AC-7)
+        for env_c in envelope_rankings:
+            if env_c.crop_id in tier_a_crop_ids or env_c.confidence_tier != "B":
+                continue
+            if env_c.score < 0.15:  # skip unsuitable
+                continue
+
+            rec_crop = RecommendedCrop(
+                crop_id=env_c.crop_id,
+                crop_name=env_c.common_name.title(),
+                scientific_name=env_c.scientific_name,
+                category=env_c.category,
+                recommendation_score=round(env_c.score * 100, 1),
+                suitability_score=round(env_c.score, 3),
+                suitability_grade=env_c.grade.capitalize(),
+                expected_yield_t_ha=None,       # NO yield numbers for Tier B (AC-7)
+                expected_production_t=None,     # NO yield numbers for Tier B (AC-7)
+                irrigation_mode=effective_mode,
+                water_need_mm=round(sum(site.monthly_rain_mm), 1),
+                climate_risk_score=round((1.0 - env_c.score) * 100, 1),
+                climate_risk_note=f"Limiting factor: {env_c.limiting_factor}. Best planting month: month {env_c.best_planting_month}.",
+                intercrop_options=[],
+                rationale=f"EcoCrop climatic envelope match ({env_c.grade}).",
+                data_confidence="low",
+                regional_agronomic_prior=1.0,
+                intercrop_data_available=False,
+                confidence_tier="B",
+                method="ecocrop_envelope",
+                score=round(env_c.score, 3),
+                score_rainfed=round(env_c.score_rainfed, 3),
+                score_irrigated=round(env_c.score_irrigated, 3),
+                season_months=env_c.season_months,
+                limiting_factor=env_c.limiting_factor,
+                best_planting_month=env_c.best_planting_month,
+                notes=env_c.notes,
+            )
+            tier_b_crops.append(rec_crop)
+
+        # Sort individual partitions
+        formatted_recs.sort(key=lambda c: (c.suitability_score, c.recommendation_score), reverse=True)
+        tier_b_crops.sort(key=lambda c: (c.suitability_score, c.recommendation_score), reverse=True)
+
+        # PRD §7.1 / §7.2: Guarantee both Tier A ML-verified and Tier B envelope matches
+        total_limit = req.limit or 20
+        target_a = min(len(formatted_recs), max(5, total_limit // 2))
+        target_b = max(0, total_limit - target_a)
+
+        # PRD §7.1 / §7.2: Present ML-verified Tier A recommendations with expected yields,
+        # followed by Tier B EcoCrop envelope matches.
+        merged = formatted_recs[:target_a] + tier_b_crops[:target_b]
+        formatted_recs = merged
 
         top_rec = formatted_recs[0] if formatted_recs else None
 
         # Intercrop boost math for top crop
         top_pair_str = "None (Sole Cropping)"
         intercrop_boost_t = 0.0
-        if top_rec and top_rec.intercrop_options:
+        if top_rec and top_rec.intercrop_options and top_rec.expected_production_t:
             opt = top_rec.intercrop_options[0]
             top_pair_str = f"{top_rec.crop_name} + {opt.companion_crop_name}"
             intercrop_boost_t = round(top_rec.expected_production_t.p50 * opt.yield_boost_pct * opt.companion_share_factor, 3)
@@ -375,15 +565,15 @@ async def generate_full_report(req: PredictRequest):
             recommended_crops=formatted_recs,
             yield_summary=YieldSummary(
                 top_recommended_crop=top_rec.crop_name if top_rec else "N/A",
-                p10_t_ha=top_rec.expected_yield_t_ha.p10 if top_rec else 0.0,
-                p50_t_ha=top_rec.expected_yield_t_ha.p50 if top_rec else 0.0,
-                p90_t_ha=top_rec.expected_yield_t_ha.p90 if top_rec else 0.0,
+                p10_t_ha=top_rec.expected_yield_t_ha.p10 if (top_rec and top_rec.expected_yield_t_ha) else 0.0,
+                p50_t_ha=top_rec.expected_yield_t_ha.p50 if (top_rec and top_rec.expected_yield_t_ha) else 0.0,
+                p90_t_ha=top_rec.expected_yield_t_ha.p90 if (top_rec and top_rec.expected_yield_t_ha) else 0.0,
             ),
             production_summary=ProductionSummary(
                 top_recommended_crop=top_rec.crop_name if top_rec else "N/A",
-                p10_t=top_rec.expected_production_t.p10 if top_rec else 0.0,
-                p50_t=top_rec.expected_production_t.p50 if top_rec else 0.0,
-                p90_t=top_rec.expected_production_t.p90 if top_rec else 0.0,
+                p10_t=top_rec.expected_production_t.p10 if (top_rec and top_rec.expected_production_t) else 0.0,
+                p50_t=top_rec.expected_production_t.p50 if (top_rec and top_rec.expected_production_t) else 0.0,
+                p90_t=top_rec.expected_production_t.p90 if (top_rec and top_rec.expected_production_t) else 0.0,
                 area_ha=effective_area_ha
             ),
             irrigation_summary=IrrigationSummary(
@@ -410,7 +600,9 @@ async def generate_full_report(req: PredictRequest):
             detection=detection_dict,
             gate_mode=gate_mode,
             area_check=area_check_alias,
-            imputed_features=imputed_features
+            imputed_features=imputed_features,
+            climatology_status="available",
+            climatology_message="NASA POWER 12-month long-term climatology verified."
         )
     except HTTPException:
         raise

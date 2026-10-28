@@ -24,7 +24,7 @@ class PredictRequest(BaseModel):
     point: list[float] | None = None
     area_ha: float | None = None
     season: Literal["kharif", "rabi", "zaid", "annual", "perennial"] = "kharif"
-    limit: int = Field(default=10, ge=1, le=250)
+    limit: int = Field(default=20, ge=1, le=250)
     irrigation_preference: Literal["rainfed", "supplemental", "full"] | None = "rainfed"
     manual_soil: ManualSoilInput | None = None
     survey_ref: dict[str, Any] | None = None
@@ -54,13 +54,14 @@ class IntercropOption(BaseModel):
 class RecommendedCrop(BaseModel):
     crop_id: str = ""
     crop_name: str
+    scientific_name: str | None = None
     category: str = "general"
     recommendation_score: float = 0.0
     canonical_id: str | None = None
     suitability_score: float
     suitability_grade: str = "Moderate"
-    expected_yield_t_ha: QuantileValue
-    expected_production_t: QuantileValue
+    expected_yield_t_ha: QuantileValue | None = None
+    expected_production_t: QuantileValue | None = None
     irrigation_mode: Literal["rainfed", "supplemental", "full"]
     water_need_mm: float
     climate_risk_score: float
@@ -70,6 +71,15 @@ class RecommendedCrop(BaseModel):
     data_confidence: Literal["high", "medium", "low"]
     regional_agronomic_prior: float = 1.0
     intercrop_data_available: bool = True
+    confidence_tier: Literal["A", "B"] = "A"
+    method: str = "ml_model"
+    score: float | None = None
+    score_rainfed: float | None = None
+    score_irrigated: float | None = None
+    season_months: int | None = None
+    limiting_factor: str | None = None
+    best_planting_month: int | None = None
+    notes: list[str] = []
 
 
 class FieldSummary(BaseModel):
@@ -155,11 +165,11 @@ class IntercropSummary(BaseModel):
 
 
 class ModelStatus(BaseModel):
-    model_a: Literal["ok", "fallback", "skipped_not_irrigable"] = "ok"
-    model_b: Literal["ok", "fallback", "skipped_not_irrigable"] = "ok"
-    model_c: Literal["ok", "fallback", "skipped_not_irrigable"] = "ok"
-    model_d: Literal["ok", "fallback", "skipped_not_irrigable"] = "ok"
-    model_e: Literal["ok", "fallback", "skipped_not_irrigable"] = "ok"
+    model_a: Literal["ok", "fallback", "skipped_not_irrigable", "skipped_unavailable"] = "ok"
+    model_b: Literal["ok", "fallback", "skipped_not_irrigable", "skipped_unavailable"] = "ok"
+    model_c: Literal["ok", "fallback", "skipped_not_irrigable", "skipped_unavailable"] = "ok"
+    model_d: Literal["ok", "fallback", "skipped_not_irrigable", "skipped_unavailable"] = "ok"
+    model_e: Literal["ok", "fallback", "skipped_not_irrigable", "skipped_unavailable"] = "ok"
 
 
 class LandClassification(BaseModel):
@@ -220,6 +230,8 @@ class FullReportResponse(BaseModel):
     gate_mode: str | None = None
     area_check: dict[str, Any] | None = None
     imputed_features: list[str] | None = None
+    climatology_status: str = "available"
+    climatology_message: str | None = None
     disclaimer: str = "Decision-support only. Not a legal land record, conversion certificate or survey."
 
 

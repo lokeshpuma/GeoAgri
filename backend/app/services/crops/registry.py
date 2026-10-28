@@ -306,6 +306,7 @@ class CropRegistry:
 
 # Default global registry instance
 _registry_instance: CropRegistry | None = None
+_global_registry_dict: dict[str, dict[str, Any]] | None = None
 
 def get_crop_registry() -> CropRegistry:
     global _registry_instance
@@ -313,3 +314,23 @@ def get_crop_registry() -> CropRegistry:
         json_path = "backend/ml/data/processed/crop_registry.json"
         _registry_instance = CropRegistry(json_path if os.path.exists(json_path) else None)
     return _registry_instance
+
+
+def get_global_registry() -> dict[str, dict[str, Any]]:
+    """PRD v3.2 §7.1 item 1: Global crop registry accessor."""
+    global _global_registry_dict
+    if _global_registry_dict is None:
+        from pathlib import Path
+        candidate_paths = [
+            Path(__file__).resolve().parents[3] / "ml" / "data" / "processed" / "crop_registry_global.json",
+            Path("backend/ml/data/processed/crop_registry_global.json"),
+            Path("ml/data/processed/crop_registry_global.json"),
+        ]
+        target_path = next((p for p in candidate_paths if p.exists()), None)
+        if target_path:
+            with open(target_path, "r", encoding="utf-8") as f:
+                crops_list = json.load(f)
+                _global_registry_dict = {c["crop_id"]: c for c in crops_list}
+        else:
+            _global_registry_dict = {}
+    return _global_registry_dict

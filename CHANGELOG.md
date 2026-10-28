@@ -515,3 +515,25 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `PYTHONPATH=. venv/bin/python -m pytest -q`: **127 passed, 3009 warnings in 43.38s** (100% offline, PASSED).
 - Git tag: `phase-Q4` created.
 
+## [PRD v3.2 - Phase Q5 Climatology + Recommender Integration] - 2026-10-28
+### Added & Verified (AC-7, AC-8, PRD v3.2 §7.1)
+- **NASA POWER Climatology Service (`backend/app/services/weather/climatology.py`)**:
+  - Implemented 12-month temperature (°C) and precipitation (mm) climatology retrieval from NASA POWER API.
+  - 0.1° spatial cell caching (`_CLIMATOLOGY_CACHE`) ensuring efficient, reproducible lookups.
+  - Open water / ocean detection: coordinates without valid land climatology or over water bodies return `available=False` with descriptive reason; never invents temperature or precipitation values.
+- **Recommender Integration & Water Mode Gating (`backend/app/api/v1/predict.py`)**:
+  - Enforced water mode from land gate: `is_irrigated = (irrigability.verdict != "NOT_IRRIGABLE" and req.irrigation_preference in ["supplemental", "full"])`.
+  - Added `get_global_registry()` accessor next to `get_crop_registry()` in `registry.py` and `envelope_suitability.py`.
+  - Balanced recommendation merge presenting ML-verified Tier A crops (with quantiles, production math, intercrop options) followed by EcoCrop Tier B envelope matches.
+  - Added schema fields: `confidence_tier`, `method`, `score`, `score_rainfed`, `score_irrigated`, `season_months`, `limiting_factor`, `best_planting_month`, and `notes`.
+  - Enforced `climatology_status="unavailable"` when climatology fails or on open water, returning 0 crop rankings and zero fallback numbers.
+- **Test Suite & Gate Verification (AC-7, AC-8)**:
+  - Added `backend/tests/test_climatology_and_recommender.py` covering AC-7 and AC-8 requirements.
+  - `PYTHONPATH=. venv/bin/python -m pytest tests/test_climatology_and_recommender.py -v`: **5 passed in 25.51s** (PASSED).
+  - Gate AC-7 verified: API response for Tier B crops contains no yield fields (`expected_yield_t_ha=None`, `expected_production_t=None`).
+  - Gate AC-8 verified: Monthly climatology failure / open water returns `"climatology_status": "unavailable"`, 0 recommended crops, and no fallback numbers.
+  - Full suite `PYTHONPATH=. venv/bin/python -m pytest -q`: **132 passed, 3009 warnings in 60.35s** (PASSED).
+  - Frontend `npm test`: **20 passed in 4.28s** across 5 test files (PASSED).
+  - Frontend `npm run build`: built in 7.75s with zero errors (PASSED).
+- Git tag: `phase-Q5` created.
+

@@ -215,3 +215,7 @@ def rank_crops(
             out.append(s)
     out.sort(key=lambda c: (-c.score, c.confidence_tier, c.common_name))
     return out[:top_n]
+
+
+def get_global_registry() -> dict[str, dict[str, Any]]:
+    return {c["crop_id"]: c for c in load_registry()}
