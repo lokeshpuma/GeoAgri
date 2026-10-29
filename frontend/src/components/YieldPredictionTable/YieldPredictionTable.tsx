@@ -22,11 +22,11 @@ export const YieldPredictionTable: React.FC<YieldPredictionTableProps> = ({ crop
           <div className="yield-pred-title-group">
             <Table size={20} className="text-emerald" />
             <h3 className="yield-pred-title">
-              Top 10 Yield Predictions
+              Top 10 Regional Yield Benchmarks
             </h3>
           </div>
           <p className="yield-pred-subtitle">
-            Prioritized by median yield potential (P50), intercrop synergy, and regional environmental compatibility.
+            Prioritized by median regional yield benchmark (P50), intercrop synergy, and regional environmental compatibility (national statistics; not field adjusted).
           </p>
         </div>
 

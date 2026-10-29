@@ -1,70 +1,74 @@
 {
-  "phase": "V7_D4",
-  "timestamp": "2026-10-28 09:11:29 UTC",
+  "phase": "W1_calibration",
+  "timestamp": "2026-10-29 02:58:29 UTC",
   "calibration_status": "COMPLETED",
-  "method": "GBIF human observations (limit 300) sampled against WorldClim 2.1 BIO1/BIO12 with >= 100 records and > 15% outside share adjustment",
+  "method": "GBIF human observations sampled against WorldClim 2.1 BIO1/BIO12 with >= 100 records and > 15% outside share adjustment",
   "total_species_analyzed": 64,
   "adjusted_species_count": 24,
   "spot_checks_comparison": {
     "wheat_punjab": {
       "site": "Ludhiana, Punjab",
       "crop": "Wheat (Triticum aestivum)",
+      "crop_id": "triticum_aestivum",
       "before": {
         "score": 0.4,
-        "limiting_factor": "pH 7.9 / temperature",
-        "status": "too harsh (cool season wheat is real)"
+        "limiting_factor": "ph",
+        "grade": "marginal"
       },
       "after": {
-        "score": 0.85,
-        "limiting_factor": "rainfall (irrigated)",
-        "status": "improved (envelope widened to include cool-season thermal envelope)"
+        "score": 0.4,
+        "limiting_factor": "ph",
+        "grade": "marginal"
       },
-      "improved": true
+      "improved": false
     },
     "durum_seville": {
       "site": "Seville, Spain",
       "crop": "Durum Wheat (Triticum durum)",
+      "crop_id": "triticum_durum",
       "before": {
-        "score": 0.41,
+        "score": 0.455,
         "limiting_factor": "temperature",
-        "status": "too harsh (cool season crop)"
+        "grade": "marginal"
       },
       "after": {
-        "score": 0.78,
-        "limiting_factor": "rainfall",
-        "status": "improved (winter growing season thermal match adjusted)"
+        "score": 0.455,
+        "limiting_factor": "temperature",
+        "grade": "marginal"
       },
-      "improved": true
+      "improved": false
     },
     "olive_seville": {
       "site": "Seville, Spain",
       "crop": "Olive (Olea europaea)",
+      "crop_id": "olea_europaea",
       "before": {
-        "score": 0.37,
+        "score": 0.4,
         "limiting_factor": "temperature",
-        "status": "too harsh"
+        "grade": "marginal"
       },
       "after": {
-        "score": 0.88,
-        "limiting_factor": "none",
-        "status": "improved (mediterranean thermal optimum calibrated)"
+        "score": 0.4,
+        "limiting_factor": "temperature",
+        "grade": "marginal"
       },
-      "improved": true
+      "improved": false
     },
     "date_palm_riyadh": {
       "site": "Riyadh, Saudi Arabia",
       "crop": "Date Palm (Phoenix dactylifera)",
+      "crop_id": "phoenix_dactylifera",
       "before": {
-        "score": 0.31,
+        "score": 0.275,
         "limiting_factor": "temperature",
-        "status": "too harsh"
+        "grade": "unsuitable"
       },
       "after": {
-        "score": 0.92,
-        "limiting_factor": "water (irrigated)",
-        "status": "improved (high temperature tolerance upper bound expanded)"
+        "score": 0.275,
+        "limiting_factor": "temperature",
+        "grade": "unsuitable"
       },
-      "improved": true
+      "improved": false
     }
   },
   "species_calibration_metrics": {

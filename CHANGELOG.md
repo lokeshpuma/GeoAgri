@@ -2,6 +2,24 @@
 
 All notable changes to the GeoAgri project will be documented in this file in accordance with `PRD.md` §0.
 
+## [Correction Notice - PRD v3.4 Truth Audit of v3.3 Release] - 2026-10-29
+In accordance with PRD v3.4 §3.6, the following factual corrections are recorded regarding the previously published v3.3 changelog entries:
+- **Correction H-1 (Calibration Spot Checks)**:
+  - *Previous v3.3 claim*: Spot checks for Wheat @ Ludhiana (0.40 -> 0.85), Durum @ Seville (0.41 -> 0.78), Olive @ Seville (0.37 -> 0.88), and Date Palm @ Riyadh (0.31 -> 0.92) were reported as "re-ran" and improved.
+  - *Truth audit*: Those numbers were typed as static literals into `calibrate_envelopes.py`. In reality, GBIF occurrences did not widen envelopes for those species (>15% outside share condition was not met). The genuine computed scores using `score_crop` against `backend/tests/fixtures/spot_climates.json` are: Wheat @ Ludhiana: 0.4000 -> 0.4000; Durum @ Seville: 0.4550 -> 0.4550; Olive @ Seville: 0.4000 -> 0.4000; Date Palm @ Riyadh: 0.2750 -> 0.2750 (`improved: false`).
+- **Correction H-2 (Model B Hit Rate)**:
+  - *Previous v3.3 claim*: Model B top-5 hit rate was reported as 88.3% to 91.6% across continents.
+  - *Truth audit*: Those figures were computed via synthetic formula `round(min(94.5, 78.0 + (coverage * 15.0)), 2)` rather than an empirical validation. In reality, genuine rule-based envelope ranking evaluated against country top-5 harvested-area crops across 186 countries achieves: overall top-5 hit rate 30.22% and MRR 0.2102 (Africa 29.2%, Asia 35.5%, Europe 24.7%, North America 31.2%, Oceania 17.8%, South America 36.9%) compared against a trivial baseline of globally most-grown crops (wheat, maize, rice, soyabean, barley) which scores 41.29% hit rate and 0.2151 MRR.
+- **Correction H-3 (Model D Yield Forecaster Scope)**:
+  - *Previous v3.3 claim*: Model D was presented as a field-specific quantile yield forecast across 47 hand-picked countries.
+  - *Truth audit*: Model D is trained on FAOSTAT country-year yield statistics without field-level soil or weather covariates. It has been relabeled to "Regional yield benchmark (FAOSTAT, crop-level)" with the explanation "based on national statistics for this crop; not adjusted to your field" and expanded to all 203 countries mapped via UN M49 (Leave-One-Continent-Out empirical coverage 78.04%, mean P50 pinball loss 3.054 t/ha).
+- **Correction H-9 (Clean Clone Test Suite Results)**:
+  - *Previous v3.3 claim*: "148 passed" on the test suite.
+  - *Truth audit*: On a fresh clone without cached NASA POWER weather (`backend/.cache/climatology.json`), `test_predict_full_report_e2e` in `tests/test_phase7_api.py` failed with `SocketBlockedError` because climatology was not mocked, yielding 147 passed, 1 failed.
+
+See `PRD_v3.4_Truthful_Data_UI_Recovery_and_Repo_Cleanup.md` §2 and §3 for comprehensive defect analysis and resolution details.
+
+
 ## [Phase 0 - Foundations] - 2026-10-23
 
 ### Added
@@ -827,3 +845,42 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
   - Observed missing CSS on `.btn-primary` and several utility elements.
   - Observed ~450px blank vertical space under map on `#analysis` page.
 - Git tag: `pre-v3.4` updated.
+
+## [PRD v3.4 - Phase W1 Honesty in Training Scripts & Model Verification] - 2026-10-29
+### Added & Verified (§3.1, §3.2, §3.6, AC-1 to AC-3)
+- **Envelope Calibration Honesty (H-1, H-4, AC-1)**:
+  - Deleted the hard-coded `spot_checks` block in `backend/ml/training/calibrate_envelopes.py`.
+  - Created `backend/tests/fixtures/spot_climates.json` containing textbook monthly climates for Ludhiana, Seville, and Riyadh.
+  - Dynamically computed before and after scores by evaluating `score_crop` against the EcoCrop registry and calibrated registry.
+  - Computed `"improved"` flag (`after > before + 0.05`), recording genuine results in `backend/ml/data/processed/calibration_report.json`:
+    - Wheat @ Ludhiana: 0.4000 -> 0.4000 (improved: false)
+    - Durum wheat @ Seville: 0.4550 -> 0.4550 (improved: false)
+    - Olive @ Seville: 0.4000 -> 0.4000 (improved: false)
+    - Date palm @ Riyadh: 0.2750 -> 0.2750 (improved: false)
+  - Wired `USE_CALIBRATED_ENVELOPES` flag into `app/core/config.py` and `app/services/crops/registry.py` / `envelope_suitability.py`.
+  - Gate verification AC-1: `grep -n '"score": 0\.' backend/ml/training/*.py` returned 0 matches (PASSED).
+- **Model D Yield Benchmark Relabeling & LOCO Cross-Validation (H-3, AC-3)**:
+  - Relabeled Model D across API, UI, cards, tables, and charts to "Regional yield benchmark (FAOSTAT, crop-level)" with the explanation "based on national statistics for this crop; not adjusted to your field".
+  - Replaced 47-country `CONTINENT_MAP` with complete UN M49 mapping for all 203 FAOSTAT countries/territories, explicitly listing 41 regional aggregates.
+  - Executed Leave-One-Continent-Out (LOCO) cross-validation across all 6 continents on 85,459 observations:
+    - Africa (N=24,664): P10-P90 Coverage 61.8%, Loss P50 2.3820
+    - Asia (N=24,650): P10-P90 Coverage 84.3%, Loss P50 2.6803
+    - Europe (N=15,297): P10-P90 Coverage 79.1%, Loss P50 3.2583
+    - North America (N=9,991): P10-P90 Coverage 84.3%, Loss P50 3.2555
+    - Oceania (N=3,183): P10-P90 Coverage 73.7%, Loss P50 3.7808
+    - South America (N=7,674): P10-P90 Coverage 85.0%, Loss P50 2.9674
+    - Overall mean pinball loss: P10=0.9209, P50=3.0541, P90=2.0460; Empirical coverage: 78.04%.
+- **Model B Recommender Genuine Evaluation & Baseline Comparison (H-2, AC-2)**:
+  - Deleted synthetic formula `min(94.5, 78.0 + (coverage * 15.0))`.
+  - Evaluated rule-based envelope ranking (`score_crop`) at each country's centroid against genuine top-5 harvested-area crops across 186 countries with >= 5 reported crops.
+  - Measured genuine Model B top-5 hit rate and MRR alongside trivial baseline (globally most-grown crops: wheat, maize, rice, soyabean, barley):
+    - Africa (N=52): Model B Hit 29.2% | Baseline Hit 31.5%
+    - Asia (N=49): Model B Hit 35.5% | Baseline Hit 47.8%
+    - Europe (N=38): Model B Hit 24.7% | Baseline Hit 55.3%
+    - North America (N=25): Model B Hit 31.2% | Baseline Hit 27.2%
+    - Oceania (N=9): Model B Hit 17.8% | Baseline Hit 26.7%
+    - South America (N=13): Model B Hit 36.9% | Baseline Hit 52.3%
+    - Overall: Model B Hit 30.22%, MRR 0.2102 | Baseline Hit 41.29%, MRR 0.2151.
+  - Published truthful `backend/ml/models/model_card.json` containing only computed values.
+  - Added test suite `backend/tests/test_truthful_model_card.py` verifying no literal scores, dynamic spot checks, and absence of formulaic metrics (4 passed).
+- Git tag: `phase-W1` created.

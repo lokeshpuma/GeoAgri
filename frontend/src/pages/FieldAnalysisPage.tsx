@@ -550,9 +550,9 @@ export const FieldAnalysisPage: React.FC = () => {
                     <div className="tech-item"><span className="tech-name">Feature Vector Length</span><span className="tech-val">78 Diagnostic Bands</span></div>
                     <div className="tech-item"><span className="tech-name">Coordinate Reference System</span><span className="tech-val">EPSG:4326 (WGS84 Geodesic)</span></div>
                     <div className="tech-item"><span className="tech-name">Model A: Land Suitability</span><span className="tech-val text-emerald">Active (FAO Framework)</span></div>
-                    <div className="tech-item"><span className="tech-name">Model B: Quantile Yields</span><span className="tech-val text-emerald">Active (GBDT P10/P50/P90)</span></div>
+                    <div className="tech-item"><span className="tech-name">Model B: Crop Recommender</span><span className="tech-val text-emerald">Active (Rule-based Envelope Matching)</span></div>
                     <div className="tech-item"><span className="tech-name">Model C: Irrigation Demand</span><span className="tech-val text-emerald">Active (FAO-56 Water Balance)</span></div>
-                    <div className="tech-item"><span className="tech-name">Model D: Intercrop Symbiosis</span><span className="tech-val text-emerald">Active (Synergy Boost Matrix)</span></div>
+                    <div className="tech-item"><span className="tech-name">Model D: Regional Yield Benchmark</span><span className="tech-val text-emerald">Active (FAOSTAT Crop-Level)</span></div>
                     <div className="tech-item"><span className="tech-name">Model E: Agro-Climatic Risk</span><span className="tech-val text-emerald">Active (30-Year Extremes)</span></div>
                     <div className="tech-item"><span className="tech-name">Satellite Ingestion Engine</span><span className="tech-val">Google Earth Engine API</span></div>
                   </div>

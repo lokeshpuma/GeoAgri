@@ -1,20 +1,22 @@
 {
-  "model_name": "GeoAgri Tier A Yield Quantiles (Model D) & Recommender (Model B)",
-  "version": "v3.3.0",
-  "date": "2026-10-28 09:18:02 UTC",
+  "model_name": "GeoAgri Regional Yield Benchmark (Model D) & Rule-Based Recommender (Model B)",
+  "version": "v3.4.0",
+  "date": "2026-10-29 03:03:51 UTC",
   "training_data": {
     "source": "FAOSTAT QCL Normalized Dataset (1990\u20132022)",
-    "raw_samples": 25017,
+    "raw_samples": 85459,
     "elements": [
       "Yield",
       "Area harvested",
       "Production"
     ],
     "unit": "kg/ha converted to t/ha",
-    "geographic_coverage": "Global (6 continents)"
+    "geographic_coverage": "Global (203 countries mapped via UN M49)"
   },
-  "validation_strategy": {
-    "protocol": "Leave-One-Continent-Out (LOCO) Cross-Validation",
+  "model_d_yield_benchmark": {
+    "label": "Regional yield benchmark (FAOSTAT, crop-level)",
+    "description": "based on national statistics for this crop; not adjusted to your field",
+    "validation_protocol": "Leave-One-Continent-Out (LOCO) Cross-Validation",
     "continents_evaluated": [
       "Africa",
       "Asia",
@@ -22,66 +24,157 @@
       "North America",
       "Oceania",
       "South America"
-    ]
-  },
-  "performance_metrics": {
-    "mean_pinball_loss_p10": 1.0014,
-    "mean_pinball_loss_p50": 3.017,
-    "mean_pinball_loss_p90": 1.6597,
-    "empirical_coverage_p10_p90_pct": 78.86,
-    "per_continent_evaluation": {
+    ],
+    "mean_pinball_loss_p10": 0.9209,
+    "mean_pinball_loss_p50": 3.0541,
+    "mean_pinball_loss_p90": 2.046,
+    "empirical_coverage_p10_p90_pct": 78.04,
+    "per_continent": {
       "Africa": {
-        "n_test_samples": 6024,
-        "pinball_loss_p10": 0.8774,
-        "pinball_loss_p50": 2.6029,
-        "pinball_loss_p90": 1.5437,
-        "coverage_p10_p90_pct": 68.82,
-        "top5_hit_rate_pct": 88.32
+        "n_test_samples": 24664,
+        "pinball_loss_p10": 0.7394,
+        "pinball_loss_p50": 2.382,
+        "pinball_loss_p90": 1.7507,
+        "coverage_p10_p90_pct": 61.75
       },
       "Asia": {
-        "n_test_samples": 5919,
-        "pinball_loss_p10": 0.8676,
-        "pinball_loss_p50": 1.9698,
-        "pinball_loss_p90": 1.3772,
-        "coverage_p10_p90_pct": 76.77,
-        "top5_hit_rate_pct": 89.52
+        "n_test_samples": 24650,
+        "pinball_loss_p10": 0.8214,
+        "pinball_loss_p50": 2.6803,
+        "pinball_loss_p90": 1.665,
+        "coverage_p10_p90_pct": 84.33
       },
       "Europe": {
-        "n_test_samples": 4971,
-        "pinball_loss_p10": 0.9286,
-        "pinball_loss_p50": 3.0603,
-        "pinball_loss_p90": 1.5602,
-        "coverage_p10_p90_pct": 81.55,
-        "top5_hit_rate_pct": 90.23
+        "n_test_samples": 15297,
+        "pinball_loss_p10": 0.9283,
+        "pinball_loss_p50": 3.2583,
+        "pinball_loss_p90": 2.4376,
+        "coverage_p10_p90_pct": 79.09
       },
       "North America": {
-        "n_test_samples": 2157,
-        "pinball_loss_p10": 1.1383,
-        "pinball_loss_p50": 3.5045,
-        "pinball_loss_p90": 1.537,
-        "coverage_p10_p90_pct": 82.38,
-        "top5_hit_rate_pct": 90.36
+        "n_test_samples": 9991,
+        "pinball_loss_p10": 1.0416,
+        "pinball_loss_p50": 3.2555,
+        "pinball_loss_p90": 1.9263,
+        "coverage_p10_p90_pct": 84.33
       },
       "Oceania": {
-        "n_test_samples": 1746,
-        "pinball_loss_p10": 1.2082,
-        "pinball_loss_p50": 4.1396,
-        "pinball_loss_p90": 2.7128,
-        "coverage_p10_p90_pct": 73.14,
-        "top5_hit_rate_pct": 88.97
+        "n_test_samples": 3183,
+        "pinball_loss_p10": 1.0471,
+        "pinball_loss_p50": 3.7808,
+        "pinball_loss_p90": 2.7485,
+        "coverage_p10_p90_pct": 73.74
       },
       "South America": {
-        "n_test_samples": 4200,
-        "pinball_loss_p10": 0.9885,
-        "pinball_loss_p50": 2.825,
-        "pinball_loss_p90": 1.2271,
-        "coverage_p10_p90_pct": 90.5,
-        "top5_hit_rate_pct": 91.58
+        "n_test_samples": 7674,
+        "pinball_loss_p10": 0.9475,
+        "pinball_loss_p50": 2.9674,
+        "pinball_loss_p90": 1.7479,
+        "coverage_p10_p90_pct": 85.01
       }
     }
   },
+  "model_b_recommender": {
+    "type": "rule-based envelope ranking",
+    "method": "Multi-month bioclimatic envelope scoring (WorldClim monthly climatology at country cropland centroid)",
+    "evaluated_countries_count": 186,
+    "overall_top5_hit_rate_pct": 30.22,
+    "overall_mean_reciprocal_rank": 0.2102,
+    "baseline_comparison": {
+      "baseline_name": "Globally most-grown crops (wheat, maize, rice, soyabean, barley)",
+      "baseline_overall_top5_hit_rate_pct": 41.29,
+      "baseline_overall_mean_reciprocal_rank": 0.2151
+    },
+    "per_continent": {
+      "Africa": {
+        "n_countries": 52,
+        "top5_hit_rate_pct": 29.23,
+        "mean_reciprocal_rank": 0.2295,
+        "baseline_top5_hit_rate_pct": 31.54,
+        "baseline_mrr": 0.1591
+      },
+      "Asia": {
+        "n_countries": 49,
+        "top5_hit_rate_pct": 35.51,
+        "mean_reciprocal_rank": 0.2147,
+        "baseline_top5_hit_rate_pct": 47.76,
+        "baseline_mrr": 0.2459
+      },
+      "Europe": {
+        "n_countries": 38,
+        "top5_hit_rate_pct": 24.74,
+        "mean_reciprocal_rank": 0.1721,
+        "baseline_top5_hit_rate_pct": 55.26,
+        "baseline_mrr": 0.3158
+      },
+      "North America": {
+        "n_countries": 25,
+        "top5_hit_rate_pct": 31.2,
+        "mean_reciprocal_rank": 0.2157,
+        "baseline_top5_hit_rate_pct": 27.2,
+        "baseline_mrr": 0.1309
+      },
+      "Oceania": {
+        "n_countries": 9,
+        "top5_hit_rate_pct": 17.78,
+        "mean_reciprocal_rank": 0.1667,
+        "baseline_top5_hit_rate_pct": 26.67,
+        "baseline_mrr": 0.1348
+      },
+      "South America": {
+        "n_countries": 13,
+        "top5_hit_rate_pct": 36.92,
+        "mean_reciprocal_rank": 0.2467,
+        "baseline_top5_hit_rate_pct": 52.31,
+        "baseline_mrr": 0.2459
+      }
+    }
+  },
+  "unmapped_regional_aggregates": [
+    "Africa",
+    "Americas",
+    "Asia",
+    "Europe",
+    "Oceania",
+    "World",
+    "Australia and New Zealand",
+    "Caribbean",
+    "Central America",
+    "Central Asia",
+    "Eastern Africa",
+    "Eastern Asia",
+    "Eastern Europe",
+    "European Union (27)",
+    "Land Locked Developing Countries (LLDCs)",
+    "Least Developed Countries (LDCs)",
+    "Low Income Food Deficit Countries (LIFDCs)",
+    "Melanesia",
+    "Micronesia",
+    "Middle Africa",
+    "Net Food Importing Developing Countries (NFIDCs)",
+    "Northern Africa",
+    "Northern America",
+    "Northern Europe",
+    "Polynesia",
+    "Small Island Developing States (SIDS)",
+    "South America",
+    "South-eastern Asia",
+    "Southern Africa",
+    "Southern Asia",
+    "Southern Europe",
+    "Western Africa",
+    "Western Asia",
+    "Western Europe",
+    "Belgium-Luxembourg",
+    "Czechoslovakia",
+    "Ethiopia PDR",
+    "Serbia and Montenegro",
+    "Sudan (former)",
+    "USSR",
+    "Yugoslav SFR"
+  ],
   "bias_and_fairness": {
     "held_out_validation": "Strict continental holdouts ensure models generalize to novel geographic zones without spatial data leakage.",
-    "synthetic_data": "Zero synthetic or invented values used in training."
+    "synthetic_data": "Zero synthetic or invented values used in training. All metrics directly computed from observations."
   }
 }

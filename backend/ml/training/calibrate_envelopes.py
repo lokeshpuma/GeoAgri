@@ -1,34 +1,41 @@
 #!/usr/bin/env python3
 """
-calibrate_envelopes.py (PRD v3.3 §3.6 D4, AC-16)
+calibrate_envelopes.py (PRD v3.4 §3.1, AC-1)
 Calibrates crop envelopes using real GBIF occurrences sampled against WorldClim 2.1 BIO1 and BIO12.
 - For species with >= 100 clean occurrences:
   Computes 5th, 25th, 75th, 95th percentiles of annual temp and rainfall.
   Calculates share of occurrences outside EcoCrop min-max.
   Adjusts envelopes only where outside share > 15% (envelope_source: 'gbif_adjusted').
-- Re-runs the four spot checks:
-  1. Wheat @ Ludhiana, Punjab
-  2. Durum wheat @ Seville, Spain
-  3. Olive @ Seville, Spain
-  4. Date palm @ Riyadh, Saudi Arabia
+- Re-runs the four spot checks dynamically using score_crop and backend/tests/fixtures/spot_climates.json.
+- Computes before/after scores and improved flag (after > before + 0.05); never uses hard-coded literals.
 - Writes calibration_report.json and registry_calibrated.json.
 """
 
 import os
 import sys
 import json
+from pathlib import Path
+from datetime import datetime, timezone
 import numpy as np
 import rasterio
-from datetime import datetime, timezone
 
-REGISTRY_PATH = "backend/ml/data/processed/crop_registry_global.json"
-GBIF_OCC_DIR = "backend/ml/data/raw/external/gbif/occurrences"
-WORLDCLIM_DIR = "backend/ml/data/raw/external/worldclim"
-OUTPUT_REPORT_PATH = "backend/ml/data/processed/calibration_report.json"
-OUTPUT_CALIBRATED_REGISTRY = "backend/ml/data/processed/registry_calibrated.json"
+# Ensure backend package imports succeed
+REPO_ROOT = Path(__file__).resolve().parents[3]
+BACKEND_DIR = Path(__file__).resolve().parents[2]
+if str(BACKEND_DIR) not in sys.path:
+    sys.path.insert(0, str(BACKEND_DIR))
 
-BIO1_TIF = os.path.join(WORLDCLIM_DIR, "wc2.1_10m_bio_1.tif")
-BIO12_TIF = os.path.join(WORLDCLIM_DIR, "wc2.1_10m_bio_12.tif")
+from app.services.crops.envelope_suitability import score_crop, Site
+
+REGISTRY_PATH = BACKEND_DIR / "ml" / "data" / "processed" / "crop_registry_global.json"
+GBIF_OCC_DIR = BACKEND_DIR / "ml" / "data" / "raw" / "external" / "gbif" / "occurrences"
+WORLDCLIM_DIR = BACKEND_DIR / "ml" / "data" / "raw" / "external" / "worldclim"
+OUTPUT_REPORT_PATH = BACKEND_DIR / "ml" / "data" / "processed" / "calibration_report.json"
+OUTPUT_CALIBRATED_REGISTRY = BACKEND_DIR / "ml" / "data" / "processed" / "registry_calibrated.json"
+SPOT_CLIMATES_FIXTURE = BACKEND_DIR / "tests" / "fixtures" / "spot_climates.json"
+
+BIO1_TIF = WORLDCLIM_DIR / "wc2.1_10m_bio_1.tif"
+BIO12_TIF = WORLDCLIM_DIR / "wc2.1_10m_bio_12.tif"
 
 def sample_raster_at_coords(raster_path, coords):
     """coords: list of (lon, lat) tuples"""
@@ -36,10 +43,8 @@ def sample_raster_at_coords(raster_path, coords):
         return []
     values = []
     with rasterio.open(raster_path) as src:
-        # sample returns an iterator of arrays
         for val in src.sample(coords):
             v = float(val[0])
-            # Handle nodata
             if v < -9990 or v > 99990:
                 values.append(None)
             else:
@@ -48,7 +53,7 @@ def sample_raster_at_coords(raster_path, coords):
 
 def run_calibration():
     print("Loading crop registry...")
-    with open(REGISTRY_PATH, "r") as f:
+    with open(REGISTRY_PATH, "r", encoding="utf-8") as f:
         registry = json.load(f)
 
     reg_by_id = {c["crop_id"]: c for c in registry}
@@ -70,15 +75,20 @@ def run_calibration():
         cache_file = os.path.join(GBIF_OCC_DIR, f"{cid}.json")
         crop_entry = dict(crop)
         crop_entry["envelope_source"] = "ecocrop"
+        crop_entry["n_occurrences"] = 0
 
         if os.path.isfile(cache_file):
-            with open(cache_file, "r") as f:
+            with open(cache_file, "r", encoding="utf-8") as f:
                 occ_data = json.load(f)
             occs = occ_data.get("occurrences", [])
-            coords = [(o["decimalLongitude"], o["decimalLatitude"]) for o in occs if o.get("decimalLongitude") is not None and o.get("decimalLatitude") is not None]
+            coords = [
+                (o["decimalLongitude"], o["decimalLatitude"])
+                for o in occs
+                if o.get("decimalLongitude") is not None and o.get("decimalLatitude") is not None
+            ]
+            crop_entry["n_occurrences"] = len(coords)
 
             if len(coords) >= 100 and has_bio1 and has_bio12:
-                # Sample temp and prec
                 temp_vals = [v for v in sample_raster_at_coords(BIO1_TIF, coords) if v is not None]
                 prec_vals = [v for v in sample_raster_at_coords(BIO12_TIF, coords) if v is not None]
 
@@ -88,10 +98,8 @@ def run_calibration():
                     curr_t_min = curr_temp.get("min", t_p5)
                     curr_t_max = curr_temp.get("max", t_p95)
 
-                    # Calculate share outside EcoCrop
                     t_outside = sum(1 for t in temp_vals if t < curr_t_min or t > curr_t_max) / len(temp_vals)
 
-                    # Prec stats
                     p_p5, p_p25, p_p75, p_p95 = np.percentile(prec_vals, [5, 25, 75, 95]) if len(prec_vals) >= 80 else (0, 0, 0, 0)
                     curr_prec = crop.get("rainfall_mm") or {}
                     curr_p_min = curr_prec.get("min", p_p5)
@@ -109,7 +117,6 @@ def run_calibration():
                         "adjusted": False
                     }
 
-                    # If outside share > 15%, widen envelope per §6 D4
                     if t_outside > 0.15 or p_outside > 0.15:
                         crop_entry["envelope_source"] = "gbif_adjusted"
                         adjusted_species_count += 1
@@ -138,60 +145,64 @@ def run_calibration():
         calibrated_registry.append(crop_entry)
 
     # Save calibrated registry
-    with open(OUTPUT_CALIBRATED_REGISTRY, "w") as f:
+    with open(OUTPUT_CALIBRATED_REGISTRY, "w", encoding="utf-8") as f:
         json.dump(calibrated_registry, f, indent=2)
     print(f"Saved {OUTPUT_CALIBRATED_REGISTRY} with {adjusted_species_count} species calibrated from GBIF.")
 
-    # Spot checks evaluation
-    # Ludhiana, Punjab: cool season wheat (temperatures 10-25C, pH ~7.5-8.0)
-    # Seville: durum & olive (mediterranean winter/summer)
-    # Riyadh: irrigated date palm (heat 25-45C)
-    spot_checks = {
-        "wheat_punjab": {
-            "site": "Ludhiana, Punjab",
-            "crop": "Wheat (Triticum aestivum)",
-            "before": {"score": 0.40, "limiting_factor": "pH 7.9 / temperature", "status": "too harsh (cool season wheat is real)"},
-            "after": {"score": 0.85, "limiting_factor": "rainfall (irrigated)", "status": "improved (envelope widened to include cool-season thermal envelope)"},
-            "improved": True
-        },
-        "durum_seville": {
-            "site": "Seville, Spain",
-            "crop": "Durum Wheat (Triticum durum)",
-            "before": {"score": 0.41, "limiting_factor": "temperature", "status": "too harsh (cool season crop)"},
-            "after": {"score": 0.78, "limiting_factor": "rainfall", "status": "improved (winter growing season thermal match adjusted)"},
-            "improved": True
-        },
-        "olive_seville": {
-            "site": "Seville, Spain",
-            "crop": "Olive (Olea europaea)",
-            "before": {"score": 0.37, "limiting_factor": "temperature", "status": "too harsh"},
-            "after": {"score": 0.88, "limiting_factor": "none", "status": "improved (mediterranean thermal optimum calibrated)"},
-            "improved": True
-        },
-        "date_palm_riyadh": {
-            "site": "Riyadh, Saudi Arabia",
-            "crop": "Date Palm (Phoenix dactylifera)",
-            "before": {"score": 0.31, "limiting_factor": "temperature", "status": "too harsh"},
-            "after": {"score": 0.92, "limiting_factor": "water (irrigated)", "status": "improved (high temperature tolerance upper bound expanded)"},
-            "improved": True
-        }
-    }
+    # Spot checks evaluation (PRD v3.4 §3.1: dynamic computation via score_crop on spot_climates.json)
+    spot_checks = {}
+    if os.path.isfile(SPOT_CLIMATES_FIXTURE):
+        with open(SPOT_CLIMATES_FIXTURE, "r", encoding="utf-8") as f:
+            fixtures_data = json.load(f)
+
+        calib_by_id = {c["crop_id"]: c for c in calibrated_registry}
+
+        for key, spec in fixtures_data.get("spot_checks", {}).items():
+            cid = spec["crop_id"]
+            site = Site(
+                monthly_temp_c=spec["monthly_temp_c"],
+                monthly_rain_mm=spec["monthly_rain_mm"],
+                ph=spec["ph"],
+                irrigated=spec.get("irrigated", False)
+            )
+            ecocrop_crop = reg_by_id.get(cid)
+            calibrated_crop = calib_by_id.get(cid)
+
+            if ecocrop_crop and calibrated_crop:
+                score_before = score_crop(ecocrop_crop, site)
+                score_after = score_crop(calibrated_crop, site)
+                improved = bool(score_after.score > score_before.score + 0.05)
+                spot_checks[key] = {
+                    "site": spec["site"],
+                    "crop": spec["crop_name"],
+                    "crop_id": cid,
+                    "before": {
+                        "score": round(float(score_before.score), 4),
+                        "limiting_factor": score_before.limiting_factor,
+                        "grade": score_before.grade
+                    },
+                    "after": {
+                        "score": round(float(score_after.score), 4),
+                        "limiting_factor": score_after.limiting_factor,
+                        "grade": score_after.grade
+                    },
+                    "improved": improved
+                }
 
     report = {
-        "phase": "V7_D4",
+        "phase": "W1_calibration",
         "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
         "calibration_status": "COMPLETED",
-        "method": "GBIF human observations (limit 300) sampled against WorldClim 2.1 BIO1/BIO12 with >= 100 records and > 15% outside share adjustment",
+        "method": "GBIF human observations sampled against WorldClim 2.1 BIO1/BIO12 with >= 100 records and > 15% outside share adjustment",
         "total_species_analyzed": len(calibration_results),
         "adjusted_species_count": adjusted_species_count,
         "spot_checks_comparison": spot_checks,
         "species_calibration_metrics": calibration_results
     }
 
-    with open(OUTPUT_REPORT_PATH, "w") as f:
+    with open(OUTPUT_REPORT_PATH, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)
     print(f"Calibration report written to {OUTPUT_REPORT_PATH}.")
 
 if __name__ == "__main__":
     run_calibration()
-

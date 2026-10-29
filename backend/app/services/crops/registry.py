@@ -318,16 +318,29 @@ def get_crop_registry() -> CropRegistry:
 
 
 def get_global_registry() -> dict[str, dict[str, Any]]:
-    """PRD v3.2 §7.1 item 1: Global crop registry accessor."""
+    """PRD v3.2 §7.1 item 1 & PRD v3.4 §3.1: Global crop registry accessor with optional calibrated envelopes."""
     global _global_registry_dict
     if _global_registry_dict is None:
         from pathlib import Path
-        candidate_paths = [
-            Path(__file__).resolve().parents[3] / "ml" / "data" / "processed" / "crop_registry_global.json",
-            Path("backend/ml/data/processed/crop_registry_global.json"),
-            Path("ml/data/processed/crop_registry_global.json"),
-        ]
-        target_path = next((p for p in candidate_paths if p.exists()), None)
+        from app.core.config import settings
+        
+        target_path = None
+        if getattr(settings, "USE_CALIBRATED_ENVELOPES", True):
+            calibrated_candidates = [
+                Path(__file__).resolve().parents[3] / "ml" / "data" / "processed" / "registry_calibrated.json",
+                Path("backend/ml/data/processed/registry_calibrated.json"),
+                Path("ml/data/processed/registry_calibrated.json"),
+            ]
+            target_path = next((p for p in calibrated_candidates if p.exists()), None)
+
+        if not target_path:
+            candidate_paths = [
+                Path(__file__).resolve().parents[3] / "ml" / "data" / "processed" / "crop_registry_global.json",
+                Path("backend/ml/data/processed/crop_registry_global.json"),
+                Path("ml/data/processed/crop_registry_global.json"),
+            ]
+            target_path = next((p for p in candidate_paths if p.exists()), None)
+
         if target_path:
             with open(target_path, "r", encoding="utf-8") as f:
                 crops_list = json.load(f)

@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     ALLOW_SYNTHETIC_DATA: bool = False
     GEE_MOCK_FALLBACK: bool = False
     LOG_LEVEL: str = "INFO"
+    USE_CALIBRATED_ENVELOPES: bool = True
 
     # Google Earth Engine
     GEE_PROJECT_ID: str = ""

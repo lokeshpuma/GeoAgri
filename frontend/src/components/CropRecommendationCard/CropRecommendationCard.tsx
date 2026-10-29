@@ -122,7 +122,7 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
       {/* Key Metric Grid */}
       <div className="crop-rec-stats-grid">
         <div className="crop-stat-cell">
-          <span className="crop-stat-label">Expected Yield</span>
+          <span className="crop-stat-label">Regional Yield Benchmark</span>
           {isTierA && p50YieldHa != null ? (
             <>
               <div className="crop-stat-val">
@@ -130,6 +130,9 @@ export const CropRecommendationCard: React.FC<CropRecommendationCardProps> = ({
               </div>
               <span className="crop-stat-sub">
                 P10: {crop.expected_yield_t_ha?.p10.toFixed(2)} | P90: {crop.expected_yield_t_ha?.p90.toFixed(2)}
+              </span>
+              <span className="crop-stat-note text-xs text-ink-3 block mt-1" style={{ fontSize: '0.72rem', lineHeight: '1.1' }}>
+                Based on national statistics for this crop; not adjusted to your field
               </span>
             </>
           ) : (

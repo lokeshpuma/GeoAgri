@@ -88,7 +88,15 @@ class CropScore:
 
 @lru_cache(maxsize=1)
 def load_registry(path: str | None = None) -> list[dict[str, Any]]:
-    p = Path(path) if path else REGISTRY_PATH
+    if path:
+        p = Path(path)
+    else:
+        from app.core.config import settings
+        calibrated_p = Path(__file__).resolve().parents[3] / "ml" / "data" / "processed" / "registry_calibrated.json"
+        if getattr(settings, "USE_CALIBRATED_ENVELOPES", True) and calibrated_p.exists():
+            p = calibrated_p
+        else:
+            p = REGISTRY_PATH
     if not p.exists():
         raise FileNotFoundError(
             f"Global crop registry not found at {p}. Run backend/ml/training/build_global_crop_registry.py"

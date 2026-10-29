@@ -23,9 +23,9 @@ export const YieldChart: React.FC<YieldChartProps> = ({ crops }) => {
     <div className="glass-card yield-chart-container">
       <div className="flex-row-center gap-8">
         <TrendingUp className="text-emerald" size={20} />
-        <h3 className="yield-chart-title">Yield Quantiles Comparison (Tonnes / Ha)</h3>
+        <h3 className="yield-chart-title">Regional Yield Benchmark Comparison (Tonnes / Ha)</h3>
       </div>
-      <p className="yield-chart-desc">Visualizing yield uncertainty bounds across top candidates: P10 (Pessimistic), P50 (Expected), P90 (Optimistic).</p>
+      <p className="yield-chart-desc">Regional yield benchmarks (FAOSTAT, crop-level): P10, P50, and P90 ranges based on national statistics; not adjusted to your field.</p>
 
       <div className="yield-chart-body">
         <ResponsiveContainer width="100%" height="100%">
