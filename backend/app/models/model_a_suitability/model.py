@@ -61,11 +61,11 @@ class ModelASuitability:
             return self._fallback_predict(feature_vector)
 
         try:
-            ph = feature_vector.get("ph", 6.5)
-            soc = feature_vector.get("organic_carbon_g_kg", 10.0)
-            slope = feature_vector.get("slope_mean", feature_vector.get("slope", 2.0))
-            twi = feature_vector.get("twi_mean", feature_vector.get("twi", 5.0))
-            ndvi = feature_vector.get("ndvi_mean", feature_vector.get("ndvi", 0.65))
+            ph = feature_vector.get("ph") if feature_vector.get("ph") is not None else 6.5
+            soc = feature_vector.get("organic_carbon_g_kg") if feature_vector.get("organic_carbon_g_kg") is not None else 10.0
+            slope = feature_vector.get("slope_mean") if feature_vector.get("slope_mean") is not None else (feature_vector.get("slope") if feature_vector.get("slope") is not None else 2.0)
+            twi = feature_vector.get("twi_mean") if feature_vector.get("twi_mean") is not None else (feature_vector.get("twi") if feature_vector.get("twi") is not None else 5.0)
+            ndvi = feature_vector.get("ndvi_mean") if feature_vector.get("ndvi_mean") is not None else (feature_vector.get("ndvi") if feature_vector.get("ndvi") is not None else 0.65)
 
             limiting_factors = []
             score = 1.0
@@ -119,9 +119,9 @@ class ModelASuitability:
 
     def _fallback_predict(self, feature_vector: dict) -> dict:
         """Rule-based fallback: NDVI + slope + pH scoring."""
-        ndvi = feature_vector.get("ndvi", 0.60)
-        slope = feature_vector.get("slope", 3.0)
-        ph = feature_vector.get("ph", 6.5)
+        ndvi = feature_vector.get("ndvi") if feature_vector.get("ndvi") is not None else 0.60
+        slope = feature_vector.get("slope") if feature_vector.get("slope") is not None else 3.0
+        ph = feature_vector.get("ph") if feature_vector.get("ph") is not None else 6.5
 
         score = 0.5 * ndvi + 0.3 * (1.0 if slope < 10 else 0.5) + 0.2 * (1.0 if 5.5 <= ph <= 8.0 else 0.5)
         grade = "High" if score >= 0.7 else ("Moderate" if score >= 0.4 else "Low")

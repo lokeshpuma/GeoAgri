@@ -9,3 +9,4 @@
 | `v3.2.0` | 2026-10-27 | Global EcoCrop registry integration (1,710 species) and atomic boundary workflow. |
 | `v3.3.0` | 2026-10-28 | FAOSTAT yield distribution integration, UN M49 mapping, and single-shape polygon flow. |
 | `v3.4.0` | 2026-10-29 | Truthful data audit, evidence contract, CSS recovery, non-sticky equal-height layout, and clean repository structure. |
+

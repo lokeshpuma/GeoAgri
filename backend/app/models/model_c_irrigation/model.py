@@ -54,7 +54,7 @@ class ModelCIrrigation:
         """Fallback water requirement thresholding."""
         registry = get_crop_registry()
         crops = registry.list_crops()
-        rainfall = feature_vector.get("rainfall_mm", 800.0)
+        rainfall = feature_vector.get("rainfall_mm") if feature_vector.get("rainfall_mm") is not None else 800.0
 
         results = {}
         for crop in crops:

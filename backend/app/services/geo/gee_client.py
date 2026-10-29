@@ -59,12 +59,16 @@ def fetch_satellite_features(polygon_pts: list[tuple[float, float]] | None, cent
                 reducer=ee.Reducer.mean(),
                 geometry=gee_poly,
                 scale=30
-            ).getInfo()
+            ).getInfo() or {}
 
-            elev_val = float(terrain_stats.get("elevation", 320.0))
-            slope_val = float(terrain_stats.get("slope", 2.5))
-            aspect_val = float(terrain_stats.get("aspect", 180.0))
-            hill_val = float(terrain_stats.get("hillshade", 190.0))
+            elev_raw = terrain_stats.get("elevation")
+            elev_val = float(elev_raw) if elev_raw is not None else 320.0
+            slope_raw = terrain_stats.get("slope")
+            slope_val = float(slope_raw) if slope_raw is not None else 2.5
+            aspect_raw = terrain_stats.get("aspect")
+            aspect_val = float(aspect_raw) if aspect_raw is not None else 180.0
+            hill_raw = terrain_stats.get("hillshade")
+            hill_val = float(hill_raw) if hill_raw is not None else 190.0
             twi_val = float(np.log((elev_val + 10.0) / (np.tan(np.radians(max(0.1, slope_val))) + 0.01)))
 
             # S2 Surface Reflectance with SCL Cloud Masking and 45-day rolling window (PRD M3)

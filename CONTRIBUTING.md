@@ -42,3 +42,4 @@ python3 scripts/audit_css_classes.py
 Follow Conventional Commits: `type(scope): subject`.
 - Examples: `fix(ui): correct metric card padding`, `feat(api): add health sources endpoint`.
 - Avoid vague commits like "fix" or "update files".
+

@@ -371,10 +371,10 @@ class ModelBRecommendation:
         """Agronomic rule filter and bioclimatic affinity fallback."""
         registry = get_crop_registry()
         crops = registry.list_crops()
-        lat = feature_vector.get("latitude", feature_vector.get("centroid_lat", 13.32))
-        lon = feature_vector.get("longitude", feature_vector.get("centroid_lon", 75.75))
-        rainfall = feature_vector.get("rainfall_mm", 800.0)
-        temp = feature_vector.get("temp_mean_c", 27.0)
+        lat = feature_vector.get("latitude") if feature_vector.get("latitude") is not None else (feature_vector.get("centroid_lat") if feature_vector.get("centroid_lat") is not None else 13.32)
+        lon = feature_vector.get("longitude") if feature_vector.get("longitude") is not None else (feature_vector.get("centroid_lon") if feature_vector.get("centroid_lon") is not None else 75.75)
+        rainfall = feature_vector.get("rainfall_mm") if feature_vector.get("rainfall_mm") is not None else 800.0
+        temp = feature_vector.get("temp_mean_c") if feature_vector.get("temp_mean_c") is not None else 27.0
 
         results = {}
         for crop in crops:

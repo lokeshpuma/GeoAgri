@@ -108,7 +108,7 @@ async def generate_full_report(req: PredictRequest):
         # 2. Extract 78-layer feature vector
         pipeline = get_feature_pipeline()
         vector = pipeline.extract_feature_vector(profile)
-        _, imputed_features = pipeline.impute_for_model(vector)
+        clean_vector, imputed_features = pipeline.impute_for_model(vector)
 
         # 3. Land Intelligence Layer (Records, Classification, Detection, Irrigability)
         lon = profile["field_summary"]["centroid_lon"]
@@ -150,9 +150,13 @@ async def generate_full_report(req: PredictRequest):
         profile["field_summary"]["plot_name"] = req.plot_name
         profile["field_summary"]["area_source"] = req.area_source or ("manual" if req.area_ha is not None and req.area_ha > 0 else "calculated")
 
-        w = profile["weather"]
-        s = profile["soil"]
-        sat = profile["satellite"]
+        w_raw = profile.get("weather")
+        s_raw = profile.get("soil")
+        sat_raw = profile.get("satellite")
+
+        w = w_raw or {}
+        s = s_raw or {}
+        sat = sat_raw or {}
 
         # 4. PREDICTION GATING (PRD v2.1 §5A.7, §7.2, §10, M6):
         # Non-irrigable plots return ZERO crops, red verdict, and BYPASS Models A-E execution completely
@@ -172,12 +176,12 @@ async def generate_full_report(req: PredictRequest):
                     vv=sat.get("vv"),
                     vh=sat.get("vh"),
                 )
-                if sat
+                if sat_raw
                 else None
             )
             return FullReportResponse(
                 analysis_status=analysis_status,
-                sources=[SourceStatus(**s) for s in sources],
+                sources=[SourceStatus(**src) for src in sources],
                 data_mode=data_mode,
                 field_summary=FieldSummary(**profile["field_summary"]),
                 land_suitability=LandSuitability(
@@ -251,12 +255,12 @@ async def generate_full_report(req: PredictRequest):
                     vv=sat.get("vv"),
                     vh=sat.get("vh"),
                 )
-                if sat
+                if sat_raw
                 else None
             )
             return FullReportResponse(
                 analysis_status=analysis_status,
-                sources=[SourceStatus(**s) for s in sources],
+                sources=[SourceStatus(**src) for src in sources],
                 data_mode=data_mode,
                 field_summary=FieldSummary(**profile["field_summary"]),
                 land_suitability=LandSuitability(
@@ -332,7 +336,7 @@ async def generate_full_report(req: PredictRequest):
 
         # 7. Parallel Models A-E execution (For Irrigable, Conditionally Irrigable, or Shadow-mode plots)
         model_reg = get_model_registry()
-        model_outputs = await model_reg.run_models_parallel(vector, season=req.season)
+        model_outputs = await model_reg.run_models_parallel(clean_vector, season=req.season)
 
         # 8. Decision Fusion & Crop Ranking
         recs = run_decision_fusion(
@@ -568,7 +572,7 @@ async def generate_full_report(req: PredictRequest):
                 vv=sat.get("vv"),
                 vh=sat.get("vh"),
             )
-            if sat
+            if sat_raw
             else None
         )
 
@@ -619,7 +623,7 @@ async def generate_full_report(req: PredictRequest):
 
         return FullReportResponse(
             analysis_status=analysis_status,
-            sources=[SourceStatus(**s) for s in sources],
+            sources=[SourceStatus(**src) for src in sources],
             data_mode=data_mode,
             field_summary=FieldSummary(**profile["field_summary"]),
             land_suitability=LandSuitability(

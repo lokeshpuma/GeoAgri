@@ -13,7 +13,7 @@ logger = logging.getLogger("geoagri.api")
 def handle_internal_error(exc: Exception, operation: str = "operation") -> HTTPException:
     request_id = str(uuid.uuid4())[:8]
     logger.exception("Internal error during %s [ref: %s]: %s", operation, request_id, exc)
-    return HTTPException(
+    raise HTTPException(
         status_code=500,
         detail={
             "code": "INTERNAL",

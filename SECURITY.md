@@ -16,3 +16,4 @@ Instead, please report it privately:
 
 - Never commit private keys, service account JSON files, or API credentials to git.
 - Secrets must be configured via environment variables or secret management in deployment targets (Render / Vercel).
+

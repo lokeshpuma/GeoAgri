@@ -197,3 +197,54 @@ def test_data_mode_demo_synthetic_when_flag_enabled(monkeypatch):
         assert resp.status_code == 200
         assert resp.json().get("data_mode") == "demo_synthetic"
 
+
+def test_partial_evidence_when_gee_and_soil_fail_returns_200(monkeypatch):
+    """
+    When both GEE and SoilGrids fail, but weather/climatology succeeds:
+    HTTP 200 is returned with analysis_status='partial', soil and satellite fields null,
+    and no AttributeError or 500 error occurs.
+    """
+    from app.core.config import get_settings
+    monkeypatch.setenv("GEE_MOCK_FALLBACK", "false")
+    monkeypatch.setenv("ALLOW_SYNTHETIC_DATA", "false")
+    get_settings.cache_clear()
+
+    fake_climatology = MonthlyClimatologyResult(
+        available=True,
+        monthly_temp_c=[20.0] * 12,
+        monthly_rain_mm=[80.0] * 12,
+        source="TEST_FIXTURE",
+        status_message="ok"
+    )
+    fake_weather = {
+        "rainfall_mm": 500.0,
+        "temp_max_c": 32.0,
+        "temp_min_c": 18.0,
+        "temp_mean_c": 24.5,
+        "humidity_pct": 65.0,
+        "solar_radiation_mj_m2": 18.0,
+    }
+
+    with patch("app.services.features.profile.fetch_satellite_features",
+               side_effect=RuntimeError("GEE credentials missing")), \
+         patch("app.services.features.profile.fetch_weather_data",
+               new_callable=AsyncMock, return_value=fake_weather), \
+         patch("app.services.features.profile.fetch_soil_data",
+               side_effect=RuntimeError("Soil data unavailable")), \
+         patch("app.api.v1.predict.fetch_monthly_climatology",
+               new_callable=AsyncMock, return_value=fake_climatology):
+
+        resp = client.post("/api/v1/predict/full-report", json={
+            "polygon": SAMPLE_POLYGON,
+            "season": "kharif"
+        })
+
+        assert resp.status_code == 200, f"Expected 200, got {resp.status_code}: {resp.text}"
+        data = resp.json()
+        assert data.get("analysis_status") == "partial"
+        assert data.get("satellite_features") is None
+        assert data.get("environment") is not None
+        assert data["environment"]["ph"] is None
+        assert data["environment"]["rainfall_mm"] == 500.0
+
+
