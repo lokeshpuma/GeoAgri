@@ -92,3 +92,10 @@ Thumbs.db
 *.swo
 *~
 *.log
+
+# Generated data (rebuild with backend/ml/training/*)
+backend/ml/data/processed/*.parquet
+backend/ml/data/processed/registry_calibrated.json
+backend/.cache/
+frontend/test-results/
+frontend/playwright-report/

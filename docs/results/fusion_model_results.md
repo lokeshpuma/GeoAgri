@@ -35,4 +35,4 @@ $$\text{FinalScore} = \text{clip}\left(\frac{\text{FusionScore} + 0.30}{1.05}, 0
 | **Rice (Paddy)** | 0.90 | 0.75 | Extreme (0.90) | 4.2 t/ha | High (0.60) | **0.64 / 1.0** | **Rank 3: Unfavorable in Dry Zone** |
 
 ## 4. Visual Artifact
-![Decision Fusion Trade-off](file:///Users/lokesh/Documents/PRO/playground/documentation/result/assets/fusion_model_radar_tradeoff.png)
+![Decision Fusion Trade-off](assets/fusion_model_radar_tradeoff.png)

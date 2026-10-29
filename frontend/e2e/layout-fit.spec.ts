@@ -8,7 +8,7 @@ const VIEWPORTS = [
   { width: 390, height: 844 },
 ];
 
-const SCREENS_DIR = path.resolve(process.cwd(), '../documentation/screens');
+const SCREENS_DIR = path.resolve(process.cwd(), '../docs/screenshots');
 
 test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () => {
   for (const vp of VIEWPORTS) {

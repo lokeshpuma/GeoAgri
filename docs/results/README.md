@@ -61,7 +61,7 @@ flowchart TD
   * Highly robust against overfitting compared to standalone decision trees and handles multi-class classification (22 classes) with superior confidence calibration.
 * **Accuracy Achieved**: **99.55%** on 80/20 test split.
 
-![Crop Recommendation Performance](file:///Users/lokesh/Documents/PRO/playground/documentation/result/assets/crop_recommendation_performance.png)
+![Crop Recommendation Performance](assets/crop_recommendation_performance.png)
 
 #### Algorithm Benchmark on `Crop_recommendation.csv`:
 | Algorithm | Test Accuracy | Macro Precision | Macro Recall | Macro F1-Score | Inference Latency |
@@ -89,7 +89,7 @@ flowchart TD
   * **$P_{10}$ Pinball Loss**: **0.412**
   * **$P_{90}$ Pinball Loss**: **0.385**
 
-![Yield Quantile Performance](file:///Users/lokesh/Documents/PRO/playground/documentation/result/assets/yield_quantile_performance.png)
+![Yield Quantile Performance](assets/yield_quantile_performance.png)
 
 ---
 
@@ -105,7 +105,7 @@ $$\text{FinalScore} = \text{clip}\left(\frac{\text{FusionScore} + 0.30}{1.05}, 0
 * Default baseline weights: $w_1 = 0.20$, $w_2 = 0.25$, $w_3 = 0.15$, $w_4 = 0.25$, $w_5 = 0.15$.
 * Under **Rainfed Mode**, $w_3$ (Irrigation penalty) automatically scales to **0.30** and $w_5$ (Risk) scales up, deprioritizing thirsty crops and elevating drought-hardy millets and pulses.
 
-![Fusion Model Tradeoff Radar](file:///Users/lokesh/Documents/PRO/playground/documentation/result/assets/fusion_model_radar_tradeoff.png)
+![Fusion Model Tradeoff Radar](assets/fusion_model_radar_tradeoff.png)
 
 ---
 
@@ -116,7 +116,7 @@ $$\text{FinalScore} = \text{clip}\left(\frac{\text{FusionScore} + 0.30}{1.05}, 0
   * If live Google Earth Engine fails $\rightarrow$ synthetic spatial generator kicks in seamlessly.
   * If ML models are disabled $\rightarrow$ agronomic rule filter executes with 100% availability.
 
-![System Latency and Fallbacks](file:///Users/lokesh/Documents/PRO/playground/documentation/result/assets/system_latency_and_fallbacks.png)
+![System Latency and Fallbacks](assets/system_latency_and_fallbacks.png)
 
 ---
 

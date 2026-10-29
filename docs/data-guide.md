@@ -1,6 +1,6 @@
 # GeoAgri — Data Download & Setup Guide
 
-Put this file in the repo root next to `PRD.md`. The script goes in `backend/ml/data/scripts/download_datasets.py`.
+This guide lives in `docs/data-guide.md`. PRD specifications are in `docs/prd/`. The script goes in `backend/ml/data/scripts/download_datasets.py`.
 All paths below are relative to `backend/ml/data/raw/external/`. Karnataka bbox (with margin): **lon 73.9–78.7, lat 11.4–18.6**.
 
 > ⚠ = I could not confirm this from a page I was able to load; check it before relying on it.

@@ -304,7 +304,8 @@ M49_MAP = {
 
 def load_and_prep_yield_data():
     if not os.path.isfile(FAOSTAT_PARQUET):
-        raise FileNotFoundError(f"{FAOSTAT_PARQUET} not found. Run load_faostat.py first.")
+        print(f"Error: {FAOSTAT_PARQUET} not found. Run `python backend/ml/training/load_faostat.py` first.", file=sys.stderr)
+        sys.exit(1)
 
     print(f"Loading {FAOSTAT_PARQUET}...")
     df = pd.read_parquet(FAOSTAT_PARQUET)
@@ -407,6 +408,9 @@ def evaluate_model_b_recommender():
     4. Compute trivial baseline (globally most-grown crops) on the same countries.
     """
     print("\n--- Evaluating Model B Recommender & Baseline against FAOSTAT Harvested Area ---")
+    if not os.path.isfile(FAOSTAT_PARQUET):
+        print(f"Error: {FAOSTAT_PARQUET} not found. Run `python backend/ml/training/load_faostat.py` first.", file=sys.stderr)
+        sys.exit(1)
     df = pd.read_parquet(FAOSTAT_PARQUET)
     area_df = df[df["Element"] == "Area harvested"].copy()
     area_df["crop_id"] = area_df["Item"].map(FAO_ITEM_MAP)

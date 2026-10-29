@@ -12,7 +12,7 @@ Features: resumable downloads (HTTP Range), skips finished files, writes SOURCE.
 Only stdlib is required. Files land in backend/ml/data/raw/external/<category>/<source>/.
 
 NOTE: URLs marked "verify" come from prior knowledge, not a page that was loadable when this
-was written. If a URL 404s, open the source's page (see DATA_GUIDE.md) and update it here.
+was written. If a URL 404s, open the source's page (see docs/data-guide.md) and update it here.
 """
 from __future__ import annotations
 
@@ -206,9 +206,9 @@ def download_ms_buildings(country: str = "India") -> None:
 
 
 MANUAL = """
-Manual / credentialed sources (see DATA_GUIDE.md for steps):
+Manual / credentialed sources (see docs/data-guide.md for steps):
   GEE exports  : Dynamic World, JRC GSW, SRTM, Sentinel-2 composites   (Earth Engine project)
-  SoilGrids    : gdal commands in DATA_GUIDE.md section 5            (files.isric.org)
+  SoilGrids    : gdal commands in docs/data-guide.md section 5            (files.isric.org)
   GHSL         : GHS-BUILT-S R2023A tiles                              (human-settlement.emergency.copernicus.eu)
   OSM          : Geofabrik India extract -> Karnataka clip
   WDPA         : protectedplanet.net download (non-commercial terms)

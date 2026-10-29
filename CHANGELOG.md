@@ -976,3 +976,27 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
   - `npm --prefix frontend test`: 7 test files, 29 passed.
   - `npm --prefix frontend run build`: 0 errors in 2.25s.
 - Git tag: `phase-W5` created.
+
+## [PRD v3.4 - Phase W6 Repository Clean-Up & Structural Hygiene] - 2026-10-29
+### Added & Verified (§8.1, §8.2, §8.4, AC-12)
+- **Target Repository Structure & Consolidations (AC-12)**:
+  - Created and executed `scripts/cleanup_repo.sh` using `git mv` and `git rm`.
+  - Archived planning specifications into `docs/prd/` (`PRD_v1_baseline.md`, `PRD_v3.2_Confirm_Fix_and_Global_Crops.md`, `PRD_v3.3_Audit_Fixes_Layout_and_Recommender.md`, `PRD_v3.4_Truthful_Data_UI_Recovery_and_Repo_Cleanup.md`).
+  - Unified all documentation under `docs/` (`docs/data-guide.md`, `docs/running-locally.md`, `docs/architecture.md`, `docs/api_reference.md`, `docs/model-cards/`, `docs/results/`, `docs/screenshots/`). Removed obsolete `documentation/` folder.
+  - Purged dead code (`api/index.py`), stray AI prompt templates (`geoagri_data_expansion_training_prompt.md`), and untracked binary caches (`faostat_yields.parquet`, `registry_calibrated.json`).
+  - Replaced local machine path image URLs in `docs/results/` with relative markdown links.
+  - Added ignore patterns for generated parquets, cache files, and test reports to `.gitignore`.
+- **Reference Updates & Code Alignment (§8.2)**:
+  - Updated `backend/ml/training/generate_result_charts.py` lines 4 & 22 to `docs/results/assets/`.
+  - Updated `frontend/e2e/layout-fit.spec.ts` line 11 to `../docs/screenshots`.
+  - Updated `backend/ml/data/scripts/download_datasets.py` lines 15, 209, 211 to `docs/data-guide.md`.
+  - Updated `docs/data-guide.md` headers to point to `docs/prd/`.
+  - Handled missing parquet gracefully in `retrain_models.py` and `load_faostat.py` with guidance to run `python backend/ml/training/load_faostat.py`.
+- **Repository Policies & Metadata (§8.4)**:
+  - Added `LICENSE` (MIT).
+  - Curated screenshots in `docs/screenshots/` to exactly 4 canonical images (boundary, analysis, crops at 1440x900, boundary at 390x844), with all images under 250 KB.
+  - Added `docs/releases.md` mapping all kept releases from `v1.0.0` through `v3.4.0`.
+  - Cleaned internal temporary tags (`phase-*`, `pre-*`, `step-*`, `baseline-*`), preserving clean semver release tags.
+  - Added `CONTRIBUTING.md` and `SECURITY.md`.
+  - Verified repository root contains exactly 12 visible entries (`ls -1`): `CHANGELOG.md`, `CONTRIBUTING.md`, `LICENSE`, `README.md`, `SECURITY.md`, `backend`, `docker-compose.yml`, `docs`, `frontend`, `render.yaml`, `scripts`, `vercel.json`.
+- Git tag: `phase-W6` created.

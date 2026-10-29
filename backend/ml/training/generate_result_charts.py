@@ -1,7 +1,7 @@
 """
 Generates publication-quality performance graphs and evaluation artifacts
 for the GeoAgri AI Panel Presentation.
-Outputs to documentation/result/assets/
+Outputs to docs/results/assets/
 """
 
 import os
@@ -19,7 +19,7 @@ plt.rcParams['font.sans-serif'] = 'Helvetica, Arial, DejaVu Sans'
 plt.rcParams['font.size'] = 11
 
 def generate_result_assets():
-    out_dir = "documentation/result/assets"
+    out_dir = "docs/results/assets"
     os.makedirs(out_dir, exist_ok=True)
     raw_dir = "backend/ml/data/raw"
 
