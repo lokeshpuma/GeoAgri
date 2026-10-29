@@ -786,3 +786,44 @@ All notable changes to the GeoAgri project will be documented in this file in ac
   - `npx playwright test`: **10 passed across 3 spec files in 28.1s in real Chromium browser (PASSED)**.
   - `PYTHONPATH=. venv/bin/python -m pytest -q`: **148 passed, 3009 warnings in 45.07s (PASSED)**.
 - Git tag: `v3.3.0` created.
+
+## [PRD v3.4 - Phase W0 Baseline Truth Verification] - 2026-10-29
+### Baseline Execution & Truth Audit (§1, §10 W0)
+Executed from clean checkout with `backend/.cache` removed and no `backend/.env`:
+- **`npm ci && npm run build`**:
+  - `435 packages audited in 5s`
+  - `vite v6.4.1 building for production...`
+  - `✓ 74 modules transformed.`
+  - `dist/index.html 1.09 kB │ gzip: 0.51 kB`
+  - `dist/assets/index-BLUSFRBu.css 76.68 kB │ gzip: 13.91 kB`
+  - `dist/assets/index-B7y9h-2M.js 397.66 kB │ gzip: 119.53 kB`
+  - `✓ built in 2.41s`
+- **`npm test`**:
+  - `✓ src/context/WorkflowContext.test.tsx (4 tests) 37ms`
+  - `✓ src/features/boundary/extractBoundary.test.ts (4 tests) 11ms`
+  - `✓ src/features/boundary/useDrawingWorkflow.test.ts (6 tests) 19ms`
+  - `✓ src/context/stale.repro.test.tsx (2 tests) 20ms`
+  - `✓ src/components/cards/CropCard.test.tsx (4 tests) 39ms`
+  - `✓ src/pages/CropsRecommenderPage.test.tsx (3 tests) 39ms`
+  - `Test Files  6 passed (6)`
+  - `Tests  23 passed (23)`
+  - `Duration  1.16s`
+- **`pytest -q` (no .cache, no .env)**:
+  - Output: `...........................................................................................................................................F`
+  - Result: **147 passed, 1 failed, 3008 warnings in 33.35s**
+  - Failure: `FAILED tests/test_phase7_api.py::test_predict_full_report_e2e - assert 0 == 10`
+  - Traceback root cause: `pytest_socket.SocketBlockedError: A test tried to use socket.getaddrinfo()` during `fetch_monthly_climatology` when NASA POWER cache was empty.
+- **`python3 scripts/audit_css_classes.py`**:
+  - Script created per PRD v3.4 §7.2.
+  - Output: `669 classes used, 154 without a rule`
+  - Exit code: 1 (FAILED as expected).
+- **`npx playwright test`**:
+  - Result: **1 failed, 9 passed in 26.8s**
+  - Failure: `crop-cards.spec.ts:16:7 › Crop Cards › displays ranked crop cards with suitability scores and metrics`
+  - Root cause: Real local preview dev server hit backend without cache, resulting in 0 recommended crops returned.
+- **Visual Baseline**:
+  - Observed GEE error message displayed beside "Location Analysis Complete" banner.
+  - Observed `0.000` NDVI rendered as "Barren or fallow surface".
+  - Observed missing CSS on `.btn-primary` and several utility elements.
+  - Observed ~450px blank vertical space under map on `#analysis` page.
+- Git tag: `pre-v3.4` updated.
