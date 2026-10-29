@@ -1027,3 +1027,15 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
        10 passed (31.0s)
        ```
 - Git tag: `phase-W7` created.
+
+## [PRD v3.4 - Phase W8 Site-Aware Model D Evaluation] - 2026-10-29
+### Added & Verified (§3.2b, AC-3)
+- **Model D Gate Decision: Option (a) Accepted, Option (b) Rejected**:
+  - Evaluated site-aware Model D feature set under Leave-One-Continent-Out (LOCO) cross-validation across all 6 inhabited continents.
+  - Adding country cropland centroid bioclimatic covariates (WorldClim BIO1, BIO12) under LOCO held-out validation did not beat the baseline quantile yield model pinball loss by ≥ 5% (mean P50 pinball loss: 3.054 t/ha).
+  - In strict compliance with §3.2b gate criteria, Option (a) ("Relabel now") is retained and active:
+    - User-facing label: "Regional yield benchmark (FAOSTAT, crop-level)"
+    - Disclaimer: "based on national statistics for this crop; not adjusted to your field"
+    - P10–P90 empirical coverage: 78.04% (within 75%–85% target window).
+  - Documented decision and metrics in `backend/ml/models/model_card.json`.
+- Git tag: `phase-W8` created.
