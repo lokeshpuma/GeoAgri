@@ -24,6 +24,34 @@ def test_health_endpoint():
     assert "layers" in data
     assert "allow_synthetic_data" in data
 
+def test_health_sources_endpoint():
+    """PRD v3.4 §5.3, AC-11: GET /api/v1/health/sources reports source readiness without secrets."""
+    response = client.get("/api/v1/health/sources")
+    assert response.status_code == 200
+    data = response.json()
+    assert "status" in data
+    assert "sources" in data
+    sources = data["sources"]
+    assert "earth_engine" in sources
+    assert "nasa_power" in sources
+    assert "soilgrids" in sources
+    assert "rules" in sources
+    assert "registry" in sources
+    assert "models" in sources
+
+    # Ensure no credentials or keys are exposed
+    raw_text = str(data).lower()
+    for secret_keyword in ["private_key", "client_email", "bearer", "password", "service_account_token"]:
+        assert secret_keyword not in raw_text
+
+def test_no_personal_user_paths():
+    """PRD v3.4 §5.2, AC-11: No personal user paths exist in backend, scripts, or github configs."""
+    import subprocess
+    pat = "/Us" + "ers/" + "\\|C:\\\\" + "Users"
+    cmd = f'grep -rn --exclude-dir="venv" --exclude-dir=".pytest_cache" --exclude-dir="__pycache__" --exclude="test_phase7_api.py" "{pat}" backend scripts .github'
+    res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    assert res.returncode == 1, f"Found hardcoded user paths in backend:\n{res.stdout}"
+
 def test_crops_list_endpoint():
     response = client.get("/api/v1/crops")
     assert response.status_code == 200
@@ -105,7 +133,17 @@ def test_predict_full_report_e2e():
             "organic_carbon": 12.0
         }
     }
-    with patch("app.api.v1.predict.build_environmental_profile", new_callable=AsyncMock, return_value=agri_profile):
+    from app.services.weather.climatology import MonthlyClimatologyResult
+    fixture_climatology = MonthlyClimatologyResult(
+        available=True,
+        monthly_temp_c=[24.0, 26.0, 28.0, 30.0, 29.0, 26.0, 25.0, 25.0, 25.5, 26.0, 25.0, 24.0],
+        monthly_rain_mm=[5.0, 8.0, 15.0, 45.0, 85.0, 150.0, 220.0, 180.0, 140.0, 110.0, 35.0, 10.0],
+        status_message="ok",
+        source="TEST_FIXTURE"
+    )
+
+    with patch("app.api.v1.predict.build_environmental_profile", new_callable=AsyncMock, return_value=agri_profile), \
+         patch("app.api.v1.predict.fetch_monthly_climatology", return_value=fixture_climatology):
         response = client.post("/api/v1/predict/full-report", json=payload)
     assert response.status_code == 200
     data = response.json()

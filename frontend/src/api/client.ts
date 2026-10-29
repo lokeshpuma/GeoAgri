@@ -358,3 +358,25 @@ export async function uploadLandRecord(file: File): Promise<{ doc_token: string;
   }
   return await response.json();
 }
+
+export interface HealthSourcesResponse {
+  status: string;
+  timestamp: string;
+  sources: {
+    earth_engine: { status: string; credentials_present: boolean; initialized: boolean; message: string };
+    nasa_power: { status: string; latency_ms?: number };
+    soilgrids: { status: string; mode: string; local_cache_present: boolean };
+    rules: { status: string; files: Record<string, boolean> };
+    registry: { status: string; total_crops: number; calibrated: boolean };
+    models: { status: string; models: Record<string, boolean> };
+  };
+}
+
+export async function fetchHealthSources(): Promise<HealthSourcesResponse> {
+  const response = await fetch(`${API_BASE_URL}/health/sources`);
+  if (!response.ok) {
+    throw new Error(`Health sources error: ${response.statusText}`);
+  }
+  return await response.json();
+}
+

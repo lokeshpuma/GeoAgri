@@ -61,8 +61,8 @@ def test_invalid_polygon_returns_400():
     assert "out of bounds" in resp2.json()["detail"]
 
 
-def test_forced_evidence_exception_returns_200_unverified():
-    """M26 Gate: Upstream evidence exception must return HTTP 200 with UNVERIFIED and warnings, not 500."""
+def test_forced_evidence_exception_returns_503_unavailable():
+    """PRD v3.4 §3.3 (H-5, AC-4): Upstream evidence total failure must return HTTP 503 EVIDENCE_UNAVAILABLE, not 200 with fabricated zeros."""
     with patch(
         "app.api.v1.predict.build_environmental_profile",
         side_effect=RuntimeError("Sentinel-2 API network timeout")
@@ -78,10 +78,7 @@ def test_forced_evidence_exception_returns_200_unverified():
             "season": "kharif"
         }
         response = client.post("/api/v1/predict/full-report", json=payload)
-        assert response.status_code == 200
+        assert response.status_code == 503
         data = response.json()
-        assert data["irrigability"]["verdict"] == "UNVERIFIED"
-        assert data["land_class"]["dominant"] == "UNKNOWN"
-        assert data["recommended_crops"] == []
-        assert data["model_status"]["model_a"] == "skipped_not_irrigable"
-        assert "evidence" in data["irrigability"]["reasons"][0]["rule_id"].lower()
+        assert data["detail"]["code"] == "EVIDENCE_UNAVAILABLE"
+        assert "setup_hint" in data["detail"]

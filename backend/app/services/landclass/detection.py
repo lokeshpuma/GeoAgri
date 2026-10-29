@@ -144,8 +144,8 @@ def load_detection_rules() -> Dict[str, Any]:
         for candidate in [
             rules_path,
             Path("backend") / rules_path,
-            Path(__file__).resolve().parent.parent / "rules" / rules_path.name,
-            Path("/Users/lokesh/Desktop/GeoAgri/backend/app/rules") / rules_path.name,
+            Path(__file__).resolve().parents[2] / "rules" / rules_path.name,
+            Path(__file__).resolve().parents[3] / "backend" / "app" / "rules" / rules_path.name,
         ]:
             if candidate.exists():
                 rules_path = candidate
@@ -209,10 +209,13 @@ def worldcover_tile_url(lat: float, lon: float) -> str:
     la, lo = int(math.floor(lat / 3.0)) * 3, int(math.floor(lon / 3.0)) * 3
     tile = f"{'N' if la >= 0 else 'S'}{abs(la):02d}{'E' if lo >= 0 else 'W'}{abs(lo):03d}"
     
+    geoagri_data_root = os.environ.get("GEOAGRI_DATA_ROOT")
+    base_data_dir = Path(geoagri_data_root) if geoagri_data_root else Path(__file__).resolve().parents[3] / "ml" / "data"
+
     # Check local file first (D8: Local-first)
     local_candidates = [
         Path(f"backend/ml/data/raw/external/geo/worldcover_2021/ESA_WorldCover_10m_2021_v200_{tile}_Map.tif"),
-        Path(f"/Users/lokesh/Desktop/GeoAgri/backend/ml/data/raw/external/geo/worldcover_2021/ESA_WorldCover_10m_2021_v200_{tile}_Map.tif"),
+        base_data_dir / "raw" / "external" / "geo" / "worldcover_2021" / f"ESA_WorldCover_10m_2021_v200_{tile}_Map.tif",
     ]
     for cand in local_candidates:
         if cand.exists():
@@ -228,9 +231,12 @@ def dem_tile_url(lat: float, lon: float) -> str:
         f"Copernicus_DSM_COG_10_{'N' if la >= 0 else 'S'}{abs(la):02d}_00_"
         f"{'E' if lo >= 0 else 'W'}{abs(lo):03d}_00_DEM"
     )
+    geoagri_data_root = os.environ.get("GEOAGRI_DATA_ROOT")
+    base_data_dir = Path(geoagri_data_root) if geoagri_data_root else Path(__file__).resolve().parents[3] / "ml" / "data"
+
     local_candidates = [
         Path(f"backend/ml/data/raw/external/geo/slope/{name}.tif"),
-        Path(f"/Users/lokesh/Desktop/GeoAgri/backend/ml/data/raw/external/geo/slope/{name}.tif"),
+        base_data_dir / "raw" / "external" / "geo" / "slope" / f"{name}.tif",
     ]
     for cand in local_candidates:
         if cand.exists():

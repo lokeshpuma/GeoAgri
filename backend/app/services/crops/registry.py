@@ -322,7 +322,8 @@ def get_global_registry() -> dict[str, dict[str, Any]]:
     global _global_registry_dict
     if _global_registry_dict is None:
         from pathlib import Path
-        from app.core.config import settings
+        from app.core.config import get_settings
+        settings = get_settings()
         
         target_path = None
         if getattr(settings, "USE_CALIBRATED_ENVELOPES", True):

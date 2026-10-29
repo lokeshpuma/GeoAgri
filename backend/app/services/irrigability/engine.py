@@ -28,7 +28,7 @@ class IrrigabilityEngine:
                     rules_path,
                     Path("backend") / rules_path,
                     Path(__file__).resolve().parents[2] / "rules" / rules_path.name,
-                    Path("/Users/lokesh/Desktop/GeoAgri/backend/app/rules") / rules_path.name,
+                    Path(__file__).resolve().parents[3] / "backend" / "app" / "rules" / rules_path.name,
                 ]:
                     if candidate.exists():
                         rules_path = candidate

@@ -948,15 +948,9 @@
       "p90": 3.5
     },
     "data_confidence": "high",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
-        "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-      }
-    ]
+    "intercrop_options": [],
+    "intercrop_data_available": false,
+    "sole_crop_rationale": "Dedicated Prunus dulcis nut orchard with specialized pollination and disease management."
   },
   {
     "crop_id": "olive",
@@ -976,15 +970,9 @@
       "p90": 11.0
     },
     "data_confidence": "high",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
-        "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-      }
-    ]
+    "intercrop_options": [],
+    "intercrop_data_available": false,
+    "sole_crop_rationale": "Perennial Olea europaea grove crop with extensive shallow root spread."
   },
   {
     "crop_id": "pistachio",
@@ -1004,15 +992,9 @@
       "p90": 3.2
     },
     "data_confidence": "high",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
-        "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-      }
-    ]
+    "intercrop_options": [],
+    "intercrop_data_available": false,
+    "sole_crop_rationale": "Specialized arid Pistacia vera nut tree orchard."
   },
   {
     "crop_id": "walnut",
@@ -1032,15 +1014,9 @@
       "p90": 4.5
     },
     "data_confidence": "medium",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
-        "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-      }
-    ]
+    "intercrop_options": [],
+    "intercrop_data_available": false,
+    "sole_crop_rationale": "Juglone allelopathy severely stunts adjacent annual crops; strictly solitary or dedicated Juglans regia orchard."
   },
   {
     "crop_id": "sugarcane",
@@ -1123,15 +1099,9 @@
       "p90": 2.5
     },
     "data_confidence": "medium",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
-        "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-      }
-    ]
+    "intercrop_options": [],
+    "intercrop_data_available": false,
+    "sole_crop_rationale": "High-grade commercial Solanaceae; strictly sole-cropped to prevent Tobacco Mosaic Virus (TMV) and leaf quality loss."
   },
   {
     "crop_id": "tea",
@@ -1151,15 +1121,9 @@
       "p90": 3.0
     },
     "data_confidence": "medium",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
-        "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-      }
-    ]
+    "intercrop_options": [],
+    "intercrop_data_available": false,
+    "sole_crop_rationale": "Dense perennial Camellia sinensis plantation with shade tree canopy; sole cropped under high rainfall."
   },
   {
     "crop_id": "coffee",
@@ -1277,15 +1241,9 @@
       "p90": 3.0
     },
     "data_confidence": "high",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
-        "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-      }
-    ]
+    "intercrop_options": [],
+    "intercrop_data_available": false,
+    "sole_crop_rationale": "Forage legume broadcast as pure dense sward or green manure pasture."
   },
   {
     "crop_id": "cassava",
@@ -2075,15 +2033,9 @@
       "p90": 0.9
     },
     "data_confidence": "medium",
-    "intercrop_options": [
-      {
-        "companion_crop_id": "cowpea",
-        "companion_crop_name": "Cowpea (Lobia)",
-        "yield_boost_pct": 0.15,
-        "companion_share_factor": 0.25,
-        "rationale": "Companion intercropping with Cowpea provides biological nitrogen fixation and canopy cover."
-      }
-    ]
+    "intercrop_options": [],
+    "intercrop_data_available": false,
+    "sole_crop_rationale": "Arid sensitive spice; prone to blight and Fusarium wilt, requires clean sole-crop aeration."
   },
   {
     "crop_id": "cardamom",

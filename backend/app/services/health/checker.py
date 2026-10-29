@@ -191,3 +191,99 @@ async def get_full_health_report() -> dict[str, Any]:
         },
         "layers": layers,
     }
+
+
+async def get_sources_health_report() -> dict[str, Any]:
+    """PRD v3.4 §5.3: Check readiness of all external and local sources with zero leaked secrets."""
+    settings = get_settings()
+
+    # 1. Earth Engine
+    gee_res = await check_gee_status()
+    has_sa = bool(settings.GEE_SERVICE_ACCOUNT)
+    has_key = bool(settings.GEE_PRIVATE_KEY_PATH and os.path.exists(settings.GEE_PRIVATE_KEY_PATH))
+    gee_source = {
+        "status": "ok" if gee_res.get("status") == "connected" else ("degraded" if gee_res.get("status") == "mock_fallback" else "unconfigured"),
+        "credentials_present": bool(has_sa and has_key),
+        "initialized": gee_res.get("status") == "connected",
+        "message": gee_res.get("message", ""),
+    }
+
+    # 2. NASA POWER
+    nasa_res = await check_nasa_power_status()
+    nasa_source = {
+        "status": "ok" if nasa_res.get("status") == "reachable" else "unreachable",
+        "latency_ms": nasa_res.get("latency_ms"),
+    }
+
+    # 3. SoilGrids
+    soil_dir = Path(settings.SOILGRIDS_LOCAL_DIR) if settings.SOILGRIDS_LOCAL_DIR else None
+    soil_local = bool(soil_dir and soil_dir.exists())
+    soilgrids_source = {
+        "status": "ok",
+        "mode": "local_rasters" if soil_local else "gee_openlandmap",
+        "local_cache_present": soil_local,
+    }
+
+    # 4. Rule Files
+    backend_root = Path(__file__).resolve().parents[3]
+    rule_paths = {
+        "land_class_rules": backend_root / "backend" / "app" / "rules" / "land_class_rules.yaml",
+        "irrigability_rules": backend_root / "backend" / "app" / "rules" / "irrigability_rules.yaml",
+        "yield_ceilings": backend_root / "backend" / "app" / "rules" / "yield_ceilings.yaml",
+    }
+    rules_loaded = {}
+    all_rules_ok = True
+    for name, path in rule_paths.items():
+        exists = path.exists() or (Path("backend/app/rules") / path.name).exists()
+        rules_loaded[name] = exists
+        if not exists:
+            all_rules_ok = False
+    rules_source = {
+        "status": "ok" if all_rules_ok else "missing",
+        "files": rules_loaded,
+    }
+
+    # 5. Crop Registry
+    try:
+        from app.services.crops.registry import get_global_registry
+        reg = get_global_registry()
+        reg_count = len(reg)
+        reg_ok = reg_count > 0
+    except Exception:
+        reg_count = 0
+        reg_ok = False
+    registry_source = {
+        "status": "ok" if reg_ok else "missing",
+        "total_crops": reg_count,
+        "calibrated": (backend_root / "backend" / "ml" / "data" / "processed" / "registry_calibrated.json").exists(),
+    }
+
+    # 6. Model Files
+    model_paths = {
+        "crop_recommendation": backend_root / "backend" / "ml" / "models" / "crop_recommendation_model.joblib",
+        "crop_yield_quantile": backend_root / "backend" / "ml" / "models" / "crop_yield_quantile_models.joblib",
+        "legacy_crosswalk": backend_root / "backend" / "ml" / "data" / "processed" / "legacy_crosswalk.json",
+        "model_card": backend_root / "backend" / "ml" / "models" / "model_card.json",
+    }
+    models_status = {}
+    for mname, mpath in model_paths.items():
+        cand1 = mpath.exists()
+        cand2 = Path(str(mpath).replace(str(backend_root) + "/", "")).exists()
+        models_status[mname] = cand1 or cand2
+    models_source = {
+        "status": "ok" if all(models_status.values()) else "partial",
+        "models": models_status,
+    }
+
+    return {
+        "status": "ok" if (gee_source["status"] == "ok" and rules_source["status"] == "ok" and registry_source["status"] == "ok") else "degraded",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "sources": {
+            "earth_engine": gee_source,
+            "nasa_power": nasa_source,
+            "soilgrids": soilgrids_source,
+            "rules": rules_source,
+            "registry": registry_source,
+            "models": models_source,
+        }
+    }

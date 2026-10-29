@@ -91,7 +91,8 @@ def load_registry(path: str | None = None) -> list[dict[str, Any]]:
     if path:
         p = Path(path)
     else:
-        from app.core.config import settings
+        from app.core.config import get_settings
+        settings = get_settings()
         calibrated_p = Path(__file__).resolve().parents[3] / "ml" / "data" / "processed" / "registry_calibrated.json"
         if getattr(settings, "USE_CALIBRATED_ENVELOPES", True) and calibrated_p.exists():
             p = calibrated_p

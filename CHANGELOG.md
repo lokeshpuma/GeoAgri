@@ -950,3 +950,29 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
   - Ran `npx playwright test` across all 10 E2E scenarios across 1280x720, 1440x900, 1920x1080, and 390x844: 10 passed in 31.4s.
   - Regenerated all 12 viewports and screen states in `documentation/screens/`.
 - Git tag: `phase-W4` created.
+
+## [PRD v3.4 - Phase W5 Backend Hardening & Test Verification] - 2026-10-29
+### Added & Verified (§5, AC-11)
+- **Elimination of Personal Absolute Paths (K-2, AC-11)**:
+  - Replaced all 5 hardcoded `/Users/lokesh/...` absolute paths in `backend/app/services/landclass/detection.py`, `backend/app/services/landclass/classifier.py`, and `backend/app/services/irrigability/engine.py` with repo-relative paths (`Path(__file__).resolve().parents[n]`) and optional `GEOAGRI_DATA_ROOT`.
+  - Added gate test `test_no_personal_user_paths` in `backend/tests/test_phase7_api.py` asserting zero hardcoded personal user directories across `backend`, `scripts`, and `.github`.
+- **E2E Offline Climatology Fixture (K-1, AC-11)**:
+  - Injected fixture climatology (`source="TEST_FIXTURE"`, `MonthlyClimatologyResult`) in `test_predict_full_report_e2e`, enabling 100% offline suite execution without network sockets or cached responses.
+- **Source Readiness Endpoint (`GET /api/v1/health/sources`) (§5.3)**:
+  - Implemented health checker reporting readiness of all 6 platform dependencies without leaking keys, tokens, or emails:
+    1. `earth_engine`: credentials presence and initialization state.
+    2. `nasa_power`: API connectivity.
+    3. `soilgrids`: raster presence / OpenLandMap fallback state.
+    4. `rules`: load state of `land_class_rules.yaml`, `irrigability_rules.yaml`, `yield_ceilings.yaml`.
+    5. `registry`: registered crop count and calibration status.
+    6. `models`: disk presence of quantile, recommendation, and crosswalk models.
+  - Added frontend `fetchHealthSources` API client and rendered source status chips on `WorkspacePage.tsx`.
+- **Test Suite Results from Clean State (no `.env`, no `.cache`)**:
+  - `rm -rf backend/.cache && PYTHONPATH=backend backend/venv/bin/python -m pytest backend/tests -q`:
+    ```
+    157 passed, 3008 warnings in 52.73s
+    ```
+  - `python3 scripts/audit_css_classes.py`: 680 classes used, 0 without a rule.
+  - `npm --prefix frontend test`: 7 test files, 29 passed.
+  - `npm --prefix frontend run build`: 0 errors in 2.25s.
+- Git tag: `phase-W5` created.

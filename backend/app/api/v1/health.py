@@ -6,7 +6,7 @@ Health & Crops Router Endpoint (PRD v1.0 FR-26).
 
 from fastapi import APIRouter
 from app.services.crops.registry import get_crop_registry
-from app.services.health.checker import get_full_health_report
+from app.services.health.checker import get_full_health_report, get_sources_health_report
 
 router = APIRouter()
 
@@ -20,6 +20,12 @@ async def health_check():
     services["gee"] = services.get("google_earth_engine", {}).get("status", "unknown")
     services["soilgrids"] = "local"
     return report
+
+
+@router.get("/health/sources")
+async def health_sources():
+    """PRD v3.4 §5.3: Data source readiness check without secrets."""
+    return await get_sources_health_report()
 
 
 @router.get("/crops")

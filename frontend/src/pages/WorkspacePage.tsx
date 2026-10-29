@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   MapPin,
   ArrowRight,
@@ -20,6 +20,7 @@ import {
 import { useWorkflow } from '../context/WorkflowContext';
 import { GeoAgriLogo } from '../components/GeoAgriLogo/GeoAgriLogo';
 import { Button } from '../ui/Button';
+import { fetchHealthSources, HealthSourcesResponse } from '../api/client';
 
 const HOW_IT_WORKS_STAGES = [
   {
@@ -110,6 +111,21 @@ const DATA_SOURCES = [
 export const WorkspacePage: React.FC = () => {
   const { goToStep } = useWorkflow();
   const [showDetails, setShowDetails] = useState(false);
+  const [sourcesHealth, setSourcesHealth] = useState<HealthSourcesResponse | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchHealthSources()
+      .then(data => {
+        if (isMounted) setSourcesHealth(data);
+      })
+      .catch(() => {
+        // Backend offline or starting up
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="workspace-page-container">
@@ -138,6 +154,54 @@ export const WorkspacePage: React.FC = () => {
         <p className="type-body workspace-hero-desc">
           Calibrated satellite observations, soil physics, and machine learning models for verified field-level crop suitability and yield forecasting.
         </p>
+
+        {/* Source Readiness Chips (PRD v3.4 §5.3) */}
+        {sourcesHealth?.sources && (
+          <div className="source-chips-row mb-4" role="status" aria-label="Data source readiness">
+            <span
+              className={`source-chip ${sourcesHealth.sources.earth_engine.initialized ? 'status-ok' : 'status-failed'}`}
+              title={sourcesHealth.sources.earth_engine.initialized ? 'Earth Engine connected' : 'Earth Engine unconfigured'}
+            >
+              <span className={`chip-dot ${sourcesHealth.sources.earth_engine.initialized ? 'status-ok' : 'status-failed'}`} />
+              Earth Engine: {sourcesHealth.sources.earth_engine.initialized ? 'Ready' : 'Unconfigured'}
+            </span>
+            <span
+              className={`source-chip ${sourcesHealth.sources.nasa_power.status === 'ok' ? 'status-ok' : 'status-failed'}`}
+              title={`NASA POWER: ${sourcesHealth.sources.nasa_power.status}`}
+            >
+              <span className={`chip-dot ${sourcesHealth.sources.nasa_power.status === 'ok' ? 'status-ok' : 'status-failed'}`} />
+              NASA POWER: {sourcesHealth.sources.nasa_power.status === 'ok' ? 'Online' : 'Offline'}
+            </span>
+            <span
+              className={`source-chip ${sourcesHealth.sources.soilgrids.status === 'ok' ? 'status-ok' : 'status-failed'}`}
+              title={`SoilGrids mode: ${sourcesHealth.sources.soilgrids.mode}`}
+            >
+              <span className={`chip-dot ${sourcesHealth.sources.soilgrids.status === 'ok' ? 'status-ok' : 'status-failed'}`} />
+              SoilGrids: Ready
+            </span>
+            <span
+              className={`source-chip ${sourcesHealth.sources.rules.status === 'ok' ? 'status-ok' : 'status-failed'}`}
+              title="Agronomic and regulatory rule files"
+            >
+              <span className={`chip-dot ${sourcesHealth.sources.rules.status === 'ok' ? 'status-ok' : 'status-failed'}`} />
+              Rules: {sourcesHealth.sources.rules.status === 'ok' ? 'Loaded' : 'Missing'}
+            </span>
+            <span
+              className={`source-chip ${sourcesHealth.sources.registry.status === 'ok' ? 'status-ok' : 'status-failed'}`}
+              title={`${sourcesHealth.sources.registry.total_crops} crops registered`}
+            >
+              <span className={`chip-dot ${sourcesHealth.sources.registry.status === 'ok' ? 'status-ok' : 'status-failed'}`} />
+              Registry: {sourcesHealth.sources.registry.total_crops} crops
+            </span>
+            <span
+              className={`source-chip ${sourcesHealth.sources.models.status === 'ok' ? 'status-ok' : 'status-failed'}`}
+              title="Predictive and quantile models"
+            >
+              <span className={`chip-dot ${sourcesHealth.sources.models.status === 'ok' ? 'status-ok' : 'status-failed'}`} />
+              Models: {sourcesHealth.sources.models.status === 'ok' ? 'Ready' : 'Partial'}
+            </span>
+          </div>
+        )}
 
         {/* Primary Call To Action (PRD §6.6: "Draw your land →" CTA to Step 2) */}
         <div className="workspace-cta-col">
