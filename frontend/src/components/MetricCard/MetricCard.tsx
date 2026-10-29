@@ -7,21 +7,27 @@ interface MetricCardProps {
 }
 
 export const MetricCard: React.FC<MetricCardProps> = ({ data, icon }) => {
-  const ratingClass = data.rating === 'optimal'
+  const isUnavailable = !data || data.value === 'Not available' || data.interpretation === 'Not available';
+
+  const ratingClass = isUnavailable
+    ? 'neutral'
+    : data.rating === 'optimal'
     ? 'optimal'
     : data.rating === 'warning'
     ? 'warning'
     : data.rating === 'moderate'
     ? 'moderate'
-    : 'info';
+    : 'neutral';
 
-  const colorClass = data.rating === 'optimal'
+  const colorClass = isUnavailable
+    ? 'text-ink-3'
+    : data.rating === 'optimal'
     ? 'text-emerald-light'
     : data.rating === 'warning'
     ? 'text-danger'
     : data.rating === 'moderate'
     ? 'text-gold'
-    : 'text-info';
+    : 'text-ink-3';
 
   return (
     <div className="human-metric-card">

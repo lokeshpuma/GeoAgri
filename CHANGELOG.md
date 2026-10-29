@@ -884,3 +884,32 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
   - Published truthful `backend/ml/models/model_card.json` containing only computed values.
   - Added test suite `backend/tests/test_truthful_model_card.py` verifying no literal scores, dynamic spot checks, and absence of formulaic metrics (4 passed).
 - Git tag: `phase-W1` created.
+
+## [PRD v3.4 - Phase W2 Evidence Contract & Truthful UI] - 2026-10-29
+### Added & Verified (§3.3, §3.4, §3.5, AC-4 to AC-7)
+- **Evidence Failure Contract & Strict Containment (H-5, K-3, AC-4)**:
+  - In `backend/app/schemas/predict.py`, made every numeric summary field in `EnvironmentSummary`, `SatelliteFeatures`, `YieldSummary`, `ProductionSummary`, `IrrigationSummary`, and `ClimateRiskSummary` `Optional[float] = None`.
+  - Added `analysis_status: Literal["complete", "partial", "unavailable"]`, `sources: list[SourceStatus]`, and `data_mode: Literal["live", "demo_synthetic"]` to `FullReportResponse`.
+  - In `backend/app/services/features/profile.py`, built unified error containment capturing per-source states (`geodesic_boundary`, `google_earth_engine`, `nasa_power`, `soilgrids`) with timestamps and failure reasons.
+  - In `backend/app/api/v1/predict.py`:
+    - Completely removed hardcoded fallbacks `ph=7.0`, `ndvi=0.0`, `rainfall_mm=0.0`.
+    - Implemented HTTP 503 `EVIDENCE_UNAVAILABLE` with `setup_hint` detailing required Earth Engine credentials (`GEE_SERVICE_ACCOUNT_EMAIL`, `GEE_PRIVATE_KEY_JSON`, or `ALLOW_SYNTHETIC_DATA`) when all external sources fail.
+    - Implemented HTTP 200 with `analysis_status: "partial"` returning `None` instead of zeros for failed data layers.
+  - Gate verification AC-4: `backend/tests/test_evidence_contract.py` passed (4 passed in 9.72s).
+- **Truthful UI Diagnostics & Banners (H-6, H-7, AC-5)**:
+  - Dynamic status banners in `FieldAnalysisPage.tsx`:
+    - `complete`: "Analysis complete. {n_ok} of {n_total} data layers retrieved for {lat}°N, {lon}°E."
+    - `partial`: amber banner "{n_failed} data layers could not be retrieved: {names}" with interactive Retry button.
+    - `unavailable`: red card displaying exact `setup_hint` with Retry button; suppresses "Analyse All Crops" button.
+  - Replaced static "GEE & SoilGrids Verified" with interactive source chips row (`sources[]`) showing status dots (ok/failed/skipped), source names, and fetch timestamps.
+  - In `MetricCard.tsx` and `agronomicFormatters.ts`, all formatter functions handle `null`/`undefined` gracefully, displaying "Not available" with neutral styling without inventing interpretations.
+  - "Geodesic Verified" / "Verified Field Extent" displayed only when `areaSource === 'server'`; otherwise explicitly shows "Area estimated in browser" (in `BoundaryPreviewMap.tsx` and `SummaryReportPage.tsx`).
+- **Data Mode & Production Honesty (H-8, AC-6, AC-7)**:
+  - Removed `GEE_MOCK_FALLBACK: "true"` from `render.yaml` (AC-7).
+  - Wired `data_mode: "live" | "demo_synthetic"` throughout backend responses.
+  - Added persistent amber banner in `App.tsx` and printable report whenever `data_mode === "demo_synthetic"`: "Demo Mode: Satellite & environmental layers are simulated and not real measurements."
+- **Test & Build Gates**:
+  - `PYTHONPATH=backend backend/venv/bin/python -m pytest backend/tests/test_evidence_contract.py -q`: 4 passed.
+  - `npm --prefix frontend test`: 7 test files, 29 passed.
+  - `npm --prefix frontend run build`: Built cleanly with 0 TypeScript errors.
+- Git tag: `phase-W2` created.

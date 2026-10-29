@@ -15,8 +15,6 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
-      - key: GEE_MOCK_FALLBACK
-        value: "true"
       - key: ENV
         value: "production"
 

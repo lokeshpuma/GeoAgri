@@ -114,9 +114,17 @@ export const SummaryReportPage: React.FC = () => {
   ];
 
   const aiSynthesis = generateAgronomicRecommendation(report);
+  const isServerArea = report?.field_summary?.area_source === 'server';
+  const isDemoMode = report?.data_mode === 'demo_synthetic';
 
   return (
     <div className="page-container printable-report-area">
+      {isDemoMode && (
+        <div className="demo-mode-ribbon" role="alert" style={{ background: '#f59e0b', color: '#78350f', fontWeight: 600, textAlign: 'center', padding: '8px 12px', fontSize: '0.85rem', marginBottom: '16px', borderRadius: '6px' }}>
+          DEMO MODE: Synthetic satellite and soil data. Not for real agronomic use.
+        </div>
+      )}
+
       {/* Printable Header (Visible during Print / PDF Export) */}
       <div className="print-header">
         <div className="flex-between align-start">
@@ -134,7 +142,7 @@ export const SummaryReportPage: React.FC = () => {
           <div className="text-right text-xs text-ink-3 leading-normal">
             <div><strong>Generated:</strong> {new Date().toLocaleDateString('en-US', { dateStyle: 'long' })}</div>
             <div><strong>Parcel ID:</strong> WGS84-{centroidLat?.toFixed(3)}-{centroidLon?.toFixed(3)}</div>
-            <div><strong>Status:</strong> Geodesic Spatial Verified</div>
+            <div><strong>Status:</strong> {isServerArea ? 'Geodesic Spatial Verified' : 'Area estimated in browser'}</div>
           </div>
         </div>
         <hr className="my-2 border-glass" />
@@ -160,7 +168,7 @@ export const SummaryReportPage: React.FC = () => {
             <MapPin size={20} className="text-emerald" />
             <h2 className="section-title">1. Field Overview & Spatial Geography</h2>
           </div>
-          <span className="badge badge-high">Geodesic Verified</span>
+          <span className="badge badge-high">{isServerArea ? 'Geodesic Verified' : 'Area estimated in browser'}</span>
         </div>
 
         <div className="report-grid-3">
@@ -646,7 +654,7 @@ export const SummaryReportPage: React.FC = () => {
             </span>
           </div>
           <span className="text-xs text-ink-2">
-            Bioclimatic Multi-Criteria Decision Engine • WGS84 Geodesic Verified • Report ID: WGS84-{centroidLat?.toFixed(3)}-{centroidLon?.toFixed(3)}
+            Bioclimatic Multi-Criteria Decision Engine • {isServerArea ? 'WGS84 Geodesic Verified' : 'Area estimated in browser'} • Report ID: WGS84-{centroidLat?.toFixed(3)}-{centroidLon?.toFixed(3)}
           </span>
         </div>
       </section>

@@ -33,6 +33,13 @@ class PredictRequest(BaseModel):
     area_source: str | None = None
 
 
+class SourceStatus(BaseModel):
+    name: str
+    state: Literal["ok", "failed", "skipped"]
+    reason: str | None = None
+    fetched_at: str | None = None
+
+
 class QuantileValue(BaseModel):
     p10: float
     p50: float
@@ -96,9 +103,9 @@ class FieldSummary(BaseModel):
 
 class LandSuitability(BaseModel):
     grade: str
-    score: float
-    confidence: float
-    limiting_factors: list[str]
+    score: float | None = None
+    confidence: float | None = None
+    limiting_factors: list[str] = []
 
 
 class EnvironmentSummary(BaseModel):
@@ -119,50 +126,50 @@ class EnvironmentSummary(BaseModel):
 
 
 class SatelliteFeatures(BaseModel):
-    ndvi: float
-    ndwi: float
-    evi: float
-    savi: float
-    ndmi: float
-    elevation: float
-    slope: float
-    twi: float
-    vv: float
-    vh: float
+    ndvi: float | None = None
+    ndwi: float | None = None
+    evi: float | None = None
+    savi: float | None = None
+    ndmi: float | None = None
+    elevation: float | None = None
+    slope: float | None = None
+    twi: float | None = None
+    vv: float | None = None
+    vh: float | None = None
 
 
 class YieldSummary(BaseModel):
-    top_recommended_crop: str
-    p10_t_ha: float
-    p50_t_ha: float
-    p90_t_ha: float
+    top_recommended_crop: str | None = None
+    p10_t_ha: float | None = None
+    p50_t_ha: float | None = None
+    p90_t_ha: float | None = None
 
 
 class ProductionSummary(BaseModel):
-    top_recommended_crop: str
-    p10_t: float
-    p50_t: float
-    p90_t: float
+    top_recommended_crop: str | None = None
+    p10_t: float | None = None
+    p50_t: float | None = None
+    p90_t: float | None = None
     area_ha: float | None = None
 
 
 class IrrigationSummary(BaseModel):
-    recommended_mode: str
-    total_water_demand_m3: float
-    effective_rainfall_mm: float
+    recommended_mode: str | None = None
+    total_water_demand_m3: float | None = None
+    effective_rainfall_mm: float | None = None
 
 
 class ClimateRiskSummary(BaseModel):
-    overall_risk_level: str
-    drought_risk_score: float
-    heat_risk_score: float
-    excess_rain_risk_score: float
-    note: str
+    overall_risk_level: str | None = None
+    drought_risk_score: float | None = None
+    heat_risk_score: float | None = None
+    excess_rain_risk_score: float | None = None
+    note: str | None = None
 
 
 class IntercropSummary(BaseModel):
-    top_pair: str
-    estimated_production_boost_t: float
+    top_pair: str | None = None
+    estimated_production_boost_t: float | None = None
     disclaimer: str = "Intercrop yield boost is an estimate dependent on field management practices."
 
 
@@ -213,17 +220,20 @@ class LandRecordSummary(BaseModel):
 
 
 class FullReportResponse(BaseModel):
+    analysis_status: Literal["complete", "partial", "unavailable"] = "complete"
+    sources: list[SourceStatus] = []
+    data_mode: Literal["live", "demo_synthetic"] = "live"
     field_summary: FieldSummary
     land_suitability: LandSuitability
     environment: EnvironmentSummary
-    satellite_features: SatelliteFeatures
-    recommended_crops: list[RecommendedCrop]
+    satellite_features: SatelliteFeatures | None = None
+    recommended_crops: list[RecommendedCrop] = []
     excluded_crops: list[dict[str, Any]] = []
-    yield_summary: YieldSummary
-    production_summary: ProductionSummary
-    irrigation_summary: IrrigationSummary
-    climate_risk_summary: ClimateRiskSummary
-    intercrop_summary: IntercropSummary
+    yield_summary: YieldSummary | None = None
+    production_summary: ProductionSummary | None = None
+    irrigation_summary: IrrigationSummary | None = None
+    climate_risk_summary: ClimateRiskSummary | None = None
+    intercrop_summary: IntercropSummary | None = None
     model_status: ModelStatus
     land_class: LandClassification | None = None
     irrigability: Irrigability | None = None

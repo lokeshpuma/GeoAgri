@@ -8,12 +8,14 @@ export interface BoundaryPreviewMapProps {
   polygon: [number, number][];
   point?: [number, number];
   height?: string | number;
+  areaSource?: string | null;
 }
 
 export const BoundaryPreviewMap: React.FC<BoundaryPreviewMapProps> = ({
   polygon,
   point,
   height = '320px',
+  areaSource,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -92,7 +94,7 @@ export const BoundaryPreviewMap: React.FC<BoundaryPreviewMapProps> = ({
     <div className="boundary-preview-container" style={height ? { height } : undefined}>
       <div ref={containerRef} className="boundary-preview-canvas" style={{ width: '100%', height: '100%' }} />
       <div className="boundary-preview-badge">
-        Verified Field Extent
+        {areaSource === 'server' ? 'Verified Field Extent' : 'Area estimated in browser'}
       </div>
     </div>
   );

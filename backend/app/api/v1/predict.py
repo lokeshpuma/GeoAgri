@@ -14,7 +14,7 @@ from app.schemas.predict import (
     RecommendedCrop, FieldSummary, LandSuitability, EnvironmentSummary,
     SatelliteFeatures, YieldSummary, ProductionSummary, IrrigationSummary,
     ClimateRiskSummary, IntercropSummary, ModelStatus, LandClassification,
-    Irrigability, LandRecordSummary
+    Irrigability, LandRecordSummary, SourceStatus
 )
 from app.core.config import get_settings
 from app.services.features.profile import build_environmental_profile
@@ -69,7 +69,7 @@ async def generate_full_report(req: PredictRequest):
     try:
         manual_soil_dict = req.manual_soil.model_dump() if req.manual_soil else None
         
-        # 1. Build environmental profile with exception containment per M26
+        # 1. Build environmental profile with exception containment per M26 & PRD v3.4 §3.3
         try:
             profile = await build_environmental_profile(
                 polygon_pts=req.polygon,
@@ -79,80 +79,31 @@ async def generate_full_report(req: PredictRequest):
             )
         except Exception as ev_err:
             logger.warning("Upstream environmental profile/evidence exception: %s", ev_err)
-            c_lon = req.point[0] if req.point else (req.polygon[0][0] if req.polygon else 0.0)
-            c_lat = req.point[1] if req.point else (req.polygon[0][1] if req.polygon else 0.0)
-            unknown_class = LandClassification(
-                dominant="UNKNOWN",
-                class_shares={"UNKNOWN": 1.0},
-                subclass="insufficient_evidence",
-                legal_forest_status="unknown",
-                confidence=0.0
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "code": "EVIDENCE_UNAVAILABLE",
+                    "missing_sources": ["google_earth_engine", "nasa_power", "soilgrids"],
+                    "setup_hint": "Configure Google Earth Engine by setting GEE_PROJECT_ID, GEE_SERVICE_ACCOUNT, and GEE_PRIVATE_KEY_PATH (or set ALLOW_SYNTHETIC_DATA=true for demo synthetic mode)."
+                }
             )
-            unverified_irrigability = Irrigability(
-                verdict="UNVERIFIED",
-                reasons=[{
-                    "rule_id": "upstream_evidence_failure",
-                    "verdict": "UNVERIFIED",
-                    "reason": f"External evidence services encountered an error: {str(ev_err)}",
-                    "layer": "evidence_pipeline"
-                }],
-                reclaimable="unknown",
-                irrigable_area_ha=None,
-                irrigation_options=[],
-                crop_models="skipped_not_irrigable"
+
+        sources = profile.get("sources", [])
+        data_mode = profile.get("data_mode", "live")
+        external_sources = [s for s in sources if s["name"] in ("google_earth_engine", "nasa_power", "soilgrids")]
+        failed_sources = [s["name"] for s in external_sources if s["state"] == "failed"]
+
+        if external_sources and len(failed_sources) == len(external_sources):
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "code": "EVIDENCE_UNAVAILABLE",
+                    "missing_sources": failed_sources,
+                    "setup_hint": "Configure Google Earth Engine by setting GEE_PROJECT_ID, GEE_SERVICE_ACCOUNT, and GEE_PRIVATE_KEY_PATH (or set ALLOW_SYNTHETIC_DATA=true for demo synthetic mode)."
+                }
             )
-            return FullReportResponse(
-                field_summary=FieldSummary(
-                    area_ha=req.area_ha,
-                    centroid_lon=c_lon,
-                    centroid_lat=c_lat,
-                    polygon_valid=bool(req.polygon),
-                    boundary_source="user_drawn" if req.polygon else "point_only"
-                ),
-                land_suitability=LandSuitability(
-                    grade="Not Evaluated",
-                    score=0.0,
-                    confidence=0.0,
-                    limiting_factors=[f"Evidence retrieval warning: {str(ev_err)}"]
-                ),
-                environment=EnvironmentSummary(
-                    rainfall_mm=0.0, temp_max_c=0.0, temp_min_c=0.0, temp_mean_c=0.0,
-                    humidity_pct=0.0, solar_radiation_mj_m2=0.0, ph=7.0,
-                    organic_carbon_g_kg=0.0, nitrogen_g_kg=0.0, texture_clay_pct=0.0,
-                    texture_sand_pct=0.0, texture_silt_pct=0.0
-                ),
-                satellite_features=SatelliteFeatures(
-                    ndvi=0.0, ndwi=0.0, evi=0.0, savi=0.0, ndmi=0.0, elevation=0.0,
-                    slope=0.0, twi=0.0, vv=0.0, vh=0.0
-                ),
-                recommended_crops=[],
-                yield_summary=YieldSummary(
-                    top_recommended_crop="None (Unverified)", p10_t_ha=0.0, p50_t_ha=0.0, p90_t_ha=0.0
-                ),
-                production_summary=ProductionSummary(
-                    top_recommended_crop="None (Unverified)", p10_t=0.0, p50_t=0.0, p90_t=0.0, area_ha=req.area_ha
-                ),
-                irrigation_summary=IrrigationSummary(
-                    recommended_mode="rainfed", total_water_demand_m3=0.0, effective_rainfall_mm=0.0
-                ),
-                climate_risk_summary=ClimateRiskSummary(
-                    overall_risk_level="Unknown", drought_risk_score=0.0, heat_risk_score=0.0,
-                    excess_rain_risk_score=0.0, note="Evidence retrieval warning"
-                ),
-                intercrop_summary=IntercropSummary(top_pair="N/A", estimated_production_boost_t=0.0),
-                model_status=ModelStatus(
-                    model_a="skipped_not_irrigable", model_b="skipped_not_irrigable",
-                    model_c="skipped_not_irrigable", model_d="skipped_not_irrigable",
-                    model_e="skipped_not_irrigable"
-                ),
-                land_class=unknown_class,
-                irrigability=unverified_irrigability,
-                land_records=LandRecordSummary(providers=[], record=None),
-                detection=None,
-                gate_mode=gate_mode,
-                area_check=None,
-                imputed_features=None
-            )
+
+        analysis_status = "complete" if not failed_sources else "partial"
 
         # 2. Extract 78-layer feature vector
         pipeline = get_feature_pipeline()
@@ -208,11 +159,30 @@ async def generate_full_report(req: PredictRequest):
         # ONLY when gate_mode == "enforce". In shadow or off mode, continue and compute recommendations.
         if irrigability.verdict in ["NOT_IRRIGABLE", "NOT_IRRIGABLE_PROVISIONAL"] and gate_mode == "enforce":
             limiting = [r["reason"] for r in irrigability.reasons]
+            sat_model = (
+                SatelliteFeatures(
+                    ndvi=sat.get("ndvi"),
+                    ndwi=sat.get("ndwi"),
+                    evi=sat.get("evi"),
+                    savi=sat.get("savi"),
+                    ndmi=sat.get("ndmi"),
+                    elevation=sat.get("elevation"),
+                    slope=sat.get("slope"),
+                    twi=sat.get("twi"),
+                    vv=sat.get("vv"),
+                    vh=sat.get("vh"),
+                )
+                if sat
+                else None
+            )
             return FullReportResponse(
+                analysis_status=analysis_status,
+                sources=[SourceStatus(**s) for s in sources],
+                data_mode=data_mode,
                 field_summary=FieldSummary(**profile["field_summary"]),
                 land_suitability=LandSuitability(
                     grade="Not Suitable",
-                    score=0.0,
+                    score=None,
                     confidence=land_class.confidence,
                     limiting_factors=limiting
                 ),
@@ -232,49 +202,13 @@ async def generate_full_report(req: PredictRequest):
                     texture_sand_pct=s.get("texture_sand_pct"),
                     texture_silt_pct=s.get("texture_silt_pct")
                 ),
-                satellite_features=SatelliteFeatures(
-                    ndvi=sat.get("ndvi", 0.0),
-                    ndwi=sat.get("ndwi", 0.0),
-                    evi=sat.get("evi", 0.0),
-                    savi=sat.get("savi", 0.0),
-                    ndmi=sat.get("ndmi", 0.0),
-                    elevation=sat.get("elevation", 0.0),
-                    slope=sat.get("slope", 0.0),
-                    twi=sat.get("twi", 0.0),
-                    vv=sat.get("vv", 0.0),
-                    vh=sat.get("vh", 0.0)
-                ),
+                satellite_features=sat_model,
                 recommended_crops=[],
-                yield_summary=YieldSummary(
-                    top_recommended_crop="None (Not Irrigable)",
-                    p10_t_ha=0.0,
-                    p50_t_ha=0.0,
-                    p90_t_ha=0.0
-                ),
-                production_summary=ProductionSummary(
-                    top_recommended_crop="None (Not Irrigable)",
-                    p10_t=0.0,
-                    p50_t=0.0,
-                    p90_t=0.0,
-                    area_ha=gross_area
-                ),
-                irrigation_summary=IrrigationSummary(
-                    recommended_mode="Not Applicable",
-                    total_water_demand_m3=0.0,
-                    effective_rainfall_mm=round((w.get("rainfall_mm") or 0.0) * 0.75, 1)
-                ),
-                climate_risk_summary=ClimateRiskSummary(
-                    overall_risk_level="Critical",
-                    drought_risk_score=100.0,
-                    heat_risk_score=100.0,
-                    excess_rain_risk_score=100.0,
-                    note=f"Plot verdict is {irrigability.verdict} ({land_class.dominant}). Agronomic crop recommendation bypassed."
-                ),
-                intercrop_summary=IntercropSummary(
-                    top_pair="None",
-                    estimated_production_boost_t=0.0,
-                    disclaimer="Not applicable for non-irrigable land."
-                ),
+                yield_summary=None,
+                production_summary=None,
+                irrigation_summary=None,
+                climate_risk_summary=None,
+                intercrop_summary=None,
                 model_status=ModelStatus(
                     model_a="skipped_not_irrigable",
                     model_b="skipped_not_irrigable",
@@ -304,12 +238,31 @@ async def generate_full_report(req: PredictRequest):
                 if land_class.dominant == "WATER_BODY"
                 else (climatology.status_message or "Climatology service unavailable.")
             )
+            sat_model = (
+                SatelliteFeatures(
+                    ndvi=sat.get("ndvi"),
+                    ndwi=sat.get("ndwi"),
+                    evi=sat.get("evi"),
+                    savi=sat.get("savi"),
+                    ndmi=sat.get("ndmi"),
+                    elevation=sat.get("elevation"),
+                    slope=sat.get("slope"),
+                    twi=sat.get("twi"),
+                    vv=sat.get("vv"),
+                    vh=sat.get("vh"),
+                )
+                if sat
+                else None
+            )
             return FullReportResponse(
+                analysis_status=analysis_status,
+                sources=[SourceStatus(**s) for s in sources],
+                data_mode=data_mode,
                 field_summary=FieldSummary(**profile["field_summary"]),
                 land_suitability=LandSuitability(
                     grade="Unavailable",
-                    score=0.0,
-                    confidence=0.0,
+                    score=None,
+                    confidence=None,
                     limiting_factors=[unavail_msg]
                 ),
                 environment=EnvironmentSummary(
@@ -328,45 +281,13 @@ async def generate_full_report(req: PredictRequest):
                     texture_sand_pct=s.get("texture_sand_pct"),
                     texture_silt_pct=s.get("texture_silt_pct")
                 ),
-                satellite_features=SatelliteFeatures(
-                    ndvi=sat.get("ndvi", 0.0),
-                    ndwi=sat.get("ndwi", 0.0),
-                    evi=sat.get("evi", 0.0),
-                    savi=sat.get("savi", 0.0),
-                    ndmi=sat.get("ndmi", 0.0),
-                    elevation=sat.get("elevation", 0.0),
-                    slope=sat.get("slope", 0.0),
-                    twi=sat.get("twi", 0.0),
-                    vv=sat.get("vv", 0.0),
-                    vh=sat.get("vh", 0.0)
-                ),
+                satellite_features=sat_model,
                 recommended_crops=[],
-                yield_summary=YieldSummary(
-                    top_recommended_crop="None (Climatology Unavailable)",
-                    p10_t_ha=0.0,
-                    p50_t_ha=0.0,
-                    p90_t_ha=0.0
-                ),
-                production_summary=ProductionSummary(
-                    top_recommended_crop="None (Climatology Unavailable)",
-                    p10_t=0.0,
-                    p50_t=0.0,
-                    p90_t=0.0,
-                    area_ha=gross_area
-                ),
-                irrigation_summary=IrrigationSummary(
-                    recommended_mode="Not Applicable",
-                    total_water_demand_m3=0.0,
-                    effective_rainfall_mm=round((w.get("rainfall_mm") or 0.0) * 0.75, 1)
-                ),
-                climate_risk_summary=ClimateRiskSummary(
-                    overall_risk_level="Unknown",
-                    drought_risk_score=0.0,
-                    heat_risk_score=0.0,
-                    excess_rain_risk_score=0.0,
-                    note=unavail_msg
-                ),
-                intercrop_summary=IntercropSummary(top_pair="N/A", estimated_production_boost_t=0.0),
+                yield_summary=None,
+                production_summary=None,
+                irrigation_summary=None,
+                climate_risk_summary=None,
+                intercrop_summary=None,
                 model_status=ModelStatus(
                     model_a="skipped_unavailable",
                     model_b="skipped_unavailable",
@@ -634,12 +555,77 @@ async def generate_full_report(req: PredictRequest):
 
         mod_a = model_outputs["model_a"]
 
+        sat_model = (
+            SatelliteFeatures(
+                ndvi=sat.get("ndvi"),
+                ndwi=sat.get("ndwi"),
+                evi=sat.get("evi"),
+                savi=sat.get("savi"),
+                ndmi=sat.get("ndmi"),
+                elevation=sat.get("elevation"),
+                slope=sat.get("slope"),
+                twi=sat.get("twi"),
+                vv=sat.get("vv"),
+                vh=sat.get("vh"),
+            )
+            if sat
+            else None
+        )
+
+        yield_summary_model = (
+            YieldSummary(
+                top_recommended_crop=top_rec.crop_name,
+                p10_t_ha=top_rec.expected_yield_t_ha.p10 if top_rec.expected_yield_t_ha else None,
+                p50_t_ha=top_rec.expected_yield_t_ha.p50 if top_rec.expected_yield_t_ha else None,
+                p90_t_ha=top_rec.expected_yield_t_ha.p90 if top_rec.expected_yield_t_ha else None,
+            )
+            if (top_rec and top_rec.expected_yield_t_ha)
+            else None
+        )
+
+        production_summary_model = (
+            ProductionSummary(
+                top_recommended_crop=top_rec.crop_name,
+                p10_t=top_rec.expected_production_t.p10 if top_rec.expected_production_t else None,
+                p50_t=top_rec.expected_production_t.p50 if top_rec.expected_production_t else None,
+                p90_t=top_rec.expected_production_t.p90 if top_rec.expected_production_t else None,
+                area_ha=effective_area_ha,
+            )
+            if (top_rec and top_rec.expected_production_t)
+            else None
+        )
+
+        irrigation_summary_model = (
+            IrrigationSummary(
+                recommended_mode=top_rec.irrigation_mode,
+                total_water_demand_m3=round(top_rec.water_need_mm * 10.0 * calc_area, 1) if (top_rec.water_need_mm is not None) else None,
+                effective_rainfall_mm=round(w["rainfall_mm"] * 0.75, 1) if (w and w.get("rainfall_mm") is not None) else None,
+            )
+            if top_rec
+            else None
+        )
+
+        climate_risk_summary_model = (
+            ClimateRiskSummary(
+                overall_risk_level="Low" if (top_rec.climate_risk_score is not None and top_rec.climate_risk_score < 35) else ("Moderate" if (top_rec.climate_risk_score is not None and top_rec.climate_risk_score < 60) else ("High" if top_rec.climate_risk_score is not None else None)),
+                drought_risk_score=round(top_rec.climate_risk_score * 0.4, 1) if top_rec.climate_risk_score is not None else None,
+                heat_risk_score=round(top_rec.climate_risk_score * 0.3, 1) if top_rec.climate_risk_score is not None else None,
+                excess_rain_risk_score=round(top_rec.climate_risk_score * 0.3, 1) if top_rec.climate_risk_score is not None else None,
+                note=top_rec.climate_risk_note if top_rec.climate_risk_note else None,
+            )
+            if top_rec
+            else None
+        )
+
         return FullReportResponse(
+            analysis_status=analysis_status,
+            sources=[SourceStatus(**s) for s in sources],
+            data_mode=data_mode,
             field_summary=FieldSummary(**profile["field_summary"]),
             land_suitability=LandSuitability(
                 grade=mod_a.get("grade", "Moderate"),
-                score=mod_a.get("score", 0.70),
-                confidence=mod_a.get("confidence", 0.85),
+                score=mod_a.get("score"),
+                confidence=mod_a.get("confidence"),
                 limiting_factors=mod_a.get("limiting_factors", [])
             ),
             environment=EnvironmentSummary(
@@ -658,45 +644,13 @@ async def generate_full_report(req: PredictRequest):
                 texture_sand_pct=s.get("texture_sand_pct"),
                 texture_silt_pct=s.get("texture_silt_pct")
             ),
-            satellite_features=SatelliteFeatures(
-                ndvi=sat.get("ndvi", 0.0),
-                ndwi=sat.get("ndwi", 0.0),
-                evi=sat.get("evi", 0.0),
-                savi=sat.get("savi", 0.0),
-                ndmi=sat.get("ndmi", 0.0),
-                elevation=sat.get("elevation", 0.0),
-                slope=sat.get("slope", 0.0),
-                twi=sat.get("twi", 0.0),
-                vv=sat.get("vv", 0.0),
-                vh=sat.get("vh", 0.0)
-            ),
+            satellite_features=sat_model,
             recommended_crops=formatted_recs,
             excluded_crops=excluded_crops,
-            yield_summary=YieldSummary(
-                top_recommended_crop=top_rec.crop_name if top_rec else "N/A",
-                p10_t_ha=top_rec.expected_yield_t_ha.p10 if (top_rec and top_rec.expected_yield_t_ha) else 0.0,
-                p50_t_ha=top_rec.expected_yield_t_ha.p50 if (top_rec and top_rec.expected_yield_t_ha) else 0.0,
-                p90_t_ha=top_rec.expected_yield_t_ha.p90 if (top_rec and top_rec.expected_yield_t_ha) else 0.0,
-            ),
-            production_summary=ProductionSummary(
-                top_recommended_crop=top_rec.crop_name if top_rec else "N/A",
-                p10_t=top_rec.expected_production_t.p10 if (top_rec and top_rec.expected_production_t) else 0.0,
-                p50_t=top_rec.expected_production_t.p50 if (top_rec and top_rec.expected_production_t) else 0.0,
-                p90_t=top_rec.expected_production_t.p90 if (top_rec and top_rec.expected_production_t) else 0.0,
-                area_ha=effective_area_ha
-            ),
-            irrigation_summary=IrrigationSummary(
-                recommended_mode=top_rec.irrigation_mode if top_rec else "rainfed",
-                total_water_demand_m3=round(top_rec.water_need_mm * 10.0 * calc_area, 1) if (top_rec and top_rec.water_need_mm is not None) else 0.0,
-                effective_rainfall_mm=round((w.get("rainfall_mm") or 0.0) * 0.75, 1)
-            ),
-            climate_risk_summary=ClimateRiskSummary(
-                overall_risk_level="Low" if (top_rec and top_rec.climate_risk_score is not None and top_rec.climate_risk_score < 35) else ("Moderate" if (top_rec and top_rec.climate_risk_score is not None and top_rec.climate_risk_score < 60) else "High"),
-                drought_risk_score=round(top_rec.climate_risk_score * 0.4, 1) if (top_rec and top_rec.climate_risk_score is not None) else 15.0,
-                heat_risk_score=round(top_rec.climate_risk_score * 0.3, 1) if (top_rec and top_rec.climate_risk_score is not None) else 10.0,
-                excess_rain_risk_score=round(top_rec.climate_risk_score * 0.3, 1) if (top_rec and top_rec.climate_risk_score is not None) else 10.0,
-                note=top_rec.climate_risk_note if top_rec and top_rec.climate_risk_note else "Low climatic risk profile."
-            ),
+            yield_summary=yield_summary_model,
+            production_summary=production_summary_model,
+            irrigation_summary=irrigation_summary_model,
+            climate_risk_summary=climate_risk_summary_model,
             intercrop_summary=IntercropSummary(
                 top_pair=top_pair_str,
                 estimated_production_boost_t=intercrop_boost_t,

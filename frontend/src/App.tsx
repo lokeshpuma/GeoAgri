@@ -19,7 +19,8 @@ const PageFallback: React.FC = () => (
 );
 
 const WorkflowContainer: React.FC = () => {
-  const { currentStep } = useWorkflow();
+  const { currentStep, report } = useWorkflow();
+  const isDemoMode = report?.data_mode === 'demo_synthetic';
 
   React.useEffect(() => {
     const updateDimensions = () => {
@@ -84,6 +85,27 @@ const WorkflowContainer: React.FC = () => {
         <div className="ambient-orb ambient-orb-3" />
         <div className="ambient-grid-overlay" />
       </div>
+
+      {isDemoMode && (
+        <div
+          className="demo-mode-ribbon"
+          role="alert"
+          style={{
+            background: '#f59e0b',
+            color: '#78350f',
+            fontWeight: 700,
+            textAlign: 'center',
+            padding: '8px 16px',
+            fontSize: '0.85rem',
+            letterSpacing: '0.02em',
+            zIndex: 9999,
+            position: 'relative',
+            borderBottom: '1px solid #d97706'
+          }}
+        >
+          DEMO MODE: Synthetic satellite and soil data. Not for real agronomic use.
+        </div>
+      )}
 
       <PageHeader />
       <main className="main-content">

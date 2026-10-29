@@ -99,3 +99,4 @@ def test_model_card_builder_rejects_formulaic_hit_rate():
             assert actual_val != formulaic_val, (
                 f"Continent {cont} hit rate ({actual_val}) matches the fabricated formula {formulaic_val}"
             )
+

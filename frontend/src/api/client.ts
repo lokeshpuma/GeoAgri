@@ -95,6 +95,13 @@ export interface LandInquiryResponse {
   assessment_timestamp: string;
 }
 
+export interface SourceStatus {
+  name: string;
+  state: "ok" | "failed" | "skipped";
+  reason?: string | null;
+  fetched_at?: string | null;
+}
+
 export interface FullReportResponse {
   field_summary: {
     area_ha: number | null;
@@ -102,6 +109,7 @@ export interface FullReportResponse {
     centroid_lat: number;
     polygon_valid: boolean;
     boundary_source?: string;
+    area_source?: string;
   };
   land_suitability: {
     grade: "High" | "Moderate" | "Low" | "Not Suitable" | string;
@@ -227,6 +235,10 @@ export interface FullReportResponse {
   area_check?: Record<string, any> | null;
   imputed_features?: string[] | null;
   disclaimer?: string;
+  analysis_status?: "complete" | "partial" | "unavailable";
+  sources?: SourceStatus[];
+  data_mode?: "live" | "demo_synthetic";
+  setup_hint?: string | null;
 }
 
 export async function fetchFullReport(payload: PredictRequestPayload): Promise<FullReportResponse> {

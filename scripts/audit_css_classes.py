@@ -27,3 +27,4 @@ for c in sorted(missing):
     print(f"MISSING  .{c:36s} {', '.join(sorted(missing[c]))}")
 print(f"\n{len(used)} classes used, {len(missing)} without a rule")
 sys.exit(1 if missing else 0)
+

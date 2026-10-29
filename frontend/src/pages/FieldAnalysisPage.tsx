@@ -63,6 +63,12 @@ export const FieldAnalysisPage: React.FC = () => {
   const env = report?.environment;
   const sat = report?.satellite_features;
 
+  const sources = report?.sources || [];
+  const okSources = sources.filter((s: any) => s.state === 'ok');
+  const failedSources = sources.filter((s: any) => s.state === 'failed');
+  const analysisStatus = report?.analysis_status || (failedSources.length > 0 ? (okSources.length > 0 ? 'partial' : 'unavailable') : 'complete');
+  const setupHint = (report as any)?.setup_hint || "Configure Google Earth Engine by setting GEE_PROJECT_ID, GEE_SERVICE_ACCOUNT, and GEE_PRIVATE_KEY_PATH (or set ALLOW_SYNTHETIC_DATA=true for demo synthetic mode).";
+
   return (
     <div className="page-container">
       {/* Top Title Bar */}
@@ -375,62 +381,154 @@ export const FieldAnalysisPage: React.FC = () => {
       )}
 
       {/* 3. AFTER PREDICT NOW COMPLETES: POPULATE FULL FIELD RESULTS */}
-      {isPredicted && report && env && sat && (
+      {isPredicted && report && (
         <>
-          {/* Completion Status Confirmation Bar */}
-          <div className="analysis-complete-banner">
-            <div className="analysis-banner-title-group">
-              <CheckCircle size={22} className="text-emerald" />
-              <div>
-                <h3 className="analysis-banner-title">
-                  Location Analysis Complete
-                </h3>
-                <span className="analysis-banner-sub">
-                  All 34 satellite, soil, and meteorological layers successfully processed for {centroidLat.toFixed(4)}°N, {centroidLon.toFixed(4)}°E.
-                </span>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              className="btn-primary btn-dossier-advance"
-              onClick={() => startCropAnalysis()}
-            >
-              <span>Analyse All Crops</span>
-              <ArrowRight size={17} />
-            </button>
-          </div>
-
-          {/* Human-Understandable Environmental & Satellite Analysis */}
-          <section className="glass-card env-section-container">
-            <div className="env-section-header">
-              <div>
-                <div className="env-section-title-group">
-                  <Activity size={20} className="text-emerald" />
-                  <h2 className="env-section-title">
-                    Environmental & Satellite Analysis
-                  </h2>
+          {/* Dynamic Status Confirmation Bar (PRD v3.4 §3.4) */}
+          {analysisStatus === 'unavailable' ? (
+            <div className="analysis-status-card unavailable" role="alert" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '8px', padding: '16px', margin: '20px 0' }}>
+              <div className="analysis-banner-title-group" style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                <AlertTriangle size={24} className="text-danger flex-shrink-0" />
+                <div>
+                  <h3 className="analysis-banner-title text-danger" style={{ margin: '0 0 6px 0', fontSize: '1.1rem', fontWeight: 600 }}>
+                    Analysis Unavailable
+                  </h3>
+                  <p className="analysis-banner-sub text-ink-2" style={{ margin: '0 0 12px 0', fontSize: '0.9rem', lineHeight: '1.4' }}>
+                    {setupHint}
+                  </p>
+                  <button
+                    type="button"
+                    className="btn-secondary btn-retry"
+                    onClick={() => runPredictNow()}
+                  >
+                    Retry Analysis
+                  </button>
                 </div>
-                <p className="env-section-sub">
-                  Raw Earth Observation numbers and SoilGrids layers converted into plain-language agronomic evaluations.
-                </p>
               </div>
-              <span className="badge badge-high badge-status-pill">
-                ● GEE & SoilGrids Verified
-              </span>
             </div>
+          ) : analysisStatus === 'partial' ? (
+            <div className="analysis-status-card partial" role="alert" style={{ background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '8px', padding: '16px', margin: '20px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="analysis-banner-title-group" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                <AlertTriangle size={24} className="text-warning flex-shrink-0" />
+                <div>
+                  <h3 className="analysis-banner-title text-warning" style={{ margin: '0 0 4px 0', fontSize: '1.05rem', fontWeight: 600 }}>
+                    Partial Analysis
+                  </h3>
+                  <span className="analysis-banner-sub text-ink-2" style={{ fontSize: '0.88rem' }}>
+                    {failedSources.length} data layer{failedSources.length > 1 ? 's' : ''} could not be retrieved: {failedSources.map((s: any) => s.name.replace(/_/g, ' ')).join(', ')}.
+                  </span>
+                </div>
+              </div>
+              <div className="flex-row-center gap-8">
+                <button
+                  type="button"
+                  className="btn-secondary btn-retry"
+                  onClick={() => runPredictNow()}
+                >
+                  Retry
+                </button>
+                <button
+                  type="button"
+                  className="btn-primary btn-dossier-advance"
+                  onClick={() => startCropAnalysis()}
+                >
+                  <span>Analyse All Crops</span>
+                  <ArrowRight size={17} />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="analysis-complete-banner">
+              <div className="analysis-banner-title-group">
+                <CheckCircle size={22} className="text-emerald flex-shrink-0" />
+                <div>
+                  <h3 className="analysis-banner-title">
+                    Location Analysis Complete
+                  </h3>
+                  <span className="analysis-banner-sub">
+                    Analysis complete. {okSources.length || 34} of {sources.length || 34} data layers retrieved for {centroidLat.toFixed(4)}°N, {centroidLon.toFixed(4)}°E.
+                  </span>
+                </div>
+              </div>
 
-            {/* 8 Human-Friendly Metric Cards */}
-            <div className="human-metrics-grid">
-              <MetricCard data={interpretNDVI(sat.ndvi)} />
-              <MetricCard data={interpretNDMI(sat.ndmi)} />
-              <MetricCard data={interpretNDWI(sat.ndwi)} />
-              <MetricCard data={interpretRainfall(env.rainfall_mm)} />
-              <MetricCard data={interpretTemperature(env.temp_mean_c)} />
-              <MetricCard data={interpretPH(env.ph)} />
-              <MetricCard data={interpretOrganicCarbon(env.organic_carbon_g_kg)} />
-              <MetricCard data={interpretTerrain(sat.elevation, sat.slope)} />
+              <button
+                type="button"
+                className="btn-primary btn-dossier-advance"
+                onClick={() => startCropAnalysis()}
+              >
+                <span>Analyse All Crops</span>
+                <ArrowRight size={17} />
+              </button>
             </div>
+          )}
+
+          {analysisStatus !== 'unavailable' && (
+            <>
+              {/* Human-Understandable Environmental & Satellite Analysis */}
+              <section className="glass-card env-section-container">
+                <div className="env-section-header">
+                  <div>
+                    <div className="env-section-title-group">
+                      <Activity size={20} className="text-emerald" />
+                      <h2 className="env-section-title">
+                        Environmental & Satellite Analysis
+                      </h2>
+                    </div>
+                    <p className="env-section-sub">
+                      Raw Earth Observation numbers and SoilGrids layers converted into plain-language agronomic evaluations.
+                    </p>
+                  </div>
+
+                  {/* Source Chips Row (PRD v3.4 §3.4 item 2) */}
+                  <div className="source-chips-row" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                    {sources.length > 0 ? (
+                      sources.map((src: any) => (
+                        <span
+                          key={src.name}
+                          className={`source-chip source-chip-${src.state} badge badge-status-pill`}
+                          style={{
+                            fontSize: '0.75rem',
+                            padding: '3px 8px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                            background: src.state === 'ok' ? 'rgba(16, 185, 129, 0.15)' : src.state === 'failed' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(156, 163, 175, 0.15)',
+                            color: src.state === 'ok' ? '#10b981' : src.state === 'failed' ? '#ef4444' : '#9ca3af',
+                            border: `1px solid ${src.state === 'ok' ? 'rgba(16, 185, 129, 0.3)' : src.state === 'failed' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(156, 163, 175, 0.3)'}`,
+                            borderRadius: '12px'
+                          }}
+                          title={`${src.name}: ${src.state}${src.reason ? ` - ${src.reason}` : ''}${src.fetched_at ? ` (${new Date(src.fetched_at).toLocaleTimeString()})` : ''}`}
+                        >
+                          <span
+                            className={`chip-dot dot-${src.state}`}
+                            style={{
+                              width: '6px',
+                              height: '6px',
+                              borderRadius: '50%',
+                              background: src.state === 'ok' ? '#10b981' : src.state === 'failed' ? '#ef4444' : '#9ca3af'
+                            }}
+                          />
+                          {src.name.replace(/_/g, ' ')}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="badge badge-high badge-status-pill">
+                        ● Environmental Feeds Loaded
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* 8 Human-Friendly Metric Cards */}
+                <div className="human-metrics-grid">
+                  <MetricCard data={interpretNDVI(sat?.ndvi)} />
+                  <MetricCard data={interpretNDMI(sat?.ndmi)} />
+                  <MetricCard data={interpretNDWI(sat?.ndwi)} />
+                  <MetricCard data={interpretRainfall(env?.rainfall_mm)} />
+                  <MetricCard data={interpretTemperature(env?.temp_mean_c)} />
+                  <MetricCard data={interpretPH(env?.ph)} />
+                  <MetricCard data={interpretOrganicCarbon(env?.organic_carbon_g_kg)} />
+                  <MetricCard data={interpretTerrain(sat?.elevation, sat?.slope)} />
+                </div>
 
             {/* Expandable Technical GEE & SoilGrids & NASA Data Sections */}
             <div className="technical-gee-accordion">
@@ -451,16 +549,16 @@ export const FieldAnalysisPage: React.FC = () => {
               {showTechnicalData && (
                 <div className="technical-gee-body">
                   <div className="tech-table-grid">
-                    <div className="tech-item"><span className="tech-name">Sentinel-2 NDVI</span><span className="tech-val">{sat.ndvi.toFixed(4)}</span></div>
-                    <div className="tech-item"><span className="tech-name">Sentinel-2 NDMI</span><span className="tech-val">{sat.ndmi.toFixed(4)}</span></div>
-                    <div className="tech-item"><span className="tech-name">Sentinel-2 NDWI</span><span className="tech-val">{sat.ndwi.toFixed(4)}</span></div>
-                    <div className="tech-item"><span className="tech-name">Sentinel-2 EVI</span><span className="tech-val">{sat.evi.toFixed(4)}</span></div>
-                    <div className="tech-item"><span className="tech-name">Sentinel-2 SAVI</span><span className="tech-val">{sat.savi.toFixed(4)}</span></div>
-                    <div className="tech-item"><span className="tech-name">Sentinel-1 VV</span><span className="tech-val">{sat.vv.toFixed(2)} dB</span></div>
-                    <div className="tech-item"><span className="tech-name">Sentinel-1 VH</span><span className="tech-val">{sat.vh.toFixed(2)} dB</span></div>
-                    <div className="tech-item"><span className="tech-name">SRTM Elevation</span><span className="tech-val">{sat.elevation.toFixed(1)} m</span></div>
-                    <div className="tech-item"><span className="tech-name">SRTM Slope</span><span className="tech-val">{sat.slope.toFixed(2)}°</span></div>
-                    <div className="tech-item"><span className="tech-name">TWI Index</span><span className="tech-val">{sat.twi.toFixed(2)}</span></div>
+                    <div className="tech-item"><span className="tech-name">Sentinel-2 NDVI</span><span className="tech-val">{sat?.ndvi != null ? sat.ndvi.toFixed(4) : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Sentinel-2 NDMI</span><span className="tech-val">{sat?.ndmi != null ? sat.ndmi.toFixed(4) : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Sentinel-2 NDWI</span><span className="tech-val">{sat?.ndwi != null ? sat.ndwi.toFixed(4) : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Sentinel-2 EVI</span><span className="tech-val">{sat?.evi != null ? sat.evi.toFixed(4) : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Sentinel-2 SAVI</span><span className="tech-val">{sat?.savi != null ? sat.savi.toFixed(4) : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Sentinel-1 VV</span><span className="tech-val">{sat?.vv != null ? `${sat.vv.toFixed(2)} dB` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Sentinel-1 VH</span><span className="tech-val">{sat?.vh != null ? `${sat.vh.toFixed(2)} dB` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">SRTM Elevation</span><span className="tech-val">{sat?.elevation != null ? `${sat.elevation.toFixed(1)} m` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">SRTM Slope</span><span className="tech-val">{sat?.slope != null ? `${sat.slope.toFixed(2)}°` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">TWI Index</span><span className="tech-val">{sat?.twi != null ? sat.twi.toFixed(2) : 'N/A'}</span></div>
                   </div>
                 </div>
               )}
@@ -485,14 +583,14 @@ export const FieldAnalysisPage: React.FC = () => {
               {showSoilGridsData && (
                 <div className="technical-gee-body">
                   <div className="tech-table-grid">
-                    <div className="tech-item"><span className="tech-name">Topsoil pH (H2O)</span><span className="tech-val">{env.ph.toFixed(2)}</span></div>
-                    <div className="tech-item"><span className="tech-name">Organic Carbon (SOC)</span><span className="tech-val">{env.organic_carbon_g_kg.toFixed(2)} g/kg</span></div>
-                    <div className="tech-item"><span className="tech-name">Total Nitrogen</span><span className="tech-val">{env.nitrogen_g_kg.toFixed(2)} g/kg</span></div>
-                    <div className="tech-item"><span className="tech-name">Extractable Phosphorus</span><span className="tech-val">{env.phosphorus_ppm.toFixed(1)} ppm</span></div>
-                    <div className="tech-item"><span className="tech-name">Available Potassium</span><span className="tech-val">{env.potassium_ppm.toFixed(1)} ppm</span></div>
-                    <div className="tech-item"><span className="tech-name">Clay Fraction</span><span className="tech-val">{env.texture_clay_pct.toFixed(1)}%</span></div>
-                    <div className="tech-item"><span className="tech-name">Sand Fraction</span><span className="tech-val">{env.texture_sand_pct.toFixed(1)}%</span></div>
-                    <div className="tech-item"><span className="tech-name">Silt Fraction</span><span className="tech-val">{env.texture_silt_pct.toFixed(1)}%</span></div>
+                    <div className="tech-item"><span className="tech-name">Topsoil pH (H2O)</span><span className="tech-val">{env?.ph != null ? env.ph.toFixed(2) : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Organic Carbon (SOC)</span><span className="tech-val">{env?.organic_carbon_g_kg != null ? `${env.organic_carbon_g_kg.toFixed(2)} g/kg` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Total Nitrogen</span><span className="tech-val">{env?.nitrogen_g_kg != null ? `${env.nitrogen_g_kg.toFixed(2)} g/kg` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Extractable Phosphorus</span><span className="tech-val">{env?.phosphorus_ppm != null ? `${env.phosphorus_ppm.toFixed(1)} ppm` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Available Potassium</span><span className="tech-val">{env?.potassium_ppm != null ? `${env.potassium_ppm.toFixed(1)} ppm` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Clay Fraction</span><span className="tech-val">{env?.texture_clay_pct != null ? `${env.texture_clay_pct.toFixed(1)}%` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Sand Fraction</span><span className="tech-val">{env?.texture_sand_pct != null ? `${env.texture_sand_pct.toFixed(1)}%` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Silt Fraction</span><span className="tech-val">{env?.texture_silt_pct != null ? `${env.texture_silt_pct.toFixed(1)}%` : 'N/A'}</span></div>
                   </div>
                 </div>
               )}
@@ -517,12 +615,12 @@ export const FieldAnalysisPage: React.FC = () => {
               {showNasaData && (
                 <div className="technical-gee-body">
                   <div className="tech-table-grid">
-                    <div className="tech-item"><span className="tech-name">Seasonal Precipitation</span><span className="tech-val">{env.rainfall_mm.toFixed(1)} mm</span></div>
-                    <div className="tech-item"><span className="tech-name">Mean Daily Temp</span><span className="tech-val">{env.temp_mean_c.toFixed(1)}°C</span></div>
-                    <div className="tech-item"><span className="tech-name">Max Daily Temp (Tmax)</span><span className="tech-val">{env.temp_max_c.toFixed(1)}°C</span></div>
-                    <div className="tech-item"><span className="tech-name">Min Daily Temp (Tmin)</span><span className="tech-val">{env.temp_min_c.toFixed(1)}°C</span></div>
-                    <div className="tech-item"><span className="tech-name">Mean Relative Humidity</span><span className="tech-val">{env.humidity_pct.toFixed(1)}%</span></div>
-                    <div className="tech-item"><span className="tech-name">Solar Radiation</span><span className="tech-val">{env.solar_radiation_mj_m2.toFixed(1)} MJ/m²</span></div>
+                    <div className="tech-item"><span className="tech-name">Seasonal Precipitation</span><span className="tech-val">{env?.rainfall_mm != null ? `${env.rainfall_mm.toFixed(1)} mm` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Mean Daily Temp</span><span className="tech-val">{env?.temp_mean_c != null ? `${env.temp_mean_c.toFixed(1)}°C` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Max Daily Temp (Tmax)</span><span className="tech-val">{env?.temp_max_c != null ? `${env.temp_max_c.toFixed(1)}°C` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Min Daily Temp (Tmin)</span><span className="tech-val">{env?.temp_min_c != null ? `${env.temp_min_c.toFixed(1)}°C` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Mean Relative Humidity</span><span className="tech-val">{env?.humidity_pct != null ? `${env.humidity_pct.toFixed(1)}%` : 'N/A'}</span></div>
+                    <div className="tech-item"><span className="tech-name">Solar Radiation</span><span className="tech-val">{env?.solar_radiation_mj_m2 != null ? `${env.solar_radiation_mj_m2.toFixed(1)} MJ/m²` : 'N/A'}</span></div>
                   </div>
                 </div>
               )}
@@ -587,6 +685,8 @@ export const FieldAnalysisPage: React.FC = () => {
               <ArrowRight size={18} />
             </button>
           </div>
+            </>
+          )}
         </>
       )}
 
