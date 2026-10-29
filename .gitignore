@@ -39,10 +39,22 @@ backend/ml/data/raw/external/**/dataset-links.csv
 backend/ml/data/raw/external/**/*.part
 !backend/ml/data/raw/external/**/SOURCE.md
 
-# Virtual Environments
+# Environment & Secret Credentials
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+*.env
+backend/.env
+frontend/.env
+*.key
+*.pem
+gee-key.json
+backend/gee-key.json
+*key*.json
+*credentials*.json
+service-account*.json
+
+# Virtual Environments
 .venv
 .venv/
 env/

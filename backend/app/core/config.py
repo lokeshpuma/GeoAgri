@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     GEE_PROJECT_ID: str = ""
     GEE_SERVICE_ACCOUNT: str = ""
     GEE_PRIVATE_KEY_PATH: str = ""
+    GEE_KEY_JSON_RAW: str = ""
 
     # External APIs & Weather
     NASA_POWER_API_URL: str = "https://power.larc.nasa.gov/api/temporal/daily/point"

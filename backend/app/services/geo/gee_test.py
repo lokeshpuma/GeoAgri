@@ -21,9 +21,13 @@ def test_gee_connection() -> dict:
     settings = get_settings()
     service_account = settings.GEE_SERVICE_ACCOUNT
     key_path = settings.GEE_PRIVATE_KEY_PATH
+    raw_key = settings.GEE_KEY_JSON_RAW.strip() if settings.GEE_KEY_JSON_RAW else ""
     mock_fallback = settings.GEE_MOCK_FALLBACK and settings.is_synthetic_allowed()
 
-    if not service_account or not key_path or not os.path.exists(key_path):
+    has_file_key = bool(service_account and key_path and os.path.exists(key_path))
+    has_raw_key = bool(raw_key)
+
+    if not has_file_key and not has_raw_key:
         if mock_fallback:
             return {
                 "status": "mock_fallback",
@@ -38,15 +42,26 @@ def test_gee_connection() -> dict:
     try:
         import ee
         import json
-        project_id = os.getenv("GEE_PROJECT_ID", "")
-        if not project_id and os.path.exists(key_path):
+        project_id = os.getenv("GEE_PROJECT_ID", "") or settings.GEE_PROJECT_ID
+
+        if has_raw_key:
             try:
-                with open(key_path) as f:
-                    project_id = json.load(f).get("project_id", "")
+                parsed_json = json.loads(raw_key)
+                if not project_id:
+                    project_id = parsed_json.get("project_id", "")
+                if not service_account:
+                    service_account = parsed_json.get("client_email", "")
             except Exception:
                 pass
-
-        credentials = ee.ServiceAccountCredentials(service_account, key_path)
+            credentials = ee.ServiceAccountCredentials(service_account, key_data=raw_key)
+        else:
+            if not project_id and os.path.exists(key_path):
+                try:
+                    with open(key_path) as f:
+                        project_id = json.load(f).get("project_id", "")
+                except Exception:
+                    pass
+            credentials = ee.ServiceAccountCredentials(service_account, key_path)
         if project_id:
             ee.Initialize(credentials, project=project_id)
         else:
