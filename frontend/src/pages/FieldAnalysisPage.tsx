@@ -416,6 +416,9 @@ export const FieldAnalysisPage: React.FC = () => {
                   <span className="analysis-banner-sub text-ink-2" style={{ fontSize: '0.88rem' }}>
                     {failedSources.length} data layer{failedSources.length > 1 ? 's' : ''} could not be retrieved: {failedSources.map((s: any) => s.name.replace(/_/g, ' ')).join(', ')}.
                   </span>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--ink-3)', margin: '4px 0 0 0' }}>
+                    💡 Provide Google Earth Engine credentials in <code>backend/.env</code> for live Sentinel satellite imagery, or set <code>ALLOW_SYNTHETIC_DATA=true</code> and <code>GEE_MOCK_FALLBACK=true</code> for local development simulation.
+                  </p>
                 </div>
               </div>
               <div className="flex-row-center gap-8">
