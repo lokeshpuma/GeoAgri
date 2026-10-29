@@ -64,3 +64,4 @@ describe('Truthful Agronomic Formatters (PRD v3.4 §3.4, AC-4, AC-5)', () => {
     expect(rec).toContain('pH: N/A');
   });
 });
+

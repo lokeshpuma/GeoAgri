@@ -913,3 +913,24 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
   - `npm --prefix frontend test`: 7 test files, 29 passed.
   - `npm --prefix frontend run build`: Built cleanly with 0 TypeScript errors.
 - Git tag: `phase-W2` created.
+
+## [PRD v3.4 - Phase W3 CSS Recovery & Style Audit Resolution] - 2026-10-29
+### Added & Verified (§4.1, AC-8, AC-9)
+- **CSS Rule Recovery & Token Alignment (U-1, U-2, AC-8)**:
+  - Recovered all 88 deleted rules from `v3.2.0:frontend/src/index.css` and rewritten to use design tokens (`--emerald-*`, `--gold-*`, `--bg-*`, `--ink-*`) with zero raw hex codes.
+  - Created `frontend/src/styles/components/chatbot.css` containing all 24 AgriChatBot styling classes (`agri-chat-bubble`, `agri-chatbot-avatar`, `agri-chatbot-drawer`, etc.) and wired into `frontend/src/main.tsx`.
+  - Ported Field Analysis and MetricCard rules (`human-metric-card`, `diagnostics-two-col`, `pipeline-stage-row`, `tech-table-grid`, etc.) into `fieldAnalysis.css`.
+  - Ported Crop Recommendation & Insights rules (`crop-rec-stats-grid`, `companion-intercrop-banner`, `insight-bullets-list`, etc.) into `cropPrediction.css`.
+  - Ported UI Kit elements (`btn-primary`, `btn-secondary`, `badge-high`, `matrix-modal-backdrop`, `report-table`, etc.) into `uiKit.css`.
+  - Defined all 73+ semantic utilities and new component classes in `utilities.css` (`btn-finish-shape`, `btn-edit-boundary`, `btn-replace-yes`, `btn-replace-no`, `drawing-help-banner`, `drawing-help-content`, `boundary-preview-canvas`, `metric-icon-slot`, `theme-toggle-label`, `printable-report-area`, `animate-spin`, `text-muted`, `text-capitalize`, `analysis-status-card`, `source-chip`, `chip-dot`, spacing scale, and flex/grid helpers).
+- **Tooling & CI Gates**:
+  - Deleted obsolete duplicate-checker script `scripts/check_css_duplicates.py`.
+  - Integrated `python scripts/audit_css_classes.py` into `.github/workflows/ci.yml` and `scripts/verify.sh`.
+  - Gate verification AC-8: `python3 scripts/audit_css_classes.py` exits 0:
+    ```
+    680 classes used, 0 without a rule
+    ```
+- **Build & Test Outputs**:
+  - `npm --prefix frontend test`: 7 test files, 29 passed.
+  - `npm --prefix frontend run build`: Built successfully in 2.29s with 0 errors.
+- Git tag: `phase-W3` created.

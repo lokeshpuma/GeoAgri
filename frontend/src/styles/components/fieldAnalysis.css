@@ -629,3 +629,289 @@
   font-size: 0.95rem;
 }
 
+
+
+/* Recovered Field Analysis Rules */
+[data-theme="light"] .human-metric-card {
+  background: var(--ink-1);
+  border-color: #e2e8f0;
+}
+
+[data-theme="light"] .pipeline-stage-row {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  color: var(--bg-1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .pipeline-stage-row .stage-title {
+  color: var(--bg-0) !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pipeline-stage-row .stage-source {
+  color: var(--ink-3) !important;
+}
+
+[data-theme="light"] .pipeline-stage-row.done {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #065f46;
+}
+
+[data-theme="light"] .pipeline-stage-row.done .stage-title {
+  color: #064e3b !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pipeline-stage-row.done .stage-source {
+  color: #047857 !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .pipeline-stage-row.done .stage-status {
+  color: var(--emerald-600) !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pipeline-stage-row.current {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+[data-theme="light"] .pipeline-stage-row.current .stage-title {
+  color: #78350f !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pipeline-stage-row.current .stage-status {
+  color: #b45309 !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .accordion-toggle-btn {
+  color: var(--bg-0);
+}
+
+[data-theme="light"] .accordion-toggle-btn:hover {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .analysis-complete-banner {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+[data-theme="light"] .analysis-complete-banner h3 {
+  color: #065f46;
+}
+
+[data-theme="light"] .human-metric-label {
+  color: #475569 !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .human-metric-value {
+  color: var(--bg-0) !important;
+}
+
+[data-theme="light"] .human-metric-implication {
+  color: var(--bg-1) !important;
+  font-weight: 450;
+}
+
+[data-theme="light"] .human-metric-raw {
+  color: var(--ink-3) !important;
+}
+
+[data-theme="light"] .technical-gee-accordion {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+
+[data-theme="light"] .technical-gee-body {
+  background: var(--ink-1);
+  border-top-color: #e2e8f0;
+}
+
+.accordion-toggle-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 12px 16px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.accordion-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.human-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+.human-metric-card {
+  background: var(--bg-input);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.human-metric-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+.human-metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.human-metric-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.human-metric-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.human-metric-value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.human-metric-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.human-metric-raw {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-family: monospace;
+}
+
+.human-metric-implication {
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.technical-gee-accordion {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.technical-gee-body {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.tech-table-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.diagnostics-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* PAGE 2: PROCESSING DOCK & LIVE PIPELINE */
+.processing-dock-panel {
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 12px 36px rgba(16, 185, 129, 0.15);
+  animation: fadeInSlide 0.25s ease;
+}
+
+.processing-pipeline-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.pipeline-stage-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+}
+
+.pipeline-stage-row.done {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.pipeline-stage-row.current {
+  border-color: rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.stage-status-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stage-num-dot {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+
+.analysis-complete-banner {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  animation: fadeInSlide 0.3s ease;
+}

@@ -56,6 +56,10 @@ echo "=== [3/4] Building Frontend ==="
 cd "$REPO_ROOT/frontend"
 npm run build
 
-echo "=== [4/4] Verification Complete ==="
+echo "=== [4/5] Auditing CSS Classes ==="
+cd "$REPO_ROOT"
+python3 scripts/audit_css_classes.py
+
+echo "=== [5/5] Verification Complete ==="
 echo "ALL GATES & BUILDS PASSED (EXIT 0)"
 exit 0

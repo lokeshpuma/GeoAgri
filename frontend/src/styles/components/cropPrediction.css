@@ -1362,3 +1362,252 @@
 
 
 
+
+
+/* Recovered Crop Prediction Rules */
+[data-theme="light"] .page-title,
+[data-theme="light"] .hero-title,
+[data-theme="light"] .info-section-title,
+[data-theme="light"] .section-title,
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] .cell-val,
+[data-theme="light"] .summary-pill-val,
+[data-theme="light"] .metric-value,
+[data-theme="light"] .report-field-title {
+  color: var(--bg-0);
+}
+
+/* Light Mode Overrides for Step 1, Step 2, Step 3, and Step 4 */
+[data-theme="light"] .crop-main-name {
+  color: var(--bg-0);
+}
+
+[data-theme="light"] .crop-stat-val {
+  color: var(--bg-0);
+}
+
+[data-theme="light"] .crop-rec-stats-grid {
+  background: var(--ink-1);
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .companion-intercrop-banner {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+[data-theme="light"] .companion-intercrop-banner strong,
+[data-theme="light"] .companion-name-text {
+  color: #047857;
+}
+
+[data-theme="light"] .crop-rec-rationale {
+  background: var(--ink-1);
+  border: 1px solid #e2e8f0;
+  color: var(--bg-2);
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+[data-theme="light"] .insight-bullets-list {
+  background: var(--ink-1);
+  border: 1px solid #e2e8f0;
+  color: var(--bg-1);
+}
+
+[data-theme="light"] .insight-bullet-item {
+  color: var(--bg-2);
+}
+
+[data-theme="light"] .insight-bullet-item strong {
+  color: var(--bg-0);
+}
+
+[data-theme="light"] .crop-insight-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .analysis-summary-bar {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* ==================================================
+   PAGE 3: CROP PREDICTIONS (TOP 5 & TOP 10)
+   ================================================== */
+.crop-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.crop-category-tag {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.crop-rec-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.crop-main-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.companion-intercrop-banner {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.yield-boost-pill {
+  background: rgba(16, 185, 129, 0.25);
+  color: var(--emerald-400);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.crop-rec-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.crop-stat-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.crop-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.crop-stat-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.stat-unit {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.crop-stat-sub {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+}
+
+.crop-rec-rationale {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* PAGE 3: ANALYSIS SUMMARY BAR & CROP INSIGHTS */
+.analysis-summary-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  padding: 16px 20px;
+  background: rgba(18, 24, 38, 0.85);
+}
+
+.summary-pill-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary-pill-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  display: block;
+}
+
+.summary-pill-val {
+  font-size: 0.88rem;
+  color: #ffffff;
+}
+
+.crop-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.crop-insight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px;
+  height: 100%;
+}
+
+.rank-badge-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--emerald-400);
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.insight-bullets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 0.81rem;
+  color: var(--text-main);
+  background: var(--bg-card);
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  flex: 1;
+}
+
+.insight-bullet-item {
+  line-height: 1.45;
+}
+
+.insight-expanded-details {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 12px;
+  margin-top: 4px;
+}

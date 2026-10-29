@@ -50,3 +50,7 @@ jobs:
         run: |
           cd frontend
           npm run build
+
+      - name: Audit CSS classes
+        run: |
+          python scripts/audit_css_classes.py
