@@ -44,7 +44,7 @@ jobs:
       - name: Run frontend tests
         run: |
           cd frontend
-          npm test
+          npm test -- --reporter=verbose
 
       - name: Build frontend
         run: |
