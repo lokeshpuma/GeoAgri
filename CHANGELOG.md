@@ -1000,3 +1000,30 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
   - Added `CONTRIBUTING.md` and `SECURITY.md`.
   - Verified repository root contains exactly 12 visible entries (`ls -1`): `CHANGELOG.md`, `CONTRIBUTING.md`, `LICENSE`, `README.md`, `SECURITY.md`, `backend`, `docker-compose.yml`, `docs`, `frontend`, `render.yaml`, `scripts`, `vercel.json`.
 - Git tag: `phase-W6` created.
+
+## [PRD v3.4 - Phase W7 README & Documentation Rewrite] - 2026-10-29
+### Added & Verified (§8.3, AC-13)
+- **Concise & Truthful README Rewrite (AC-13)**:
+  - Replaced legacy 600-line documentation with 164-line factual, clear technical overview following the 13 required sections in §8.3 with zero emojis in headings.
+  - Included operational summary, live and demo screenshots, Mermaid architectural workflow, honest data provenance table with licensing and agronomic limitations, copy-pasteable quickstart and Docker commands, complete environment variable specification, project directory tree, API highlights, and legal attribution.
+- **Verification of Documented Commands (§8.3)**:
+  - Executed all 4 commands documented in `README.md` and recorded real observed outputs:
+    1. `python3 scripts/audit_css_classes.py`:
+       ```
+       680 classes used, 0 without a rule
+       ```
+    2. `npm --prefix frontend test`:
+       ```
+       Test Files  7 passed (7)
+       Tests       29 passed (29)
+       Duration    1.44s
+       ```
+    3. `rm -rf backend/.cache && PYTHONPATH=backend backend/venv/bin/python -m pytest backend/tests -q`:
+       ```
+       157 passed, 3008 warnings in 53.68s
+       ```
+    4. `cd frontend && npx playwright test`:
+       ```
+       10 passed (31.0s)
+       ```
+- Git tag: `phase-W7` created.
