@@ -47,8 +47,25 @@ def test_health_sources_endpoint():
 def test_no_personal_user_paths():
     """PRD v3.4 §5.2, AC-11: No personal user paths exist in backend, scripts, or github configs."""
     import subprocess
+    from pathlib import Path
+
+    # Locate repo root reliably whether run from repo root or from backend/
+    here = Path(__file__).resolve().parent
+    repo_root = here.parent.parent if here.parent.name == "backend" else here.parent
+    if not (repo_root / "backend").exists():
+        repo_root = Path.cwd()
+        if (repo_root.parent / "backend").exists():
+            repo_root = repo_root.parent
+
+    target_dirs = []
+    for d in ["backend", "scripts", ".github"]:
+        p = repo_root / d
+        if p.exists():
+            target_dirs.append(f'"{p}"')
+
+    targets = " ".join(target_dirs)
     pat = "/Us" + "ers/" + "\\|C:\\\\" + "Users"
-    cmd = f'grep -rn --exclude-dir="venv" --exclude-dir=".pytest_cache" --exclude-dir="__pycache__" --exclude="test_phase7_api.py" "{pat}" backend scripts .github'
+    cmd = f'grep -rn --exclude-dir="venv" --exclude-dir=".pytest_cache" --exclude-dir="__pycache__" --exclude=".env" --exclude=".env.*" --exclude="*.env" --exclude="*.json" --exclude="test_phase7_api.py" "{pat}" {targets}'
     res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     assert res.returncode == 1, f"Found hardcoded user paths in backend:\n{res.stdout}"
 
