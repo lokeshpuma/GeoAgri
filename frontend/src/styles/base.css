@@ -9,7 +9,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
 }
 
 body {
@@ -21,7 +20,7 @@ body {
   color: var(--ink-1);
   line-height: 1.5;
   transition: background-color var(--t-med) ease, color var(--t-med) ease;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
 }
 

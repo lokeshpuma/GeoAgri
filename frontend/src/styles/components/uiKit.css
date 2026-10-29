@@ -1074,7 +1074,8 @@
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-.no-print,
+@media print {
+  .no-print,
   .app-header,
   .bottom-workflow-container,
   .dynamic-ambient-background,
@@ -1083,32 +1084,35 @@
   .btn-outline,
   .report-actions-panel,
   .page-bottom-actions {
-  display: none !important;
-}
+    display: none !important;
+  }
 
-.section-title,
+  .section-title,
   .page-title,
   h1, h2, h3, h4 {
-  color: var(--bg-0) !important;
+    color: var(--bg-0) !important;
     font-size: 9.5pt !important;
     font-weight: 700 !important;
     margin: 0 !important;
-}
+  }
 
-/* Crisp Badges for Print */
+  /* Crisp Badges for Print */
   .badge {
-  padding: 1.5px 6px !important;
+    padding: 1.5px 6px !important;
     font-size: 6.8pt !important;
     font-weight: 700 !important;
     border-radius: 4px !important;
     border: 1px solid #cbd5e1 !important;
     color: var(--bg-0) !important;
     background: #f1f5f9 !important;
+  }
 }
 
-.btn-primary,
+@media (max-width: 600px) {
+  .btn-primary,
   .btn-secondary {
-  width: 100%;
+    width: 100%;
+  }
 }
 
 /* ==================================================

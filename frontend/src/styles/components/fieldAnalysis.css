@@ -249,24 +249,19 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: 0;
-  position: sticky;
-  top: calc(var(--app-header-h) + 12px);
-  align-self: start;
-  height: calc(100dvh - var(--app-header-h) - var(--step-bar-h) - 48px);
-  min-height: 420px;
+  align-self: stretch;
+  min-height: 460px;
 }
 
 .field-map-column .boundary-preview-container {
   flex: 1 1 auto;
-  height: auto !important;
-  min-height: 320px;
+  height: 100% !important;
+  min-height: 460px;
 }
 
 @media (max-width: 900px) {
   .field-map-column {
-    position: static;
-    height: 60dvh;
+    min-height: 380px;
   }
 }
 

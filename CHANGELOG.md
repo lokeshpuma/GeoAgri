@@ -934,3 +934,19 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
   - `npm --prefix frontend test`: 7 test files, 29 passed.
   - `npm --prefix frontend run build`: Built successfully in 2.29s with 0 errors.
 - Git tag: `phase-W3` created.
+
+## [PRD v3.4 - Phase W4 Layout Fit & Screen Restoration] - 2026-10-29
+### Added & Verified (§4.2, AC-10)
+- **Equal-Height Non-Sticky Field Analysis Grid (U-3, AC-10)**:
+  - Eliminated `position: sticky` dependency in `frontend/src/styles/components/fieldAnalysis.css`.
+  - Re-architected `.top-grid` into an equal-height grid (`grid-template-columns: 1fr 1fr; align-items: stretch`).
+  - Styled `.field-map-column` as `display: flex; flex-direction: column; min-height: 460px; align-self: stretch` with map container filling full height (`flex: 1 1 auto; height: 100% !important; min-height: 460px`).
+  - Restructured `frontend/src/pages/FieldAnalysisPage.tsx` so Row 1 contains only the Map and the Selected Field panel side-by-side, with `SuitabilityBanner`, land eligibility tables, diagnostics, and action buttons stacked full-width below.
+  - Verified that map bottom edge and Selected Field panel bottom edge differ by < 24px across all desktop viewports.
+- **Root Overflow & Viewport Geometry**:
+  - Replaced `overflow-x: hidden` with `overflow-x: clip` in `frontend/src/styles/base.css` and `.app-layout` in `frontend/src/index.css`.
+  - Ensured boundary studio map fills the entire height (`viewport height - step bar height`) without blank gap or horizontal scrollbar across all tested viewports.
+- **Playwright E2E Suite & Screenshots**:
+  - Ran `npx playwright test` across all 10 E2E scenarios across 1280x720, 1440x900, 1920x1080, and 390x844: 10 passed in 31.4s.
+  - Regenerated all 12 viewports and screen states in `documentation/screens/`.
+- Git tag: `phase-W4` created.

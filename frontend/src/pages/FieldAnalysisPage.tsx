@@ -294,18 +294,18 @@ export const FieldAnalysisPage: React.FC = () => {
               </p>
             </div>
           </div>
-
-          {/* Quick Land Suitability Banner if available */}
-          {report && (
-            <SuitabilityBanner
-              grade={report.land_suitability.grade}
-              score={report.land_suitability.score}
-              confidence={report.land_suitability.confidence}
-              limitingFactors={report.land_suitability.limiting_factors}
-            />
-          )}
         </div>
       </div>
+
+      {/* Row 2: Land Suitability Banner (Full-Width per PRD v3.4 §4.2) */}
+      {report && (
+        <SuitabilityBanner
+          grade={report.land_suitability.grade}
+          score={report.land_suitability.score}
+          confidence={report.land_suitability.confidence}
+          limitingFactors={report.land_suitability.limiting_factors}
+        />
+      )}
 
       {/* 2. PROCESSING STATE ("Analysing Your Field...") */}
       {loading && (

@@ -238,6 +238,8 @@ test.describe('Boundary Studio Drawing & Confirmation Flow (PRD v3.2 §2, §9 Q3
     await page.waitForTimeout(150);
     await page.mouse.click(cx + 20, cy + 60);
     await page.waitForTimeout(200);
+    await page.mouse.click(cx + 20, cy + 20);
+    await page.waitForTimeout(200);
 
     if (await finishShapeBtn.isVisible()) {
       await finishShapeBtn.click();
@@ -268,6 +270,8 @@ test.describe('Boundary Studio Drawing & Confirmation Flow (PRD v3.2 §2, §9 Q3
     await page.mouse.click(cx + 60, cy + 60);
     await page.waitForTimeout(150);
     await page.mouse.click(cx + 20, cy + 60);
+    await page.waitForTimeout(200);
+    await page.mouse.click(cx + 20, cy + 20);
     await page.waitForTimeout(200);
 
     if (await finishShapeBtn.isVisible()) {

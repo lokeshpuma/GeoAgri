@@ -139,6 +139,8 @@ test.describe('Crop Cards & UI Truthfulness (PRD v3.3 §3.3, AC-6 to AC-10)', ()
     await page.waitForTimeout(150);
     await page.mouse.click(cx - 30, cy + 30);
     await page.waitForTimeout(200);
+    await page.mouse.click(cx - 30, cy - 30);
+    await page.waitForTimeout(200);
 
     const finishBtn = page.getByRole('button', { name: /Finish shape/i });
     if (await finishBtn.isVisible()) {

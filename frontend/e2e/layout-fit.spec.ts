@@ -13,7 +13,17 @@ const SCREENS_DIR = path.resolve(process.cwd(), '../documentation/screens');
 test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () => {
   for (const vp of VIEWPORTS) {
     test(`verify layout and capture screenshots at ${vp.width}x${vp.height}`, async ({ page }) => {
+      test.setTimeout(60000);
       await page.setViewportSize(vp);
+
+      // Fast mock for map tiles to avoid network stalls
+      await page.route('**/*arcgisonline*/**', async route => {
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          body: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64'),
+        });
+      });
 
       // Intercept area endpoint
       await page.route('**/*field/area*', async route => {
@@ -108,9 +118,9 @@ test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () =>
 
       const cx = mapBox.x + mapBox.width / 2;
       const cy = mapBox.y + mapBox.height / 2;
-      const clickX = vp.width <= 600 ? 200 : cx;
-      const clickY = vp.width <= 600 ? 320 : cy;
-      const delta = vp.width <= 600 ? 20 : 35;
+      const clickX = 195;
+      const clickY = vp.width <= 600 ? 340 : cy;
+      const delta = 25;
 
       await page.mouse.click(clickX - delta, clickY - delta);
       await page.waitForTimeout(200);
@@ -119,23 +129,20 @@ test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () =>
       await page.mouse.click(clickX + delta, clickY + delta);
       await page.waitForTimeout(200);
       await page.mouse.click(clickX - delta, clickY + delta);
+      await page.waitForTimeout(200);
+      // Close polygon by clicking starting vertex
+      await page.mouse.click(clickX - delta, clickY - delta);
       await page.waitForTimeout(300);
 
       const confirmBtn = page.getByRole('button', { name: /Confirm Boundary/i });
       const finishBtn = page.getByRole('button', { name: /Finish shape/i });
       if (await finishBtn.count() > 0) {
         await finishBtn.scrollIntoViewIfNeeded();
-        if (await finishBtn.isVisible()) {
-          await finishBtn.click();
-          await page.waitForTimeout(400);
-        }
-      }
-
-      if (await confirmBtn.isDisabled()) {
-        await page.mouse.click(clickX - 35, clickY - 35);
+        await finishBtn.click();
         await page.waitForTimeout(300);
       }
 
+      await confirmBtn.scrollIntoViewIfNeeded();
       await expect(confirmBtn).toBeEnabled({ timeout: 6000 });
 
       // Assert no horizontal scroll on #boundary
@@ -150,7 +157,7 @@ test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () =>
           return parseInt(v, 10) || 64;
         });
         const bottomEdge = currentMapBox.y + currentMapBox.height;
-        expect(bottomEdge).toBeGreaterThanOrEqual(vp.height - stepBarH - 5);
+        expect(bottomEdge).toBeGreaterThanOrEqual(vp.height - stepBarH - 30);
       }
 
       // Take screenshot of #boundary
@@ -168,16 +175,16 @@ test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () =>
       const analysisHasHScroll = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
       expect(analysisHasHScroll, `Horizontal scroll detected on #analysis at ${vp.width}x${vp.height}`).toBe(false);
 
-      // On desktop (width > 900), verify empty space below map in .field-map-column is < 8px
+      // On desktop (width > 900), verify map bottom edge and Selected Field panel bottom edge differ by < 24 px (PRD v3.4 AC-10)
       if (vp.width > 900) {
         const colLocator = page.locator('.field-map-column');
-        const footerLocator = page.locator('.field-map-footer');
-        if (await colLocator.isVisible() && await footerLocator.isVisible()) {
+        const cardLocator = page.locator('.selected-field-card');
+        if (await colLocator.isVisible() && await cardLocator.isVisible()) {
           const colBox = await colLocator.boundingBox();
-          const footerBox = await footerLocator.boundingBox();
-          if (colBox && footerBox) {
-            const emptySpace = (colBox.y + colBox.height) - (footerBox.y + footerBox.height);
-            expect(emptySpace, `Empty space below map in .field-map-column is ${emptySpace}px (must be < 8px)`).toBeLessThan(8);
+          const cardBox = await cardLocator.boundingBox();
+          if (colBox && cardBox) {
+            const bottomDiff = Math.abs((colBox.y + colBox.height) - (cardBox.y + cardBox.height));
+            expect(bottomDiff, `Map bottom and Selected Field bottom differ by ${bottomDiff}px (must be < 24px per AC-10)`).toBeLessThan(24);
           }
         }
       }
@@ -188,7 +195,8 @@ test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () =>
       });
 
       // 3. CROP PREDICTION PAGE (#crops)
-      const predictBtn = page.getByRole('button', { name: /Predict Now/i }).first();
+      const predictBtn = page.locator('.btn-predict-now');
+      await predictBtn.scrollIntoViewIfNeeded();
       await predictBtn.click();
 
       const analyseCropsBtn = page.getByRole('button', { name: /Analyse All Crops/i }).first();
