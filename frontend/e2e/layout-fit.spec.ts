@@ -118,7 +118,7 @@ test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () =>
 
       const cx = mapBox.x + mapBox.width / 2;
       const cy = mapBox.y + mapBox.height / 2;
-      const clickX = 195;
+      const clickX = vp.width <= 600 ? 195 : cx;
       const clickY = vp.width <= 600 ? 340 : cy;
       const delta = 25;
 
@@ -136,10 +136,9 @@ test.describe('Screen Fit & Viewport Screenshots (PRD v3.3 §3.5, AC-13)', () =>
 
       const confirmBtn = page.getByRole('button', { name: /Confirm Boundary/i });
       const finishBtn = page.getByRole('button', { name: /Finish shape/i });
-      if (await finishBtn.count() > 0) {
-        await finishBtn.scrollIntoViewIfNeeded();
+      if (await finishBtn.isVisible()) {
         await finishBtn.click();
-        await page.waitForTimeout(300);
+        await page.waitForTimeout(400);
       }
 
       await confirmBtn.scrollIntoViewIfNeeded();

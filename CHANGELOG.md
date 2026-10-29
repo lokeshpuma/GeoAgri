@@ -1039,3 +1039,31 @@ Executed from clean checkout with `backend/.cache` removed and no `backend/.env`
     - P10–P90 empirical coverage: 78.04% (within 75%–85% target window).
   - Documented decision and metrics in `backend/ml/models/model_card.json`.
 - Git tag: `phase-W8` created.
+
+## [v3.4.0 - PRD v3.4 Truthful Data, UI Recovery, and Clean Repository Release] - 2026-10-29
+### Final Release Verification (§10, AC-14)
+- **Truthful Model Verification & Dynamic Calibration (H-1, H-2, H-3, AC-1, AC-2, AC-3)**:
+  - Eliminated hardcoded calibration spot checks; dynamic computation on textbook climates confirms true EcoCrop envelope scores.
+  - Replaced Model B hit-rate formula with empirical ranking against national top-5 harvested-area crops across 186 countries (30.22% top-5 hit rate, 0.2102 MRR vs 41.29% / 0.2151 baseline).
+  - Relabeled Model D to "Regional yield benchmark (FAOSTAT, crop-level)" across all 203 UN M49 mapped countries under Leave-One-Continent-Out cross-validation (mean P50 pinball loss 3.054 t/ha, 78.04% coverage).
+- **Evidence Contract & Honest UI (H-5, H-6, H-7, H-8, K-3, AC-4, AC-5, AC-6, AC-7)**:
+  - Numeric metrics nullable (`Optional[float] = None`); total evidence failure returns HTTP 503 `EVIDENCE_UNAVAILABLE` with setup hints, partial failures return HTTP 200 with `null` fields (0 invented zeros).
+  - Replaced static "Verified" headers with dynamic status cards and source chips based on real upstream responses.
+  - Enforced persistent amber ribbon on UI and PDF dossier when `data_mode === "demo_synthetic"`.
+- **CSS Rule Recovery & Component Encapsulation (U-1, U-2, AC-8)**:
+  - Recovered all 88 deleted rules rewritten with CSS design tokens; added missing utilities and component stylesheets.
+  - Integrated `scripts/audit_css_classes.py` into CI and pre-commit checks: 680 classes used, 0 missing.
+- **Layout Restoration (U-3, U-4, AC-10)**:
+  - Replaced `overflow-x: hidden` with `overflow-x: clip`; restructured Field Analysis top row into an equal-height grid with map and Selected Field card side-by-side (differing by < 24px) and stacked full-width sections below.
+- **Backend Clean-Clone Offline Execution (K-1, K-2, AC-11)**:
+  - Eliminated personal machine paths; injected offline climatology fixture in API tests; added `GET /api/v1/health/sources` endpoint without secrets.
+- **Repository Structure & Documentation (AC-12, AC-13)**:
+  - Unified docs under `docs/`; archived historical PRDs in `docs/prd/`; added `LICENSE` (MIT), `CONTRIBUTING.md`, `SECURITY.md`, `docs/releases.md`. Exactly 12 visible entries in root.
+  - Rewrote `README.md` to 164 lines with zero emoji in headings.
+- **All Quality Gates Green**:
+  - `python3 scripts/audit_css_classes.py`: 680 classes used, 0 without a rule.
+  - `npm --prefix frontend run build`: Clean build in 2.58s.
+  - `npm --prefix frontend test`: 7 test files, 29 passed.
+  - `rm -rf backend/.cache && PYTHONPATH=backend backend/venv/bin/python -m pytest backend/tests -q`: 157 passed in 56.07s.
+  - `cd frontend && npx playwright test`: 10 passed in 47.2s.
+- Git tag: `v3.4.0` created.
