@@ -578,6 +578,17 @@
   min-width: 0;
 }
 
+.yield-chart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 260px;
+  color: var(--ink-2);
+  text-align: center;
+  padding: 24px;
+}
+
 /* Yield Comparison Chart */
 .yield-comp-chart-wrap {
   display: flex;
@@ -1376,16 +1387,20 @@
 [data-theme="light"] .summary-pill-val,
 [data-theme="light"] .metric-value,
 [data-theme="light"] .report-field-title {
-  color: var(--bg-0);
+  color: var(--ink-1);
 }
 
 /* Light Mode Overrides for Step 1, Step 2, Step 3, and Step 4 */
 [data-theme="light"] .crop-main-name {
-  color: var(--bg-0);
+  color: var(--ink-1);
+}
+
+[data-theme="light"] .crop-rec-suit-val {
+  color: var(--emerald-500);
 }
 
 [data-theme="light"] .crop-stat-val {
-  color: var(--bg-0);
+  color: var(--ink-1);
 }
 
 [data-theme="light"] .crop-rec-stats-grid {
@@ -1405,25 +1420,25 @@
 }
 
 [data-theme="light"] .crop-rec-rationale {
-  background: var(--ink-1);
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
-  color: var(--bg-2);
+  color: var(--ink-2);
   padding: 10px 12px;
   border-radius: 8px;
 }
 
 [data-theme="light"] .insight-bullets-list {
-  background: var(--ink-1);
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
-  color: var(--bg-1);
+  color: var(--ink-1);
 }
 
 [data-theme="light"] .insight-bullet-item {
-  color: var(--bg-2);
+  color: var(--ink-2);
 }
 
 [data-theme="light"] .insight-bullet-item strong {
-  color: var(--bg-0);
+  color: var(--ink-1);
 }
 
 [data-theme="light"] .crop-insight-card {

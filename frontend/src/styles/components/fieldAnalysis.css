@@ -635,12 +635,12 @@
 [data-theme="light"] .pipeline-stage-row {
   background: #ffffff;
   border-color: #e2e8f0;
-  color: var(--bg-1);
+  color: var(--ink-1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="light"] .pipeline-stage-row .stage-title {
-  color: var(--bg-0) !important;
+  color: var(--ink-1) !important;
   font-weight: 700;
 }
 
@@ -686,7 +686,7 @@
 }
 
 [data-theme="light"] .accordion-toggle-btn {
-  color: var(--bg-0);
+  color: var(--ink-1);
 }
 
 [data-theme="light"] .accordion-toggle-btn:hover {
@@ -709,11 +709,11 @@
 }
 
 [data-theme="light"] .human-metric-value {
-  color: var(--bg-0) !important;
+  color: var(--ink-1) !important;
 }
 
 [data-theme="light"] .human-metric-implication {
-  color: var(--bg-1) !important;
+  color: var(--ink-2) !important;
   font-weight: 450;
 }
 

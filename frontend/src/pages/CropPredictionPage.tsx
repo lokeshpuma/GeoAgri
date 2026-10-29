@@ -103,8 +103,9 @@ export const CropPredictionPage: React.FC = () => {
   const topNames = top5Crops.map(c => c.crop_name).join(", ");
 
   // Chart data for Top 10 crops with yield data
-  const chartData = top10Crops
+  const chartData = crops
     .filter(c => c.expected_yield_t_ha != null)
+    .slice(0, 10)
     .map((c) => ({
       name: c.crop_name,
       expectedYield: Number(c.expected_yield_t_ha!.p50.toFixed(2)),
@@ -589,36 +590,48 @@ export const CropPredictionPage: React.FC = () => {
               </div>
 
               <div className="yield-chart-body">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    layout="vertical"
-                    data={chartData}
-                    margin={{ top: 10, right: 30, left: 130, bottom: 20 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" stroke={isLight ? YIELD_CHART_COLORS.gridLight : YIELD_CHART_COLORS.grid} />
-                    <XAxis type="number" stroke={isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark} unit=" t/ha" />
-                    <YAxis
-                      type="category"
-                      dataKey="name"
-                      stroke={isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark}
-                      width={120}
-                      tick={{ fontSize: 11, fill: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight, fontWeight: 600 }}
-                    />
-                    <Tooltip
-                      contentStyle={{
-                        background: isLight ? YIELD_CHART_COLORS.tooltipBgLight : YIELD_CHART_COLORS.tooltipBgDark,
-                        border: isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark,
-                        borderRadius: '10px',
-                        color: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight
-                      }}
-                      labelStyle={{ color: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight, fontWeight: 700 }}
-                    />
-                    <Legend wrapperStyle={{ paddingTop: '10px' }} />
-                    <Bar dataKey="p10" fill={YIELD_CHART_COLORS.p10} name="P10 (Pessimistic)" radius={[0, 4, 4, 0]} />
-                    <Bar dataKey="expectedYield" fill={YIELD_CHART_COLORS.p50} name="P50 (Median Expected)" radius={[0, 4, 4, 0]} />
-                    <Bar dataKey="p90" fill={YIELD_CHART_COLORS.p90} name="P90 (Optimistic)" radius={[0, 4, 4, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+                {chartData.length === 0 ? (
+                  <div className="yield-chart-empty" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '240px', color: 'var(--ink-2)', textAlign: 'center', padding: '24px' }}>
+                    <BarChart3 size={36} style={{ opacity: 0.4, marginBottom: '12px' }} />
+                    <p style={{ fontWeight: 600, fontSize: '0.95rem', margin: 0, color: 'var(--ink-1)' }}>
+                      No Empirical Yield Forecasts for Current Crop Matches
+                    </p>
+                    <p style={{ fontSize: '0.825rem', marginTop: '6px', maxWidth: '440px', color: 'var(--ink-2)' }}>
+                      The recommended crops for this parcel are climate-envelope matches (Tier B). Quantile yield distributions (P10/P50/P90) are exclusively generated for retrained machine-learning crops (Tier A).
+                    </p>
+                  </div>
+                ) : (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      layout="vertical"
+                      data={chartData}
+                      margin={{ top: 10, right: 30, left: 130, bottom: 20 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke={isLight ? YIELD_CHART_COLORS.gridLight : YIELD_CHART_COLORS.grid} />
+                      <XAxis type="number" stroke={isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark} unit=" t/ha" />
+                      <YAxis
+                        type="category"
+                        dataKey="name"
+                        stroke={isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark}
+                        width={120}
+                        tick={{ fontSize: 11, fill: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight, fontWeight: 600 }}
+                      />
+                      <Tooltip
+                        contentStyle={{
+                          background: isLight ? YIELD_CHART_COLORS.tooltipBgLight : YIELD_CHART_COLORS.tooltipBgDark,
+                          border: isLight ? YIELD_CHART_COLORS.tooltipBorderLight : YIELD_CHART_COLORS.tooltipBorderDark,
+                          borderRadius: '10px',
+                          color: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight
+                        }}
+                        labelStyle={{ color: isLight ? YIELD_CHART_COLORS.tooltipBgDark : YIELD_CHART_COLORS.tooltipBgLight, fontWeight: 700 }}
+                      />
+                      <Legend wrapperStyle={{ paddingTop: '10px' }} />
+                      <Bar dataKey="p10" fill={YIELD_CHART_COLORS.p10} name="P10 (Pessimistic)" radius={[0, 4, 4, 0]} />
+                      <Bar dataKey="expectedYield" fill={YIELD_CHART_COLORS.p50} name="P50 (Median Expected)" radius={[0, 4, 4, 0]} />
+                      <Bar dataKey="p90" fill={YIELD_CHART_COLORS.p90} name="P90 (Optimistic)" radius={[0, 4, 4, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                )}
               </div>
             </div>
           </section>
@@ -794,10 +807,15 @@ export const CropPredictionPage: React.FC = () => {
                       </span>
                     </div>
                     <div className="text-sm font-bold text-ink-1">
-                      {topCrop?.crop_name || "Finger Millet (Ragi)"}
+                      {topCrop?.crop_name || "N/A"}
                     </div>
                     <p className="text-xs text-ink-2 m-0 leading-normal">
-                      Suitability match of <strong>{Math.round(((topCrop?.recommendation_score || 0.83) * 100))}%</strong> with expected median yield of <strong>{topCrop?.expected_yield_t_ha?.p50 || 1.56} t/ha</strong> (P10–P90: {topCrop?.expected_yield_t_ha?.p10 || 0.93}–{topCrop?.expected_yield_t_ha?.p90 || 2.56} t/ha).
+                      Suitability match of <strong>{topCrop?.recommendation_score != null ? `${(topCrop.recommendation_score > 1 ? topCrop.recommendation_score : topCrop.recommendation_score * 100).toFixed(0)}%` : "N/A"}</strong>
+                      {topCrop?.expected_yield_t_ha ? (
+                        <> with expected median yield of <strong>{topCrop.expected_yield_t_ha.p50.toFixed(2)} t/ha</strong> (P10–P90: {topCrop.expected_yield_t_ha.p10.toFixed(2)}–{topCrop.expected_yield_t_ha.p90.toFixed(2)} t/ha).</>
+                      ) : (
+                        <> (Climate-envelope match; no empirical ML yield model for Tier B).</>
+                      )}
                     </p>
                   </div>
 
@@ -854,7 +872,11 @@ export const CropPredictionPage: React.FC = () => {
                       Water Management Mode: {String(irri.recommended_mode || 'Rainfed').toUpperCase()}
                     </div>
                     <p className="text-xs text-ink-2 m-0 leading-normal">
-                      Seasonal water demand of <strong>{irri.total_water_demand_m3?.toLocaleString() || '11,400'} m³</strong> against <strong>{irri.effective_rainfall_mm || '789.8'} mm</strong> effective precipitation.
+                      {irri.total_water_demand_m3 != null ? (
+                        <>Seasonal water demand of <strong>{irri.total_water_demand_m3.toLocaleString()} m³</strong> against <strong>{irri.effective_rainfall_mm != null ? `${irri.effective_rainfall_mm.toFixed(1)} mm` : 'N/A'}</strong> effective precipitation.</>
+                      ) : (
+                        <>Water demand metrics not available for current soil/climate envelope.</>
+                      )}
                     </p>
                   </div>
 
@@ -869,10 +891,14 @@ export const CropPredictionPage: React.FC = () => {
                       </span>
                     </div>
                     <div className="text-sm font-bold text-ink-1">
-                      Drought: {risk.drought_risk_score?.toFixed(0) || '6'}% • Heat: {risk.heat_risk_score?.toFixed(0) || '5'}%
+                      {risk.drought_risk_score != null && risk.heat_risk_score != null ? (
+                        <>Drought: {risk.drought_risk_score.toFixed(0)}% • Heat: {risk.heat_risk_score.toFixed(0)}%</>
+                      ) : (
+                        <>Not assessed for Tier B envelope match</>
+                      )}
                     </div>
                     <p className="text-xs text-ink-2 m-0 leading-normal">
-                      {risk.note || 'Low climatic risk profile during active vegetative and grain filling window.'}
+                      {risk.note || 'Climatic risk evaluation for the selected cultivation period.'}
                     </p>
                   </div>
                 </div>

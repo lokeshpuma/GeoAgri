@@ -558,7 +558,7 @@
 .page-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 32px 24px calc(var(--step-bar-h) + 24px) 24px;
+  padding: 32px 24px calc(var(--step-bar-h) + 80px) 24px;
 }
 
 /* Floating Bottom Workflow Nav Dock */
@@ -795,12 +795,12 @@
 [data-theme="light"] .summary-pill-val,
 [data-theme="light"] .metric-value,
 [data-theme="light"] .report-field-title {
-  color: var(--bg-0);
+  color: var(--ink-1);
 }
 
 [data-theme="light"] .btn-secondary {
   background: #f1f5f9;
-  color: var(--bg-0);
+  color: var(--ink-1);
   border-color: #cbd5e1;
 }
 
@@ -816,7 +816,7 @@
 
 [data-theme="light"] .report-table td {
   border-color: #f1f5f9;
-  color: var(--bg-1);
+  color: var(--ink-1);
 }
 
 [data-theme="light"] .report-table tr:hover {
@@ -847,7 +847,7 @@
 [data-theme="light"] .matrix-modal-content {
   background: #ffffff;
   border-color: #e2e8f0;
-  color: var(--bg-0);
+  color: var(--ink-1);
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
 }
 
@@ -1090,7 +1090,7 @@
   .section-title,
   .page-title,
   h1, h2, h3, h4 {
-    color: var(--bg-0) !important;
+    color: #0f172a !important;
     font-size: 9.5pt !important;
     font-weight: 700 !important;
     margin: 0 !important;
@@ -1103,7 +1103,7 @@
     font-weight: 700 !important;
     border-radius: 4px !important;
     border: 1px solid #cbd5e1 !important;
-    color: var(--bg-0) !important;
+    color: #0f172a !important;
     background: #f1f5f9 !important;
   }
 }

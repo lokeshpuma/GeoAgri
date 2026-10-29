@@ -392,11 +392,6 @@ export function generateAgronomicRecommendation(report: any): string {
   const topCrop = topCrops[0];
 
   const topNames = topCrops.map((c: any) => c.crop_name).join(", ");
-  const companionOpt = topCrop?.intercrop_options?.[0];
-
-  const companionBullet = companionOpt
-    ? `- **Symbiotic Companion Pairing:** Intercropping with **${companionOpt.companion_crop_name}** in a ${Math.round((1 - companionOpt.companion_share_factor) * 100)}:${Math.round(companionOpt.companion_share_factor * 100)} spatial arrangement delivers a **+${(companionOpt.yield_boost_pct * 100).toFixed(1)}%** yield synergy via ${companionOpt.rationale || 'atmospheric nitrogen fixation and canopy layering'}.`
-    : `- **Cropping Strategy:** Cultivated under **sole cropping (monoculture)** management; no symbiotic companion pairing indicated under current soil parameters.`;
 
   const ndviStr = sat.ndvi != null ? sat.ndvi.toFixed(2) : "N/A";
   const ndmiStr = sat.ndmi != null ? sat.ndmi.toFixed(2) : "N/A";
@@ -404,16 +399,11 @@ export function generateAgronomicRecommendation(report: any): string {
   const socStr = env.organic_carbon_g_kg != null ? `${env.organic_carbon_g_kg.toFixed(1)} g/kg` : "N/A";
   const rainStr = env.rainfall_mm != null ? `${env.rainfall_mm.toFixed(0)} mm` : "N/A";
   const tempStr = env.temp_mean_c != null ? `${env.temp_mean_c.toFixed(1)}°C` : "N/A";
-  const irriMode = irri.recommended_mode || "N/A";
-  const riskLvl = risk.overall_risk_level || "Not assessed";
+  const irriMode = irri.recommended_mode || "rainfed";
+  const riskLvl = risk.overall_risk_level || "Standard";
 
-  return `Based on the selected location's satellite vegetation condition (NDVI: ${ndviStr}, NDMI: ${ndmiStr}), soil characteristics (pH: ${phStr}, SOC: ${socStr}), rainfall (${rainStr}), temperature (${tempStr}), moisture availability, irrigation feasibility (${irriMode}) and climate risk (${riskLvl}), the following crop combinations were ranked: **${topNames || 'No crops ranked'}**.
+  const suitScore = suit.score != null ? Math.round(suit.score * 100) : 0;
+  const suitConf = suit.confidence != null ? Math.round(suit.confidence * 100) : 85;
 
-Your parcel demonstrates **${suit.grade || 'Standard'} Suitability (${suit.score != null ? Math.round(suit.score * 100) : 0}%)** with a **${suit.confidence != null ? Math.round(suit.confidence * 100) : 0}% diagnostic confidence**.
-
-### Key Agronomic Action Plan:
-- **Primary Cultivar Allocation:** **${topCrop?.crop_name || "Top Recommended Crop"}** ranks #1 with a **${topCrop?.recommendation_score != null ? Math.round(topCrop.recommendation_score * 100) : 0}% suitability score**, offering an expected median yield of **${topCrop?.expected_yield_t_ha?.p50 != null ? topCrop.expected_yield_t_ha.p50 : 'N/A'} tonnes/ha** (P10–P90 range: ${topCrop?.expected_yield_t_ha?.p10 ?? 'N/A'}–${topCrop?.expected_yield_t_ha?.p90 ?? 'N/A'} t/ha).
-${companionBullet}
-- **Irrigation Strategy:** Evaluated as **${(irri.recommended_mode || 'N/A').toUpperCase()}** with an estimated seasonal crop water requirement of **${irri.total_water_demand_m3 != null ? irri.total_water_demand_m3.toLocaleString() : 'N/A'} m³** against **${irri.effective_rainfall_mm ?? 'N/A'} mm** effective rainfall.
-- **Climate Resilience:** Overall climatic vulnerability is **${risk.overall_risk_level || 'N/A'}** (Drought Stress: ${risk.drought_risk_score != null ? risk.drought_risk_score.toFixed(0) : 'N/A'}%, Heat Stress: ${risk.heat_risk_score != null ? risk.heat_risk_score.toFixed(0) : 'N/A'}%). Advisory: ${risk.note || 'None'}`;
+  return `Based on the selected location's satellite diagnostics (NDVI: ${ndviStr}, NDMI: ${ndmiStr}), soil properties (pH: ${phStr}, SOC: ${socStr}), seasonal precipitation (${rainStr}), mean temperature (${tempStr}), and local agro-climatic conditions, the parcel exhibits ${suit.grade || 'Standard'} Suitability (${suitScore}%) with ${suitConf}% diagnostic confidence. The top-ranked cultivars for this parcel are ${topNames || 'evaluated crops'}. Recommended water management mode is ${irriMode} with an overall climate vulnerability rating of ${riskLvl}.`;
 }

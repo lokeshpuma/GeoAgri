@@ -408,7 +408,7 @@ export const SummaryReportPage: React.FC = () => {
                       )}
                     </td>
                     <td className="text-right font-bold text-emerald">
-                      {(c.recommendation_score * 100).toFixed(1)}%
+                      {(c.recommendation_score > 1 ? c.recommendation_score : c.recommendation_score * 100).toFixed(1)}%
                     </td>
                     <td className="text-right font-bold text-gold">
                       {totalYield != null ? (
@@ -493,7 +493,7 @@ export const SummaryReportPage: React.FC = () => {
                   </td>
                   <td className="text-center text-info">{c.water_need_mm} mm</td>
                   <td className="text-right font-bold text-emerald-light">
-                    {(c.recommendation_score * 100).toFixed(1)}%
+                    {(c.recommendation_score > 1 ? c.recommendation_score : c.recommendation_score * 100).toFixed(1)}%
                   </td>
                 </tr>
               ))}
@@ -537,14 +537,18 @@ export const SummaryReportPage: React.FC = () => {
             </div>
             <div className="action-meta-row">
               <span className="badge badge-high text-xs">
-                {Math.round((topCrop?.recommendation_score || 0.8) * 100)}% Suitability
+                {Math.round(topCrop?.recommendation_score != null ? (topCrop.recommendation_score > 1 ? topCrop.recommendation_score : topCrop.recommendation_score * 100) : 80)}% Suitability
               </span>
               <span className="text-xs text-ink-2">
-                Target Yield: <strong className="text-ink-1">{topCrop?.expected_yield_t_ha?.p50.toFixed(2) || "0.00"} t/ha</strong>
+                Target Yield: <strong className="text-ink-1">{topCrop?.expected_yield_t_ha?.p50 != null ? `${topCrop.expected_yield_t_ha.p50.toFixed(2)} t/ha` : "N/A (Tier B)"}</strong>
               </span>
             </div>
             <p className="action-desc">
-              P10–P90 harvest boundary: {topCrop?.expected_yield_t_ha?.p10.toFixed(2)}–{topCrop?.expected_yield_t_ha?.p90.toFixed(2)} t/ha. Total estimated yield across parcel: <strong>{(topCrop?.expected_production_t?.p50 || ((topCrop?.expected_yield_t_ha?.p50 || 0) * farmArea)).toFixed(1)} tonnes</strong>.
+              {topCrop?.expected_yield_t_ha != null ? (
+                <>P10–P90 harvest boundary: {topCrop.expected_yield_t_ha.p10.toFixed(2)}–{topCrop.expected_yield_t_ha.p90.toFixed(2)} t/ha. Total estimated yield across parcel: <strong>{(topCrop.expected_production_t?.p50 || (topCrop.expected_yield_t_ha.p50 * farmArea)).toFixed(1)} tonnes</strong>.</>
+              ) : (
+                <>Ranked based on EcoCrop climatic envelope match. Empirical ML yield forecast is not trained for this species.</>
+              )}
             </p>
           </div>
 
@@ -608,14 +612,14 @@ export const SummaryReportPage: React.FC = () => {
               <span className="action-type-badge">Precision Irrigation Strategy</span>
             </div>
             <div className="action-main-val text-capitalize">
-              {irri.recommended_mode} Mode
+              {irri.recommended_mode || 'Rainfed'} Mode
             </div>
             <div className="action-meta-row">
               <span className="badge badge-moderate text-xs">
-                {irri.total_water_demand_m3.toLocaleString()} m³ Total Need
+                {irri.total_water_demand_m3 != null ? `${irri.total_water_demand_m3.toLocaleString()} m³ Total Need` : 'Water demand N/A'}
               </span>
               <span className="text-xs text-ink-2">
-                Rainfall: <strong className="text-ink-1">{irri.effective_rainfall_mm.toFixed(1)} mm</strong>
+                Rainfall: <strong className="text-ink-1">{irri.effective_rainfall_mm != null ? `${irri.effective_rainfall_mm.toFixed(1)} mm` : 'N/A'}</strong>
               </span>
             </div>
             <p className="action-desc">
@@ -632,15 +636,15 @@ export const SummaryReportPage: React.FC = () => {
               <span className="action-type-badge">Climate Resilience & Advisory</span>
             </div>
             <div className="action-main-val">
-              {risk.overall_risk_level} Climatic Vulnerability
+              {risk.overall_risk_level || 'Evaluated'} Climatic Vulnerability
             </div>
             <div className="action-meta-row">
               <span className="text-xs text-ink-2">
-                Drought: <strong className="text-ink-1">{risk.drought_risk_score.toFixed(0)}%</strong> • Heat: <strong className="text-ink-1">{risk.heat_risk_score.toFixed(0)}%</strong>
+                Drought: <strong className="text-ink-1">{risk.drought_risk_score != null ? `${risk.drought_risk_score.toFixed(0)}%` : 'N/A'}</strong> • Heat: <strong className="text-ink-1">{risk.heat_risk_score != null ? `${risk.heat_risk_score.toFixed(0)}%` : 'N/A'}</strong>
               </span>
             </div>
             <p className="action-desc">
-              {risk.note}
+              {risk.note || 'No specific climate risk alert for this crop and planting window.'}
             </p>
           </div>
         </div>
