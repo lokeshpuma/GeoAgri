@@ -2,21 +2,22 @@ import React from 'react';
 import { Award, AlertCircle } from 'lucide-react';
 
 interface SuitabilityBannerProps {
-  grade: "High" | "Moderate" | "Low" | "Not Suitable" | string;
-  score: number;
-  confidence: number;
-  limitingFactors: string[];
+  grade?: "High" | "Moderate" | "Low" | "Not Suitable" | string | null;
+  score?: number | null;
+  confidence?: number | null;
+  limitingFactors?: string[] | null;
 }
 
 export const SuitabilityBanner: React.FC<SuitabilityBannerProps> = ({
   grade,
   score,
   confidence,
-  limitingFactors
+  limitingFactors = []
 }) => {
-  const gradeClass = grade.toLowerCase().includes("high")
+  const g = grade || "Moderate";
+  const gradeClass = g.toLowerCase().includes("high")
     ? "high"
-    : grade.toLowerCase().includes("moderate")
+    : g.toLowerCase().includes("moderate")
     ? "moderate"
     : "low";
 
@@ -25,6 +26,8 @@ export const SuitabilityBanner: React.FC<SuitabilityBannerProps> = ({
     : gradeClass === "moderate"
     ? "text-gold"
     : "text-danger";
+
+  const factors = limitingFactors || [];
 
   return (
     <div className={`suit-banner-container ${gradeClass}`}>
@@ -36,22 +39,22 @@ export const SuitabilityBanner: React.FC<SuitabilityBannerProps> = ({
               Land Suitability Assessment (Model A)
             </h4>
             <div className={`suit-banner-grade ${colorClass}`}>
-              {grade} Suitability ({Math.round(score * 100)}%)
+              {g} Suitability {score != null ? `(${Math.round(score * 100)}%)` : ''}
             </div>
           </div>
         </div>
         <span className="badge badge-high text-xs px-3 py-1 font-bold">
-          Confidence: {Math.round(confidence * 100)}%
+          Confidence: {confidence != null ? `${Math.round(confidence * 100)}%` : 'Standard'}
         </span>
       </div>
 
-      {limitingFactors.length > 0 && (
+      {factors.length > 0 && (
         <div className="flex-col gap-4 text-sm text-ink-1 mt-2">
           <span className="text-gold font-semibold flex-row-center gap-4">
             <AlertCircle size={14} /> Key Limiting Factors:
           </span>
           <ul className="m-0 pl-5 text-ink-2">
-            {limitingFactors.map((f, i) => (
+            {factors.map((f, i) => (
               <li key={i}>{f}</li>
             ))}
           </ul>

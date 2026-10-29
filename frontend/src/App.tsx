@@ -3,6 +3,7 @@ import { WorkflowProvider, useWorkflow } from './context/WorkflowContext';
 import { PageHeader } from './components/PageHeader/PageHeader';
 import { BottomWorkflowNav } from './components/BottomWorkflowNav/BottomWorkflowNav';
 import { ToastProvider } from './ui/Toast';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 
 // Code-split pages and chatbot per PRD v3.1 §5.3 item 7 (AC-12, AC-13)
 const WorkspacePage = lazy(() => import('./pages/WorkspacePage').then(m => ({ default: m.WorkspacePage })));
@@ -109,9 +110,11 @@ const WorkflowContainer: React.FC = () => {
 
       <PageHeader />
       <main className="main-content">
-        <Suspense fallback={<PageFallback />}>
-          {renderActiveStepPage()}
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<PageFallback />}>
+            {renderActiveStepPage()}
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <BottomWorkflowNav />
 

@@ -285,16 +285,16 @@ export const SummaryReportPage: React.FC = () => {
           </div>
           <div className="ai-suitability-highlight mb-3">
             <div className={`text-xl font-extrabold ${suit.score === 0 ? 'text-danger' : 'text-emerald'}`}>
-              {suit.grade} Suitability ({Math.round(suit.score * 100)}%)
+              {suit.grade || 'Evaluated'} Suitability {suit.score != null ? `(${Math.round(suit.score * 100)}%)` : ''}
             </div>
             <div className="text-xs text-ink-2 mt-1">
-              Diagnostic Confidence: <strong>{Math.round(suit.confidence * 100)}%</strong>
+              Diagnostic Confidence: <strong>{suit.confidence != null ? `${Math.round(suit.confidence * 100)}%` : 'Standard'}</strong>
             </div>
           </div>
           <div className="text-xs text-ink-1">
             <strong>Limiting Factors:</strong>
             <ul className="pl-4 mt-1">
-              {suit.limiting_factors.map((f, i) => (
+              {(suit.limiting_factors || []).map((f, i) => (
                 <li key={i}>{f}</li>
               ))}
             </ul>
@@ -313,18 +313,18 @@ export const SummaryReportPage: React.FC = () => {
             <div className="metric-box">
               <span className="metric-label">Recommended Mode</span>
               <span className="metric-value text-info text-capitalize">
-                {irri.recommended_mode}
+                {irri.recommended_mode || 'Rainfed'}
               </span>
             </div>
             <div className="metric-box">
               <span className="metric-label">Total Water Demand</span>
               <span className="metric-value">
-                {irri.total_water_demand_m3.toLocaleString()} m³
+                {irri.total_water_demand_m3 != null ? `${irri.total_water_demand_m3.toLocaleString()} m³` : 'N/A'}
               </span>
             </div>
           </div>
           <div className="text-xs text-ink-1 leading-relaxed">
-            Seasonal effective rainfall is estimated at <strong>{irri.effective_rainfall_mm} mm</strong>. Soil moisture levels are adequate with supplemental watering required during flowering and pod development.
+            Seasonal effective rainfall is estimated at <strong>{irri.effective_rainfall_mm != null ? `${irri.effective_rainfall_mm} mm` : 'N/A'}</strong>. Soil moisture levels are adequate with supplemental watering required during flowering and pod development.
           </div>
         </div>
 
@@ -338,22 +338,22 @@ export const SummaryReportPage: React.FC = () => {
           </div>
           <div className="flex-between mb-3">
             <span className="badge badge-high text-sm">
-              {risk.overall_risk_level} Climate Risk
+              {risk.overall_risk_level || 'Evaluated'} Climate Risk
             </span>
             <span className="text-xs text-ink-2">30-Year Trend Calibration</span>
           </div>
           <div className="grid grid-cols-3 gap-2 mb-2">
             <div className="metric-box p-2">
               <span className="metric-label text-xs">Drought</span>
-              <span className="metric-value text-sm">{risk.drought_risk_score.toFixed(0)}%</span>
+              <span className="metric-value text-sm">{risk.drought_risk_score != null ? `${risk.drought_risk_score.toFixed(0)}%` : 'N/A'}</span>
             </div>
             <div className="metric-box p-2">
               <span className="metric-label text-xs">Heat Stress</span>
-              <span className="metric-value text-sm">{risk.heat_risk_score.toFixed(0)}%</span>
+              <span className="metric-value text-sm">{risk.heat_risk_score != null ? `${risk.heat_risk_score.toFixed(0)}%` : 'N/A'}</span>
             </div>
             <div className="metric-box p-2">
               <span className="metric-label text-xs">Excess Rain</span>
-              <span className="metric-value text-sm">{risk.excess_rain_risk_score.toFixed(0)}%</span>
+              <span className="metric-value text-sm">{risk.excess_rain_risk_score != null ? `${risk.excess_rain_risk_score.toFixed(0)}%` : 'N/A'}</span>
             </div>
           </div>
           <p className="text-xs text-ink-2 m-0">
